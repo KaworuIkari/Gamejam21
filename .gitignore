@@ -1,0 +1,21 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Builds and exports (upload builds to itch.io, not the repo)
+build/
+builds/
+export/
+*.zip
+
+# Secrets
+.env
+
+# Add your engine's ignore rules below once the engine is chosen:
+# https://github.com/github/gitignore (Godot.gitignore, Unity.gitignore, UnrealEngine.gitignore)
