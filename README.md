@@ -16,11 +16,11 @@ A game jam lasting 21 days, from 1 October to 21 October 2026.
 
 ## Links
 
-- Discord: _add link_
 - Task board: _add link_
-- Shared Drive (source art and audio): _add link_
+- Shared Drive (source art and audio): https://drive.google.com/drive/folders/1dAuMr1tX9pbZ8WwjA47rwEANIASIRtaQ?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto
 - itch.io build page: _add link_
-- Jam page and rules: _add link_
+- Jam page and rules: https://www.taptap.cn/moment/843496646862966742
+
 
 ## Docs
 
