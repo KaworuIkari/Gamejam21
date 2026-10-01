@@ -20,8 +20,6 @@ export/
 # Add your engine's ignore rules below once the engine is chosen:
 # https://github.com/github/gitignore (Godot.gitignore, Unity.gitignore, UnrealEngine.gitignore)
 
-# Logs
-/logs/
 
 # Local docs
 
