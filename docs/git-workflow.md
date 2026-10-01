@@ -2,7 +2,7 @@
 
 This is how the three of us work so nobody loses work, and `main` always runs.
 
-**The one rule:** nobody commits directly to `main`. Each task gets its own short-lived branch, which is merged into `main` through a pull request (PR) on GitHub, usually within a day.
+**The one rule:** nobody commits directly to `main`. Each task gets its own short-lived branch, which is merged into `main` through a pull request (PR) on GitHub, usually within one day.
 
 ---
 
@@ -69,7 +69,7 @@ Tip: turn on a prompt that shows your branch (VS Code shows it in the bottom-lef
 
 ---
 
-## 3. The daily loop
+## 3. The daily loop (The most used steps)
 
 ### Step 1: Start from an up-to-date `main`
 
@@ -116,7 +116,7 @@ git push
 
 The first push creates the branch on GitHub (thanks to `push.autoSetupRemote`). Push at least once a day, even if unfinished; it doubles as a backup.
 
-### Step 5: Keep your branch up to date with `main`
+### Step 5: Keep your branch up to date with `main` (optional, only if others done some work)
 
 If your branch lives for more than a few hours, pull in teammates' work regularly:
 
