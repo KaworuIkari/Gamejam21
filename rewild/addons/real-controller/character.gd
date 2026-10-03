@@ -64,6 +64,7 @@ var direction: Vector3 = Vector3.ZERO
 var is_sprinting: bool = false
 var is_walking: bool = false
 var is_jumping: bool = false
+var is_using: bool = false
 
 # Freeze the character. It may be useful when you want to pause the character.
 var frozen: bool = false
@@ -88,6 +89,8 @@ func _physics_process(delta: float) -> void:
 		handle_frozen_movement()
 		move_and_slide()
 		return
+		
+	_handle_use_item(delta)
 
 	_handle_movement_input()
 	if camera_mode == CameraMode.THIRD_PERSON:
@@ -151,6 +154,18 @@ func _handle_camera_transition(delta: float) -> void:
 	elif character:
 		character.visible = camera_mode == CameraMode.THIRD_PERSON
 
+func _handle_use_item(delta: float) -> void:
+	is_using = Input.is_action_pressed("use")
+	if Input.is_action_just_pressed("use2"):
+		# TODO add water dispenser position logic
+		var dispenser_pos = position
+		print(dispenser_pos)
+		GrowthMap.paint(dispenser_pos, 6.0, 1.0)         # one burst
+	if is_using:
+		var dispenser_pos = position
+		print(dispenser_pos)
+		GrowthMap.paint(dispenser_pos, 3.0, 2.0 * delta)  # continuous, while watering
+
 ## Updates camera mode (sets target for smooth transition).
 func _update_camera_mode() -> void:
 	if camera_mode == CameraMode.FIRST_PERSON:
@@ -187,8 +202,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if frozen:
 		return
 
-	if event is InputEventKey and event.physical_keycode == KEY_ESCAPE:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if event is InputEventKey:
+		if event.physical_keycode == KEY_ESCAPE:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
