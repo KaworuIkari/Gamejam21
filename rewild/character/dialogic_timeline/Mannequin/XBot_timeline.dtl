@@ -1,0 +1,23 @@
+[style name="speaker_custom"]
+
+XBot: Hey, check[portrait=happy] it out...[portrait=default]
+[style name="custom1"]
+join XBot (happy) left
+XBot: This icosphere must be for me!
+XBot: Here is a question for you,
+update XBot (default)
+XBot: [shake2]Mirror[/shake2], mirror, on the wall, who in this land is [rainbow freq=0.8 sat=1.0 val=1.0]fairest[/rainbow] of all?
+- You, my queen
+	XBot (happy): Sweet.
+	set {XBot.MirrorQuestionName} = "XBot"
+	XBot: I know it must be me.
+- Snow White
+	XBot: How dare you!
+	set {XBot.MirrorQuestionName} = "Snow White"
+	jump XBot_timeline/End
+- I have some other idea...
+	[text_input text="Name" var="XBot.MirrorQuestionName" placeholder="Antiduspig"]
+	XBot: {XBot.MirrorQuestionName}? Never heard of it.
+XBot: Anyways, if it's not [shake]Snow White[/shake], I agree.
+label End
+leave XBot
