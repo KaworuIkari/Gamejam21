@@ -189,11 +189,7 @@ git status                              # lists files marked "both modified"
 Open each file and look for:
 
 ```
-<<<<<<< HEAD
-your version
-=======
 their version
->>>>>>> origin/main
 ```
 
 Edit it to the correct final code, delete the three marker lines, then:
@@ -272,3 +268,9 @@ git push origin v1.0-jam
 ```
 
 The tag marks exactly what you submitted, so you can come back to it after the jam.
+
+
+## 9. Some other useful commands
+```bash
+git log --oneline --graph --all
+```

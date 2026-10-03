@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DialogicStyle" format=3 uid="uid://cpxdno4503kbl"]
+
+[ext_resource type="PackedScene" uid="uid://bim4wsqd43mjv" path="res://character/dialogic_style/custom1/layer/CustomCustom1/custom_custom_1.tscn" id="1_t78al"]
+[ext_resource type="Script" uid="uid://bwg6yncmh2cml" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_awhts"]
+[ext_resource type="Script" uid="uid://dv08k6ljua6fm" path="res://addons/dialogic/Resources/dialogic_style.gd" id="11_nq6n0"]
+
+[sub_resource type="Resource" id="Resource_vvwpy"]
+script = ExtResource("2_awhts")
+scene = ExtResource("1_t78al")
+overrides = {
+"global_font": "\"res://fonts/ChillBitmap7x.ttf\"",
+"global_font_size": "32.0"
+}
+
+[resource]
+script = ExtResource("11_nq6n0")
+name = "custom1"
+layer_info = {
+"": SubResource("Resource_vvwpy")
+}
+metadata/_latest_layer = ""

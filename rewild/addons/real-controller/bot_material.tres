@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bcpdt0jgl3487"]
+
+[ext_resource type="Texture2D" uid="uid://clvrjivp043tr" path="res://addons/real-controller/HumanAnimations_ColorPalette.png" id="1_fbl4i"]
+
+[resource]
+albedo_color = Color(1, 0.39607844, 0, 1)
+albedo_texture = ExtResource("1_fbl4i")
+stencil_mode = 3
+stencil_flags = 2
