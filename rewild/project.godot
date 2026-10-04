@@ -30,11 +30,13 @@ directories/dtl_directory={
 "XBot_timeline": "res://character/dialogic_timeline/Mannequin/XBot_timeline.dtl"
 }
 layout/style_directory={}
+layout/style_list=[""]
+layout/default_style="res://character/dialogic_style/New_File.tres"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1080
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -98,6 +100,10 @@ use2={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(315, 27),"global_position":Vector2(329, 100),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://character/dialogic_timeline/Mannequin/XBot_timeline.dtl")
 
 [physics]
 
