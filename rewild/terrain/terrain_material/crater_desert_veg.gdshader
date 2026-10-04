@@ -1,5 +1,7 @@
 shader_type spatial;
+//render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx,skip_vertex_transform;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx,skip_vertex_transform;
+
 
 /* The terrain depends on this shader to function. Don't change most things in vertex() or 
  * terrain normal calculations in fragment(). You probably only want to customize the 
@@ -541,21 +543,32 @@ void fragment() {
 	bool in_crater = all(greaterThanEqual(map_uv, vec2(0.0))) && all(lessThanEqual(map_uv, vec2(1.0)));
 
 	if (in_crater) {
+		//float g = texture(growth_map, map_uv).r;
+		//ALBEDO = mix(texture(desert_albedo, map_uv).rgb,
+		             //texture(vegetation_albedo, map_uv).rgb, g);
+		//ROUGHNESS = clamp(fma(color_map.a - 0.5, 2.0, base_roughness), 0., 1.);
+		//SPECULAR = 0.3;
 		float g = texture(growth_map, map_uv).r;
-		ALBEDO = mix(texture(desert_albedo, map_uv).rgb,
+		// Flat base color, exactly like your reference toon shader: raw albedo only
+		vec3 flat_col = mix(texture(desert_albedo, map_uv).rgb,
 		             texture(vegetation_albedo, map_uv).rgb, g);
-		ROUGHNESS = clamp(fma(color_map.a - 0.5, 2.0, base_roughness), 0., 1.);
-		SPECULAR = 0.3;
-	} else {
-		// Apply PBR (vanilla)
-		ALBEDO = mat.albedo_height.rgb * color_map.rgb * macrov;
-		ROUGHNESS = roughness;
-		SPECULAR = 1. - mat.normal_rough.a;
-		// Repack final normal map value.
+
+		ALBEDO = flat_col;
+		// Disable PBR specular response for toon look
+		ROUGHNESS = 1.0;
+		SPECULAR = 0.0;
+	}else {
+		// Flat albedo only, no in‑shader light multiplication
+		vec3 flat_col = mat.albedo_height.rgb * color_map.rgb * macrov;
+		ALBEDO = flat_col;
+
+		// Kill specular highlights for toon
+		ROUGHNESS = 1.0;
+		SPECULAR = 0.0;
+
+		// Keep ALL terrain normal‑map & AO code untouched
 		NORMAL_MAP = fma(normalize(mat.normal_rough.xzy), vec3(0.5), vec3(0.5));
 		NORMAL_MAP_DEPTH = mat.normal_map_depth;
-
-		// Higher and/or facing up, less occluded.
 		float ao = (1. - (mat.albedo_height.a * log(2.1 - mat.ao_strength))) * (1. - mat.normal_rough.y);
 		AO = clamp(1. - ao * mat.ao_strength, mat.albedo_height.a, 1.0);
 		AO_LIGHT_AFFECT = (1.0 - mat.albedo_height.a) * clamp(mat.normal_rough.y, 0., 1.);

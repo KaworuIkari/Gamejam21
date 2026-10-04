@@ -158,6 +158,12 @@ git fetch --prune                  # forget branches deleted on GitHub
 
 Then back to Step 2.
 
+### Check out teammates' work
+```bash
+git fetch origin
+git switch feat/double-jump
+```
+
 ---
 
 ## 4. Quick reference

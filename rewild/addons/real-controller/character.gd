@@ -159,11 +159,9 @@ func _handle_use_item(delta: float) -> void:
 	if Input.is_action_just_pressed("use2"):
 		# TODO add water dispenser position logic
 		var dispenser_pos = position
-		print(dispenser_pos)
 		GrowthMap.paint(dispenser_pos, 6.0, 1.0)         # one burst
 	if is_using:
 		var dispenser_pos = position
-		print(dispenser_pos)
 		GrowthMap.paint(dispenser_pos, 3.0, 2.0 * delta)  # continuous, while watering
 
 ## Updates camera mode (sets target for smooth transition).
