@@ -4,6 +4,8 @@ class_name MeadowWorld extends Node3D
 ## dirt path, GPU grass and flowers that follow the camera, a mountain ring,
 ## water and a few props. Everything is regenerated from the exported
 ## settings, so tweak them and press "Rebuild" in the inspector.
+## Coordinates in the exports (ponds, stream, path) are relative to this node,
+## so move the node to place the whole meadow anywhere.
 
 const GROUND_SHADER := preload("res://meadow/shaders/ground.gdshader")
 const GRASS_SHADER := preload("res://meadow/shaders/grass.gdshader")
@@ -21,6 +23,18 @@ const TREES := [
 const BUSHES := [
 	"res://stylized_nature/imported_assets/Bush_Common.gltf",
 	"res://stylized_nature/imported_assets/Bush_Common_Flowers.gltf",
+]
+const DEAD_TREES := [
+	"res://stylized_nature/imported_assets/DeadTree_1.gltf",
+	"res://stylized_nature/imported_assets/DeadTree_2.gltf",
+	"res://stylized_nature/imported_assets/DeadTree_3.gltf",
+	"res://stylized_nature/imported_assets/DeadTree_4.gltf",
+	"res://stylized_nature/imported_assets/DeadTree_5.gltf",
+]
+const SLABS := [
+	"res://stylized_nature/imported_assets/RockPath_Square_Wide.gltf",
+	"res://stylized_nature/imported_assets/RockPath_Square_Thin.gltf",
+	"res://stylized_nature/imported_assets/RockPath_Round_Wide.gltf",
 ]
 const ROCKS := [
 	"res://stylized_nature/imported_assets/Rock_Medium_1.gltf",
@@ -56,7 +70,7 @@ const ROCKS := [
 @export var path_width: float = 1.8
 
 @export_group("Grass")
-@export var grass_radius: float = 36.0
+@export var grass_radius: float = 36.0 ## raise for high cameras (costs more blades)
 @export var grass_spacing: float = 0.2
 @export var flower_radius: float = 30.0
 @export var flower_spacing: float = 0.3
@@ -69,6 +83,18 @@ const ROCKS := [
 @export var bush_count: int = 70
 @export var rock_count: int = 40
 @export var lone_tree_count: int = 14
+@export var dead_tree_count: int = 0
+@export var ruin_count: int = 0 ## clusters of broken stone slabs
+
+@export_group("Growth")
+## Drive the ground, grass, flowers and props from the GrowthMap autoload:
+## barren desert where growth is 0, meadow where it is 1. Living props
+## (trees, bushes) grow in, dead trees, ruins and rocks get moss.
+@export var use_growth_map := false
+
+## Shared material of the cloud banks, so a stage director can recolour them.
+var cloud_material: ShaderMaterial
+var water: MeshInstance3D
 
 var heights := PackedFloat32Array()
 var path_mask := PackedFloat32Array()
@@ -91,7 +117,16 @@ func _process(_delta: float) -> void:
 	var cam := _active_camera()
 	if cam == null:
 		return
+	# Centre the patches on the ground the camera looks at, not under it, so a
+	# high top-down camera still sees grass all the way across the screen.
 	var p := cam.global_position
+	var fwd := -cam.global_basis.z
+	var flat := Vector2(fwd.x, fwd.z)
+	if flat.length() > 0.01 and fwd.y < -0.05:
+		var above := maxf(p.y - get_height(p.x, p.z), 0.0)
+		var reach := minf(above / -fwd.y * flat.length(), grass_radius * 0.6)
+		var ahead := flat.normalized() * reach
+		p += Vector3(ahead.x, 0.0, ahead.y)
 	if _grass:
 		_grass.global_position = _snap(p, grass_spacing)
 	if _flowers:
@@ -118,6 +153,10 @@ func rebuild() -> void:
 
 ## Height of the generated ground at a world xz position (bilinear).
 func get_height(x: float, z: float) -> float:
+	return _height_local(x - global_position.x, z - global_position.z) + global_position.y
+
+
+func _height_local(x: float, z: float) -> float:
 	var n := resolution + 1
 	var step := terrain_size / resolution
 	var fx := clampf((x + terrain_size * 0.5) / step, 0.0, resolution - 0.001)
@@ -132,6 +171,10 @@ func get_height(x: float, z: float) -> float:
 
 
 func get_path_mask(x: float, z: float) -> float:
+	return _path_local(x - global_position.x, z - global_position.z)
+
+
+func _path_local(x: float, z: float) -> float:
 	var n := resolution + 1
 	var step := terrain_size / resolution
 	var ix := clampi(roundi((x + terrain_size * 0.5) / step), 0, resolution)
@@ -220,10 +263,21 @@ func _for_polyline_cells(points: PackedVector2Array, reach: float, fn: Callable)
 
 func _common_params(mat: ShaderMaterial) -> void:
 	mat.set_shader_parameter("heightmap", heightmap_texture)
-	mat.set_shader_parameter("terrain_origin", Vector2.ONE * -terrain_size * 0.5)
+	mat.set_shader_parameter("terrain_origin", Vector2(global_position.x, global_position.z) - Vector2.ONE * terrain_size * 0.5)
 	mat.set_shader_parameter("terrain_size", terrain_size)
 	mat.set_shader_parameter("heightmap_res", float(resolution + 1))
-	mat.set_shader_parameter("water_level", water_level)
+	mat.set_shader_parameter("water_level", water_level + global_position.y)
+	var growth := _growth_map()
+	if growth:
+		mat.set_shader_parameter("growth_map", growth.texture)
+		mat.set_shader_parameter("growth_origin", growth.MAP_ORIGIN)
+		mat.set_shader_parameter("growth_size", growth.MAP_SIZE)
+
+
+func _growth_map() -> Node:
+	if not use_growth_map or not is_inside_tree():
+		return null
+	return get_node_or_null("/root/GrowthMap")
 
 
 func _build_terrain() -> void:
@@ -298,6 +352,7 @@ func _build_water() -> void:
 	mi.position = Vector3(0, water_level, 0)
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	_generated.add_child(mi)
+	water = mi
 
 
 func _build_mountains() -> void:
@@ -353,6 +408,7 @@ func _build_clouds() -> void:
 	quad.center_offset = Vector3(0, 0.5, 0) # pivot at the base
 	var mat := ShaderMaterial.new()
 	mat.shader = CLOUD_SHADER
+	cloud_material = mat
 	var clouds := Node3D.new()
 	clouds.name = "Clouds"
 	_generated.add_child(clouds)
@@ -446,18 +502,34 @@ func _build_props() -> void:
 	props.name = "Props"
 	_generated.add_child(props)
 
+	var growing := use_growth_map
 	# A small grove at the end of the path, like the spot by the mill.
 	for i in 7:
 		var p := Vector2(-62, -88) + Vector2(rng.randf_range(-14, 14), rng.randf_range(-10, 10))
-		_place(props, TREES[rng.randi() % TREES.size()], p, rng.randf_range(0.9, 1.4), rng)
+		_place(props, TREES[rng.randi() % TREES.size()], p, rng.randf_range(0.9, 1.4), rng, 0.0, growing)
 	for i in lone_tree_count:
 		var p := _random_spot(rng, 60.0, 220.0)
 		if p != Vector2.INF:
-			_place(props, TREES[rng.randi() % TREES.size()], p, rng.randf_range(0.9, 1.5), rng)
+			_place(props, TREES[rng.randi() % TREES.size()], p, rng.randf_range(0.9, 1.5), rng, 0.0, growing)
 	for i in bush_count:
 		var p := _random_spot(rng, 8.0, 180.0)
 		if p != Vector2.INF:
-			_place(props, BUSHES[rng.randi() % BUSHES.size()], p, rng.randf_range(0.8, 1.6), rng)
+			_place(props, BUSHES[rng.randi() % BUSHES.size()], p, rng.randf_range(0.8, 1.6), rng, 0.0, growing)
+	for i in dead_tree_count:
+		var p := _random_spot(rng, 10.0, 200.0)
+		if p != Vector2.INF:
+			_place(props, DEAD_TREES[rng.randi() % DEAD_TREES.size()], p, rng.randf_range(1.0, 1.8), rng, -0.2, false, growing)
+	# Ruins: a few broken slabs tilted and half sunk, like an old foundation.
+	for i in ruin_count:
+		var c := _random_spot(rng, 15.0, 160.0)
+		if c == Vector2.INF:
+			continue
+		for j in rng.randi_range(4, 9):
+			var p := c + Vector2(rng.randf_range(-7, 7), rng.randf_range(-7, 7))
+			var slab := _place(props, SLABS[rng.randi() % SLABS.size()], p, rng.randf_range(2.5, 4.0), rng, -0.15, false, growing)
+			if slab:
+				slab.rotation.x = rng.randf_range(-0.08, 0.08)
+				slab.rotation.z = rng.randf_range(-0.08, 0.08)
 	# Rocks gather around the ponds and a few lie loose in the grass.
 	for i in rock_count:
 		var p: Vector2
@@ -467,28 +539,39 @@ func _build_props() -> void:
 			p = Vector2(pond.x, pond.y) + Vector2(cos(a), sin(a)) * pond.z * rng.randf_range(0.9, 1.3)
 		else:
 			p = _random_spot(rng, 10.0, 160.0)
-		if p != Vector2.INF and get_height(p.x, p.y) > water_level - 0.3:
-			_place(props, ROCKS[rng.randi() % ROCKS.size()], p, rng.randf_range(0.6, 1.8), rng, -0.3)
+		if p != Vector2.INF and _height_local(p.x, p.y) > water_level - 0.3:
+			_place(props, ROCKS[rng.randi() % ROCKS.size()], p, rng.randf_range(0.6, 1.8), rng, -0.3, false, growing)
 
 
 func _random_spot(rng: RandomNumberGenerator, r_min: float, r_max: float) -> Vector2:
 	for attempt in 12:
 		var a := rng.randf() * TAU
 		var p := Vector2(cos(a), sin(a)) * sqrt(rng.randf_range(r_min * r_min, r_max * r_max))
-		if get_height(p.x, p.y) > water_level + 0.8 and get_path_mask(p.x, p.y) < 0.05:
+		if _height_local(p.x, p.y) > water_level + 0.8 and _path_local(p.x, p.y) < 0.05:
 			return p
 	return Vector2.INF
 
 
-func _place(parent: Node3D, path: String, p: Vector2, s: float, rng: RandomNumberGenerator, sink := 0.0) -> void:
+## grow_in / moss wrap the prop in a GrowthProp so it reacts to the GrowthMap.
+func _place(parent: Node3D, path: String, p: Vector2, s: float, rng: RandomNumberGenerator,
+		sink := 0.0, grow_in := false, moss := false) -> Node3D:
 	var scene := load(path) as PackedScene
 	if scene == null:
-		return
+		return null
 	var inst := scene.instantiate() as Node3D
-	parent.add_child(inst)
-	inst.position = Vector3(p.x, get_height(p.x, p.y) + sink, p.y)
-	inst.rotation.y = rng.randf() * TAU
-	inst.scale = Vector3.ONE * s
+	var holder: Node3D = inst
+	if grow_in or moss:
+		var gp := GrowthProp.new()
+		gp.grow_in = grow_in
+		gp.moss = moss
+		gp.add_child(inst)
+		holder = gp
+	# Transform first: GrowthProp remembers its scale in _ready as the grown size.
+	holder.position = Vector3(p.x, _height_local(p.x, p.y) + sink, p.y)
+	holder.rotation.y = rng.randf() * TAU
+	holder.scale = Vector3.ONE * s
+	parent.add_child(holder)
+	return holder
 
 
 func _active_camera() -> Camera3D:

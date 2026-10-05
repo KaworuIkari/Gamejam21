@@ -95,6 +95,64 @@ func _apply_mask(t: float, idx: PackedInt32Array, from: PackedByteArray,
 	_dirty = true
 
 
+## Story: green spreads outward from a point, like a wave from the planted device.
+## max_radius in metres (0 = the whole map). The rim of a limited bloom fades out softly.
+## duration 0 applies the end state at once (e.g. when restoring a stage).
+func reveal_from(world_pos: Vector3, duration: float = 6.0, max_radius: float = 0.0, ramp: float = 0.12) -> void:
+	var c := world_to_px(world_pos)
+	var r_px := max_radius / MAP_SIZE * RES if max_radius > 0.0 else RES * 1.45
+	const BUCKETS := 64
+	var buckets: Array[PackedInt32Array] = []
+	buckets.resize(BUCKETS)
+	var delay := PackedFloat32Array()
+	var target := PackedByteArray()
+	delay.resize(RES * RES)
+	target.resize(RES * RES)
+	for y in RES:
+		for x in RES:
+			var n := _noise.get_noise_2d(x, y)
+			var d := Vector2(x + 0.5, y + 0.5).distance_to(c) / r_px
+			# A noisy rim so a limited bloom ends in an organic blob, not a circle.
+			var dn := d + n * 0.3 if max_radius > 0.0 else d
+			if dn >= 1.0:
+				continue
+			var i := y * RES + x
+			var v := 255 if max_radius <= 0.0 else int(255.0 * (1.0 - smoothstep(0.6, 1.0, dn)))
+			if v <= _data[i]:
+				continue
+			# Mostly distance (an expanding ring), broken up by noise.
+			var dl := clampf(minf(dn, 1.0) * 0.85 + (n + 1.0) * 0.075, 0.0, 0.999)
+			delay[i] = dl
+			target[i] = v
+			buckets[int(dl * BUCKETS)].append(i)
+
+	if duration <= 0.0:
+		for b in buckets:
+			for i in b:
+				_data[i] = maxi(_data[i], _cap(i, target[i]))
+		_dirty = true
+		return
+
+	var state := {"done": 0}  # buckets below this index are finished
+	var tween := create_tween()
+	tween.tween_method(_apply_reveal.bind(buckets, delay, target, ramp, state), 0.0, 1.0, duration)
+
+
+func _apply_reveal(t: float, buckets: Array[PackedInt32Array], delay: PackedFloat32Array,
+		target: PackedByteArray, ramp: float, state: Dictionary) -> void:
+	# Only touch the band of pixels currently ramping up; finished buckets are skipped.
+	var front := t * (1.0 + ramp)
+	var n := buckets.size()
+	var last := mini(int(front * n), n - 1)
+	for b in range(state.done, last + 1):
+		for i in buckets[b]:
+			var k := clampf((front - delay[i]) / ramp, 0.0, 1.0)
+			_data[i] = maxi(_data[i], _cap(i, int(target[i] * k)))
+	while state.done < n and (state.done + 1.0) / n + ramp <= front:
+		state.done += 1
+	_dirty = true
+
+
 # --- 2. Interaction: noisy brush ------------------------------------------
 
 ## Call once for a burst, or every frame with strength * delta for continuous watering.

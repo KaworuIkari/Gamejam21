@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="WorldStage" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://world_stages/world_stage.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+stage_name = "Golden meadow"
+transition_time = 10.0
+sun_rotation_degrees = Vector3(-12, 145, 0)
+sun_color = Color(1, 0.76, 0.5, 1)
+sun_energy = 2.2
+sky_zenith = Color(0.3, 0.4, 0.7, 1)
+sky_horizon = Color(1, 0.64, 0.34, 1)
+sky_cloud_light = Color(1, 0.84, 0.62, 1)
+sky_cloud_shade = Color(0.78, 0.52, 0.48, 1)
+sky_cloud_coverage = 0.45
+fog_color = Color(1, 0.8, 0.6, 1)
+fog_density = 0.0009
+fog_height_density = 0.003
+fog_sun_scatter = 0.45
+ambient_energy = 0.6
+exposure = 1.0
+saturation = 1.15
+bank_light = Color(1, 0.8, 0.58, 1)
+bank_shade = Color(0.8, 0.52, 0.5, 1)
+water_offset = 0.0
+growth_event = 2
+growth_duration = 10.0

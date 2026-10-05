@@ -29,7 +29,8 @@ void vertex() {
 
 	float dist = length(wp - NODE_POSITION_WORLD.xz);
 	float fade = 1.0 - smoothstep(fade_radius * 0.55, fade_radius, dist);
-	float keep = fade * (1.0 - smoothstep(0.3, 0.6, t.g)) * smoothstep(water_level + 0.05, water_level + 0.35, ground_h);
+	float grow = growth_at(wp);
+	float keep = smoothstep(0.05, 0.6, grow) * fade * (1.0 - smoothstep(0.3, 0.6, t.g)) * smoothstep(water_level + 0.05, water_level + 0.35, ground_h);
 	// Taller, lusher tufts in patches.
 	float lush = m_fbm(wp * 0.08);
 	float h = mix(blade_height_min, blade_height_max, m_hash(cell + 3.7)) * (0.7 + 0.6 * lush) * keep;
@@ -55,14 +56,15 @@ void vertex() {
 	// Point normals up so the field lights like a soft carpet instead of flat cards.
 	NORMAL = normalize(vec3(bend.x * 0.5, 1.0, bend.y * 0.5));
 
-	base_color = meadow_color(wp);
+	// Freshly grown edges are a little yellow and short.
+	base_color = mix(srgb(vec3(0.72, 0.70, 0.30)), meadow_color(wp), smoothstep(0.3, 0.9, grow));
 	// A few blades catch more light than their neighbours.
 	base_color *= 0.9 + 0.25 * m_hash(cell + 1.3);
 }
 
 void fragment() {
 	vec3 root = base_color * 0.72;
-	vec3 tip = base_color * 1.12 + srgb(vec3(0.06, 0.05, 0.0));
+	vec3 tip = base_color * 1.06 + srgb(vec3(0.05, 0.04, 0.0));
 	vec3 col = mix(root, tip, smoothstep(0.0, 1.0, blade_t));
 	ALBEDO = apply_cloud_shadow(col, (INV_VIEW_MATRIX * vec4(VERTEX, 1.0)).xz, TIME);
 	ROUGHNESS = 1.0;

@@ -10,6 +10,12 @@ uniform float water_level = 0.0;
 uniform float cloud_shadow_strength : hint_range(0.0, 1.0) = 0.28;
 uniform vec2 cloud_shadow_wind = vec2(4.0, 1.5);
 
+// Growth (see GrowthMap autoload): 0 = barren desert, 1 = full meadow.
+// Defaults to white, so scenes without a growth map are fully green.
+uniform sampler2D growth_map : hint_default_white, filter_linear, repeat_disable;
+uniform vec2 growth_origin = vec2(0.0);
+uniform float growth_size = 1024.0;
+
 float m_hash(vec2 p) {
 	p = fract(p * vec2(123.34, 456.21));
 	p += dot(p, p + 45.32);
@@ -65,6 +71,30 @@ vec3 meadow_color(vec2 wp) {
 
 vec3 path_color(vec2 wp) {
 	return srgb(mix(vec3(0.70, 0.60, 0.42), vec3(0.80, 0.72, 0.52), m_noise(wp * 0.7)));
+}
+
+vec3 desert_color(vec2 wp) {
+	float big = m_fbm(wp * 0.015 + 7.0);
+	// Wind-streaked dunes: stretch the noise along one axis.
+	float streak = m_fbm(vec2(wp.x * 0.02, wp.y * 0.12) + 19.0);
+	vec3 dark = srgb(vec3(0.66, 0.47, 0.25));
+	vec3 base = srgb(vec3(0.80, 0.61, 0.34));
+	vec3 pale = srgb(vec3(0.90, 0.76, 0.50));
+	vec3 c = mix(dark, base, smoothstep(0.30, 0.55, big));
+	return mix(c, pale, smoothstep(0.55, 0.75, streak) * 0.8);
+}
+
+float growth_raw(vec2 wp) {
+	vec2 uv = (wp - growth_origin) / growth_size;
+	if (any(lessThan(uv, vec2(0.0))) || any(greaterThan(uv, vec2(1.0)))) return 1.0;
+	return texture(growth_map, uv).r;
+}
+
+// Growth with a patchy, noise-broken edge so green spreads in clumps, not circles.
+float growth_at(vec2 wp) {
+	float g = growth_raw(wp);
+	float n = m_fbm(wp * 0.15 + 5.0) * 0.7 + m_noise(wp * 0.9) * 0.3;
+	return smoothstep(0.25, 0.75, g + (n - 0.5) * 0.55 * (1.0 - g * g));
 }
 
 // 0 = full sun, 1 = under a cloud. Big soft blobs drifting across the field.

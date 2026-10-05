@@ -22,7 +22,7 @@ void vertex() {
 	float fade = 1.0 - smoothstep(fade_radius * 0.6, fade_radius, dist);
 	// A sprinkle of lone flowers everywhere, dense in the clusters.
 	float chance = max(flower_cluster(wp) * density, 0.05);
-	float keep = step(m_hash(cell + 8.8), chance) * fade * (1.0 - step(0.4, t.g))
+	float keep = step(0.8, growth_at(wp)) * step(m_hash(cell + 8.8), chance) * fade * (1.0 - step(0.4, t.g))
 			* step(water_level + 0.3, t.r);
 
 	vec3 local = VERTEX - origin;
