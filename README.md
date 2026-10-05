@@ -1,6 +1,6 @@
 # Gamejam21
 
-A game jam lasting 21 days, from 1 October to 21 October 2026.
+A game jam lasting 21 days, from 1 October to 21 October 2026. HAHA.
 
 **Pitch:** _one sentence, filled in on day 1_
 
