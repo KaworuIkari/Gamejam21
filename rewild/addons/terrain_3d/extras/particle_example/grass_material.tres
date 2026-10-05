@@ -1,8 +1,11 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ljo1wt61kbkq"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ljo1wt61kbkq"]
 
-[ext_resource type="Shader" uid="uid://dq3lfyp3u5oxt" path="res://addons/terrain_3d/extras/particle_example/grass.gdshader" id="1_nkru0"]
+[ext_resource type="Shader" uid="uid://bdfdlxyi2imf3" path="res://meadow/grass/meadow_flower.gdshader" id="1_nkru0"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_nkru0")
-shader_parameter/wind_direction = Vector2(1, 1)
+shader_parameter/cloud_shadow_strength = 0.28
+shader_parameter/cloud_shadow_wind = Vector2(4, 1.5)
+shader_parameter/cluster_density = 0.8
+shader_parameter/lone_density = 0.04
