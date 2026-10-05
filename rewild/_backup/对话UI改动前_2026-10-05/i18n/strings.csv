@@ -1,0 +1,108 @@
+keys,zh_CN,en
+MENU_TITLE,自然涌现,Emergence
+MENU_SUBTITLE,一个机器人，一颗星球，慢慢变绿,"One robot, one planet, slowly turning green"
+MENU_CONTINUE,继续游戏,Continue
+MENU_NEW_GAME,新游戏,New Game
+MENU_LOAD,读取存档,Load Game
+MENU_SETTINGS,设置,Settings
+MENU_QUIT,退出游戏,Quit
+MENU_VERSION,灰盒原型 v0.1,Greybox prototype v0.1
+MENU_QUIT_CONFIRM,确定要退出游戏吗？,Quit the game?
+UI_CONFIRM,确定,Confirm
+UI_CANCEL,取消,Cancel
+UI_BACK,返回,Back
+UI_RESET_PAGE,恢复本页默认,Reset Page
+HINT_TABS,点击分页标签切换,Click a tab to switch pages
+HINT_BACK,Esc / B 返回,Esc / B: back
+SETTINGS_TITLE,设置,Settings
+TAB_AUDIO,音频,Audio
+TAB_VIDEO,画面,Video
+TAB_CONTROLS,操作,Controls
+TAB_ACCESSIBILITY,语言与辅助,Language & Access
+HEADER_VOLUME,音量,Volume
+HEADER_DISPLAY,显示,Display
+HEADER_GRAPHICS,图形,Graphics
+HEADER_SENSITIVITY,灵敏度与手感,Sensitivity & Feel
+HEADER_KEYBINDS,按键绑定,Key Bindings
+HEADER_LANGUAGE,语言,Language
+HEADER_ACCESSIBILITY,辅助功能,Accessibility
+HEADER_SAVE_SLOTS,存档位,Save Slots
+OPT_MASTER_VOLUME,主音量,Master Volume
+OPT_MUSIC_VOLUME,音乐,Music
+OPT_SFX_VOLUME,音效,Sound Effects
+OPT_AMBIENT_VOLUME,环境音,Ambience
+OPT_WINDOW_MODE,窗口模式,Window Mode
+WINDOW_WINDOWED,窗口化,Windowed
+WINDOW_BORDERLESS,无边框全屏,Borderless Fullscreen
+WINDOW_EXCLUSIVE,独占全屏,Exclusive Fullscreen
+OPT_RESOLUTION,分辨率（窗口化）,Resolution (Windowed)
+OPT_VSYNC,垂直同步,V-Sync
+VSYNC_OFF,关闭,Off
+VSYNC_ON,开启,On
+VSYNC_ADAPTIVE,自适应,Adaptive
+OPT_MAX_FPS,帧率上限,Frame Rate Limit
+FPS_UNLIMITED,不限制,Unlimited
+OPT_QUALITY,画质,Graphics Quality
+QUALITY_LOW,低,Low
+QUALITY_MEDIUM,中,Medium
+QUALITY_HIGH,高,High
+QUALITY_ULTRA,极高,Ultra
+OPT_RENDER_SCALE,渲染缩放,Render Scale
+OPT_SCALER,缩放算法,Upscaler
+SCALER_BILINEAR,双线性,Bilinear
+SCALER_FSR1,FSR 1.0,FSR 1.0
+SCALER_FSR2,FSR 2.2,FSR 2.2
+OPT_FOV,视野（FOV）,Field of View
+OPT_MOUSE_SENS,鼠标灵敏度,Mouse Sensitivity
+OPT_PAD_SENS,手柄灵敏度,Controller Sensitivity
+OPT_INVERT_Y,反转 Y 轴,Invert Y Axis
+OPT_VIBRATION,手柄震动,Controller Vibration
+OPT_LANGUAGE,语言,Language
+LANG_ZH,简体中文,简体中文
+LANG_EN,English,English
+OPT_UI_SCALE,界面缩放,UI Scale
+OPT_CAMERA_SHAKE,镜头晃动,Camera Shake
+OPT_SUBTITLES,字幕,Subtitles
+BIND_COL_ACTION,动作,Action
+BIND_COL_KBM,键盘 / 鼠标,Keyboard / Mouse
+BIND_COL_PAD,手柄,Controller
+BIND_WAITING,请按下按键…,Press a key…
+BIND_NONE,未绑定,Unbound
+BIND_MOUSE_LEFT,鼠标左键,Left Mouse
+BIND_MOUSE_RIGHT,鼠标右键,Right Mouse
+BIND_MOUSE_MIDDLE,鼠标中键,Middle Mouse
+BIND_WHEEL_UP,滚轮上,Wheel Up
+BIND_WHEEL_DOWN,滚轮下,Wheel Down
+BIND_MOUSE_N,鼠标按键 %d,Mouse Button %d
+BIND_LSTICK,左摇杆,Left Stick
+BIND_RSTICK,右摇杆,Right Stick
+BIND_RESET_ALL,重置全部按键,Reset All Bindings
+BIND_HINT,Esc 取消（手柄：View 键取消）,Esc to cancel (controller: View)
+ACTION_MOVE_FORWARD,向前移动,Move Forward
+ACTION_MOVE_BACK,向后移动,Move Back
+ACTION_MOVE_LEFT,向左移动,Move Left
+ACTION_MOVE_RIGHT,向右移动,Move Right
+ACTION_JUMP,跳跃,Jump
+ACTION_SPRINT,冲刺,Sprint
+ACTION_INTERACT,交互 / 拾取,Interact / Pick Up
+ACTION_PAUSE,暂停菜单,Pause Menu
+SLOT_TITLE,存档 %d,Slot %d
+SLOT_EMPTY,空存档位,Empty Slot
+SLOT_SAVED_AT,保存于 %s,Saved %s
+SLOT_PLAY_TIME,游玩时长 %s,Play time %s
+SLOT_LOAD,读取,Load
+SLOT_DELETE,删除,Delete
+SLOT_START_HERE,在此开始,Start Here
+SLOT_OVERWRITE,覆盖并开始,Overwrite
+SLOT_SAVE_HERE,保存到此,Save Here
+SLOT_OVERWRITE_SAVE,覆盖存档,Overwrite Save
+SLOT_NO_THUMB,无预览,No preview
+SLOT_SCREEN_NEW,选择存档位开始新游戏,Choose a slot for your new game
+SLOT_SCREEN_LOAD,读取存档,Load Game
+SLOT_SCREEN_BROWSE,存档管理,Save Files
+SLOT_SCREEN_SAVE,选择存档位保存进度,Choose a slot to save progress
+SLOT_SCREEN_IN_GAME_MANAGE,游戏内存档管理,In-Game Save Files
+SLOT_CONFIRM_DELETE,确定删除存档 %d 吗？此操作无法撤销。,Delete slot %d? This cannot be undone.
+SLOT_CONFIRM_OVERWRITE,存档 %d 已有进度，确定覆盖吗？,Slot %d has progress. Overwrite it?
+LOC_CRASH_SITE,坠落地点,Crash Site
+GAME_PLACEHOLDER,游戏世界（占位）\n存档 %d · %s · 游玩时长 %s\n按 %s 保存并返回主菜单,Game world (placeholder)\nSlot %d · %s · Play time %s\nPress %s to save and return to menu

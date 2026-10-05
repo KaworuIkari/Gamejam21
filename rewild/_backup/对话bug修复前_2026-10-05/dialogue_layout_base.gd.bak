@@ -1,0 +1,56 @@
+@tool
+extends DialogicLayoutBase
+## 自定义对话布局的根节点（custom_ui_.tscn）。
+## - 提供全局字体/字号/颜色给 Dialogic 自带的图层（如词汇表）读取
+## - 隐藏“站位立绘层”：join / leave / update 指令照常工作，但不在屏幕上画大立绘，
+##   说话人的头像统一显示在对话框左侧
+
+@export var canvas_layer: int = 10
+
+@export_subgroup("Global")
+@export var global_bg_color: Color = Color(0.15, 0.17, 0.19, 1)
+@export var global_font_color: Color = Color("e6e8eb")
+@export_file("*.ttf", "*.tres") var global_font: String = "res://fonts/ChillBitmap7x.ttf"
+@export var global_font_size: int = 32
+## 是否在屏幕上显示站位立绘（关闭时只在对话框里显示说话人头像）
+@export var show_stage_portraits: bool = false
+
+
+var _tree_was_paused := false
+var _dialogic_paused_before := false
+
+
+func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	# 游戏暂停（打开暂停菜单）时同步暂停对话，避免点击菜单时推进对话
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	_apply_export_overrides()
+	# 应用“设置 > 对话 > 文字速度”
+	var sm := get_node_or_null(^"/root/SettingsManager")
+	if sm and sm.has_method("apply_dialogue_speed"):
+		sm.apply_dialogue_speed()
+
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	var paused := get_tree().paused
+	if paused == _tree_was_paused:
+		return
+	_tree_was_paused = paused
+	var dialogic := DialogicUtil.autoload()
+	if paused:
+		_dialogic_paused_before = dialogic.paused
+		DialogueUtils.set_paused(true)
+		set(&"visible", false)
+	else:
+		DialogueUtils.set_paused(_dialogic_paused_before)
+		set(&"visible", true)
+
+
+func _apply_export_overrides() -> void:
+	set(&"layer", canvas_layer)
+	var stage := get_node_or_null(^"StagePortraitLayer") as CanvasItem
+	if stage:
+		stage.visible = show_stage_portraits

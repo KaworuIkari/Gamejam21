@@ -1,0 +1,65 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://CustomUi/layers/text_input_layer.gd" id="1_layer"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/TextInput/node_text_input.gd" id="2_input"]
+
+[node name="TextInputLayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_layer")
+
+[node name="DialogicNode_TextInput" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_input")
+input_line_edit = NodePath("Center/TextInputPanel/VBox/InputField")
+text_label = NodePath("Center/TextInputPanel/VBox/TextLabel")
+confirmation_button = NodePath("Center/TextInputPanel/VBox/ConfirmationButton")
+
+[node name="Center" type="CenterContainer" parent="DialogicNode_TextInput"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -340.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextInputPanel" type="PanelContainer" parent="DialogicNode_TextInput/Center"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="DialogicNode_TextInput/Center/TextInputPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TextLabel" type="Label" parent="DialogicNode_TextInput/Center/TextInputPanel/VBox"]
+layout_mode = 2
+text = "请输入"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="InputField" type="LineEdit" parent="DialogicNode_TextInput/Center/TextInputPanel/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+alignment = 1
+
+[node name="ConfirmationButton" type="Button" parent="DialogicNode_TextInput/Center/TextInputPanel/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "UI_CONFIRM"

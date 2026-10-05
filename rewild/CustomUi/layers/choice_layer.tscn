@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://CustomUi/layers/choice_layer.gd" id="1_layer"]
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Choice/node_choice_button.gd" id="2_button"]
+
+[node name="ChoiceLayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_layer")
+
+[node name="Choices" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -420.0
+offset_right = 360.0
+offset_bottom = -380.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+alignment = 2
+theme_override_constants/separation = 12
+
+[node name="Choice1" type="Button" parent="Choices"]
+layout_mode = 2
+script = ExtResource("2_button")
+
+[node name="Choice2" type="Button" parent="Choices"]
+layout_mode = 2
+script = ExtResource("2_button")
+
+[node name="Choice3" type="Button" parent="Choices"]
+layout_mode = 2
+script = ExtResource("2_button")
+
+[node name="Choice4" type="Button" parent="Choices"]
+layout_mode = 2
+script = ExtResource("2_button")
+
+[node name="Choice5" type="Button" parent="Choices"]
+layout_mode = 2
+script = ExtResource("2_button")
+
+[node name="Choice6" type="Button" parent="Choices"]
+layout_mode = 2
+script = ExtResource("2_button")

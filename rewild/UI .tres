@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DialogicStyle" format=3 uid="uid://gd13glhogncq"]
+
+[ext_resource type="PackedScene" uid="uid://dpd74r7db1fuh" path="res://CustomUi/custom_ui_.tscn" id="1_g8jpq"]
+[ext_resource type="Script" uid="uid://bwg6yncmh2cml" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_gqe7q"]
+[ext_resource type="Script" uid="uid://dv08k6ljua6fm" path="res://addons/dialogic/Resources/dialogic_style.gd" id="11_vs0sd"]
+
+[sub_resource type="Resource" id="Resource_m7ehh"]
+script = ExtResource("2_gqe7q")
+scene = ExtResource("1_g8jpq")
+
+[resource]
+script = ExtResource("11_vs0sd")
+name = "UI"
+layer_info = {
+"": SubResource("Resource_m7ehh")
+}
+metadata/_latest_layer = ""

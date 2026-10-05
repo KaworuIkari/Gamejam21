@@ -1,0 +1,44 @@
+对话 UI 改动前的备份（2026-10-05）
+====================================
+本文件夹里有 .gdignore，Godot 会忽略这里的所有文件，不会导入、不会和正式文件冲突。
+
+【整体回退】把下面左边的备份文件复制回右边的位置并覆盖，然后删除“新增文件”列表里的文件。
+（Godot 打开时会自动重新导入。）
+
+备份文件（本文件夹内）                                   →  原位置（项目根目录 rewild/ 下）
+CustomUi/custom_ui_.tscn                                 →  CustomUi/custom_ui_.tscn
+UI .tres                                                 →  UI .tres
+project.godot                                            →  project.godot
+character/dialogic_timeline/Mannequin/XBot_timeline.dtl  →  character/dialogic_timeline/Mannequin/XBot_timeline.dtl
+character/mannequin/XBot.dch                             →  character/mannequin/XBot.dch
+character/mannequin/xbot.gd                              →  character/mannequin/xbot.gd
+autoload/settings_manager.gd                             →  autoload/settings_manager.gd
+ui/settings/settings_menu.gd                             →  ui/settings/settings_menu.gd
+i18n/strings.csv                                         →  i18n/strings.csv
+i18n/strings.en.translation                              →  i18n/strings.en.translation
+i18n/strings.zh_CN.translation                           →  i18n/strings.zh_CN.translation
+
+【本次新增的文件】（整体回退时删除）
+CustomUi/dialogue_layout_base.gd (+ .uid)
+CustomUi/dialogue_utils.gd (+ .uid)
+CustomUi/dialogue_trigger.gd (+ .uid)
+CustomUi/README_对话UI.md
+CustomUi/layers/ 整个文件夹
+CustomUi/assets/ 整个文件夹
+i18n/dialogue_xbot.csv / .csv.import / .en.translation / .zh_CN.translation
+
+【各文件改了什么】
+- CustomUi/custom_ui_.tscn：重做为像素风底部对话框布局（原来内置的普通对话框层等被替换）
+- UI .tres：去掉了叠加的“带头像对话框”图层（layer 10），只保留 custom_ui_ 底板
+- XBot_timeline.dtl：删除两行 [style name=...] 样式切换；每句台词末尾加了翻译编号 #id:xx
+- XBot.dch：角色名加了翻译编号（_translation_id = "1e"）
+- xbot.gd：输入动作 up/down 改为 forward/backward；加入 player 分组；对话中停止移动
+- project.godot：新增输入动作 interact / dialogue_auto / dialogue_skip / dialogue_history；
+  开启 Dialogic 翻译、简单历史记录；新增 dialogic 变量 XBot.MirrorQuestionName；
+  新增 settings/text_speed；注册 dialogue_xbot 翻译文件
+- settings_manager.gd / settings_menu.gd：新增“对话”设置（文字速度、对话字号、对话框不透明度）
+- strings.csv：新增对话 UI 相关文案
+
+【只想恢复 custom1 样式给 XBot 对话】
+不用整体回退：在 XBot_timeline.dtl 第一行加 [style name="custom1"]，或在 Dialogic 编辑器里加一个 Change Style 事件选 custom1。
+speaker_custom、custom1 两套样式文件本次完全没动。
