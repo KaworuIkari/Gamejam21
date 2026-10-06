@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsi1lrljxs7v"
-path.s3tc="res://.godot/imported/sky_100_2k.png-054cf14ae0965101881334161a36078f.s3tc.ctex"
+uid="uid://dwj44t5iy0mbj"
+path.s3tc="res://.godot/imported/sand_alb_ht.png-565d1ad9657860ae6b95b79d4550e0a9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://sky/sky_100_2k.png"
-dest_files=["res://.godot/imported/sky_100_2k.png-054cf14ae0965101881334161a36078f.s3tc.ctex"]
+source_file="res://terrain/sand/sand_alb_ht.png"
+dest_files=["res://.godot/imported/sand_alb_ht.png-565d1ad9657860ae6b95b79d4550e0a9.s3tc.ctex"]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=2
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
@@ -38,4 +38,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

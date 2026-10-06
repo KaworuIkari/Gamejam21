@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwj44t5iy0mbj"
-path.s3tc="res://.godot/imported/sand_alb_ht.png.png-6beea6609baa2a96da75c525388a8ad6.s3tc.ctex"
+uid="uid://cbmub7lakcv81"
+path.s3tc="res://.godot/imported/sand_nrm_rgh.png-f09373fcf85104993a0a88fc6c74a8b7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://terrain/sand/sand_alb_ht.png.png"
-dest_files=["res://.godot/imported/sand_alb_ht.png.png-6beea6609baa2a96da75c525388a8ad6.s3tc.ctex"]
+source_file="res://terrain/sand/sand_nrm_rgh.png"
+dest_files=["res://.godot/imported/sand_nrm_rgh.png-f09373fcf85104993a0a88fc6c74a8b7.s3tc.ctex"]
 
 [params]
 
