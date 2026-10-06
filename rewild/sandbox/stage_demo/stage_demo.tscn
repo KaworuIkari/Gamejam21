@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://sandbox/stage_demo/stage_demo.gd" id="1_demo"]
+[ext_resource type="Script" path="res://levels/meadow/meadow_world.gd" id="2_world"]
+[ext_resource type="Shader" path="res://shaders/sky/sky.gdshader" id="3_sky"]
+[ext_resource type="Script" path="res://objects/player/fly_camera.gd" id="4_cam"]
+[ext_resource type="Script" path="res://systems/world_stages/world_stages.gd" id="5_stages"]
+[ext_resource type="Resource" path="res://systems/world_stages/stages/stage_1_wasteland.tres" id="6_s1"]
+[ext_resource type="Resource" path="res://systems/world_stages/stages/stage_2_revival.tres" id="7_s2"]
+[ext_resource type="Resource" path="res://systems/world_stages/stages/stage_3_golden.tres" id="8_s3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sky"]
+shader = ExtResource("3_sky")
+
+[sub_resource type="Sky" id="Sky_main"]
+sky_material = SubResource("ShaderMaterial_sky")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+sky = SubResource("Sky_main")
+ambient_light_source = 3
+ambient_light_energy = 1.0
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_white = 6.0
+glow_enabled = true
+glow_intensity = 0.35
+glow_bloom = 0.05
+fog_enabled = true
+fog_mode = 0
+fog_light_color = Color(0.74, 0.85, 0.97, 1)
+fog_density = 0.0006
+fog_aerial_perspective = 0.3
+fog_height = 2.0
+fog_height_density = 0.006
+adjustment_enabled = true
+adjustment_contrast = 1.04
+adjustment_saturation = 1.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_body"]
+top_radius = 0.7
+bottom_radius = 0.9
+height = 1.6
+
+[sub_resource type="StandardMaterial3D" id="Mat_body"]
+albedo_color = Color(0.88, 0.85, 0.78, 1)
+roughness = 0.8
+
+[sub_resource type="TorusMesh" id="TorusMesh_ring"]
+inner_radius = 0.62
+outer_radius = 0.78
+
+[sub_resource type="StandardMaterial3D" id="Mat_glow"]
+shading_mode = 0
+albedo_color = Color(0.35, 0.95, 1, 1)
+emission_enabled = true
+emission = Color(0.35, 0.95, 1, 1)
+emission_energy_multiplier = 3.0
+
+[node name="StageDemo" type="Node3D"]
+script = ExtResource("1_demo")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-48, -35, 0)
+light_energy = 1.5
+shadow_enabled = true
+shadow_blur = 1.5
+directional_shadow_max_distance = 150.0
+
+[node name="MeadowWorld" type="Node3D" parent="."]
+position = Vector3(512, 0, 512)
+script = ExtResource("2_world")
+bush_count = 90
+rock_count = 50
+dead_tree_count = 40
+ruin_count = 12
+use_growth_map = true
+grass_radius = 48.0
+
+[node name="SeedDevice" type="Node3D" parent="."]
+position = Vector3(512, 3, 500)
+
+[node name="Body" type="MeshInstance3D" parent="SeedDevice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+mesh = SubResource("CylinderMesh_body")
+surface_material_override/0 = SubResource("Mat_body")
+
+[node name="Ring" type="MeshInstance3D" parent="SeedDevice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55, 0)
+mesh = SubResource("TorusMesh_ring")
+surface_material_override/0 = SubResource("Mat_glow")
+
+[node name="Glow" type="OmniLight3D" parent="SeedDevice"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+light_color = Color(0.4, 0.95, 1, 1)
+light_energy = 1.5
+omni_range = 5.0
+
+[node name="WorldStages" type="Node" parent="." node_paths=PackedStringArray("environment", "sun", "meadow", "focus")]
+script = ExtResource("5_stages")
+stages = Array[Resource]([ExtResource("6_s1"), ExtResource("7_s2"), ExtResource("8_s3")])
+environment = NodePath("../WorldEnvironment")
+sun = NodePath("../Sun")
+meadow = NodePath("../MeadowWorld")
+focus = NodePath("../SeedDevice")
+
+[node name="Camera" type="Camera3D" parent="."]
+position = Vector3(500, 30, 532)
+rotation_degrees = Vector3(-42, -15, 0)
+fov = 55.0
+far = 5000.0
+script = ExtResource("4_cam")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 16.0
+offset_top = 12.0
+offset_right = 800.0
+offset_bottom = 40.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.6)
+theme_override_constants/outline_size = 6
+text = "Stage 1"

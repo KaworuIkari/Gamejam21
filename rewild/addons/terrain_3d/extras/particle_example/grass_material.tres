@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://ljo1wt61kbkq"]
 
-[ext_resource type="Shader" uid="uid://bdfdlxyi2imf3" path="res://meadow/grass/meadow_flower.gdshader" id="1_nkru0"]
+[ext_resource type="Shader" uid="uid://bdfdlxyi2imf3" path="res://shaders/foliage/meadow_flower.gdshader" id="1_nkru0"]
 
 [resource]
 render_priority = 0
