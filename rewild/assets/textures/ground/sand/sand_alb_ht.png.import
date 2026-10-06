@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwj44t5iy0mbj"
-path.s3tc="res://.godot/imported/sand_alb_ht.png-ce4a0aeee4afe512f056b17eac3785cf.s3tc.ctex"
+path.bptc="res://.godot/imported/sand_alb_ht.png-ce4a0aeee4afe512f056b17eac3785cf.bptc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,12 +12,12 @@ metadata={
 [deps]
 
 source_file="res://assets/textures/ground/sand/sand_alb_ht.png"
-dest_files=["res://.godot/imported/sand_alb_ht.png-ce4a0aeee4afe512f056b17eac3785cf.s3tc.ctex"]
+dest_files=["res://.godot/imported/sand_alb_ht.png-ce4a0aeee4afe512f056b17eac3785cf.bptc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=false
+compress/high_quality=true
 compress/lossy_quality=0.7
 compress/uastc_level=0
 compress/rdo_quality_loss=0.0
@@ -38,4 +38,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
