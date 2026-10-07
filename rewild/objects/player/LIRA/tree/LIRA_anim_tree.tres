@@ -1,0 +1,9 @@
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://c6m8qiernvaoi"]
+
+[ext_resource type="AnimationNodeStateMachine" uid="uid://c58ol76h8kcgr" path="res://objects/player/LIRA/tree/LIRA_anim_main_state.tres" id="1_jdw11"]
+
+[resource]
+graph_offset = Vector2(-342.62564, -23.389475)
+nodes/AnimationNodeStateMachine/node = ExtResource("1_jdw11")
+nodes/AnimationNodeStateMachine/position = Vector2(-66.666664, 146.66667)
+node_connections = [&"output", 0, &"AnimationNodeStateMachine"]

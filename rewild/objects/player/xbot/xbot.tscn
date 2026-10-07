@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dbg2ncgj47d8n"]
 
-[ext_resource type="Script" uid="uid://b3hlblew5782h" path="res://objects/player/xbot.gd" id="1_1eav5"]
-[ext_resource type="Script" uid="uid://ciigwsgfrka3s" path="res://objects/player/xbot_animation_tree.gd" id="2_puh8s"]
+[ext_resource type="Script" uid="uid://b3hlblew5782h" path="res://objects/player/xbot/xbot.gd" id="1_1eav5"]
+[ext_resource type="Script" uid="uid://ciigwsgfrka3s" path="res://objects/player/xbot/xbot_animation_tree.gd" id="2_puh8s"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0yw1p"]
 radius = 1.0
