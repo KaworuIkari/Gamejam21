@@ -1,0 +1,160 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://ui/in_game/pause_menu.gd" id="1_pause"]
+[ext_resource type="PackedScene" path="res://ui/settings/settings_menu.tscn" id="2_settings"]
+[ext_resource type="Script" path="res://ui/save_slots/save_slot_list.gd" id="3_slots"]
+[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="4_glass"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 100
+process_mode = 3
+script = ExtResource("1_pause")
+
+[node name="Overlay" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0156863, 0.0235294, 0.0352941, 0.30)
+mouse_filter = 0
+
+[node name="Center" type="CenterContainer" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Overlay/Center"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+material = ExtResource("4_glass")
+
+[node name="Margin" type="MarginContainer" parent="Overlay/Center/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 30
+
+[node name="VBox" type="VBoxContainer" parent="Overlay/Center/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="Overlay/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+text = "暂停"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "继续游戏"
+
+[node name="SaveButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "保存进度"
+
+[node name="SettingsButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "设置"
+
+[node name="MainMenuButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "返回主菜单"
+
+[node name="SaveFeedback" type="Label" parent="Overlay/Center/Panel/Margin/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HintLabel"
+text = "进度已保存"
+horizontal_alignment = 1
+
+[node name="SettingsMenu" parent="." instance=ExtResource("2_settings")]
+unique_name_in_owner = true
+visible = false
+
+[node name="SaveScreen" type="Control" parent="." unique_id=101]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="SaveScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.06, 0.07, 0.35)
+
+[node name="Center" type="CenterContainer" parent="SaveScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="SaveScreen/Center"]
+custom_minimum_size = Vector2(1100, 0)
+layout_mode = 2
+material = ExtResource("4_glass")
+
+[node name="VBox" type="VBoxContainer" parent="SaveScreen/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Title" type="Label" parent="SaveScreen/Center/Panel/VBox"]
+layout_mode = 2
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 48
+text = "SLOT_SCREEN_IN_GAME_MANAGE"
+
+[node name="SaveSlotList" type="VBoxContainer" parent="SaveScreen/Center/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("3_slots")
+mode = 5
+
+[node name="Footer" type="HBoxContainer" parent="SaveScreen/Center/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Spacer" type="Control" parent="SaveScreen/Center/Panel/VBox/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackButton" type="Button" parent="SaveScreen/Center/Panel/VBox/Footer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "UI_BACK"
