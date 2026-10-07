@@ -12,6 +12,9 @@ UI_CONFIRM,确定,Confirm
 UI_CANCEL,取消,Cancel
 UI_BACK,返回,Back
 UI_RESET_PAGE,恢复本页默认,Reset Page
+UI_APPLY,应用,Apply
+UI_DISCARD,放弃更改,Discard
+SETTINGS_DISCARD_CONFIRM,有未应用的设置更改，放弃并返回吗？,You have unapplied changes. Discard them and go back?
 HINT_TABS,点击分页标签切换,Click a tab to switch pages
 HINT_BACK,Esc / B 返回,Esc / B: back
 SETTINGS_TITLE,设置,Settings
@@ -36,6 +39,9 @@ WINDOW_WINDOWED,窗口化,Windowed
 WINDOW_BORDERLESS,无边框全屏,Borderless Fullscreen
 WINDOW_EXCLUSIVE,独占全屏,Exclusive Fullscreen
 OPT_RESOLUTION,分辨率（窗口化）,Resolution (Windowed)
+RES_AUTO,自动,Auto
+RES_HINT_FULLSCREEN,全屏：跟随显示器,Fullscreen: native
+RES_HINT_EDITOR,编辑器内运行：窗口由编辑器控制,Running in editor: window controlled by editor
 OPT_VSYNC,垂直同步,V-Sync
 VSYNC_OFF,关闭,Off
 VSYNC_ON,开启,On
@@ -124,3 +130,11 @@ DLG_SKIP_CONFIRM,跳过这段对话吗？（遇到下一个选项时会停下）
 DLG_HISTORY_TITLE,对话记录,Dialogue Log
 DLG_HISTORY_EMPTY,还没有对话记录,No dialogue yet
 DLG_TALK_PROMPT,按 %s 交谈,Press %s to talk
+ACTION_WALK,慢走,Walk
+ACTION_USE,浇水（按住）,Water (hold)
+ACTION_USE2,浇水（单次喷洒）,Water (burst)
+ACTION_DIALOGUE_AUTO,对话：自动播放,Dialogue: Auto
+ACTION_DIALOGUE_SKIP,对话：跳过,Dialogue: Skip
+ACTION_DIALOGUE_HISTORY,对话：历史记录,Dialogue: History
+SAVE_FEEDBACK_OK,进度已保存,Progress saved
+SAVE_FEEDBACK_FAIL,保存失败,Save failed

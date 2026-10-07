@@ -7,7 +7,7 @@
   - `StagePortraitLayer`：Dialogic 自带的站位立绘层，**默认隐藏**（join/leave/update 指令照常工作）。想在屏幕上显示大立绘：选中根节点，勾选 `show_stage_portraits`
   - `FullAdvanceInputLayer`：点击屏幕任意位置推进对话
   - `DialogueBoxLayer`（`layers/dialogue_box_layer.tscn`）：底部对话框、头像、名牌、继续箭头、角落按钮（自动 / 跳过 / 历史）
-  - `ChoiceLayer`（`layers/choice_layer.tscn`）：选项按钮（最多 6 个，复用全局像素主题）
+  - `ChoiceLayer`（`layers/choice_layer.tscn`）：选项按钮（最多 6 个，复用全局玻璃主题）
   - `TextInputLayer`（`layers/text_input_layer.tscn`）：文字输入
   - `Glossary`：Dialogic 自带词汇表弹窗
   - `HistoryLayer`（`layers/history_layer.tscn`）：对话记录
@@ -15,7 +15,8 @@
 - `dialogue_utils.gd`：安全暂停 Dialogic 的小工具（规避 Dialogic Alpha 的一个报错）
 
 ## 常改的地方
-- 字体 / 字号：各图层 Inspector 的 `dialogue_font` / `font_sizes`（ChillBitmap 7px 的像素网格是 8px，字号用 8 的倍数）
+- 字体：默认全部继承项目主题字体（Sarasa UI：正文 Regular，按钮 / 标题 / 名牌 SemiBold，与菜单一致）。各图层的 `*_font` 留空即可；只有确实要给对话单独换字体时才填
+- 字号：各图层 Inspector 的 `font_sizes` / `*_font_size`。运行时会自动吸附到 12 的整数倍（规则在 `ui/theme/ui_type.gd`），推荐 24 / 36 / 48
 - 头像：像素画头像把 `DialogueBoxLayer` 的 `portrait_smooth_filter` 关掉
 - 外观：框体、按钮沿用 `ui/theme/pixel/*.png`；继续箭头是 `assets/next_arrow.png`
 - 快捷键：项目设置 > 输入映射 中的 `dialogue_auto`(Q / 手柄 Y)、`dialogue_skip`(Tab / 手柄 View)、`dialogue_history`(H / 手柄 LB)、`interact`(F / 手柄 X)

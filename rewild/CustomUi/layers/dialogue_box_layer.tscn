@@ -7,9 +7,10 @@
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_dialog_text.gd" id="5_text"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_type_sound.gd" id="6_sound"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_next_indicator.gd" id="7_next"]
-[ext_resource type="Texture2D" path="res://CustomUi/assets/next_arrow.png" id="8_arrow"]
-[ext_resource type="Texture2D" path="res://ui/theme/pixel/tab_selected.png" id="9_plate"]
+[ext_resource type="Texture2D" path="res://ui/theme/glass/next_circle.png" id="8_arrow"]
+[ext_resource type="Texture2D" path="res://ui/theme/glass/nameplate.png" id="9_plate"]
 [ext_resource type="Script" path="res://character/dialogic_style/text_effect_shake.gd" id="10_shake"]
+[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="11_glass"]
 
 [sub_resource type="Resource" id="Flex_size"]
 script = ExtResource("3_flex")
@@ -28,14 +29,14 @@ y_value = 1.0
 
 [sub_resource type="StyleBoxTexture" id="Plate"]
 texture = ExtResource("9_plate")
-texture_margin_left = 6.0
-texture_margin_top = 6.0
-texture_margin_right = 6.0
-texture_margin_bottom = 6.0
-content_margin_left = 24.0
-content_margin_top = 6.0
-content_margin_right = 24.0
-content_margin_bottom = 6.0
+texture_margin_left = 52.0
+texture_margin_top = 28.0
+texture_margin_right = 28.0
+texture_margin_bottom = 28.0
+content_margin_left = 58.0
+content_margin_top = 4.0
+content_margin_right = 32.0
+content_margin_bottom = 4.0
 
 [sub_resource type="RichTextEffect" id="Shake2"]
 script = ExtResource("10_shake")
@@ -58,7 +59,7 @@ anchor_left = 0.1
 anchor_top = 1.0
 anchor_right = 0.9
 anchor_bottom = 1.0
-offset_top = -320.0
+offset_top = -308.0
 offset_bottom = -36.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -73,6 +74,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+material = ExtResource("11_glass")
 
 [node name="HBox" type="HBoxContainer" parent="Box/Panel"]
 layout_mode = 2
@@ -82,7 +84,7 @@ theme_override_constants/separation = 28
 [node name="PortraitFrame" type="PanelContainer" parent="Box/Panel/HBox"]
 unique_name_in_owner = true
 texture_filter = 2
-custom_minimum_size = Vector2(228, 228)
+custom_minimum_size = Vector2(176, 176)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
@@ -137,58 +139,72 @@ textbox_root = NodePath("../../../..")
 bus = &"SFX"
 script = ExtResource("6_sound")
 
+[node name="BottomSpacer" type="Control" parent="Box/Panel/HBox/TextColumn"]
+custom_minimum_size = Vector2(0, 58)
+layout_mode = 2
+mouse_filter = 2
+
 [node name="NamePlate" type="PanelContainer" parent="Box"]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 24.0
-offset_top = -46.0
-offset_right = 220.0
-offset_bottom = 6.0
+offset_left = 304.0
+offset_top = -30.0
+offset_right = 305.0
+offset_bottom = 30.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("Plate")
 
 [node name="DialogicNode_NameLabel" type="Label" parent="Box/NamePlate" node_paths=PackedStringArray("name_label_root")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"NameLabel"
+vertical_alignment = 1
 text = "名字"
 script = ExtResource("4_name")
 name_label_root = NodePath("..")
 
 [node name="NextIndicator" type="Control" parent="Box"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -52.0
-offset_right = -28.0
-offset_bottom = -28.0
+offset_left = -26.0
+offset_top = -14.0
+offset_right = -25.0
+offset_bottom = -13.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("7_next")
 show_on_questions = false
 texture = ExtResource("8_arrow")
-texture_size = Vector2(27, 18)
+texture_size = Vector2(64, 64)
+animation = 1
 
 [node name="CornerButtons" type="HBoxContainer" parent="Box"]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -560.0
-offset_top = -52.0
-offset_right = -12.0
-offset_bottom = -6.0
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -70.0
+offset_right = -96.0
+offset_bottom = -22.0
 grow_horizontal = 0
+grow_vertical = 0
 alignment = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 10
 
 [node name="AutoButton" type="Button" parent="Box/CornerButtons"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+theme_type_variation = &"CornerButton"
 focus_mode = 0
 auto_translate_mode = 2
 toggle_mode = true
@@ -196,14 +212,18 @@ text = "自动"
 
 [node name="SkipButton" type="Button" parent="Box/CornerButtons"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+theme_type_variation = &"CornerButton"
 focus_mode = 0
 auto_translate_mode = 2
 text = "跳过"
 
 [node name="HistoryButton" type="Button" parent="Box/CornerButtons"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+theme_type_variation = &"CornerButton"
 focus_mode = 0
 auto_translate_mode = 2
 text = "历史"

@@ -15,6 +15,7 @@ signal game_starting(slot: int)
 ## 选择一个存档位保存时发出；具体游戏状态由外部调用者写入。
 signal save_requested(slot: int)
 
+const UIScaler = preload("res://ui/layout/ui_scaler.gd")
 const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 
 var _compact_layout := false
@@ -60,7 +61,7 @@ func _on_viewport_size_changed() -> void:
 
 
 func _is_compact_layout() -> bool:
-	return UILayoutRules.is_compact(get_viewport().get_visible_rect().size)
+	return UILayoutRules.is_compact(UIScaler.virtual_viewport_size(get_viewport()))
 
 
 ## 聚焦第一个可用按钮
@@ -199,6 +200,18 @@ func _build_card(info: Dictionary) -> Control:
 			else:
 				var new_save_button := _make_button("SLOT_SAVE_HERE", actions)
 				new_save_button.pressed.connect(_on_save_pressed.bind(slot, false))
+	# 各卡片按钮数量不同（已存档 3 个 / 空位 1 个）会让卡片高矮不一：补不可见占位按钮对齐高度
+	var want: int = {Mode.IN_GAME: 3, Mode.BROWSE: 2, Mode.MANAGE: 2}.get(mode, 1)
+	while actions.get_child_count() < want:
+		var ph_btn := Button.new()
+		ph_btn.text = "·"
+		ph_btn.set_meta(&"no_glass", true)
+		ph_btn.disabled = true
+		ph_btn.focus_mode = Control.FOCUS_NONE
+		ph_btn.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		ph_btn.modulate.a = 0.0
+		ph_btn.custom_minimum_size.x = 220
+		actions.add_child(ph_btn)
 	return card
 
 

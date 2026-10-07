@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://CustomUi/layers/history_layer.gd" id="1_layer"]
+[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="9_glass"]
 
 [node name="HistoryLayer" type="Control"]
 layout_mode = 3
@@ -29,7 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.06, 0.07, 0.88)
+color = Color(0.05, 0.06, 0.07, 0.35)
 
 [node name="Margin" type="MarginContainer" parent="HistoryRoot"]
 layout_mode = 1
@@ -45,6 +46,7 @@ theme_override_constants/margin_bottom = 72
 
 [node name="Panel" type="PanelContainer" parent="HistoryRoot/Margin"]
 layout_mode = 2
+material = ExtResource("9_glass")
 
 [node name="VBox" type="VBoxContainer" parent="HistoryRoot/Margin/Panel"]
 layout_mode = 2

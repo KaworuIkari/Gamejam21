@@ -1,11 +1,21 @@
 extends Node
 ## 全局设置管理（Autoload: SettingsManager）
 ## - 读写 user://settings.cfg
-## - 启动时应用全部设置；运行时 set_value() 立即生效
-## - 管理按键重绑定（每个动作一个键鼠绑定 + 一个手柄绑定）
+## - 启动时应用全部设置
+## - 两步式修改：set_value() 立即生效（预览），commit() 确认并写盘，
+##   revert() 撤回到上次确认的值。设置页的“应用 / 放弃”只调用这两个函数
+## - 管理按键重绑定（每个动作一个键鼠绑定 + 一个手柄绑定），重绑定即时写盘，不经过 commit
 
 signal setting_changed(section: String, key: String, value: Variant)
 signal bindings_changed
+## 是否存在“已预览、未应用”的更改发生变化
+signal pending_changed(has_pending: bool)
+
+## 子模块（由本节点创建，不需要单独注册 Autoload）
+const UIScaler = preload("res://ui/layout/ui_scaler.gd")
+const PlayerSettingsBridge = preload("res://autoload/player_settings_bridge.gd")
+var _ui_scaler: Node
+var _player_bridge: Node
 
 const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 
@@ -16,10 +26,6 @@ enum Quality { LOW, MEDIUM, HIGH, ULTRA }
 enum Scaler { BILINEAR, FSR1, FSR2 }
 enum VSync { OFF, ON, ADAPTIVE }
 
-const RESOLUTIONS: Array[Vector2i] = [
-	Vector2i(1280, 720), Vector2i(1600, 900), Vector2i(1920, 1080),
-	Vector2i(2560, 1440), Vector2i(3840, 2160),
-]
 const FPS_LIMITS: Array[int] = [30, 60, 120, 144, 0] # 0 = 不限制
 const LOCALES: Array[String] = ["zh_CN", "en"]
 
@@ -31,11 +37,25 @@ const AUDIO_BUSES := {
 	"ambient_volume": "Ambient",
 }
 
-## 可在设置里重绑定的动作（需在 项目设置 > 输入映射 中存在）
+## 可在设置里重绑定的动作（名字必须和 项目设置 > 输入映射 一致；不存在的动作会自动跳过）
+## 列出所有玩家会用到的键，重绑定时才能检测到冲突并自动交换
 const REBINDABLE_ACTIONS: Array[StringName] = [
-	&"move_forward", &"move_back", &"move_left", &"move_right",
-	&"jump", &"sprint", &"interact", &"pause",
+	&"forward", &"backward", &"left", &"right",
+	&"jump", &"sprint", &"walk", &"use", &"use2", &"interact", &"pause",
+	&"dialogue_auto", &"dialogue_skip", &"dialogue_history",
 ]
+## 动作 -> 显示名（翻译键）；未列出的用 "ACTION_" + 大写动作名
+const ACTION_LABELS := {
+	&"forward": "ACTION_MOVE_FORWARD",
+	&"backward": "ACTION_MOVE_BACK",
+	&"left": "ACTION_MOVE_LEFT",
+	&"right": "ACTION_MOVE_RIGHT",
+}
+
+
+static func action_label(action: StringName) -> String:
+	return ACTION_LABELS.get(action, "ACTION_" + String(action).to_upper())
+
 
 const DEFAULTS := {
 	"audio": {
@@ -46,7 +66,7 @@ const DEFAULTS := {
 	},
 	"video": {
 		"window_mode": WindowMode.WINDOWED,
-		"resolution": 1, # RESOLUTIONS 下标，默认 1600x900
+		"resolution": DisplayResolutions.AUTO, # 窗口尺寸；(0, 0) = 自动适配显示器（规则见 DisplayResolutions）
 		"vsync": VSync.ON,
 		"max_fps": 4, # FPS_LIMITS 下标，默认不限制
 		"quality": Quality.HIGH,
@@ -77,17 +97,27 @@ const DIALOGUE_SPEEDS: Array[float] = [2.5, 1.0, 0.4, 0.0]
 
 var _config := ConfigFile.new()
 var _values: Dictionary = {}
+## 上次确认（commit）或读盘时的值；用于判断未应用更改和撤回。
+## _config 只保存已确认的值，所以按键重绑定触发的写盘不会顺带写入未应用的设置
+var _committed: Dictionary = {}
 var _default_events: Dictionary = {} # action -> Array[InputEvent]
 var _environments: Array[WeakRef] = []
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	_ui_scaler = UIScaler.new()
+	_ui_scaler.name = &"UIScaler"
+	add_child(_ui_scaler)
+	_player_bridge = PlayerSettingsBridge.new()
+	_player_bridge.name = &"PlayerSettingsBridge"
+	add_child(_player_bridge)
 	_values = DEFAULTS.duplicate(true)
 	for action in REBINDABLE_ACTIONS:
 		if InputMap.has_action(action):
 			_default_events[action] = InputMap.action_get_events(action).map(func(e): return e.duplicate())
 	_load()
+	_committed = _values.duplicate(true)
 	apply_all.call_deferred()
 
 
@@ -107,9 +137,9 @@ func set_value(section: String, key: String, value: Variant) -> void:
 	if _values[section].get(key) == value:
 		return
 	_values[section][key] = value
-	_config.set_value(section, key, value)
 	_apply(section, key)
 	setting_changed.emit(section, key, value)
+	pending_changed.emit(has_pending_changes())
 
 
 func reset_section(section: String) -> void:
@@ -118,6 +148,38 @@ func reset_section(section: String) -> void:
 		return
 	for key in DEFAULTS.get(section, {}):
 		set_value(section, key, DEFAULTS[section][key])
+
+
+## 是否有已预览、尚未应用的更改
+func has_pending_changes() -> bool:
+	for section in DEFAULTS:
+		for key in DEFAULTS[section]:
+			if get_value(section, key) != _committed_value(section, key):
+				return true
+	return false
+
+
+## 应用：把当前值确认为正式设置并写盘
+func commit() -> void:
+	for section in DEFAULTS:
+		for key in DEFAULTS[section]:
+			_config.set_value(section, key, get_value(section, key))
+	_committed = _values.duplicate(true)
+	save()
+	pending_changed.emit(false)
+
+
+## 放弃：把所有未应用的更改撤回到上次确认的值（会重新应用并刷新界面）
+func revert() -> void:
+	if not has_pending_changes():
+		return
+	for section in DEFAULTS:
+		for key in DEFAULTS[section]:
+			set_value(section, key, _committed_value(section, key))
+
+
+func _committed_value(section: String, key: String) -> Variant:
+	return _committed.get(section, {}).get(key, DEFAULTS[section][key])
 
 
 func save() -> void:
@@ -175,17 +237,21 @@ func _apply(section: String, key: String) -> void:
 					_apply_quality()
 				"render_scale", "scaler":
 					_apply_scaling()
-				# fov 由相机自行读取 / 监听 setting_changed
+				"fov":
+					_player_bridge.refresh()
 		"accessibility":
 			match key:
 				"locale":
 					TranslationServer.set_locale(LOCALES[clampi(v, 0, LOCALES.size() - 1)])
 				"ui_scale":
-					get_tree().root.content_scale_factor = UILayoutRules.content_scale(float(v))
+					# 只缩放我们的 UI，不改全局缩放（全局缩放会改变主场景像素化的分辨率）
+					_ui_scaler.user_scale = UILayoutRules.content_scale(float(v))
 				"dialogue_text_speed":
 					apply_dialogue_speed()
 				# dialogue_font_size / dialogue_box_opacity 由对话框图层监听 setting_changed 自行应用
-		# controls 由玩家控制器读取
+		"controls":
+			# 灵敏度等由 PlayerSettingsBridge 写到角色控制器上
+			_player_bridge.refresh()
 
 
 func apply_dialogue_speed() -> void:
@@ -205,9 +271,14 @@ func _apply_volume(bus_name: String, percent: Variant) -> void:
 	AudioServer.set_bus_volume_db(idx, linear_to_db(maxf(linear, 0.0001)))
 
 
+## 当前能否由游戏控制窗口（编辑器“游戏”标签页内嵌运行 / 无头模式下不能）
+func can_control_window() -> bool:
+	return not Engine.is_embedded_in_editor() and DisplayServer.get_name() != "headless"
+
+
 func _apply_window() -> void:
 	# 在编辑器内嵌窗口中运行时不改动窗口，避免干扰编辑器
-	if Engine.is_embedded_in_editor() or DisplayServer.get_name() == "headless":
+	if not can_control_window():
 		return
 	var mode: int = get_value("video", "window_mode")
 	match mode:
@@ -217,9 +288,8 @@ func _apply_window() -> void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 		_:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-			var res := RESOLUTIONS[clampi(get_value("video", "resolution"), 0, RESOLUTIONS.size() - 1)]
-			var usable := DisplayServer.screen_get_usable_rect(DisplayServer.window_get_current_screen())
-			res = res.min(usable.size)
+			# 放不下或“自动”时取自动档，保证宽高比不被截断变形
+			var res := DisplayResolutions.resolve(get_value("video", "resolution"))
 			var win := get_tree().root
 			win.size = res
 			win.move_to_center()

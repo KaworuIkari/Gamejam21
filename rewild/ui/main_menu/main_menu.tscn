@@ -3,15 +3,8 @@
 [ext_resource type="Script" uid="uid://y16lcfbh3np" path="res://ui/main_menu/main_menu.gd" id="1_menu"]
 [ext_resource type="Script" uid="uid://bq8hjgxtqayf0" path="res://ui/save_slots/save_slot_list.gd" id="2_slots"]
 [ext_resource type="PackedScene" path="res://ui/settings/settings_menu.tscn" id="3_settings"]
-
-[sub_resource type="Gradient" id="Gradient_bg"]
-offsets = PackedFloat32Array(0, 0.55, 1)
-colors = PackedColorArray(0.19, 0.27, 0.27, 1, 0.12, 0.15, 0.17, 1, 0.07, 0.08, 0.1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bg"]
-gradient = SubResource("Gradient_bg")
-fill_from = Vector2(0.15, 0)
-fill_to = Vector2(0.6, 1)
+[ext_resource type="Texture2D" path="res://ui/main_menu/menu_bg.jpg" id="4_bg"]
+[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="5_glass"]
 
 [node name="MainMenu" type="Control" unique_id=1076275347]
 layout_mode = 3
@@ -23,14 +16,16 @@ grow_vertical = 2
 script = ExtResource("1_menu")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1156831566]
+texture_filter = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_bg")
+texture = ExtResource("4_bg")
 expand_mode = 1
+stretch_mode = 6
 
 [node name="Content" type="MarginContainer" parent="." unique_id=304471519]
 unique_name_in_owner = true
@@ -72,7 +67,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_constants/separation = 6
+theme_override_constants/separation = 20
 
 [node name="ContinueButton" type="Button" parent="Content/VBox/Buttons" unique_id=1728757562]
 unique_name_in_owner = true
@@ -136,7 +131,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.06, 0.07, 0.88)
+color = Color(0.05, 0.06, 0.07, 0.35)
 
 [node name="Center" type="CenterContainer" parent="SlotScreen" unique_id=428618299]
 layout_mode = 1
@@ -149,6 +144,7 @@ grow_vertical = 2
 [node name="Panel" type="PanelContainer" parent="SlotScreen/Center" unique_id=16813654]
 custom_minimum_size = Vector2(1100, 0)
 layout_mode = 2
+material = ExtResource("5_glass")
 
 [node name="VBox" type="VBoxContainer" parent="SlotScreen/Center/Panel" unique_id=728620720]
 layout_mode = 2

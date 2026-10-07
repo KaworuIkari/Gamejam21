@@ -1,23 +1,20 @@
-[style name="speaker_custom"]
-
-XBot: Hey, check[portrait=happy] it out...[portrait=default]
-[style name="custom1"]
+XBot: Hey, check[portrait=happy] it out...[portrait=default] #id:11
 join XBot (happy) left
-XBot: This icosphere must be for me!
-XBot: Here is a question for you,
+XBot: This icosphere must be for me! #id:12
+XBot: Here is a question for you, #id:13
 update XBot (default)
-XBot: [shake2]Mirror[/shake2], mirror, on the wall, who in this land is [rainbow freq=0.8 sat=1.0 val=1.0]fairest[/rainbow] of all?
-- You, my queen
-	XBot (happy): Sweet.
+XBot: [shake2]Mirror[/shake2], mirror, on the wall, who in this land is [rainbow freq=0.8 sat=1.0 val=1.0]fairest[/rainbow] of all? #id:14
+- You, my queen #id:15
+	XBot (happy): Sweet. #id:16
 	set {XBot.MirrorQuestionName} = "XBot"
-	XBot: I know it must be me.
-- Snow White
-	XBot: How dare you!
+	XBot: I know it must be me. #id:17
+- Snow White #id:18
+	XBot: How dare you! #id:19
 	set {XBot.MirrorQuestionName} = "Snow White"
 	jump XBot_timeline/End
-- I have some other idea...
-	[text_input text="Name" var="XBot.MirrorQuestionName" placeholder="Antiduspig"]
-	XBot: {XBot.MirrorQuestionName}? Never heard of it.
-XBot: Anyways, if it's not [shake]Snow White[/shake], I agree.
+- I have some other idea... #id:1a
+	[text_input text="Name" var="XBot.MirrorQuestionName" placeholder="Antiduspig"] #id:1b
+	XBot: {XBot.MirrorQuestionName}? Never heard of it. #id:1c
+XBot: Anyways, if it's not [shake]Snow White[/shake], I agree. #id:1d
 label End
 leave XBot

@@ -12,14 +12,14 @@ extends DialogicLayoutBase
 @export_subgroup("Global")
 @export var global_bg_color: Color = Color(0.15, 0.17, 0.19, 1)
 @export var global_font_color: Color = Color("e6e8eb")
-@export_file("*.ttf", "*.tres") var global_font: String = "res://fonts/ChillBitmap7x.ttf"
-@export var global_font_size: int = 32
+## Dialogic 自带图层（如词汇表）读取的全局字体。留空 = 使用项目主题字体（见 UIType）
+@export_file("*.ttf", "*.tres") var global_font: String = ""
+@export var global_font_size: int = UIType.MEDIUM
 ## 是否在屏幕上显示站位立绘（关闭时只在对话框里显示说话人头像）
 @export var show_stage_portraits: bool = false
 
 
 var _tree_was_paused := false
-var _dialogic_paused_before := false
 
 ## 对话期间被冻结的玩家
 var _frozen_players: Array[Node] = []
@@ -48,12 +48,18 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	if not Engine.is_editor_hint():
 		_release_player()
+		DialogueUtils.clear_pauses()
 
 
 # ------------------------------------------------------------------ 冻结玩家
 
 func _on_timeline_started() -> void:
 	_dialogue_scene = get_tree().current_scene
+	# 新对话开始时清掉上一段对话可能残留的暂停原因（游戏暂停除外，由 _process 维护）
+	var game_paused := DialogueUtils.is_pause_reason_active(&"game_paused")
+	DialogueUtils.clear_pauses()
+	if game_paused:
+		DialogueUtils.push_pause(&"game_paused")
 	if not _frozen_players.is_empty():
 		return
 	for body in _find_players():
@@ -108,14 +114,22 @@ func _process(_delta: float) -> void:
 	if paused == _tree_was_paused:
 		return
 	_tree_was_paused = paused
-	var dialogic := DialogicUtil.autoload()
 	if paused:
-		_dialogic_paused_before = dialogic.paused
-		DialogueUtils.set_paused(true)
+		DialogueUtils.push_pause(&"game_paused")
 		set(&"visible", false)
 	else:
-		DialogueUtils.set_paused(_dialogic_paused_before)
+		DialogueUtils.pop_pause(&"game_paused")
 		set(&"visible", true)
+
+
+## Dialogic 图层通过它读取 global_* 设置；字体留空时回落到项目主题字体，
+## 保证自带图层和我们的图层用同一套字体
+func get_global_setting(setting: StringName, default: Variant) -> Variant:
+	if setting == &"font" and global_font.is_empty():
+		return UIType.theme_font_path()
+	if setting == &"font_size":
+		return UIType.snap(global_font_size)
+	return super(setting, default)
 
 
 func _apply_export_overrides() -> void:

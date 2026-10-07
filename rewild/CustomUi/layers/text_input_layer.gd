@@ -2,8 +2,10 @@
 extends DialogicLayoutLayer
 ## 文字输入层（例如让玩家输入名字）。确认后焦点自动交还对话。
 
-@export_file("*.ttf", "*.tres") var input_font: String = "res://fonts/ChillBitmap7x.ttf"
-@export var input_font_size: int = 32
+## 输入框字体覆盖。留空 = 使用项目主题字体
+@export_file("*.ttf", "*.tres") var input_font: String = ""
+## 输入框字号（运行时吸附到 UIType.GRID_PX 的整数倍）
+@export var input_font_size: int = 36
 
 @onready var _node: Control = %DialogicNode_TextInput
 @onready var _field: LineEdit = %InputField
@@ -23,9 +25,9 @@ func _ready() -> void:
 func _apply_export_overrides() -> void:
 	if not is_node_ready():
 		return
-	var font: Font = load(input_font) if ResourceLoader.exists(input_font) else null
+	var font := UIType.font_or_null(input_font)
 	var t := Theme.new()
-	t.default_font_size = input_font_size
+	t.default_font_size = UIType.snap(input_font_size)
 	if font:
 		t.default_font = font
 	_panel.theme = t

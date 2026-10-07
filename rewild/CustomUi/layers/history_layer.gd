@@ -2,8 +2,10 @@
 extends DialogicLayoutLayer
 ## 对话历史：全屏回看面板。打开时暂停对话；Esc / 手柄 B / 历史键 / 返回按钮关闭。
 
-@export_file("*.ttf", "*.tres") var history_font: String = "res://fonts/ChillBitmap7x.ttf"
-@export var history_font_size: int = 32
+## 历史记录字体覆盖。留空 = 使用项目主题字体
+@export_file("*.ttf", "*.tres") var history_font: String = ""
+## 历史记录正文字号（运行时吸附到 UIType.GRID_PX 的整数倍）
+@export var history_font_size: int = 36
 @export var name_separator: String = "："
 
 @onready var _root: Control = %HistoryRoot
@@ -12,7 +14,6 @@ extends DialogicLayoutLayer
 @onready var _close_button: Button = %CloseButton
 @onready var _title: Label = %Title
 
-var _was_paused := false
 
 
 func _ready() -> void:
@@ -30,15 +31,18 @@ func _ready() -> void:
 func _apply_export_overrides() -> void:
 	if not is_node_ready():
 		return
-	var font: Font = load(history_font) if ResourceLoader.exists(history_font) else null
+	# 只给记录列表套一层小主题：字号统一，字体未覆盖时自动回落到项目主题
+	var font := UIType.font_or_null(history_font)
+	var size := UIType.snap(history_font_size)
 	var t := Theme.new()
-	t.default_font_size = history_font_size
+	t.default_font_size = size
 	if font:
 		t.default_font = font
 		for key in [&"normal_font", &"bold_font", &"italics_font", &"bold_italics_font"]:
 			t.set_font(key, &"RichTextLabel", font)
 	for key in [&"normal_font_size", &"bold_font_size", &"italics_font_size", &"bold_italics_font_size"]:
-		t.set_font_size(key, &"RichTextLabel", history_font_size)
+		t.set_font_size(key, &"RichTextLabel", size)
+	t.set_constant(&"line_separation", &"RichTextLabel", UIType.pixel(size) * 2)
 	_log.theme = t
 
 
@@ -49,9 +53,7 @@ func is_open() -> bool:
 func open() -> void:
 	if is_open():
 		return
-	var dialogic := DialogicUtil.autoload()
-	_was_paused = dialogic.paused
-	DialogueUtils.set_paused(true)
+	DialogueUtils.push_pause(&"history")
 	_rebuild()
 	_root.show()
 	_close_button.grab_focus()
@@ -64,7 +66,7 @@ func close() -> void:
 	if not is_open():
 		return
 	_root.hide()
-	DialogueUtils.set_paused(_was_paused)
+	DialogueUtils.pop_pause(&"history")
 
 
 func _rebuild() -> void:

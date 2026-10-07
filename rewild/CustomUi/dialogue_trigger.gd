@@ -90,9 +90,17 @@ func _process(_delta: float) -> void:
 		return
 	var show := _player_inside and not auto_start and _can_start()
 	if show:
-		_prompt.global_position = global_position + prompt_offset
+		_prompt.global_position = _prompt_anchor() + prompt_offset
 		_prompt.text = tr("DLG_TALK_PROMPT") % _interact_key_text()
 	_prompt.visible = show
+
+
+## 提示文字的锚点：第一个碰撞形状的中心（形状可能相对本节点有偏移）
+func _prompt_anchor() -> Vector3:
+	for c in get_children():
+		if c is CollisionShape3D or c is CollisionPolygon3D:
+			return c.global_position
+	return global_position
 
 
 func _unhandled_input(event: InputEvent) -> void:

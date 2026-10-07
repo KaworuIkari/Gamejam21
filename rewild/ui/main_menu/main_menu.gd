@@ -19,6 +19,8 @@ var _return_focus: Control
 
 
 func _ready() -> void:
+	# 从游戏返回时鼠标可能还被镜头锁定
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_continue.pressed.connect(_on_continue)
 	_load.pressed.connect(_open_save_browser)
 	_settings_button.pressed.connect(_on_settings)

@@ -1,5 +1,8 @@
 extends Control
-## 设置菜单：4 个分页，所有改动即时生效，关闭时写盘。
+## 设置菜单：4 个分页。
+## 改动即时预览；点“应用”才确认并写盘（SettingsManager.commit）。
+## 有未应用的更改时返回会先询问；以任何方式离开设置页（返回、被外部隐藏、随场景释放）
+## 而没有应用的更改，都会撤回（SettingsManager.revert）。按键重绑定不经过“应用”，即时保存。
 ## 用法：settings_menu.open()；关闭时发出 closed。
 
 signal closed
@@ -11,14 +14,18 @@ const SECTIONS: Array[String] = ["audio", "video", "controls", "accessibility"]
 const TAB_TITLES: Array[String] = ["TAB_AUDIO", "TAB_VIDEO", "TAB_CONTROLS", "TAB_ACCESSIBILITY"]
 
 const LABEL_WIDTH := 460.0
+const OptionStepperScript = preload("res://ui/settings/option_stepper.gd")
 const CONTROL_WIDTH := 620.0
 const ROW_HEIGHT := 64.0
 const BODY_FONT_SIZE := 24
 const CONTROL_FONT_SIZE := 22
 const SECTION_FONT_SIZE := 34
+## 各分页内容区右侧留白（含滚动条位置，见 _equalize_scroll_width）
+const EDGE_PAD := 36
 
 @onready var _tabs: TabContainer = %Tabs
 @onready var _reset_button: Button = %ResetButton
+@onready var _apply_button: Button = %ApplyButton
 @onready var _back_button: Button = %BackButton
 @onready var _margin: MarginContainer = $Margin
 @onready var _panel_rows: VBoxContainer = $Margin/Panel/VBox
@@ -28,6 +35,8 @@ const SECTION_FONT_SIZE := 34
 var _refreshers: Array[Callable] = []
 var _settings_rows: Array[ResponsiveSettingsRow] = []
 var _section_gaps: Array[Control] = []
+## 正在显示“放弃更改？”确认框
+var _confirming := false
 
 
 func _ready() -> void:
@@ -37,15 +46,40 @@ func _ready() -> void:
 	_build_video(%VideoRows)
 	_build_controls(%ControlsRows)
 	_build_accessibility(%AccessibilityRows)
+	_equalize_scroll_width()
 
 	_reset_button.pressed.connect(_on_reset_pressed)
-	_back_button.pressed.connect(close)
+	_apply_button.pressed.connect(_on_apply_pressed)
+	_back_button.pressed.connect(request_close)
 	_tabs.tab_changed.connect(_on_tab_changed)
 	SettingsManager.setting_changed.connect(func(_s, _k, _v): _refresh_all())
+	SettingsManager.pending_changed.connect(_update_apply_button)
+	visibility_changed.connect(_on_visibility_changed)
+	_update_apply_button(SettingsManager.has_pending_changes())
 	resized.connect(_update_responsive_layout)
 	_on_tab_changed(_tabs.current_tab)
 	_refresh_all()
 	_update_responsive_layout()
+
+
+## 内容较少的分页没有滚动条、内容较多的分页有，会让右侧控件的位置差一个滚动条宽度。
+## 没有滚动条的分页把这段宽度补回右边距，四页的内容宽度就一致了。
+func _equalize_scroll_width() -> void:
+	for sc in _tabs.get_children():
+		if not (sc is ScrollContainer) or sc.get_child_count() == 0:
+			continue
+		var pad := sc.get_child(0) as MarginContainer
+		if pad == null:
+			continue
+		var update := func() -> void:
+			var bar_w := int(sc.get_v_scroll_bar().get_combined_minimum_size().x)
+			var scrolls: bool = pad.get_combined_minimum_size().y > sc.size.y
+			var target := EDGE_PAD + (0 if scrolls else bar_w)
+			if pad.get_theme_constant("margin_right") != target:
+				pad.add_theme_constant_override("margin_right", target)
+		sc.resized.connect(update)
+		pad.minimum_size_changed.connect(update)
+		update.call_deferred()
 
 
 func open(tab: int = -1) -> void:
@@ -56,10 +90,49 @@ func open(tab: int = -1) -> void:
 	_focus_current_tab.call_deferred()
 
 
+## 返回：有未应用的更改时先询问，确认放弃后撤回并关闭
+func request_close() -> void:
+	if _confirming:
+		return
+	if SettingsManager.has_pending_changes():
+		_confirming = true
+		var discard: bool = await ConfirmPopup.ask(self, tr("SETTINGS_DISCARD_CONFIRM"), "UI_DISCARD", true)
+		_confirming = false
+		if not discard or not is_visible_in_tree():
+			return
+	close()
+
+
+## 直接关闭：未应用的更改一律撤回
 func close() -> void:
-	SettingsManager.save()
+	SettingsManager.revert()
 	hide()
 	closed.emit()
+
+
+func _on_apply_pressed() -> void:
+	var had_focus := _apply_button.has_focus()
+	SettingsManager.commit()
+	# 应用后按钮变为禁用，焦点交给“返回”，手柄 / 键盘导航不会丢失
+	if had_focus:
+		_back_button.grab_focus()
+
+
+func _update_apply_button(has_pending: bool) -> void:
+	_apply_button.disabled = not has_pending
+	_apply_button.focus_mode = Control.FOCUS_ALL if has_pending else Control.FOCUS_NONE
+
+
+## 被外部直接隐藏（如暂停菜单关闭）时也撤回未应用的更改
+func _on_visibility_changed() -> void:
+	if not visible:
+		SettingsManager.revert()
+
+
+func _exit_tree() -> void:
+	# 随场景释放（如切回主菜单）时撤回未应用的更改；退出游戏时 SettingsManager 可能已先离开场景树，跳过即可
+	if SettingsManager.is_inside_tree():
+		SettingsManager.revert()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -67,7 +140,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
-		close()
+		request_close()
 
 
 func _focus_current_tab() -> void:
@@ -112,13 +185,9 @@ func _build_video(p: Control) -> void:
 	_header(p, "HEADER_DISPLAY")
 	var window_mode := _option(p, "OPT_WINDOW_MODE", "video", "window_mode",
 		["WINDOW_WINDOWED", "WINDOW_BORDERLESS", "WINDOW_EXCLUSIVE"])
-	var res_items: Array = SettingsManager.RESOLUTIONS.map(func(r: Vector2i): return "%d × %d" % [r.x, r.y])
-	var res := _option(p, "OPT_RESOLUTION", "video", "resolution", res_items)
+	var res := _resolution_option(p)
 	_set_desktop_only(window_mode)
 	_set_desktop_only(res)
-	_refreshers.append(func():
-		res.disabled = SettingsManager.get_value("video", "window_mode") != SettingsManager.WindowMode.WINDOWED
-		res.focus_mode = Control.FOCUS_NONE if res.disabled else Control.FOCUS_ALL)
 	_option(p, "OPT_VSYNC", "video", "vsync", ["VSYNC_OFF", "VSYNC_ON", "VSYNC_ADAPTIVE"])
 	var fps_items: Array = SettingsManager.FPS_LIMITS.map(func(f: int): return "FPS_UNLIMITED" if f == 0 else str(f))
 	_option(p, "OPT_MAX_FPS", "video", "max_fps", fps_items)
@@ -149,7 +218,9 @@ func _build_controls(p: Control) -> void:
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		head.controls.add_child(l)
 	for action in SettingsManager.REBINDABLE_ACTIONS:
-		var row := _row(p, "ACTION_" + String(action).to_upper())
+		if not InputMap.has_action(action):
+			continue
+		var row := _row(p, SettingsManager.action_label(action))
 		for kind in ["kbm", "joy"]:
 			var b := KeyRebindButton.new()
 			b.action = action
@@ -253,17 +324,51 @@ func _slider(parent: Control, key: String, section: String, setting: String,
 	return s
 
 
-func _option(parent: Control, key: String, section: String, setting: String, items: Array) -> OptionButton:
+## 选项行：用“◀ 值 ▶”选择器（不弹出下拉窗口，手柄左右键即可切换）
+func _option(parent: Control, key: String, section: String, setting: String, items: Array) -> Button:
 	var row := _row(parent, key)
-	var o := OptionButton.new()
+	var o: Button = OptionStepperScript.new()
 	o.custom_minimum_size = Vector2(CONTROL_WIDTH, ROW_HEIGHT)
 	o.add_theme_font_size_override(&"font_size", CONTROL_FONT_SIZE)
-	o.fit_to_longest_item = false
 	for item in items:
 		o.add_item(str(item))
 	o.item_selected.connect(func(i: int): SettingsManager.set_value(section, setting, i))
 	row.controls.add_child(o)
 	_refreshers.append(func(): o.select(int(SettingsManager.get_value(section, setting))))
+	return o
+
+
+## 分辨率行：选项由 DisplayResolutions 按当前显示器生成，设置值是尺寸本身（第 0 项 = 自动）。
+## 全屏或编辑器内嵌运行时不可选，并直接在按钮上说明原因。
+func _resolution_option(parent: Control) -> Button:
+	var row := _row(parent, "OPT_RESOLUTION")
+	var o: OptionStepper = OptionStepperScript.new()
+	o.custom_minimum_size = Vector2(CONTROL_WIDTH, ROW_HEIGHT)
+	o.add_theme_font_size_override(&"font_size", CONTROL_FONT_SIZE)
+	row.controls.add_child(o)
+	var values: Array[Vector2i] = [] # 与选项一一对应
+	o.item_selected.connect(func(i: int):
+		if i >= 0 and i < values.size():
+			SettingsManager.set_value("video", "resolution", values[i]))
+	_refreshers.append(func():
+		var windowed: bool = SettingsManager.get_value("video", "window_mode") == SettingsManager.WindowMode.WINDOWED
+		var controllable: bool = SettingsManager.can_control_window()
+		o.clear()
+		values.clear()
+		if not controllable:
+			o.add_item("RES_HINT_EDITOR")
+		elif not windowed:
+			o.add_item("%s  %s" % [tr("RES_HINT_FULLSCREEN"), DisplayResolutions.label(DisplayResolutions.screen_size())])
+		else:
+			values.append(DisplayResolutions.AUTO)
+			o.add_item("%s  (%s)" % [tr("RES_AUTO"), DisplayResolutions.label(DisplayResolutions.auto_size())])
+			for s in DisplayResolutions.available():
+				values.append(s)
+				o.add_item(DisplayResolutions.label(s))
+			var current: Vector2i = SettingsManager.get_value("video", "resolution")
+			o.select(maxi(0, values.find(current)))
+		o.disabled = not (controllable and windowed)
+		o.focus_mode = Control.FOCUS_NONE if o.disabled else Control.FOCUS_ALL)
 	return o
 
 

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://CustomUi/layers/text_input_layer.gd" id="1_layer"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/TextInput/node_text_input.gd" id="2_input"]
+[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="9_glass"]
 
 [node name="TextInputLayer" type="Control"]
 layout_mode = 3
@@ -42,6 +43,7 @@ mouse_filter = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
+material = ExtResource("9_glass")
 
 [node name="VBox" type="VBoxContainer" parent="DialogicNode_TextInput/Center/TextInputPanel"]
 layout_mode = 2

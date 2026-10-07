@@ -19,12 +19,15 @@ visible = false
 [node name="FullAdvanceInputLayer" parent="." unique_id=1334878183 instance=ExtResource("3_input")]
 
 [node name="DialogueBoxLayer" parent="." unique_id=1102734651 instance=ExtResource("4_box")]
-font_sizes = PackedInt32Array(24, 32, 40)
+font_sizes = PackedInt32Array(24, 36, 48)
 
 [node name="ChoiceLayer" parent="." unique_id=1446962635 instance=ExtResource("5_choice")]
 
 [node name="TextInputLayer" parent="." unique_id=1428742002 instance=ExtResource("6_input")]
 
 [node name="Glossary" parent="." unique_id=330979583 instance=ExtResource("7_glossary")]
+font_title_size = 36
+font_text_size = 24
+font_extra_size = 24
 
 [node name="HistoryLayer" parent="." unique_id=790160903 instance=ExtResource("8_history")]
