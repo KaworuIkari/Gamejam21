@@ -15,31 +15,31 @@ const MOUNTAIN_SHADER := preload("res://shaders/terrain/mountain.gdshader")
 const CLOUD_SHADER := preload("res://shaders/sky/cloud_bank.gdshader")
 
 const TREES := [
-	"res://assets/models/stylized_nature/CommonTree_1.gltf",
-	"res://assets/models/stylized_nature/CommonTree_2.gltf",
-	"res://assets/models/stylized_nature/CommonTree_3.gltf",
-	"res://assets/models/stylized_nature/CommonTree_4.gltf",
+	"res://assets/models/stylized_nature/CommonTree/CommonTree_1.gltf",
+	"res://assets/models/stylized_nature/CommonTree/CommonTree_2.gltf",
+	"res://assets/models/stylized_nature/CommonTree/CommonTree_3.gltf",
+	"res://assets/models/stylized_nature/CommonTree/CommonTree_4.gltf",
 ]
 const BUSHES := [
-	"res://assets/models/stylized_nature/Bush_Common.gltf",
-	"res://assets/models/stylized_nature/Bush_Common_Flowers.gltf",
+	"res://assets/models/stylized_nature/Bush/Bush_Common.gltf",
+	"res://assets/models/stylized_nature/Bush/Bush_Common_Flowers.gltf",
 ]
 const DEAD_TREES := [
-	"res://assets/models/stylized_nature/DeadTree_1.gltf",
-	"res://assets/models/stylized_nature/DeadTree_2.gltf",
-	"res://assets/models/stylized_nature/DeadTree_3.gltf",
-	"res://assets/models/stylized_nature/DeadTree_4.gltf",
-	"res://assets/models/stylized_nature/DeadTree_5.gltf",
+	"res://assets/models/stylized_nature/DeadTree/DeadTree_1.gltf",
+	"res://assets/models/stylized_nature/DeadTree/DeadTree_2.gltf",
+	"res://assets/models/stylized_nature/DeadTree/DeadTree_3.gltf",
+	"res://assets/models/stylized_nature/DeadTree/DeadTree_4.gltf",
+	"res://assets/models/stylized_nature/DeadTree/DeadTree_5.gltf",
 ]
 const SLABS := [
-	"res://assets/models/stylized_nature/RockPath_Square_Wide.gltf",
-	"res://assets/models/stylized_nature/RockPath_Square_Thin.gltf",
-	"res://assets/models/stylized_nature/RockPath_Round_Wide.gltf",
+	"res://assets/models/stylized_nature/RockPath/RockPath_Square_Wide.gltf",
+	"res://assets/models/stylized_nature/RockPath/RockPath_Square_Thin.gltf",
+	"res://assets/models/stylized_nature/RockPath/RockPath_Round_Wide.gltf",
 ]
 const ROCKS := [
-	"res://assets/models/stylized_nature/Rock_Medium_1.gltf",
-	"res://assets/models/stylized_nature/Rock_Medium_2.gltf",
-	"res://assets/models/stylized_nature/Rock_Medium_3.gltf",
+	"res://assets/models/stylized_nature/Rock/Rock_Medium_1.gltf",
+	"res://assets/models/stylized_nature/Rock/Rock_Medium_2.gltf",
+	"res://assets/models/stylized_nature/Rock/Rock_Medium_3.gltf",
 ]
 
 @export_tool_button("Rebuild") var rebuild_button = rebuild

@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://c7lilb41q7732"]
 
-[ext_resource type="Texture2D" uid="uid://bcbdehllus7he" path="res://assets/models/stylized_nature/PathRocks_Diffuse.png" id="1_by3da"]
+[ext_resource type="Texture2D" uid="uid://bcbdehllus7he" path="res://assets/models/stylized_nature/Textures/PathRocks_Diffuse.png" id="1_by3da"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4qyf"]
 resource_name = "PathRocks"
