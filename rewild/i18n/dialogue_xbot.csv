@@ -1,0 +1,16 @@
+keys,zh_CN,en
+Text/11/text,嘿，快[portrait=happy]看这个……[portrait=default],"Hey, check[portrait=happy] it out...[portrait=default]"
+Text/12/text,这颗二十面球一定是给我准备的！,This icosphere must be for me!
+Text/13/text,我有个问题要问你，,"Here is a question for you,"
+Text/14/text,[shake2]魔镜[/shake2]，魔镜，墙上的魔镜，谁是这世上[rainbow freq=0.8 sat=1.0 val=1.0]最美[/rainbow]的人？,"[shake2]Mirror[/shake2], mirror, on the wall, who in this land is [rainbow freq=0.8 sat=1.0 val=1.0]fairest[/rainbow] of all?"
+Choice/15/text,当然是您，我的女王,"You, my queen"
+Text/16/text,真贴心。,Sweet.
+Text/17/text,我就知道一定是我。,I know it must be me.
+Choice/18/text,白雪公主,Snow White
+Text/19/text,你好大的胆子！,How dare you!
+Choice/1a/text,我有别的想法……,I have some other idea...
+Text Input/1b/text,名字,Name
+Text Input/1b/placeholder,输入一个名字,Antiduspig
+Text/1c/text,{XBot.MirrorQuestionName}？从没听说过。,{XBot.MirrorQuestionName}? Never heard of it.
+Text/1d/text,总之，只要不是[shake]白雪公主[/shake]，我都同意。,"Anyways, if it's not [shake]Snow White[/shake], I agree."
+Character/1e/name,X 型机器人,X Bot

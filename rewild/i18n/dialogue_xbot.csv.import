@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dw8f1x6a5bllq"
+
+[deps]
+
+files=["res://i18n/dialogue_xbot.zh_CN.translation", "res://i18n/dialogue_xbot.en.translation"]
+
+source_file="res://i18n/dialogue_xbot.csv"
+dest_files=["res://i18n/dialogue_xbot.zh_CN.translation", "res://i18n/dialogue_xbot.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rewild"
-run/main_scene="uid://dqephagsig11e"
+run/main_scene="uid://btf7l77hja0cc"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 Dialogic="*uid://ds2q0uclmolvu"
 DebugAutoload="*uid://bxgnn65quhplo"
 GrowthMap="*uid://bie2o1n0by1by"
+SettingsManager="*uid://bpw2lxfxx2phv"
+SaveManager="*uid://dxlcock8vlyly"
+SceneRouter="*uid://1gcapdc0v6w2"
+GlassFx="*uid://domoynxq80l1j"
 
 [dialogic]
 
@@ -29,20 +33,29 @@ directories/dch_directory={
 directories/dtl_directory={
 "XBot_timeline": "res://dialogue/timelines/Mannequin/XBot_timeline.dtl"
 }
-layout/style_directory={}
-layout/style_list=[""]
-layout/default_style="res://dialogue/styles/New_File.tres"
+layout/style_directory={
+"": "res://dialogue/styles/UI.tres",
+"UI": "res://dialogue/styles/UI.tres"
+}
+layout/style_list=["res://dialogue/styles/UI.tres"]
+layout/default_style="res://dialogue/styles/UI.tres"
+history/simple_history_enabled=true
+text/letter_speed=0.01
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://dno7062cmif5h"
 
 [input]
 
@@ -100,10 +113,35 @@ use2={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(315, 27),"global_position":Vector2(329, 100),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+pause={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+interact={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)
+]
+}
+dialogue_auto={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":81,"key_label":0,"unicode":113,"location":0,"echo":false,"script":null)
+]
+}
+dialogue_skip={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+dialogue_history={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":72,"key_label":0,"unicode":104,"location":0,"echo":false,"script":null)
+]
+}
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://dialogue/timelines/Mannequin/XBot_timeline.dtl")
+locale/translations=PackedStringArray("res://i18n/dialogue_xbot.en.translation", "res://i18n/dialogue_xbot.zh_CN.translation", "res://i18n/strings.en.translation", "res://i18n/strings.zh_CN.translation")
 
 [physics]
 

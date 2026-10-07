@@ -1,0 +1,82 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://CustomUi/layers/history_layer.gd" id="1_layer"]
+[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="9_glass"]
+
+[node name="HistoryLayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_layer")
+
+[node name="HistoryRoot" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dim" type="ColorRect" parent="HistoryRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.06, 0.07, 0.35)
+
+[node name="Margin" type="MarginContainer" parent="HistoryRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 240
+theme_override_constants/margin_top = 72
+theme_override_constants/margin_right = 240
+theme_override_constants/margin_bottom = 72
+
+[node name="Panel" type="PanelContainer" parent="HistoryRoot/Margin"]
+layout_mode = 2
+material = ExtResource("9_glass")
+
+[node name="VBox" type="VBoxContainer" parent="HistoryRoot/Margin/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="HistoryRoot/Margin/Panel/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="HistoryRoot/Margin/Panel/VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"HeaderLabel"
+theme_override_font_sizes/font_size = 48
+text = "DLG_HISTORY_TITLE"
+
+[node name="CloseButton" type="Button" parent="HistoryRoot/Margin/Panel/VBox/Header"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "UI_BACK"
+
+[node name="Scroll" type="ScrollContainer" parent="HistoryRoot/Margin/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Log" type="VBoxContainer" parent="HistoryRoot/Margin/Panel/VBox/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 18

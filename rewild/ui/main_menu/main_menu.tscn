@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://y16lcfbh3np" path="res://ui/main_menu/main_menu.gd" id="1_menu"]
 [ext_resource type="Script" uid="uid://bq8hjgxtqayf0" path="res://ui/save_slots/save_slot_list.gd" id="2_slots"]
 [ext_resource type="PackedScene" path="res://ui/settings/settings_menu.tscn" id="3_settings"]
-[ext_resource type="Texture2D" path="res://ui/main_menu/menu_bg.jpg" id="4_bg"]
-[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="5_glass"]
+[ext_resource type="Texture2D" uid="uid://c8pfms8ka42x3" path="res://ui/main_menu/menu_bg.jpg" id="4_bg"]
+[ext_resource type="Material" uid="uid://bp3j3rxhcaw8f" path="res://ui/theme/glass/glass_panel_material.tres" id="5_glass"]
 
 [node name="MainMenu" type="Control" unique_id=1076275347]
 layout_mode = 3
@@ -49,7 +49,7 @@ layout_mode = 2
 theme_type_variation = &"TitleLabel"
 text = "MENU_TITLE"
 
-[node name="TitleGap" type="Control" parent="Content/VBox"]
+[node name="TitleGap" type="Control" parent="Content/VBox" unique_id=415652355]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
@@ -142,9 +142,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="SlotScreen/Center" unique_id=16813654]
+material = ExtResource("5_glass")
 custom_minimum_size = Vector2(1100, 0)
 layout_mode = 2
-material = ExtResource("5_glass")
 
 [node name="VBox" type="VBoxContainer" parent="SlotScreen/Center/Panel" unique_id=728620720]
 layout_mode = 2

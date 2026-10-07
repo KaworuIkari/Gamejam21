@@ -41,7 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _refresh_buttons() -> void:
-	var has_save := SaveManager.has_any_save()
+	var has_save = SaveManager.has_any_save()
 	_continue.disabled = not has_save
 	_continue.focus_mode = Control.FOCUS_ALL if has_save else Control.FOCUS_NONE
 
@@ -51,7 +51,7 @@ func _focus_default() -> void:
 
 
 func _on_continue() -> void:
-	var slot := SaveManager.get_latest_slot()
+	var slot = SaveManager.get_latest_slot()
 	if slot >= 0 and SaveManager.load_slot(slot):
 		SceneRouter.goto_game()
 
