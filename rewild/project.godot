@@ -24,14 +24,14 @@ GrowthMap="*uid://bie2o1n0by1by"
 [dialogic]
 
 directories/dch_directory={
-"XBot": "res://character/mannequin/XBot.dch"
+"XBot": "res://dialogue/characters/XBot.dch"
 }
 directories/dtl_directory={
-"XBot_timeline": "res://character/dialogic_timeline/Mannequin/XBot_timeline.dtl"
+"XBot_timeline": "res://dialogue/timelines/Mannequin/XBot_timeline.dtl"
 }
 layout/style_directory={}
 layout/style_list=[""]
-layout/default_style="res://character/dialogic_style/New_File.tres"
+layout/default_style="res://dialogue/styles/New_File.tres"
 
 [display]
 
@@ -42,7 +42,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [input]
 
@@ -103,7 +103,7 @@ use2={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://character/dialogic_timeline/Mannequin/XBot_timeline.dtl")
+locale/translations=PackedStringArray("res://dialogue/timelines/Mannequin/XBot_timeline.dtl")
 
 [physics]
 
