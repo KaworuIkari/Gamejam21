@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bsj2hbqrlmtlq" path="res://assets/textures/ground/stylized_rock/rock_normal.png" id="8_ujneh"]
 [ext_resource type="Texture2D" uid="uid://bhhf02dj4bluw" path="res://assets/textures/ground/stylized_sand/sand_albedo.png" id="9_u5ak7"]
 [ext_resource type="Texture2D" uid="uid://dpncj06glabpl" path="res://assets/textures/ground/stylized_sand/sand_normal.png" id="10_u6783"]
-[ext_resource type="PackedScene" uid="uid://bree5dglifb5o" path="res://assets/models/stylized_nature/Clover_2.gltf" id="12_u6783"]
+[ext_resource type="PackedScene" uid="uid://bree5dglifb5o" path="res://assets/models/stylized_nature/Clover/Clover_2.gltf" id="12_u6783"]
 [ext_resource type="Texture2D" uid="uid://c62nvohdmmkym" path="res://assets/textures/ground/stylized_grass/stylized_grass_albedo.png" id="13_5y0pk"]
 [ext_resource type="Texture2D" uid="uid://v54jgpcv6rl5" path="res://assets/textures/ground/stylized_grass/stylized_grass_normal.png" id="14_g1oa1"]
 [ext_resource type="Texture2D" uid="uid://dlwmsv26qqcis" path="res://assets/textures/ground/stone_path/stone_path_albedo.png" id="15_04n15"]
