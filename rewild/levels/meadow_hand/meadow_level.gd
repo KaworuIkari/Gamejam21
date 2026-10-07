@@ -1,16 +1,15 @@
 extends Node3D
 
 
+const PAUSE_MENU = preload("res://ui/in_game/pause_menu.tscn")
 @onready var terrain: Terrain3D = $Terrain3D
-@onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/Character/CameraPivot/SpringArm3D/Camera3D
+@onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/CameraPivot/SpringArm3D/Camera3D
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	terrain.set_camera(player_camera)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-
+	add_child(PAUSE_MENU.instantiate())
 
 func _process(delta: float) -> void:
-	
-	pass
+	# UI 补丁：存档里的游戏时长
+	SaveManager.add_play_time(delta)

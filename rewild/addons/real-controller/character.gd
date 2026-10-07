@@ -1,6 +1,7 @@
 ## A first-person character controller with camera controls, movement, sprinting, and jumping.
 ## Requires a CameraPivot (Node3D) and Camera3D as children, and a character mesh as a child node.
 extends CharacterBody3D
+class_name RealController
 
 enum CameraMode {
 	FIRST_PERSON,
@@ -14,7 +15,7 @@ enum CameraMode {
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var camera_3d: Camera3D = %Camera3D
 @onready var spring_arm: SpringArm3D = camera_pivot.get_node("SpringArm3D")
-@onready var character: Node3D = $character
+@onready var character: Node3D
 
 ## Movement Settings
 ## -----------------------------------------------------------------------------
@@ -27,7 +28,7 @@ enum CameraMode {
 ## Speed multiplier when sprinting. Should be higher than normal speed.
 @export_range(0.1, 30.0, 0.1, "or_greater") var sprint_speed: float = 8.0 * scale.x
 ## Vertical velocity applied when jumping.
-@export_range(1.0, 20.0, 0.1) var jump_velocity: float = 4.5
+@export_range(1.0, 20.0, 0.1, "or_greater") var jump_velocity: float = 4.5
 @export var can_walk: bool = true
 
 ## Camera Settings
@@ -95,7 +96,7 @@ func _physics_process(delta: float) -> void:
 	_handle_movement_input()
 	if camera_mode == CameraMode.THIRD_PERSON:
 		_handle_character_rotation(delta)
-	_apply_movement()
+	_apply_movement(delta)
 	move_and_slide()
 
 func handle_frozen_movement() -> void:
@@ -172,7 +173,7 @@ func _update_camera_mode() -> void:
 		target_camera_distance = camera_distance
 
 ## Applies horizontal movement velocity based on input and sprint/walk state.
-func _apply_movement() -> void:
+func _apply_movement(_delta : float) -> void:
 	var is_moving = input_dir != Vector2.ZERO and is_on_floor()
 	if not is_on_floor():
 		return  # no air control: keep the velocity from take-off

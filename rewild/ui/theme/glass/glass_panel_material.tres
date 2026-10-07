@@ -1,11 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bp3j3rxhcaw8f"]
 
-[ext_resource type="Shader" path="res://ui/theme/glass/glass_blur.gdshader" id="1_shader"]
+[ext_resource type="Shader" uid="uid://cqqhe6dxuf7df" path="res://ui/theme/glass/glass_blur.gdshader" id="1_shader"]
 
 [resource]
 shader = ExtResource("1_shader")
-shader_parameter/blur_px = 22.0
-shader_parameter/lod = 2.0
-shader_parameter/fill_alpha = 0.3
-shader_parameter/saturation = 0.85
-shader_parameter/dim = 0.8

@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cw7kj47oantb3"]
+
+[ext_resource type="Texture2D" uid="uid://c74v6cnhg3ou0" path="res://character/LIRA/textures/black/Robot_Bdoy_BaseColor.png" id="1_y3rb3"]
+[ext_resource type="Texture2D" uid="uid://cb8wsjudms7by" path="res://character/LIRA/textures/black/Robot_Bdoy_Metallic.png" id="2_jc2pi"]
+[ext_resource type="Texture2D" uid="uid://c6f8ekt663o5l" path="res://character/LIRA/textures/black/Robot_Bdoy_Normal.png" id="3_rqstn"]
+[ext_resource type="Texture2D" uid="uid://bkxlptseju8mx" path="res://character/LIRA/textures/black/Robot_Bdoy_Roughness.png" id="4_umi5u"]
+
+[resource]
+albedo_texture = ExtResource("1_y3rb3")
+metallic = 1.0
+metallic_texture = ExtResource("2_jc2pi")
+roughness_texture = ExtResource("4_umi5u")
+normal_enabled = true
+normal_texture = ExtResource("3_rqstn")
