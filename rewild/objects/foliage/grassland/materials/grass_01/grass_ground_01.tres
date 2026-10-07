@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bra6ug2wjmj0j"]
+
+[ext_resource type="Shader" uid="uid://d2pxrch4crrap" path="res://objects/foliage/grassland/shader/ground.gdshader" id="1_qlfk2"]
+[ext_resource type="Texture2D" uid="uid://di62ixsr75dl2" path="res://objects/foliage/grassland/palette/palette_01.tres" id="2_qlfk2"]
+[ext_resource type="Texture2D" uid="uid://dxyk3hviw0qvk" path="res://objects/foliage/grassland/texture/noise/noise1.tres" id="3_7ihcu"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_qlfk2")
+shader_parameter/noise_texture = ExtResource("3_7ihcu")
+shader_parameter/color_gradient = ExtResource("2_qlfk2")

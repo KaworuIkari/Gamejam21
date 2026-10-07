@@ -28,10 +28,10 @@ GlassFx="*res://ui/theme/glass/glass_fx.gd"
 [dialogic]
 
 directories/dch_directory={
-"XBot": "res://character/mannequin/XBot.dch"
+"XBot": "res://dialogue/characters/XBot.dch"
 }
 directories/dtl_directory={
-"XBot_timeline": "res://character/dialogic_timeline/Mannequin/XBot_timeline.dtl"
+"XBot_timeline": "res://dialogue/timelines/Mannequin/XBot_timeline.dtl"
 }
 layout/style_directory={
 "": "res://UI .tres",
@@ -90,7 +90,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [gui]
 
