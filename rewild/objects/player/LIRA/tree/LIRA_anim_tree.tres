@@ -2,12 +2,8 @@
 
 [ext_resource type="AnimationNodeStateMachine" uid="uid://c58ol76h8kcgr" path="res://objects/player/LIRA/tree/LIRA_anim_main_state.tres" id="1_jdw11"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7jbh6"]
-
 [resource]
-graph_offset = Vector2(-344.66666, 74)
+graph_offset = Vector2(-302, 199.66667)
 nodes/AnimationNodeStateMachine/node = ExtResource("1_jdw11")
 nodes/AnimationNodeStateMachine/position = Vector2(-226.66667, 146.66667)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_7jbh6")
-nodes/Animation/position = Vector2(66.666664, 146.66667)
 node_connections = [&"output", 0, &"AnimationNodeStateMachine"]
