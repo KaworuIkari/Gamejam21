@@ -397,46 +397,54 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="LIRA" parent="SubViewportContainer/PixelateSubViewport" unique_id=223261986 instance=ExtResource("29_ae10e")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.604156, -17.752558)
 
-[node name="Skeleton3D" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root" parent_id_path=PackedInt32Array(223261986, 1465668705, 801732766) index="0" unique_id=975379877]
-bones/0/position = Vector3(0.009014559, 1.2174718, 0.054890998)
-bones/0/rotation = Quaternion(-0.024025127, -0.001507499, -0.02044279, 0.9995012)
-bones/1/rotation = Quaternion(-0.11666332, 0.00083880295, -0.0012051278, 0.9931705)
-bones/2/rotation = Quaternion(0.061999436, -0.034435015, -0.016775668, 0.9973409)
-bones/4/rotation = Quaternion(0.11753086, 0.005578299, -0.0026149694, 0.99305016)
-bones/5/rotation = Quaternion(-0.14459866, 0.027749935, -0.005542331, 0.9890857)
-bones/8/rotation = Quaternion(-0.42321193, 0.5009874, 0.58603394, 0.47588617)
-bones/9/rotation = Quaternion(-0.54744023, -0.11472676, 0.21558833, 0.8004178)
-bones/10/rotation = Quaternion(1.1717377e-05, 3.6563848e-05, 0.30001718, 0.95393384)
-bones/31/rotation = Quaternion(-0.47220775, -0.4805641, -0.5210086, 0.5240498)
-bones/32/rotation = Quaternion(-0.58835256, 0.10784272, -0.16262698, 0.7847061)
-bones/33/rotation = Quaternion(-7.744789e-06, 2.648113e-05, -0.2835056, 0.9589706)
-bones/34/rotation = Quaternion(-0.015070886, 0.066566944, 0.10159597, 0.99248177)
-bones/35/rotation = Quaternion(-0.24076292, -0.48689514, -0.17905226, 0.82030886)
-bones/36/rotation = Quaternion(0.20462313, -0.014270814, 0.20465234, 0.9571014)
-bones/37/rotation = Quaternion(0.040889256, -0.03345974, 0.011962882, 0.99853164)
-bones/39/rotation = Quaternion(-0.21740068, -0.2691354, 0.021198625, 0.93800527)
-bones/40/rotation = Quaternion(-0.3327093, -0.1669845, 0.19171642, 0.908111)
-bones/41/rotation = Quaternion(-0.17259488, -0.08186489, 0.06832992, 0.97920394)
-bones/43/rotation = Quaternion(-0.21115619, -0.02826582, -0.008274968, 0.9770086)
-bones/44/rotation = Quaternion(-0.2659366, -0.11200933, 0.025387634, 0.9571244)
-bones/45/rotation = Quaternion(-0.20748077, -0.12340736, 0.013759671, 0.97032624)
-bones/47/rotation = Quaternion(-0.28068924, -0.043780055, -0.025013093, 0.95847344)
-bones/48/rotation = Quaternion(-0.21772991, -0.12882584, 0.06319992, 0.9654033)
-bones/49/rotation = Quaternion(-0.11085838, -0.0092526125, 0.053072143, 0.9923751)
-bones/51/rotation = Quaternion(-0.4199837, -0.09749671, 0.16316764, 0.88740325)
-bones/52/rotation = Quaternion(-0.16792187, 0.0054148096, -0.001881433, 0.98578364)
-bones/54/rotation = Quaternion(0.73053235, 0.119531825, 0.66906244, 0.0662591)
-bones/55/rotation = Quaternion(-3.044128e-08, -6.50993e-09, 0.4202533, 0.9074069)
-bones/56/rotation = Quaternion(0.4334441, 0.5075525, -0.48379502, 0.5660911)
-bones/57/rotation = Quaternion(-0.0018035136, 0.96359324, 0.26736656, -0.00015650225)
-bones/58/rotation = Quaternion(-0.7727466, 0.12935698, 0.6193564, -0.050272398)
-bones/59/rotation = Quaternion(-2.207053e-07, -9.318433e-08, -0.38295776, 0.9237659)
-bones/61/rotation = Quaternion(0.001797457, 0.964332, 0.26468977, 0.00014219656)
+[node name="Skeleton3D" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root" parent_id_path=PackedInt32Array(223261986, 971101118) index="0" unique_id=1049420892]
+bones/0/position = Vector3(-0.025499683, 1.2200149, 0.047705986)
+bones/0/rotation = Quaternion(-0.022692963, 0.0011698542, -0.011530939, 0.9996754)
+bones/1/rotation = Quaternion(-0.11832157, -0.0018632113, 0.0012665997, 0.9929728)
+bones/2/rotation = Quaternion(0.052017536, -0.051059417, -0.0052861325, 0.997326)
+bones/4/rotation = Quaternion(0.10418263, 0.008709952, -0.012541873, 0.994441)
+bones/5/rotation = Quaternion(-0.11218418, 0.028478548, -0.007577581, 0.99325037)
+bones/8/rotation = Quaternion(-0.43224823, 0.5034678, 0.5559581, 0.5005919)
+bones/9/rotation = Quaternion(-0.56155777, -0.12414329, 0.23253082, 0.7843283)
+bones/10/rotation = Quaternion(1.0909706e-05, 3.674924e-05, 0.28595084, 0.9582443)
+bones/31/rotation = Quaternion(-0.49832335, -0.45609254, -0.51591367, 0.52677)
+bones/32/rotation = Quaternion(-0.56724626, 0.13316652, -0.19494261, 0.78898406)
+bones/33/rotation = Quaternion(-8.198206e-06, 2.6434189e-05, -0.2869691, 0.9579399)
+bones/34/rotation = Quaternion(-0.022966195, 0.055002462, 0.110772364, 0.9920569)
+bones/35/rotation = Quaternion(-0.24073564, -0.4869156, -0.17904368, 0.82030666)
+bones/36/rotation = Quaternion(0.20512791, -0.0134588685, 0.20560047, 0.95680195)
+bones/37/rotation = Quaternion(0.043886576, -0.03416644, 0.018675845, 0.9982774)
+bones/39/rotation = Quaternion(-0.2075322, -0.26673353, 0.018816866, 0.9409727)
+bones/40/rotation = Quaternion(-0.32894164, -0.1661919, 0.19008136, 0.90997076)
+bones/41/rotation = Quaternion(-0.16847414, -0.08081374, 0.06574116, 0.9801856)
+bones/43/rotation = Quaternion(-0.20756654, -0.027804151, -0.011311313, 0.97776026)
+bones/44/rotation = Quaternion(-0.25905317, -0.11080475, 0.024973124, 0.95916116)
+bones/45/rotation = Quaternion(-0.2104205, -0.12399675, 0.014397223, 0.9696086)
+bones/47/rotation = Quaternion(-0.28498963, -0.044928934, -0.02902177, 0.9570372)
+bones/48/rotation = Quaternion(-0.21222542, -0.12762813, 0.061498344, 0.9668969)
+bones/49/rotation = Quaternion(-0.11208083, -0.009543763, 0.053531025, 0.9922103)
+bones/51/rotation = Quaternion(-0.42191193, -0.09804037, 0.15668881, 0.88759625)
+bones/52/rotation = Quaternion(-0.15634942, 0.0075944546, -0.008462303, 0.98763645)
+bones/54/rotation = Quaternion(0.723614, 0.12327337, 0.6765379, 0.059017405)
+bones/55/rotation = Quaternion(-6.198764e-08, -1.1499189e-08, 0.4040153, 0.9147523)
+bones/56/rotation = Quaternion(0.4089828, 0.5144659, -0.48750854, 0.57479846)
+bones/57/rotation = Quaternion(-0.001798681, 0.9641859, 0.2652217, -0.00014526855)
+bones/58/rotation = Quaternion(-0.7747368, 0.12849374, 0.6160517, -0.061257772)
+bones/59/rotation = Quaternion(-3.1389519e-07, -1.0255352e-07, -0.38908413, 0.9212023)
+bones/61/rotation = Quaternion(0.0017977941, 0.96428967, 0.26484373, 0.00014302737)
+
+[node name="WaterGun" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D/Equipments/Tank" parent_id_path=PackedInt32Array(223261986, 1308716164) index="0" unique_id=987640430]
+transform = Transform3D(0.9474296, 0.12675405, -0.29378724, 0.107712865, -0.9909434, -0.08018024, -0.30128995, 0.04432012, -0.952502, -0.2697671, 0.82228833, 0.35829398)
+
+[node name="spine_02_x" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D" index="5" unique_id=1064549217]
+transform = Transform3D(0.9946433, 0.025171204, -0.10025581, -0.006873859, 0.9838575, 0.178821, 0.10313859, -0.17717391, 0.9787604, -0.020875536, 1.4349028, -0.013364632)
+
+[node name="hand_r" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D" index="6" unique_id=202739528]
+transform = Transform3D(-0.6948128, -0.045258474, -0.717765, -0.29233256, -0.89407814, 0.33936036, -0.657097, 0.44561797, 0.6079867, -0.3024342, 0.9992713, 0.21970199)
 
 [node name="StylizedWater" parent="." unique_id=1300348298 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -79.78651, -0.9091954, 59.27675)
 
 [editable path="SubViewportContainer/PixelateSubViewport/LIRA"]
-[editable path="SubViewportContainer/PixelateSubViewport/LIRA/Robot"]
+[editable path="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D/Equipments/Tank"]

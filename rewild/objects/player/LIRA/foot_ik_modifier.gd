@@ -64,7 +64,7 @@ func _update_foot(bone_name: StringName,ray: RayCast3D,marker: Marker3D,current_
 			# STANDING: Snap to ground whether higher or lower
 			if abs(delta_y) < airborne_threshold:
 				target_pos.y = ground_y
-				_set_foot_bone_rotation(skeleton, bone_idx, target_normal, is_moving, delta)
+				_set_foot_bone_rotation(skeleton, bone_idx, target_normal, delta)
 				target_weight = 1.0
 			else:
 				target_weight = 0.0
@@ -74,7 +74,7 @@ func _update_foot(bone_name: StringName,ray: RayCast3D,marker: Marker3D,current_
 	new_weight = lerp(current_weight, 0.0, delta * standing_lerp_speed)
 	return new_weight
 
-func _set_foot_bone_rotation(skeleton: Skeleton3D, bone_idx: int, normal: Vector3, is_moving: bool, delta:float) -> void:
+func _set_foot_bone_rotation(skeleton: Skeleton3D, bone_idx: int, normal: Vector3, delta:float) -> void:
 	var bone_model_pose: Transform3D = skeleton.get_bone_global_pose(bone_idx)
 	var B_anim_model: Basis = bone_model_pose.basis
 	var B_skeleton_world: Basis = skeleton.global_transform.basis
