@@ -3,7 +3,10 @@ var anim_dir := Vector2.ZERO   # character rotation for diagonal walks
 @export var stopping_tweak : float = 20.0  # tweak how fast velocity decreases after moving, to match the locomotion -> idle Xfade Time visually
 # Called when the node enters the scene tree for the first time.
 @onready var spring_arm_3d: SpringArm3D = $CameraPivot/SpringArm3D
+@onready var robot: MeshInstance3D = $Robot/root/Skeleton3D/Robot
 
+# emoji
+var screen_mat : Material
 
 func _ready() -> void:
 	super()
@@ -17,9 +20,12 @@ func _ready() -> void:
 	
 	spring_arm_3d.add_excluded_object(self)
 
+	screen_mat = robot.mesh.surface_get_material(4)
 
 func _physics_process(delta: float) -> void:
 	super(delta)
+	var t = Time.get_ticks_msec() * 0.001
+	screen_mat.emission_energy_multiplier = 1.0 + 0.8 * sin(TAU * .5 * t)
 
 func _apply_movement(delta : float) -> void:
 	var is_moving = input_dir != Vector2.ZERO and is_on_floor()
@@ -60,11 +66,3 @@ func _handle_character_rotation(delta: float) -> void:
 	# camera yaw + PI = camera-forward; turning toward the right is a negative yaw
 	var target := camera_pivot.rotation.y + PI - off * PI / 4.0
 	character.rotation.y = lerp_angle(character.rotation.y, target, rotation_speed * delta)
-
-@onready var tank: MeshInstance3D = $Robot/root/Skeleton3D/Tank
-@onready var jet_pack: MeshInstance3D = $Robot/root/Skeleton3D/JetPack
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.keycode == KEY_Q and event.pressed:
-		tank.visible = not tank.visible
-		jet_pack.visible = not jet_pack.visible
-	super(event)
