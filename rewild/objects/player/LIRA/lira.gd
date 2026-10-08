@@ -60,3 +60,11 @@ func _handle_character_rotation(delta: float) -> void:
 	# camera yaw + PI = camera-forward; turning toward the right is a negative yaw
 	var target := camera_pivot.rotation.y + PI - off * PI / 4.0
 	character.rotation.y = lerp_angle(character.rotation.y, target, rotation_speed * delta)
+
+@onready var tank: MeshInstance3D = $Robot/root/Skeleton3D/Tank
+@onready var jet_pack: MeshInstance3D = $Robot/root/Skeleton3D/JetPack
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.keycode == KEY_Q and event.pressed:
+		tank.visible = not tank.visible
+		jet_pack.visible = not jet_pack.visible
+	super(event)
