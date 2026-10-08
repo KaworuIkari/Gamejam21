@@ -122,8 +122,9 @@ func _handle_gravity_and_jump(delta: float) -> void:
 func _handle_movement_input() -> void:
 	input_dir = Input.get_vector("left", "right", "forward", "backward")
 	input_strength = minf(input_dir.length(), 1.0)
-	
-	var camera_basis = Transform3D(Basis(Vector3.UP, camera_pivot.rotation.y), Vector3.ZERO).basis
+	var global_forward: Vector3 = -camera_pivot.global_transform.basis.z
+	var global_yaw: float = atan2(-global_forward.x, -global_forward.z)
+	var camera_basis = Transform3D(Basis(Vector3.UP, global_yaw), Vector3.ZERO).basis
 	direction = (camera_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 ## Rotates the character mesh to face the movement direction smoothly.

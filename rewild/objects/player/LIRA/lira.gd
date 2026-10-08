@@ -2,6 +2,9 @@ extends RealController
 var anim_dir := Vector2.ZERO   # character rotation for diagonal walks
 @export var stopping_tweak : float = 20.0  # tweak how fast velocity decreases after moving, to match the locomotion -> idle Xfade Time visually
 # Called when the node enters the scene tree for the first time.
+@onready var spring_arm_3d: SpringArm3D = $CameraPivot/SpringArm3D
+
+
 func _ready() -> void:
 	super()
 	character = $Robot
@@ -11,6 +14,8 @@ func _ready() -> void:
 	walk_speed = speed             # my "walk"
 	sprint_speed = 8.0 * scale.x   # my "run"
 	pass # Replace with function body.
+	
+	spring_arm_3d.add_excluded_object(self)
 
 
 func _physics_process(delta: float) -> void:
