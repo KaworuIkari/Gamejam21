@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rewild"
-run/main_scene="uid://btf7l77hja0cc"
+run/main_scene="uid://dqephagsig11e"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

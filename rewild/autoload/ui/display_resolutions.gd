@@ -98,7 +98,7 @@ static func aspect_name(size: Vector2i) -> String:
 		if absf(r - ASPECTS[name]) / ASPECTS[name] < 0.02:
 			return name
 	var g := _gcd(size.x, size.y)
-	return "%d:%d" % [size.x / g, size.y / g]
+	return "%d:%d" % [float(size.x) / g, float(size.y) / g]
 
 
 ## 选项文字，例如 “1920 × 1080  16:9”

@@ -154,7 +154,7 @@ func _focus_current_tab() -> void:
 	_back_button.grab_focus()
 
 
-func _on_tab_changed(tab: int) -> void:
+func _on_tab_changed(_tab: int) -> void:
 	_reset_button.visible = true
 
 

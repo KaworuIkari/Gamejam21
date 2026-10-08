@@ -75,7 +75,7 @@ func reveal_mask(mask: Texture2D, duration: float = 4.0, gain: float = 5.0, cuto
 		idx.append(i)
 		from.append(_data[i])
 		to.append(v)
-		delay.append((_noise.get_noise_2d(i % RES, i / RES) + 1.0) * 0.5)
+		delay.append((_noise.get_noise_2d(i % RES, float(i) / RES) + 1.0) * 0.5)
 	if idx.is_empty():
 		return
 

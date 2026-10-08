@@ -53,7 +53,7 @@ const ACTION_LABELS := {
 }
 
 
-static func action_label(action: StringName) -> String:
+func action_label(action: StringName) -> String:
 	return ACTION_LABELS.get(action, "ACTION_" + String(action).to_upper())
 
 
@@ -425,22 +425,22 @@ func _deserialize_event(d: Variant) -> InputEvent:
 	match d.get("type", ""):
 		"key":
 			var k := InputEventKey.new()
-			k.physical_keycode = int(d.get("code", 0))
+			k.physical_keycode = int(d.get("code", 0)) as Key
 			k.device = -1
 			return k
 		"mouse":
 			var m := InputEventMouseButton.new()
-			m.button_index = int(d.get("button", 1))
+			m.button_index = int(d.get("button", 1)) as MouseButton
 			m.device = -1
 			return m
 		"joy_button":
 			var jb := InputEventJoypadButton.new()
-			jb.button_index = int(d.get("button", 0))
+			jb.button_index = int(d.get("button", 0)) as JoyButton
 			jb.device = -1
 			return jb
 		"joy_axis":
 			var ja := InputEventJoypadMotion.new()
-			ja.axis = int(d.get("axis", 0))
+			ja.axis = int(d.get("axis", 0)) as JoyAxis
 			ja.axis_value = float(d.get("sign", 1.0))
 			ja.device = -1
 			return ja

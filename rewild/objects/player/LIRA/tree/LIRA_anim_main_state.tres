@@ -259,6 +259,7 @@ advance_expression = "is_moving"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u8nfu"]
+xfade_time = 0.1
 advance_mode = 2
 advance_expression = "is_jumping"
 
@@ -268,10 +269,12 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bbnu2"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "is_falling"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v6joj"]
+xfade_time = 0.2
 advance_mode = 2
 advance_expression = "is_falling"
 
@@ -290,6 +293,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3v8jb"]
+xfade_time = 0.1
 advance_mode = 2
 advance_expression = "is_moving"
 
@@ -307,4 +311,4 @@ states/jump_running_air_rig/position = Vector2(748.4445, 203.33331)
 states/jump_running_rig/node = SubResource("AnimationNodeAnimation_2yvgq")
 states/jump_running_rig/position = Vector2(661.3334, 91.33333)
 transitions = ["Locomotion", "Idle", SubResource("AnimationNodeStateMachineTransition_jdw11"), "Idle", "Locomotion", SubResource("AnimationNodeStateMachineTransition_by2w6"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_spjav"), "Locomotion", "jump_running_rig", SubResource("AnimationNodeStateMachineTransition_u8nfu"), "jump_running_rig", "jump_running_air_rig", SubResource("AnimationNodeStateMachineTransition_pxaim"), "Idle", "jump_running_air_rig", SubResource("AnimationNodeStateMachineTransition_bbnu2"), "Locomotion", "jump_running_air_rig", SubResource("AnimationNodeStateMachineTransition_v6joj"), "Idle", "jump_running_rig", SubResource("AnimationNodeStateMachineTransition_2yvgq"), "jump_running_air_rig", "Robot_anim2_jump_end_rig", SubResource("AnimationNodeStateMachineTransition_dvdqv"), "Robot_anim2_jump_end_rig", "Idle", SubResource("AnimationNodeStateMachineTransition_ulwi0"), "Robot_anim2_jump_end_rig", "Locomotion", SubResource("AnimationNodeStateMachineTransition_3v8jb")]
-graph_offset = Vector2(96, -28)
+graph_offset = Vector2(-19, 41)
