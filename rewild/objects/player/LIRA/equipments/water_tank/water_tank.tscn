@@ -4,16 +4,49 @@
 [ext_resource type="Material" uid="uid://dc6btv3rapucg" path="res://objects/player/LIRA/equipments/water_tank/water_tank_mat.tres" id="2_7eek8"]
 [ext_resource type="Script" uid="uid://c7a57k8snjvxo" path="res://objects/player/LIRA/equipments/water_tank/water_tank.gd" id="3_7eek8"]
 [ext_resource type="ArrayMesh" uid="uid://bklgvsi6uykq4" path="res://objects/player/LIRA/equipments/water_tank/WaterGun_muzzle.res" id="4_bi8wa"]
+[ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="5_0g07r"]
 
 [sub_resource type="Curve3D" id="Curve3D_bi8wa"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, -0.01829577, 0.11755732, 0.12565316, -0.09466735, 1.5291406, -0.28015617, 0.051303424, 0.10312093, -0.12914023, -0.08327749, -0.16738947, 0.20962489, -0.5170442, 1.6974185, -0.0859543, -0.055447508, -0.22621335, -0.15700348, 0, 0, 0, -0.33910492, 1.037816, 0.3351385),
+"points": PackedVector3Array(0, 0, 0, -0.026208626, 0.16951588, 0.17040823, -0.051750112, 1.5244346, -0.36206865, 0.072266504, 0.12870212, -0.1915067, -0.13879403, -0.24718347, 0.36780506, -0.53537625, 1.8682816, -0.71577996, -0.14748898, -0.40440673, -0.17420277, 0, 0, 0, -0.30821544, 1.067686, 0.317566),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqtik"]
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_c82li"]
+top_radius = 0.145
+bottom_radius = 0.155
+height = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5wno"]
+render_priority = 0
+shader = ExtResource("5_0g07r")
+shader_parameter/shallow_color = Color(0.45, 0.9, 0.93, 1)
+shader_parameter/deep_color = Color(0.06, 0.36, 0.72, 1)
+shader_parameter/sky_tint = Color(0.8, 0.9, 1, 1)
+shader_parameter/color_depth = 2.5
+shader_parameter/murkiness = 0.45
+shader_parameter/refraction = 0.025
+shader_parameter/ripple_scale = 0.5
+shader_parameter/ripple_strength = 0.12
+shader_parameter/wave_height = 0.05
+shader_parameter/wave_speed = 1.0
+shader_parameter/use_local_coords = true
+shader_parameter/local_noise_scale = 1.0
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/foam_width = 0.3
+shader_parameter/caustic_strength = 0.9
+shader_parameter/caustic_scale = 0.6
+shader_parameter/sparkle_strength = 1.2
+shader_parameter/sparkle_threshold = 0.6
+shader_parameter/underwater_fog_color = Color(0.1, 0.42, 0.58, 1)
+shader_parameter/underwater_fog_density = 0.08
+shader_parameter/blob_density = 1.2
+shader_parameter/blob_clarity = 0.25
+shader_parameter/blob_foam = 0.6
 
 [node name="Tank" type="MeshInstance3D" unique_id=1308716164 node_paths=PackedStringArray("anchor_end")]
 process_mode = 3
@@ -22,11 +55,6 @@ skeleton = NodePath("..")
 surface_material_override/0 = ExtResource("2_7eek8")
 script = ExtResource("3_7eek8")
 anchor_end = NodePath("WaterGun/TubeEnd")
-mid_offset = null
-tension = null
-noise_amplitude = null
-noise_frequency = null
-noise_seed = null
 
 [node name="WaterGun" type="MeshInstance3D" parent="." unique_id=987640430]
 mesh = ExtResource("4_bi8wa")
@@ -36,9 +64,11 @@ surface_material_override/0 = ExtResource("2_7eek8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13109416, -0.10885434)
 
 [node name="Path3D" type="Path3D" parent="." unique_id=2079714481]
+top_level = true
 curve = SubResource("Curve3D_bi8wa")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="." unique_id=27185233]
+top_level = true
 polygon = PackedVector2Array(-0.01, -0.01, -0.01, 0.01, 0.01, 0.01, 0.01, -0.01)
 mode = 2
 path_node = NodePath("../Path3D")
@@ -47,9 +77,14 @@ path_interval = 0.02
 path_simplify_angle = 0.0
 path_rotation = 2
 path_rotation_accurate = false
-path_local = false
+path_local = true
 path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 smooth_faces = true
 material = SubResource("StandardMaterial3D_vqtik")
+
+[node name="TankWater" type="MeshInstance3D" parent="." unique_id=964947035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1073638, -0.2640112)
+mesh = SubResource("CylinderMesh_c82li")
+surface_material_override/0 = SubResource("ShaderMaterial_c5wno")
