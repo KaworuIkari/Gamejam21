@@ -2,8 +2,72 @@
 
 [ext_resource type="AnimationNodeStateMachine" uid="uid://c58ol76h8kcgr" path="res://objects/player/LIRA/tree/LIRA_anim_main_state.tres" id="1_jdw11"]
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_7jbh6"]
+filter_enabled = true
+filters = ["..", "root/Skeleton3D:arm_stretch.r", "root/Skeleton3D:forearm_stretch.r", "root/Skeleton3D:hand.r", "root/Skeleton3D:index1.r", "root/Skeleton3D:index2.r", "root/Skeleton3D:index3.r", "root/Skeleton3D:middle1.r", "root/Skeleton3D:middle2.r", "root/Skeleton3D:middle3.r", "root/Skeleton3D:pinky1.r", "root/Skeleton3D:pinky2.r", "root/Skeleton3D:pinky3.r", "root/Skeleton3D:ring1.r", "root/Skeleton3D:ring2.r", "root/Skeleton3D:ring3.r", "root/Skeleton3D:shoulder.r", "root/Skeleton3D:thumb1.r", "root/Skeleton3D:thumb2.r", "root/Skeleton3D:thumb3.r"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7jbh6"]
+animation = &"Robot_anim2/gun_aim_rig"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hx2yo"]
+animation = &"Robot_anim2/gun_aim_wall_rig"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gmice"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_60aqe"]
+xfade_time = 0.3
+advance_mode = 2
+advance_expression = "aim_wall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ue2qr"]
+xfade_time = 0.3
+advance_mode = 2
+advance_expression = "not aim_wall"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g8v1d"]
+states/Robot_anim2_gun_aim_rig/node = SubResource("AnimationNodeAnimation_7jbh6")
+states/Robot_anim2_gun_aim_rig/position = Vector2(506.66666, 68)
+states/Robot_anim2_gun_aim_wall_rig/node = SubResource("AnimationNodeAnimation_hx2yo")
+states/Robot_anim2_gun_aim_wall_rig/position = Vector2(507.11108, 186.66667)
+transitions = ["Start", "Robot_anim2_gun_aim_rig", SubResource("AnimationNodeStateMachineTransition_gmice"), "Robot_anim2_gun_aim_rig", "Robot_anim2_gun_aim_wall_rig", SubResource("AnimationNodeStateMachineTransition_60aqe"), "Robot_anim2_gun_aim_wall_rig", "Robot_anim2_gun_aim_rig", SubResource("AnimationNodeStateMachineTransition_ue2qr")]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ftcwy"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_bi7sg"]
+states/AimIdle/node = SubResource("AnimationNodeStateMachine_g8v1d")
+states/AimIdle/position = Vector2(436, 82)
+states/Start/position = Vector2(207.33334, 100.66667)
+transitions = ["Start", "AimIdle", SubResource("AnimationNodeStateMachineTransition_ftcwy")]
+graph_offset = Vector2(-53, -10)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gmice"]
+animation = &"Robot_anim2/hand_grip_rig"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g8v1d"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6jtc7"]
+states/Robot_anim2_hand_grip_rig/node = SubResource("AnimationNodeAnimation_gmice")
+states/Robot_anim2_hand_grip_rig/position = Vector2(422, 93.33333)
+states/Start/position = Vector2(213.33333, 98.88889)
+transitions = ["Start", "Robot_anim2_hand_grip_rig", SubResource("AnimationNodeStateMachineTransition_g8v1d")]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_vypbv"]
+filter_enabled = true
+filters = ["root/Skeleton3D:index1.r", "root/Skeleton3D:index2.r", "root/Skeleton3D:index3.r", "root/Skeleton3D:middle1.r", "root/Skeleton3D:middle2.r", "root/Skeleton3D:middle3.r", "root/Skeleton3D:pinky1.r", "root/Skeleton3D:pinky2.r", "root/Skeleton3D:pinky3.r", "root/Skeleton3D:ring1.r", "root/Skeleton3D:ring2.r", "root/Skeleton3D:ring3.r", "root/Skeleton3D:thumb1.r", "root/Skeleton3D:thumb2.r", "root/Skeleton3D:thumb3.r"]
+
 [resource]
-graph_offset = Vector2(-302, 199.66667)
-nodes/AnimationNodeStateMachine/node = ExtResource("1_jdw11")
-nodes/AnimationNodeStateMachine/position = Vector2(-226.66667, 146.66667)
-node_connections = [&"output", 0, &"AnimationNodeStateMachine"]
+graph_offset = Vector2(-725.3333, 233.33333)
+nodes/Torso/node = ExtResource("1_jdw11")
+nodes/Torso/position = Vector2(-506.66666, 120)
+nodes/Gun/node = SubResource("AnimationNodeStateMachine_bi7sg")
+nodes/Gun/position = Vector2(-506.66666, 333.33334)
+nodes/Aim/node = SubResource("AnimationNodeBlend2_7jbh6")
+nodes/Aim/position = Vector2(-146.66667, 120)
+nodes/RightFingers/node = SubResource("AnimationNodeBlend2_vypbv")
+nodes/RightFingers/position = Vector2(73.05184, 273.27246)
+nodes/Hand/node = SubResource("AnimationNodeStateMachine_6jtc7")
+nodes/Hand/position = Vector2(-493.33334, 533.3333)
+node_connections = [&"output", 0, &"RightFingers", &"Aim", 0, &"Torso", &"Aim", 1, &"Gun", &"RightFingers", 0, &"Aim", &"RightFingers", 1, &"Hand"]

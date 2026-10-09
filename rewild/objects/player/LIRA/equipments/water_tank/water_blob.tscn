@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://b41wv7vy216je"]
+
+[ext_resource type="Shader" uid="uid://cyshfkm3ffxkk" path="res://shaders/post/pp_outline.gdshader" id="1_83yxn"]
+[ext_resource type="Script" uid="uid://c4xre2v0gfogd" path="res://objects/player/LIRA/equipments/water_tank/water_blob.gd" id="1_gd28f"]
+[ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="1_snoof"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0yw1p"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_snoof"]
+render_priority = 0
+shader = ExtResource("1_83yxn")
+shader_parameter/outlineColor = Color(0, 0, 0, 0.78)
+shader_parameter/depth_threshold = 0.025
+shader_parameter/normal_threshold = 0.5
+shader_parameter/normal_smoothing = 0.25
+shader_parameter/max_thickness = 1.3
+shader_parameter/min_thickness = 0.5
+shader_parameter/max_distance = 75.0
+shader_parameter/min_distance = 2.0
+shader_parameter/grazing_fresnel_power = 5.0
+shader_parameter/grazing_angle_mask_power = 1.0
+shader_parameter/grazing_angle_modulation_factor = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mwutn"]
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_snoof")
+shader = ExtResource("1_snoof")
+shader_parameter/shallow_color = Color(0.45, 0.9, 0.93, 1)
+shader_parameter/deep_color = Color(0.06, 0.36, 0.72, 1)
+shader_parameter/sky_tint = Color(0.8, 0.9, 1, 1)
+shader_parameter/color_depth = 2.5
+shader_parameter/murkiness = 0.45
+shader_parameter/refraction = 0.025
+shader_parameter/ripple_scale = 0.5
+shader_parameter/ripple_strength = 0.12
+shader_parameter/wave_height = 0.5
+shader_parameter/wave_speed = 1.0
+shader_parameter/use_local_coords = true
+shader_parameter/local_noise_scale = 1.0
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/foam_width = 0.3
+shader_parameter/caustic_strength = 0.9
+shader_parameter/caustic_scale = 0.6
+shader_parameter/sparkle_strength = 1.2
+shader_parameter/sparkle_threshold = 0.6
+shader_parameter/underwater_fog_color = Color(0.1, 0.42, 0.58, 1)
+shader_parameter/underwater_fog_density = 0.08
+shader_parameter/blob_density = 1.2
+shader_parameter/blob_clarity = 0.25
+shader_parameter/blob_foam = 0.6
+
+[node name="WaterBlob" type="MeshInstance3D" unique_id=291285294]
+mesh = SubResource("SphereMesh_0yw1p")
+surface_material_override/0 = SubResource("ShaderMaterial_mwutn")
+script = ExtResource("1_gd28f")

@@ -198,7 +198,6 @@ func _apply_movement(_delta : float) -> void:
 
 ## Handles mouse input for camera rotation with tilt limits.
 func _unhandled_input(event: InputEvent) -> void:
-
 	if frozen:
 		return
 
