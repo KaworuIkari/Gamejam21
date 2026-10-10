@@ -1,6 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bmmonormoyrck"]
 
-[ext_resource type="Shader" path="res://systems/world_stages/materials/moss_overlay.gdshader" id="1"]
+[ext_resource type="Shader" uid="uid://wv58okkbi4do" path="res://systems/world_stages/materials/moss_overlay.gdshader" id="1"]
 
 [resource]
+render_priority = 0
 shader = ExtResource("1")
+shader_parameter/moss_dark = Color(0.3, 0.48, 0.14, 1)
+shader_parameter/moss_light = Color(0.58, 0.74, 0.24, 1)
+shader_parameter/noise_scale = 1.6

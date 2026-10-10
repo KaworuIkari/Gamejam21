@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://CustomUi/layers/history_layer.gd" id="1_layer"]
+[ext_resource type="Script" path="res://ui/CustomUi/layers/history_layer.gd" id="1_layer"]
 [ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="9_glass"]
 
 [node name="HistoryLayer" type="Control"]

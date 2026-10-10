@@ -1,44 +1,55 @@
-# UI / 对话系统 架构说明
+# UI 与对话系统维护说明
 
-给队友看的“谁负责什么”。改动这些行为时，请改对应的唯一负责模块，不要在别处另写一份。
+团队项目的目录层级为准。界面放在 `ui/`，全局 UI 管理脚本放在 `autoload/ui/`，对话内容与样式注册放在 `dialogue/`，翻译放在 `i18n/`。
 
-## 模块一览
+## 模块职责
 
-| 模块 | 位置 | 职责 |
+| 模块 | 项目内路径 | 职责 |
 |---|---|---|
-| SettingsManager（Autoload） | `autoload/settings_manager.gd` | 读写 `user://settings.cfg`，应用设置，管理按键重绑定；`set_value` 预览 → `commit` 应用并写盘 / `revert` 撤回 |
-| └ UIScaler（子节点） | `ui/layout/ui_scaler.gd` | 把 `res://ui/`、`res://CustomUi/` 下的界面按 1920×1080 排版后缩放到项目基准分辨率；不改全局缩放 |
-| DisplayResolutions（静态类） | `autoload/display_resolutions.gd` | 窗口分辨率规则：按当前显示器生成可选尺寸、标注宽高比、计算“自动”档；设置里保存尺寸本身，`(0,0)` = 自动 |
-| UIType（静态类） | `ui/theme/ui_type.gd` | 像素字体排版规则：字体网格、字号档位、字号吸附、字体覆盖。全部界面的字体 / 字号从这里取 |
-| └ PlayerSettingsBridge（子节点） | `autoload/player_settings_bridge.gd` | 把鼠标/手柄灵敏度、视野写到 real-controller 角色上（不改队友的控制器代码） |
-| SaveManager（Autoload） | `autoload/save_manager.gd` | 存档位读写、游戏时长 |
-| SceneRouter（Autoload） | `autoload/scene_router.gd` | 带淡入淡出的场景切换；切换前解除暂停 |
-| 暂停菜单 | `ui/in_game/pause_menu.gd` | 由 `main.gd` 创建 |
-| 对话布局 | `CustomUi/`（Dialogic 样式 `UI .tres`） | 对话框、选项、输入框、历史；对话期间冻结玩家 |
-| 对话触发器 | `CustomUi/dialogue_trigger.gd` | 靠近显示“按 F 交谈”，按交互键开始时间线 |
+| SettingsManager | `autoload/ui/settings_manager.gd` | 设置预览、应用、撤回与按键重绑定，读写 `user://settings.cfg` |
+| DisplayResolutions | `autoload/ui/display_resolutions.gd` | 分辨率候选、显示器尺寸及自动档 |
+| SaveManager | `autoload/ui/save_manager.gd` | 存档槽位与元数据；尚未保存完整游戏状态 |
+| SceneRouter | `autoload/ui/scene_router.gd` | 淡入淡出和场景切换；当前游戏入口为 `levels/meadow_hand/meadow_hand.tscn` |
+| PlayerSettingsBridge | `ui/common/player_settings_bridge.gd` | 向符合接口的角色应用灵敏度和视野 |
+| UIScaler / UILayout | `ui/layout/ui_scaler.gd`、`ui/layout/ui_layout.gd` | 界面缩放与响应式布局 |
+| UIType | `ui/theme/ui_type.gd` | 字号档位、字号吸附及字体覆盖辅助 |
+| 主菜单 / 设置 / 存档列表 | `ui/main_menu/`、`ui/settings/`、`ui/save_slots/` | 各自页面与交互 |
+| 暂停菜单 | `ui/in_game/pause_menu.gd` | 由关卡创建，管理游戏暂停和游戏内存档页面 |
+| ConfirmPopup | `ui/common/confirm_popup.gd` | 覆盖、删除等确认；默认聚焦取消 |
+| 对话布局 | `ui/CustomUi/` | 文本、头像、选项、输入、历史与对话期间的玩家冻结 |
+| 对话样式 | `dialogue/styles/UI.tres` | 注册 `ui/CustomUi/custom_ui_.tscn` |
+| DialogueTrigger / DialogueUtils | `ui/CustomUi/dialogue_trigger.gd`、`ui/CustomUi/dialogue_utils.gd` | 交互触发与按原因管理对话暂停 |
+| 交互提示 | `ui/in_game/interaction/` | 显示实际绑定键，适配语言与输入设备 |
 
-## 唯一负责人（避免互相打架）
+## 主题与字体
 
-| 状态 | 负责模块 | 说明 |
-|---|---|---|
-| 暂停键 Esc | 暂停菜单 | 只有它处理 `pause` 动作；历史面板、确认框、设置页会先消费 Esc |
-| 场景树暂停 `get_tree().paused` | 暂停菜单（开/关）、SceneRouter（切场景前解除） | |
-| 对话暂停 `Dialogic.paused` | `DialogueUtils.push_pause / pop_pause` | 不要直接写 `Dialogic.paused`；按“原因”登记，全部撤销才继续 |
-| 鼠标显示/锁定 | 对话布局（对话中显示）、暂停菜单（打开显示、关闭按规则恢复）、主菜单（显示） | 回到游戏的规则在 `pause_menu.gd` 的 `restore_gameplay_mouse()` |
-| 玩家冻结 `frozen` | 对话布局 | 对话开始冻结、结束/切场景解冻 |
+主菜单、设置、存档、确认弹窗和自定义对话图层使用 `ui/theme/light/light_theme.tres`。项目全局回退主题仍是 `ui/theme/glass/glass_theme.tres`；对话还引用玻璃目录的部分素材和材质。两者并存有明确用途，不要只因菜单使用明亮主题就删除玻璃资源。
 
-## 约定
+两个主题的默认字体均为 `ui/fonts/SarasaUiCL-Regular.ttf`，按钮和部分标题、名牌使用 `SarasaUiCL-SemiBold.ttf`。主菜单标题另使用 `ui/main_menu/title/` 中的图片。字体覆盖留空时继承所在控件的主题；Dialogic 的部分内置图层通过 `UIType.theme_font_path()` 读取项目全局主题。
 
-- 分辨率：可选尺寸只在 `DisplayResolutions.CANDIDATES` 里增减；放不下当前显示器的尺寸不会出现在列表里，旧设置放不下时自动回落到“自动”档（保持宽高比，不截断）。编辑器“游戏”标签页内嵌运行时窗口由编辑器控制，分辨率按钮会显示为不可用。
-- 设置的“应用”：改设置只调用 `SettingsManager.set_value()`（立即预览）；只有设置页的“应用”按钮调用 `commit()` 写盘；离开设置页未应用则 `revert()`。不要在别处直接调用 `save()` 保存普通设置（按键重绑定除外，它自己即时写盘）。
-- 字体：所有界面默认使用项目主题 `ui/theme/greybox_theme.tres` 的字体，不要在场景或脚本里写死字体路径。字号用 12 的整数倍（`UIType.SMALL / MEDIUM / LARGE` = 24 / 36 / 48），代码里设置字号时经过 `UIType.snap()`。换字体时改主题的 `default_font` 和 `UIType.GRID_PX` 两处。
-- 2D 默认纹理过滤是“最近邻”（像素风）。渐变背景、照片、3D 渲染的立绘等非像素图，在节点上单独把 `texture_filter` 设为 Linear。
+`UIType` 当前保留 12 的字号步长，常用档位为 24 / 36 / 48。这是现有排版规则，不表示当前默认字体是 Fusion Pixel。换字体应检查明亮主题与全局主题各自的字体设置，再评估字号步长。
 
-- 新界面放在 `res://ui/` 或 `res://CustomUi/` 下、根节点铺满全屏，就会自动按 1920×1080 设计尺寸缩放；排版时用自身 `size`，需要视口尺寸时用 `UIScaler.virtual_viewport_size()`。
-- 我们的界面里不要用 `OptionButton` / `PopupMenu`：Godot 4.7 在缩放后的界面里弹不出来。用 `ui/settings/option_stepper.gd`（◀ 值 ▶）。
-- 新增可重绑定按键：在 `SettingsManager.REBINDABLE_ACTIONS` 里加动作名（必须和输入映射一致），并在 `i18n/strings.csv` 加 `ACTION_<动作名大写>`。
-- 新的对话 NPC：拖一个 `DialogueTrigger` 节点、填时间线名即可；已有 Area3D 可用 `DialogueTrigger.attach_to(area, "时间线名")`。
+## 状态与输入约定
 
-## 尚未接入
+- 暂停菜单管理场景树暂停；SceneRouter 切场景前解除暂停。设置、存档子页与确认框处理各自的返回操作。
+- 暂停及存档页面为 CanvasLayer 100，确认框为 120，场景切换遮罩为 128。新增模态界面须检查层级，避免遮挡或穿透。
+- 对话暂停使用 `DialogueUtils.push_pause()` / `pop_pause()` 登记原因，不直接覆盖其他模块的暂停状态。
+- 对话布局管理带 `frozen` 接口的玩家冻结与恢复；鼠标恢复规则见 `pause_menu.gd` 的 `restore_gameplay_mouse()`。
+- 交互提示读取 `interact` 当前绑定；不要写死 F。以项目输入映射与用户重绑定为准。
+- 普通设置通过 `set_value()` 预览，`commit()` 应用写盘，离开未应用时 `revert()`；按键重绑定按管理器自身规则即时保存。
+- 分辨率候选由 `DisplayResolutions.CANDIDATES` 管理；新增 UI 使用 UIScaler 和 UILayout 的布局规则。选项步进控件使用 `ui/settings/option_stepper.gd`。
 
-设置里的“反转 Y 轴、镜头晃动、手柄震动、字幕”目前只保存，不生效：角色控制器没有对应功能，需要和控制器作者商量后再接。
+## 当前边界
+
+反转 Y 轴、镜头晃动、手柄震动、字幕等设置尚未完整接入游戏功能。存档界面可管理槽位，但角色位置、任务和绿化进度需要游戏系统接入，不能据此认为完整进度已保存。
+
+
+## 行动终端（2026-10-10）
+
+入口及页面：`ui/in_game/tasks/`；独立像素主题：`ui/theme/terminal/terminal_theme.tres`。
+任务页展示可点击的“演示参考”案例，不创建实际流程任务或存档数据。以后任务定义与状态放在 `systems/tasks/`。
+暂停菜单实例化终端，并统一负责两种菜单的场景树暂停与鼠标恢复；Esc 优先关闭已打开的终端。
+`task_terminal` 默认 Tab，可在设置中重绑定。对话期间终端不打开，Tab 继续保留对话跳过用途。
+终端字体只通过局部主题覆盖为已有 Fusion Pixel 12px，字号使用 12 的整数倍；其他明亮菜单继续使用各自主题。
+
+任务显示案例集中在 `ui/in_game/tasks/task_demo.gd`，仅供页面排版参考。`task_page.gd` 的 `show_demo` 导出开关设为 false 可恢复“待编辑”空页。演示追踪每次关闭/打开页面重置；案例的 1/3 进度是固定展示值，无真实完成行为。

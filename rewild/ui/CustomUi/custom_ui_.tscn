@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://dpd74r7db1fuh"]
 
-[ext_resource type="Script" uid="uid://3yypcka0x2vm" path="res://CustomUi/dialogue_layout_base.gd" id="1_base"]
+[ext_resource type="Script" uid="uid://3yypcka0x2vm" path="res://ui/CustomUi/dialogue_layout_base.gd" id="1_base"]
 [ext_resource type="PackedScene" uid="uid://cy1y14inwkplb" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Portraits/vn_portrait_layer.tscn" id="2_stage"]
 [ext_resource type="PackedScene" uid="uid://cn674foxwedqu" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Input/full_advance_input_layer.tscn" id="3_input"]
-[ext_resource type="PackedScene" path="res://CustomUi/layers/dialogue_box_layer.tscn" id="4_box"]
-[ext_resource type="PackedScene" path="res://CustomUi/layers/choice_layer.tscn" id="5_choice"]
-[ext_resource type="PackedScene" path="res://CustomUi/layers/text_input_layer.tscn" id="6_input"]
+[ext_resource type="PackedScene" path="res://ui/CustomUi/layers/dialogue_box_layer.tscn" id="4_box"]
+[ext_resource type="PackedScene" path="res://ui/CustomUi/layers/choice_layer.tscn" id="5_choice"]
+[ext_resource type="PackedScene" path="res://ui/CustomUi/layers/text_input_layer.tscn" id="6_input"]
 [ext_resource type="PackedScene" uid="uid://dsbwnp5hegnu3" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Glossary/glossary_popup_layer.tscn" id="7_glossary"]
-[ext_resource type="PackedScene" path="res://CustomUi/layers/history_layer.tscn" id="8_history"]
+[ext_resource type="PackedScene" path="res://ui/CustomUi/layers/history_layer.tscn" id="8_history"]
 
 [node name="CustomUi" type="CanvasLayer" unique_id=1056014597]
 layer = 10

@@ -6,10 +6,10 @@ How to give a Terrain3D map the Ghibli-style meadow look (soft green ground, gra
 
 ```
 meadow_palette.gdshaderinc   <- ONE function: meadow_color(x, z) = "which green is here"
-        |                         (+ cloud shadows, flower colours)
-        +--> meadow_terrain.gdshader    Terrain3D ground (shader override)
-        +--> meadow_grass.gdshader      grass blades     (Terrain3D particle example)
-        +--> meadow_flower.gdshader     flower heads     (Terrain3D particle example)
+		|                         (+ cloud shadows, flower colours)
+		+--> meadow_terrain.gdshader    Terrain3D ground (shader override)
+		+--> meadow_grass.gdshader      grass blades     (Terrain3D particle example)
+		+--> meadow_flower.gdshader     flower heads     (Terrain3D particle example)
 ```
 
 Because ground, grass and flowers all ask the same function for their colour, they always match, and the field reads as one painted surface.

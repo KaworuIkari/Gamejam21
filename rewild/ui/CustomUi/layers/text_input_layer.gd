@@ -7,6 +7,8 @@ extends DialogicLayoutLayer
 ## 输入框字号（运行时吸附到 UIType.GRID_PX 的整数倍）
 @export var input_font_size: int = 36
 
+const LightUI = preload("res://ui/theme/light/light_ui.gd")
+
 @onready var _node: Control = %DialogicNode_TextInput
 @onready var _field: LineEdit = %InputField
 @onready var _panel: Control = %TextInputPanel
@@ -16,6 +18,8 @@ func _ready() -> void:
 	super._ready()
 	if Engine.is_editor_hint():
 		return
+	LightUI.apply(self)
+	LightUI.frost(_panel)
 	_apply_export_overrides()
 	_node.visibility_changed.connect(func():
 		if _node.visible:
@@ -26,8 +30,13 @@ func _apply_export_overrides() -> void:
 	if not is_node_ready():
 		return
 	var font := UIType.font_or_null(input_font)
-	var t := Theme.new()
+	var t: Theme = LightUI.bright_theme().duplicate()
 	t.default_font_size = UIType.snap(input_font_size)
 	if font:
 		t.default_font = font
+	t.set_color(&"font_color", &"LineEdit", LightUI.INK)
+	t.set_color(&"caret_color", &"LineEdit", LightUI.INK)
+	t.set_color(&"font_placeholder_color", &"LineEdit", LightUI.MUTED)
+	t.set_stylebox(&"normal", &"LineEdit", t.get_stylebox(&"normal", &"Button"))
+	t.set_stylebox(&"focus", &"LineEdit", t.get_stylebox(&"focus", &"Button"))
 	_panel.theme = t

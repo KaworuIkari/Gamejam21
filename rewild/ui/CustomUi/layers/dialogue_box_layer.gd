@@ -14,6 +14,7 @@ extends DialogicLayoutLayer
 ## 头像是像素画时关掉（最近邻采样）；3D 渲染图 / 手绘图保持开启（线性采样，缩小更平滑）
 @export var portrait_smooth_filter: bool = true
 
+const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const SETTINGS_SECTION := "accessibility"
 const NEXT_GOLD: Texture2D = preload("res://ui/theme/glass/next_circle_gold.png")
 
@@ -38,6 +39,10 @@ func _ready() -> void:
 	super._ready()
 	if Engine.is_editor_hint():
 		return
+	LightUI.apply(self)
+	LightUI.frost(_panel, true)
+	LightUI.frost(_name_plate)
+	_next_indicator.modulate = Color(0.32, 0.47, 0.42, 1)
 	_auto_button.toggled.connect(_on_auto_toggled)
 	_skip_button.pressed.connect(_request_skip)
 	_history_button.pressed.connect(_open_history)
@@ -104,6 +109,9 @@ func _apply_opacity() -> void:
 	if _settings() and not Engine.is_editor_hint():
 		opacity = float(_settings().get_value(SETTINGS_SECTION, "dialogue_box_opacity"))
 	_panel.self_modulate.a = clampf(opacity / 100.0, 0.0, 1.0)
+	var backdrop := _panel.get_node_or_null("LightBackdrop/Surface") as CanvasItem
+	if backdrop:
+		backdrop.self_modulate.a = _panel.self_modulate.a
 
 
 func _on_setting_changed(section: String, key: String, _value: Variant) -> void:

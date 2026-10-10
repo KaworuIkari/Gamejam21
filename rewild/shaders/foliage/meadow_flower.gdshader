@@ -22,6 +22,7 @@ void vertex() {
 	// Billboard: keep the particle's position and size, but use the camera's rotation.
 	// (This is the same thing Godot's built-in "Billboard" material mode does.)
 	float size = keep ? length(MODEL_MATRIX[0].xyz) : 0.0; // size 0 = invisible
+	size *= smoothstep(0.6, 0.9, growth_at(pos)); // GROWTH: flowers come after the grass
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 			INV_VIEW_MATRIX[0] * size,
 			INV_VIEW_MATRIX[1] * size,

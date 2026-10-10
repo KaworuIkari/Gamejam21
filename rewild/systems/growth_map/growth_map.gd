@@ -4,7 +4,7 @@ extends Node
 
 signal changed
 
-const MAP_ORIGIN := Vector2(0.0, 0.0)  # world XZ of the crater's corner
+const MAP_ORIGIN := Vector2(-512.0, -512.0)  # world XZ of the crater's corner
 const MAP_SIZE := 1024.0               # crater size in world metres (not mask pixels)
 const RES := 512                       # growth map pixels per side -> 2 m per pixel
 const SAVE_PATH := "user://growth_map.png"
@@ -38,6 +38,12 @@ func _process(_delta: float) -> void:
 
 func attach_terrain(terrain: Terrain3D) -> void:
 	terrain.material.set_shader_param("growth_map", texture)
+
+
+## For other shaders that read growth_map (grass, flowers...). The texture updates
+## in place, so one call is enough.
+func attach_material(mat: ShaderMaterial) -> void:
+	mat.set_shader_parameter("growth_map", texture)
 
 
 # --- Coordinates ----------------------------------------------------------
