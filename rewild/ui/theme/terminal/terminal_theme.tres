@@ -2,6 +2,18 @@
 
 [ext_resource type="FontFile" uid="uid://ct8a2wf8b34bl" path="res://ui/fonts/fusion-pixel-12px.ttf" id="1_font"]
 
+[sub_resource type="StyleBoxFlat" id="button"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.09, 0.17, 0.13, 0.82)
+border_width_left = 2
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.66, 0.76, 0.54, 0.6)
+
 [sub_resource type="StyleBoxFlat" id="focus"]
 bg_color = Color(0, 0, 0, 0)
 border_width_left = 2
@@ -22,18 +34,6 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.81, 0.91, 0.68, 0.95)
 
-[sub_resource type="StyleBoxFlat" id="button"]
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
-bg_color = Color(0.09, 0.17, 0.13, 0.82)
-border_width_left = 2
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.66, 0.76, 0.54, 0.6)
-
 [sub_resource type="StyleBoxFlat" id="panel"]
 content_margin_left = 36.0
 content_margin_top = 30.0
@@ -50,17 +50,16 @@ border_color = Color(0.57, 0.68, 0.47, 0.55)
 default_font = ExtResource("1_font")
 default_font_size = 24
 Button/colors/font_color = Color(0.81, 0.89, 0.73, 1)
+Button/colors/font_focus_color = Color(0.9, 0.97, 0.8, 1)
 Button/colors/font_hover_color = Color(0.9, 0.97, 0.8, 1)
+Button/colors/font_hover_pressed_color = Color(0.9, 0.97, 0.8, 1)
 Button/colors/font_pressed_color = Color(0.9, 0.97, 0.8, 1)
+Button/styles/disabled = SubResource("button")
 Button/styles/focus = SubResource("focus")
 Button/styles/hover = SubResource("hover")
+Button/styles/hover_pressed = SubResource("hover")
 Button/styles/normal = SubResource("button")
 Button/styles/pressed = SubResource("hover")
 HSeparator/colors/separator = Color(0.47, 0.6, 0.41, 0.45)
 Label/colors/font_color = Color(0.81, 0.89, 0.73, 1)
 PanelContainer/styles/panel = SubResource("panel")
-
-Button/styles/hover_pressed = SubResource("hover")
-Button/styles/disabled = SubResource("button")
-Button/colors/font_hover_pressed_color = Color(0.9, 0.97, 0.8, 1)
-Button/colors/font_focus_color = Color(0.9, 0.97, 0.8, 1)
