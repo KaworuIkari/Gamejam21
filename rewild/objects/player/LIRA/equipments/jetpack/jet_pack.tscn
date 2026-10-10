@@ -2,16 +2,29 @@
 
 [ext_resource type="ArrayMesh" uid="uid://brqwem615waj1" path="res://objects/player/LIRA/equipments/jetpack/Jetpack_Jetpack.res" id="1_qht45"]
 [ext_resource type="Material" uid="uid://ce2i34cfdhpci" path="res://objects/player/LIRA/textures/lira_pink.tres" id="2_j73ex"]
-[ext_resource type="Script" uid="uid://foi05tufgwkn" path="res://objects/player/LIRA/equipments/jetpack/jetpack_fx.gd" id="3_j73ex"]
-[ext_resource type="Shader" uid="uid://cd3pasykw5st6" path="res://objects/player/LIRA/equipments/jetpack/jetpack_flame.gdshader" id="4_c3lyx"]
-[ext_resource type="Shader" uid="uid://uhllxx3tn63u" path="res://objects/player/LIRA/equipments/jetpack/jetpack_smoke.gdshader" id="5_mvceg"]
+[ext_resource type="Script" uid="uid://b6i8vtvghkxok" path="res://objects/player/LIRA/equipments/jetpack/jet_pack.gd" id="3_c3lyx"]
+[ext_resource type="Material" uid="uid://ddtv5s6u6e5xv" path="res://objects/player/LIRA/equipments/jetpack/jetpack_flame_material.tres" id="3_wqfbq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_0yw1p"]
+material = ExtResource("3_wqfbq")
+size = Vector2(0.2, 0.56)
+center_offset = Vector3(0, -0.285, 0)
+
+[sub_resource type="GDScript" id="GDScript_mvceg"]
 
 [node name="Jetpack" type="MeshInstance3D" unique_id=1580065771]
 mesh = ExtResource("1_qht45")
-skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("2_j73ex")
+script = ExtResource("3_c3lyx")
 
-[node name="JetpackFX" type="Node3D" parent="." unique_id=1046422269]
-script = ExtResource("3_j73ex")
-flame_shader = ExtResource("4_c3lyx")
-smoke_shader = ExtResource("5_mvceg")
+[node name="Flame" type="MeshInstance3D" parent="." unique_id=124921933]
+transform = Transform3D(1, 0, 0, 0, 0.99644196, -0.084282085, 0, 0.084282085, 0.99644196, -0.06600747, 1.2230206, -0.1883779)
+instance_shader_parameters/intensity = 1.0
+mesh = SubResource("QuadMesh_0yw1p")
+script = SubResource("GDScript_mvceg")
+
+[node name="Flame2" type="MeshInstance3D" parent="." unique_id=1567758886]
+transform = Transform3D(1, 0, 0, 0, 0.99644196, -0.084282085, 0, 0.084282085, 0.99644196, 0.066, 1.223, -0.188)
+instance_shader_parameters/intensity = 1.0
+mesh = SubResource("QuadMesh_0yw1p")
+script = SubResource("GDScript_mvceg")
