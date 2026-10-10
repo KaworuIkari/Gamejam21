@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/in_game/interaction/interaction_prompt.gd" id="1"]
+
+[node name="InteractionPrompt" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Anchor" type="CenterContainer" parent="Root"]
+layout_mode = 1
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -144.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Root/Anchor"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Row" type="HBoxContainer" parent="Root/Anchor/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 14
+mouse_filter = 2
+
+[node name="Before" type="Label" parent="Root/Anchor/Panel/Row"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "按"
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="Key" type="PanelContainer" parent="Root/Anchor/Panel/Row"]
+custom_minimum_size = Vector2(48, 40)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Root/Anchor/Panel/Row/Key"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
+
+[node name="After" type="Label" parent="Root/Anchor/Panel/Row"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "交谈"
+vertical_alignment = 1
+mouse_filter = 2

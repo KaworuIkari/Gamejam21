@@ -3,6 +3,7 @@ extends CanvasLayer
 ## 通用确认弹窗（支持键鼠 / 手柄）
 ## 用法：  if await ConfirmPopup.ask(self, "确定吗？"): ...
 
+const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 
 signal decided(accepted: bool)
@@ -33,7 +34,8 @@ static func ask(context: Node, message: String, confirm_key := "UI_CONFIRM", dan
 
 
 func _ready() -> void:
-	layer = 100
+	# 高于暂停/存档页（100），低于场景切换遮罩（128）。
+	layer = 120
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 	_root = Control.new()
@@ -102,6 +104,9 @@ func _ready() -> void:
 	# 默认聚焦“取消”，防止误操作
 	_cancel_btn.grab_focus.call_deferred()
 	_root.resized.connect(_update_responsive_layout)
+	LightUI.apply(_root)
+	LightUI.frost(_panel)
+	LightUI.soften_dim(dim)
 	_update_responsive_layout()
 
 

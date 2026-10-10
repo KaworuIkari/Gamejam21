@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://CustomUi/layers/text_input_layer.gd" id="1_layer"]
+[ext_resource type="Script" path="res://ui/CustomUi/layers/text_input_layer.gd" id="1_layer"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/TextInput/node_text_input.gd" id="2_input"]
 [ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="9_glass"]
 

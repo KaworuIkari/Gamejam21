@@ -8,6 +8,8 @@ extends DialogicLayoutLayer
 @export var choice_font_size: int = 36
 @export var choice_min_width: int = 720
 
+const LightUI = preload("res://ui/theme/light/light_ui.gd")
+
 @onready var _choices: VBoxContainer = %Choices
 
 
@@ -15,6 +17,7 @@ func _ready() -> void:
 	super._ready()
 	if Engine.is_editor_hint():
 		return
+	LightUI.apply(self)
 	_apply_export_overrides()
 
 
@@ -25,6 +28,7 @@ func _apply_export_overrides() -> void:
 	var size := UIType.snap(choice_font_size)
 	for b in _choices.get_children():
 		if b is Button:
+			LightUI.frost(b)
 			b.custom_minimum_size = Vector2(choice_min_width, 64)
 			b.add_theme_font_size_override(&"font_size", size)
 			UIType.apply_font(b, &"font", font)

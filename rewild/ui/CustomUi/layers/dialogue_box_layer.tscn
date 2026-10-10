@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://CustomUi/layers/dialogue_box_layer.gd" id="1_box"]
+[ext_resource type="Theme" path="res://ui/theme/light/light_theme.tres" id="12_light"]
+[ext_resource type="Script" path="res://ui/CustomUi/layers/dialogue_box_layer.gd" id="1_box"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Character/node_portrait_container.gd" id="2_portrait"]
 [ext_resource type="Script" path="res://addons/dialogic/Resources/flex_vector.gd" id="3_flex"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_name_label.gd" id="4_name"]
@@ -27,17 +28,21 @@ script = ExtResource("3_flex")
 x_value = 0.5
 y_value = 1.0
 
-[sub_resource type="StyleBoxTexture" id="Plate"]
-texture = ExtResource("9_plate")
-texture_margin_left = 52.0
-texture_margin_top = 28.0
-texture_margin_right = 28.0
-texture_margin_bottom = 28.0
-content_margin_left = 58.0
-content_margin_top = 4.0
-content_margin_right = 32.0
-content_margin_bottom = 4.0
-
+[sub_resource type="StyleBoxFlat" id="Plate"]
+bg_color = Color(1, 0.99, 0.95, 0.20)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 0.97, 0.65)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_left = 18
+corner_radius_bottom_right = 18
+content_margin_left = 26.0
+content_margin_top = 8.0
+content_margin_right = 26.0
+content_margin_bottom = 8.0
 [sub_resource type="RichTextEffect" id="Shake2"]
 script = ExtResource("10_shake")
 
@@ -49,6 +54,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = ExtResource("12_light")
 script = ExtResource("1_box")
 
 [node name="Box" type="Control" parent="."]
@@ -125,7 +131,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_colors/default_color = Color(0.92, 0.93, 0.94, 1)
+theme_override_colors/default_color = Color(0.22, 0.29, 0.28, 1)
 theme_override_constants/line_separation = 8
 bbcode_enabled = true
 text = "对话文本预览 Dialogue preview"
@@ -161,6 +167,7 @@ theme_type_variation = &"NameLabel"
 vertical_alignment = 1
 text = "名字"
 script = ExtResource("4_name")
+use_character_color = false
 name_label_root = NodePath("..")
 
 [node name="NextIndicator" type="Control" parent="Box"]
@@ -204,7 +211,7 @@ theme_override_constants/separation = 10
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_type_variation = &"CornerButton"
+theme_type_variation = &"Button"
 focus_mode = 0
 auto_translate_mode = 2
 toggle_mode = true
@@ -214,7 +221,7 @@ text = "自动"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_type_variation = &"CornerButton"
+theme_type_variation = &"Button"
 focus_mode = 0
 auto_translate_mode = 2
 text = "跳过"
@@ -223,7 +230,7 @@ text = "跳过"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
-theme_type_variation = &"CornerButton"
+theme_type_variation = &"Button"
 focus_mode = 0
 auto_translate_mode = 2
 text = "历史"
