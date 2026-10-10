@@ -1,29 +1,12 @@
 [gd_scene format=3 uid="uid://b41wv7vy216je"]
 
-[ext_resource type="Shader" uid="uid://cyshfkm3ffxkk" path="res://shaders/post/pp_outline.gdshader" id="1_83yxn"]
 [ext_resource type="Script" uid="uid://c4xre2v0gfogd" path="res://objects/player/LIRA/equipments/water_tank/water_blob.gd" id="1_gd28f"]
 [ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="1_snoof"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_0yw1p"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_snoof"]
-render_priority = 0
-shader = ExtResource("1_83yxn")
-shader_parameter/outlineColor = Color(0, 0, 0, 0.78)
-shader_parameter/depth_threshold = 0.025
-shader_parameter/normal_threshold = 0.5
-shader_parameter/normal_smoothing = 0.25
-shader_parameter/max_thickness = 1.3
-shader_parameter/min_thickness = 0.5
-shader_parameter/max_distance = 75.0
-shader_parameter/min_distance = 2.0
-shader_parameter/grazing_fresnel_power = 5.0
-shader_parameter/grazing_angle_mask_power = 1.0
-shader_parameter/grazing_angle_modulation_factor = 50.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mwutn"]
 render_priority = 0
-next_pass = SubResource("ShaderMaterial_snoof")
 shader = ExtResource("1_snoof")
 shader_parameter/shallow_color = Color(0.45, 0.9, 0.93, 1)
 shader_parameter/deep_color = Color(0.06, 0.36, 0.72, 1)

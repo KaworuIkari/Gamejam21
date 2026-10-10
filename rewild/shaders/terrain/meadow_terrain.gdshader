@@ -79,6 +79,7 @@ uniform float mipmap_bias : hint_range(0.5, 1.5, 0.01) = 1.0;
 uniform float depth_blur : hint_range(0.0, 35.0, 0.1) = 0.0;
 uniform float bias_distance : hint_range(0.0, 16384.0, 0.1) = 512.0;
 
+uniform float far_flower_start = 25.0; // MEADOW: distance where ground flower speckles start
 uniform bool enable_macro_variation = true;
 uniform vec3 macro_variation1 : source_color = vec3(1.);
 uniform vec3 macro_variation2 : source_color = vec3(1.);
@@ -553,7 +554,30 @@ void fragment() {
 	vec3 textured = has_tex ? mat.albedo_height.rgb * macrov : vec3(0.5);
 	vec3 tex_normal = has_tex ? fma(normalize(mat.normal_rough.xzy), vec3(0.5), vec3(0.5)) : vec3(0.5, 0.5, 1.0);
 
-	vec3 col = mix(textured, meadow_color(v_vertex.xz), meadow_w);
+	// MEADOW: same ground recipe as res://shaders/terrain/ground.gdshader (generated meadow).
+	vec2 wp = v_vertex.xz;
+	// Slightly darker than the blade tips so the grass reads as depth, not noise.
+	vec3 meadow = meadow_color(wp) * 0.97;
+	// Steep slopes go a little earthy.
+	meadow = mix(meadow, srgb(vec3(0.42, 0.50, 0.22)), smoothstep(0.25, 0.55, 1.0 - w_normal.y));
+	// Far away, where flower meshes have faded out, paint flowers as round speckles;
+	// once a speckle is only a few pixels wide it fades into an averaged pastel tint.
+	float cluster = flower_cluster(wp);
+	vec2 sp = wp * 2.5;
+	vec2 cell = floor(sp);
+	vec2 jitter = m_hash2(cell + 3.3) * 0.5 + 0.25;
+	float px = length(fwidth(sp));
+	float dot_mask = 1.0 - smoothstep(0.16 - px * 0.5, 0.16 + px * 0.5, length(fract(sp) - jitter));
+	float speck = step(0.62, m_hash(cell)) * cluster * dot_mask;
+	float detail = 1.0 - smoothstep(0.12, 0.35, px);
+	float far = smoothstep(far_flower_start, far_flower_start * 1.6, length(v_vertex - CAMERA_POSITION_WORLD));
+	meadow = mix(meadow, flower_palette(m_hash(cell + 7.0)), speck * far * detail * 0.85);
+	meadow = mix(meadow, srgb(vec3(0.90, 0.78, 0.80)), cluster * (1.0 - detail) * 0.18);
+
+	// GROWTH: barren desert until the GrowthMap turns this spot green.
+	meadow = mix(desert_color(wp), meadow, growth_at(wp));
+
+	vec3 col = mix(textured, meadow, meadow_w);
 	col *= color_map.rgb;                       // Paint Color tool (C) tints everything
 	ALBEDO = apply_cloud_shadow(col, v_vertex.xz, TIME);
 	ROUGHNESS = mix(roughness, 1.0, meadow_w);  // meadow is fully matte
@@ -563,7 +587,7 @@ void fragment() {
 
 	// Higher and/or facing up, less occluded.
 	float ao = (1. - (mat.albedo_height.a * log(2.1 - mat.ao_strength))) * (1. - mat.normal_rough.y);
-	AO = clamp(1. - ao * mat.ao_strength, mat.albedo_height.a, 1.0);
-	AO_LIGHT_AFFECT = (1.0 - mat.albedo_height.a) * clamp(mat.normal_rough.y, 0., 1.);
+	AO = mix(clamp(1. - ao * mat.ao_strength, mat.albedo_height.a, 1.0), 1.0, meadow_w); // MEADOW: no texture AO on the painted meadow
+	AO_LIGHT_AFFECT = (1.0 - meadow_w) * (1.0 - mat.albedo_height.a) * clamp(mat.normal_rough.y, 0., 1.);
 
 }

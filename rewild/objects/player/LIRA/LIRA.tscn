@@ -10,7 +10,6 @@
 [ext_resource type="ArrayMesh" uid="uid://dwt42pd6wpfwo" path="res://objects/player/LIRA/Robot_Robot.res" id="7_n661r"]
 [ext_resource type="PackedScene" uid="uid://bm4kbp1plk4ob" path="res://objects/player/LIRA/equipments/water_tank/water_tank.tscn" id="7_vqtik"]
 [ext_resource type="AnimationLibrary" uid="uid://7qhlb2jw3hkc" path="res://objects/player/LIRA/animations/anim2/Robot_anim2.glb" id="9_mjkbt"]
-[ext_resource type="Shader" uid="uid://cyshfkm3ffxkk" path="res://shaders/post/pp_outline.gdshader" id="11_jhgke"]
 [ext_resource type="Script" uid="uid://cqevipvuj1tmv" path="res://objects/player/LIRA/equipments/water_tank/aim_trajectory.gd" id="11_vqtik"]
 [ext_resource type="PackedScene" uid="uid://b41wv7vy216je" path="res://objects/player/LIRA/equipments/water_tank/water_blob.tscn" id="12_mjkbt"]
 [ext_resource type="Script" uid="uid://btj4dciqskt0k" path="res://objects/player/LIRA/textures/screen/robot_face.gd" id="14_eiqvn"]
@@ -207,27 +206,6 @@ bind/61/bone = -1
 bind/61/pose = Transform3D(0.9999898, -0.0016970298, -0.004073147, 0.0037298214, -0.1683463, 0.98572034, -0.0023586443, -0.9857264, -0.1683382, 0.11346153, -0.038038008, 0.065682575)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0yw1p"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1w2nw"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("11_jhgke")
-shader_parameter/outlineColor = Color(0, 0, 0, 0.78)
-shader_parameter/depth_threshold = 0.025
-shader_parameter/normal_threshold = 0.5
-shader_parameter/normal_smoothing = 0.25
-shader_parameter/max_thickness = 1.3
-shader_parameter/min_thickness = 0.5
-shader_parameter/max_distance = 75.0
-shader_parameter/min_distance = 2.0
-shader_parameter/grazing_fresnel_power = 5.0
-shader_parameter/grazing_angle_mask_power = 1.0
-shader_parameter/grazing_angle_modulation_factor = 50.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_ulwi0"]
-material = SubResource("ShaderMaterial_1w2nw")
-flip_faces = true
-size = Vector2(20, 20)
 
 [node name="LIRA" type="CharacterBody3D" unique_id=223261986]
 script = ExtResource("2_xaedf")
@@ -1105,11 +1083,6 @@ spring_length = 3.5
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1387486395]
 unique_name_in_owner = true
-
-[node name="PostProcessQuad" type="MeshInstance3D" parent="CameraPivot/SpringArm3D/Camera3D" unique_id=28531513]
-transform = Transform3D(1.0000006, 0, 0, 1.7881393e-07, 1.0000002, 2.0861627e-07, 2.9802322e-08, 1.1920929e-07, 1.0000004, 0.0008046627, 0.0034348965, 0.0015969276)
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_ulwi0")
 
 [node name="AimTrajectory" type="Node3D" parent="." unique_id=1011454280]
 script = ExtResource("11_vqtik")

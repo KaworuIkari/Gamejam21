@@ -8,6 +8,9 @@ const PAUSE_MENU = preload("res://ui/in_game/pause_menu.tscn")
 
 func _ready() -> void:
 	terrain.set_camera(player_camera)
+	GrowthMap.attach_terrain(terrain)
+	GrowthMap.attach_material($Terrain3D/Grass.mesh_material_override)
+	GrowthMap.attach_material($Terrain3D/Flowers.mesh_material_override)
 	add_child(PAUSE_MENU.instantiate())
 
 func _process(delta: float) -> void:
