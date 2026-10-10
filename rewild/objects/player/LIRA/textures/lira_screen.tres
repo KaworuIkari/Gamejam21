@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://dl08jjoubdmgj"]
-
-[ext_resource type="Texture2D" uid="uid://cv0d2220n5yoi" path="res://objects/player/LIRA/textures/screen/smile.png" id="1_js1th"]
-
-[resource]
-albedo_texture = ExtResource("1_js1th")
-emission_enabled = true
-emission_energy_multiplier = 2.36
-emission_texture = ExtResource("1_js1th")

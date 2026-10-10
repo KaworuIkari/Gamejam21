@@ -1,4 +1,5 @@
 extends RealController
+class_name LIRA_Character
 var anim_dir := Vector2.ZERO   # character rotation for diagonal walks
 @export var stopping_tweak : float = 20.0  # tweak how fast velocity decreases after moving, to match the locomotion -> idle Xfade Time visually
 
@@ -9,12 +10,48 @@ var anim_dir := Vector2.ZERO   # character rotation for diagonal walks
 @onready var anim_player: AnimationPlayer = $Robot/AnimationPlayer
 
 # emoji
-var screen_mat : Material
+@onready var face: RobotFace = $RobotFace
+var _idle_time := 0.0
 
 # trajectory and shooting
 @onready var aim_trajectory: AimTrajectory = $AimTrajectory
 @export var fire_cooldown := 0.35
 var _fire_cd := 0.0
+
+@export var aim_offset : Vector3 = Vector3(1,0,0)
+@export var aim_offset_lerp_speed : float = 20.0
+@export var aim_camera_distance : float = 2.5
+@onready var spring_arm_initial_pos : Vector3 = spring_arm_3d.position
+var _target_pivot_offset := spring_arm_initial_pos
+
+
+# jetpack
+@export_group("Jetpack")
+@export var max_energy := 100.0
+@export var burst_cost := 15.0
+@export var burst_velocity := 6.0        # upward speed a tap gives you
+@export var thrust_accel := 24.0         # m/s² while held; net lift = this - gravity
+@export var max_rise_speed := 5.0        # thrust stops adding speed above this
+@export var thrust_drain := 35.0         # energy per second while thrusting
+@export var hold_threshold := 0.15       # hold longer than this → sustained thrust
+@export var spool_time := 0.25           # thrust ramps 0→100% over this (the "heavy" feel)
+@export var regen_delay := 1.0
+@export var regen_rate := 30.0
+@export_group("Air Control")
+@export var air_accel := 8.0
+@export var air_max_speed := 6.0
+@export var thrust_air_accel_mult := 1.5 # steer a bit better while the jets are firing
+
+var energy := max_energy
+var _jet_armed := false     # jump was pressed in the air and is still held
+var _thrusting := false
+var _hold_time := 0.0
+var _spool := 0.0
+var _regen_timer := 0.0
+var _debug_timer := 0.0
+var _last_printed_energy := -1.0
+
+
 
 func _ready() -> void:
 	super()
@@ -27,16 +64,23 @@ func _ready() -> void:
 	pass # Replace with function body.
 	
 	spring_arm_3d.add_excluded_object(self)
-	screen_mat = robot.mesh.surface_get_material(4)
+
+	face.setup(robot, 4)
 	
 
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
-	var t = Time.get_ticks_msec() * 0.001
-	screen_mat.emission_energy_multiplier = 1.0 + 0.8 * sin(TAU * .5 * t)
+	# udpate face
+	_idle_time = _idle_time + delta if velocity.length() < 0.1 else 0.0
+	face.base = _pick_base_mood()
+	face.stress = 0.0             # e.g. 1.0 - health / max_health
 
 	_fire_cd = maxf(0.0, _fire_cd - delta)
+
+	# move camera sideways when aiming
+	var t := 1.0 - exp(-aim_offset_lerp_speed * delta)
+	spring_arm_3d.position = spring_arm_3d.position.lerp(_target_pivot_offset, t)
 
 func _apply_movement(delta : float) -> void:
 	var is_moving = input_dir != Vector2.ZERO and is_on_floor()
@@ -85,6 +129,16 @@ func try_shoot() -> void:                   # call this from the input code that
 	aim_trajectory.fire()
 	animation_script.aim_correction.kick()
 
+func on_aim(is_aiming : bool) -> void:
+	if is_aiming:
+		_update_camera_distance(aim_camera_distance)
+		_target_pivot_offset = spring_arm_initial_pos + aim_offset
+	else:
+		_update_camera_distance(default_camera_distance)
+		_target_pivot_offset = spring_arm_initial_pos
+	animation_script.is_aiming = is_aiming
+	aim_trajectory.active = is_aiming
+
 func _unhandled_input(event: InputEvent) -> void:
 	super(event)
 	if event.is_action_pressed("use"):
@@ -92,8 +146,102 @@ func _unhandled_input(event: InputEvent) -> void:
 			animation_script.is_shooting = true
 			try_shoot()
 	if event.is_action_pressed("use2"):
-		animation_script.is_aiming = true
-		aim_trajectory.active = true
+		on_aim(true)
 	elif event.is_action_released("use2"):
-		animation_script.is_aiming = false
-		aim_trajectory.active = false
+		on_aim(false)
+
+func _handle_gravity_and_jump(delta: float) -> void:
+	super(delta)  # gravity + ground jump
+	if is_on_floor():
+		_end_thrust()
+	else:
+		_handle_jetpack(delta)
+		_handle_air_control(delta)
+	_handle_energy_regen(delta)
+	_debug_energy(delta)
+	_consume_anim_triggers()
+
+func _handle_jetpack(delta: float) -> void:
+	if frozen:
+		_end_thrust()
+		return
+	# Tap: immediate burst (also the first frame of a hold)
+	if Input.is_action_just_pressed("jump") and energy >= burst_cost:
+		energy -= burst_cost
+		velocity.y = maxf(velocity.y, burst_velocity)  # also arrests a fall
+		_jet_armed = true
+		_hold_time = 0.0
+		_spool = 0.0
+		_regen_timer = regen_delay
+		animation_script.is_using_double_jump = true
+	if not _jet_armed:
+		return
+	if not Input.is_action_pressed("jump") or energy <= 0.0:
+		_end_thrust()
+		return
+	# Hold: sustained thrust after the threshold
+	_hold_time += delta
+	if _hold_time < hold_threshold:
+		return
+	_thrusting = true
+	_spool = minf(_spool + delta / spool_time, 1.0)
+	if velocity.y < max_rise_speed:
+		velocity.y = minf(velocity.y + thrust_accel * _spool * delta, max_rise_speed)
+	energy = maxf(energy - thrust_drain * delta, 0.0)
+	_regen_timer = regen_delay
+
+func _end_thrust() -> void:
+	_jet_armed = false
+	_thrusting = false
+	_spool = 0.0
+
+func _handle_air_control(delta: float) -> void:
+	var wish := Vector3(direction.x, 0.0, direction.z)
+	if wish.length_squared() < 0.001:
+		return  # no input: keep momentum
+	var target := wish.normalized() * air_max_speed * input_strength
+	var accel := air_accel * (thrust_air_accel_mult if _thrusting else 1.0)
+	var h := Vector3(velocity.x, 0.0, velocity.z).move_toward(target, accel * delta)
+	velocity.x = h.x
+	velocity.z = h.z
+
+
+func _handle_energy_regen(delta: float) -> void:
+	if _thrusting:
+		return
+	_regen_timer -= delta
+	if _regen_timer <= 0.0:
+		energy = minf(energy + regen_rate * delta, max_energy)
+
+
+func _debug_energy(delta: float) -> void:
+	_debug_timer -= delta
+	if _debug_timer > 0.0 or is_equal_approx(energy, _last_printed_energy):
+		return
+	_debug_timer = 0.2
+	_last_printed_energy = energy
+	print("Jetpack energy: %.1f / %.0f%s" % [energy, max_energy, "  [THRUST]" if _thrusting else ""])
+
+func _consume_anim_triggers() -> void:
+	if not animation_script.is_using_double_jump:
+		return
+	if animation_script.torso_pb.get_current_node() == "JumpStart":
+		animation_script.is_using_double_jump = false
+
+###### Mood ######
+func _pick_base_mood() -> RobotFace.Mood:
+	if animation_script.is_aiming:                 # use whichever script owns this flag
+		return RobotFace.Mood.WATCHING
+	if _idle_time > 20.0:
+		return RobotFace.Mood.CAT
+	return RobotFace.Mood.SMILE
+
+# events
+func _on_hurt() -> void:
+	face.react(RobotFace.Mood.DISGUST, 2, 1.4)           # urgent: skips the hold
+
+func _on_blob_landed(on_target: bool) -> void:
+	if on_target:
+		face.react(RobotFace.Mood.CORRECT, 1, 1.0)       # watered something that grows
+	else:
+		face.react(RobotFace.Mood.QUESTION, 1, 1.2)      # wasted shot

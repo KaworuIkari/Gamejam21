@@ -1,5 +1,5 @@
 @tool
-extends Node3D
+extends MeshInstance3D
 # gun attachment
 @export var water_gun_pos:Node3D
 @onready var water_gun: MeshInstance3D = $WaterGun
@@ -24,7 +24,6 @@ var noise := FastNoiseLite.new()
 
 func _ready():
 	_ready_tube()
-	_ready_tank_water()
 
 func _process(_delta):
 	set_gun_pos()
@@ -77,28 +76,3 @@ func update_tube():
 		c.set_point_position(i, path.to_local(pts[i]))
 		c.set_point_in(i,  inv * (-dirs[i] * len_in  * tension))
 		c.set_point_out(i, inv * ( dirs[i] * len_out * tension))
-
-@onready var spine_02 : BoneAttachment3D = $"../../spine_02_x"
-@onready var tank_water : MeshInstance3D = $"TankWater"
-
-var _skel: Skeleton3D
-var _bone := -1
-var _offset := Transform3D.IDENTITY
-
-func _ready_tank_water() -> void:
-	_skel = spine_02.get_parent() as Skeleton3D
-	if _skel == null:
-		push_warning("TankWater: the attachment's parent is not a Skeleton3D")
-		return
-	_bone = _skel.find_bone(spine_02.bone_name)
-	if _bone < 0:
-		push_warning("TankWater: bone not found: %s" % spine_02.bone_name)
-		return
-	var bone_rest_world := _skel.global_transform * _skel.get_bone_global_rest(_bone)
-	_offset = bone_rest_world.affine_inverse() * tank_water.global_transform
-	tank_water.top_level = true          # drive it directly, ignore the parent chain
-	_skel.skeleton_updated.connect(_follow)
-	_follow()
-
-func _follow() -> void:
-	tank_water.global_transform = _skel.global_transform * _skel.get_bone_global_pose(_bone) * _offset

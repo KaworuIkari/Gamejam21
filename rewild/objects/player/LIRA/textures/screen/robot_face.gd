@@ -51,6 +51,7 @@ func setup(mesh_instance: MeshInstance3D, surface: int) -> void:
 	_mat.set_shader_parameter("from_layer", 0)
 	_mat.set_shader_parameter("to_layer", 0)
 	_mat.set_shader_parameter("transition", 1.0)
+	_mat.set_shader_parameter("scanline_count", 15)
 	mesh_instance.set_surface_override_material(surface, _mat)   # belongs to this node only
 
 # A short-lived reaction. Higher priority wins; priority >= 2 skips the hold and shows immediately.
