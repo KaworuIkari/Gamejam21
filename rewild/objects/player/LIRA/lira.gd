@@ -21,13 +21,12 @@ var _fire_cd := 0.0
 @export var aim_offset : Vector3 = Vector3(1,0,0)
 @export var aim_offset_lerp_speed : float = 20.0
 @export var aim_camera_distance : float = 2.5
-@onready var spring_arm_initial_pos : Vector3 = spring_arm_3d.position
-var _target_pivot_offset := spring_arm_initial_pos
+var _target_pivot_offset := Vector3.ZERO
 
 
 # jetpack
 @export_group("Jetpack")
-# @onready var jet_fx: JetpackFX = $Robot/root/Skeleton3D/JetpackSocket/JetpackFX
+@onready var jet_fx: JetpackFX = $Robot/root/Skeleton3D/Jetpack/JetpackFX
 @export var max_energy := 100.0
 @export var burst_cost := 15.0
 @export var burst_velocity := 6.0        # upward speed a tap gives you
@@ -80,8 +79,10 @@ func _physics_process(delta: float) -> void:
 	_fire_cd = maxf(0.0, _fire_cd - delta)
 
 	# move camera sideways when aiming
+	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
+	var target := yaw_basis * _target_pivot_offset
 	var t := 1.0 - exp(-aim_offset_lerp_speed * delta)
-	spring_arm_3d.position = spring_arm_3d.position.lerp(_target_pivot_offset, t)
+	camera_pivot.position = camera_pivot.position.lerp(target, t)
 
 func _apply_movement(delta : float) -> void:
 	var is_moving = input_dir != Vector2.ZERO and is_on_floor()
@@ -133,10 +134,10 @@ func try_shoot() -> void:                   # call this from the input code that
 func on_aim(is_aiming : bool) -> void:
 	if is_aiming:
 		_update_camera_distance(aim_camera_distance)
-		_target_pivot_offset = spring_arm_initial_pos + aim_offset
+		_target_pivot_offset = aim_offset
 	else:
 		_update_camera_distance(default_camera_distance)
-		_target_pivot_offset = spring_arm_initial_pos
+		_target_pivot_offset = Vector3.ZERO
 	animation_script.is_aiming = is_aiming
 	aim_trajectory.active = is_aiming
 
@@ -161,7 +162,7 @@ func _handle_gravity_and_jump(delta: float) -> void:
 	_handle_energy_regen(delta)
 	_debug_energy(delta)
 	_consume_anim_triggers()
-	# jet_fx.set_thrust(_thrusting, _spool)
+	jet_fx.set_thrust(_thrusting, _spool)
 
 func _handle_jetpack(delta: float) -> void:
 	if frozen:
@@ -176,7 +177,7 @@ func _handle_jetpack(delta: float) -> void:
 		_spool = 0.0
 		_regen_timer = regen_delay
 		animation_script.is_using_double_jump = true
-		# jet_fx.burst()
+		jet_fx.burst()
 	if not _jet_armed:
 		return
 	if not Input.is_action_pressed("jump") or energy <= 0.0:
