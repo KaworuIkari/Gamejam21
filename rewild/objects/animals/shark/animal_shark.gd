@@ -12,10 +12,10 @@ enum State { PATROL, HUNT, DESCEND, SLEEP }
 @export_group("Sea")
 @export var sea_plane: MeshInstance3D           # water surface; its mesh bounds the sea horizontally
 @export var terrain: Node3D                     # the Terrain3D node
-@export var patrol_radius := 25.0               # patrol points are picked around the shark
+@export var patrol_radius := 40.0               # patrol points are picked around the shark
 @export var min_depth := 2.0                    # ignore spots shallower than this
 @export var terrain_lookahead := 3.0            # check this far ahead for rising seabed
-@export var climb_speed := 1.2                  # vertical escape speed over rising seabed
+@export var climb_speed := 4                  # vertical escape speed over rising seabed
 @export_flags_3d_physics var seabed_mask := 1   # raycast fallback only
 
 @export_group("Sleep Spot")
@@ -23,16 +23,16 @@ enum State { PATROL, HUNT, DESCEND, SLEEP }
 @export var sleep_search_radius := 20.0
 @export var rest_height := 0.3                  # root origin height above the seabed when lying
 @export var land_radius := 1.0
-@export var descend_speed := 1.5
+@export var descend_speed := 3
 @export var descend_pitch_deg := 25.0
 @export var settle_time := 0.8
 @export var wake_lift := 0.8
 
 @export_group("Movement")
-@export var patrol_speed := 2.0
-@export var chase_speed := 5.0
+@export var patrol_speed := 4.0
+@export var chase_speed := 7.0
 @export var acceleration := 2.5                # m/s²: sharks don't stop on a dime
-@export var turn_speed := 1.8                  # rad/s heading change
+@export var turn_speed := 2.5                  # rad/s heading change
 @export var max_pitch_deg := 30.0
 @export var face_smoothing := 6.0
 @export var arrive_radius := 1.5
@@ -137,8 +137,6 @@ func _physics_process(delta: float) -> void:
 	_depth_guards()
 	move_and_slide()
 	_face_motion(delta)
-
-	print(is_moving, state)
 
 
 # --- states ------------------------------------------------------------------

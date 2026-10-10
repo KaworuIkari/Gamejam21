@@ -36,6 +36,7 @@ func blob_die(on_target : bool = false) -> void:
 		return
 	_dead = true
 	on_blob_die.emit(on_target)
+	GrowthMap.paint(position, 10)
 	queue_free()
 
 func _is_good_target(collider: Object) -> bool:
