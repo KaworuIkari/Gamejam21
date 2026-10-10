@@ -14,7 +14,7 @@ class_name AimTrajectory extends Node3D
 @export var aim_origin_height := 1.3                     # chest height used for the elevation solve
 @export_range(0.0, 1.0) var inherit_velocity := 1.0      # share of the along-barrel player speed added to the throw
 
-@onready var player: RealController = $".."
+@onready var player: LIRA_Character = $".."
 @onready var muzzle: Node3D = $"../Robot/root/Skeleton3D/hand_r/WaterGunMuzzle"
 
 var active := false
@@ -44,6 +44,7 @@ func _process(_d: float) -> void:
 func fire() -> void:
 	_update_velocity()                 # use the barrel's direction at this instant
 	var blob := blob_scene.instantiate()
+	blob.on_blob_die.connect(player._on_blob_landed)
 	get_tree().current_scene.add_child(blob)
 	blob.launch(muzzle.global_position, world_velocity, gravity, collision_mask, player.get_rid())
 

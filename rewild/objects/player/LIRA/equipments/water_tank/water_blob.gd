@@ -7,6 +7,9 @@ var _mask: int
 var _exclude: RID
 var _t := 0.0
 
+signal on_blob_die(on_target: bool)
+var _dead := false
+
 func _ready() -> void:
 	set_instance_shader_parameter("time_offset", randf_range(0.0, 60.0))
 
@@ -22,12 +25,22 @@ func _physics_process(delta: float) -> void:
 	if not hit.is_empty():
 		global_position = hit.position
 		# spawn splash here
-		blob_die()
+		blob_die(_is_good_target(hit.collider))
 		return
 	global_position = next
 	if _t > 6.0 or global_position.y < -50.0:
 		blob_die()
 		
-func blob_die() -> void:
-	print("blob died")
+func blob_die(on_target : bool = false) -> void:
+	if _dead:
+		return
+	_dead = true
+	on_blob_die.emit(on_target)
 	queue_free()
+
+func _is_good_target(collider: Object) -> bool:
+	if collider == null:
+		return false
+	# TODO: decide what counts as a good shot, e.g.:
+	# return collider is Node and (collider as Node).is_in_group("plant")
+	return false

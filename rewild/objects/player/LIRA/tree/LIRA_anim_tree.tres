@@ -59,7 +59,6 @@ filter_enabled = true
 filters = ["root/Skeleton3D:index1.r", "root/Skeleton3D:index2.r", "root/Skeleton3D:index3.r", "root/Skeleton3D:middle1.r", "root/Skeleton3D:middle2.r", "root/Skeleton3D:middle3.r", "root/Skeleton3D:pinky1.r", "root/Skeleton3D:pinky2.r", "root/Skeleton3D:pinky3.r", "root/Skeleton3D:ring1.r", "root/Skeleton3D:ring2.r", "root/Skeleton3D:ring3.r", "root/Skeleton3D:thumb1.r", "root/Skeleton3D:thumb2.r", "root/Skeleton3D:thumb3.r"]
 
 [resource]
-graph_offset = Vector2(-725.3333, 233.33333)
 nodes/Torso/node = ExtResource("1_jdw11")
 nodes/Torso/position = Vector2(-506.66666, 120)
 nodes/Gun/node = SubResource("AnimationNodeStateMachine_bi7sg")
