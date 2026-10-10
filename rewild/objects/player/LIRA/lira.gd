@@ -26,7 +26,7 @@ var _target_pivot_offset := Vector3.ZERO
 
 # jetpack
 @export_group("Jetpack")
-@onready var jet_fx: JetpackFX = $Robot/root/Skeleton3D/Jetpack/JetpackFX
+@onready var jetpack: Jetpack = $Robot/root/Skeleton3D/spine_02_x/Jetpack
 @export var max_energy := 100.0
 @export var burst_cost := 15.0
 @export var burst_velocity := 6.0        # upward speed a tap gives you
@@ -162,7 +162,7 @@ func _handle_gravity_and_jump(delta: float) -> void:
 	_handle_energy_regen(delta)
 	_debug_energy(delta)
 	_consume_anim_triggers()
-	jet_fx.set_thrust(_thrusting, _spool)
+	jetpack.set_thrust(_thrusting, _spool)
 
 func _handle_jetpack(delta: float) -> void:
 	if frozen:
@@ -177,7 +177,7 @@ func _handle_jetpack(delta: float) -> void:
 		_spool = 0.0
 		_regen_timer = regen_delay
 		animation_script.is_using_double_jump = true
-		jet_fx.burst()
+		jetpack.burst()
 	if not _jet_armed:
 		return
 	if not Input.is_action_pressed("jump") or energy <= 0.0:
