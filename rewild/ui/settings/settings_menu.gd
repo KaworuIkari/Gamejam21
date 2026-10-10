@@ -7,6 +7,7 @@ extends Control
 
 signal closed
 
+const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 const ResponsiveRow = preload("res://ui/layout/responsive_settings_row.gd")
 
@@ -40,6 +41,9 @@ var _confirming := false
 
 
 func _ready() -> void:
+	LightUI.apply(self)
+	LightUI.frost($Margin/Panel)
+	LightUI.soften_dim($Dim)
 	for i in TAB_TITLES.size():
 		_tabs.set_tab_title(i, TAB_TITLES[i])
 	_build_audio(%AudioRows)
@@ -154,7 +158,7 @@ func _focus_current_tab() -> void:
 	_back_button.grab_focus()
 
 
-func _on_tab_changed(_tab: int) -> void:
+func _on_tab_changed(tab: int) -> void:
 	_reset_button.visible = true
 
 
@@ -291,6 +295,9 @@ func _slider(parent: Control, key: String, section: String, setting: String,
 		min_v: float, max_v: float, step: float, fmt: String, apply_on_release := false) -> HSlider:
 	var row := _row(parent, key)
 	var s := HSlider.new()
+	# Wheel belongs to the enclosing page, never to setting values.
+	s.scrollable = false
+	s.mouse_force_pass_scroll_events = true
 	s.min_value = min_v
 	s.max_value = max_v
 	s.step = step
@@ -305,11 +312,7 @@ func _slider(parent: Control, key: String, section: String, setting: String,
 	row.controls.add_child(value_label)
 
 	var is_int := typeof(SettingsManager.get_default(section, setting)) == TYPE_INT
-	var to_value := func(v: float) -> Variant:
-		if is_int:
-			return int(roundf(v))
-		else:
-			return snappedf(v, step)
+	var to_value := func(v: float) -> Variant: return int(roundf(v)) if is_int else snappedf(v, step)
 	var commit := func(v: float) -> void: SettingsManager.set_value(section, setting, to_value.call(v))
 
 	s.value_changed.connect(func(v: float):

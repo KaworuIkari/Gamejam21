@@ -1,9 +1,11 @@
 [gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://ui/settings/settings_menu.gd" id="1_menu"]
-[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="2_glass"]
+
+[ext_resource type="Theme" path="res://ui/theme/light/light_theme.tres" id="light_theme"]
 
 [node name="SettingsMenu" type="Control"]
+theme = ExtResource("light_theme")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +37,6 @@ theme_override_constants/margin_bottom = 56
 
 [node name="Panel" type="PanelContainer" parent="Margin"]
 layout_mode = 2
-material = ExtResource("2_glass")
 
 [node name="VBox" type="VBoxContainer" parent="Margin/Panel"]
 layout_mode = 2

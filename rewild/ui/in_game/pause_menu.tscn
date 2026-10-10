@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://ui/in_game/pause_menu.gd" id="1_pause"]
 [ext_resource type="PackedScene" path="res://ui/settings/settings_menu.tscn" id="2_settings"]
 [ext_resource type="Script" path="res://ui/save_slots/save_slot_list.gd" id="3_slots"]
-[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="4_glass"]
+
+[ext_resource type="Script" path="res://ui/theme/light/pause_light_style.gd" id="5_light"]
+
+[ext_resource type="Theme" path="res://ui/theme/light/light_theme.tres" id="light_theme"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 layer = 100
@@ -11,6 +14,7 @@ process_mode = 3
 script = ExtResource("1_pause")
 
 [node name="Overlay" type="Control" parent="."]
+theme = ExtResource("light_theme")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,9 +41,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="Overlay/Center"]
+script = ExtResource("5_light")
+metadata/no_glass = true
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
-material = ExtResource("4_glass")
 
 [node name="Margin" type="MarginContainer" parent="Overlay/Center/Panel"]
 layout_mode = 2
@@ -55,7 +60,7 @@ theme_override_constants/separation = 18
 [node name="Title" type="Label" parent="Overlay/Center/Panel/Margin/VBox"]
 layout_mode = 2
 theme_type_variation = &"HeaderLabel"
-text = "暂停"
+text = "PAUSE_TITLE"
 horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
@@ -63,34 +68,34 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 theme_type_variation = &"MainMenuButton"
-text = "继续游戏"
+text = "PAUSE_RESUME"
 
 [node name="SaveButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 theme_type_variation = &"MainMenuButton"
-text = "保存进度"
+text = "PAUSE_SAVE"
 
 [node name="SettingsButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 theme_type_variation = &"MainMenuButton"
-text = "设置"
+text = "MENU_SETTINGS"
 
 [node name="MainMenuButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 theme_type_variation = &"MainMenuButton"
-text = "返回主菜单"
+text = "PAUSE_MAIN_MENU"
 
 [node name="SaveFeedback" type="Label" parent="Overlay/Center/Panel/Margin/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"HintLabel"
-text = "进度已保存"
+text = "SAVE_FEEDBACK_OK"
 horizontal_alignment = 1
 
 [node name="SettingsMenu" parent="." instance=ExtResource("2_settings")]
@@ -98,6 +103,7 @@ unique_name_in_owner = true
 visible = false
 
 [node name="SaveScreen" type="Control" parent="." unique_id=101]
+theme = ExtResource("light_theme")
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -127,7 +133,6 @@ grow_vertical = 2
 [node name="Panel" type="PanelContainer" parent="SaveScreen/Center"]
 custom_minimum_size = Vector2(1100, 0)
 layout_mode = 2
-material = ExtResource("4_glass")
 
 [node name="VBox" type="VBoxContainer" parent="SaveScreen/Center/Panel"]
 layout_mode = 2

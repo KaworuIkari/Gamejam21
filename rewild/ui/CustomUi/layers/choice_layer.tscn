@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="Script" path="res://CustomUi/layers/choice_layer.gd" id="1_layer"]
+[ext_resource type="Script" path="res://ui/CustomUi/layers/choice_layer.gd" id="1_layer"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Choice/node_choice_button.gd" id="2_button"]
 
 [node name="ChoiceLayer" type="Control"]

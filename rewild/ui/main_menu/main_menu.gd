@@ -1,6 +1,7 @@
 extends Control
 ## 主菜单：继续 / 存档浏览 / 设置 / 退出
 
+const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 
 @onready var _content: Control = %Content
@@ -19,6 +20,14 @@ var _return_focus: Control
 
 
 func _ready() -> void:
+	LightUI.apply(self)
+	$Version.add_theme_color_override(&"font_color", Color(0.93, 0.95, 0.90, 0.85))
+	$Version.add_theme_color_override(&"font_shadow_color", Color(0.12, 0.18, 0.20, 0.65))
+	LightUI.frost(_slot_panel)
+	LightUI.soften_dim($SlotScreen/Dim)
+	_continue.theme_type_variation = &"LightPrimaryButton"
+	for button in [_continue, _load, _settings_button, _quit]:
+		LightUI.frost(button)
 	# 从游戏返回时鼠标可能还被镜头锁定
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	_continue.pressed.connect(_on_continue)
@@ -41,7 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _refresh_buttons() -> void:
-	var has_save = SaveManager.has_any_save()
+	var has_save := SaveManager.has_any_save()
 	_continue.disabled = not has_save
 	_continue.focus_mode = Control.FOCUS_ALL if has_save else Control.FOCUS_NONE
 
@@ -51,7 +60,7 @@ func _focus_default() -> void:
 
 
 func _on_continue() -> void:
-	var slot = SaveManager.get_latest_slot()
+	var slot := SaveManager.get_latest_slot()
 	if slot >= 0 and SaveManager.load_slot(slot):
 		SceneRouter.goto_game()
 

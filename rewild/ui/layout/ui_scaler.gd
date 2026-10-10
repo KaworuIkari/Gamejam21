@@ -1,5 +1,5 @@
 extends Node
-## 只缩放“我们的 UI”（res://ui/ 与 res://CustomUi/ 下的界面），不碰全局缩放。
+## 只缩放“我们的 UI”（res://ui/ 与 res://ui/CustomUi/ 下的界面），不碰全局缩放。
 ##
 ## 为什么需要它：
 ##   UI 按 1920×1080 设计；项目基准分辨率由队友设为 1080×720（主场景用 SubViewport
@@ -7,13 +7,13 @@ extends Node
 ##   1920×1080，会让像素化变细。所以这里只把 UI 根节点按 1080 高度排版后再整体缩放。
 ##
 ## 规则：一个铺满全屏（四个锚点 0,0,1,1）的顶层 Control，只要它或它的祖先属于
-## res://ui/ 或 res://CustomUi/，就会被缩放。
+## res://ui/ 或 res://ui/CustomUi/，就会被缩放。
 ## 注意：Godot 4.7 里从带 scale 的 Control 弹出的下拉菜单不会显示，
 ## 所以我们的 UI 不使用 OptionButton / PopupMenu（设置页用 OptionStepper 代替）。
 ## 由 SettingsManager 创建；“界面缩放”设置通过 user_scale 生效。
 
 const DESIGN_HEIGHT := 1080.0
-const UI_PREFIXES: Array[String] = ["res://ui/", "res://CustomUi/"]
+const UI_PREFIXES: Array[String] = ["res://ui/"]
 const META := &"_ui_scaler_root"
 
 static var _factor := 1.0

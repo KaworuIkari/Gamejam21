@@ -1,38 +1,28 @@
-# 对话 UI（Dialogic 自定义布局）
+# 对话 UI
 
-所有对话界面都在 `CustomUi/` 下，由默认样式 `UI .tres` 引用 `custom_ui_.tscn`。
+默认 Dialogic 样式为 `dialogue/styles/UI.tres`，注册并加载 `ui/CustomUi/custom_ui_.tscn`。剧情在 `dialogue/timelines/`，角色定义在 `dialogue/characters/`，显示布局与剧情内容分别维护。
 
-## 结构
-- `custom_ui_.tscn` 根节点，脚本 `dialogue_layout_base.gd`
-  - `StagePortraitLayer`：Dialogic 自带的站位立绘层，**默认隐藏**（join/leave/update 指令照常工作）。想在屏幕上显示大立绘：选中根节点，勾选 `show_stage_portraits`
-  - `FullAdvanceInputLayer`：点击屏幕任意位置推进对话
-  - `DialogueBoxLayer`（`layers/dialogue_box_layer.tscn`）：底部对话框、头像、名牌、继续箭头、角落按钮（自动 / 跳过 / 历史）
-  - `ChoiceLayer`（`layers/choice_layer.tscn`）：选项按钮（最多 6 个，复用全局玻璃主题）
-  - `TextInputLayer`（`layers/text_input_layer.tscn`）：文字输入
-  - `Glossary`：Dialogic 自带词汇表弹窗
-  - `HistoryLayer`（`layers/history_layer.tscn`）：对话记录
-- `dialogue_trigger.gd`：可复用的触发区域组件 `DialogueTrigger`
-- `dialogue_utils.gd`：安全暂停 Dialogic 的小工具（规避 Dialogic Alpha 的一个报错）
+## 组成
 
-## 常改的地方
-- 字体：默认全部继承项目主题字体（Sarasa UI：正文 Regular，按钮 / 标题 / 名牌 SemiBold，与菜单一致）。各图层的 `*_font` 留空即可；只有确实要给对话单独换字体时才填
-- 字号：各图层 Inspector 的 `font_sizes` / `*_font_size`。运行时会自动吸附到 12 的整数倍（规则在 `ui/theme/ui_type.gd`），推荐 24 / 36 / 48
-- 头像：像素画头像把 `DialogueBoxLayer` 的 `portrait_smooth_filter` 关掉
-- 外观：框体、按钮沿用 `ui/theme/pixel/*.png`；继续箭头是 `assets/next_arrow.png`
-- 快捷键：项目设置 > 输入映射 中的 `dialogue_auto`(Q / 手柄 Y)、`dialogue_skip`(Tab / 手柄 View)、`dialogue_history`(H / 手柄 LB)、`interact`(F / 手柄 X)
+- `dialogue_layout_base.gd`：主题设置、对话期间玩家冻结与鼠标状态管理。
+- `layers/dialogue_box_layer.tscn`：底部文本框、说话者头像、姓名、继续提示及自动／跳过／历史操作。
+- `layers/choice_layer.tscn`、`text_input_layer.tscn`、`history_layer.tscn`：选项、文字输入及历史。
+- `StagePortraitLayer`：Dialogic 站位立绘层；`show_stage_portraits` 控制是否显示。
+- `dialogue_trigger.gd`：进入范围后选取最近的可交互目标，按 `interact` 启动时间线。
+- `dialogue_utils.gd`：按原因管理对话暂停，避免历史、确认框与游戏暂停互相覆盖。
 
-## 触发对话
-1. 在场景里新建节点，类型搜 `DialogueTrigger`（Area3D）
-2. Inspector 填 `timeline`（如 `XBot_timeline`）；可选 `auto_start`（进入即触发）、`one_shot`（只触发一次）、`radius`
-3. 玩家需在 `player` 分组（`xbot.gd` 已自动加入）。玩家靠近会出现“按 F 交谈”
-4. 代码里也可以直接 `Dialogic.start("时间线名")`
+## 外观与字体
 
-## 中英台词
-- 已开启 Dialogic 翻译（项目设置 `dialogic/translation/enabled`）
-- 时间线每行末尾的 `#id:xx` 是翻译编号，**不要删**
-- 译文在 `i18n/dialogue_xbot.csv`（keys, zh_CN, en），改完 Godot 会自动重新导入
-- 新时间线：可以用 Dialogic 编辑器设置里的翻译功能自动生成编号和表格（注意它会按自己的格式另建 CSV），或参照现有格式手写：行尾加 `#id:新编号`，再在 CSV 里加对应的 `Text/编号/text` 等行
-- 台词语言跟随 设置 > 语言
+自定义图层显式使用 `ui/theme/light/light_theme.tres`。默认正文为 Sarasa UI Regular，按钮和名牌等使用主题中的 SemiBold；覆盖字段留空则继承主题。字号辅助规则见 `ui/theme/ui_type.gd`，当前步长为 12，常用 24 / 36 / 48。
 
-## 设置联动
-设置 > 语言与辅助 > 对话：文字速度、对话字号、对话框不透明度（保存在 `user://settings.cfg` 的 accessibility 段）
+对话框仍引用 `ui/theme/glass/next_circle.png`、`nameplate.png` 和 `glass_panel_material.tres` 等资源，不能删除整个玻璃目录。头像过滤通过 `portrait_smooth_filter` 调整；布局和外观参数以对应场景及脚本导出字段为准。
+
+## 触发与快捷键
+
+在场景添加 `DialogueTrigger` 并设置 `timeline`，或用 `DialogueTrigger.attach_to(area, "时间线名")` 包装已有区域。可配置自动启动、一次性触发与范围。触发器识别 `player` 分组，或带 `frozen` 属性的 CharacterBody3D。
+
+靠近提示由 `ui/in_game/interaction/interaction_prompt.tscn` 显示，按键文字来自 SettingsManager 的实际绑定；重绑定后自动更新。不要把交互键写成固定 F，也不要在文档中把某个默认键当成永久规则。自动、跳过和历史分别使用 `dialogue_auto`、`dialogue_skip`、`dialogue_history` 动作，以项目输入映射和当前用户设置为准。
+
+## 翻译
+
+UI 文案在 `i18n/strings.csv`，现有 XBot 台词译文在 `i18n/dialogue_xbot.csv`。时间线行尾的 `#id:xx` 用于匹配译文，不随意删除。项目的 Dialogic 翻译开关与资源注册需在新增时间线时一并核对；CSV 修改后由 Godot 重新导入。界面语言由 SettingsManager 管理。

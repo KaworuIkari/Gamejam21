@@ -10,8 +10,8 @@ extends DialogicLayoutBase
 @export var canvas_layer: int = 10
 
 @export_subgroup("Global")
-@export var global_bg_color: Color = Color(0.15, 0.17, 0.19, 1)
-@export var global_font_color: Color = Color("e6e8eb")
+@export var global_bg_color: Color = Color(0.95, 0.97, 0.93, 0.9)
+@export var global_font_color: Color = Color(0.22, 0.29, 0.28, 1)
 ## Dialogic 自带图层（如词汇表）读取的全局字体。留空 = 使用项目主题字体（见 UIType）
 @export_file("*.ttf", "*.tres") var global_font: String = ""
 @export var global_font_size: int = UIType.MEDIUM

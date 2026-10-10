@@ -11,19 +11,19 @@ config_version=5
 [application]
 
 config/name="Rewild"
-run/main_scene="uid://dqephagsig11e"
+run/main_scene="res://ui/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Dialogic="*uid://ds2q0uclmolvu"
-DebugAutoload="*uid://bxgnn65quhplo"
-GrowthMap="*uid://bie2o1n0by1by"
-SettingsManager="*uid://bpw2lxfxx2phv"
-SaveManager="*uid://dxlcock8vlyly"
-SceneRouter="*uid://1gcapdc0v6w2"
-GlassFx="*uid://domoynxq80l1j"
+DebugAutoload="*res://autoload/debug_autoload.gd"
+GrowthMap="*res://systems/growth_map/growth_map.gd"
+SettingsManager="*res://autoload/ui/settings_manager.gd"
+SaveManager="*res://autoload/ui/save_manager.gd"
+SceneRouter="*res://autoload/ui/scene_router.gd"
+GlassFx="*res://ui/theme/glass/glass_fx.gd"
 
 [dialogic]
 
@@ -41,6 +41,22 @@ layout/style_list=["res://dialogue/styles/UI.tres"]
 layout/default_style="res://dialogue/styles/UI.tres"
 history/simple_history_enabled=true
 text/letter_speed=0.01
+text/initial_text_reveal_skippable=true
+text/text_reveal_skip_delay=0.1
+text/advance_delay=0.1
+text/autoadvance_per_character_delay=0.1
+text/autoadvance_ignored_characters_enabled=true
+animations/join_default_length=0.5
+animations/join_default_wait=true
+animations/leave_default_length=0.5
+animations/leave_default_wait=true
+animations/cross_fade_default_length=0.5
+choices/autofocus_first=true
+choices/delay=0.2
+choices/reveal_delay=0
+choices/reveal_by_input=false
+text/autopauses={}
+settings/text_speed=1.0
 
 [display]
 
@@ -55,7 +71,7 @@ enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/
 
 [gui]
 
-theme/custom="uid://dno7062cmif5h"
+theme/custom="res://ui/theme/glass/glass_theme.tres"
 
 [input]
 
@@ -116,6 +132,11 @@ use2={
 pause={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+task_terminal={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194306,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
 interact={

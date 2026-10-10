@@ -104,9 +104,8 @@ func _build_card(info: Dictionary) -> Control:
 	# 缩略图
 	var thumb_frame := PanelContainer.new()
 	thumb_frame.custom_minimum_size = Vector2(SaveManager.THUMB_SIZE) * 0.75
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color("1b1f23")
-	thumb_frame.add_theme_stylebox_override("panel", sb)
+	thumb_frame.theme_type_variation = &"LightSaveThumbnail"
+	thumb_frame.set_meta(&"no_glass", true)
 	row.add_child(thumb_frame)
 	if info.thumbnail:
 		var tex := TextureRect.new()
