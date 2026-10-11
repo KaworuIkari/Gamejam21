@@ -1,7 +1,7 @@
 // meadow_flower.gdshader: a round flower head on a camera-facing quad.
 // Used as the mesh material of a second Terrain3DParticles node.
 shader_type spatial;
-render_mode cull_disabled, specular_disabled;
+render_mode cull_disabled, depth_draw_always, specular_disabled;
 
 #include "res://shaders/common/meadow_palette.gdshaderinc"
 
@@ -39,4 +39,5 @@ void fragment() {
 	ALBEDO = col;
 	EMISSION = col * 0.15;               // a little glow so they pop in shade
 	ROUGHNESS = 1.0;
+	ALPHA = 0.999;                       // transparent pass: stays out of the depth/normal buffers, so no outline
 }
