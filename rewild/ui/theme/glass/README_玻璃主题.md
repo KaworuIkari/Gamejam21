@@ -1,13 +1,11 @@
-# 玻璃风 UI 主题（验证版）
+# 玻璃主题与共享资源
 
-- 项目主题已指向 `res://ui/theme/glass/glass_theme.tres`（project.godot 的 GUI → Theme → Custom）。
-  想回到像素版：把它改回 `res://ui/theme/greybox_theme.tres` 即可，像素素材原样保留在 `ui/theme/pixel/`。
-- 默认纹理过滤需为 Linear（Project Settings → Rendering → Textures → Canvas Textures），否则圆角会有锯齿。
-- 字体：正文思源黑体（裁剪版），标题 / 主菜单 / 对话与历史正文用霞鹜文楷；来源与许可见 `ui/fonts/README_字体.md`。
-  字号仍经过 `UIType.snap()`（12 的整数倍），对矢量字体无害，只是档位偏粗；以后要细调再把 `UIType.GRID_PX` 改小。
-- 对话框的名牌与继续箭头已换成玻璃素材（`CustomUi/layers/dialogue_box_layer.tscn`）。
-- 磨砂效果：`glass_blur.gdshader` + `glass_panel_material.tres`，已挂在设置页、暂停菜单、存档页、主菜单存档页和对话框的大面板上（节点的 Material）。**尚未在引擎里实测**；
-  只能挂在 PanelContainer / Panel 上，不要挂在 Button / Label 上（文字会被一起处理坏）。
-  可调参数在 `glass_panel_material.tres`：`blur_px` 模糊程度、`dim` 压暗背后画面、`saturation` 偏灰程度。
-  不想要模糊：删掉对应节点的 Material 即可，贴图本身仍是半透明灰玻璃。
-- 暂无图标；亮背景下暗色玻璃偏灰，后续做亮色变体。
+项目全局主题为 `ui/theme/glass/glass_theme.tres`，供未显式指定主题的控件继承。其默认字体为 Sarasa UI Regular，按钮和部分标题等使用 SemiBold，详见 `ui/fonts/README_字体.md`。
+
+当前主菜单、设置、存档及确认弹窗主要使用独立的 `ui/theme/light/light_theme.tres`。自定义对话图层也使用明亮主题，但仍直接引用本目录中的继续箭头、名牌和 `glass_panel_material.tres` 等素材。`GlassFx` 对相关玻璃纹理控件补充背景效果。
+
+本目录的模糊着色器和材质与明亮主题的 `light_backdrop.gdshader` 分别维护。修改玻璃效果应检查材质的实际挂载节点，不要假定它负责所有菜单；修改菜单整体外观应优先检查明亮主题。
+
+旧主题路径为 `ui/theme/greybox/greybox_theme.tres`。切换项目全局主题不会自动替换各场景显式指定的明亮主题。照片、头像、圆角纹理等过滤方式按节点和素材需求调整，不统一要求所有 UI 使用最近邻或 Linear。
+
+保留本目录被引用的资源；新增外观优先复用明确的主题职责，避免把全部页面再次绑定到同一个材质。

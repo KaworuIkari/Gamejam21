@@ -2,7 +2,9 @@ class_name AimCorrection extends SkeletonModifier3D
 
 @export var hand := &"hand.r"
 @export var chain: Array[StringName] = [&"spine_02.x", &"arm_stretch.r"]   # root to tip
-@export var chain_weights: Array[float] = [0.6, 0.4]
+@export var chain_weights_right: Array[float] = [0.4, 0.6]   # aim correction swings right
+@export var chain_weights_left: Array[float] = [0.6, 0.4]    # aim correction swings left
+@export var side_blend_angle := deg_to_rad(10.0)             # blend zone around straight ahead
 @export var max_angle := deg_to_rad(120.0)
 
 @export_group("Recoil")
@@ -46,6 +48,21 @@ func _process(delta: float) -> void:
 	if debug_draw:
 		_debug()
 
+# -1 = correction swings right, +1 = left, blended within side_blend_angle of zero yaw.
+func _side_factor(a: Vector3, b: Vector3, up: Vector3) -> float:
+	var ah := (a - up * a.dot(up))
+	var bh := (b - up * b.dot(up))
+	if ah.length() < 1e-4 or bh.length() < 1e-4:
+		return 0.0
+	var yaw := atan2(up.dot(ah.cross(bh)), ah.dot(bh))     # + about up = counter-clockwise = left
+	return clampf(yaw / maxf(side_blend_angle, 1e-4), -1.0, 1.0)
+
+
+func _chain_weight(i: int, side: float) -> float:
+	var r := chain_weights_right[i] if i < chain_weights_right.size() else 0.0
+	var l := chain_weights_left[i] if i < chain_weights_left.size() else 0.0
+	return lerpf(r, l, (side + 1.0) * 0.5)
+
 func _process_modification() -> void:
 	var skel := get_skeleton()
 	var hand_i := skel.find_bone(hand)
@@ -61,14 +78,16 @@ func _process_modification() -> void:
 	var b := (skel.global_basis.inverse() * desired_dir_world).normalized()
 	var angle := a.angle_to(b)
 	if angle > 0.0001:
+		var up := (skel.global_basis.inverse() * Vector3.UP).normalized()
+		var side := _side_factor(a, b, up)
 		var q := Quaternion.IDENTITY.slerp(Quaternion(a, b), weight * minf(1.0, max_angle / angle))
 		for i in chain.size():
 			var bi := skel.find_bone(chain[i])
 			if bi < 0:
 				continue
-			var qi := Quaternion.IDENTITY.slerp(q, chain_weights[i])
+			var qi := Quaternion.IDENTITY.slerp(q, _chain_weight(i, side))
 			_rotate_bone(skel, bi, qi)
-			q_total = qi * q_total            # same axis, so order doesn't matter
+			q_total = qi * q_total
 	var d := q_total * a                      # barrel direction after correction, skeleton space
 	aim_dir_world = (skel.global_basis * d).normalized()
 

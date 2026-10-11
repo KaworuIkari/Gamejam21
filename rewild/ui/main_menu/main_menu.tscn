@@ -4,7 +4,8 @@
 [ext_resource type="Script" uid="uid://bq8hjgxtqayf0" path="res://ui/save_slots/save_slot_list.gd" id="2_slots"]
 [ext_resource type="PackedScene" path="res://ui/settings/settings_menu.tscn" id="3_settings"]
 [ext_resource type="Texture2D" uid="uid://c8pfms8ka42x3" path="res://ui/main_menu/menu_bg.jpg" id="4_bg"]
-[ext_resource type="Material" uid="uid://bp3j3rxhcaw8f" path="res://ui/theme/glass/glass_panel_material.tres" id="5_glass"]
+[ext_resource type="Theme" uid="uid://lfw6rhhegb5m" path="res://ui/theme/light/light_theme.tres" id="light_theme"]
+[ext_resource type="Script" uid="uid://cr8tx2mpxm44m" path="res://ui/main_menu/title/title_art.gd" id="title_art"]
 
 [node name="MainMenu" type="Control" unique_id=1076275347]
 layout_mode = 3
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("light_theme")
 script = ExtResource("1_menu")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1156831566]
@@ -44,12 +46,17 @@ theme_override_constants/margin_bottom = 120
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Content/VBox" unique_id=412284275]
+[node name="Title" type="TextureRect" parent="Content/VBox" unique_id=412284275]
+texture_filter = 2
+custom_minimum_size = Vector2(640, 200)
 layout_mode = 2
-theme_type_variation = &"TitleLabel"
-text = "MENU_TITLE"
+size_flags_horizontal = 0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("title_art")
 
-[node name="TitleGap" type="Control" parent="Content/VBox" unique_id=415652355]
+[node name="TitleGap" type="Control" parent="Content/VBox" unique_id=1372000356]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
@@ -142,7 +149,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="SlotScreen/Center" unique_id=16813654]
-material = ExtResource("5_glass")
 custom_minimum_size = Vector2(1100, 0)
 layout_mode = 2
 

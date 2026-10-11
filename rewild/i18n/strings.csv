@@ -138,3 +138,35 @@ ACTION_DIALOGUE_SKIP,对话：跳过,Dialogue: Skip
 ACTION_DIALOGUE_HISTORY,对话：历史记录,Dialogue: History
 SAVE_FEEDBACK_OK,进度已保存,Progress saved
 SAVE_FEEDBACK_FAIL,保存失败,Save failed
+PAUSE_TITLE,暂停,Paused
+PAUSE_RESUME,继续游戏,Resume
+PAUSE_SAVE,保存进度,Save Progress
+PAUSE_MAIN_MENU,返回主菜单,Return to Main Menu
+
+TASK_TERMINAL_TITLE,行动终端,Action terminal
+TASK_TERMINAL_CLOSE,关闭,Close
+TASK_TERMINAL_EMPTY,待编辑,To be edited
+TASK_TERMINAL_BACK,[%s] / Esc 返回,[%s] / Esc Back
+ACTION_TASK_TERMINAL,行动终端,Action terminal
+
+TASK_TERMINAL_ACTIVE,进行中,Active
+TASK_TERMINAL_ARCHIVE,已归档,Archived
+TASK_TERMINAL_ID,编号,ID
+TASK_TERMINAL_TASK,任务,Task
+TASK_TERMINAL_STEPS,步骤,Steps
+TASK_TERMINAL_STATUS,状态,Status
+TASK_TERMINAL_RECORD,任务记录,Task record
+TASK_TERMINAL_EXECUTION,执行步骤,Steps
+TASK_DEMO_TITLE,修复一处生态区域,Restore an ecological area
+TASK_DEMO_DESCRIPTION,这是任务页面的显示案例。正式任务内容待编辑；此处不关联场景事件或游戏进度。,This is a display example. Actual task content is to be edited; no world events or gameplay progress are connected.
+TASK_DEMO_LOCATION,演示区域 / 待编辑,Demo area / To be edited
+TASK_DEMO_STEP_1,检查区域环境（示例已完成）,Inspect the area (sample completed)
+TASK_DEMO_STEP_2,清理废弃物（待编辑）,Clear debris (to be edited)
+TASK_DEMO_STEP_3,观察生态变化（待编辑）,Observe ecological changes (to be edited)
+TASK_DEMO_REFERENCE,演示参考,Demo reference
+TASK_DEMO_TRACKING,演示追踪中,Demo tracked
+TASK_DEMO_TRACK,演示追踪,Demo track
+TASK_DEMO_UNTRACK,取消演示追踪,Cancel demo tracking
+TASK_DEMO_ARCHIVE_EMPTY,暂无归档示例,No archived examples
+TASK_DEMO_SELECT,点击任务查看演示详情,Select the task to view demo details
+TASK_DEMO_NOTICE,演示参考：不计入游戏进度或存档。,Display reference: no gameplay or save progress.

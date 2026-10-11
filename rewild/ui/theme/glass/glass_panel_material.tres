@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://bp3j3rxhcaw8f"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dpw0n45it0sdq"]
 
 [ext_resource type="Shader" uid="uid://cqqhe6dxuf7df" path="res://ui/theme/glass/glass_blur.gdshader" id="1_shader"]
 

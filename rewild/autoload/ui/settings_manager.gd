@@ -41,7 +41,7 @@ const AUDIO_BUSES := {
 ## 列出所有玩家会用到的键，重绑定时才能检测到冲突并自动交换
 const REBINDABLE_ACTIONS: Array[StringName] = [
 	&"forward", &"backward", &"left", &"right",
-	&"jump", &"sprint", &"walk", &"use", &"use2", &"interact", &"pause",
+	&"jump", &"sprint", &"walk", &"use", &"use2", &"interact", &"pause", &"task_terminal",
 	&"dialogue_auto", &"dialogue_skip", &"dialogue_history",
 ]
 ## 动作 -> 显示名（翻译键）；未列出的用 "ACTION_" + 大写动作名
@@ -53,7 +53,7 @@ const ACTION_LABELS := {
 }
 
 
-func action_label(action: StringName) -> String:
+static func action_label(action: StringName) -> String:
 	return ACTION_LABELS.get(action, "ACTION_" + String(action).to_upper())
 
 
@@ -425,22 +425,22 @@ func _deserialize_event(d: Variant) -> InputEvent:
 	match d.get("type", ""):
 		"key":
 			var k := InputEventKey.new()
-			k.physical_keycode = int(d.get("code", 0)) as Key
+			k.physical_keycode = int(d.get("code", 0))
 			k.device = -1
 			return k
 		"mouse":
 			var m := InputEventMouseButton.new()
-			m.button_index = int(d.get("button", 1)) as MouseButton
+			m.button_index = int(d.get("button", 1))
 			m.device = -1
 			return m
 		"joy_button":
 			var jb := InputEventJoypadButton.new()
-			jb.button_index = int(d.get("button", 0)) as JoyButton
+			jb.button_index = int(d.get("button", 0))
 			jb.device = -1
 			return jb
 		"joy_axis":
 			var ja := InputEventJoypadMotion.new()
-			ja.axis = int(d.get("axis", 0)) as JoyAxis
+			ja.axis = int(d.get("axis", 0))
 			ja.axis_value = float(d.get("sign", 1.0))
 			ja.device = -1
 			return ja

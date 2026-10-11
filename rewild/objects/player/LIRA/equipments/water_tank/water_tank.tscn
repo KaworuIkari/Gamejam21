@@ -8,7 +8,7 @@
 
 [sub_resource type="Curve3D" id="Curve3D_bi8wa"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, -0.026208626, 0.16951588, 0.17040823, -0.051750112, 1.5244346, -0.36206865, 0.072266504, 0.12870212, -0.1915067, -0.13879403, -0.24718347, 0.36780506, -0.53537625, 1.8682816, -0.71577996, -0.14748898, -0.40440673, -0.17420277, 0, 0, 0, -0.30821544, 1.067686, 0.317566),
+"points": PackedVector3Array(0, 0, 0, -0.025199259, 0.103597045, 0.14443189, 0.0014906172, 1.4912213, -0.25669673, 0.00016426719, 0.17878042, -0.016292347, -0.00036085196, -0.39273375, 0.03579002, 0.01196608, 0.97992456, -0.2960773, 0, 0, 0.39436132, 0, 0, 0, 0, -0.13109416, -0.10885434),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
@@ -48,12 +48,12 @@ shader_parameter/blob_density = 1.2
 shader_parameter/blob_clarity = 0.25
 shader_parameter/blob_foam = 0.6
 
-[node name="Tank" type="MeshInstance3D" unique_id=1308716164 node_paths=PackedStringArray("anchor_end")]
+[node name="Tank" type="MeshInstance3D" unique_id=1308716164 node_paths=PackedStringArray("anchor_start", "anchor_end")]
 process_mode = 3
 mesh = ExtResource("1_y0824")
-skeleton = NodePath("..")
 surface_material_override/0 = ExtResource("2_7eek8")
 script = ExtResource("3_7eek8")
+anchor_start = NodePath("TubeStart")
 anchor_end = NodePath("WaterGun/TubeEnd")
 
 [node name="WaterGun" type="MeshInstance3D" parent="." unique_id=987640430]
@@ -85,6 +85,9 @@ smooth_faces = true
 material = SubResource("StandardMaterial3D_vqtik")
 
 [node name="TankWater" type="MeshInstance3D" parent="." unique_id=964947035]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1073638, -0.2640112)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.307, -0.264)
 mesh = SubResource("CylinderMesh_c82li")
 surface_material_override/0 = SubResource("ShaderMaterial_c5wno")
+
+[node name="TubeStart" type="Node3D" parent="." unique_id=2059603440]
+transform = Transform3D(0.98107797, 0.14036916, -0.13335186, 0.19051115, -0.5770738, 0.79416114, 0.034522012, -0.80453897, -0.59289646, 0.0014906172, 1.4912213, -0.25669673)

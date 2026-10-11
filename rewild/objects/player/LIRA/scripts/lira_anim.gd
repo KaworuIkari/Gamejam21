@@ -26,6 +26,7 @@ var is_moving : bool = false
 var is_walking : bool = false
 var is_running : bool = false
 var is_jumping : bool = false
+var is_using_double_jump : bool = false
 var is_falling : bool = false
 
 # locomotion
@@ -252,7 +253,7 @@ func _update_turn(delta: float) -> void:
 			return
 		_turn_dur = maxf(l / _turn_scale - turn_exit_blend, 0.05)
 		_turn_guard = _turn_dur + 0.6
-		print("turn ", _turn_clip, " len ", l, " scale ", _turn_scale, " dur ", _turn_dur)
+		# print("turn ", _turn_clip, " len ", l, " scale ", _turn_scale, " dur ", _turn_dur)
 
 	_turn_t += delta
 	_turn_delta = _live_delta()

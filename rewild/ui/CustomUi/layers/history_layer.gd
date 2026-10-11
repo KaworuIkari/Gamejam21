@@ -8,6 +8,8 @@ extends DialogicLayoutLayer
 @export var history_font_size: int = 36
 @export var name_separator: String = "："
 
+const LightUI = preload("res://ui/theme/light/light_ui.gd")
+
 @onready var _root: Control = %HistoryRoot
 @onready var _scroll: ScrollContainer = %Scroll
 @onready var _log: VBoxContainer = %Log
@@ -20,6 +22,9 @@ func _ready() -> void:
 	super._ready()
 	if Engine.is_editor_hint():
 		return
+	LightUI.apply(self)
+	LightUI.frost($HistoryRoot/Margin/Panel)
+	LightUI.soften_dim($HistoryRoot/Dim)
 	_root.hide()
 	var history = DialogicUtil.autoload().History
 	history.open_requested.connect(open)
@@ -34,7 +39,7 @@ func _apply_export_overrides() -> void:
 	# 只给记录列表套一层小主题：字号统一，字体未覆盖时自动回落到项目主题
 	var font := UIType.font_or_null(history_font)
 	var size := UIType.snap(history_font_size)
-	var t := Theme.new()
+	var t: Theme = LightUI.bright_theme().duplicate()
 	t.default_font_size = size
 	if font:
 		t.default_font = font
@@ -74,18 +79,18 @@ func _rebuild() -> void:
 		c.queue_free()
 	var entries: Array = DialogicUtil.autoload().History.get_simple_history()
 	if entries.is_empty():
-		_add_entry("[color=#9aa1a9]%s[/color]" % tr("DLG_HISTORY_EMPTY"))
+		_add_entry("[color=#59695f]%s[/color]" % tr("DLG_HISTORY_EMPTY"))
 		return
 	for info: Dictionary in entries:
 		match str(info.get("event_type", "")):
 			"Text":
 				var line := str(info.get("text", ""))
 				if info.get("character", ""):
-					var col: Color = info.get("character_color", Color("e8c872"))
+					var col: Color = Color(0.43, 0.32, 0.14, 1)
 					line = "[color=#%s]%s%s[/color]%s" % [col.to_html(false), info["character"], name_separator, line]
 				_add_entry(line)
 			"Choice":
-				_add_entry("[color=#e8c872]▶ %s[/color]" % str(info.get("text", "")))
+				_add_entry("[color=#6e5224]▶ %s[/color]" % str(info.get("text", "")))
 			_:
 				pass
 
