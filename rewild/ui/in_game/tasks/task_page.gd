@@ -98,7 +98,7 @@ func _render() -> void:
 	%DemoStatus.text = tr("TASK_DEMO_TRACKING" if _tracking else "TASK_DEMO_REFERENCE")
 	%TrackButton.text = tr("TASK_DEMO_UNTRACK" if _tracking else "TASK_DEMO_TRACK")
 	%TrackButton.button_pressed = _tracking
-	var step_container := get_node("Center/TerminalPanel/Scroll/Content/Detail/Split/Steps")
+	var step_container := get_node("Center/TerminalPanel/Window/Scroll/Margin/Content/Detail/Split/Steps")
 	for child in step_container.get_children():
 		if child.name != &"Heading":
 			step_container.remove_child(child)

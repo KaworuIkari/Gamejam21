@@ -11,3 +11,6 @@
 任务显示案例集中在 `ui/in_game/tasks/task_demo.gd`，仅供页面排版参考。`task_page.gd` 的 `show_demo` 导出开关设为 false 可恢复“待编辑”空页。演示追踪每次关闭/打开页面重置；案例的 1/3 进度是固定展示值，无真实完成行为。
 
 页面显示层提供 set_task_record(record) 接口，接收 title / description / location / steps / completed_steps 的显示快照。步骤数量可变；当前仅展示一条任务记录，批量任务列表、真实进度事件及存档接入仍由未来 systems/tasks 模块负责。主题补齐 hover_pressed/disabled，避免全局圆角玻璃样式回落。面板外框保持固定，内容在内部滚动；展开箭头与详情同步；退出提示合并在右上角关闭按钮。
+
+## 终端窗口与数字雨
+外框使用 TerminalWindow 局部主题（6px 直角边框、8px 内沿），标题栏独立固定，内容区滚动条保留槽位。数字雨在 `ui/theme/terminal/digital_rain.gd`：纯绘制层、不接收输入，30fps 重绘上限，页面隐藏时停止处理，暂停期间仍可运行。可通过节点的 intensity / fall_speed 调整强度与速度；fall_speed=0 可静止显示。无新增 Autoload 或游戏数据。
