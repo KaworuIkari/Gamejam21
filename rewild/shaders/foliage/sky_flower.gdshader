@@ -9,22 +9,22 @@ render_mode cull_disabled, diffuse_lambert_wrap, specular_disabled;
 #include "res://shaders/common/meadow_palette.gdshaderinc"
 
 group_uniforms placement;
-uniform float coverage : hint_range(0.0, 1.0) = 0.55;      // share of the ground that is flower bed
+uniform float coverage : hint_range(0.0, 1.0) = 0.45;      // share of the ground that is flower bed
 uniform float bed_scale = 0.06;                            // smaller = bigger flower beds
-uniform float density : hint_range(0.0, 1.0) = 0.9;        // flowers per spot inside a bed
+uniform float density : hint_range(0.0, 1.0) = 0.75;        // flowers per spot inside a bed
 uniform float lone_density : hint_range(0.0, 1.0) = 0.02;  // stray flowers outside beds
 
 group_uniforms look;
-uniform vec4 color_a : source_color = vec4(0.98, 0.62, 0.86, 1.0); // pink
-uniform vec4 color_b : source_color = vec4(0.84, 0.40, 0.88, 1.0); // magenta
-uniform vec4 color_c : source_color = vec4(0.60, 0.34, 0.95, 1.0); // violet
-uniform vec4 color_d : source_color = vec4(0.98, 0.94, 0.52, 1.0); // butter yellow
-uniform vec4 color_e : source_color = vec4(0.99, 0.78, 0.56, 1.0); // peach
+uniform vec4 color_a : source_color = vec4(0.97, 0.68, 0.88, 1.0); // pink
+uniform vec4 color_b : source_color = vec4(0.88, 0.55, 0.90, 1.0); // orchid
+uniform vec4 color_c : source_color = vec4(0.72, 0.56, 0.96, 1.0); // lilac
+uniform vec4 color_d : source_color = vec4(0.96, 0.93, 0.62, 1.0); // butter yellow
+uniform vec4 color_e : source_color = vec4(0.98, 0.80, 0.68, 1.0); // peach
 uniform vec4 stem_color : source_color = vec4(0.30, 0.52, 0.42, 1.0);
 uniform float hue_patch_scale = 0.045;                     // size of the same-colour patches
 uniform float hue_mix : hint_range(0.0, 1.0) = 0.35;       // how much colours bleed between patches
-uniform float head_size : hint_range(0.1, 0.5) = 0.30;     // head radius, as a share of flower height
-uniform float glow : hint_range(0.0, 2.0) = 0.35;          // soft self-glow (pairs with Environment glow)
+uniform float head_size : hint_range(0.1, 0.5) = 0.22;     // head radius, as a share of flower height
+uniform float glow : hint_range(0.0, 2.0) = 0.22;          // soft self-glow (pairs with Environment glow)
 
 group_uniforms player_glow;
 // Flowers light up around this point (set by foliage_glow_follow.gd). Radius 0 = off.
