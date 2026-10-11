@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dluvtf1jvdc4k"]
+
+[ext_resource type="Script" uid="uid://b5plrqlg10uaw" path="res://objects/animals/animal_helpers/animal_spawner.gd" id="1_82x7t"]
+
+[node name="AnimalSpawner" type="Node3D" unique_id=503472948]
+script = ExtResource("1_82x7t")

@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://crqjiok8rjjjk" path="res://objects/animals/shark/shark_anim1.glb" id="2_4uv4k"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0yw1p"]
+radius = 1.5
+height = 6.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0yw1p"]
 
@@ -33,14 +35,23 @@ states/swim/node = SubResource("AnimationNodeAnimation_5p2wl")
 states/swim/position = Vector2(351.3333, 99.62963)
 transitions = ["Start", "swim", SubResource("AnimationNodeStateMachineTransition_b3yh5"), "swim", "sleep", SubResource("AnimationNodeStateMachineTransition_wrxtq"), "sleep", "swim", SubResource("AnimationNodeStateMachineTransition_macu2")]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o3dam"]
+animation = &"bite"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4uv4k"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wxqwa"]
+states/bite/node = SubResource("AnimationNodeAnimation_o3dam")
+states/bite/position = Vector2(316.66666, 100)
+transitions = ["Start", "bite", SubResource("AnimationNodeStateMachineTransition_4uv4k")]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_x4r8f"]
 filter_enabled = true
 filters = ["Shark/Skeleton3D:DRIVEN_THROAT__Skeleton", "Shark/Skeleton3D:LOWER_JAW__Skeleton", "Shark/Skeleton3D:NECK__Skeleton"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0yw1p"]
-graph_offset = Vector2(-371, 88.80001)
+graph_offset = Vector2(-388, 172)
 nodes/output/position = Vector2(333.33334, 66.666664)
 nodes/Body/node = SubResource("AnimationNodeStateMachine_7c52u")
 nodes/Body/position = Vector2(-160, 80)
@@ -52,14 +63,35 @@ node_connections = [&"output", 0, &"HeadBlend", &"HeadBlend", 0, &"Body", &"Head
 
 [node name="AnimalShark" type="CharacterBody3D" unique_id=896278617]
 script = ExtResource("1_o3dam")
-patrol_speed = 3.0
+debug_print = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1328344668]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_0yw1p")
 
 [node name="shark_anim1" parent="." unique_id=1397621798 instance=ExtResource("2_4uv4k")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-1.3113416e-07, 0, -3, 0, 3, 0, 3, 0, -1.3113416e-07, 0, 0, 0)
+
+[node name="Skeleton3D" parent="shark_anim1/Shark" parent_id_path=PackedInt32Array(1397621798, 1898171099) index="0" unique_id=486239068]
+bones/0/rotation = Quaternion(-0.0038153639, -0.0030168323, -0.7159709, 0.6981133)
+bones/2/position = Vector3(-4.656615e-10, 0.20416911, 0.034030892)
+bones/2/rotation = Quaternion(4.681588e-09, 2.42413e-09, 0.053813826, 0.9985511)
+bones/5/position = Vector3(-2.4243128e-09, -0.056346737, 0.10606403)
+bones/5/rotation = Quaternion(1.4551915e-11, 1.09139364e-10, -7.450581e-09, 1)
+bones/7/position = Vector3(-2.491026e-09, 0.08138667, -0.044216305)
+bones/7/rotation = Quaternion(-2.7141864e-23, 1.0914292e-10, -7.451035e-09, 1)
+bones/9/rotation = Quaternion(-8.4791605e-09, 1.3659016e-09, 0.14171079, 0.98990816)
+bones/10/position = Vector3(1.2607109e-08, -0.6532428, -0.0144329)
+bones/10/rotation = Quaternion(3.7094976e-09, -7.285718e-10, 0.109958574, 0.9939362)
+bones/11/rotation = Quaternion(7.761429e-09, -1.0229635e-09, 0.03930777, 0.9992272)
+bones/12/position = Vector3(-4.6753662e-08, -0.36523008, 0.010282602)
+bones/12/rotation = Quaternion(2.9103834e-11, 5.0931703e-11, -7.451035e-09, 1)
+bones/14/rotation = Quaternion(0.044004608, -0.04264299, -0.0066421325, 0.99809873)
+bones/16/rotation = Quaternion(-0.39745852, 0.043348767, 0.019321943, 0.9163921)
+bones/17/rotation = Quaternion(0.013952913, -0.026437024, 0.00030418023, 0.99955314)
+bones/19/rotation = Quaternion(-3.109381e-09, 0.029452087, 6.05584e-10, 0.9995662)
+bones/21/rotation = Quaternion(0.11496077, -0.3103715, -0.19110951, 0.9240837)
+bones/24/rotation = Quaternion(0.117123276, 0.2034465, 0.19393209, 0.9525135)
 
 [node name="MouthArea3D" type="Area3D" parent="shark_anim1" unique_id=1254110704]
 
@@ -67,32 +99,17 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3954775, 0, 0)
 shape = SubResource("SphereShape3D_0yw1p")
 
-[node name="Skeleton3D" parent="shark_anim1/Shark" parent_id_path=PackedInt32Array(1397621798, 1898171099) index="0" unique_id=486239068]
-bones/0/rotation = Quaternion(0.00010344219, 8.176604e-05, -0.7068647, 0.7073488)
-bones/2/position = Vector3(-4.656615e-10, 0.20416911, 0.034030892)
-bones/2/rotation = Quaternion(4.7128528e-09, 2.4701592e-09, 0.008910391, 0.99996036)
-bones/5/position = Vector3(-2.4243128e-09, -0.056346737, 0.10606403)
-bones/5/rotation = Quaternion(1.4551915e-11, 1.09139364e-10, -7.450581e-09, 1)
-bones/7/position = Vector3(-2.491026e-09, 0.08138667, -0.044216305)
-bones/7/rotation = Quaternion(-2.7141864e-23, 1.0914292e-10, -7.451035e-09, 1)
-bones/9/rotation = Quaternion(-8.6058725e-09, -2.2959978e-09, 0.00363503, 0.9999934)
-bones/10/position = Vector3(1.2607109e-08, -0.6532428, -0.0144329)
-bones/10/rotation = Quaternion(3.7232093e-09, 1.0461318e-09, -0.0075870184, 0.9999713)
-bones/11/rotation = Quaternion(7.80516e-09, 2.1237054e-09, 0.024299588, 0.9997047)
-bones/12/position = Vector3(-4.6753662e-08, -0.36523008, 0.010282602)
-bones/12/rotation = Quaternion(2.9103834e-11, 5.0931703e-11, -7.451035e-09, 1)
-bones/14/rotation = Quaternion(0.043975987, 0.0075337524, -0.055717245, 0.9974493)
-bones/16/rotation = Quaternion(-0.39754996, 0.03631881, -0.02178189, 0.9166028)
-bones/17/rotation = Quaternion(0.013946042, -0.014872263, -0.03820928, 0.99906176)
-bones/19/rotation = Quaternion(-3.1102878e-09, -0.0058942256, 1.6376925e-09, 0.99998266)
-bones/21/rotation = Quaternion(0.12912673, -0.24647231, -0.18727706, 0.94207484)
-bones/24/rotation = Quaternion(0.10666636, 0.24036722, 0.21100488, 0.9414472)
-
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=618059732]
 root_node = NodePath("../shark_anim1")
 tree_root = SubResource("AnimationNodeBlendTree_0yw1p")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../shark_anim1/AnimationPlayer")
-parameters/HeadBlend/blend_amount = 0.0
+parameters/HeadBlend/blend_amount = 1.0
+
+[node name="DebugLabel3D" type="Label3D" parent="." unique_id=648162599]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4771788, 0)
+billboard = 1
+text = "Sharky"
+font_size = 70
 
 [editable path="shark_anim1"]

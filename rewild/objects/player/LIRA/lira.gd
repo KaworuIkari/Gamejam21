@@ -224,7 +224,7 @@ func _debug_energy(delta: float) -> void:
 		return
 	_debug_timer = 0.2
 	_last_printed_energy = energy
-	print("Jetpack energy: %.1f / %.0f%s" % [energy, max_energy, "  [THRUST]" if _thrusting else ""])
+	# print("Jetpack energy: %.1f / %.0f%s" % [energy, max_energy, "  [THRUST]" if _thrusting else ""])
 
 func _consume_anim_triggers() -> void:
 	if not animation_script.is_using_double_jump:
