@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dpncj06glabpl" path="res://assets/textures/ground/stylized_sand/sand_normal.png" id="10_0npfb"]
 [ext_resource type="Texture2D" uid="uid://dlwmsv26qqcis" path="res://assets/textures/ground/stone_path/stone_path_albedo.png" id="11_5ass5"]
 [ext_resource type="Texture2D" uid="uid://duowwvsj0n56f" path="res://assets/textures/ground/stone_path/stone_path_normal.png" id="12_ma7yh"]
-[ext_resource type="PackedScene" path="res://objects/water/stylized_water.tscn" id="14_i4ovm"]
+[ext_resource type="PackedScene" uid="uid://dg7htfejywn14" path="res://objects/water/stylized_water.tscn" id="14_i4ovm"]
 [ext_resource type="Texture2D" uid="uid://bei87k7mevhmn" path="res://assets/textures/ground/stone_floor/stone_floor_albedo.png" id="15_0tkcr"]
 [ext_resource type="Texture2D" uid="uid://dauiirdyfgfp2" path="res://assets/textures/ground/stone_floor/stone_floor_normal.png" id="16_f26gw"]
 [ext_resource type="Texture2D" uid="uid://c88j3oj0lf6om" path="res://assets/textures/ground/rock023/rock023_alb_ht.png" id="17_a2o6s"]
@@ -26,8 +26,10 @@
 [ext_resource type="Texture2D" uid="uid://ba8g841l3u1fd" path="res://assets/textures/ground/desert/desert_normal.png" id="22_nexx3"]
 [ext_resource type="PackedScene" uid="uid://cyr2yne1jhnyv" path="res://objects/player/LIRA/LIRA.tscn" id="29_ae10e"]
 [ext_resource type="PackedScene" uid="uid://q5g68s303xuk" path="res://objects/animals/shark/animal_shark.tscn" id="30_lf2va"]
-[ext_resource type="PackedScene" uid="uid://dluvtf1jvdc4k" path="res://objects/animals/animal_spawner/animal_spawner.tscn" id="31_lvj5s"]
+[ext_resource type="PackedScene" uid="uid://dluvtf1jvdc4k" path="res://objects/animals/animal_helpers/animal_spawner.tscn" id="31_lvj5s"]
 [ext_resource type="PackedScene" uid="uid://dbrlmc7rwn285" path="res://objects/animals/chicken/animal_chicken.tscn" id="32_t7m7w"]
+[ext_resource type="Script" uid="uid://ckii3rx7wc8ck" path="res://objects/animals/animal_helpers/aquatic_animal_spawner.gd" id="32_x5fu1"]
+[ext_resource type="PackedScene" uid="uid://bw7tcdi0oy5a8" path="res://objects/animals/small_fish/small_fish_tropical.tscn" id="33_x5fu1"]
 [ext_resource type="Script" uid="uid://bjc7jyj0erdnc" path="res://levels/meadow_hand/mountain_ring.gd" id="42_i3aac"]
 [ext_resource type="Texture2D" uid="uid://dwj44t5iy0mbj" path="res://assets/textures/ground/sand/sand_alb_ht.png" id="90_sandalb"]
 [ext_resource type="Texture2D" uid="uid://wjnkwo3qgaqg" path="res://assets/textures/sky/sky_100_2k.png" id="91_skypano"]
@@ -345,6 +347,8 @@ data_directory = "res://levels/meadow_hand/terrain_data"
 material = SubResource("Terrain3DMaterial_6ue3f")
 assets = SubResource("Terrain3DAssets_4kvac")
 label_distance = 4096.0
+collision_mode = 4
+unique_name_in_owner = true
 top_level = true
 metadata/_edit_lock_ = true
 
@@ -369,7 +373,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 transform = Transform3D(3, 0, 0, 0, 4, 0, 0, 0, 3, 51.09939, -0.60241175, -38.085808)
 
 [node name="StylizedWater2" parent="Water" unique_id=1728321023 instance=ExtResource("14_i4ovm")]
-transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 7, 230.82767, -7.2979836, -61.27674)
+transform = Transform3D(6.9999995, 0, 0, 0, 1, 0, 0, 0, 6.9999995, 241.77145, -7.2979836, -61.276737)
 
 [node name="Plants" type="Node3D" parent="." unique_id=1370453621]
 
@@ -414,50 +418,50 @@ render_target_update_mode = 4
 [node name="LIRA" parent="SubViewportContainer/PixelateSubViewport" unique_id=223261986 instance=ExtResource("29_ae10e")]
 
 [node name="Skeleton3D" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root" parent_id_path=PackedInt32Array(223261986, 971101118) index="0" unique_id=1049420892]
-bones/0/position = Vector3(-0.046849005, 1.2255933, 0.044468973)
-bones/0/rotation = Quaternion(-0.019180942, 0.0027385068, -0.0057990956, 0.99979544)
-bones/1/rotation = Quaternion(-0.11935907, -0.0033397456, 0.0024247952, 0.99284256)
-bones/2/rotation = Quaternion(0.048083324, -0.05763161, -0.0005109705, 0.9971792)
+bones/0/position = Vector3(-0.010378701, 1.215706, 0.052041113)
+bones/0/rotation = Quaternion(-0.026265996, -0.0016849291, -0.017146297, 0.9995066)
+bones/1/rotation = Quaternion(-0.11748821, -3.1131538e-05, 0.00022031629, 0.99307424)
+bones/2/rotation = Quaternion(0.055365168, -0.038587138, -0.008182174, 0.99768674)
 bones/3/rotation = Quaternion(0.05100843, 0, 0, 0.99869823)
-bones/4/rotation = Quaternion(0.0840805, 0.0118442075, -0.0153018525, 0.99627113)
-bones/5/rotation = Quaternion(-0.11972865, 0.028276747, -0.0070495172, 0.9923789)
-bones/8/rotation = Quaternion(-0.4369196, 0.5028325, 0.54385847, 0.5103713)
-bones/9/rotation = Quaternion(-0.56204164, -0.118869625, 0.23593262, 0.7837825)
-bones/10/rotation = Quaternion(1.0692909e-05, 3.6813726e-05, 0.27884334, 0.9603367)
-bones/31/rotation = Quaternion(-0.5094368, -0.44558954, -0.5103383, 0.5305459)
-bones/32/rotation = Quaternion(-0.5517288, 0.1421308, -0.21386985, 0.79350734)
-bones/33/rotation = Quaternion(-8.432547e-06, 2.6374051e-05, -0.29724216, 0.9548021)
-bones/34/rotation = Quaternion(-0.04300611, 0.061590444, 0.11883932, 0.99006784)
-bones/35/rotation = Quaternion(-0.25045848, -0.48646298, -0.19941926, 0.81293076)
-bones/36/rotation = Quaternion(0.22693776, 0.022855293, 0.24544185, 0.9421971)
-bones/37/rotation = Quaternion(0.053983122, -0.035622235, 0.03447674, 0.9973106)
-bones/39/rotation = Quaternion(-0.22391038, -0.27068138, 0.025521956, 0.9359191)
-bones/40/rotation = Quaternion(-0.28848353, -0.15755562, 0.17246349, 0.9285526)
-bones/41/rotation = Quaternion(-0.13968565, -0.073443, 0.047682486, 0.9863167)
-bones/43/rotation = Quaternion(-0.22315711, -0.030687599, -0.007338119, 0.9742717)
-bones/44/rotation = Quaternion(-0.21596596, -0.103186555, 0.022368299, 0.97067547)
-bones/45/rotation = Quaternion(-0.20667468, -0.12324569, 0.013584818, 0.97052133)
-bones/47/rotation = Quaternion(-0.2926179, -0.04602333, -0.024488663, 0.95480734)
-bones/48/rotation = Quaternion(-0.18972448, -0.12270036, 0.054545175, 0.972612)
-bones/49/rotation = Quaternion(-0.11064735, -0.009202435, 0.052992765, 0.99240327)
-bones/51/rotation = Quaternion(-0.39975268, -0.09750665, 0.14750883, 0.89940614)
-bones/52/rotation = Quaternion(-0.123398475, 0.013763192, -0.02710208, 0.99189156)
-bones/54/rotation = Quaternion(0.7289119, 0.12199483, 0.67190963, 0.048395555)
-bones/55/rotation = Quaternion(-9.017836e-08, 3.919394e-09, 0.37598777, 0.92662466)
-bones/56/rotation = Quaternion(0.39045906, 0.52831256, -0.48342752, 0.5785546)
-bones/57/rotation = Quaternion(-0.001800062, 0.96402264, 0.26581424, -0.000148335)
-bones/58/rotation = Quaternion(-0.77654415, 0.12176001, 0.61480176, -0.06459463)
-bones/59/rotation = Quaternion(-2.4404142e-07, -9.07622e-08, -0.3755853, 0.9267879)
-bones/61/rotation = Quaternion(0.0017979383, 0.9642716, 0.26490954, 0.00014338274)
+bones/4/rotation = Quaternion(0.115745015, 0.006437252, -0.007129249, 0.9932326)
+bones/5/rotation = Quaternion(-0.113997415, 0.028447479, -0.007470873, 0.9930457)
+bones/8/rotation = Quaternion(-0.42744848, 0.5019147, 0.5736712, 0.48607704)
+bones/9/rotation = Quaternion(-0.55585533, -0.12543395, 0.21768937, 0.7924031)
+bones/10/rotation = Quaternion(1.13293145e-05, 3.666977e-05, 0.29145262, 0.9565853)
+bones/31/rotation = Quaternion(-0.48016593, -0.47264567, -0.52448106, 0.52054435)
+bones/32/rotation = Quaternion(-0.5825257, 0.117834195, -0.16446579, 0.7872293)
+bones/33/rotation = Quaternion(-7.776785e-06, 2.6588299e-05, -0.28221336, 0.95935166)
+bones/34/rotation = Quaternion(-0.01580953, 0.06182557, 0.10612804, 0.99230266)
+bones/35/rotation = Quaternion(-0.24079463, -0.4868672, -0.1797542, 0.82016265)
+bones/36/rotation = Quaternion(0.20477231, -0.014079382, 0.20484127, 0.957032)
+bones/37/rotation = Quaternion(0.04287505, -0.03394656, 0.016574781, 0.99836606)
+bones/39/rotation = Quaternion(-0.21082143, -0.26753148, 0.018909357, 0.9400126)
+bones/40/rotation = Quaternion(-0.34007648, -0.16852842, 0.19491056, 0.9044092)
+bones/41/rotation = Quaternion(-0.1760246, -0.08273897, 0.070485756, 0.9783667)
+bones/43/rotation = Quaternion(-0.19995025, -0.025963891, -0.008854149, 0.979422)
+bones/44/rotation = Quaternion(-0.2715382, -0.112987086, 0.02572425, 0.9554263)
+bones/45/rotation = Quaternion(-0.2104299, -0.12399852, 0.014399469, 0.9696063)
+bones/47/rotation = Quaternion(-0.26988736, -0.041857988, -0.02632353, 0.96162146)
+bones/48/rotation = Quaternion(-0.21891782, -0.12908414, 0.063566945, 0.965076)
+bones/49/rotation = Quaternion(-0.112518825, -0.009648043, 0.053695392, 0.9921509)
+bones/51/rotation = Quaternion(-0.40230373, -0.09715804, 0.15693057, 0.8967079)
+bones/52/rotation = Quaternion(-0.16758622, 0.0054781544, -0.0020725478, 0.98584)
+bones/54/rotation = Quaternion(0.7237453, 0.12437465, 0.6758462, 0.062893696)
+bones/55/rotation = Quaternion(-5.7004648e-08, -9.509249e-09, 0.4232126, 0.9060304)
+bones/56/rotation = Quaternion(0.42284745, 0.5048377, -0.49072874, 0.57054734)
+bones/57/rotation = Quaternion(-0.0017983189, 0.9642269, 0.26507217, -0.00014449845)
+bones/58/rotation = Quaternion(-0.7727713, 0.1302826, 0.61839044, -0.0586894)
+bones/59/rotation = Quaternion(-2.4616344e-07, -7.927484e-08, -0.39709356, 0.9177782)
+bones/61/rotation = Quaternion(0.0017976742, 0.9643047, 0.26478907, 0.00014273246)
 
 [node name="spine_02_x" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D" index="5" unique_id=1064549217]
-transform = Transform3D(0.9934219, 0.0013460409, -0.11450328, 0.019361198, 0.98356044, 0.17953852, 0.112862565, -0.18057443, 0.9770644, -0.04509257, 1.4408834, -0.015314627)
+transform = Transform3D(0.99603903, 0.04600951, -0.07608733, -0.031766422, 0.9833735, 0.17879377, 0.08304849, -0.17566857, 0.9809401, -0.0028254585, 1.4301277, -0.010365259)
 
 [node name="WaterGun" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D/spine_02_x/Tank" parent_id_path=PackedInt32Array(223261986, 1308716164) index="0" unique_id=987640430]
-transform = Transform3D(0.7862993, 0.18065672, -0.5908454, 0.060644835, -0.9742467, -0.21717909, -0.6148637, 0.13493568, -0.7770044, -0.2573524, 0.8368425, 0.40954894)
+transform = Transform3D(0.7530775, 0.21085629, -0.6232303, 0.09083114, -0.9715037, -0.21893197, -0.6516332, 0.10826354, -0.7507688, -0.21467516, 0.82500744, 0.40094346)
 
 [node name="hand_r" parent="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D" index="6" unique_id=202739528]
-transform = Transform3D(-0.6639988, -0.057844713, -0.74549246, -0.30338204, -0.89041007, 0.33930683, -0.6834211, 0.4514684, 0.5736822, -0.33359858, 1.0041724, 0.21649194)
+transform = Transform3D(-0.72246075, -0.0421688, -0.69012463, -0.2722016, -0.9001851, 0.33995977, -0.6355755, 0.43346065, 0.6388701, -0.28259364, 0.99223316, 0.2243788)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1490722808]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -14.654937)
@@ -480,8 +484,16 @@ terrain = NodePath("../../../NavigationRegion3D/Terrain3D")
 [node name="AnimalSpawner" parent="Animals" unique_id=503472948 instance=ExtResource("31_lvj5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.46062, -62.70341)
 animal_scene = ExtResource("32_t7m7w")
-radius = 30.0
 
+[node name="AquaticAnimalSpawner" type="Node3D" parent="Animals" unique_id=921817118 node_paths=PackedStringArray("water_volume")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, -8.265825, 19.011028)
+script = ExtResource("32_x5fu1")
+water_volume = NodePath("../../Water/StylizedWater/WaterVolume")
+animal_scene = ExtResource("33_x5fu1")
+count = 1
+radius = 10.0
+
+[editable path="Water/StylizedWater"]
 [editable path="SubViewportContainer/PixelateSubViewport/LIRA"]
 [editable path="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D/spine_02_x/Tank"]
 [editable path="SubViewportContainer/PixelateSubViewport/LIRA/Robot/root/Skeleton3D/spine_02_x/Jetpack"]

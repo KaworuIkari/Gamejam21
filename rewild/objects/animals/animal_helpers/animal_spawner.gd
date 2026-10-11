@@ -5,8 +5,8 @@ class_name AnimalSpawner
 ## In the editor, shows the spawn radius as a red circle while selected.
 
 @export var animal_scene: PackedScene
-@export var count := 1
-@export var radius := 10.0:
+@export var count := 10
+@export var radius := 50.0:
 	set(v):
 		radius = v
 		_rebuild_circle()
@@ -82,5 +82,5 @@ func spawn_one(map: RID) -> Node3D:
 	animal.position = to_local(p + Vector3.UP * height_offset)
 	animal.rotation.y = randf() * TAU
 	add_child(animal)
-	print(animal, " added at ", p, "!")
+	# print(animal, " added at ", p, "!")
 	return animal

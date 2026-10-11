@@ -1,52 +1,64 @@
 extends CharacterBody3D
 class_name AnimalChicken
-## Walks on the nav mesh, gets hungry and eats, then looks for the closest chicken to play
-## with: they stand together, flap and sing. Wings can flap at any time, over any animation.
+## IDLE ⇄ WANDER (curvy loops)
+## hungry → GO_EAT (zig-zag, may stop early) → EATING → look for a playmate
+## GO_PLAY → PLAYING (stand together, flap + sing, quiet wind-down) → IDLE
+## more than `crowd_limit` playing together → LEAVING → IDLE
+## Wings flap at random over any animation, except during the play wind-down.
 
-signal sang                                   # hook audio here later
+signal sang  # hook audio here later
 
 const GROUP := &"chickens"
-
 enum State { IDLE, WANDER, GO_EAT, EATING, GO_PLAY, PLAYING, LEAVING }
+const PLAY_STATES := [State.GO_PLAY, State.PLAYING]
 
 @export_group("Nodes")
-@export var animation_tree: AnimationTree     # auto-found if empty
-@export var agent: NavigationAgent3D          # auto-found if empty
+@export var animation_tree: AnimationTree  # auto-found if empty
+@export var agent: NavigationAgent3D  # auto-found if empty
 
 @export_group("Movement")
 @export var walk_speed := 2.5
 @export var acceleration := 8.0
-@export var turn_speed := 12.0
-@export var move_timeout := 15.0              # give up on a path after this long
+@export var turn_speed := 12.0  # body yaw toward facing direction
+@export var max_turn_rate := 5.0  # rad/s heading change while walking; lower = wider curves
+@export var waypoint_radius := 0.5
+@export var move_timeout := 15.0  # give up on a route leg after this long
+@export var fall_recover_depth := 3.0
 @export var model_faces_positive_z := true
 
-@export_group("Idle")
-@export var idle_time := Vector2(3.0, 8.0)    # min/max seconds standing between wanders
-@export var wander_radius := 30.0
+@export_group("Idle & Wander")
+@export var idle_time := Vector2(3.0, 8.0)
+@export var wander_radius := 30.0  # fallback when no arc fits
+@export var arc_radius := Vector2(1.5, 4.0)
+@export var arc_sweep_deg := Vector2(90.0, 330.0)  # >270° ≈ a full loop
+@export var arc_step_deg := 30.0
 
-@export_group("Hunger")
+@export_group("Hunger & Foraging")
 @export var hunger_interval_mean := 60.0
-@export var hunger_interval_dev := 10.0       # used as standard deviation
+@export var hunger_interval_dev := 10.0  # standard deviation
 @export var eat_search_radius := 60.0
-@export var eat_timeout := 8.0                # fallback if the eat state is never seen
+@export var eat_timeout := 8.0  # fallback if the eat state is never seen
+@export var zigzag_step := 1.2
+@export var zigzag_width := Vector2(0.4, 1.0)
+@export var find_food_chance := 0.15  # per zig-zag corner: stop dead and eat there
 
 @export_group("Play")
 @export var play_search_radius := 100.0
-@export var play_distance := 0.6              # how close playmates stand
-@export var play_event_mean := 6.0            # seconds between flap+sing
+@export var play_distance := 0.6
+@export var play_event_mean := 6.0
 @export var play_event_dev := 2.0
 @export var play_events_to_finish := 2
-@export var play_wind_down := 10.0            # after the last event: stay, no flapping, then leave
+@export var play_wind_down := 10.0
 @export var crowd_radius := 2.5
-@export var crowd_limit := 2                  # more than this many playing together → leave
+@export var crowd_limit := 2
 @export var leave_distance := 6.0
-@export var play_block_after := 20.0          # won't start or accept play again for this long
+@export var play_block_after := 20.0
 
 @export_group("Wings")
-@export var flap_interval_mean := 24.0        # random flaps: exponential, this mean
-@export var flap_state_name := "flap_wings"         # state inside the Wings state machine
-@export var flap_anim_name := "flap_wings"          # animation in the AnimationPlayer (for its length)
-@export var flap_length := 0.0                # 0 = read from the animation
+@export var flap_interval_mean := 24.0
+@export var flap_state_name := "flap_wings"
+@export var flap_anim_name := "flap_wings"
+@export var flap_length := 0.0  # 0 = read from the animation
 @export var wings_blend_speed := 10.0
 @export var wings_blend_out := 0.15
 
@@ -56,36 +68,43 @@ enum State { IDLE, WANDER, GO_EAT, EATING, GO_PLAY, PLAYING, LEAVING }
 @export var body_playback_param := "parameters/Body/playback"
 @export var eat_state_name := "eat"
 
-# edge case
-@export var fall_recover_depth := 3.0
-
 @export_group("Debug")
-@export var debug_print := false
+@export var debug := true
 
-var is_moving := false                        # Body state machine: idle <-> walk
-var is_eating := false                        # Body state machine: idle -> eat (one-shot trigger)
+@onready var debug_label: Label3D = get_node_or_null("DebugLabel3D")
+
+var is_moving := false  # Body state machine: idle ⇄ walk
+var is_eating := false  # Body state machine: idle → eat (one-shot trigger)
 var state := State.IDLE
 
+var _route := PackedVector3Array()
+var _route_i := 0
+var _leg_time := 0.0
+var _waypoint_reached := false  # true on the frame a route corner is passed
 var _desired_h := Vector3.ZERO
+var _heading := Vector3.ZERO
 var _face_dir := Vector3.ZERO
-var _timer := 0.0
-var _move_timer := 0.0
-var _move_elapsed := 0.0
-var _hunger_timer := 0.0
-var _hungry := false
+
+var _timer := 0.0  # idle wait / eat timeout / play wind-down
 var _eat_seen := false
 var _playmate: AnimalChicken
-var _play_event_timer := 0.0
 var _play_events := 0
-var _wind_down := -1.0
-var _play_block := 0.0
+var _play_event_timer := 0.0
+var _winding_down := false
 var _replan_timer := 0.0
+var _play_block := 0.0
+
+var _hungry := false
+var _hunger_timer := 0.0
+var _hunger_interval := 60.0
+
 var _flap_timer := 0.0
-var _flap_t := -1.0
+var _flap_t := -1.0  # time into the current flap; -1 = not flapping
 var _wing_blend := 0.0
 var _wings_pb: AnimationNodeStateMachinePlayback
 var _body_pb: AnimationNodeStateMachinePlayback
 
+# === Lifecycle ===
 
 func _ready() -> void:
 	add_to_group(GROUP)
@@ -97,24 +116,21 @@ func _ready() -> void:
 		push_error("AnimalChicken: needs an AnimationTree and a NavigationAgent3D")
 		set_physics_process(false)
 		return
-
 	_wings_pb = animation_tree.get(wings_playback_param)
 	_body_pb = animation_tree.get(body_playback_param)
 	_detect_flap_length()
-
-	_hunger_timer = randf() * _next_hunger_interval()    # random hunger level at spawn
+	_reset_hunger(true)
 	_flap_timer = _exp(flap_interval_mean)
+	if debug_label:
+		debug_label.no_depth_test = true
 	_enter_idle()
 
 func _physics_process(delta: float) -> void:
 	_desired_h = Vector3.ZERO
 	_face_dir = Vector3.ZERO
-
 	_hunger_timer -= delta
-	if _hunger_timer <= 0.0:
-		_hungry = true
+	_hungry = _hungry or _hunger_timer <= 0.0
 	_play_block = maxf(_play_block - delta, 0.0)
-
 	match state:
 		State.IDLE: _tick_idle(delta)
 		State.WANDER: _tick_wander(delta)
@@ -123,254 +139,361 @@ func _physics_process(delta: float) -> void:
 		State.GO_PLAY: _tick_go_play(delta)
 		State.PLAYING: _tick_playing(delta)
 		State.LEAVING: _tick_leaving(delta)
-
 	_apply_motion(delta)
 	_face(delta)
 	_update_wings(delta)
+	_update_debug_label()
 
+# === States ===
 
-# --- states ------------------------------------------------------------------
+func _enter_idle() -> void:
+	_timer = randf_range(idle_time.x, idle_time.y)
+	state = State.IDLE
 
 func _tick_idle(delta: float) -> void:
 	if not _nav_ready():
 		return
 	if _hungry:
-		_go_to(_random_nav_point(global_position, eat_search_radius), State.GO_EAT)
+		_enter_go_eat()
 		return
 	_timer -= delta
 	if _timer <= 0.0:
-		_go_to(_random_nav_point(global_position, wander_radius), State.WANDER)
-
+		var arc := _arc_route()
+		if arc.is_empty():
+			arc.append(_random_nav_point(global_position, wander_radius))
+		_set_route(arc)
+		state = State.WANDER
 
 func _tick_wander(delta: float) -> void:
 	if _hungry:
-		_go_to(_random_nav_point(global_position, eat_search_radius), State.GO_EAT)
-		return
-	if _follow_path(delta):
+		_enter_go_eat()
+	elif _follow_route(delta):
 		_enter_idle()
 
+func _enter_go_eat() -> void:
+	_set_route(_zigzag_route(_random_nav_point(global_position, eat_search_radius)))
+	state = State.GO_EAT
 
 func _tick_go_eat(delta: float) -> void:
-	if _follow_path(delta):          # arrived, or gave up: a hungry chicken pecks wherever it is
-		_set_state(State.EATING)
-		is_eating = true
-		_eat_seen = false
-		_timer = eat_timeout
+	if _follow_route(delta):
+		_enter_eating()
+	elif _waypoint_reached and randf() < find_food_chance:
+		_stop_now()  # spotted something: stop dead and peck here
+		_enter_eating()
 
+func _enter_eating() -> void:
+	is_eating = true
+	_eat_seen = false
+	_timer = eat_timeout
+	state = State.EATING
 
 func _tick_eating(delta: float) -> void:
-	var cur: StringName = _body_pb.get_current_node() if _body_pb else &""
-	if cur == StringName(eat_state_name):
+	var in_eat := _body_pb != null and _body_pb.get_current_node() == StringName(eat_state_name)
+	if in_eat:
 		_eat_seen = true
-		is_eating = false            # consume the trigger; eat -> idle plays out At End
-	elif _eat_seen:
-		_finish_eating()             # back out of the eat state: done
-		return
+		is_eating = false  # consume the trigger; eat → idle plays out At End
 	_timer -= delta
-	if _timer <= 0.0:
-		_finish_eating()
+	if (_eat_seen and not in_eat) or _timer <= 0.0:
+		is_eating = false
+		_reset_hunger()
+		if not _try_start_play():  # just ate: look for company
+			_enter_idle()
 
-
-func _finish_eating() -> void:
-	is_eating = false
-	_hungry = false
-	_hunger_timer = _next_hunger_interval()
-	if not _try_start_play():        # just ate: look for company
-		_enter_idle()
-
+func _enter_go_play(partner: AnimalChicken) -> void:
+	_playmate = partner
+	_replan_timer = 0.5
+	_set_route(PackedVector3Array([_play_spot(partner)]))
+	state = State.GO_PLAY
 
 func _tick_go_play(delta: float) -> void:
-	if not _partner_ok():
-		_end_play()
-		return
-	if _crowd_count() > crowd_limit:
-		_leave_crowd()
+	if _abandon_play_if_needed():
 		return
 	_replan_timer -= delta
-	if _replan_timer <= 0.0:
+	if _replan_timer <= 0.0:  # partner may still be shuffling
 		_replan_timer = 0.5
-		agent.target_position = _play_spot(_playmate)    # partner may still be shuffling
-	if _follow_path(delta):
-		_enter_play()
+		_route[0] = _play_spot(_playmate)
+		agent.target_position = _route[0]
+	if _follow_route(delta):
+		_enter_playing(_playmate)
 
+func _enter_playing(partner: AnimalChicken) -> void:
+	_playmate = partner
+	_play_events = 0
+	_winding_down = false
+	_play_event_timer = _play_interval()
+	agent.target_position = global_position
+	state = State.PLAYING
 
 func _tick_playing(delta: float) -> void:
-	if _crowd_count() > crowd_limit:
-		_leave_crowd()
+	if _abandon_play_if_needed():
 		return
-	if not _partner_ok():
-		_end_play()
+	var nearest := _closest_chicken()
+	_face_dir = (nearest if nearest else _playmate).global_position - global_position
+	if _winding_down:  # show is over: stay quietly, no flapping
+		_timer -= delta
+		if _timer <= 0.0:
+			_clear_play()
+			_enter_idle()
 		return
-	_face_dir = _playmate.global_position - global_position
-
-	if _wind_down >= 0.0:            # last event done: hang around quietly, no flapping
-		_wind_down -= delta
-		if _wind_down <= 0.0:
-			_end_play()
-		return
-
-	# Wait for the partner to actually arrive before the show starts
 	if global_position.distance_to(_playmate.global_position) > play_distance * 2.5:
-		return
+		return  # wait for the partner to arrive
 	_play_event_timer -= delta
-	if _play_event_timer <= 0.0:
-		_flap()
-		_sing()
-		_play_events += 1
-		if _play_events >= play_events_to_finish:
-			_wind_down = play_wind_down
-		else:
-			_play_event_timer = _play_interval()
+	if _play_event_timer > 0.0:
+		return
+	_flap()
+	_sing()
+	_play_events += 1
+	if _play_events >= play_events_to_finish:
+		_winding_down = true
+		_timer = play_wind_down
+	else:
+		_play_event_timer = _play_interval()
 
+func _enter_leaving() -> void:
+	var crowd := _playing_neighbors()
+	var center := Vector3.ZERO
+	for c in crowd:
+		center += c.global_position
+	center /= maxf(crowd.size(), 1)
+	var away := global_position - center
+	away.y = 0.0
+	if away.length() < 0.05:
+		away = Vector3.FORWARD.rotated(Vector3.UP, randf() * TAU)
+	_clear_play()
+	_set_route(PackedVector3Array([_closest_nav_point(global_position + away.normalized() * leave_distance)]))
+	state = State.LEAVING
 
 func _tick_leaving(delta: float) -> void:
-	if _follow_path(delta):
+	if _follow_route(delta):
 		_enter_idle()
 
+# === Play ===
 
-func _enter_idle() -> void:
-	_timer = randf_range(idle_time.x, idle_time.y)
-	_set_state(State.IDLE)
-
-
-func _set_state(s: State) -> void:
-	if s == state:
-		return
-	state = s
-	if debug_print:
-		print("[%s] %s" % [name, State.keys()[s]])
-
-
-# --- play --------------------------------------------------------------------
-
-## Whether this chicken is available to play with `other`.
+## Public: whether this chicken can play right now.
 func can_play_with(_other: AnimalChicken) -> bool:
 	return _play_block <= 0.0 and not _hungry and state in [State.IDLE, State.WANDER, State.PLAYING]
 
-
-## Called by another chicken that wants to play. Returns true if accepted.
+## Public: another chicken asks to play. Returns true if accepted.
 func request_play(from: AnimalChicken) -> bool:
 	if not can_play_with(from):
 		return false
-	if state != State.PLAYING:       # already playing: the newcomer just joins
-		_playmate = from
-		_enter_play()
+	if state != State.PLAYING:  # already playing: the newcomer just joins
+		_enter_playing(from)
 	return true
-
 
 func _try_start_play() -> bool:
 	if _play_block > 0.0:
 		return false
 	var best: AnimalChicken = null
 	var best_d := play_search_radius
-	for n in get_tree().get_nodes_in_group(GROUP):
-		var c := n as AnimalChicken
-		if c == null or c == self or not c.can_play_with(self):
-			continue
+	for c in _other_chickens():
 		var d := global_position.distance_to(c.global_position)
-		if d < best_d:
+		if d < best_d and c.can_play_with(self):
 			best_d = d
 			best = c
 	if best and best.request_play(self):
-		_playmate = best
-		_replan_timer = 0.5
-		_go_to(_play_spot(best), State.GO_PLAY)
+		_enter_go_play(best)
 		return true
 	return false
 
+## Shared checks for GO_PLAY and PLAYING. Returns true if play was abandoned.
+func _abandon_play_if_needed() -> bool:
+	if _playing_neighbors().size() > crowd_limit:
+		_enter_leaving()
+		return true
+	if not (is_instance_valid(_playmate) and _playmate.state in PLAY_STATES):
+		_clear_play()
+		_enter_idle()
+		return true
+	return false
 
-func _enter_play() -> void:
-	agent.target_position = global_position
-	_play_events = 0
-	_wind_down = -1.0
-	_play_event_timer = _play_interval()
-	_set_state(State.PLAYING)
-
-
-func _end_play() -> void:
+func _clear_play() -> void:
 	_playmate = null
-	_wind_down = -1.0
+	_winding_down = false
 	_play_block = play_block_after
-	_enter_idle()
-
-
-func _partner_ok() -> bool:
-	return is_instance_valid(_playmate) and _playmate.state in [State.GO_PLAY, State.PLAYING]
-
-
-func _crowd_count() -> int:
-	var count := 0
-	for n in get_tree().get_nodes_in_group(GROUP):
-		var c := n as AnimalChicken
-		if c and c.state in [State.GO_PLAY, State.PLAYING] \
-				and c.global_position.distance_to(global_position) <= crowd_radius:
-			count += 1               # includes self
-	return count
-
-
-func _leave_crowd() -> void:
-	var center := Vector3.ZERO
-	var count := 0
-	for n in get_tree().get_nodes_in_group(GROUP):
-		var c := n as AnimalChicken
-		if c and c.state in [State.GO_PLAY, State.PLAYING] \
-				and c.global_position.distance_to(global_position) <= crowd_radius:
-			center += c.global_position
-			count += 1
-	center /= maxf(count, 1)
-	var away := global_position - center
-	away.y = 0.0
-	if away.length() < 0.05:
-		away = Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))
-	_playmate = null
-	_wind_down = -1.0
-	_play_block = play_block_after
-	var target := _closest_nav_point(global_position + away.normalized() * leave_distance)
-	_go_to(target, State.LEAVING)
-
 
 func _play_spot(other: AnimalChicken) -> Vector3:
 	var dir := global_position - other.global_position
 	dir.y = 0.0
 	if dir.length() < 0.05:
-		dir = Vector3(randf_range(-1, 1), 0, randf_range(-1, 1))
+		dir = Vector3.FORWARD.rotated(Vector3.UP, randf() * TAU)
 	return _closest_nav_point(other.global_position + dir.normalized() * play_distance)
 
-
 func _sing() -> void:
-	# TODO: play a cluck/song AudioStreamPlayer3D once the asset exists
-	sang.emit()
-	if debug_print:
-		print("[%s] ♪ bawk ♪" % name)
+	sang.emit()  # TODO: play a cluck/song AudioStreamPlayer3D once the asset exists
 
+func _other_chickens() -> Array[AnimalChicken]:
+	var out: Array[AnimalChicken] = []
+	for n in get_tree().get_nodes_in_group(GROUP):
+		if n != self and n is AnimalChicken:
+			out.append(n)
+	return out
 
-# --- wings -------------------------------------------------------------------
+func _closest_chicken() -> AnimalChicken:
+	var best: AnimalChicken = null
+	var best_d := INF
+	for c in _other_chickens():
+		var d := global_position.distance_squared_to(c.global_position)
+		if d < best_d:
+			best_d = d
+			best = c
+	return best
+
+## Chickens (including self) going to or playing within crowd_radius.
+func _playing_neighbors() -> Array[AnimalChicken]:
+	var out: Array[AnimalChicken] = []
+	for n in get_tree().get_nodes_in_group(GROUP):
+		var c := n as AnimalChicken
+		if c and c.state in PLAY_STATES and c.global_position.distance_to(global_position) <= crowd_radius:
+			out.append(c)
+	return out
+
+# === Routes ===
+
+func _set_route(points: PackedVector3Array) -> void:
+	_route = points
+	if _route.is_empty():
+		_route.append(global_position)
+	_route_i = 0
+	agent.target_position = _route[0]
+	_leg_time = 0.0
+
+## Walks the route corner by corner. Returns true when the last point is reached.
+func _follow_route(delta: float) -> bool:
+	_waypoint_reached = false
+	_leg_time += delta
+	var leg_done := _leg_time >= move_timeout \
+			or _flat_dist(_route[_route_i]) < waypoint_radius \
+			or (_leg_time > 0.1 and agent.is_navigation_finished())  # path needs a frame to exist
+	if not leg_done:
+		_steer_along_path()
+		return false
+	_route_i += 1
+	if _route_i >= _route.size():
+		return true
+	_waypoint_reached = true
+	agent.target_position = _route[_route_i]
+	_leg_time = 0.0
+	return false
+
+func _steer_along_path() -> void:
+	var to := agent.get_next_path_position() - global_position
+	to.y = 0.0
+	if to.length() < 0.05:  # standing on the current path point (just above/below us): aim at the next
+		var path := agent.get_current_navigation_path()
+		var idx := agent.get_current_navigation_path_index() + 1
+		if idx < path.size():
+			to = path[idx] - global_position
+			to.y = 0.0
+	if to.length() > 0.05:
+		_desired_h = to.normalized() * walk_speed
+
+## Arc or loop curving left or right from the current heading, snapped to the nav mesh.
+func _arc_route() -> PackedVector3Array:
+	var pts := PackedVector3Array()
+	var right := _flat_forward().cross(Vector3.UP).normalized()
+	var side := 1.0 if randf() < 0.5 else -1.0
+	var center := global_position + right * randf_range(arc_radius.x, arc_radius.y) * side
+	var start := global_position - center
+	var sweep := deg_to_rad(randf_range(arc_sweep_deg.x, arc_sweep_deg.y))
+	var n := maxi(2, ceili(sweep / deg_to_rad(arc_step_deg)))
+	for k in range(1, n + 1):
+		var p := center + start.rotated(Vector3.UP, -side * sweep * float(k) / n)
+		var q := _closest_nav_point(p)
+		if Vector2(q.x - p.x, q.z - p.z).length() > 1.0:
+			break  # arc runs off the nav mesh: end the route here
+		pts.append(q)
+	return pts
+
+## Zig-zag toward goal: corners alternate left and right of the straight line.
+func _zigzag_route(goal: Vector3) -> PackedVector3Array:
+	var pts := PackedVector3Array()
+	var to := goal - global_position
+	to.y = 0.0
+	var dist := to.length()
+	if dist > 0.1:
+		var dir := to / dist
+		var right := dir.cross(Vector3.UP).normalized()
+		var n := maxi(1, int(dist / zigzag_step))
+		var side := 1.0 if randf() < 0.5 else -1.0
+		for k in range(1, n):
+			var corner := global_position + dir * (dist * k / n) + right * side * randf_range(zigzag_width.x, zigzag_width.y)
+			pts.append(_closest_nav_point(corner))
+			side = -side
+	pts.append(goal)
+	return pts
+
+# === Motion ===
+
+func _apply_motion(delta: float) -> void:
+	var cur := Vector3(velocity.x, 0.0, velocity.z)
+	var target_speed := _desired_h.length()
+	var h: Vector3
+	if target_speed > 0.01:  # turn the heading at a limited rate, so corners become curves
+		if _heading == Vector3.ZERO:
+			_heading = cur.normalized() if cur.length() > 0.1 else _flat_forward()
+		var angle := _heading.signed_angle_to(_desired_h / target_speed, Vector3.UP)
+		_heading = _heading.rotated(Vector3.UP, clampf(angle, -max_turn_rate * delta, max_turn_rate * delta))
+		var turn_slow := clampf(0.5 + 0.5 * cos(angle), 0.25, 1.0)  # slow down on sharp turns
+		h = _heading * move_toward(cur.length(), target_speed * turn_slow, acceleration * delta)
+	else:
+		h = cur.move_toward(Vector3.ZERO, acceleration * delta)
+		if h.length() < 0.05:
+			_heading = Vector3.ZERO
+	velocity.x = h.x
+	velocity.z = h.z
+	if is_on_floor():
+		velocity.y = minf(velocity.y, 0.0)
+	else:
+		velocity += get_gravity() * delta
+	move_and_slide()
+	_fall_guard()
+	is_moving = h.length() > 0.15
+	if _face_dir == Vector3.ZERO and h.length() > 0.1:
+		_face_dir = h
+
+func _face(delta: float) -> void:
+	var d := Vector3(_face_dir.x, 0.0, _face_dir.z)
+	if d.length() < 0.01:
+		return
+	var yaw := atan2(d.x, d.z) if model_faces_positive_z else atan2(-d.x, -d.z)
+	rotation.y = lerp_angle(rotation.y, yaw, 1.0 - exp(-turn_speed * delta))
+
+func _stop_now() -> void:
+	velocity.x = 0.0
+	velocity.z = 0.0
+	_heading = Vector3.ZERO
+	agent.target_position = global_position
+
+func _fall_guard() -> void:
+	var p := _closest_nav_point(global_position)
+	if p != Vector3.ZERO and global_position.y < p.y - fall_recover_depth:
+		global_position = p + Vector3.UP * 0.5
+		velocity = Vector3.ZERO
+
+# === Wings ===
 
 func _update_wings(delta: float) -> void:
 	_flap_timer -= delta
 	if _flap_timer <= 0.0:
 		_flap_timer = _exp(flap_interval_mean)
-		_flap()                      # silently skipped if suppressed or already flapping
-
+		_flap()
 	if _flap_t >= 0.0:
 		_flap_t += delta
 		if _flap_t >= flap_length:
 			_flap_t = -1.0
-
-	var target := 1.0 if _flap_t >= 0.0 and _flap_t < flap_length - wings_blend_out else 0.0
-	_wing_blend = lerpf(_wing_blend, target, 1.0 - exp(-wings_blend_speed * delta))
+	var flapping := _flap_t >= 0.0 and _flap_t < flap_length - wings_blend_out
+	_wing_blend = lerpf(_wing_blend, 1.0 if flapping else 0.0, 1.0 - exp(-wings_blend_speed * delta))
 	animation_tree.set(wings_blend_param, _wing_blend)
 
-
 func _flap() -> void:
-	if _flap_t >= 0.0:
+	var already_flapping := _flap_t >= 0.0
+	var quiet_time := state == State.PLAYING and _winding_down
+	if already_flapping or quiet_time:
 		return
-	if state == State.PLAYING and _wind_down >= 0.0:
-		return                       # quiet period after the play show
 	_flap_t = 0.0
 	if _wings_pb:
 		_wings_pb.start(flap_state_name, true)
-
 
 func _detect_flap_length() -> void:
 	if flap_length > 0.0:
@@ -384,90 +507,49 @@ func _detect_flap_length() -> void:
 	flap_length = 1.0
 	push_warning("AnimalChicken: '%s' not found, using flap_length 1.0s" % flap_anim_name)
 
+# === Hunger ===
 
-# --- movement ----------------------------------------------------------------
+func _reset_hunger(random_start := false) -> void:
+	_hungry = false
+	_hunger_interval = maxf(randfn(hunger_interval_mean, hunger_interval_dev), 10.0)
+	_hunger_timer = _hunger_interval * (randf() if random_start else 1.0)
 
-func _go_to(point: Vector3, s: State) -> void:
-	agent.target_position = point
-	_move_timer = move_timeout
-	_move_elapsed = 0.0
-	_set_state(s)
+## 0 = just ate, 1 = hungry.
+func hunger_level() -> float:
+	if _hungry:
+		return 1.0
+	return clampf(1.0 - _hunger_timer / maxf(_hunger_interval, 0.001), 0.0, 1.0)
 
-
-## Steers along the agent path. Returns true when arrived (or timed out).
-func _follow_path(delta: float) -> bool:
-	_move_elapsed += delta
-	_move_timer -= delta
-	if _move_timer <= 0.0:
-		return true
-	if _move_elapsed > 0.1 and agent.is_navigation_finished():   # grace: path needs a frame
-		return true
-	var to := agent.get_next_path_position() - global_position
-	to.y = 0.0
-	if to.length() < 0.05:
-		# Standing on the current waypoint (it's just above/below us): aim at the following one
-		var path := agent.get_current_navigation_path()
-		var idx := agent.get_current_navigation_path_index() + 1
-		if idx < path.size():
-			to = path[idx] - global_position
-			to.y = 0.0
-	if to.length() > 0.05:
-		_desired_h = to.normalized() * walk_speed
-	return false
-
-
-func _apply_motion(delta: float) -> void:
-	var h := Vector3(velocity.x, 0.0, velocity.z).move_toward(_desired_h, acceleration * delta)
-	velocity.x = h.x
-	velocity.z = h.z
-	if is_on_floor():
-		velocity.y = minf(velocity.y, 0.0)
-	else:
-		velocity += get_gravity() * delta
-	move_and_slide()
-	_fall_guard()
-	is_moving = h.length() > 0.15
-	if _face_dir == Vector3.ZERO and h.length() > 0.1:
-		_face_dir = h
-
-
-func _face(delta: float) -> void:
-	var d := Vector3(_face_dir.x, 0.0, _face_dir.z)
-	if d.length() < 0.01:
-		return
-	var yaw := atan2(d.x, d.z) if model_faces_positive_z else atan2(-d.x, -d.z)
-	rotation.y = lerp_angle(rotation.y, yaw, 1.0 - exp(-turn_speed * delta))
-
-
-# --- navigation & random helpers ----------------------------------------------
+# === Helpers ===
 
 func _nav_ready() -> bool:
 	return NavigationServer3D.map_get_iteration_id(agent.get_navigation_map()) > 0
 
-
 func _closest_nav_point(p: Vector3) -> Vector3:
 	return NavigationServer3D.map_get_closest_point(agent.get_navigation_map(), p)
 
-
 func _random_nav_point(center: Vector3, radius: float) -> Vector3:
 	var a := randf() * TAU
-	var r := sqrt(randf()) * radius
+	var r := sqrt(randf()) * radius  # uniform over the disc
 	return _closest_nav_point(center + Vector3(cos(a) * r, 0.0, sin(a) * r))
 
+func _flat_dist(p: Vector3) -> float:
+	return Vector2(p.x - global_position.x, p.z - global_position.z).length()
+
+func _flat_forward() -> Vector3:
+	var f := global_basis.z if model_faces_positive_z else -global_basis.z
+	f.y = 0.0
+	return f.normalized() if f.length() > 1e-3 else Vector3.FORWARD
 
 func _exp(mean: float) -> float:
-	return -mean * log(1.0 - randf())          # exponential: memoryless "could happen any time"
-
-
-func _next_hunger_interval() -> float:
-	return maxf(randfn(hunger_interval_mean, hunger_interval_dev), 10.0)
-
+	return -mean * log(1.0 - randf())  # exponential: "could happen any time"
 
 func _play_interval() -> float:
 	return maxf(randfn(play_event_mean, play_event_dev), 1.0)
 
-func _fall_guard() -> void:
-	var p := NavigationServer3D.map_get_closest_point(agent.get_navigation_map(), global_position)
-	if p != Vector3.ZERO and global_position.y < p.y - fall_recover_depth:
-		global_position = p + Vector3.UP * 0.5
-		velocity = Vector3.ZERO
+func _update_debug_label() -> void:
+	if debug_label == null:
+		return
+	debug_label.visible = debug
+	if debug:
+		debug_label.text = "%s\nhunger %d%%" % [State.keys()[state], roundi(hunger_level() * 100.0)]

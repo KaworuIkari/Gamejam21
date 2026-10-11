@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bs25wd1ca52du"]
+
+[ext_resource type="Script" uid="uid://ltvuc4yflwv0" path="res://objects/animals/small_fish/small_fish.gd" id="1_snpxf"]
+[ext_resource type="Script" uid="uid://cnsvtasva4k1a" path="res://objects/animals/small_fish/edible.gd" id="1_ukkmt"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_30rud"]
+
+[node name="SmallFishBase" type="CharacterBody3D" unique_id=1341900652]
+script = ExtResource("1_snpxf")
+
+[node name="Edible" type="Node" parent="." unique_id=1734452845]
+script = ExtResource("1_ukkmt")
+
+[node name="DebugLabel3D" type="Label3D" parent="." unique_id=879025316]
+billboard = 1
+text = "Small Fish"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1260081375]
+shape = SubResource("SphereShape3D_30rud")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=669078589]
