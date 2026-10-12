@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cl884sfqvxgrx"
-path="res://.godot/imported/sky_22_2k.png-7d1ac55a14c31ba4cfc6eab4769246ff.ctex"
+uid="uid://dql71j75gqt31"
+path="res://.godot/imported/preview.png-904edf4638200a83254332607413dfc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sky_22_2k/sky_22_2k.png"
-dest_files=["res://.godot/imported/sky_22_2k.png-7d1ac55a14c31ba4cfc6eab4769246ff.ctex"]
+source_file="res://assets/models/rewild_litter_v1/preview.png"
+dest_files=["res://.godot/imported/preview.png-904edf4638200a83254332607413dfc7.ctex"]
 
 [params]
 

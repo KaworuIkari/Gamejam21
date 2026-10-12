@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4f8wouhkca4i"
-path="res://.godot/imported/sky_36_2k.png-0025e57117b9eff690b8653cc0ad18d5.ctex"
+uid="uid://c1y5nqileumcc"
+path="res://.godot/imported/preview.png-91364aa3209e0bdd9870f03589b28448.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sky_36_2k/sky_36_2k.png"
-dest_files=["res://.godot/imported/sky_36_2k.png-0025e57117b9eff690b8653cc0ad18d5.ctex"]
+source_file="res://assets/models/rewild_vegetation_v1/preview.png"
+dest_files=["res://.godot/imported/preview.png-91364aa3209e0bdd9870f03589b28448.ctex"]
 
 [params]
 

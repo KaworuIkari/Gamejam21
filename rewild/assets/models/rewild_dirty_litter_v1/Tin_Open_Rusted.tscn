@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Tin_Open_Rusted.glb" id="1_r04j4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_n7p7w"]
+radius = 0.28
+
+[node name="Tin_Open_Rusted" type="Node3D" unique_id=207720132]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Visual" type="Node3D" parent="." unique_id=1349592667 instance=ExtResource("1_r04j4")]
+
+[node name="ClearTarget" type="Area3D" parent="." unique_id=2102165308]
+collision_layer = 0
+collision_mask = 0
+
+[node name="@CollisionShape3D@16" type="CollisionShape3D" parent="ClearTarget" unique_id=1931415826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("SphereShape3D_n7p7w")

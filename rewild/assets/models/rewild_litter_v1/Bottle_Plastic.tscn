@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_litter_v1/Bottle_Plastic.glb" id="1_v75f3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_22j6n"]
+radius = 0.28
+
+[node name="Bottle_Plastic" type="Node3D" unique_id=834709935]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Cloudy plastic drinks bottle with cap and faded label. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Visual" type="Node3D" parent="." unique_id=1920275346 instance=ExtResource("1_v75f3")]
+
+[node name="ClearTarget" type="Area3D" parent="." unique_id=909054264]
+collision_layer = 0
+collision_mask = 0
+
+[node name="@CollisionShape3D@6" type="CollisionShape3D" parent="ClearTarget" unique_id=390913236]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("SphereShape3D_22j6n")

@@ -170,3 +170,4 @@ TASK_DEMO_UNTRACK,取消演示追踪,Cancel demo tracking
 TASK_DEMO_ARCHIVE_EMPTY,暂无归档示例,No archived examples
 TASK_DEMO_SELECT,点击任务查看演示详情,Select the task to view demo details
 TASK_DEMO_NOTICE,演示参考：不计入游戏进度或存档。,Display reference: no gameplay or save progress.
+INTERACT_PUMP_PROMPT,按 %s 启动水泵,Press %s to start the pump
