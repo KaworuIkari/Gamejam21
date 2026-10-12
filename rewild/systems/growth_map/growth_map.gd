@@ -1,8 +1,15 @@
 extends Node
 ## Growth map over the crater: one byte per pixel, 0 = barren, 255 = fully green.
 ## Add as an autoload named "GrowthMap". The level calls attach_terrain() once.
+##
+## A second layer, the wet map, holds watering. Watering never turns ground green
+## directly: water() only darkens the soil, then growth catches up over a few
+## seconds wherever it is still wet, so a splash reads as damp sand -> sprouts ->
+## meadow instead of an instant green stamp.
 
 signal changed
+## Emitted for every watering, so tasks and zones can count it.
+signal watered(world_pos: Vector3, radius: float)
 
 const MAP_ORIGIN := Vector2(-512.0, -512.0)  # world XZ of the crater's corner
 const MAP_SIZE := 1024.0               # crater size in world metres (not mask pixels)
@@ -14,8 +21,38 @@ var soil: PackedByteArray = PackedByteArray()
 
 var image: Image
 var texture: ImageTexture
+var wet_image: Image
+var wet_texture: ImageTexture
+
+@export_group("Watering")
+## Seconds for fully wet ground to go from barren to full meadow (per-pixel speeds vary around this).
+@export var grow_time := 3.5
+## Seconds for fully wet ground to dry out completely.
+@export var dry_time := 20.0
+## Wet ground next to existing meadow greens this many times faster, so green creeps in from the edges.
+@export var neighbour_boost := 2.0
+## Simulation steps per second (cost scales with the wet area only).
+@export var tick_rate := 15.0
+
+@export_group("Hole filling")
+## Ground whose surroundings are at least this green fills itself in, so nearly
+## finished patches don't leave odd little dry specks. Straight or bulging edges
+## sit near 50% and never qualify, so green only creeps into gaps and notches.
+@export_range(0.5, 1.0) var fill_threshold := 0.7
+## Size of the "surroundings" checked around each pixel, in metres.
+@export var fill_radius := 8.0
+## How wet a filling pixel gets (it then greens like watered ground, damp first).
+@export_range(0.0, 1.0) var fill_wetness := 1.0
+@export var fill_interval := 0.4
 
 var _data := PackedByteArray()
+var _wet := PackedByteArray()
+var _wet_dirty := false
+var _active := PackedInt32Array()   # pixels that are still wet
+var _is_active := PackedByteArray()  # 1 if the pixel is in _active
+var _tick := 0.0
+var _fill_timer := 0.0
+var _changed_rect := Rect2i()  # pixels whose growth changed since the last hole-fill pass
 var _dirty := false
 var _spreading := false
 var _noise := FastNoiseLite.new()
@@ -25,10 +62,29 @@ func _ready() -> void:
 	_data.resize(RES * RES)  # zero-filled: all barren
 	image = Image.create_from_data(RES, RES, false, Image.FORMAT_R8, _data)
 	texture = ImageTexture.create_from_image(image)
+	_wet.resize(RES * RES)
+	_is_active.resize(RES * RES)
+	wet_image = Image.create_from_data(RES, RES, false, Image.FORMAT_R8, _wet)
+	wet_texture = ImageTexture.create_from_image(wet_image)
 	_noise.frequency = 0.08  # in pixels; lower = larger blobs
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
+	if not _active.is_empty():
+		_tick += delta
+		var step := 1.0 / tick_rate
+		if _tick >= step:
+			_simulate(_tick)
+			_tick = 0.0
+	if _changed_rect.has_area():
+		_fill_timer += delta
+		if _fill_timer >= fill_interval:
+			_fill_timer = 0.0
+			_fill_holes()
+	if _wet_dirty:
+		_wet_dirty = false
+		wet_image.set_data(RES, RES, false, Image.FORMAT_R8, _wet)
+		wet_texture.update(wet_image)
 	if _dirty:  # upload at most once per frame, however many edits happened
 		_dirty = false
 		image.set_data(RES, RES, false, Image.FORMAT_R8, _data)
@@ -38,12 +94,14 @@ func _process(_delta: float) -> void:
 
 func attach_terrain(terrain: Terrain3D) -> void:
 	terrain.material.set_shader_param("growth_map", texture)
+	terrain.material.set_shader_param("wet_map", wet_texture)
 
 
 ## For other shaders that read growth_map (grass, flowers...). The texture updates
 ## in place, so one call is enough.
 func attach_material(mat: ShaderMaterial) -> void:
 	mat.set_shader_parameter("growth_map", texture)
+	mat.set_shader_parameter("wet_map", wet_texture)
 
 
 # --- Coordinates ----------------------------------------------------------
@@ -159,7 +217,191 @@ func _apply_reveal(t: float, buckets: Array[PackedInt32Array], delay: PackedFloa
 	_dirty = true
 
 
-# --- 2. Interaction: noisy brush ------------------------------------------
+# --- 2. Interaction: watering ----------------------------------------------
+
+## The water gun's splash. Wets a noisy disc; growth follows over the next seconds.
+## amount: how wet the centre gets (1 = soaked). Watering the same spot again adds up.
+func water(world_pos: Vector3, radius: float, amount: float = 1.0, edge_noise: float = 0.35) -> void:
+	_wet_disc(world_pos, radius, amount, edge_noise)
+	watered.emit(world_pos, radius)
+
+
+func _wet_disc(world_pos: Vector3, radius: float, amount: float, edge_noise: float) -> void:
+	var c := world_to_px(world_pos)
+	var r := maxf(radius / MAP_SIZE * RES, 0.5)
+	var x0 := maxi(int(c.x - r - 1.0), 0)
+	var y0 := maxi(int(c.y - r - 1.0), 0)
+	var x1 := mini(int(c.x + r + 1.0), RES - 1)
+	var y1 := mini(int(c.y + r + 1.0), RES - 1)
+	for y in range(y0, y1 + 1):
+		for x in range(x0, x1 + 1):
+			var d := Vector2(x + 0.5, y + 0.5).distance_to(c) / r
+			d += _noise.get_noise_2d(x, y) * edge_noise
+			var shape := 1.0 - smoothstep(0.2, 1.0, d)
+			if shape <= 0.0:
+				continue
+			var i := y * RES + x
+			_wet[i] = mini(255, _wet[i] + int(shape * amount * 255.0))
+			_activate(i)
+	_wet_dirty = true
+
+
+func _activate(i: int) -> void:
+	if _is_active[i] == 0:
+		_is_active[i] = 1
+		_active.append(i)
+
+
+## Wet pixels grow green and slowly dry out. Only touches pixels that are wet.
+func _simulate(dt: float) -> void:
+	var grow := 255.0 * dt / grow_time
+	var dry := maxi(1, int(255.0 * dt / dry_time))
+	var still := PackedInt32Array()
+	for i in _active:
+		var w := _wet[i]
+		var g := _data[i]
+		if g < 255:
+			# Per-pixel speed (0.35..1) so a splash fills in unevenly, not as one disc.
+			var speed := 0.35 + 0.65 * float(((i * 2654435761) >> 11) & 255) / 255.0
+			var x := i % RES
+			if x > 0 and x < RES - 1 and i >= RES and i < RES * (RES - 1):
+				var m := maxi(maxi(_data[i - 1], _data[i + 1]), maxi(_data[i - RES], _data[i + RES]))
+				if m > 200:
+					speed *= neighbour_boost
+			# Accumulate fractional gains stochastically so slow pixels still move at low tick sizes.
+			var gain := grow * speed * w / 255.0
+			var whole := int(gain)
+			if randf() < gain - whole:
+				whole += 1
+			if whole > 0:
+				_data[i] = _cap(i, g + whole)
+				_dirty = true
+				_mark_changed(i)
+		w = maxi(0, w - dry)
+		_wet[i] = w
+		if w > 0:
+			still.append(i)
+		else:
+			_is_active[i] = 0
+	_active = still
+	_wet_dirty = true
+
+
+func _mark_changed(i: int) -> void:
+	var p := Vector2i(i % RES, i / RES)
+	if _changed_rect.has_area():
+		_changed_rect = _changed_rect.expand(p).expand(p + Vector2i.ONE)
+	else:
+		_changed_rect = Rect2i(p, Vector2i.ONE)
+
+
+## Wets every pixel that is nearly surrounded by green, using a summed-area table
+## over just the region that changed. Filled pixels change growth themselves, so
+## the next pass looks again and gaps close from their rims inwards.
+func _fill_holes() -> void:
+	var r := maxi(1, int(fill_radius / MAP_SIZE * RES))
+	var area := _changed_rect.grow(r).intersection(Rect2i(0, 0, RES, RES))
+	_changed_rect = Rect2i()
+	# Window sums need r more pixels on each side than the pixels we test.
+	var outer := area.grow(r).intersection(Rect2i(0, 0, RES, RES))
+	var w := outer.size.x
+	var h := outer.size.y
+	var has_soil := soil.size() == RES * RES
+	# Integral images of growth and of countable (soil) pixels, (w+1) x (h+1).
+	var sum := PackedInt32Array()
+	var cnt := PackedInt32Array()
+	sum.resize((w + 1) * (h + 1))
+	cnt.resize((w + 1) * (h + 1))
+	for y in h:
+		var row_s := 0
+		var row_c := 0
+		var src := (outer.position.y + y) * RES + outer.position.x
+		for x in w:
+			var i := src + x
+			if not has_soil or soil[i] > 0:
+				row_s += 1 if _data[i] >= 96 else 0  # counts green pixels, not how green
+				row_c += 1
+			var k := (y + 1) * (w + 1) + x + 1
+			sum[k] = sum[k - w - 1] + row_s
+			cnt[k] = cnt[k - w - 1] + row_c
+	var wet := int(fill_wetness * 255.0)
+	var any := false
+	for y in range(area.position.y, area.end.y):
+		var y0 := maxi(y - r, outer.position.y) - outer.position.y
+		var y1 := mini(y + r + 1, outer.end.y) - outer.position.y
+		for x in range(area.position.x, area.end.x):
+			var i := y * RES + x
+			if _data[i] >= 230 or _wet[i] >= wet or (has_soil and soil[i] == 0):
+				continue
+			var x0 := maxi(x - r, outer.position.x) - outer.position.x
+			var x1 := mini(x + r + 1, outer.end.x) - outer.position.x
+			var a := y1 * (w + 1)
+			var b := y0 * (w + 1)
+			var n := cnt[a + x1] - cnt[a + x0] - cnt[b + x1] + cnt[b + x0]
+			if n == 0:
+				continue
+			var s := sum[a + x1] - sum[a + x0] - sum[b + x1] + sum[b + x0]
+			if s >= fill_threshold * n:
+				_wet[i] = wet
+				_activate(i)
+				any = true
+	if any:
+		_wet_dirty = true
+
+
+# --- 2b. Story: scattered green patches -----------------------------------------
+
+## Sprinkles patches of green over the world, e.g. when the lake terminal comes
+## online. Each patch is watered ground, so it darkens, sprouts and greens like
+## the player's own watering, and makes a seed the player's watering joins up with.
+## patches: Array of Vector4(x, y, z, radius) in world space.
+## duration spreads the patches' start times; 0 applies the end state at once (loading).
+func scatter(patches: Array[Vector4], duration: float = 6.0) -> void:
+	if duration <= 0.0:
+		for p in patches:
+			paint(Vector3(p.x, p.y, p.z), p.w, 2.0)
+		return
+	var order := patches.duplicate()
+	order.shuffle()
+	for k in order.size():
+		var p: Vector4 = order[k]
+		var t := get_tree().create_timer(duration * float(k) / order.size())
+		t.timeout.connect(_wet_disc.bind(Vector3(p.x, p.y, p.z), p.w, 1.0, 0.45))
+
+
+## Random patch positions inside a world XZ rect, kept apart and off non-soil ground.
+func random_patches(area: Rect2, count: int, radius_min: float, radius_max: float,
+		spacing: float, seed_value: int = 1) -> Array[Vector4]:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = seed_value
+	var out: Array[Vector4] = []
+	var tries := 0
+	while out.size() < count and tries < count * 30:
+		tries += 1
+		var p := Vector3(rng.randf_range(area.position.x, area.end.x), 0.0,
+				rng.randf_range(area.position.y, area.end.y))
+		var px := world_to_px(p)
+		if soil.size() == RES * RES and soil[clampi(int(px.y), 0, RES - 1) * RES + clampi(int(px.x), 0, RES - 1)] == 0:
+			continue
+		var ok := true
+		for q in out:
+			if Vector2(q.x, q.z).distance_to(Vector2(p.x, p.z)) < spacing:
+				ok = false
+				break
+		if not ok:
+			continue
+		# A patch is a few overlapping blobs of different sizes, so it reads as an
+		# irregular clump rather than one more dot of the same size.
+		var r := rng.randf_range(radius_min, radius_max)
+		out.append(Vector4(p.x, 0.0, p.z, r))
+		for k in rng.randi_range(1, 3):
+			var a := rng.randf() * TAU
+			var d := r * rng.randf_range(0.6, 1.3)
+			out.append(Vector4(p.x + cos(a) * d, 0.0, p.z + sin(a) * d, r * rng.randf_range(0.4, 0.8)))
+	return out
+
+
+# --- 2c. Instant brush (debug / scripted) -----------------------------------
 
 ## Call once for a burst, or every frame with strength * delta for continuous watering.
 ## edge_noise: how much noise distorts the round falloff (0 = perfect circle).
@@ -232,7 +474,31 @@ func load_progress(path: String = SAVE_PATH) -> bool:
 
 func clear() -> void:
 	_data.fill(0)
+	_wet.fill(0)
+	_is_active.fill(0)
+	_active.clear()
+	_changed_rect = Rect2i()
 	_dirty = true
+	_wet_dirty = true
+
+
+## Average growth (0..1) inside a circle. Used by GrowthZone to decide when an area is done.
+## step: sample every Nth pixel to keep it cheap for big zones.
+func coverage(world_pos: Vector3, radius: float, step: int = 2) -> float:
+	var c := world_to_px(world_pos)
+	var r := maxf(radius / MAP_SIZE * RES, 0.5)
+	var total := 0
+	var sum := 0
+	for y in range(maxi(int(c.y - r), 0), mini(int(c.y + r), RES - 1) + 1, step):
+		for x in range(maxi(int(c.x - r), 0), mini(int(c.x + r), RES - 1) + 1, step):
+			if Vector2(x + 0.5, y + 0.5).distance_to(c) > r:
+				continue
+			var i := y * RES + x
+			if soil.size() == RES * RES and soil[i] == 0:
+				continue  # rock / water never counts against the zone
+			total += 1
+			sum += _data[i]
+	return float(sum) / (total * 255.0) if total > 0 else 1.0
 
 
 # --- Helpers -------------------------------------------------------------------

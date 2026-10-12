@@ -57,6 +57,8 @@ vec3 meadow_color(vec2 wp) {
 uniform sampler2D growth_map : hint_default_white, filter_linear, repeat_disable;
 uniform vec2 growth_origin = vec2(-512.0); // must match GrowthMap.MAP_ORIGIN
 uniform float growth_size = 1024.0;        // must match GrowthMap.MAP_SIZE
+// 0 = dry, 1 = soaked (GrowthMap.wet_texture). Black by default: nothing is wet.
+uniform sampler2D wet_map : hint_default_black, filter_linear, repeat_disable;
 
 vec3 desert_color(vec2 wp) {
 	float big = m_fbm(wp * 0.015 + 7.0);
@@ -80,6 +82,34 @@ float growth_at(vec2 wp) {
 	float g = growth_raw(wp);
 	float n = m_fbm(wp * 0.15 + 5.0) * 0.7 + m_noise(wp * 0.9) * 0.3;
 	return smoothstep(0.25, 0.75, g + (n - 0.5) * 0.55 * (1.0 - g * g));
+}
+
+// How wet the ground is (0..1), with a soft noisy rim like soaked sand.
+float wet_at(vec2 wp) {
+	vec2 uv = (wp - growth_origin) / growth_size;
+	if (any(lessThan(uv, vec2(0.0))) || any(greaterThan(uv, vec2(1.0)))) return 0.0;
+	float w = texture(wet_map, uv).r;
+	float n = m_fbm(wp * 0.4 + 11.0);
+	return smoothstep(0.05, 0.45, w + (n - 0.5) * 0.25);
+}
+
+// Barren -> damp -> sprouting -> meadow. Each stage has its own noisy threshold,
+// so a watered patch darkens first, then greens in clumps from its wettest middle
+// and an existing meadow's edge, instead of switching texture in one hard step.
+vec3 ground_blend(vec2 wp, vec3 meadow) {
+	float g = growth_raw(wp);
+	float n = m_fbm(wp * 0.15 + 5.0) * 0.7 + m_noise(wp * 0.9) * 0.3;
+	float edge = (n - 0.5) * 0.55 * (1.0 - g * g);
+	vec3 col = desert_color(wp);
+	// Damp sand: darker and a little cooler; stays visible under the first sprouts.
+	vec3 damp = col * srgb(vec3(0.66, 0.60, 0.56));
+	col = mix(col, damp, wet_at(wp) * 0.9);
+	// Sprouts: an olive haze that arrives early and patchy.
+	vec3 sprout = mix(col, srgb(vec3(0.56, 0.60, 0.28)), 0.75);
+	float s = smoothstep(0.08, 0.40, g + edge * 1.4 + (m_noise(wp * 2.3) - 0.5) * 0.2);
+	col = mix(col, sprout, s);
+	// Full meadow, same threshold growth_at() uses so grass blades match.
+	return mix(col, meadow, smoothstep(0.25, 0.75, g + edge));
 }
 
 // Darkens the colour under big drifting cloud shadows.

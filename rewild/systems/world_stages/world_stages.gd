@@ -13,6 +13,9 @@ signal stage_changed(index: int, stage: WorldStage)
 @export var meadow: MeadowWorld
 ## Where blooms start (e.g. the planted device).
 @export var focus: Node3D
+## Optional hand-placed scatter patches: each child Marker3D is a patch, its
+## scale.x the radius in metres. When set, stages use these instead of random spots.
+@export var scatter_points: Node3D
 @export var start_stage := 0
 ## Clear the GrowthMap on start. Turn off when loading saved progress.
 @export var reset_growth_on_start := true
@@ -104,6 +107,20 @@ func _run_growth(st: WorldStage, instant: bool) -> void:
 			growth.reveal_from(pos, dur, 0.0)
 		WorldStage.GrowthEvent.CLEAR:
 			growth.clear()
+	if st.scatter_count > 0:
+		growth.scatter(_scatter_patches(growth, st), dur)
+
+
+func _scatter_patches(growth: Node, st: WorldStage) -> Array[Vector4]:
+	if scatter_points == null:
+		return growth.random_patches(st.scatter_area, st.scatter_count,
+				st.scatter_radius_min, st.scatter_radius_max, st.scatter_spacing, st.scatter_seed)
+	var out: Array[Vector4] = []
+	for m in scatter_points.get_children():
+		if m is Node3D:
+			var p: Vector3 = m.global_position
+			out.append(Vector4(p.x, p.y, p.z, maxf(m.scale.x, 1.0) * st.scatter_radius_min))
+	return out
 
 
 func _growth() -> Node:
