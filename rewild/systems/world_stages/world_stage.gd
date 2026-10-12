@@ -46,3 +46,14 @@ enum GrowthEvent {
 @export var growth_event := GrowthEvent.NONE
 @export var growth_radius := 40.0
 @export var growth_duration := 6.0
+
+@export_group("Scattered patches")
+## Patches of green sprinkled over scatter_area when this stage starts (e.g. the
+## terminal coming online). They are seeds the player's watering joins up with.
+@export var scatter_count := 0
+## World XZ rect the patches land in.
+@export var scatter_area := Rect2(-200, -200, 400, 400)
+@export var scatter_radius_min := 5.0
+@export var scatter_radius_max := 12.0
+@export var scatter_spacing := 25.0
+@export var scatter_seed := 1

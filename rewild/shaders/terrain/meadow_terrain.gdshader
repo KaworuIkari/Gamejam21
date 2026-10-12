@@ -574,8 +574,8 @@ void fragment() {
 	meadow = mix(meadow, flower_palette(m_hash(cell + 7.0)), speck * far * detail * 0.85);
 	meadow = mix(meadow, srgb(vec3(0.90, 0.78, 0.80)), cluster * (1.0 - detail) * 0.18);
 
-	// GROWTH: barren desert until the GrowthMap turns this spot green.
-	meadow = mix(desert_color(wp), meadow, growth_at(wp));
+	// GROWTH: barren desert until the GrowthMap turns this spot green (damp -> sprouts -> meadow).
+	meadow = ground_blend(wp, meadow);
 
 	vec3 col = mix(textured, meadow, meadow_w);
 	col *= color_map.rgb;                       // Paint Color tool (C) tints everything
