@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Lakebed_Cracked_Flat_Polluted",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation.",
+    "dimensions": [
+      5.946,
+      0.298,
+      6.159
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Lakebed_Cracked_Flat_Cleared",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation.",
+    "dimensions": [
+      5.946,
+      0.212,
+      6.159
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Lakebed_Drum_Sink_Polluted",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation.",
+    "dimensions": [
+      6.3,
+      1.208,
+      6.376
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Lakebed_Drum_Sink_Cleared",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation.",
+    "dimensions": [
+      6.3,
+      0.212,
+      6.376
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Lakebed_Stranded_Frame_Polluted",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation.",
+    "dimensions": [
+      6.143,
+      1.08,
+      6.107
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Lakebed_Stranded_Frame_Cleared",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation.",
+    "dimensions": [
+      6.143,
+      0.212,
+      6.107
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Lakebed_Hazard_Sign",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "1.7m shoreline hazard sign. Place above high waterline; text-free warning symbol.",
+    "dimensions": [
+      1.5,
+      1.682,
+      0.293
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Lakebed_Waterline_Gauge",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "3.1m gauge prop with unnumbered ticks. Position and scale against actual dry and full lake levels.",
+    "dimensions": [
+      0.515,
+      3.1,
+      0.269
+    ],
+    "objects": 1
+  }
+]

@@ -1,0 +1,141 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58k7u"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r664u"]
+size = Vector2(32, 32)
+
+[sub_resource type="Environment" id="Environment_4csbj"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=1716192053]
+
+[node name="Lake_Island_Dock" type="Node3D" parent="." unique_id=726414364]
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "Raised island with empty terminal pad; dry bed at 0m, dock at 4m, target waterline 3.7m."
+
+[node name="@Label3D@40" type="Label3D" parent="." unique_id=18358372]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Lake Island Dock"
+font_size = 48
+
+[node name="Sluice_Gate_Closed" type="Node3D" parent="." unique_id=192870411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "2.7m channel; swap complete scene to open or close. Open leaf rises above passage."
+
+[node name="@Label3D@80" type="Label3D" parent="." unique_id=2134249686]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 3.7)
+pixel_size = 0.007
+text = "Sluice Gate Closed"
+font_size = 48
+
+[node name="Sluice_Gate_Open" type="Node3D" parent="." unique_id=1420881422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "2.7m channel; swap complete scene to open or close. Open leaf rises above passage."
+
+[node name="@Label3D@120" type="Label3D" parent="." unique_id=850418207]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 18, 0.15, 3.7)
+pixel_size = 0.007
+text = "Sluice Gate Open"
+font_size = 48
+
+[node name="Spring_Intake" type="Node3D" parent="." unique_id=2098945035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+metadata/zone = "spring"
+metadata/category = "Permanent"
+metadata/description = "Water-source background fixture; place removable rubble in front of its grille."
+
+[node name="@Label3D@150" type="Label3D" parent="." unique_id=803677450]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 12.7)
+pixel_size = 0.007
+text = "Spring Intake"
+font_size = 48
+
+[node name="Rescue_Enclosure_Closed" type="Node3D" parent="." unique_id=2010681305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+metadata/zone = "spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Separate empty enclosure; animal and rescue event must be supplied by gameplay."
+
+[node name="@Label3D@187" type="Label3D" parent="." unique_id=262067461]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 12.7)
+pixel_size = 0.007
+text = "Rescue Enclosure Closed"
+font_size = 48
+
+[node name="Rescue_Enclosure_Open" type="Node3D" parent="." unique_id=532862064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 9)
+metadata/zone = "spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Separate empty enclosure; animal and rescue event must be supplied by gameplay."
+
+[node name="@Label3D@224" type="Label3D" parent="." unique_id=935675783]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 18, 0.15, 12.7)
+pixel_size = 0.007
+text = "Rescue Enclosure Open"
+font_size = 48
+
+[node name="Jetpack_Pickup" type="Node3D" parent="." unique_id=1588727149]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+metadata/zone = "east"
+metadata/category = "Pickup"
+metadata/description = "0.8m tall equipment mesh. Attach to character with a local offset; no flight behavior included."
+
+[node name="@Label3D@225" type="Label3D" parent="." unique_id=354170926]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 21.7)
+pixel_size = 0.007
+text = "Jetpack Pickup"
+font_size = 48
+
+[node name="Water_Tool_Pickup" type="Node3D" parent="." unique_id=1897878698]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 18)
+metadata/zone = "lake"
+metadata/category = "Pickup"
+metadata/description = "Tool points local -Z; mesh only, ready for pickup display or character attachment."
+
+[node name="@Label3D@226" type="Label3D" parent="." unique_id=311920601]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 21.7)
+pixel_size = 0.007
+text = "Water Tool Pickup"
+font_size = 48
+
+[node name="Peak_Landing_Platform" type="Node3D" parent="." unique_id=1824256323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 18)
+metadata/zone = "peak"
+metadata/category = "Permanent"
+metadata/description = "3.6m landing surface for staged jetpack ascent; space ledges to your actual flight range."
+
+[node name="@Label3D@245" type="Label3D" parent="." unique_id=1505934310]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 18, 0.15, 21.7)
+pixel_size = 0.007
+text = "Peak Landing Platform"
+font_size = 48
+
+[node name="@MeshInstance3D@246" type="MeshInstance3D" parent="." unique_id=2006886897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.65, 9)
+material_override = SubResource("StandardMaterial3D_58k7u")
+mesh = SubResource("PlaneMesh_r664u")
+
+[node name="@DirectionalLight3D@247" type="DirectionalLight3D" parent="." unique_id=407203995]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@248" type="WorldEnvironment" parent="." unique_id=1229523124]
+environment = SubResource("Environment_4csbj")
+
+[node name="@Camera3D@249" type="Camera3D" parent="." unique_id=118229374]
+transform = Transform3D(0.81373346, -0.3668594, 0.4508348, 0, 0.7756455, 0.6311688, -0.5812382, -0.51360315, 0.63116866, 29, 29, 37)
+projection = 1
+current = true
+size = 34.0

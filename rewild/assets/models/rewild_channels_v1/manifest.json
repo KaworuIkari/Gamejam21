@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Channel_Straight_Dry",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      2.24,
+      1.175,
+      6.0
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Channel_Straight_Flowing",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      2.24,
+      1.175,
+      6.0
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Channel_Straight_Reclaimed",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      2.832,
+      1.175,
+      6.0
+    ],
+    "objects": 3
+  },
+  {
+    "name": "Channel_Bend_Dry",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      4.12,
+      1.175,
+      4.12
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Channel_Bend_Flowing",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      4.12,
+      1.175,
+      4.12
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Channel_Bend_Reclaimed",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      4.832,
+      1.175,
+      4.12
+    ],
+    "objects": 3
+  },
+  {
+    "name": "Channel_Junction_Dry",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      4.12,
+      1.175,
+      6.0
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Channel_Junction_Flowing",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      4.12,
+      1.175,
+      6.0
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Channel_Junction_Reclaimed",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      4.835,
+      1.175,
+      6.0
+    ],
+    "objects": 3
+  },
+  {
+    "name": "Channel_Spillway_Dry",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      2.24,
+      1.875,
+      6.0
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Channel_Spillway_Flowing",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      2.24,
+      1.875,
+      6.0
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Channel_Spillway_Reclaimed",
+    "zone": "spring / lake / east",
+    "category": "Permanent",
+    "description": "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length.",
+    "dimensions": [
+      2.832,
+      1.875,
+      6.0
+    ],
+    "objects": 3
+  }
+]

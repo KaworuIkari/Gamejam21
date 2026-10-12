@@ -1,0 +1,117 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gb0qc"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xckvq"]
+size = Vector2(110, 110)
+
+[sub_resource type="Environment" id="Environment_x3vt3"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=172035367]
+
+[node name="Wall_Container_Stack" type="Node3D" parent="." unique_id=121750237]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="@Label3D@3" type="Label3D" parent="." unique_id=89208043]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Wall Container Stack"
+font_size = 48
+
+[node name="Wall_Vehicle_Carcass" type="Node3D" parent="." unique_id=1151549557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="@Label3D@5" type="Label3D" parent="." unique_id=588846418]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 24, 0.15, 3.7)
+pixel_size = 0.007
+text = "Wall Vehicle Carcass"
+font_size = 48
+
+[node name="Wall_Compacted_Scrap" type="Node3D" parent="." unique_id=1455965868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 0)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="@Label3D@7" type="Label3D" parent="." unique_id=1484467074]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 48, 0.15, 3.7)
+pixel_size = 0.007
+text = "Wall Compacted Scrap"
+font_size = 48
+
+[node name="Wall_Rebar_Seawall" type="Node3D" parent="." unique_id=1553212900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="@Label3D@9" type="Label3D" parent="." unique_id=730189917]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 27.7)
+pixel_size = 0.007
+text = "Wall Rebar Seawall"
+font_size = 48
+
+[node name="Wall_Engine_Pile" type="Node3D" parent="." unique_id=1578878461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 24)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="@Label3D@11" type="Label3D" parent="." unique_id=117692033]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 24, 0.15, 27.7)
+pixel_size = 0.007
+text = "Wall Engine Pile"
+font_size = 48
+
+[node name="Wall_Final_Locked_Section" type="Node3D" parent="." unique_id=1199180393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 24)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="@Label3D@13" type="Label3D" parent="." unique_id=701588763]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 48, 0.15, 27.7)
+pixel_size = 0.007
+text = "Wall Final Locked Section"
+font_size = 48
+
+[node name="@MeshInstance3D@14" type="MeshInstance3D" parent="." unique_id=747533836]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -0.65, 32)
+material_override = SubResource("StandardMaterial3D_gb0qc")
+mesh = SubResource("PlaneMesh_xckvq")
+
+[node name="@DirectionalLight3D@15" type="DirectionalLight3D" parent="." unique_id=1705034646]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@16" type="WorldEnvironment" parent="." unique_id=648636991]
+environment = SubResource("Environment_x3vt3")
+
+[node name="@Camera3D@17" type="Camera3D" parent="." unique_id=1234782456]
+transform = Transform3D(0.80800754, -0.34281024, 0.47917116, 0, 0.8132956, 0.5818507, -0.5891722, -0.47013977, 0.65714896, 94, 88, 126)
+projection = 1
+current = true
+size = 120.0
