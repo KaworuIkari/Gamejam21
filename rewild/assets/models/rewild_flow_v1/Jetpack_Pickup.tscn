@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_flow_v1/Jetpack_Pickup.glb" id="1_a0b2x"]
+
+[node name="Jetpack_Pickup" type="Node3D" unique_id=1588727149]
+metadata/zone = "east"
+metadata/category = "Pickup"
+metadata/description = "0.8m tall equipment mesh. Attach to character with a local offset; no flight behavior included."
+
+[node name="Visual" type="Node3D" parent="." unique_id=1780255734 instance=ExtResource("1_a0b2x")]

@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://objects/pickups/water_drop/water_drop.gd" id="1_script"]
+[ext_resource type="ArrayMesh" path="res://objects/pickups/water_drop/water_drop_mesh.res" id="2_mesh"]
+[ext_resource type="Shader" path="res://objects/pickups/water_drop/water_drop.gdshader" id="3_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drop"]
+render_priority = 0
+shader = ExtResource("3_shader")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_drop"]
+radius = 0.7
+
+[node name="WaterDrop" type="Area3D"]
+script = ExtResource("1_script")
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_mesh")
+material_override = SubResource("ShaderMaterial_drop")
+cast_shadow = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_drop")

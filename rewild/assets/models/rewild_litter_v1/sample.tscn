@@ -1,0 +1,229 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wmqu"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jgmyt"]
+size = Vector2(10, 13)
+
+[sub_resource type="Environment" id="Environment_kkicq"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=657568006]
+
+[node name="Can_Aluminum" type="Node3D" parent="." unique_id=1411668632]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Small aluminum drink can, approx 0.32m. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@3" type="Label3D" parent="." unique_id=779572856]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.03, 0.8)
+pixel_size = 0.004
+text = "Can Aluminum"
+font_size = 24
+
+[node name="Can_Crushed" type="Node3D" parent="." unique_id=2076629758]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Crushed drink can. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@5" type="Label3D" parent="." unique_id=1535683281]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 2, 0.03, 0.8)
+pixel_size = 0.004
+text = "Can Crushed"
+font_size = 24
+
+[node name="Bottle_Plastic" type="Node3D" parent="." unique_id=834709935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Cloudy plastic drinks bottle with cap and faded label. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@7" type="Label3D" parent="." unique_id=1810593901]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 4, 0.03, 0.8)
+pixel_size = 0.004
+text = "Bottle Plastic"
+font_size = 24
+
+[node name="Bottle_Squat" type="Node3D" parent="." unique_id=623486932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Squat blue plastic bottle. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@9" type="Label3D" parent="." unique_id=355178467]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.03, 2.8)
+pixel_size = 0.004
+text = "Bottle Squat"
+font_size = 24
+
+[node name="Bottle_Green" type="Node3D" parent="." unique_id=1213823983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Faded green plastic bottle. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@11" type="Label3D" parent="." unique_id=821710767]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 2, 0.03, 2.8)
+pixel_size = 0.004
+text = "Bottle Green"
+font_size = 24
+
+[node name="Cup_Takeaway" type="Node3D" parent="." unique_id=1813611521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Discarded takeaway cup with bent straw. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@13" type="Label3D" parent="." unique_id=1955368714]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 4, 0.03, 2.8)
+pixel_size = 0.004
+text = "Cup Takeaway"
+font_size = 24
+
+[node name="Carton_Drink" type="Node3D" parent="." unique_id=1400794711]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Folded drink carton. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@15" type="Label3D" parent="." unique_id=127364443]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.03, 4.8)
+pixel_size = 0.004
+text = "Carton Drink"
+font_size = 24
+
+[node name="Tray_Food" type="Node3D" parent="." unique_id=420779256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Discarded food tray and liner. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@17" type="Label3D" parent="." unique_id=1423546814]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 2, 0.03, 4.8)
+pixel_size = 0.004
+text = "Tray Food"
+font_size = 24
+
+[node name="Bag_Crumpled" type="Node3D" parent="." unique_id=1543369068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Crumpled plastic shopping bag. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@19" type="Label3D" parent="." unique_id=1326175920]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 4, 0.03, 4.8)
+pixel_size = 0.004
+text = "Bag Crumpled"
+font_size = 24
+
+[node name="Wrapper_Snack" type="Node3D" parent="." unique_id=1990084533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Crumpled foil snack wrapper. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@21" type="Label3D" parent="." unique_id=893781608]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.03, 6.8)
+pixel_size = 0.004
+text = "Wrapper Snack"
+font_size = 24
+
+[node name="Wire_Offcut" type="Node3D" parent="." unique_id=1250790846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Small bent wire offcut. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@23" type="Label3D" parent="." unique_id=1875874311]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 2, 0.03, 6.8)
+pixel_size = 0.004
+text = "Wire Offcut"
+font_size = 24
+
+[node name="Litter_Cluster_1" type="Node3D" parent="." unique_id=262260080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@25" type="Label3D" parent="." unique_id=1172490234]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 4, 0.03, 6.8)
+pixel_size = 0.004
+text = "Litter Cluster 1"
+font_size = 24
+
+[node name="Litter_Cluster_2" type="Node3D" parent="." unique_id=1216172333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@27" type="Label3D" parent="." unique_id=109879487]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.03, 8.8)
+pixel_size = 0.004
+text = "Litter Cluster 2"
+font_size = 24
+
+[node name="Litter_Cluster_3" type="Node3D" parent="." unique_id=867804029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 8)
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="@Label3D@29" type="Label3D" parent="." unique_id=646962580]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 2, 0.03, 8.8)
+pixel_size = 0.004
+text = "Litter Cluster 3"
+font_size = 24
+
+[node name="@MeshInstance3D@30" type="MeshInstance3D" parent="." unique_id=230332821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.04, 4)
+material_override = SubResource("StandardMaterial3D_4wmqu")
+mesh = SubResource("PlaneMesh_jgmyt")
+
+[node name="@DirectionalLight3D@31" type="DirectionalLight3D" parent="." unique_id=462946341]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@32" type="WorldEnvironment" parent="." unique_id=1898910132]
+environment = SubResource("Environment_kkicq")
+
+[node name="@Camera3D@33" type="Camera3D" parent="." unique_id=1538604089]
+transform = Transform3D(0.8637789, -0.3277909, 0.38267365, 0, 0.7594675, 0.65054524, -0.503871, -0.56192726, 0.656012, 9, 12, 16)
+projection = 1
+current = true
+size = 14.0

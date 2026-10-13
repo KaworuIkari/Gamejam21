@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_litter_v1/Wire_Offcut.glb" id="1_pi8i1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qgv3f"]
+radius = 0.28
+
+[node name="Wire_Offcut" type="Node3D" unique_id=1250790846]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Small bent wire offcut. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Visual" type="Node3D" parent="." unique_id=1532261748 instance=ExtResource("1_pi8i1")]
+
+[node name="ClearTarget" type="Area3D" parent="." unique_id=1257184958]
+collision_layer = 0
+collision_mask = 0
+
+[node name="@CollisionShape3D@22" type="CollisionShape3D" parent="ClearTarget" unique_id=753353475]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("SphereShape3D_qgv3f")

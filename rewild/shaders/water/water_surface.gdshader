@@ -23,6 +23,10 @@ uniform float local_noise_scale = 1.0;                 // local mode only: raise
 group_uniforms foam;
 uniform vec3 foam_color : source_color = vec3(1.0);
 uniform float foam_width = 0.3;
+group_uniforms flow; // rapids: noise slides along the mesh instead of drifting in place
+uniform vec3 flow_direction = vec3(0.0, 0.0, 1.0);    // in mesh space; +Z = downstream
+uniform float flow_speed = 0.0;                        // metres per second, 0 = still water
+uniform float flow_foam : hint_range(0.0, 1.0) = 0.0;  // streaky whitewater stretched along the flow
 group_uniforms light;
 uniform float caustic_strength = 0.9;
 uniform float caustic_scale = 0.6;
@@ -37,6 +41,7 @@ uniform sampler2D depth_tex : hint_depth_texture, filter_nearest, repeat_disable
 
 varying vec3 world_pos;
 varying vec3 noise_pos;
+varying vec3 flow_dir;
 
 group_uniforms blob;                                   // local-coords mode only
 instance uniform float time_offset = 0.0;   // per-blob phase in seconds, set from code at spawn
@@ -132,6 +137,8 @@ void vertex() {
 	vec3 lp = VERTEX * local_noise_scale;                  // local-space coordinates, before any displacement
 	vec3 wp0 = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 	noise_pos = use_local_coords ? lp : wp0;
+	vec3 fd = use_local_coords ? flow_direction : mat3(MODEL_MATRIX) * flow_direction;
+	flow_dir = length(fd) > 0.0001 ? normalize(fd) : vec3(0.0, 0.0, 1.0);
 	float t = (TIME + time_offset) * wave_speed;
 
 	if (use_local_coords) {
@@ -160,10 +167,11 @@ void vertex() {
 
 void fragment() {
 	float t = TIME * wave_speed;
+	vec3 np = noise_pos - flow_dir * flow_speed * TIME;    // noise position, sliding downstream when flowing
 
 	// Ripples: two gradient-noise layers drifting in different directions, as a height field.
-	vec3 p1 = noise_pos * ripple_scale * 2.0 + vec3(t * 0.15, 3.7, t * 0.10);
-	vec3 p2 = noise_pos * ripple_scale * 3.1 - vec3(t * 0.12, 8.2, -t * 0.17);
+	vec3 p1 = np * ripple_scale * 2.0 + vec3(t * 0.15, 3.7, t * 0.10);
+	vec3 p2 = np * ripple_scale * 3.1 - vec3(t * 0.12, 8.2, -t * 0.17);
 	vec3 g = gnoise_grad(p1) + gnoise_grad(p2);           // slope in noise space
 
 	mat3 to_view = mat3(VIEW_MATRIX);
@@ -187,7 +195,7 @@ void fragment() {
 			vec3 behind = textureLod(screen_tex, SCREEN_UV + ripple * refraction, 0.0).rgb;
 			vec3 water = mix(shallow_color, deep_color, 1.0 - exp(-(1.0 - rim) * blob_density * 2.0));
 			col = mix(water, behind * mix(vec3(1.0), shallow_color, 0.55), blob_clarity);
-			float fn = gn01(noise_pos * 3.0 + vec3(t * 0.3, 5.1, 0.0)) - 0.5;
+			float fn = gn01(np * 3.0 + vec3(t * 0.3, 5.1, 0.0)) - 0.5;
 			foam = blob_foam * smoothstep(0.7, 0.9, rim + fn * 0.35);
 		} else {
 			// Flat water: depth and thickness come from the scene behind the surface.
@@ -210,15 +218,24 @@ void fragment() {
 			vec3 water = mix(deep_color, shallow_color, exp(-depth / color_depth));
 			col = mix(water, bed, exp(-path * murkiness));
 
-			float foam_edge = foam_width * (0.5 + gn01(noise_pos * 3.0 + vec3(t * 0.3, 5.1, 0.0)));
+			float foam_edge = foam_width * (0.5 + gn01(np * 3.0 + vec3(t * 0.3, 5.1, 0.0)));
 			foam = smoothstep(0.55, 0.45, depth / max(foam_edge, 0.001));
+		}
+
+		if (flow_foam > 0.0) {
+			// Squash the noise along the flow so it turns into long white streaks.
+			vec3 streak_pos = np - flow_dir * dot(np, flow_dir) * 0.92;
+			float streaks = gn01(streak_pos * 3.0 + vec3(0.0, 2.3, 0.0));
+			streaks *= 0.75 + 0.5 * gn01(np * 0.8 - vec3(4.1, 0.0, 0.0)); // break the lines up along their length
+			float cut = 0.85 - 0.4 * flow_foam;                  // more flow_foam = more of the surface is white
+			foam = max(foam, smoothstep(cut, cut + 0.08, streaks));
 		}
 
 		float fresnel = pow(1.0 - clamp(dot(n0, VIEW), 0.0, 1.0), 4.0);
 		col = mix(col, sky_tint, fresnel * 0.6);
 
-		float sparkle = gn01(noise_pos * 22.0 + vec3(t * 1.5, 1.3, 0.0))
-			* gn01(noise_pos * 17.0 - vec3(t * 1.2, 7.9, 0.0));
+		float sparkle = gn01(np * 22.0 + vec3(t * 1.5, 1.3, 0.0))
+			* gn01(np * 17.0 - vec3(t * 1.2, 7.9, 0.0));
 		sparkle = smoothstep(sparkle_threshold, sparkle_threshold + 0.1, sparkle) * sparkle_strength * (1.0 - foam);
 
 		ALBEDO = foam_color * foam;

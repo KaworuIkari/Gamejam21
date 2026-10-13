@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_litter_v1/Can_Aluminum.glb" id="1_qs32l"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h3mbc"]
+radius = 0.28
+
+[node name="Can_Aluminum" type="Node3D" unique_id=1411668632]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Small aluminum drink can, approx 0.32m. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Visual" type="Node3D" parent="." unique_id=1508122175 instance=ExtResource("1_qs32l")]
+
+[node name="ClearTarget" type="Area3D" parent="." unique_id=1007088357]
+collision_layer = 0
+collision_mask = 0
+
+[node name="@CollisionShape3D@2" type="CollisionShape3D" parent="ClearTarget" unique_id=403711620]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("SphereShape3D_h3mbc")

@@ -64,6 +64,7 @@ func _process(_delta: float) -> void:
 			_screen_layer.get_parent().remove_child(_screen_layer)
 		cam.get_viewport().add_child.call_deferred(_screen_layer)
 
+	# Hidden water (e.g. not switched on yet by WaterFlowSwitch) can't be dived into.
 	var under := is_point_underwater(cam.global_position)
 	_fog_quad.visible = under
 	_screen_layer.visible = under
@@ -97,7 +98,9 @@ func _wave(p: Vector2, t: float) -> float:
 func _find_camera() -> Camera3D:
 	for node in get_tree().root.find_children("*", "Camera3D", true, false):
 		var c := node as Camera3D
-		if c.is_current():
+		# Skip cameras made in code (no owner), such as Terrain3D's MouseCamera: it sits at the
+		# origin, often below the water, and shares this world, so its fog would cover every view.
+		if c.is_current() and c.owner != null:
 			return c
 	return null
 
