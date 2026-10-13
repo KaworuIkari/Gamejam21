@@ -1,8 +1,8 @@
 @tool
 extends MeshInstance3D
 # gun attachment
-@export var water_gun_pos:Node3D
-@onready var water_gun: MeshInstance3D = $WaterGun
+# @export var water_gun_pos:Node3D
+# @onready var water_gun: MeshInstance3D = $WaterGun
 
 # procedural tube
 @export var anchor_start:Node3D
@@ -26,20 +26,20 @@ func _ready():
 	_ready_tube()
 
 func _process(_delta):
-	set_gun_pos()
+	# set_gun_pos()
 	update_tube()
 
-func set_gun_pos():
-	if water_gun and water_gun_pos:
-		water_gun.global_transform = water_gun_pos.global_transform
+# func set_gun_pos():
+# 	if water_gun and water_gun_pos:
+# 		water_gun.global_transform = water_gun_pos.global_transform
 
 func _ready_tube() -> void:
 	noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	noise.seed = noise_seed
 	# we want to use point's global position!
-	path.top_level = true
+	# path.top_level = true
 	path.global_transform = Transform3D.IDENTITY
-	csg.top_level = true
+	# csg.top_level = true
 	csg.global_transform = Transform3D.IDENTITY
 	csg.path_local = true
 
@@ -48,7 +48,7 @@ func update_tube():
 		return
 	var p0 = anchor_start.global_position
 	var p2 = anchor_end.global_position
-	
+
 	# Middle point: midpoint + your offset (in character space) + wind
 	var t = Time.get_ticks_msec() * 0.001 * noise_frequency
 	var wobble = Vector3(
@@ -62,7 +62,7 @@ func update_tube():
 		c.clear_points()
 		for i in 3:
 			c.add_point(Vector3.ZERO)
-	
+
 	var pts = [p0, p1, p2]
 	var dirs = [
 		-anchor_start.global_basis.y,
