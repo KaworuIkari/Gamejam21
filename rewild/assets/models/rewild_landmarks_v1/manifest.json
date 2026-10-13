@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Ruined_Concrete_Tower_Wasteland",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Wasteland. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      9.9,
+      22.081,
+      9.042
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Ruined_Concrete_Tower_Revival",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Revival. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      15.921,
+      23.289,
+      13.679
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Ruined_Concrete_Tower_Golden",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Golden. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      18.437,
+      23.859,
+      13.918
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Twin_Ruptured_Silos_Wasteland",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Wasteland. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      11.8,
+      19.544,
+      10.799
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Twin_Ruptured_Silos_Revival",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Revival. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      17.171,
+      21.299,
+      12.324
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Twin_Ruptured_Silos_Golden",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Golden. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      18.975,
+      21.65,
+      14.001
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Broken_Industrial_Viaduct_Wasteland",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Wasteland. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      24.055,
+      11.967,
+      10.132
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Broken_Industrial_Viaduct_Revival",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Revival. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      24.055,
+      15.346,
+      17.844
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Broken_Industrial_Viaduct_Golden",
+    "zone": "permanent landmark",
+    "category": "Permanent",
+    "description": "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Golden. Same structural footprint and collision in all variants.",
+    "dimensions": [
+      27.809,
+      19.53,
+      20.64
+    ],
+    "objects": 2
+  }
+]

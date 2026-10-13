@@ -1,0 +1,228 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oindd"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6gdjc"]
+size = Vector2(35, 44)
+
+[sub_resource type="Environment" id="Environment_rseqx"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=1918828068]
+
+[node name="Shrub_Cluster_Withered" type="Node3D" parent="." unique_id=211354646]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@2" type="Label3D" parent="." unique_id=129164166]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Shrub Cluster Withered"
+font_size = 48
+
+[node name="Shrub_Cluster_Sprouting" type="Node3D" parent="." unique_id=477697531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@3" type="Label3D" parent="." unique_id=326642991]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 7, 0.15, 3.7)
+pixel_size = 0.007
+text = "Shrub Cluster Sprouting"
+font_size = 48
+
+[node name="Shrub_Cluster_Flourishing" type="Node3D" parent="." unique_id=196629598]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@4" type="Label3D" parent="." unique_id=1836925759]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 14, 0.15, 3.7)
+pixel_size = 0.007
+text = "Shrub Cluster Flourishing"
+font_size = 48
+
+[node name="Skeletal_Tree_Withered" type="Node3D" parent="." unique_id=40077724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@5" type="Label3D" parent="." unique_id=1517781501]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 10.7)
+pixel_size = 0.007
+text = "Skeletal Tree Withered"
+font_size = 48
+
+[node name="Skeletal_Tree_Sprouting" type="Node3D" parent="." unique_id=88772724]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@6" type="Label3D" parent="." unique_id=1844324335]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 7, 0.15, 10.7)
+pixel_size = 0.007
+text = "Skeletal Tree Sprouting"
+font_size = 48
+
+[node name="Skeletal_Tree_Flourishing" type="Node3D" parent="." unique_id=1996513375]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 7)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@7" type="Label3D" parent="." unique_id=1328889235]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 14, 0.15, 10.7)
+pixel_size = 0.007
+text = "Skeletal Tree Flourishing"
+font_size = 48
+
+[node name="Reed_Bed_Withered" type="Node3D" parent="." unique_id=1732964936]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@8" type="Label3D" parent="." unique_id=1555094215]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 17.7)
+pixel_size = 0.007
+text = "Reed Bed Withered"
+font_size = 48
+
+[node name="Reed_Bed_Sprouting" type="Node3D" parent="." unique_id=2067135987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 14)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@9" type="Label3D" parent="." unique_id=1652882398]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 7, 0.15, 17.7)
+pixel_size = 0.007
+text = "Reed Bed Sprouting"
+font_size = 48
+
+[node name="Reed_Bed_Flourishing" type="Node3D" parent="." unique_id=344029721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 14)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@10" type="Label3D" parent="." unique_id=1973860363]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 14, 0.15, 17.7)
+pixel_size = 0.007
+text = "Reed Bed Flourishing"
+font_size = 48
+
+[node name="Fern_Cluster_Withered" type="Node3D" parent="." unique_id=623338623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@11" type="Label3D" parent="." unique_id=1783635101]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 24.7)
+pixel_size = 0.007
+text = "Fern Cluster Withered"
+font_size = 48
+
+[node name="Fern_Cluster_Sprouting" type="Node3D" parent="." unique_id=561250276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 21)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@12" type="Label3D" parent="." unique_id=385516478]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 7, 0.15, 24.7)
+pixel_size = 0.007
+text = "Fern Cluster Sprouting"
+font_size = 48
+
+[node name="Fern_Cluster_Flourishing" type="Node3D" parent="." unique_id=1282974597]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 21)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@13" type="Label3D" parent="." unique_id=1755611869]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 14, 0.15, 24.7)
+pixel_size = 0.007
+text = "Fern Cluster Flourishing"
+font_size = 48
+
+[node name="Cracked_Planter_Withered" type="Node3D" parent="." unique_id=1343794005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 28)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@15" type="Label3D" parent="." unique_id=376671497]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 31.7)
+pixel_size = 0.007
+text = "Cracked Planter Withered"
+font_size = 48
+
+[node name="Cracked_Planter_Sprouting" type="Node3D" parent="." unique_id=1523421783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 28)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@17" type="Label3D" parent="." unique_id=1750794651]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 7, 0.15, 31.7)
+pixel_size = 0.007
+text = "Cracked Planter Sprouting"
+font_size = 48
+
+[node name="Cracked_Planter_Flourishing" type="Node3D" parent="." unique_id=1609158646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 28)
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="@Label3D@19" type="Label3D" parent="." unique_id=1986082154]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 14, 0.15, 31.7)
+pixel_size = 0.007
+text = "Cracked Planter Flourishing"
+font_size = 48
+
+[node name="@MeshInstance3D@20" type="MeshInstance3D" parent="." unique_id=1600917657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -0.2, 14)
+material_override = SubResource("StandardMaterial3D_oindd")
+mesh = SubResource("PlaneMesh_6gdjc")
+
+[node name="@DirectionalLight3D@21" type="DirectionalLight3D" parent="." unique_id=1043115652]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@22" type="WorldEnvironment" parent="." unique_id=1974830372]
+environment = SubResource("Environment_rseqx")
+
+[node name="@Camera3D@23" type="Camera3D" parent="." unique_id=1085813611]
+transform = Transform3D(0.8700222, -0.34087494, 0.3561821, 0, 0.72246045, 0.69141227, -0.49301258, -0.601544, 0.6285566, 24, 34, 44)
+projection = 1
+current = true
+size = 43.0

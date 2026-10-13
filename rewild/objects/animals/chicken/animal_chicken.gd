@@ -104,6 +104,10 @@ var _wing_blend := 0.0
 var _wings_pb: AnimationNodeStateMachinePlayback
 var _body_pb: AnimationNodeStateMachinePlayback
 
+# optimize process
+var _slow_tick_timer := 0.0
+const SLOW_TICK_INTERVAL := 3.0
+
 # === Lifecycle ===
 
 func _ready() -> void:
@@ -126,23 +130,28 @@ func _ready() -> void:
 	_enter_idle()
 
 func _physics_process(delta: float) -> void:
-	_desired_h = Vector3.ZERO
-	_face_dir = Vector3.ZERO
-	_hunger_timer -= delta
-	_hungry = _hungry or _hunger_timer <= 0.0
-	_play_block = maxf(_play_block - delta, 0.0)
-	match state:
-		State.IDLE: _tick_idle(delta)
-		State.WANDER: _tick_wander(delta)
-		State.GO_EAT: _tick_go_eat(delta)
-		State.EATING: _tick_eating(delta)
-		State.GO_PLAY: _tick_go_play(delta)
-		State.PLAYING: _tick_playing(delta)
-		State.LEAVING: _tick_leaving(delta)
-	_apply_motion(delta)
-	_face(delta)
-	_update_wings(delta)
-	_update_debug_label()
+		_desired_h = Vector3.ZERO
+		_face_dir = Vector3.ZERO
+		_hunger_timer -= delta
+		_hungry = _hungry or _hunger_timer <= 0.0
+		_play_block = maxf(_play_block - delta, 0.0)
+		match state:
+			State.IDLE: _tick_idle(delta)
+			State.WANDER: _tick_wander(delta)
+			State.GO_EAT: _tick_go_eat(delta)
+			State.EATING: _tick_eating(delta)
+			State.GO_PLAY: _tick_go_play(delta)
+			State.PLAYING: _tick_playing(delta)
+			State.LEAVING: _tick_leaving(delta)
+		_apply_motion(delta)
+		_face(delta)
+		_update_wings(delta)
+		_update_debug_label()
+		
+		_slow_tick_timer += delta
+		if _slow_tick_timer >= SLOW_TICK_INTERVAL:
+			_slow_tick_timer = 0.0
+			_fall_guard()
 
 # === States ===
 
@@ -447,7 +456,6 @@ func _apply_motion(delta: float) -> void:
 	else:
 		velocity += get_gravity() * delta
 	move_and_slide()
-	_fall_guard()
 	is_moving = h.length() > 0.15
 	if _face_dir == Vector3.ZERO and h.length() > 0.1:
 		_face_dir = h

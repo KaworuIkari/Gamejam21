@@ -8,6 +8,8 @@ var _exclude: RID
 var _t := 0.0
 
 signal on_blob_die(on_target: bool)
+## Metres of ground one blob wets.
+@export var splash_radius := 4.0
 var _dead := false
 
 func _ready() -> void:
@@ -36,7 +38,7 @@ func blob_die(on_target : bool = false) -> void:
 		return
 	_dead = true
 	on_blob_die.emit(on_target)
-	GrowthMap.paint(position, 10)
+	GrowthMap.water(global_position, splash_radius)
 	queue_free()
 
 func _is_good_target(collider: Object) -> bool:

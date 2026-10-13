@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Tray_Filthy_Broken.glb" id="1_xiaeo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6gb12"]
+radius = 0.28
+
+[node name="Tray_Filthy_Broken" type="Node3D" unique_id=2049491262]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Visual" type="Node3D" parent="." unique_id=106737304 instance=ExtResource("1_xiaeo")]
+
+[node name="ClearTarget" type="Area3D" parent="." unique_id=2047778574]
+collision_layer = 0
+collision_mask = 0
+
+[node name="@CollisionShape3D@12" type="CollisionShape3D" parent="ClearTarget" unique_id=623218897]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("SphereShape3D_6gb12")

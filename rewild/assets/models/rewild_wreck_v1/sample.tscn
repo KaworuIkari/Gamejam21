@@ -1,0 +1,117 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3bale"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iv4s0"]
+size = Vector2(32, 32)
+
+[sub_resource type="Environment" id="Environment_kbgu4"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=285756250]
+
+[node name="Wall_Jagged_Rebar" type="Node3D" parent="." unique_id=788791356]
+metadata/zone = "basin / east"
+metadata/category = "Clearable"
+metadata/description = "4.4m fractured concrete wall; exposed bent reinforcing rods. Static wreck geometry."
+
+[node name="@Label3D@68" type="Label3D" parent="." unique_id=1725346934]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Wall Jagged Rebar"
+font_size = 48
+
+[node name="Slab_Snapped_Rebar" type="Node3D" parent="." unique_id=483063794]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+metadata/zone = "east / peak"
+metadata/category = "Clearable"
+metadata/description = "Broken reinforced floor slab with a protruding, bent steel mesh."
+
+[node name="@Label3D@124" type="Label3D" parent="." unique_id=660351723]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 3.7)
+pixel_size = 0.007
+text = "Slab Snapped Rebar"
+font_size = 48
+
+[node name="Column_Burst_Rebar" type="Node3D" parent="." unique_id=3745196]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
+metadata/zone = "east / peak"
+metadata/category = "Clearable"
+metadata/description = "Shattered concrete pillar with rusty steel cage exposed above the remaining core."
+
+[node name="@Label3D@180" type="Label3D" parent="." unique_id=1137590845]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 18, 0.15, 3.7)
+pixel_size = 0.007
+text = "Column Burst Rebar"
+font_size = 48
+
+[node name="Frame_Twisted_Cables" type="Node3D" parent="." unique_id=1403297500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+metadata/zone = "east / peak"
+metadata/category = "Clearable"
+metadata/description = "Broken steel portal with buckled I-beams and hanging severed wires."
+
+[node name="@Label3D@245" type="Label3D" parent="." unique_id=1563417434]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 12.7)
+pixel_size = 0.007
+text = "Frame Twisted Cables"
+font_size = 48
+
+[node name="Garbage_Mixed_Scrap" type="Node3D" parent="." unique_id=840571373]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+metadata/zone = "basin / spring / east"
+metadata/category = "Clearable"
+metadata/description = "Low pile of folded metal, reinforcing rods, wheel rims and concrete chips."
+
+[node name="@Label3D@330" type="Label3D" parent="." unique_id=2007388161]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 12.7)
+pixel_size = 0.007
+text = "Garbage Mixed Scrap"
+font_size = 48
+
+[node name="Tank_Ripped_Open" type="Node3D" parent="." unique_id=73657058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 9)
+metadata/zone = "spring / basin"
+metadata/category = "Clearable"
+metadata/description = "Open rusted tank shell with internal pipe, damaged ribs and trailing hose."
+
+[node name="@Label3D@412" type="Label3D" parent="." unique_id=1952130990]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 18, 0.15, 12.7)
+pixel_size = 0.007
+text = "Tank Ripped Open"
+font_size = 48
+
+[node name="Fence_Sagging_Wire" type="Node3D" parent="." unique_id=1053326333]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+metadata/zone = "basin / east"
+metadata/category = "Clearable"
+metadata/description = "Damaged wire-mesh fence section with bent posts and dangling wire ends."
+
+[node name="@Label3D@479" type="Label3D" parent="." unique_id=1790088861]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 21.7)
+pixel_size = 0.007
+text = "Fence Sagging Wire"
+font_size = 48
+
+[node name="@MeshInstance3D@480" type="MeshInstance3D" parent="." unique_id=1210766604]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.65, 9)
+material_override = SubResource("StandardMaterial3D_3bale")
+mesh = SubResource("PlaneMesh_iv4s0")
+
+[node name="@DirectionalLight3D@481" type="DirectionalLight3D" parent="." unique_id=1085061176]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@482" type="WorldEnvironment" parent="." unique_id=708442494]
+environment = SubResource("Environment_kbgu4")
+
+[node name="@Camera3D@483" type="Camera3D" parent="." unique_id=2087678163]
+transform = Transform3D(0.81373346, -0.3668594, 0.4508348, 0, 0.7756455, 0.6311688, -0.5812382, -0.51360315, 0.63116866, 29, 29, 37)
+projection = 1
+current = true
+size = 34.0

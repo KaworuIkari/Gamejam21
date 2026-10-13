@@ -3,7 +3,7 @@
 shader_type spatial;
 
 // MEADOW: matte, wrap-lit blades like res://shaders/foliage/grass.gdshader (generated meadow).
-render_mode skip_vertex_transform, cull_disabled, blend_mix, diffuse_lambert_wrap, specular_disabled;
+render_mode skip_vertex_transform, cull_disabled, blend_mix, depth_draw_always, diffuse_lambert_wrap, specular_disabled;
 
 #include "res://shaders/common/meadow_palette.gdshaderinc"
 
@@ -82,6 +82,7 @@ void fragment() {
 	col *= pow(tint, vec3(2.2));                // Terrain3D colour map (C tool)
 	ALBEDO = apply_cloud_shadow(col, blade_xz, TIME);
 	ROUGHNESS = 1.0;
+	ALPHA = 0.999;  // transparent pass: stays out of the depth/normal buffers, so no outline
 	BACKLIGHT = vec3(0.25, 0.3, 0.1);
 	// Up-facing normal on both sides: Godot flips NORMAL on back faces of double-sided
 	// meshes, which would point it down and leave half of every blade dark.

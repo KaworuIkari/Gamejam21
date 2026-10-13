@@ -75,12 +75,12 @@ func spawn_all() -> void:
 func spawn_one(map: RID) -> Node3D:
 	var a := randf() * TAU
 	var r := sqrt(randf()) * radius
-	var guess := global_position + Vector3(cos(a) * r, 0.0, sin(a) * r)
+	var guess := global_position + Vector3(cos(a) * r, global_position.y, sin(a) * r)
 	var p := NavigationServer3D.map_get_closest_point(map, guess)
 
 	var animal := animal_scene.instantiate() as Node3D
 	animal.position = to_local(p + Vector3.UP * height_offset)
 	animal.rotation.y = randf() * TAU
 	add_child(animal)
-	# print(animal, " added at ", p, "!")
+	# print(animal, " added at ", p, "!", guess)
 	return animal

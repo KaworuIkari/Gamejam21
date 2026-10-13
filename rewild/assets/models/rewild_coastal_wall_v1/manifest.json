@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Wall_Container_Stack",
+    "zone": "basin",
+    "category": "Clearable",
+    "description": "Approx 5m modular section, 5\u20137m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module.",
+    "dimensions": [
+      5.1,
+      6.973,
+      4.515
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wall_Vehicle_Carcass",
+    "zone": "basin",
+    "category": "Clearable",
+    "description": "Approx 5m modular section, 5\u20137m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module.",
+    "dimensions": [
+      5.1,
+      6.657,
+      4.098
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wall_Compacted_Scrap",
+    "zone": "basin",
+    "category": "Clearable",
+    "description": "Approx 5m modular section, 5\u20137m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module.",
+    "dimensions": [
+      5.1,
+      5.829,
+      4.378
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wall_Rebar_Seawall",
+    "zone": "basin",
+    "category": "Clearable",
+    "description": "Approx 5m modular section, 5\u20137m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module.",
+    "dimensions": [
+      5.1,
+      6.717,
+      4.556
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wall_Engine_Pile",
+    "zone": "basin",
+    "category": "Clearable",
+    "description": "Approx 5m modular section, 5\u20137m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module.",
+    "dimensions": [
+      5.16,
+      6.39,
+      4.006
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wall_Final_Locked_Section",
+    "zone": "basin",
+    "category": "Clearable",
+    "description": "Approx 5m modular section, 5\u20137m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module.",
+    "dimensions": [
+      5.1,
+      6.371,
+      4.495
+    ],
+    "objects": 1
+  }
+]

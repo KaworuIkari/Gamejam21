@@ -1,0 +1,191 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_channels_v1/channel_water.gd" id="1_8qgme"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qnf0"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7002n"]
+size = Vector2(110, 110)
+
+[sub_resource type="Environment" id="Environment_sjovk"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=2061123089]
+
+[node name="Channel_Straight_Dry" type="Node3D" parent="." unique_id=706543891]
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@19" type="Label3D" parent="." unique_id=783205930]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Channel Straight Dry"
+font_size = 48
+
+[node name="Channel_Straight_Flowing" type="Node3D" parent="." unique_id=140180343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@21" type="Label3D" parent="." unique_id=731324904]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 24, 0.15, 3.7)
+pixel_size = 0.007
+text = "Channel Straight Flowing"
+font_size = 48
+
+[node name="Channel_Straight_Reclaimed" type="Node3D" parent="." unique_id=1388854954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 0)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@23" type="Label3D" parent="." unique_id=724803276]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 48, 0.15, 3.7)
+pixel_size = 0.007
+text = "Channel Straight Reclaimed"
+font_size = 48
+
+[node name="Channel_Bend_Dry" type="Node3D" parent="." unique_id=866349445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@25" type="Label3D" parent="." unique_id=334526307]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 27.7)
+pixel_size = 0.007
+text = "Channel Bend Dry"
+font_size = 48
+
+[node name="Channel_Bend_Flowing" type="Node3D" parent="." unique_id=967137115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 24)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@27" type="Label3D" parent="." unique_id=343960824]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 24, 0.15, 27.7)
+pixel_size = 0.007
+text = "Channel Bend Flowing"
+font_size = 48
+
+[node name="Channel_Bend_Reclaimed" type="Node3D" parent="." unique_id=1120614587]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 24)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@29" type="Label3D" parent="." unique_id=1567281786]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 48, 0.15, 27.7)
+pixel_size = 0.007
+text = "Channel Bend Reclaimed"
+font_size = 48
+
+[node name="Channel_Junction_Dry" type="Node3D" parent="." unique_id=1150947444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 48)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@31" type="Label3D" parent="." unique_id=714052406]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 51.7)
+pixel_size = 0.007
+text = "Channel Junction Dry"
+font_size = 48
+
+[node name="Channel_Junction_Flowing" type="Node3D" parent="." unique_id=663300595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 48)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@33" type="Label3D" parent="." unique_id=388857089]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 24, 0.15, 51.7)
+pixel_size = 0.007
+text = "Channel Junction Flowing"
+font_size = 48
+
+[node name="Channel_Junction_Reclaimed" type="Node3D" parent="." unique_id=1875263549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 48)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@35" type="Label3D" parent="." unique_id=1146110843]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 48, 0.15, 51.7)
+pixel_size = 0.007
+text = "Channel Junction Reclaimed"
+font_size = 48
+
+[node name="Channel_Spillway_Dry" type="Node3D" parent="." unique_id=1314637744]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 72)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@37" type="Label3D" parent="." unique_id=2034643177]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 75.7)
+pixel_size = 0.007
+text = "Channel Spillway Dry"
+font_size = 48
+
+[node name="Channel_Spillway_Flowing" type="Node3D" parent="." unique_id=328504626]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 72)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@39" type="Label3D" parent="." unique_id=1950927091]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 24, 0.15, 75.7)
+pixel_size = 0.007
+text = "Channel Spillway Flowing"
+font_size = 48
+
+[node name="Channel_Spillway_Reclaimed" type="Node3D" parent="." unique_id=131570519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 72)
+script = ExtResource("1_8qgme")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="@Label3D@41" type="Label3D" parent="." unique_id=1350279788]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 48, 0.15, 75.7)
+pixel_size = 0.007
+text = "Channel Spillway Reclaimed"
+font_size = 48
+
+[node name="@MeshInstance3D@42" type="MeshInstance3D" parent="." unique_id=374136660]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -0.65, 32)
+material_override = SubResource("StandardMaterial3D_6qnf0")
+mesh = SubResource("PlaneMesh_7002n")
+
+[node name="@DirectionalLight3D@43" type="DirectionalLight3D" parent="." unique_id=874028993]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@44" type="WorldEnvironment" parent="." unique_id=116698528]
+environment = SubResource("Environment_sjovk")
+
+[node name="@Camera3D@45" type="Camera3D" parent="." unique_id=791411085]
+transform = Transform3D(0.80800754, -0.34281024, 0.47917116, 0, 0.8132956, 0.5818507, -0.5891722, -0.47013977, 0.65714896, 94, 88, 126)
+projection = 1
+current = true
+size = 120.0

@@ -1,0 +1,170 @@
+[
+  {
+    "name": "Can_Aluminum",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Small aluminum drink can, approx 0.32m. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.2,
+      0.352,
+      0.205
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Can_Crushed",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Crushed drink can. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.2,
+      0.212,
+      0.205
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Bottle_Plastic",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Cloudy plastic drinks bottle with cap and faded label. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.164,
+      0.507,
+      0.164
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Bottle_Squat",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Squat blue plastic bottle. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.244,
+      0.437,
+      0.244
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Bottle_Green",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Faded green plastic bottle. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.164,
+      0.507,
+      0.164
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Cup_Takeaway",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Discarded takeaway cup with bent straw. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.199,
+      0.417,
+      0.204
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Carton_Drink",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Folded drink carton. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.17,
+      0.337,
+      0.139
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Tray_Food",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Discarded food tray and liner. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.32,
+      0.062,
+      0.22
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Bag_Crumpled",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Crumpled plastic shopping bag. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.406,
+      0.171,
+      0.345
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wrapper_Snack",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Crumpled foil snack wrapper. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.35,
+      0.027,
+      0.19
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wire_Offcut",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Small bent wire offcut. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.551,
+      0.044,
+      0.55
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Litter_Cluster_1",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.79,
+      0.507,
+      0.836
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Litter_Cluster_2",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.867,
+      0.507,
+      0.831
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Litter_Cluster_3",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      1.156,
+      0.507,
+      0.878
+    ],
+    "objects": 1
+  }
+]

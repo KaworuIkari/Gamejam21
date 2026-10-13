@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Ruined_Pump_House_Wasteland",
+    "zone": "spring",
+    "category": "Permanent",
+    "description": "16x12m foundation; 14m ruined roof trusses. Permanent giant pump, gantry and broken walls. Use existing spring intake as a separate fixture.",
+    "dimensions": [
+      16.0,
+      14.139,
+      13.225
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Ruined_Pump_House_Revival",
+    "zone": "spring",
+    "category": "Permanent",
+    "description": "16x12m foundation; 14m ruined roof trusses. Permanent giant pump, gantry and broken walls. Use existing spring intake as a separate fixture.",
+    "dimensions": [
+      16.0,
+      14.139,
+      13.225
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Ruined_Pump_House_Golden",
+    "zone": "spring",
+    "category": "Permanent",
+    "description": "16x12m foundation; 14m ruined roof trusses. Permanent giant pump, gantry and broken walls. Use existing spring intake as a separate fixture.",
+    "dimensions": [
+      16.085,
+      14.139,
+      13.225
+    ],
+    "objects": 2
+  }
+]

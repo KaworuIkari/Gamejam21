@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_litter_v1/Litter_Cluster_1.glb" id="1_bcahi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_quohk"]
+radius = 0.7
+
+[node name="Litter_Cluster_1" type="Node3D" unique_id=262260080]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Visual" type="Node3D" parent="." unique_id=545781501 instance=ExtResource("1_bcahi")]
+
+[node name="ClearTarget" type="Area3D" parent="." unique_id=1664978243]
+collision_layer = 0
+collision_mask = 0
+
+[node name="@CollisionShape3D@24" type="CollisionShape3D" parent="ClearTarget" unique_id=2064629469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("SphereShape3D_quohk")

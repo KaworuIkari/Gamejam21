@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Wall_Jagged_Rebar",
+    "zone": "basin / east",
+    "category": "Clearable",
+    "description": "4.4m fractured concrete wall; exposed bent reinforcing rods. Static wreck geometry.",
+    "dimensions": [
+      4.4,
+      4.056,
+      3.925
+    ],
+    "objects": 66
+  },
+  {
+    "name": "Slab_Snapped_Rebar",
+    "zone": "east / peak",
+    "category": "Clearable",
+    "description": "Broken reinforced floor slab with a protruding, bent steel mesh.",
+    "dimensions": [
+      4.069,
+      0.782,
+      3.252
+    ],
+    "objects": 55
+  },
+  {
+    "name": "Column_Burst_Rebar",
+    "zone": "east / peak",
+    "category": "Clearable",
+    "description": "Shattered concrete pillar with rusty steel cage exposed above the remaining core.",
+    "dimensions": [
+      2.122,
+      3.091,
+      2.223
+    ],
+    "objects": 55
+  },
+  {
+    "name": "Frame_Twisted_Cables",
+    "zone": "east / peak",
+    "category": "Clearable",
+    "description": "Broken steel portal with buckled I-beams and hanging severed wires.",
+    "dimensions": [
+      4.65,
+      3.67,
+      3.731
+    ],
+    "objects": 64
+  },
+  {
+    "name": "Garbage_Mixed_Scrap",
+    "zone": "basin / spring / east",
+    "category": "Clearable",
+    "description": "Low pile of folded metal, reinforcing rods, wheel rims and concrete chips.",
+    "dimensions": [
+      3.456,
+      0.892,
+      3.22
+    ],
+    "objects": 84
+  },
+  {
+    "name": "Tank_Ripped_Open",
+    "zone": "spring / basin",
+    "category": "Clearable",
+    "description": "Open rusted tank shell with internal pipe, damaged ribs and trailing hose.",
+    "dimensions": [
+      3.184,
+      1.937,
+      3.271
+    ],
+    "objects": 81
+  },
+  {
+    "name": "Fence_Sagging_Wire",
+    "zone": "basin / east",
+    "category": "Clearable",
+    "description": "Damaged wire-mesh fence section with bent posts and dangling wire ends.",
+    "dimensions": [
+      4.0,
+      2.239,
+      0.84
+    ],
+    "objects": 66
+  }
+]

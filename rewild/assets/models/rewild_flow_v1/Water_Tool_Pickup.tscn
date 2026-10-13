@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_flow_v1/Water_Tool_Pickup.glb" id="1_6p6pw"]
+
+[node name="Water_Tool_Pickup" type="Node3D" unique_id=1897878698]
+metadata/zone = "lake"
+metadata/category = "Pickup"
+metadata/description = "Tool points local -Z; mesh only, ready for pickup display or character attachment."
+
+[node name="Visual" type="Node3D" parent="." unique_id=920407595 instance=ExtResource("1_6p6pw")]

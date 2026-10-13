@@ -27,3 +27,5 @@ water_offset = -3.0
 growth_event = 1
 growth_radius = 45.0
 growth_duration = 6.0
+scatter_count = 30
+scatter_area = Rect2(-300, -300, 600, 600)

@@ -1,0 +1,134 @@
+[
+  {
+    "name": "Can_Flattened_Dirty",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.3,
+      0.184,
+      0.233
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Bottle_Collapsed_Uncapped",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.327,
+      0.345,
+      0.234
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Cup_Squashed_Stained",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.249,
+      0.241,
+      0.246
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Carton_Crushed_Torn",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.276,
+      0.186,
+      0.161
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Bag_Shredded_Muddy",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.494,
+      0.086,
+      0.467
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Tray_Filthy_Broken",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.37,
+      0.087,
+      0.266
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wrapper_Torn_Foil",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.38,
+      0.142,
+      0.227
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Tin_Open_Rusted",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      0.238,
+      0.306,
+      0.226
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Dirty_Litter_Heap_1",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Overlapping pile of crushed, torn and stained rubbish; one clearing target. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      1.686,
+      1.529,
+      1.656
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Dirty_Litter_Heap_2",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Overlapping pile of crushed, torn and stained rubbish; one clearing target. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      1.797,
+      1.53,
+      1.752
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Dirty_Litter_Heap_3",
+    "zone": "basin / lake / spring / east / peak",
+    "category": "Clearable",
+    "description": "Overlapping pile of crushed, torn and stained rubbish; one clearing target. Visual asset only; clearing and persistence require gameplay integration.",
+    "dimensions": [
+      1.715,
+      1.552,
+      1.62
+    ],
+    "objects": 1
+  }
+]

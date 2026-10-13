@@ -29,14 +29,14 @@ func _ready() -> void:
 
 func _process_modification_with_delta(delta: float) -> void:
 	var k := 1.0 - exp(-standing_lerp_speed * delta)   # frame-rate independent, never overshoots
-
-	left_ik_weight  = _update_foot(left_foot_bone,  ray_left,  marker_left,  left_ik_weight,  true, k)
-	right_ik_weight = _update_foot(right_foot_bone, ray_right, marker_right, right_ik_weight, true, k)
+	var is_moving : bool = player.velocity.length()>0.1
+	left_ik_weight  = _update_foot(left_foot_bone,  ray_left,  marker_left,  left_ik_weight,  is_moving, k)
+	right_ik_weight = _update_foot(right_foot_bone, ray_right, marker_right, right_ik_weight, is_moving, k)
 	left_foot_ik.influence  = left_ik_weight
 	right_foot_ik.influence = right_ik_weight
 
 func _update_foot(bone_name: StringName, ray: RayCast3D, marker: Marker3D,
-		current_weight: float, use_ik: bool, k: float) -> float:
+		current_weight: float, is_moving: bool, k: float) -> float:
 	var skeleton := get_skeleton()
 	var bone_idx := skeleton.find_bone(bone_name)
 	if bone_idx == -1:
@@ -55,7 +55,7 @@ func _update_foot(bone_name: StringName, ray: RayCast3D, marker: Marker3D,
 	var target_weight := 0.0
 	var target_tilt := Quaternion.IDENTITY
 
-	if use_ik and ray.is_colliding():
+	if not is_moving and ray.is_colliding():
 		var ground_y := ray.get_collision_point().y + foot_height_offset
 		if abs(ground_y - anim_global_pos.y) < airborne_threshold:
 			target_pos.y = ground_y

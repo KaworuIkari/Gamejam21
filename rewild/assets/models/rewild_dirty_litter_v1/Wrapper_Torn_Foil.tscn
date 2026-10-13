@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Wrapper_Torn_Foil.glb" id="1_ik0ya"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ixy6l"]
+radius = 0.28
+
+[node name="Wrapper_Torn_Foil" type="Node3D" unique_id=530993450]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Visual" type="Node3D" parent="." unique_id=1823242091 instance=ExtResource("1_ik0ya")]
+
+[node name="ClearTarget" type="Area3D" parent="." unique_id=1370060286]
+collision_layer = 0
+collision_mask = 0
+
+[node name="@CollisionShape3D@14" type="CollisionShape3D" parent="ClearTarget" unique_id=981435865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("SphereShape3D_ixy6l")
