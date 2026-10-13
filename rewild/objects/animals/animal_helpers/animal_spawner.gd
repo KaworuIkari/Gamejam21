@@ -82,5 +82,5 @@ func spawn_one(map: RID) -> Node3D:
 	animal.position = to_local(p + Vector3.UP * height_offset)
 	animal.rotation.y = randf() * TAU
 	add_child(animal)
-	print(animal, " added at ", p, "!", guess)
+	# print(animal, " added at ", p, "!", guess)
 	return animal
