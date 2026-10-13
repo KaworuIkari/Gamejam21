@@ -1,0 +1,15 @@
+{
+  "animations": [
+    "Idle",
+    "LieDown",
+    "Play",
+    "Sleep",
+    "WakeUp",
+    "Walk"
+  ],
+  "meshes": 1,
+  "skins": 1,
+  "materials": 1,
+  "embedded_images": 1,
+  "reimport": "passed"
+}
