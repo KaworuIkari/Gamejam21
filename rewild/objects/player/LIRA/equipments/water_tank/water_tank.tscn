@@ -1,14 +1,13 @@
 [gd_scene format=3 uid="uid://bm4kbp1plk4ob"]
 
-[ext_resource type="ArrayMesh" uid="uid://bm63j6jd1jysd" path="res://objects/player/LIRA/equipments/water_tank/WaterTank_tank.res" id="1_y0824"]
+[ext_resource type="ArrayMesh" uid="uid://ewuu66j580cm" path="res://objects/player/LIRA/equipments/water_tank/WaterTank_tank.res" id="1_y0824"]
 [ext_resource type="Material" uid="uid://dc6btv3rapucg" path="res://objects/player/LIRA/equipments/water_tank/water_tank_mat.tres" id="2_7eek8"]
 [ext_resource type="Script" uid="uid://c7a57k8snjvxo" path="res://objects/player/LIRA/equipments/water_tank/water_tank.gd" id="3_7eek8"]
-[ext_resource type="ArrayMesh" uid="uid://bklgvsi6uykq4" path="res://objects/player/LIRA/equipments/water_tank/WaterGun_muzzle.res" id="4_bi8wa"]
 [ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="5_0g07r"]
 
 [sub_resource type="Curve3D" id="Curve3D_bi8wa"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, -0.025199259, 0.103597045, 0.14443189, 0.0014906172, 1.4912213, -0.25669673, 0.00016426719, 0.17878042, -0.016292347, -0.00036085196, -0.39273375, 0.03579002, 0.01196608, 0.97992456, -0.2960773, 0, 0, 0.39436132, 0, 0, 0, 0, -0.13109416, -0.10885434),
+"points": PackedVector3Array(0, 0, 0, -0.021983778, 0.09037784, 0.12600207, 0.0014906172, 1.4912213, -0.25669673, 0.00015428137, 0.1543439, -0.02656854, -0.00036875208, -0.36890155, 0.06350219, -0.012421808, 1.0449086, -0.22772075, 0, 0, 0.3743274, 0, 0, 0, 0, 0, 0),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
@@ -38,6 +37,9 @@ shader_parameter/use_local_coords = true
 shader_parameter/local_noise_scale = 1.0
 shader_parameter/foam_color = Color(1, 1, 1, 1)
 shader_parameter/foam_width = 0.3
+shader_parameter/flow_direction = Vector3(0, 0, 1)
+shader_parameter/flow_speed = 0.0
+shader_parameter/flow_foam = 0.0
 shader_parameter/caustic_strength = 0.9
 shader_parameter/caustic_scale = 0.6
 shader_parameter/sparkle_strength = 1.2
@@ -54,21 +56,12 @@ mesh = ExtResource("1_y0824")
 surface_material_override/0 = ExtResource("2_7eek8")
 script = ExtResource("3_7eek8")
 anchor_start = NodePath("TubeStart")
-anchor_end = NodePath("WaterGun/TubeEnd")
-
-[node name="WaterGun" type="MeshInstance3D" parent="." unique_id=987640430]
-mesh = ExtResource("4_bi8wa")
-surface_material_override/0 = ExtResource("2_7eek8")
-
-[node name="TubeEnd" type="Node3D" parent="WaterGun" unique_id=1166513016]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13109416, -0.10885434)
+anchor_end = NodePath("")
 
 [node name="Path3D" type="Path3D" parent="." unique_id=2079714481]
-top_level = true
 curve = SubResource("Curve3D_bi8wa")
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="." unique_id=27185233]
-top_level = true
 polygon = PackedVector2Array(-0.01, -0.01, -0.01, 0.01, 0.01, 0.01, 0.01, -0.01)
 mode = 2
 path_node = NodePath("../Path3D")
