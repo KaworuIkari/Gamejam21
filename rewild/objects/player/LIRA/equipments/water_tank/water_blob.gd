@@ -39,6 +39,7 @@ func blob_die(on_target : bool = false) -> void:
 	_dead = true
 	on_blob_die.emit(on_target)
 	GrowthMap.water(global_position, splash_radius)
+	WorldEvents.report(global_position, &"splash", 0.7 if on_target else 0.35)
 	queue_free()
 
 func _is_good_target(collider: Object) -> bool:
