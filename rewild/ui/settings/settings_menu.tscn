@@ -140,7 +140,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 18
 
-[node name="Footer" type="HBoxContainer" parent="Margin/Panel/VBox"]
+[node name="Footer" type="HFlowContainer" parent="Margin/Panel/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 24
 

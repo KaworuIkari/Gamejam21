@@ -24,11 +24,9 @@ TAB_CONTROLS,操作,Controls
 TAB_ACCESSIBILITY,语言与辅助,Language & Access
 HEADER_VOLUME,音量,Volume
 HEADER_DISPLAY,显示,Display
-HEADER_GRAPHICS,图形,Graphics
 HEADER_SENSITIVITY,灵敏度与手感,Sensitivity & Feel
 HEADER_KEYBINDS,按键绑定,Key Bindings
 HEADER_LANGUAGE,语言,Language
-HEADER_ACCESSIBILITY,辅助功能,Accessibility
 HEADER_SAVE_SLOTS,存档位,Save Slots
 OPT_MASTER_VOLUME,主音量,Master Volume
 OPT_MUSIC_VOLUME,音乐,Music
@@ -48,16 +46,6 @@ VSYNC_ON,开启,On
 VSYNC_ADAPTIVE,自适应,Adaptive
 OPT_MAX_FPS,帧率上限,Frame Rate Limit
 FPS_UNLIMITED,不限制,Unlimited
-OPT_QUALITY,画质,Graphics Quality
-QUALITY_LOW,低,Low
-QUALITY_MEDIUM,中,Medium
-QUALITY_HIGH,高,High
-QUALITY_ULTRA,极高,Ultra
-OPT_RENDER_SCALE,渲染缩放,Render Scale
-OPT_SCALER,缩放算法,Upscaler
-SCALER_BILINEAR,双线性,Bilinear
-SCALER_FSR1,FSR 1.0,FSR 1.0
-SCALER_FSR2,FSR 2.2,FSR 2.2
 OPT_FOV,视野（FOV）,Field of View
 OPT_MOUSE_SENS,鼠标灵敏度,Mouse Sensitivity
 OPT_PAD_SENS,手柄灵敏度,Controller Sensitivity
@@ -67,8 +55,6 @@ OPT_LANGUAGE,语言,Language
 LANG_ZH,简体中文,简体中文
 LANG_EN,English,English
 OPT_UI_SCALE,界面缩放,UI Scale
-OPT_CAMERA_SHAKE,镜头晃动,Camera Shake
-OPT_SUBTITLES,字幕,Subtitles
 BIND_COL_ACTION,动作,Action
 BIND_COL_KBM,键盘 / 鼠标,Keyboard / Mouse
 BIND_COL_PAD,手柄,Controller
@@ -130,7 +116,6 @@ DLG_SKIP_CONFIRM,跳过这段对话吗？（遇到下一个选项时会停下）
 DLG_HISTORY_TITLE,对话记录,Dialogue Log
 DLG_HISTORY_EMPTY,还没有对话记录,No dialogue yet
 DLG_TALK_PROMPT,按 %s 交谈,Press %s to talk
-ACTION_WALK,慢走,Walk
 ACTION_USE,浇水（按住）,Water (hold)
 ACTION_USE2,浇水（单次喷洒）,Water (burst)
 ACTION_DIALOGUE_AUTO,对话：自动播放,Dialogue: Auto
@@ -171,3 +156,10 @@ TASK_DEMO_ARCHIVE_EMPTY,暂无归档示例,No archived examples
 TASK_DEMO_SELECT,点击任务查看演示详情,Select the task to view demo details
 TASK_DEMO_NOTICE,演示参考：不计入游戏进度或存档。,Display reference: no gameplay or save progress.
 INTERACT_PUMP_PROMPT,按 %s 启动水泵,Press %s to start the pump
+HEADER_CAMERA,镜头,Camera
+HEADER_INTERFACE,界面,Interface
+PAUSE_RETURN_CONFIRM,确定返回主菜单吗？未保存的进度可能丢失。,Return to the main menu? Unsaved progress may be lost.
+
+BIND_RESERVED_LOOK,右摇杆用于镜头，请选其他按键,Right stick is reserved for camera; choose another input
+UI_RETRY_SAVE,保存失败：重试,Save failed: retry
+SETTINGS_SAVE_FAILED,设置未能保存，更改仍可预览或放弃。,Settings could not be saved. Changes can still be previewed or discarded.

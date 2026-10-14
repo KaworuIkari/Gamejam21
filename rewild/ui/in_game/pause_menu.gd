@@ -22,6 +22,7 @@ const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 
 const TERMINAL_UI = preload("res://ui/in_game/tasks/terminal_ui.tscn")
 var _terminal
+var _return_confirming := false
 var _feedback_version := 0
 
 
@@ -94,6 +95,8 @@ func is_open() -> bool:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _return_confirming:
+		return
 	if not event.is_action_pressed(&"pause"):
 		return
 	if event.is_echo():
@@ -147,6 +150,13 @@ func _on_settings_closed() -> void:
 
 
 func _return_to_main_menu() -> void:
+	if _return_confirming:
+		return
+	_return_confirming = true
+	var accepted: bool = await ConfirmPopup.ask(self, tr("PAUSE_RETURN_CONFIRM"), "PAUSE_MAIN_MENU", true)
+	_return_confirming = false
+	if not accepted or not is_inside_tree() or not visible:
+		return
 	hide()
 	SceneRouter.goto_main_menu() # SceneRouter 负责解除暂停和切场景
 

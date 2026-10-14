@@ -2,7 +2,7 @@ extends Control
 ## 设置菜单：4 个分页。
 ## 改动即时预览；点“应用”才确认并写盘（SettingsManager.commit）。
 ## 有未应用的更改时返回会先询问；以任何方式离开设置页（返回、被外部隐藏、随场景释放）
-## 而没有应用的更改，都会撤回（SettingsManager.revert）。按键重绑定不经过“应用”，即时保存。
+## 而没有应用的更改，都会撤回（SettingsManager.revert）。按键重绑定也通过“应用”保存、通过放弃撤回。
 ## 用法：settings_menu.open()；关闭时发出 closed。
 
 signal closed
@@ -36,6 +36,7 @@ const EDGE_PAD := 36
 var _refreshers: Array[Callable] = []
 var _settings_rows: Array[ResponsiveSettingsRow] = []
 var _section_gaps: Array[Control] = []
+var _section_headers: Array[Label] = []
 ## 正在显示“放弃更改？”确认框
 var _confirming := false
 
@@ -116,13 +117,19 @@ func close() -> void:
 
 func _on_apply_pressed() -> void:
 	var had_focus := _apply_button.has_focus()
-	SettingsManager.commit()
+	if not SettingsManager.commit():
+		_apply_button.text = "UI_RETRY_SAVE"
+		_apply_button.tooltip_text = tr("SETTINGS_SAVE_FAILED")
+		return
 	# 应用后按钮变为禁用，焦点交给“返回”，手柄 / 键盘导航不会丢失
 	if had_focus:
 		_back_button.grab_focus()
 
 
 func _update_apply_button(has_pending: bool) -> void:
+	if not has_pending:
+		_apply_button.text = "UI_APPLY"
+		_apply_button.tooltip_text = ""
 	_apply_button.disabled = not has_pending
 	_apply_button.focus_mode = Control.FOCUS_ALL if has_pending else Control.FOCUS_NONE
 
@@ -196,10 +203,7 @@ func _build_video(p: Control) -> void:
 	var fps_items: Array = SettingsManager.FPS_LIMITS.map(func(f: int): return "FPS_UNLIMITED" if f == 0 else str(f))
 	_option(p, "OPT_MAX_FPS", "video", "max_fps", fps_items)
 
-	_header(p, "HEADER_GRAPHICS")
-	_option(p, "OPT_QUALITY", "video", "quality", ["QUALITY_LOW", "QUALITY_MEDIUM", "QUALITY_HIGH", "QUALITY_ULTRA"])
-	_slider(p, "OPT_RENDER_SCALE", "video", "render_scale", 50, 100, 5, "%d%%")
-	_option(p, "OPT_SCALER", "video", "scaler", ["SCALER_BILINEAR", "SCALER_FSR1", "SCALER_FSR2"])
+	_header(p, "HEADER_CAMERA")
 	_slider(p, "OPT_FOV", "video", "fov", 60, 110, 1, "%d°")
 
 
@@ -233,18 +237,20 @@ func _build_controls(p: Control) -> void:
 			b.add_theme_font_size_override(&"font_size", CONTROL_FONT_SIZE)
 			row.controls.add_child(b)
 
-	var footer := HBoxContainer.new()
+	var footer := HFlowContainer.new()
 	footer.add_theme_constant_override("separation", 24)
 	p.add_child(footer)
 	var hint := Label.new()
 	hint.text = "BIND_HINT"
+	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	hint.custom_minimum_size.x = 140
 	hint.theme_type_variation = &"HintLabel"
 	hint.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	footer.add_child(hint)
 	var reset := Button.new()
 	reset.text = "BIND_RESET_ALL"
-	reset.custom_minimum_size = Vector2(240, ROW_HEIGHT)
-	reset.add_theme_font_size_override(&"font_size", CONTROL_FONT_SIZE)
+	reset.custom_minimum_size = Vector2(140, ROW_HEIGHT)
+	reset.add_theme_font_size_override(&"font_size", 18)
 	reset.pressed.connect(SettingsManager.reset_bindings)
 	footer.add_child(reset)
 
@@ -252,10 +258,8 @@ func _build_controls(p: Control) -> void:
 func _build_accessibility(p: Control) -> void:
 	_header(p, "HEADER_LANGUAGE")
 	_option(p, "OPT_LANGUAGE", "accessibility", "locale", ["LANG_ZH", "LANG_EN"])
-	_header(p, "HEADER_ACCESSIBILITY")
+	_header(p, "HEADER_INTERFACE")
 	_slider(p, "OPT_UI_SCALE", "accessibility", "ui_scale", 80, 150, 10, "%d%%", true)
-	_toggle(p, "OPT_CAMERA_SHAKE", "accessibility", "camera_shake")
-	_toggle(p, "OPT_SUBTITLES", "accessibility", "subtitles")
 	_header(p, "HEADER_DIALOGUE")
 	_option(p, "OPT_TEXT_SPEED", "accessibility", "dialogue_text_speed",
 		["SPEED_SLOW", "SPEED_NORMAL", "SPEED_FAST", "SPEED_INSTANT"])
@@ -276,6 +280,8 @@ func _header(parent: Control, key: String) -> void:
 	l.text = key
 	l.theme_type_variation = &"HeaderLabel"
 	l.add_theme_font_size_override(&"font_size", SECTION_FONT_SIZE)
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_section_headers.append(l)
 	parent.add_child(l)
 
 
@@ -399,8 +405,8 @@ func _set_desktop_only(control: Control) -> void:
 
 
 func _update_responsive_layout() -> void:
-	var metrics := UILayoutRules.settings_metrics(size)
-	var compact := UILayoutRules.is_compact(size)
+	var metrics := UILayoutRules.settings_panel_metrics(size)
+	var compact: bool = metrics.compact
 	_margin.add_theme_constant_override("margin_left", int(metrics.margin_x))
 	_margin.add_theme_constant_override("margin_right", int(metrics.margin_x))
 	_margin.add_theme_constant_override("margin_top", int(metrics.margin_y))
@@ -410,8 +416,18 @@ func _update_responsive_layout() -> void:
 	_tabs.add_theme_font_size_override(&"font_size", int(metrics.tab_size))
 	_tab_hint.visible = not compact
 	_back_hint.visible = not compact
+	for header in _section_headers:
+		header.add_theme_font_size_override("font_size", int(metrics.section_size))
 	for gap in _section_gaps:
 		gap.custom_minimum_size.y = int(metrics.panel_gap)
 	for row in _settings_rows:
 		row.compact = compact
+		row.label_width = float(metrics.label_width)
 		row.apply_metrics(metrics)
+	var footer := $Margin/Panel/VBox/Footer
+	footer.get_node("Spacer").visible = not compact
+	footer.add_theme_constant_override("h_separation", 12 if compact else 24)
+	footer.add_theme_constant_override("v_separation", 8)
+	for button in [_reset_button, _apply_button, _back_button]:
+		button.custom_minimum_size.x = 100 if compact else 220
+		button.add_theme_font_size_override("font_size", 18 if compact else CONTROL_FONT_SIZE)
