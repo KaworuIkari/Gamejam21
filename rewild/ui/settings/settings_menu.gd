@@ -167,7 +167,7 @@ func _focus_current_tab() -> void:
 	_back_button.grab_focus()
 
 
-func _on_tab_changed(tab: int) -> void:
+func _on_tab_changed(_tab: int) -> void:
 	_reset_button.visible = true
 
 
@@ -320,7 +320,7 @@ func _slider(parent: Control, key: String, section: String, setting: String,
 	row.controls.add_child(value_label)
 
 	var is_int := typeof(SettingsManager.get_default(section, setting)) == TYPE_INT
-	var to_value := func(v: float) -> Variant: return int(roundf(v)) if is_int else snappedf(v, step)
+	var to_value := func(v: float) -> Variant: return int(roundf(v)) if is_int else snappedf(v, step) as Variant
 	var commit := func(v: float) -> void: SettingsManager.set_value(section, setting, to_value.call(v))
 
 	s.value_changed.connect(func(v: float):

@@ -12,6 +12,8 @@ signal on_blob_die(on_target: bool)
 @export var splash_radius := 4.0
 var _dead := false
 
+@onready var sound_emitter : FmodEventEmitter3D = $FmodEventEmitter3D
+
 func _ready() -> void:
 	set_instance_shader_parameter("time_offset", randf_range(0.0, 60.0))
 
@@ -34,11 +36,13 @@ func _physics_process(delta: float) -> void:
 		blob_die()
 		
 func blob_die(on_target : bool = false) -> void:
+	sound_emitter.play_one_shot()
 	if _dead:
 		return
 	_dead = true
 	on_blob_die.emit(on_target)
 	GrowthMap.water(global_position, splash_radius)
+	WorldEvents.report(global_position, &"splash", 0.7 if on_target else 0.35)
 	queue_free()
 
 func _is_good_target(collider: Object) -> bool:

@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://be6k1b6806dsf"
-path="res://.godot/imported/fox.blend-f5ce807d71ae90961875d72a0c02d30a.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/models/characters/Fox/fox.blend"
-dest_files=["res://.godot/imported/fox.blend-f5ce807d71ae90961875d72a0c02d30a.scn"]
 
 [params]
 

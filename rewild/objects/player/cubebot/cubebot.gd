@@ -124,3 +124,9 @@ func _apply_eye() -> void:
 	_beam.light_color = c
 	_beam.light_energy = eye_light_energy * 2.0
 	_beam.visible = cast_beam and eye_light_energy > 0.0
+
+
+# sounds
+@onready var servo_emitter : FmodEventEmitter3D = $Model/CubeBotRig/Skeleton3D/CubeBot/SoundServoEmitter
+func _servo_sound() -> void:
+	servo_emitter.play()

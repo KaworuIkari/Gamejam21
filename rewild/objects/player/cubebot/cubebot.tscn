@@ -1,9 +1,65 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://2vtwlkg57vub"]
 
-[ext_resource type="Script" path="res://objects/player/cubebot/cubebot.gd" id="1_script"]
-[ext_resource type="PackedScene" path="res://objects/player/cubebot/cubebot.glb" id="2_model"]
+[ext_resource type="Script" uid="uid://o1ugkl7de1um" path="res://objects/player/cubebot/cubebot_companion.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://dx8ryte70mppq" path="res://objects/player/cubebot/cubebot.glb" id="2_model"]
+[ext_resource type="Script" uid="uid://orf3qmijpe71" path="res://objects/player/cubebot/cubebot.gd" id="2_nrltj"]
 
-[node name="CubeBot" type="Node3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_mrhpl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nrltj"]
+resource_name = "EyeGlow"
+cull_mode = 2
+albedo_color = Color(0.25, 0.65, 1, 1)
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.25, 0.65, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvjec"]
+resource_name = "EyeCore"
+cull_mode = 2
+albedo_color = Color(0.8125, 0.9125, 1, 1)
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.70000005, 0.86, 1, 1)
+emission_energy_multiplier = 1.4
+
+[node name="CubeBotCompanion" type="CharacterBody3D" unique_id=12817185]
 script = ExtResource("1_script")
+active = true
+wake_on = &"cubebot_wake"
 
-[node name="Model" parent="." instance=ExtResource("2_model")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=772435846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_mrhpl")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1015193870]
+avoidance_enabled = true
+
+[node name="CubeBot" type="Node3D" parent="." unique_id=1525138940]
+script = ExtResource("2_nrltj")
+eye_emission = 1.0
+eye_light_energy = 0.173
+
+[node name="Model" parent="CubeBot" unique_id=788144739 instance=ExtResource("2_model")]
+
+[node name="Skeleton3D" parent="CubeBot/Model/CubeBotRig" parent_id_path=PackedInt32Array(788144739, 1771385302) index="0" unique_id=1300043577]
+bones/1/position = Vector3(-5.826215e-23, -6.285697e-08, 0.4003566)
+bones/1/rotation = Quaternion(0.7028843, -0.0069894125, 0.00690722, 0.71123636)
+bones/2/rotation = Quaternion(-0.5155186, 0.48398417, 0.5155186, 0.4839841)
+bones/3/rotation = Quaternion(0.47974348, 0.51946735, 0.47974342, -0.5194673)
+bones/4/scale = Vector3(1.027686, 1, 0.64883286)
+bones/5/rotation = Quaternion(0.95970327, -0.008605048, 0.0055130287, -0.2808297)
+bones/6/rotation = Quaternion(-0.5631493, 7.752989e-09, -3.658782e-08, 0.8263552)
+bones/7/rotation = Quaternion(-0.2787299, -0.001846089, -0.0023630105, 0.96036494)
+bones/8/rotation = Quaternion(0.9642506, -0.008610753, 0.0053162933, -0.26479858)
+bones/9/rotation = Quaternion(-0.5340952, 6.7879533e-09, -3.6686572e-08, 0.8454244)
+bones/10/rotation = Quaternion(-0.29599962, -0.0019533737, -0.0022355777, 0.95518345)
+
+[node name="CubeBot" parent="CubeBot/Model/CubeBotRig/Skeleton3D" index="0" unique_id=1331873352]
+surface_material_override/4 = SubResource("StandardMaterial3D_nrltj")
+surface_material_override/5 = SubResource("StandardMaterial3D_rvjec")
+
+[node name="SoundServoEmitter" type="FmodEventEmitter3D" parent="CubeBot/Model/CubeBotRig/Skeleton3D/CubeBot" index="0" unique_id=165636228]
+event_guid = "{c92b62ce-6ea2-4d7a-915c-ea738031ea98}"
+
+[editable path="CubeBot/Model"]
