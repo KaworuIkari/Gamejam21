@@ -6,7 +6,7 @@ extends Node
 ## - 鼠标灵敏度 / 手柄灵敏度：以角色在场景里设好的数值为基准，乘以设置里的倍率
 ## - 视野 FOV：直接写到角色的 camera_3d 上
 ## 由 SettingsManager 创建并在设置变化时调用 refresh()。
-## 尚未接入（控制器没有对应功能）：反转 Y 轴、镜头晃动、手柄震动、字幕。
+## LIRA 的反转 Y 轴通过 settings_invert_y 接入；震动由 SettingsManager 管理。
 
 const META_BASE_MOUSE := &"_settings_base_mouse_sensitivity"
 const META_BASE_PAD := &"_settings_base_controller_sensitivity"
@@ -58,6 +58,8 @@ func _apply(player: Node) -> void:
 	player.set(&"mouse_sensitivity", float(player.get_meta(META_BASE_MOUSE)) * mouse_mult)
 	if player.has_meta(META_BASE_PAD):
 		player.set(&"controller_sensitivity", float(player.get_meta(META_BASE_PAD)) * pad_mult)
+	if &"settings_invert_y" in player:
+		player.set(&"settings_invert_y", bool(sm.get_value("controls", "invert_y")))
 	var cam = player.get(&"camera_3d") if &"camera_3d" in player else null
 	if cam is Camera3D:
 		cam.fov = float(sm.get_value("video", "fov"))
