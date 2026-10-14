@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_lake_station_v1/lake_power_station.gd" id="1_3fohw"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Dormant.glb" id="2_83cxm"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Ready.glb" id="3_77a8w"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Active.glb" id="4_lfgt0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t34in"]
+height = 2.9
+radius = 1.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_orxwv"]
+radius = 1.8
+
+[node name="LakePowerStation" type="Node3D" unique_id=1001835720]
+script = ExtResource("1_3fohw")
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+
+[node name="Visuals" type="Node3D" parent="." unique_id=1054315630]
+
+[node name="Dormant" type="Node3D" parent="Visuals" unique_id=1499472771 instance=ExtResource("2_83cxm")]
+
+[node name="Ready" type="Node3D" parent="Visuals" unique_id=1280645502 instance=ExtResource("3_77a8w")]
+visible = false
+
+[node name="Active" type="Node3D" parent="Visuals" unique_id=2124079986 instance=ExtResource("4_lfgt0")]
+visible = false
+
+[node name="Body" type="StaticBody3D" parent="." unique_id=1956772811]
+
+[node name="@CollisionShape3D@12" type="CollisionShape3D" parent="Body" unique_id=205183000]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+shape = SubResource("CylinderShape3D_t34in")
+
+[node name="InteractionZone" type="Area3D" parent="." unique_id=1236241472]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 1.2)
+collision_layer = 0
+
+[node name="@CollisionShape3D@13" type="CollisionShape3D" parent="InteractionZone" unique_id=671810719]
+shape = SubResource("SphereShape3D_orxwv")
+
+[node name="Prompt" type="Label3D" parent="." unique_id=109055968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3, 1.5)
+visible = false
+pixel_size = 0.004
+billboard = 1
+font_size = 40
+
+[node name="CoreLight" type="OmniLight3D" parent="." unique_id=1830634710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+light_color = Color(0.15, 0.86, 0.92, 1)
+light_energy = 0.0
+omni_range = 4.0
+
+[node name="PlayerApproach" type="Marker3D" parent="." unique_id=321728094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.25)

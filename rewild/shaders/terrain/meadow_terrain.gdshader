@@ -80,6 +80,12 @@ uniform float depth_blur : hint_range(0.0, 35.0, 0.1) = 0.0;
 uniform float bias_distance : hint_range(0.0, 16384.0, 0.1) = 512.0;
 
 uniform float far_flower_start = 25.0; // MEADOW: distance where ground flower speckles start
+// MEADOW: texture slot drawn exactly like slot 0 (same ground, greens with the GrowthMap)
+// but without grass or flowers, which only spawn on slot 0. -1 = off.
+uniform int meadow_bare_slot = 8;
+// MEADOW: texture slot drawn like slot 0, with grass, that is green from the start
+// (GrowthMap.always_green_slot reads where it is painted). -1 = off.
+uniform int meadow_green_slot = 9;
 uniform bool enable_macro_variation = true;
 uniform vec3 macro_variation1 : source_color = vec3(1.);
 uniform vec3 macro_variation2 : source_color = vec3(1.);
@@ -550,6 +556,10 @@ void fragment() {
 	
 		// MEADOW: slot 0 is painted with meadow_color(); other slots (path, rock...) keep their texture.
 	float meadow_w = slot_weight(0, control, weights, bilerp);
+	if (meadow_bare_slot >= 0)
+		meadow_w = min(meadow_w + slot_weight(meadow_bare_slot, control, weights, bilerp), 1.0);
+	if (meadow_green_slot >= 0)
+		meadow_w = min(meadow_w + slot_weight(meadow_green_slot, control, weights, bilerp), 1.0);
 	bool has_tex = mat.total_weight > 0.0;
 	vec3 textured = has_tex ? mat.albedo_height.rgb * macrov : vec3(0.5);
 	vec3 tex_normal = has_tex ? fma(normalize(mat.normal_rough.xzy), vec3(0.5), vec3(0.5)) : vec3(0.5, 0.5, 1.0);

@@ -19,6 +19,11 @@ const SAVE_PATH := "user://growth_map.png"
 ## Optional: where growth is allowed (0 = never, e.g. rock or water). RES x RES bytes.
 var soil: PackedByteArray = PackedByteArray()
 
+## Terrain3D texture slot that is green from the start: attach_terrain() reads where
+## it is painted into the permanent layer (-1 = off). Must match the terrain shader's
+## meadow_green_slot.
+@export var always_green_slot := 9
+
 var image: Image
 var texture: ImageTexture
 var wet_image: Image
@@ -46,6 +51,7 @@ var wet_texture: ImageTexture
 @export var fill_interval := 0.4
 
 var _data := PackedByteArray()
+var _base := PackedByteArray()  # permanent green (painted slot, GrowthSeeds); clear() returns here
 var _wet := PackedByteArray()
 var _wet_dirty := false
 var _active := PackedInt32Array()   # pixels that are still wet
@@ -60,6 +66,7 @@ var _noise := FastNoiseLite.new()
 
 func _ready() -> void:
 	_data.resize(RES * RES)  # zero-filled: all barren
+	_base.resize(RES * RES)
 	image = Image.create_from_data(RES, RES, false, Image.FORMAT_R8, _data)
 	texture = ImageTexture.create_from_image(image)
 	_wet.resize(RES * RES)
@@ -95,6 +102,47 @@ func _process(delta: float) -> void:
 func attach_terrain(terrain: Terrain3D) -> void:
 	terrain.material.set_shader_param("growth_map", texture)
 	terrain.material.set_shader_param("wet_map", wet_texture)
+	if always_green_slot >= 0:
+		seed_from_terrain(terrain, always_green_slot)
+
+
+# --- 0. Permanent green: ground that is green from the start ---------------------
+
+## Makes everywhere `slot` is painted on the terrain permanently green.
+func seed_from_terrain(terrain: Terrain3D, slot: int) -> void:
+	var data := terrain.data
+	if data == null:
+		return
+	var px := MAP_SIZE / RES
+	for y in RES:
+		for x in RES:
+			var wp := Vector3(MAP_ORIGIN.x + (x + 0.5) * px, 0.0, MAP_ORIGIN.y + (y + 0.5) * px)
+			if not data.has_regionp(wp):
+				continue
+			var c: int = data.get_control(wp)
+			var blend := ((c >> 14) & 0xFF) / 255.0
+			var w := (1.0 - blend if ((c >> 27) & 0x1F) == slot else 0.0) \
+					+ (blend if ((c >> 22) & 0x1F) == slot else 0.0)
+			if w > 0.0:
+				_add_base(y * RES + x, int(w * 255.0))
+	_dirty = true
+
+
+## A permanently green blob (see GrowthSeed). Same soft, noisy rim as a bloom.
+func seed_circle(world_pos: Vector3, radius: float) -> void:
+	var c := world_to_px(world_pos)
+	var r := maxf(radius / MAP_SIZE * RES, 0.5)
+	for y in range(maxi(int(c.y - r - 1.0), 0), mini(int(c.y + r + 1.0), RES - 1) + 1):
+		for x in range(maxi(int(c.x - r - 1.0), 0), mini(int(c.x + r + 1.0), RES - 1) + 1):
+			var dn := Vector2(x + 0.5, y + 0.5).distance_to(c) / r + _noise.get_noise_2d(x, y) * 0.3
+			if dn < 1.0:
+				_add_base(y * RES + x, int(255.0 * (1.0 - smoothstep(0.6, 1.0, dn))))
+	_dirty = true
+
+
+func _add_base(i: int, v: int) -> void:
+	_base[i] = maxi(_base[i], v)
+	_data[i] = maxi(_data[i], _cap(i, v))
 
 
 ## For other shaders that read growth_map (grass, flowers...). The texture updates
@@ -472,8 +520,9 @@ func load_progress(path: String = SAVE_PATH) -> bool:
 	return true
 
 
+## Back to the start: barren except the permanent green.
 func clear() -> void:
-	_data.fill(0)
+	_data = _base.duplicate()
 	_wet.fill(0)
 	_is_active.fill(0)
 	_active.clear()

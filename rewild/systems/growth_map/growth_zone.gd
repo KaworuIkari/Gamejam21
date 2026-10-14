@@ -14,6 +14,8 @@ signal completed(zone_id: StringName)
 @export var bloom_duration := 5.0
 ## Off until a task enables it (e.g. the summit can't be finished before the jetpack).
 @export var active := true
+## Reported to the quests when the zone blooms (e.g. "east_revived"). Empty = nothing.
+@export var quest_event: StringName = &""
 
 var coverage := 0.0
 var done := false
@@ -53,3 +55,6 @@ func complete(duration: float = -1.0) -> void:
 	coverage = 1.0
 	progress_changed.emit(zone_id, coverage)
 	completed.emit(zone_id)
+	var quests := get_node_or_null(^"/root/Quests")
+	if quests:
+		quests.report(quest_event)

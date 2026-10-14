@@ -6,6 +6,13 @@ const PAUSE_MENU = preload("res://ui/in_game/pause_menu.tscn")
 @onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/CameraPivot/SpringArm3D/Camera3D
 
 
+func _enter_tree() -> void:
+	# Before the player's _ready, so LIRA starts with the saved abilities.
+	var quests := get_node_or_null(^"/root/Quests")
+	if quests:
+		quests.load_from_save()
+
+
 func _ready() -> void:
 	terrain.set_camera(player_camera)
 	GrowthMap.attach_terrain(terrain)

@@ -1,0 +1,1400 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://levels/meadow_hand/meadow_progression.gd" id="1_yyf0f"]
+[ext_resource type="Script" path="res://systems/world_stages/world_stages.gd" id="2_27ihw"]
+[ext_resource type="Script" path="res://systems/world_stages/world_stage.gd" id="3_onjh2"]
+[ext_resource type="Resource" path="res://systems/world_stages/stages/stage_1_wasteland.tres" id="4_jtbfm"]
+[ext_resource type="Resource" path="res://systems/world_stages/stages/stage_2_revival.tres" id="5_fa3fu"]
+[ext_resource type="Resource" path="res://systems/world_stages/stages/stage_3_golden.tres" id="6_tbvih"]
+[ext_resource type="Script" path="res://systems/world_objects/clearable.gd" id="7_cny7g"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Dirty_Litter_Heap_1.tscn" id="8_b5tkq"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_litter_v1/Litter_Cluster_2.tscn" id="9_4qtjq"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Dirty_Litter_Heap_3.tscn" id="10_ni4kn"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_litter_v1/Litter_Cluster_1.tscn" id="11_txcb4"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_flow_v1/Spring_Intake.tscn" id="12_xjyqa"]
+[ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Rubble_Cluster_1.tscn" id="13_sle3v"]
+[ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Rubble_Cluster_2.tscn" id="14_vrv64"]
+[ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Pipe_Broken_3m.tscn" id="15_se3kc"]
+[ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Tank_Ruptured.tscn" id="16_te501"]
+[ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Rubble_Cluster_3.tscn" id="17_55gvx"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_flow_v1/Rescue_Enclosure_Open.tscn" id="18_hdh4d"]
+[ext_resource type="PackedScene" path="res://objects/animals/chicken/animal_chicken.tscn" id="19_kpdra"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_flow_v1/Rescue_Enclosure_Closed.tscn" id="20_pmdye"]
+[ext_resource type="Script" path="res://systems/world_stages/stage_variant.gd" id="21_0hdw7"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Twin_Ruptured_Silos_Wasteland.tscn" id="22_vo06v"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Twin_Ruptured_Silos_Revival.tscn" id="23_imupp"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Twin_Ruptured_Silos_Golden.tscn" id="24_nhiqt"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station.tscn" id="25_bgtat"]
+[ext_resource type="Script" path="res://assets/models/rewild_lake_station_v1/lake_power_station.gd" id="26_wk8u3"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_flow_v1/Sluice_Gate_Closed.tscn" id="27_foa0k"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_flow_v1/Sluice_Gate_Open.tscn" id="28_eanke"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_channels_v1/Channel_Straight_Dry.tscn" id="29_sijxq"]
+[ext_resource type="Script" path="res://assets/models/rewild_channels_v1/channel_water.gd" id="30_32ynt"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_channels_v1/Channel_Straight_Flowing.tscn" id="31_g6stg"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_channels_v1/Channel_Straight_Reclaimed.tscn" id="32_u16f3"]
+[ext_resource type="Script" path="res://systems/growth_map/growth_zone.gd" id="33_yfm11"]
+[ext_resource type="Script" path="res://systems/world_objects/growth_variant.gd" id="34_rukep"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Shrub_Cluster_Withered.tscn" id="35_ohs4f"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Shrub_Cluster_Sprouting.tscn" id="36_nadc8"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Shrub_Cluster_Flourishing.tscn" id="37_r2sag"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Skeletal_Tree_Withered.tscn" id="38_tv2e6"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Skeletal_Tree_Sprouting.tscn" id="39_lkl2c"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Skeletal_Tree_Flourishing.tscn" id="40_vrrgx"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Reed_Bed_Withered.tscn" id="41_4uro7"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Reed_Bed_Sprouting.tscn" id="42_d2f8g"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Reed_Bed_Flourishing.tscn" id="43_h8a5d"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Fern_Cluster_Withered.tscn" id="44_c1gbo"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Fern_Cluster_Sprouting.tscn" id="45_igtw6"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Fern_Cluster_Flourishing.tscn" id="46_6vmk5"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Cracked_Planter_Withered.tscn" id="47_gfowj"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Cracked_Planter_Sprouting.tscn" id="48_ng560"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_vegetation_v1/Cracked_Planter_Flourishing.tscn" id="49_udx62"]
+[ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Machine_Wreck.tscn" id="50_1jb25"]
+[ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Truss_Broken.tscn" id="51_m2oav"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_wreck_v1/Slab_Snapped_Rebar.tscn" id="52_oth0a"]
+[ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Cargo_Crate.tscn" id="53_kvj47"]
+[ext_resource type="PackedScene" path="res://assets/models/crashsite_outpost/Debris_Cluster_2.tscn" id="54_buvo8"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_flow_v1/Jetpack_Pickup.tscn" id="55_cunh2"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Broken_Industrial_Viaduct_Wasteland.tscn" id="56_vw6iq"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Broken_Industrial_Viaduct_Revival.tscn" id="57_qqnr6"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Broken_Industrial_Viaduct_Golden.tscn" id="58_ewdnr"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Container_Stack.tscn" id="59_4mvl5"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Vehicle_Carcass.tscn" id="60_egnjl"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Final_Locked_Section.tscn" id="61_w2awp"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Compacted_Scrap.tscn" id="62_sj261"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Rebar_Seawall.tscn" id="63_5ek6s"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Engine_Pile.tscn" id="64_txe8h"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Bottle_Collapsed_Uncapped.tscn" id="65_weg00"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Can_Flattened_Dirty.tscn" id="66_vswyb"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Bag_Shredded_Muddy.tscn" id="67_piw4g"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Dirty_Litter_Heap_2.tscn" id="68_bkj6b"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_litter_v1/Litter_Cluster_3.tscn" id="69_aryg3"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Tray_Filthy_Broken.tscn" id="70_i6nea"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Ruined_Concrete_Tower_Wasteland.tscn" id="71_umssq"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Ruined_Concrete_Tower_Revival.tscn" id="72_xdbif"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_landmarks_v1/Ruined_Concrete_Tower_Golden.tscn" id="73_jioj4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_t6btr"]
+radius = 70.0
+
+[node name="MeadowProgression" type="Node3D" unique_id=1230808696 node_paths=PackedStringArray("world_stages", "station", "spring_area", "east_zone", "peak_zone", "east_rescue", "peak_rescue", "beach_center")]
+script = ExtResource("1_yyf0f")
+world_stages = NodePath("WorldStages")
+station = NodePath("Lake/LakeStation")
+spring_area = NodePath("Spring/SpringArea")
+east_zone = NodePath("East/EastZone")
+peak_zone = NodePath("Peak/PeakZone")
+east_rescue = NodePath("East/Rescue_rescue_east")
+peak_rescue = NodePath("Peak/Rescue_rescue_peak")
+beach_center = NodePath("Beach/WallCenter")
+
+[node name="WorldStages" type="Node" parent="." unique_id=1742501515 node_paths=PackedStringArray("focus") groups=["world_stages"]]
+script = ExtResource("2_27ihw")
+stages = Array[ExtResource("3_onjh2")]([ExtResource("4_jtbfm"), ExtResource("5_fa3fu"), ExtResource("6_tbvih")])
+focus = NodePath("../Lake/LakeStation")
+
+[node name="Basin" type="Node3D" parent="." unique_id=337484350]
+
+[node name="Dirty_Litter_Heap_1" type="Node3D" parent="Basin" unique_id=1846021037]
+transform = Transform3D(0.9809683, 0, -0.19416788, 0, 1, 0, 0.19416788, 0, 0.9809683, -2, 30.00794, -78)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"basin_litter"])
+radius = 2.5
+
+[node name="Dirty_Litter_Heap_1" type="Node3D" parent="Basin/Dirty_Litter_Heap_1" unique_id=701084029 instance=ExtResource("8_b5tkq")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Overlapping pile of crushed, torn and stained rubbish; one clearing target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Litter_Cluster_2" type="Node3D" parent="Basin" unique_id=209658414]
+transform = Transform3D(-0.99605995, 0, 0.088682495, 0, 1, 0, -0.088682495, 0, -0.99605995, 8, 30.000008, -70)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"basin_litter"])
+radius = 2.5
+
+[node name="Litter_Cluster_2" type="Node3D" parent="Basin/Litter_Cluster_2" unique_id=1216172333 instance=ExtResource("9_4qtjq")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Dirty_Litter_Heap_3" type="Node3D" parent="Basin" unique_id=1897476336]
+transform = Transform3D(-0.67216, 0, -0.7404059, 0, 1, 0, 0.7404059, 0, -0.67216, -14, 29.841654, -68)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"basin_litter"])
+radius = 2.5
+
+[node name="Dirty_Litter_Heap_3" type="Node3D" parent="Basin/Dirty_Litter_Heap_3" unique_id=402947306 instance=ExtResource("10_ni4kn")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Overlapping pile of crushed, torn and stained rubbish; one clearing target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Litter_Cluster_1" type="Node3D" parent="Basin" unique_id=1604244166]
+transform = Transform3D(0.12972836, 0, -0.99154955, 0, 1, 0, 0.99154955, 0, 0.12972836, 4, 29.982752, -60)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"basin_litter"])
+radius = 2.5
+
+[node name="Litter_Cluster_1" type="Node3D" parent="Basin/Litter_Cluster_1" unique_id=262260080 instance=ExtResource("11_txcb4")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Spring" type="Node3D" parent="." unique_id=1691595242]
+
+[node name="Spring_Intake" type="Node3D" parent="Spring" unique_id=2098945035 instance=ExtResource("12_xjyqa")]
+transform = Transform3D(-0.9396926, 0, -0.34202015, 0, 1, 0, 0.34202015, 0, -0.9396926, -56, 44.843033, -322)
+metadata/zone = "spring"
+metadata/category = "Permanent"
+metadata/description = "Water-source background fixture; place removable rubble in front of its grille."
+
+[node name="Rubble_Cluster_1" type="Node3D" parent="Spring" unique_id=1439563461]
+transform = Transform3D(0.8001456, 0, -0.59980583, 0, 1, 0, 0.59980583, 0, 0.8001456, -55, 44.681194, -315)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"spring_blockage"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Rubble_Cluster_1" type="Node3D" parent="Spring/Rubble_Cluster_1" unique_id=451589245 instance=ExtResource("13_sle3v")]
+
+[node name="Rubble_Cluster_2" type="Node3D" parent="Spring" unique_id=315083016]
+transform = Transform3D(-0.8817109, 0, -0.47179013, 0, 1, 0, 0.47179013, 0, -0.8817109, -50, 45.057453, -320)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"spring_blockage"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Rubble_Cluster_2" type="Node3D" parent="Spring/Rubble_Cluster_2" unique_id=678141368 instance=ExtResource("14_vrv64")]
+
+[node name="Pipe_Broken_3m" type="Node3D" parent="Spring" unique_id=164270026]
+transform = Transform3D(0.815189, 0, -0.5791951, 0, 1, 0, 0.5791951, 0, 0.815189, -59, 35.95053, -311)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"spring_blockage"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Pipe_Broken_3m" type="Node3D" parent="Spring/Pipe_Broken_3m" unique_id=1999864056 instance=ExtResource("15_se3kc")]
+
+[node name="Tank_Ruptured" type="Node3D" parent="Spring" unique_id=2021386468]
+transform = Transform3D(0.9775557, 0, 0.21067719, 0, 1, 0, -0.21067719, 0, 0.9775557, -48, 32.721355, -313)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"spring_blockage"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Tank_Ruptured" type="Node3D" parent="Spring/Tank_Ruptured" unique_id=134375634 instance=ExtResource("16_te501")]
+
+[node name="Rubble_Cluster_3" type="Node3D" parent="Spring" unique_id=259165716]
+transform = Transform3D(-0.02826456, 0, -0.99960047, 0, 1, 0, 0.99960047, 0, -0.02826456, -62, 45.007504, -316)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"spring_blockage"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Rubble_Cluster_3" type="Node3D" parent="Spring/Rubble_Cluster_3" unique_id=903750296 instance=ExtResource("17_55gvx")]
+
+[node name="Rescue_rescue_spring" type="Node3D" parent="Spring" unique_id=623205848]
+transform = Transform3D(0.7975915, 0, -0.603198, 0, 1, 0, 0.603198, 0, 0.7975915, -48, 45.145542, -346)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"rescue_spring", &"rescue"])
+hold_time = 1.2
+replace_with = ExtResource("18_hdh4d")
+release = ExtResource("19_kpdra")
+release_offset = Vector3(0, 0.3, 2.2)
+bloom_radius = 8.0
+
+[node name="Rescue_Enclosure_Closed" type="Node3D" parent="Spring/Rescue_rescue_spring" unique_id=2010681305 instance=ExtResource("20_pmdye")]
+metadata/zone = "spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Separate empty enclosure; animal and rescue event must be supplied by gameplay."
+
+[node name="SpringArea" type="Area3D" parent="Spring" unique_id=1477459874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 30.3, -300)
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Spring/SpringArea" unique_id=1674132357]
+shape = SubResource("SphereShape3D_t6btr")
+
+[node name="Twin_Ruptured_Silos" type="Node3D" parent="Spring" unique_id=565588098]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, -102, 30.761297, -268)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Twin_Ruptured_Silos_Wasteland" type="Node3D" parent="Spring/Twin_Ruptured_Silos" unique_id=1384669762 instance=ExtResource("22_vo06v")]
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Wasteland. Same structural footprint and collision in all variants."
+
+[node name="Twin_Ruptured_Silos_Revival" type="Node3D" parent="Spring/Twin_Ruptured_Silos" unique_id=674913329 instance=ExtResource("23_imupp")]
+visible = false
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Revival. Same structural footprint and collision in all variants."
+
+[node name="Twin_Ruptured_Silos_Golden" type="Node3D" parent="Spring/Twin_Ruptured_Silos" unique_id=145280303 instance=ExtResource("24_nhiqt")]
+visible = false
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Golden. Same structural footprint and collision in all variants."
+
+[node name="Lake" type="Node3D" parent="." unique_id=2022578045]
+
+[node name="LakeStation" type="Node3D" parent="Lake" unique_id=1001835720 instance=ExtResource("25_bgtat")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -46, 34.200012, 77)
+script = ExtResource("26_wk8u3")
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+
+[node name="SluiceGateEast" type="Node3D" parent="Lake" unique_id=980423629]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4, 28.996746, 66)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Sluice_Gate_Closed" type="Node3D" parent="Lake/SluiceGateEast" unique_id=192870411 instance=ExtResource("27_foa0k")]
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "2.7m channel; swap complete scene to open or close. Open leaf rises above passage."
+
+[node name="Sluice_Gate_Open" type="Node3D" parent="Lake/SluiceGateEast" unique_id=1420881422 instance=ExtResource("28_eanke")]
+visible = false
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "2.7m channel; swap complete scene to open or close. Open leaf rises above passage."
+
+[node name="ChannelEast1" type="Node3D" parent="Lake" unique_id=93218078]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.5, 29.905567, 66)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Channel_Straight_Dry" type="Node3D" parent="Lake/ChannelEast1" unique_id=706543891 instance=ExtResource("29_sijxq")]
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Flowing" type="Node3D" parent="Lake/ChannelEast1" unique_id=140180343 instance=ExtResource("31_g6stg")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Reclaimed" type="Node3D" parent="Lake/ChannelEast1" unique_id=1388854954 instance=ExtResource("32_u16f3")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="ChannelEast2" type="Node3D" parent="Lake" unique_id=129822222]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.5, 30.000008, 66)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Channel_Straight_Dry" type="Node3D" parent="Lake/ChannelEast2" unique_id=2015387359 instance=ExtResource("29_sijxq")]
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Flowing" type="Node3D" parent="Lake/ChannelEast2" unique_id=1277764392 instance=ExtResource("31_g6stg")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Reclaimed" type="Node3D" parent="Lake/ChannelEast2" unique_id=1763244985 instance=ExtResource("32_u16f3")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="ChannelEast3" type="Node3D" parent="Lake" unique_id=1380954910]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.5, 30.000008, 66)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Channel_Straight_Dry" type="Node3D" parent="Lake/ChannelEast3" unique_id=959888282 instance=ExtResource("29_sijxq")]
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Flowing" type="Node3D" parent="Lake/ChannelEast3" unique_id=1095232476 instance=ExtResource("31_g6stg")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Reclaimed" type="Node3D" parent="Lake/ChannelEast3" unique_id=1199931216 instance=ExtResource("32_u16f3")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="SluiceGateWest" type="Node3D" parent="Lake" unique_id=453094728]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -104, 30.050007, 66)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Sluice_Gate_Closed" type="Node3D" parent="Lake/SluiceGateWest" unique_id=2090353770 instance=ExtResource("27_foa0k")]
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "2.7m channel; swap complete scene to open or close. Open leaf rises above passage."
+
+[node name="Sluice_Gate_Open" type="Node3D" parent="Lake/SluiceGateWest" unique_id=669858236 instance=ExtResource("28_eanke")]
+visible = false
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "2.7m channel; swap complete scene to open or close. Open leaf rises above passage."
+
+[node name="ChannelWest1" type="Node3D" parent="Lake" unique_id=521569579]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -108.5, 30.000008, 66)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Channel_Straight_Dry" type="Node3D" parent="Lake/ChannelWest1" unique_id=1426918874 instance=ExtResource("29_sijxq")]
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Flowing" type="Node3D" parent="Lake/ChannelWest1" unique_id=1603047566 instance=ExtResource("31_g6stg")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Reclaimed" type="Node3D" parent="Lake/ChannelWest1" unique_id=1058942832 instance=ExtResource("32_u16f3")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="ChannelWest2" type="Node3D" parent="Lake" unique_id=851799304]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -114.5, 30.000008, 66)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Channel_Straight_Dry" type="Node3D" parent="Lake/ChannelWest2" unique_id=1121307664 instance=ExtResource("29_sijxq")]
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Flowing" type="Node3D" parent="Lake/ChannelWest2" unique_id=1312632982 instance=ExtResource("31_g6stg")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Reclaimed" type="Node3D" parent="Lake/ChannelWest2" unique_id=1819313422 instance=ExtResource("32_u16f3")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="ChannelWest3" type="Node3D" parent="Lake" unique_id=430761873]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -120.5, 30.000008, 66)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Channel_Straight_Dry" type="Node3D" parent="Lake/ChannelWest3" unique_id=1934894369 instance=ExtResource("29_sijxq")]
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Flowing" type="Node3D" parent="Lake/ChannelWest3" unique_id=485551325 instance=ExtResource("31_g6stg")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="Channel_Straight_Reclaimed" type="Node3D" parent="Lake/ChannelWest3" unique_id=1778898717 instance=ExtResource("32_u16f3")]
+visible = false
+script = ExtResource("30_32ynt")
+metadata/zone = "spring / lake / east"
+metadata/category = "Permanent"
+metadata/description = "2m tile grid, open channel ports. Channel shell permanent; Water is an animated visual, not a water volume. Spillway drops 0.7m along its length."
+
+[node name="East" type="Node3D" parent="." unique_id=1871579457]
+
+[node name="EastZone" type="Node3D" parent="East" unique_id=2024193064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, 29.5629, 30)
+script = ExtResource("33_yfm11")
+zone_id = &"east"
+
+[node name="Shrub_Cluster" type="Node3D" parent="East" unique_id=1124427097]
+transform = Transform3D(-0.560725, 0, -0.82800215, 0, 1, 0, 0.82800215, 0, -0.560725, 95.45834, 29.454437, 36.75223)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Shrub_Cluster_Withered" type="Node3D" parent="East/Shrub_Cluster" unique_id=211354646 instance=ExtResource("35_ohs4f")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Sprouting" type="Node3D" parent="East/Shrub_Cluster" unique_id=477697531 instance=ExtResource("36_nadc8")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Flourishing" type="Node3D" parent="East/Shrub_Cluster" unique_id=196629598 instance=ExtResource("37_r2sag")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster2" type="Node3D" parent="East" unique_id=589348386]
+transform = Transform3D(0.81324005, 0, -0.5819283, 0, 1, 0, 0.5819283, 0, 0.81324005, 78.52603, 29.903606, 21.750465)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Shrub_Cluster_Withered" type="Node3D" parent="East/Shrub_Cluster2" unique_id=1736431015 instance=ExtResource("35_ohs4f")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Sprouting" type="Node3D" parent="East/Shrub_Cluster2" unique_id=1324435649 instance=ExtResource("36_nadc8")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Flourishing" type="Node3D" parent="East/Shrub_Cluster2" unique_id=230287536 instance=ExtResource("37_r2sag")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster3" type="Node3D" parent="East" unique_id=1893982868]
+transform = Transform3D(0.10552851, 0, 0.9944163, 0, 1, 0, -0.9944163, 0, 0.10552851, 71.75756, 29.433943, 26.910593)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Shrub_Cluster_Withered" type="Node3D" parent="East/Shrub_Cluster3" unique_id=982918565 instance=ExtResource("35_ohs4f")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Sprouting" type="Node3D" parent="East/Shrub_Cluster3" unique_id=1185907265 instance=ExtResource("36_nadc8")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Flourishing" type="Node3D" parent="East/Shrub_Cluster3" unique_id=1777197326 instance=ExtResource("37_r2sag")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster4" type="Node3D" parent="East" unique_id=1301298359]
+transform = Transform3D(0.99965507, 0, -0.02626338, 0, 1, 0, 0.02626338, 0, 0.99965507, 71.5456, 29.833342, 13.685778)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Shrub_Cluster_Withered" type="Node3D" parent="East/Shrub_Cluster4" unique_id=1161203899 instance=ExtResource("35_ohs4f")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Sprouting" type="Node3D" parent="East/Shrub_Cluster4" unique_id=982608867 instance=ExtResource("36_nadc8")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Flourishing" type="Node3D" parent="East/Shrub_Cluster4" unique_id=693670178 instance=ExtResource("37_r2sag")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree" type="Node3D" parent="East" unique_id=439611704]
+transform = Transform3D(0.8373034, 0, 0.54673856, 0, 1, 0, -0.54673856, 0, 0.8373034, 83.29016, 29.768782, 42.809578)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Skeletal_Tree_Withered" type="Node3D" parent="East/Skeletal_Tree" unique_id=40077724 instance=ExtResource("38_tv2e6")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Sprouting" type="Node3D" parent="East/Skeletal_Tree" unique_id=88772724 instance=ExtResource("39_lkl2c")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Flourishing" type="Node3D" parent="East/Skeletal_Tree" unique_id=1996513375 instance=ExtResource("40_vrrgx")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree2" type="Node3D" parent="East" unique_id=788225197]
+transform = Transform3D(-0.79030114, 0, 0.6127186, 0, 1, 0, -0.6127186, 0, -0.79030114, 61.314243, 28.843924, 23.6599)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Skeletal_Tree_Withered" type="Node3D" parent="East/Skeletal_Tree2" unique_id=824968203 instance=ExtResource("38_tv2e6")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Sprouting" type="Node3D" parent="East/Skeletal_Tree2" unique_id=1236360981 instance=ExtResource("39_lkl2c")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Flourishing" type="Node3D" parent="East/Skeletal_Tree2" unique_id=1141404602 instance=ExtResource("40_vrrgx")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree3" type="Node3D" parent="East" unique_id=1056818110]
+transform = Transform3D(-0.9222246, 0, -0.38665465, 0, 1, 0, 0.38665465, 0, -0.9222246, 71.88144, 29.686796, 19.34208)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Skeletal_Tree_Withered" type="Node3D" parent="East/Skeletal_Tree3" unique_id=767386336 instance=ExtResource("38_tv2e6")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Sprouting" type="Node3D" parent="East/Skeletal_Tree3" unique_id=1007738992 instance=ExtResource("39_lkl2c")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Flourishing" type="Node3D" parent="East/Skeletal_Tree3" unique_id=2096953477 instance=ExtResource("40_vrrgx")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Reed_Bed" type="Node3D" parent="East" unique_id=168382440]
+transform = Transform3D(-0.999773, 0, -0.021305466, 0, 1, 0, 0.021305466, 0, -0.999773, 90.105865, 30, 10.22657)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Reed_Bed_Withered" type="Node3D" parent="East/Reed_Bed" unique_id=1732964936 instance=ExtResource("41_4uro7")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Reed_Bed_Sprouting" type="Node3D" parent="East/Reed_Bed" unique_id=2067135987 instance=ExtResource("42_d2f8g")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Reed_Bed_Flourishing" type="Node3D" parent="East/Reed_Bed" unique_id=344029721 instance=ExtResource("43_h8a5d")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Reed_Bed2" type="Node3D" parent="East" unique_id=181864589]
+transform = Transform3D(0.5569027, 0, 0.83057773, 0, 1, 0, -0.83057773, 0, 0.5569027, 52.46964, 29.01258, 32.161198)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Reed_Bed_Withered" type="Node3D" parent="East/Reed_Bed2" unique_id=1669976672 instance=ExtResource("41_4uro7")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Reed_Bed_Sprouting" type="Node3D" parent="East/Reed_Bed2" unique_id=1385337590 instance=ExtResource("42_d2f8g")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Reed_Bed_Flourishing" type="Node3D" parent="East/Reed_Bed2" unique_id=362989469 instance=ExtResource("43_h8a5d")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster" type="Node3D" parent="East" unique_id=1074272462]
+transform = Transform3D(-0.23710121, 0, 0.97148496, 0, 1, 0, -0.97148496, 0, -0.23710121, 74.04241, 30.114986, 55.341858)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Fern_Cluster_Withered" type="Node3D" parent="East/Fern_Cluster" unique_id=623338623 instance=ExtResource("44_c1gbo")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster_Sprouting" type="Node3D" parent="East/Fern_Cluster" unique_id=561250276 instance=ExtResource("45_igtw6")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster_Flourishing" type="Node3D" parent="East/Fern_Cluster" unique_id=1282974597 instance=ExtResource("46_6vmk5")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster2" type="Node3D" parent="East" unique_id=1191714108]
+transform = Transform3D(-0.9964479, 0, 0.08421154, 0, 1, 0, -0.08421154, 0, -0.9964479, 83.53233, 29.92599, 19.797657)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Fern_Cluster_Withered" type="Node3D" parent="East/Fern_Cluster2" unique_id=1628388730 instance=ExtResource("44_c1gbo")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster_Sprouting" type="Node3D" parent="East/Fern_Cluster2" unique_id=460501892 instance=ExtResource("45_igtw6")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster_Flourishing" type="Node3D" parent="East/Fern_Cluster2" unique_id=2052190946 instance=ExtResource("46_6vmk5")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Cracked_Planter" type="Node3D" parent="East" unique_id=721044474]
+transform = Transform3D(0.5845032, 0, -0.8113914, 0, 1, 0, 0.8113914, 0, 0.5845032, 89.986916, 29.834927, 18.720053)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Cracked_Planter_Withered" type="Node3D" parent="East/Cracked_Planter" unique_id=1343794005 instance=ExtResource("47_gfowj")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Cracked_Planter_Sprouting" type="Node3D" parent="East/Cracked_Planter" unique_id=1523421783 instance=ExtResource("48_ng560")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Cracked_Planter_Flourishing" type="Node3D" parent="East/Cracked_Planter" unique_id=1609158646 instance=ExtResource("49_udx62")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Cracked_Planter2" type="Node3D" parent="East" unique_id=806869717]
+transform = Transform3D(0.9963807, 0, -0.08500302, 0, 1, 0, 0.08500302, 0, 0.9963807, 58.166935, 28.729635, 28.017237)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Cracked_Planter_Withered" type="Node3D" parent="East/Cracked_Planter2" unique_id=1936293258 instance=ExtResource("47_gfowj")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Cracked_Planter_Sprouting" type="Node3D" parent="East/Cracked_Planter2" unique_id=1076577948 instance=ExtResource("48_ng560")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Cracked_Planter_Flourishing" type="Node3D" parent="East/Cracked_Planter2" unique_id=1026221597 instance=ExtResource("49_udx62")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Machine_Wreck" type="Node3D" parent="East" unique_id=2049433109]
+transform = Transform3D(0.2904003, 0, 0.95690525, 0, 1, 0, -0.95690525, 0, 0.2904003, 89.73698, 29.554113, 36.230694)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"east_debris"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Machine_Wreck" type="Node3D" parent="East/Machine_Wreck" unique_id=336802335 instance=ExtResource("50_1jb25")]
+
+[node name="Truss_Broken" type="Node3D" parent="East" unique_id=1052259095]
+transform = Transform3D(-0.9938861, 0, 0.11041011, 0, 1, 0, -0.11041011, 0, -0.9938861, 73.628235, 29.986792, 45.941086)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"east_debris"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Truss_Broken" type="Node3D" parent="East/Truss_Broken" unique_id=258498822 instance=ExtResource("51_m2oav")]
+
+[node name="Slab_Snapped_Rebar" type="Node3D" parent="East" unique_id=832384500]
+transform = Transform3D(-0.27958202, 0, 0.9601218, 0, 1, 0, -0.9601218, 0, -0.27958202, 59.415226, 28.778383, 33.62144)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"east_debris"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Slab_Snapped_Rebar" type="Node3D" parent="East/Slab_Snapped_Rebar" unique_id=483063794 instance=ExtResource("52_oth0a")]
+metadata/zone = "east / peak"
+metadata/category = "Clearable"
+metadata/description = "Broken reinforced floor slab with a protruding, bent steel mesh."
+
+[node name="Cargo_Crate" type="Node3D" parent="East" unique_id=1095310888]
+transform = Transform3D(-0.99999064, 0, -0.0043280865, 0, 1, 0, 0.0043280865, 0, -0.99999064, 66.739845, 29.46053, 16.297085)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"east_debris"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Cargo_Crate" type="Node3D" parent="East/Cargo_Crate" unique_id=1435748086 instance=ExtResource("53_kvj47")]
+
+[node name="Debris_Cluster_2" type="Node3D" parent="East" unique_id=278681080]
+transform = Transform3D(-0.19273807, 0, 0.9812502, 0, 1, 0, -0.9812502, 0, -0.19273807, 85.47972, 29.920355, 17.909693)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"east_debris"])
+hold_time = 1.0
+radius = 3.5
+
+[node name="Debris_Cluster_2" type="Node3D" parent="East/Debris_Cluster_2" unique_id=24171316 instance=ExtResource("54_buvo8")]
+
+[node name="Rescue_rescue_east" type="Node3D" parent="East" unique_id=265660023]
+transform = Transform3D(-0.9540503, 0, 0.29964656, 0, 1, 0, -0.29964656, 0, -0.9540503, 85, 29.6813, 44)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"rescue_east", &"rescue"])
+hold_time = 1.2
+replace_with = ExtResource("18_hdh4d")
+release = ExtResource("19_kpdra")
+release_offset = Vector3(0, 0.3, 2.2)
+bloom_radius = 8.0
+
+[node name="Rescue_Enclosure_Closed" type="Node3D" parent="East/Rescue_rescue_east" unique_id=848492736 instance=ExtResource("20_pmdye")]
+metadata/zone = "spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Separate empty enclosure; animal and rescue event must be supplied by gameplay."
+
+[node name="Jetpack_Pickup" type="Node3D" parent="East" unique_id=1588727149 instance=ExtResource("55_cunh2")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 67, 29.275784, 20)
+metadata/zone = "east"
+metadata/category = "Pickup"
+metadata/description = "0.8m tall equipment mesh. Attach to character with a local offset; no flight behavior included."
+
+[node name="Broken_Industrial_Viaduct" type="Node3D" parent="East" unique_id=1093018266]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 118, 30.000008, -22)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Broken_Industrial_Viaduct_Wasteland" type="Node3D" parent="East/Broken_Industrial_Viaduct" unique_id=277882645 instance=ExtResource("56_vw6iq")]
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Wasteland. Same structural footprint and collision in all variants."
+
+[node name="Broken_Industrial_Viaduct_Revival" type="Node3D" parent="East/Broken_Industrial_Viaduct" unique_id=479766344 instance=ExtResource("57_qqnr6")]
+visible = false
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Revival. Same structural footprint and collision in all variants."
+
+[node name="Broken_Industrial_Viaduct_Golden" type="Node3D" parent="East/Broken_Industrial_Viaduct" unique_id=1316003032 instance=ExtResource("58_ewdnr")]
+visible = false
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Golden. Same structural footprint and collision in all variants."
+
+[node name="Peak" type="Node3D" parent="." unique_id=1610463749]
+
+[node name="PeakZone" type="Node3D" parent="Peak" unique_id=1388616435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37, 46.29019, -106)
+script = ExtResource("33_yfm11")
+zone_id = &"peak"
+radius = 14.0
+
+[node name="Skeletal_Tree" type="Node3D" parent="Peak" unique_id=1219670705]
+transform = Transform3D(0.72969604, 0, -0.68377167, 0, 1, 0, 0.68377167, 0, 0.72969604, -32.85401, 46.29204, -102.661896)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Skeletal_Tree_Withered" type="Node3D" parent="Peak/Skeletal_Tree" unique_id=1704273833 instance=ExtResource("38_tv2e6")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Sprouting" type="Node3D" parent="Peak/Skeletal_Tree" unique_id=1854722619 instance=ExtResource("39_lkl2c")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Flourishing" type="Node3D" parent="Peak/Skeletal_Tree" unique_id=186284650 instance=ExtResource("40_vrrgx")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree2" type="Node3D" parent="Peak" unique_id=268828471]
+transform = Transform3D(-0.99769926, 0, 0.06779512, 0, 1, 0, -0.06779512, 0, -0.99769926, -43.984444, 46.294937, -100.376175)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Skeletal_Tree_Withered" type="Node3D" parent="Peak/Skeletal_Tree2" unique_id=1334818330 instance=ExtResource("38_tv2e6")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Sprouting" type="Node3D" parent="Peak/Skeletal_Tree2" unique_id=423240821 instance=ExtResource("39_lkl2c")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Skeletal_Tree_Flourishing" type="Node3D" parent="Peak/Skeletal_Tree2" unique_id=637951465 instance=ExtResource("40_vrrgx")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster" type="Node3D" parent="Peak" unique_id=210328193]
+transform = Transform3D(0.2104574, 0, -0.977603, 0, 1, 0, 0.977603, 0, 0.2104574, -40.926567, 46.018894, -111.04776)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Fern_Cluster_Withered" type="Node3D" parent="Peak/Fern_Cluster" unique_id=1950036386 instance=ExtResource("44_c1gbo")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster_Sprouting" type="Node3D" parent="Peak/Fern_Cluster" unique_id=880295906 instance=ExtResource("45_igtw6")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster_Flourishing" type="Node3D" parent="Peak/Fern_Cluster" unique_id=193312007 instance=ExtResource("46_6vmk5")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster2" type="Node3D" parent="Peak" unique_id=1978847068]
+transform = Transform3D(-0.6710103, 0, 0.741448, 0, 1, 0, -0.741448, 0, -0.6710103, -39.04147, 46.263744, -99.21128)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Fern_Cluster_Withered" type="Node3D" parent="Peak/Fern_Cluster2" unique_id=1344083522 instance=ExtResource("44_c1gbo")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster_Sprouting" type="Node3D" parent="Peak/Fern_Cluster2" unique_id=301446144 instance=ExtResource("45_igtw6")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Fern_Cluster_Flourishing" type="Node3D" parent="Peak/Fern_Cluster2" unique_id=1181498097 instance=ExtResource("46_6vmk5")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster" type="Node3D" parent="Peak" unique_id=2075482905]
+transform = Transform3D(0.98191345, 0, 0.18933046, 0, 1, 0, -0.18933046, 0, 0.98191345, -44.28014, 46.256218, -106.26205)
+script = ExtResource("34_rukep")
+thresholds = PackedFloat32Array(0.3, 0.7)
+
+[node name="Shrub_Cluster_Withered" type="Node3D" parent="Peak/Shrub_Cluster" unique_id=1769409040 instance=ExtResource("35_ohs4f")]
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Sprouting" type="Node3D" parent="Peak/Shrub_Cluster" unique_id=404450361 instance=ExtResource("36_nadc8")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Shrub_Cluster_Flourishing" type="Node3D" parent="Peak/Shrub_Cluster" unique_id=357915472 instance=ExtResource("37_r2sag")]
+visible = false
+metadata/method = "WATER"
+metadata/zone = "lake / east / peak"
+metadata/category = "Recoverable"
+metadata/description = "Matched watering-state visual. Same origin and support in all stages. Vegetation has no collision; watering and saved state remain external."
+
+[node name="Rescue_rescue_peak" type="Node3D" parent="Peak" unique_id=447212231]
+transform = Transform3D(-0.91924345, 0, 0.39368948, 0, 1, 0, -0.39368948, 0, -0.91924345, -33, 46.292305, -103)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"rescue_peak", &"rescue"])
+hold_time = 1.2
+replace_with = ExtResource("18_hdh4d")
+release = ExtResource("19_kpdra")
+release_offset = Vector3(0, 0.3, 2.2)
+bloom_radius = 8.0
+
+[node name="Rescue_Enclosure_Closed" type="Node3D" parent="Peak/Rescue_rescue_peak" unique_id=1841900623 instance=ExtResource("20_pmdye")]
+metadata/zone = "spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Separate empty enclosure; animal and rescue event must be supplied by gameplay."
+
+[node name="Beach" type="Node3D" parent="." unique_id=1760387854]
+
+[node name="WallCenter" type="Marker3D" parent="Beach" unique_id=1688487299]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 25.000008, 246)
+
+[node name="Wall00_Wall_Container_Stack" type="Node3D" parent="Beach" unique_id=561320686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.125, 25.02042, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Container_Stack" type="Node3D" parent="Beach/Wall00_Wall_Container_Stack" unique_id=121750237 instance=ExtResource("59_4mvl5")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall01_Wall_Vehicle_Carcass" type="Node3D" parent="Beach" unique_id=1358522888]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.275, 25.000013, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Vehicle_Carcass" type="Node3D" parent="Beach/Wall01_Wall_Vehicle_Carcass" unique_id=1151549557 instance=ExtResource("60_egnjl")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall02_Wall_Final_Locked_Section" type="Node3D" parent="Beach" unique_id=1364594570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.425, 25.000008, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Final_Locked_Section" type="Node3D" parent="Beach/Wall02_Wall_Final_Locked_Section" unique_id=1199180393 instance=ExtResource("61_w2awp")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall03_Wall_Compacted_Scrap" type="Node3D" parent="Beach" unique_id=636830984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.575, 25.000011, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Compacted_Scrap" type="Node3D" parent="Beach/Wall03_Wall_Compacted_Scrap" unique_id=1455965868 instance=ExtResource("62_sj261")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall04_Wall_Rebar_Seawall" type="Node3D" parent="Beach" unique_id=501374056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.725, 25.000011, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Rebar_Seawall" type="Node3D" parent="Beach/Wall04_Wall_Rebar_Seawall" unique_id=1553212900 instance=ExtResource("63_5ek6s")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall05_Wall_Engine_Pile" type="Node3D" parent="Beach" unique_id=427042586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.875, 25.000061, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Engine_Pile" type="Node3D" parent="Beach/Wall05_Wall_Engine_Pile" unique_id=1578878461 instance=ExtResource("64_txe8h")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall06_Wall_Container_Stack" type="Node3D" parent="Beach" unique_id=1237019543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.125, 25.000044, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Container_Stack" type="Node3D" parent="Beach/Wall06_Wall_Container_Stack" unique_id=417631563 instance=ExtResource("59_4mvl5")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall07_Wall_Vehicle_Carcass" type="Node3D" parent="Beach" unique_id=1071842017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.275, 25.000038, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Vehicle_Carcass" type="Node3D" parent="Beach/Wall07_Wall_Vehicle_Carcass" unique_id=1086263402 instance=ExtResource("60_egnjl")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall08_Wall_Final_Locked_Section" type="Node3D" parent="Beach" unique_id=1537624334]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.425, 25.000011, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Final_Locked_Section" type="Node3D" parent="Beach/Wall08_Wall_Final_Locked_Section" unique_id=1928336175 instance=ExtResource("61_w2awp")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall09_Wall_Compacted_Scrap" type="Node3D" parent="Beach" unique_id=1404347581]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.575, 25.000008, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Compacted_Scrap" type="Node3D" parent="Beach/Wall09_Wall_Compacted_Scrap" unique_id=1163655083 instance=ExtResource("62_sj261")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall10_Wall_Rebar_Seawall" type="Node3D" parent="Beach" unique_id=2099701098]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.725, 25.00001, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Rebar_Seawall" type="Node3D" parent="Beach/Wall10_Wall_Rebar_Seawall" unique_id=953093178 instance=ExtResource("63_5ek6s")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall11_Wall_Engine_Pile" type="Node3D" parent="Beach" unique_id=668278253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.875, 25.000008, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Engine_Pile" type="Node3D" parent="Beach/Wall11_Wall_Engine_Pile" unique_id=339450296 instance=ExtResource("64_txe8h")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall12_Wall_Container_Stack" type="Node3D" parent="Beach" unique_id=807427065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.875, 25.00001, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Container_Stack" type="Node3D" parent="Beach/Wall12_Wall_Container_Stack" unique_id=304621676 instance=ExtResource("59_4mvl5")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall13_Wall_Vehicle_Carcass" type="Node3D" parent="Beach" unique_id=917028145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.725, 24.999989, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Vehicle_Carcass" type="Node3D" parent="Beach/Wall13_Wall_Vehicle_Carcass" unique_id=1902605599 instance=ExtResource("60_egnjl")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall14_Wall_Final_Locked_Section" type="Node3D" parent="Beach" unique_id=1826617719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.575, 24.998919, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Final_Locked_Section" type="Node3D" parent="Beach/Wall14_Wall_Final_Locked_Section" unique_id=1809845414 instance=ExtResource("61_w2awp")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall15_Wall_Compacted_Scrap" type="Node3D" parent="Beach" unique_id=209231812]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.425, 24.99134, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Compacted_Scrap" type="Node3D" parent="Beach/Wall15_Wall_Compacted_Scrap" unique_id=566455621 instance=ExtResource("62_sj261")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall16_Wall_Rebar_Seawall" type="Node3D" parent="Beach" unique_id=510318821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.275, 24.973656, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Rebar_Seawall" type="Node3D" parent="Beach/Wall16_Wall_Rebar_Seawall" unique_id=2141061569 instance=ExtResource("63_5ek6s")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall17_Wall_Engine_Pile" type="Node3D" parent="Beach" unique_id=1435308463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.125, 24.936857, 246)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_wall"])
+hold_time = 1.5
+radius = 6.0
+required_ability = &"demolition_auth"
+bloom_radius = 10.0
+
+[node name="Wall_Engine_Pile" type="Node3D" parent="Beach/Wall17_Wall_Engine_Pile" unique_id=240884821 instance=ExtResource("64_txe8h")]
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Bottle_Collapsed_Uncapped" type="Node3D" parent="Beach" unique_id=291907841]
+transform = Transform3D(-0.2586214, 0, -0.96597874, 0, 1, 0, 0.96597874, 0, -0.2586214, -40, 25.117151, 226.6872)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_litter"])
+radius = 2.5
+
+[node name="Bottle_Collapsed_Uncapped" type="Node3D" parent="Beach/Bottle_Collapsed_Uncapped" unique_id=2007386354 instance=ExtResource("65_weg00")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Can_Flattened_Dirty" type="Node3D" parent="Beach" unique_id=259907367]
+transform = Transform3D(-0.18700565, 0, 0.9823588, 0, 1, 0, -0.9823588, 0, -0.18700565, -26, 25.000801, 223.78519)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_litter"])
+radius = 2.5
+
+[node name="Can_Flattened_Dirty" type="Node3D" parent="Beach/Can_Flattened_Dirty" unique_id=773904935 instance=ExtResource("66_vswyb")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Bag_Shredded_Muddy" type="Node3D" parent="Beach" unique_id=351488955]
+transform = Transform3D(-0.119895935, 0, 0.99278647, 0, 1, 0, -0.99278647, 0, -0.119895935, -12, 25.00001, 230.78967)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_litter"])
+radius = 2.5
+
+[node name="Bag_Shredded_Muddy" type="Node3D" parent="Beach/Bag_Shredded_Muddy" unique_id=1101663901 instance=ExtResource("67_piw4g")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Dirty_Litter_Heap_2" type="Node3D" parent="Beach" unique_id=973388555]
+transform = Transform3D(0.22028716, 0, -0.9754351, 0, 1, 0, 0.9754351, 0, 0.22028716, 2, 25.419252, 229.36115)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_litter"])
+radius = 2.5
+
+[node name="Dirty_Litter_Heap_2" type="Node3D" parent="Beach/Dirty_Litter_Heap_2" unique_id=1564408097 instance=ExtResource("68_bkj6b")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Overlapping pile of crushed, torn and stained rubbish; one clearing target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Litter_Cluster_3" type="Node3D" parent="Beach" unique_id=1965585080]
+transform = Transform3D(-0.9769671, 0, 0.21338989, 0, 1, 0, -0.21338989, 0, -0.9769671, 16, 25.331125, 222.12517)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_litter"])
+radius = 2.5
+
+[node name="Litter_Cluster_3" type="Node3D" parent="Beach/Litter_Cluster_3" unique_id=867804029 instance=ExtResource("69_aryg3")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Mixed small rubbish pile, about 1.2m wide; one clearable target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Tray_Filthy_Broken" type="Node3D" parent="Beach" unique_id=1436827475]
+transform = Transform3D(0.579066, 0, 0.8152807, 0, 1, 0, -0.8152807, 0, 0.579066, 30, 25.000008, 233.90623)
+script = ExtResource("7_cny7g")
+tags = Array[StringName]([&"beach_litter"])
+radius = 2.5
+
+[node name="Tray_Filthy_Broken" type="Node3D" parent="Beach/Tray_Filthy_Broken" unique_id=2049491262 instance=ExtResource("70_i6nea")]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Damaged discarded litter with crushed shape, dirt and torn surface details. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Ruined_Concrete_Tower" type="Node3D" parent="Beach" unique_id=1253795665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86, 30.000008, 209)
+script = ExtResource("21_0hdw7")
+stage_map = PackedInt32Array()
+
+[node name="Ruined_Concrete_Tower_Wasteland" type="Node3D" parent="Beach/Ruined_Concrete_Tower" unique_id=177537727 instance=ExtResource("71_umssq")]
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Wasteland. Same structural footprint and collision in all variants."
+
+[node name="Ruined_Concrete_Tower_Revival" type="Node3D" parent="Beach/Ruined_Concrete_Tower" unique_id=1104821521 instance=ExtResource("72_xdbif")]
+visible = false
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Revival. Same structural footprint and collision in all variants."
+
+[node name="Ruined_Concrete_Tower_Golden" type="Node3D" parent="Beach/Ruined_Concrete_Tower" unique_id=845147259 instance=ExtResource("73_jioj4")]
+visible = false
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Golden. Same structural footprint and collision in all variants."
