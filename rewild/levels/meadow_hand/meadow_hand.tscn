@@ -509,7 +509,7 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="LIRA" parent="SubViewportContainer/PixelateSubViewport" unique_id=223261986 instance=ExtResource("29_ae10e")]
+[node name="LIRA" parent="SubViewportContainer/PixelateSubViewport" unique_id=223261986 groups=["player"] instance=ExtResource("29_ae10e")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.13276, -55.756836)
 
@@ -631,5 +631,8 @@ metadata/_custom_type_script = "uid://dx7e7heldjwmg"
 
 [node name="CubeBotCompanion" parent="." unique_id=12817185 instance=ExtResource("53_ma7yh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.497402, 30.000006, -56.801132)
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1988809331]
+bank_paths = ["res://assets/audio/fmod_bank/Desktop/Master.bank"]
 
 [editable path="Water/StylizedWater"]

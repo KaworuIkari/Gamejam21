@@ -8,6 +8,10 @@
 
 config_version=5
 
+[Fmod]
+
+General/banks_path="res://assets/audio/fmod_bank/Desktop"
+
 [application]
 
 config/name="Rewild"
@@ -25,6 +29,7 @@ SaveManager="*res://autoload/ui/save_manager.gd"
 SceneRouter="*res://autoload/ui/scene_router.gd"
 GlassFx="*res://ui/theme/glass/glass_fx.gd"
 WorldEvents="*uid://x8dnsf2xkr0k"
+FmodManager="*uid://cds10pm7hwn3p"
 
 [dialogic]
 
@@ -68,7 +73,11 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/fmod/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+
+[global_group]
+
+player=""
 
 [gui]
 

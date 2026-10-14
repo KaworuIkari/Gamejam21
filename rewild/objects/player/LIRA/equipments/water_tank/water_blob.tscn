@@ -22,6 +22,9 @@ shader_parameter/use_local_coords = true
 shader_parameter/local_noise_scale = 1.0
 shader_parameter/foam_color = Color(1, 1, 1, 1)
 shader_parameter/foam_width = 0.3
+shader_parameter/flow_direction = Vector3(0, 0, 1)
+shader_parameter/flow_speed = 0.0
+shader_parameter/flow_foam = 0.0
 shader_parameter/caustic_strength = 0.9
 shader_parameter/caustic_scale = 0.6
 shader_parameter/sparkle_strength = 1.2
@@ -36,3 +39,7 @@ shader_parameter/blob_foam = 0.6
 mesh = SubResource("SphereMesh_0yw1p")
 surface_material_override/0 = SubResource("ShaderMaterial_mwutn")
 script = ExtResource("1_gd28f")
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=330202259]
+event_name = "event:/LIRA/blob"
+event_guid = "{2f5e5225-4d5d-4c88-8b2c-5f34a6d6775c}"

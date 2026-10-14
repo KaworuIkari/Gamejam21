@@ -24,6 +24,8 @@ var landing_valid := false
 
 var _mesh := ImmediateMesh.new()
 
+@onready var sound_emitter : FmodEventEmitter2D = $FmodEventEmitter2D
+
 func _ready() -> void:
 	var mi := MeshInstance3D.new()
 	mi.mesh = _mesh
@@ -44,6 +46,7 @@ func _process(_d: float) -> void:
 func fire() -> void:
 	_update_velocity()                 # use the barrel's direction at this instant
 	var blob : WaterBlob = blob_scene.instantiate()
+	sound_emitter.play_one_shot()
 	blob.on_blob_die.connect(player._on_blob_landed)
 	get_tree().current_scene.add_child(blob)
 	blob.launch(muzzle.global_position, world_velocity, gravity, collision_mask, player.get_rid())

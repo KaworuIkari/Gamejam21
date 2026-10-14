@@ -249,3 +249,45 @@ func _on_blob_landed(on_target: bool) -> void:
 		face.react(RobotFace.Mood.CORRECT, 1, 1.0)       # watered something that grows
 	else:
 		face.react(RobotFace.Mood.QUESTION, 1, 1.2)      # wasted shot
+
+
+# footsteps
+@onready var sound_emitter_footstep : FmodEventEmitter3D = $Robot/root/Skeleton3D/FootstepEmitter
+var surface_type : int = 0
+
+@onready var terrain: Terrain3D = %Terrain3D
+@export var sand_texture_ids: PackedInt32Array = [3]  # Terrain3D texture slot(s) that are sand
+@export var grass_threshold := 0.5
+
+@onready var left_foot_ray: RayCast3D = $Robot/root/Skeleton3D/FootIKModifier/LeftFootRay
+@onready var right_foot_ray: RayCast3D = $Robot/root/Skeleton3D/FootIKModifier/RightFootRay
+
+const SURFACE_LABELS := ["Gobi", "Grass", "Sand"]
+enum Surface { GOBI, GRASS, SAND }
+
+func _footstep() -> void:
+	surface_type = _detect_surface()
+	# print(SURFACE_LABELS[surface_type])
+	sound_emitter_footstep.set_parameter("SurfaceType", SURFACE_LABELS[surface_type])
+	sound_emitter_footstep.play()
+
+func _detect_surface() -> int:
+	# The planted foot is the lower one, and that is the foot the animation event fires for
+	var ray := left_foot_ray
+	if right_foot_ray.global_position.y < left_foot_ray.global_position.y:
+		ray = right_foot_ray
+	if not ray.is_colliding():
+		return surface_type  # airborne or swimming: keep the previous surface
+	var p := ray.get_collision_point()
+	# Painted terrain texture wins (permanent sand, even where GrowthMap is white)
+	if terrain:
+		var id: Vector3 = terrain.data.get_texture_id(p)  # x = base, y = overlay, z = blend
+		if not is_nan(id.z):
+			var dominant := int(id.y) if id.z > 0.5 else int(id.x)
+			if dominant in sand_texture_ids:
+				return Surface.SAND
+	# Grass where the growth map is green
+	if GrowthMap.sample(p) > grass_threshold:
+		return Surface.GRASS
+	# Default
+	return Surface.GOBI

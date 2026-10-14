@@ -146,6 +146,7 @@ func _physics_process(delta: float) -> void:
 		_apply_motion(delta)
 		_face(delta)
 		_update_wings(delta)
+		_update_casual_sing(delta)
 		_update_debug_label()
 		
 		_slow_tick_timer += delta
@@ -328,8 +329,38 @@ func _play_spot(other: AnimalChicken) -> Vector3:
 		dir = Vector3.FORWARD.rotated(Vector3.UP, randf() * TAU)
 	return _closest_nav_point(other.global_position + dir.normalized() * play_distance)
 
+## singing
+@onready var sound_emitter : FmodEventEmitter3D = $chicken_anim1/wil_chicken_01/Skeleton3D/wil_chicken_01_001/Sing
+@onready var sound_emitter2 : FmodEventEmitter3D = $chicken_anim1/wil_chicken_01/Skeleton3D/wil_chicken_01_001/Sing2
+
+@export_group("Casual Singing")
+@export var casual_sing_radius := 12.0
+@export_range(0.0, 1.0) var casual_sing_chance := 0.6
+@onready var _player = get_tree().get_first_node_in_group("player") as LIRA_Character
+var _greeted := false
+
 func _sing() -> void:
-	sang.emit()  # TODO: play a cluck/song AudioStreamPlayer3D once the asset exists
+	sound_emitter.play()
+	WorldEvents.report(global_position, &"chicken", 1.0)
+
+func _sing2() -> void:
+	sound_emitter2.play()
+	WorldEvents.report(global_position, &"chicken", 0.1)
+
+func _update_casual_sing(_delta: float) -> void:
+	if _greeted and global_position.distance_squared_to(_player.global_position) > 900.0:
+		_greeted = false
+	if _greeted:
+		return
+	if not is_instance_valid(_player):
+		_player = get_tree().get_first_node_in_group("player") as Node3D
+		if _player == null:
+			return
+	if global_position.distance_squared_to(_player.global_position) > casual_sing_radius * casual_sing_radius:
+		return
+	_greeted = true  # the roll is spent whether or not it sings, like Minecraft's first-notice sound
+	if randf() < casual_sing_chance:
+		_sing2()
 
 func _other_chickens() -> Array[AnimalChicken]:
 	var out: Array[AnimalChicken] = []
