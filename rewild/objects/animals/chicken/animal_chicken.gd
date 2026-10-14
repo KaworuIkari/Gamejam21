@@ -6,8 +6,6 @@ class_name AnimalChicken
 ## more than `crowd_limit` playing together → LEAVING → IDLE
 ## Wings flap at random over any animation, except during the play wind-down.
 
-signal sang  # hook audio here later
-
 const GROUP := &"chickens"
 enum State { IDLE, WANDER, GO_EAT, EATING, GO_PLAY, PLAYING, LEAVING }
 const PLAY_STATES := [State.GO_PLAY, State.PLAYING]

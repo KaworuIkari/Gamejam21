@@ -42,24 +42,24 @@ eye_light_energy = 0.173
 
 [node name="Model" parent="CubeBot" unique_id=788144739 instance=ExtResource("2_model")]
 
-[node name="Skeleton3D" parent="CubeBot/Model/CubeBotRig" parent_id_path=PackedInt32Array(788144739, 1681972510) index="0" unique_id=572851313]
-bones/1/position = Vector3(-2.3014097e-22, -6.478823e-08, 0.38869214)
-bones/1/rotation = Quaternion(0.7190734, -0.026756119, 0.007194287, 0.6943816)
-bones/2/rotation = Quaternion(-0.48807794, 0.51164436, 0.48807794, 0.51164436)
-bones/3/rotation = Quaternion(0.4854262, 0.51416093, 0.4854262, -0.51416093)
-bones/5/rotation = Quaternion(0.8780686, -0.02078864, 0.020847024, -0.47762835)
-bones/6/rotation = Quaternion(-0.75664985, 1.959084e-08, -3.499097e-08, 0.6538204)
-bones/7/rotation = Quaternion(-0.3472194, -0.006941723, -0.021280104, 0.9375168)
-bones/8/rotation = Quaternion(0.977287, -0.019096099, 0.010491312, -0.21079728)
-bones/9/rotation = Quaternion(-0.55051816, 5.6571174e-09, -3.7142748e-08, 0.83482325)
-bones/10/rotation = Quaternion(-0.2465494, -0.013539629, -0.014504179, 0.96892715)
+[node name="Skeleton3D" parent="CubeBot/Model/CubeBotRig" parent_id_path=PackedInt32Array(788144739, 1771385302) index="0" unique_id=1300043577]
+bones/1/position = Vector3(-5.826215e-23, -6.285697e-08, 0.4003566)
+bones/1/rotation = Quaternion(0.7028843, -0.0069894125, 0.00690722, 0.71123636)
+bones/2/rotation = Quaternion(-0.5155186, 0.48398417, 0.5155186, 0.4839841)
+bones/3/rotation = Quaternion(0.47974348, 0.51946735, 0.47974342, -0.5194673)
+bones/4/scale = Vector3(1.027686, 1, 0.64883286)
+bones/5/rotation = Quaternion(0.95970327, -0.008605048, 0.0055130287, -0.2808297)
+bones/6/rotation = Quaternion(-0.5631493, 7.752989e-09, -3.658782e-08, 0.8263552)
+bones/7/rotation = Quaternion(-0.2787299, -0.001846089, -0.0023630105, 0.96036494)
+bones/8/rotation = Quaternion(0.9642506, -0.008610753, 0.0053162933, -0.26479858)
+bones/9/rotation = Quaternion(-0.5340952, 6.7879533e-09, -3.6686572e-08, 0.8454244)
+bones/10/rotation = Quaternion(-0.29599962, -0.0019533737, -0.0022355777, 0.95518345)
 
-[node name="CubeBot" parent="CubeBot/Model/CubeBotRig/Skeleton3D" index="0" unique_id=752840239]
+[node name="CubeBot" parent="CubeBot/Model/CubeBotRig/Skeleton3D" index="0" unique_id=1331873352]
 surface_material_override/4 = SubResource("StandardMaterial3D_nrltj")
 surface_material_override/5 = SubResource("StandardMaterial3D_rvjec")
 
 [node name="SoundServoEmitter" type="FmodEventEmitter3D" parent="CubeBot/Model/CubeBotRig/Skeleton3D/CubeBot" index="0" unique_id=165636228]
-event_name = "event:/Cubebot/Servo"
 event_guid = "{c92b62ce-6ea2-4d7a-915c-ea738031ea98}"
 
 [editable path="CubeBot/Model"]

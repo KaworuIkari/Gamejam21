@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Lake_Power_Station_Dormant",
+    "zone": "lake",
+    "category": "Recoverable",
+    "description": "Approx 3.1m tall ivory power station with cyan halo, front interface, botanical mark and rootlike cables. Front is Godot +Z. Three identical structural states.",
+    "dimensions": [
+      3.685,
+      4.274,
+      3.11
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Lake_Power_Station_Ready",
+    "zone": "lake",
+    "category": "Recoverable",
+    "description": "Approx 3.1m tall ivory power station with cyan halo, front interface, botanical mark and rootlike cables. Front is Godot +Z. Three identical structural states.",
+    "dimensions": [
+      3.685,
+      4.274,
+      3.11
+    ],
+    "objects": 2
+  },
+  {
+    "name": "Lake_Power_Station_Active",
+    "zone": "lake",
+    "category": "Recoverable",
+    "description": "Approx 3.1m tall ivory power station with cyan halo, front interface, botanical mark and rootlike cables. Front is Godot +Z. Three identical structural states.",
+    "dimensions": [
+      3.685,
+      4.274,
+      3.11
+    ],
+    "objects": 2
+  }
+]

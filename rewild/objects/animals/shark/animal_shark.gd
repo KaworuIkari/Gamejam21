@@ -511,7 +511,7 @@ func _debug_goal() -> Variant:
 		State.PATROL:
 			return _target
 		State.HUNT:
-			return _clamp_to_water(_prey.get_body().global_position) if _prey_reachable(_prey) else null
+			return _clamp_to_water(_prey.get_body().global_position) if _prey_reachable(_prey) else null as Variant
 		State.DESCEND:
 			return _target if _sleep_spot.is_empty() else _sleep_hover()
 	return null

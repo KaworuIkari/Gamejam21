@@ -1,6 +1,6 @@
 class_name KeyRebindButton
 extends Button
-## 单个按键绑定按钮：点击后等待下一次输入并写入 SettingsManager
+## 单个按键绑定按钮：点击后等待下一次输入并预览绑定；应用后统一保存
 
 @export var action: StringName
 @export_enum("kbm", "joy") var kind: String = "kbm"
@@ -11,6 +11,7 @@ var _listening := false
 
 
 func _ready() -> void:
+	clip_text = true
 	auto_translate_mode = Node.AUTO_TRANSLATE_MODE_DISABLED # 文本由 _update_text 手动翻译
 	custom_minimum_size.x = maxf(custom_minimum_size.x, 260)
 	set_process_input(false)
@@ -34,6 +35,7 @@ func _update_text() -> void:
 		text = tr("BIND_WAITING")
 	else:
 		text = SettingsManager.event_to_text(SettingsManager.get_binding(action, kind))
+	tooltip_text = text
 
 
 func _start_listening() -> void:
@@ -72,5 +74,8 @@ func _input(event: InputEvent) -> void:
 
 	var clean := SettingsManager._deserialize_event(SettingsManager._serialize_event(event))
 	if clean:
-		SettingsManager.rebind(action, kind, clean)
+		if not SettingsManager.rebind(action, kind, clean):
+			text = tr("BIND_RESERVED_LOOK")
+			tooltip_text = text
+			return
 	_stop_listening()

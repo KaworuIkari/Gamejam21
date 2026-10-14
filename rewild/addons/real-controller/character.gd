@@ -69,6 +69,8 @@ var is_using: bool = false
 
 # Freeze the character. It may be useful when you want to pause the character.
 var frozen: bool = false
+## Hook used by project controllers without copying camera handling.
+var camera_invert_y := false
 
 var target_camera_distance: float = 3.5
 var is_transitioning_camera: bool = false
@@ -140,7 +142,7 @@ func _handle_controller_camera(delta: float) -> void:
 	var look_dir = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 	if look_dir != Vector2.ZERO:
 		camera_pivot.rotation.y -= look_dir.x * controller_sensitivity * delta
-		camera_pivot.rotation.x += look_dir.y * controller_sensitivity * delta
+		camera_pivot.rotation.x += look_dir.y * controller_sensitivity * delta * (-1.0 if camera_invert_y else 1.0)
 		camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, -tilt_limit, tilt_limit)
 
 ## Handles smooth camera transition between modes.

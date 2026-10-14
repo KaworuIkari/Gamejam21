@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Active.glb" id="1_dvi6h"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o5e6y"]
+height = 2.9
+radius = 1.1
+
+[node name="Lake_Power_Station_Active" type="Node3D" unique_id=160854649]
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "Approx 3.1m tall ivory power station with cyan halo, front interface, botanical mark and rootlike cables. Front is Godot +Z. Three identical structural states."
+
+[node name="Visual" type="Node3D" parent="." unique_id=2124079986 instance=ExtResource("1_dvi6h")]
+
+[node name="Body" type="StaticBody3D" parent="." unique_id=1068965175]
+
+[node name="@CollisionShape3D@6" type="CollisionShape3D" parent="Body" unique_id=2038950299]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.45, 0)
+shape = SubResource("CylinderShape3D_o5e6y")

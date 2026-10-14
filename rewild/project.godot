@@ -28,8 +28,15 @@ SettingsManager="*res://autoload/ui/settings_manager.gd"
 SaveManager="*res://autoload/ui/save_manager.gd"
 SceneRouter="*res://autoload/ui/scene_router.gd"
 GlassFx="*res://ui/theme/glass/glass_fx.gd"
-WorldEvents="*uid://x8dnsf2xkr0k"
+UIAudio="*res://autoload/ui/ui_audio.gd"
+Quests="*res://systems/quests/quest_log.gd"
 FmodManager="*uid://cds10pm7hwn3p"
+WorldEvents="*uid://x8dnsf2xkr0k"
+
+[debug]
+
+gdscript/warnings/integer_division=0
+gdscript/warnings/int_as_enum_without_cast=0
 
 [dialogic]
 

@@ -1,5 +1,11 @@
 extends RealController
 class_name LIRA_Character
+const JetpackHUD = preload("res://ui/in_game/jetpack/jetpack_hud.gd")
+var settings_invert_y: bool:
+	get:
+		return camera_invert_y
+	set(value):
+		camera_invert_y = value
 var anim_dir := Vector2.ZERO   # character rotation for diagonal walks
 @export var stopping_tweak : float = 20.0  # tweak how fast velocity decreases after moving, to match the locomotion -> idle Xfade Time visually
 
@@ -16,7 +22,24 @@ var _idle_time := 0.0
 # trajectory and shooting
 @onready var aim_trajectory: AimTrajectory = $AimTrajectory
 @export var fire_cooldown := 0.35
+var has_water_gun := true
 var _fire_cd := 0.0
+
+# abilities: unlocked and upgraded by quest rewards (Quests autoload)
+@export_group("Abilities")
+## Levels LIRA has from the start; quests can only raise them. 0 = locked.
+@export_range(0, 9) var start_water_gun_level := 1
+@export_range(0, 9) var start_jetpack_level := 1
+## Per level (first entry = level 1): splash radius of one shot, in metres.
+@export var water_gun_splash := PackedFloat32Array([4.0, 6.0, 8.0])
+## Per level: seconds between shots.
+@export var water_gun_cooldown := PackedFloat32Array([0.35, 0.25, 0.18])
+## Per level: jetpack energy (fuel).
+@export var jetpack_energy := PackedFloat32Array([100.0, 160.0, 240.0])
+var water_gun_level := 0
+var jetpack_level := 0
+## Splash radius of the next shot (set from water_gun_splash).
+var splash_radius := 4.0
 
 @export var aim_offset : Vector3 = Vector3(1,0,0)
 @export var aim_offset_lerp_speed : float = 20.0
@@ -57,15 +80,20 @@ func _ready() -> void:
 	super()
 	character = $Robot
 	character.rotation.y = camera_pivot.rotation.y + PI
-	
-	speed = 2.5 * scale.x          # unused slot, keep it consistent
-	walk_speed = speed             # my "walk"
-	sprint_speed = 8.0 * scale.x   # my "run"
-	pass # Replace with function body.
-	
+	# Walk Speed / Sprint Speed come from the Inspector (Speed is unused: LIRA only walks or runs).
+	var quests := get_node_or_null(^"/root/Quests")
+	if quests:
+		quests.ability_changed.connect(func(_a: StringName, _l: int) -> void: _apply_abilities())
+	_apply_abilities()
+
 	spring_arm_3d.add_excluded_object(self)
 
 	face.setup(robot, 4)
+	var energy_hud := JetpackHUD.new()
+	energy_hud.name = "JetpackHUD"
+	energy_hud.configure(self)
+	get_tree().root.add_child.call_deferred(energy_hud)
+	tree_exiting.connect(energy_hud.queue_free)
 	
 
 func _physics_process(delta: float) -> void:
@@ -124,11 +152,39 @@ func _handle_character_rotation(delta: float) -> void:
 	var target := camera_pivot.rotation.y + PI - off * PI / 4.0
 	character.rotation.y = lerp_angle(character.rotation.y, target, rotation_speed * delta)
 
+## Water gun and jetpack levels: the higher of the start level and what quests granted.
+func _apply_abilities() -> void:
+	var quests := get_node_or_null(^"/root/Quests")
+	water_gun_level = maxi(start_water_gun_level, quests.ability_level(&"water_gun") if quests else 0)
+	jetpack_level = maxi(start_jetpack_level, quests.ability_level(&"jetpack") if quests else 0)
+	set_water_gun(water_gun_level > 0)
+	if water_gun_level > 0:
+		splash_radius = _per_level(water_gun_splash, water_gun_level, splash_radius)
+		fire_cooldown = _per_level(water_gun_cooldown, water_gun_level, fire_cooldown)
+	jetpack.visible = jetpack_level > 0
+	if jetpack_level > 0:
+		max_energy = _per_level(jetpack_energy, jetpack_level, max_energy)
+		energy = max_energy
+
+
+func _per_level(values: PackedFloat32Array, level: int, fallback: float) -> float:
+	return values[mini(level, values.size()) - 1] if not values.is_empty() else fallback
+
+
+## Gives (or takes away) the water gun: shows the tank and gun and allows aiming.
+func set_water_gun(enabled: bool) -> void:
+	has_water_gun = enabled
+	$Robot/root/Skeleton3D/spine_02_x/Tank.visible = enabled
+	$Robot/root/Skeleton3D/hand_r/WaterGunPos.visible = enabled
+	if not enabled and animation_script.is_aiming:
+		on_aim(false)
+
 func try_shoot() -> void:                   # call this from the input code that used to set is_shooting
 	if not animation_script.is_aiming or _fire_cd > 0.0:
 		return
 	_fire_cd = fire_cooldown
 	aim_trajectory.fire()
+	SettingsManager.play_feedback(0.15, 0.25, 0.08)
 	animation_script.aim_correction.kick()
 
 func on_aim(is_aiming : bool) -> void:
@@ -142,15 +198,24 @@ func on_aim(is_aiming : bool) -> void:
 	aim_trajectory.active = is_aiming
 
 func _unhandled_input(event: InputEvent) -> void:
-	super(event)
+	if frozen or get_tree().paused:
+		return
+	var camera_event := event
+	if settings_invert_y and event is InputEventMouseMotion:
+		camera_event = event.duplicate()
+		camera_event.relative.y = -event.relative.y
+	super(camera_event)
 	if event.is_action_pressed("use"):
 		if animation_script.is_aiming and not animation_script.is_shooting:
 			animation_script.is_shooting = true
 			try_shoot()
-	if event.is_action_pressed("use2"):
+	if event.is_action_pressed("use2") and has_water_gun:
 		on_aim(true)
 	elif event.is_action_released("use2"):
 		on_aim(false)
+
+## Preserve horizontal look and invert only the vertical stick axis.
+
 
 func _handle_gravity_and_jump(delta: float) -> void:
 	super(delta)  # gravity + ground jump
@@ -165,7 +230,7 @@ func _handle_gravity_and_jump(delta: float) -> void:
 	jetpack.set_thrust(_thrusting, _spool)
 
 func _handle_jetpack(delta: float) -> void:
-	if frozen:
+	if frozen or jetpack_level <= 0:
 		_end_thrust()
 		return
 	# Tap: immediate burst (also the first frame of a hold)
@@ -178,6 +243,7 @@ func _handle_jetpack(delta: float) -> void:
 		_regen_timer = regen_delay
 		animation_script.is_using_double_jump = true
 		jetpack.burst()
+		SettingsManager.play_feedback(0.35, 0.55, 0.16)
 	if not _jet_armed:
 		return
 	if not Input.is_action_pressed("jump") or energy <= 0.0:

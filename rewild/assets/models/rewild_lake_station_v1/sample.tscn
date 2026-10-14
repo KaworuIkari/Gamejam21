@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yq8oy"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_qujdk"]
+size = Vector2(32, 32)
+
+[sub_resource type="Environment" id="Environment_rkucn"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=906032101]
+
+[node name="Lake_Power_Station_Dormant" type="Node3D" parent="." unique_id=1169365021]
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "Approx 3.1m tall ivory power station with cyan halo, front interface, botanical mark and rootlike cables. Front is Godot +Z. Three identical structural states."
+
+[node name="@Label3D@3" type="Label3D" parent="." unique_id=820180134]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Lake Power Station Dormant"
+font_size = 48
+
+[node name="Lake_Power_Station_Ready" type="Node3D" parent="." unique_id=148271019]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "Approx 3.1m tall ivory power station with cyan halo, front interface, botanical mark and rootlike cables. Front is Godot +Z. Three identical structural states."
+
+[node name="@Label3D@5" type="Label3D" parent="." unique_id=702575757]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 3.7)
+pixel_size = 0.007
+text = "Lake Power Station Ready"
+font_size = 48
+
+[node name="Lake_Power_Station_Active" type="Node3D" parent="." unique_id=160854649]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+metadata/description = "Approx 3.1m tall ivory power station with cyan halo, front interface, botanical mark and rootlike cables. Front is Godot +Z. Three identical structural states."
+
+[node name="@Label3D@7" type="Label3D" parent="." unique_id=1319957700]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 18, 0.15, 3.7)
+pixel_size = 0.007
+text = "Lake Power Station Active"
+font_size = 48
+
+[node name="@MeshInstance3D@8" type="MeshInstance3D" parent="." unique_id=47351070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.65, 9)
+material_override = SubResource("StandardMaterial3D_yq8oy")
+mesh = SubResource("PlaneMesh_qujdk")
+
+[node name="@DirectionalLight3D@9" type="DirectionalLight3D" parent="." unique_id=1882348161]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@10" type="WorldEnvironment" parent="." unique_id=1111819442]
+environment = SubResource("Environment_rkucn")
+
+[node name="@Camera3D@11" type="Camera3D" parent="." unique_id=1920871370]
+transform = Transform3D(0.81373346, -0.3668594, 0.4508348, 0, 0.7756455, 0.6311688, -0.5812382, -0.51360315, 0.63116866, 29, 29, 37)
+projection = 1
+current = true
+size = 34.0

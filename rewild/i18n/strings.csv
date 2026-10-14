@@ -24,11 +24,9 @@ TAB_CONTROLS,操作,Controls
 TAB_ACCESSIBILITY,语言与辅助,Language & Access
 HEADER_VOLUME,音量,Volume
 HEADER_DISPLAY,显示,Display
-HEADER_GRAPHICS,图形,Graphics
 HEADER_SENSITIVITY,灵敏度与手感,Sensitivity & Feel
 HEADER_KEYBINDS,按键绑定,Key Bindings
 HEADER_LANGUAGE,语言,Language
-HEADER_ACCESSIBILITY,辅助功能,Accessibility
 HEADER_SAVE_SLOTS,存档位,Save Slots
 OPT_MASTER_VOLUME,主音量,Master Volume
 OPT_MUSIC_VOLUME,音乐,Music
@@ -48,16 +46,6 @@ VSYNC_ON,开启,On
 VSYNC_ADAPTIVE,自适应,Adaptive
 OPT_MAX_FPS,帧率上限,Frame Rate Limit
 FPS_UNLIMITED,不限制,Unlimited
-OPT_QUALITY,画质,Graphics Quality
-QUALITY_LOW,低,Low
-QUALITY_MEDIUM,中,Medium
-QUALITY_HIGH,高,High
-QUALITY_ULTRA,极高,Ultra
-OPT_RENDER_SCALE,渲染缩放,Render Scale
-OPT_SCALER,缩放算法,Upscaler
-SCALER_BILINEAR,双线性,Bilinear
-SCALER_FSR1,FSR 1.0,FSR 1.0
-SCALER_FSR2,FSR 2.2,FSR 2.2
 OPT_FOV,视野（FOV）,Field of View
 OPT_MOUSE_SENS,鼠标灵敏度,Mouse Sensitivity
 OPT_PAD_SENS,手柄灵敏度,Controller Sensitivity
@@ -67,8 +55,6 @@ OPT_LANGUAGE,语言,Language
 LANG_ZH,简体中文,简体中文
 LANG_EN,English,English
 OPT_UI_SCALE,界面缩放,UI Scale
-OPT_CAMERA_SHAKE,镜头晃动,Camera Shake
-OPT_SUBTITLES,字幕,Subtitles
 BIND_COL_ACTION,动作,Action
 BIND_COL_KBM,键盘 / 鼠标,Keyboard / Mouse
 BIND_COL_PAD,手柄,Controller
@@ -130,7 +116,6 @@ DLG_SKIP_CONFIRM,跳过这段对话吗？（遇到下一个选项时会停下）
 DLG_HISTORY_TITLE,对话记录,Dialogue Log
 DLG_HISTORY_EMPTY,还没有对话记录,No dialogue yet
 DLG_TALK_PROMPT,按 %s 交谈,Press %s to talk
-ACTION_WALK,慢走,Walk
 ACTION_USE,浇水（按住）,Water (hold)
 ACTION_USE2,浇水（单次喷洒）,Water (burst)
 ACTION_DIALOGUE_AUTO,对话：自动播放,Dialogue: Auto
@@ -171,3 +156,56 @@ TASK_DEMO_ARCHIVE_EMPTY,暂无归档示例,No archived examples
 TASK_DEMO_SELECT,点击任务查看演示详情,Select the task to view demo details
 TASK_DEMO_NOTICE,演示参考：不计入游戏进度或存档。,Display reference: no gameplay or save progress.
 INTERACT_PUMP_PROMPT,按 %s 启动水泵,Press %s to start the pump
+HEADER_CAMERA,镜头,Camera
+HEADER_INTERFACE,界面,Interface
+PAUSE_RETURN_CONFIRM,确定返回主菜单吗？未保存的进度可能丢失。,Return to the main menu? Unsaved progress may be lost.
+
+BIND_RESERVED_LOOK,右摇杆用于镜头，请选其他按键,Right stick is reserved for camera; choose another input
+UI_RETRY_SAVE,保存失败：重试,Save failed: retry
+SETTINGS_SAVE_FAILED,设置未能保存，更改仍可预览或放弃。,Settings could not be saved. Changes can still be previewed or discarded.
+CLEAR_PROMPT,按住 %s 清除,Hold %s to clear
+CLEAR_LOCKED,%s 需要拆除授权,%s Needs demolition authorization
+OBJ_BASIN_LITTER,清理身边的垃圾,Clear the litter around you
+OBJ_REACH_SPRING,前往北方水源（北边的小岛）,Head to the north spring (the island to the north)
+OBJ_CLEAR_SPRING,清除堵住水口的残骸,Clear the debris blocking the spring intake
+OBJ_RESCUE_SPRING,打开笼子，救出小动物,Open the cage and free the animal
+OBJ_START_PUMP,启动水泵,Start the pump
+OBJ_ACTIVATE_STATION,游到湖心岛，启动终端,Reach the lake island and activate the station
+OBJ_REVIVE_EAST,东部绿洲：浇灌枯地并救出小动物,East oasis: water the dry ground and free the animal
+OBJ_REVIVE_PEAK,北部山顶：浇灌山顶并救出小动物,North summit: water the summit and free the animal
+OBJ_BEACH_WALL,拆除南岸的垃圾墙,Tear down the garbage wall on the south shore
+OBJ_DONE,大海重新打开了。谢谢游玩！,The sea is open again. Thanks for playing!
+TOAST_STAGE,世界阶段：%s,World stage: %s
+TOAST_DEMOLITION_AUTH,获得拆除授权,Demolition authorization granted
+Wasteland,荒原,Wasteland
+Revival,复苏,Revival
+Golden meadow,金色草原,Golden meadow
+QUEST_WATER_TITLE,恢复水源,Restore the water source
+QUEST_WATER_DESC,湖泊早已干涸。启动北部泉眼的水泵让水重新流向湖泊，再唤醒湖心电站。,The lake ran dry long ago. Start the pump at the north spring so water flows back to the lake. Then wake the lake power station.
+QUEST_WATER_LOCATION,北部泉眼 / 湖心电站,North spring / Lake station
+QUEST_WATER_STEP_PUMP,启动北部泉眼的水泵,Start the pump at the north spring
+QUEST_WATER_STEP_STATION,长按 E 激活湖心电站,Hold E to activate the lake power station
+QUEST_WATER_STEP_TERMINAL,在电站终端查看任务,Check the station terminal
+QUEST_CLEAN_TITLE,清理草原,Clean up the meadow
+QUEST_CLEAN_DESC,垃圾堵塞了土地。长按 E 清理垃圾，让绿色重新蔓延。,Litter is choking the land. Hold E to clear it and let the green spread again.
+QUEST_CLEAN_LOCATION,草原,Meadow
+QUEST_CLEAN_STEP_GARBAGE,清理垃圾,Clear garbage
+QUEST_REGROW_TITLE,让树木复苏,Bring the trees back
+QUEST_REGROW_DESC,继续清理并浇灌枯树周围的土地。土地变绿后枯树会重新长叶。,Keep cleaning and water the ground around dead trees. They leaf out again once the ground is green.
+QUEST_REGROW_LOCATION,草原,Meadow
+QUEST_REGROW_STEP_GARBAGE,再清理更多垃圾,Clear more garbage
+QUEST_REGROW_STEP_TREES,让枯树复苏,Revive dead trees
+QUEST_STATUS_ACTIVE,进行中,Active
+QUEST_STATUS_DONE,已完成,Done
+QUEST_STATUS_TRACKED,追踪中,Tracked
+QUEST_TRACK,追踪任务,Track quest
+QUEST_UNTRACK,取消追踪,Stop tracking
+QUEST_REWARDS,奖励：%s,Reward: %s
+QUEST_TOAST_STARTED,新任务：%s,New quest: %s
+QUEST_TOAST_DONE,任务完成：%s,Quest complete: %s
+QUEST_TOAST_ABILITY,获得：%s,Unlocked: %s
+QUEST_EMPTY_ACTIVE,暂无进行中的任务,No active quests
+QUEST_EMPTY_ARCHIVE,暂无已完成的任务,No completed quests yet
+ABILITY_WATER_GUN,水枪,Water gun
+ABILITY_JETPACK,喷气背包,Jetpack
+ABILITY_LEVEL,%s Lv%d,%s Lv%d

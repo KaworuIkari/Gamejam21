@@ -31,6 +31,7 @@ shader_parameter/sparkle_strength = 1.2
 shader_parameter/sparkle_threshold = 0.6
 shader_parameter/underwater_fog_color = Color(0.1, 0.42, 0.58, 1)
 shader_parameter/underwater_fog_density = 0.08
+shader_parameter/use_basin_mask = false
 shader_parameter/blob_density = 1.2
 shader_parameter/blob_clarity = 0.25
 shader_parameter/blob_foam = 0.6

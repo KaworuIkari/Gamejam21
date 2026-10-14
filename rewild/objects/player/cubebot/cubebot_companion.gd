@@ -39,7 +39,7 @@ const HARD_LANDING := 0.35  ## airborne longer than this plays Land
 ## If set, a WorldEvents report of this kind switches the bot on.
 @export var wake_on: StringName = &""
 ## Optional. Otherwise looked up as %LIRA in the current scene on activation.
-@export var lira: CharacterBody3D
+@onready var lira: LIRA_Character = get_tree().get_first_node_in_group("player")
 
 @export_group("Movement")
 @export var walk_speed := 1.6
@@ -348,11 +348,6 @@ func _on_landed() -> void:
 # --- helpers ----------------------------------------------------------------
 
 func _set_active(on: bool) -> void:
-	if on and lira == null:
-		lira = get_tree().current_scene.get_node_or_null(^"%LIRA") as CharacterBody3D
-		if lira == null:
-			push_warning("CubeBotCompanion: no %LIRA in the current scene")
-			on = false
 	set_physics_process(on)
 	if on:
 		_think_t = 0.0
