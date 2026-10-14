@@ -57,6 +57,8 @@ func _ready() -> void:
 	_apply_button.pressed.connect(_on_apply_pressed)
 	_back_button.pressed.connect(request_close)
 	_tabs.tab_changed.connect(_on_tab_changed)
+	# Clicked also fires for the selected tab; opening/refreshing stays silent.
+	_tabs.get_tab_bar().tab_clicked.connect(UIAudio.play_settings_tab_sound)
 	SettingsManager.setting_changed.connect(func(_s, _k, _v): _refresh_all())
 	SettingsManager.pending_changed.connect(_update_apply_button)
 	visibility_changed.connect(_on_visibility_changed)

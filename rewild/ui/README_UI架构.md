@@ -61,3 +61,5 @@
 设置清理：已移除设置不再进入默认值、应用和重置逻辑；旧配置中的历史字段保留但不生效。行走动作保留在项目输入映射中，不参与设置重绑定。右摇杆保留给镜头，拒绝绑定到其他动作。设置页专用尺寸规则集中在 UILayout.settings_panel_metrics。
 
 手柄反馈的设备追踪与震动生命周期拆分到 autoload/ui/controller_feedback.gd，由 SettingsManager 创建；角色继续调用管理器的 play_feedback 接口。父控制器提供 camera_invert_y，LIRA 通过属性桥接复用父类摇杆逻辑。能量条缓存图标样式，仅在可见时请求重绘。
+
+设置分页音效：TabBar.tab_clicked 连接 UIAudio.play_settings_tab_sound，使用 assets/audio/ui/switch20.ogg，经 SFX 总线播放。重复点击当前分页也有声音；初始化与程序刷新不触发。音效播放器继承 UIAudio 的常驻处理模式，暂停时正常播放，播放结束自动清理。
