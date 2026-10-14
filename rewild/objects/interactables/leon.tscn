@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://debmj7w0yms21"]
+
+[ext_resource type="ArrayMesh" uid="uid://bihvclpn8rxqg" path="res://assets/models/leon/leon_Leon.res" id="1_y3mfd"]
+[ext_resource type="Material" uid="uid://bcnktkqer0357" path="res://assets/models/leon/froggo/froggo.tres" id="2_y3mfd"]
+
+[node name="Leon" type="Node3D" unique_id=1356049292]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=778029803]
+mesh = ExtResource("1_y3mfd")
+surface_material_override/0 = ExtResource("2_y3mfd")
