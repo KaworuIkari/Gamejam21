@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://dsn2y05x5ywyn"]
+
+[ext_resource type="Script" uid="uid://duc3hutu3bkfv" path="res://systems/quests/quest.gd" id="1"]
+[ext_resource type="Script" uid="uid://bes5e7vhx38hw" path="res://systems/quests/quest_step.gd" id="2"]
+
+[sub_resource type="Resource" id="step_pump"]
+script = ExtResource("2")
+text = "QUEST_WATER_STEP_PUMP"
+event = &"pump_started"
+
+[sub_resource type="Resource" id="step_station"]
+script = ExtResource("2")
+text = "QUEST_WATER_STEP_STATION"
+event = &"station_activated"
+
+[sub_resource type="Resource" id="step_terminal"]
+script = ExtResource("2")
+text = "QUEST_WATER_STEP_TERMINAL"
+event = &"station_terminal"
+
+[resource]
+script = ExtResource("1")
+title = "QUEST_WATER_TITLE"
+description = "QUEST_WATER_DESC"
+location = "QUEST_WATER_LOCATION"
+steps = Array[ExtResource("2")]([SubResource("step_pump"), SubResource("step_station"), SubResource("step_terminal")])
+rewards = Dictionary[StringName, int]({
+&"water_gun": 1
+})

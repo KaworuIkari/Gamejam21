@@ -25,6 +25,7 @@ SaveManager="*res://autoload/ui/save_manager.gd"
 SceneRouter="*res://autoload/ui/scene_router.gd"
 GlassFx="*res://ui/theme/glass/glass_fx.gd"
 UIAudio="*res://autoload/ui/ui_audio.gd"
+Quests="*res://systems/quests/quest_log.gd"
 
 [dialogic]
 
