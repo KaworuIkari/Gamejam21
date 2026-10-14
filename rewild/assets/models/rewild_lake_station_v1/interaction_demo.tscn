@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_lake_station_v1/demo_controls.gd" id="1_g0m4t"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station.tscn" id="2_svna0"]
+[ext_resource type="Script" path="res://assets/models/rewild_lake_station_v1/lake_power_station.gd" id="3_x58t7"]
+
+[sub_resource type="Environment" id="Environment_kaa81"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.14, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.85, 0.86, 0.8, 1)
+ambient_light_energy = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d7yad"]
+albedo_color = Color(0.35, 0.33, 0.24, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_pp1mi"]
+top_radius = 3.8
+bottom_radius = 4.2
+height = 0.35
+
+[node name="PowerStationDemo" type="Node3D" unique_id=123907357]
+script = ExtResource("1_g0m4t")
+
+[node name="Station" type="Node3D" parent="." unique_id=1001835720 instance=ExtResource("2_svna0")]
+script = ExtResource("3_x58t7")
+metadata/zone = "lake"
+metadata/category = "Recoverable"
+
+[node name="@WorldEnvironment@14" type="WorldEnvironment" parent="." unique_id=411611212]
+environment = SubResource("Environment_kaa81")
+
+[node name="@DirectionalLight3D@15" type="DirectionalLight3D" parent="." unique_id=1946118720]
+transform = Transform3D(0.90630776, 0.29883623, -0.29883623, 0, 0.70710677, 0.70710677, 0.42261827, -0.6408563, 0.6408563, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@MeshInstance3D@16" type="MeshInstance3D" parent="." unique_id=1000599531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18, 0)
+material_override = SubResource("StandardMaterial3D_d7yad")
+mesh = SubResource("CylinderMesh_pp1mi")
+
+[node name="@Camera3D@17" type="Camera3D" parent="." unique_id=1845587830]
+transform = Transform3D(0.84799826, -0.21124941, 0.4860788, 0, 0.9171316, 0.39858457, -0.52999896, -0.33799902, 0.777726, 5, 5.5, 8)
+projection = 1
+current = true
+size = 9.0

@@ -14,6 +14,8 @@ signal interacted
 @export var player_group: StringName = &"player"
 ## Radius of the auto-made sphere when there's no CollisionShape3D child.
 @export var radius := 3.0
+## Reported to the quests when used (e.g. "valve_opened"). Empty = nothing.
+@export var quest_event: StringName = &""
 
 const PROMPT_SCENE = preload("res://ui/in_game/interaction/interaction_prompt.tscn")
 
@@ -52,6 +54,9 @@ func use() -> void:
 		return
 	_used = true
 	interacted.emit()
+	var quests := get_node_or_null(^"/root/Quests")
+	if quests:
+		quests.report(quest_event)
 
 
 func _can_use() -> bool:

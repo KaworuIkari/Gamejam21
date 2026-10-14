@@ -37,6 +37,8 @@ group_uniforms filtering;
 uniform float condition_dither_range : hint_range(0.0, 1.0, 0.01) = 0.15;
 uniform float surface_slope_min : hint_range(0.0, 1.0, 0.01) = 0.87;
 uniform float distance_fade_ammount : hint_range(0.0, 1.0, 0.01) = 0.5;
+// MEADOW: a second texture slot that grows grass like slot 0 (the always-green meadow). -1 = off.
+uniform int meadow_green_slot = 9;
 
 group_uniforms private;
 uniform float max_dist = 1.;
@@ -238,9 +240,11 @@ void start() {
 	int over = int(control >> 22u & 0x1Fu);
 	float blend = float(control >> 14u & 0xFFu) * 0.003921568627450; // 1. / 255.
 
-	// MEADOW: grass only grows where texture slot 0 ("Meadow") is painted.
-	// Paths, rock, sand (slots 1+) stay bare. Dithering keeps the edge ragged.
-	float meadow = (base == 0 ? 1.0 - blend : 0.0) + (over == 0 ? blend : 0.0);
+	// MEADOW: grass only grows where texture slot 0 ("Meadow") or meadow_green_slot is painted.
+	// Paths, rock, sand and the bare meadow slot stay bare. Dithering keeps the edge ragged.
+	bool base_m = base == 0 || base == meadow_green_slot;
+	bool over_m = over == 0 || over == meadow_green_slot;
+	float meadow = (base_m ? 1.0 - blend : 0.0) + (over_m ? blend : 0.0);
 	if (meadow < 0.5 + (r.y - 0.5) * condition_dither_range) {
 		pos.y = 0. / 0.;
 		pos.xz = vec2(100000.0);

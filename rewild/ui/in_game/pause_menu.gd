@@ -26,6 +26,7 @@ var _feedback_version := 0
 
 
 func _ready() -> void:
+	add_to_group(&"pause_menu") # so world props (e.g. the lake station) can open the terminal
 	LightUI.apply(_save_screen)
 	LightUI.frost(_save_panel)
 	LightUI.soften_dim($SaveScreen/Dim)

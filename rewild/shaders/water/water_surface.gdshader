@@ -45,6 +45,28 @@ varying vec3 flow_dir;
 
 group_uniforms blob;                                   // local-coords mode only
 instance uniform float time_offset = 0.0;   // per-blob phase in seconds, set from code at spawn
+// Holes: world XZ rects (centre.xy, half size.zw) where this surface isn't drawn, e.g. the
+// sea under an inland lake that has its own water. Set by StylizedWater.cutouts.
+instance uniform vec4 cutout_0 = vec4(0.0);
+instance uniform vec4 cutout_1 = vec4(0.0);
+instance uniform vec4 cutout_2 = vec4(0.0);
+instance uniform vec4 cutout_3 = vec4(0.0);
+// Exact hole shapes over those rects (white = hole). Unset = the whole rect.
+uniform sampler2D cutout_mask_0 : hint_default_white, filter_linear, repeat_disable;
+uniform sampler2D cutout_mask_1 : hint_default_white, filter_linear, repeat_disable;
+uniform sampler2D cutout_mask_2 : hint_default_white, filter_linear, repeat_disable;
+uniform sampler2D cutout_mask_3 : hint_default_white, filter_linear, repeat_disable;
+// This water's own shape over its footprint (white = water), from StylizedWater.fit_to_basin.
+uniform bool use_basin_mask = false;
+uniform sampler2D basin_mask : hint_default_white, filter_linear, repeat_disable;
+instance uniform vec4 basin_rect = vec4(0.0);  // centre xz, half size
+
+float cutout_mask(int i, vec2 uv) {
+	if (i == 0) return textureLod(cutout_mask_0, uv, 0.0).r;
+	if (i == 1) return textureLod(cutout_mask_1, uv, 0.0).r;
+	if (i == 2) return textureLod(cutout_mask_2, uv, 0.0).r;
+	return textureLod(cutout_mask_3, uv, 0.0).r;
+}
 uniform float blob_density : hint_range(0.0, 3.0) = 1.2;   // how quickly the colour goes from shallow to deep toward the centre
 uniform float blob_clarity : hint_range(0.0, 1.0) = 0.25;  // how much of the scene shows through
 uniform float blob_foam : hint_range(0.0, 1.0) = 0.6;      // rim foam strength (0 = none)
@@ -166,6 +188,15 @@ void vertex() {
 }
 
 void fragment() {
+	vec4 cuts[4] = vec4[4](cutout_0, cutout_1, cutout_2, cutout_3);
+	for (int i = 0; i < 4; i++) {
+		if (cuts[i].z > 0.0 && all(lessThan(abs(world_pos.xz - cuts[i].xy), cuts[i].zw))
+				&& cutout_mask(i, (world_pos.xz - cuts[i].xy) / (2.0 * cuts[i].zw) + 0.5) > 0.5)
+			discard;
+	}
+	if (use_basin_mask && basin_rect.z > 0.0
+			&& textureLod(basin_mask, (world_pos.xz - basin_rect.xy) / (2.0 * basin_rect.zw) + 0.5, 0.0).r < 0.5)
+		discard;
 	float t = TIME * wave_speed;
 	vec3 np = noise_pos - flow_dir * flow_speed * TIME;    // noise position, sliding downstream when flowing
 
