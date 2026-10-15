@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjc6i5o1apw4f"]
 
-[ext_resource type="ArrayMesh" uid="uid://brqwem615waj1" path="res://objects/player/LIRA/equipments/jetpack/Jetpack_Jetpack.res" id="1_qht45"]
+[ext_resource type="ArrayMesh" uid="uid://dxfpc1pgftbid" path="res://objects/player/LIRA/equipments/jetpack/Jetpack_Jetpack.res" id="1_qht45"]
 [ext_resource type="Material" uid="uid://ce2i34cfdhpci" path="res://objects/player/LIRA/textures/lira_pink.tres" id="2_j73ex"]
 [ext_resource type="Script" uid="uid://b6i8vtvghkxok" path="res://objects/player/LIRA/equipments/jetpack/jet_pack.gd" id="3_c3lyx"]
 [ext_resource type="Material" uid="uid://ddtv5s6u6e5xv" path="res://objects/player/LIRA/equipments/jetpack/jetpack_flame_material.tres" id="3_wqfbq"]
@@ -28,3 +28,7 @@ transform = Transform3D(1, 0, 0, 0, 0.99644196, -0.084282085, 0, 0.084282085, 0.
 instance_shader_parameters/intensity = 1.0
 mesh = SubResource("QuadMesh_0yw1p")
 script = SubResource("GDScript_mvceg")
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=340247086]
+event_name = "event:/LIRA/jetpack"
+event_guid = "{6163e72b-96f5-4cd3-8f9a-1f0d51256afa}"
