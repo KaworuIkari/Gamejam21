@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene format=3 uid="uid://tlwxc2t2titl"]
+
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/GiantTree_18m.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Platform_Wedge30.tscn" id="2"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Railing_Wedge30.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Floor_2x2.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://bjd3ekgq1qruh" path="res://assets/models/fantasy_forest_sample/assets/Floor_2x2.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Wall_Solid_2m.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Wall_Door_2m.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Wall_Window_2m.tscn" id="7"]
@@ -25,319 +26,243 @@
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_08.tscn" id="24"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_09.tscn" id="25"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Moss_Cap.tscn" id="26"]
-[node name="FantasyForest" type="Node3D"]
-[node name="GiantTree_18m_000" parent="." instance=ExtResource("1")]
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
-
-[node name="Platform_Wedge30_001" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 0, 0)
-
-[node name="Support_Brace_002" parent="." instance=ExtResource("15")]
-position = Vector3(1.6, 0.95, -0)
-rotation = Vector3(0, 0, 0)
-
-[node name="Platform_Wedge30_003" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 0.5235988, 0)
-
-[node name="Platform_Wedge30_004" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 1.047198, 0)
-
-[node name="Railing_Wedge30_005" parent="." instance=ExtResource("3")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 1.047198, 0)
-
-[node name="Support_Brace_006" parent="." instance=ExtResource("15")]
-position = Vector3(0.8, 0.95, -1.38564)
-rotation = Vector3(0, 1.047198, 0)
-
-[node name="Platform_Wedge30_007" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 1.570796, 0)
-
-[node name="Railing_Wedge30_008" parent="." instance=ExtResource("3")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 1.570796, 0)
-
-[node name="Platform_Wedge30_009" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 2.094395, 0)
-
-[node name="Railing_Wedge30_010" parent="." instance=ExtResource("3")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 2.094395, 0)
-
-[node name="Support_Brace_011" parent="." instance=ExtResource("15")]
-position = Vector3(-0.8, 0.95, -1.38564)
-rotation = Vector3(0, 2.094395, 0)
-
-[node name="Platform_Wedge30_012" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 2.617994, 0)
-
-[node name="Railing_Wedge30_013" parent="." instance=ExtResource("3")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 2.617994, 0)
-
-[node name="Platform_Wedge30_014" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 3.141593, 0)
-
-[node name="Railing_Wedge30_015" parent="." instance=ExtResource("3")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 3.141593, 0)
-
-[node name="Support_Brace_016" parent="." instance=ExtResource("15")]
-position = Vector3(-1.6, 0.95, -1.95943e-16)
-rotation = Vector3(0, 3.141593, 0)
-
-[node name="Platform_Wedge30_017" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 3.665191, 0)
-
-[node name="Railing_Wedge30_018" parent="." instance=ExtResource("3")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 3.665191, 0)
-
-[node name="Platform_Wedge30_019" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 4.18879, 0)
-
-[node name="Railing_Wedge30_020" parent="." instance=ExtResource("3")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 4.18879, 0)
-
-[node name="Support_Brace_021" parent="." instance=ExtResource("15")]
-position = Vector3(-0.8, 0.95, 1.38564)
-rotation = Vector3(0, 4.18879, 0)
-
-[node name="Platform_Wedge30_022" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 4.712389, 0)
-
-[node name="Platform_Wedge30_023" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 5.235988, 0)
-
-[node name="Railing_Wedge30_024" parent="." instance=ExtResource("3")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 5.235988, 0)
-
-[node name="Support_Brace_025" parent="." instance=ExtResource("15")]
-position = Vector3(0.8, 0.95, 1.38564)
-rotation = Vector3(0, 5.235988, 0)
+[ext_resource type="PackedScene" uid="uid://chb76mn2tr72c" path="res://objects/animals/sparrot/dead_sparrot.glb" id="27_b2g7p"]
 
-[node name="Platform_Wedge30_026" parent="." instance=ExtResource("2")]
-position = Vector3(0, 3.6, 0)
-rotation = Vector3(0, 5.759587, 0)
+[node name="FantasyForest" type="Node3D" unique_id=1005218356]
 
-[node name="Floor_2x2_027" parent="." instance=ExtResource("4")]
-position = Vector3(2.55, 3.6, 1)
-rotation = Vector3(0, 0, 0)
+[node name="GiantTree_18m_000" parent="." unique_id=1374663936 instance=ExtResource("1")]
 
-[node name="Floor_2x2_028" parent="." instance=ExtResource("4")]
-position = Vector3(2.55, 3.6, -1)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_001" parent="." unique_id=1572226458 instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
 
-[node name="Floor_2x2_029" parent="." instance=ExtResource("4")]
-position = Vector3(4.55, 3.6, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Support_Brace_002" parent="." unique_id=998623391 instance=ExtResource("15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0.95, 0)
 
-[node name="Floor_2x2_030" parent="." instance=ExtResource("4")]
-position = Vector3(4.55, 3.6, -1)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_003" parent="." unique_id=898776690 instance=ExtResource("2")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 0, 3.6, 0)
 
-[node name="Wall_Door_2m_031" parent="." instance=ExtResource("6")]
-position = Vector3(2.55, 3.6, 2)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_004" parent="." unique_id=1099029111 instance=ExtResource("2")]
+transform = Transform3D(0.49999955, 0, 0.8660257, 0, 1, 0, -0.8660257, 0, 0.49999955, 0, 3.6, 0)
 
-[node name="Door_Frame_032" parent="." instance=ExtResource("8")]
-position = Vector3(2.55, 3.6, 2)
-rotation = Vector3(0, 0, 0)
+[node name="Railing_Wedge30_005" parent="." unique_id=611952373 instance=ExtResource("3")]
+transform = Transform3D(0.49999955, 0, 0.8660257, 0, 1, 0, -0.8660257, 0, 0.49999955, 0, 3.6, 0)
 
-[node name="Wall_Window_2m_033" parent="." instance=ExtResource("7")]
-position = Vector3(2.55, 3.6, -2)
-rotation = Vector3(0, 3.141593, 0)
+[node name="Support_Brace_006" parent="." unique_id=204209288 instance=ExtResource("15")]
+transform = Transform3D(0.49999955, 0, 0.8660257, 0, 1, 0, -0.8660257, 0, 0.49999955, 0.8, 0.95, -1.38564)
 
-[node name="Window_Frame_034" parent="." instance=ExtResource("9")]
-position = Vector3(2.55, 3.6, -2)
-rotation = Vector3(0, 3.141593, 0)
+[node name="Platform_Wedge30_007" parent="." unique_id=1998279035 instance=ExtResource("2")]
+transform = Transform3D(3.1391647e-07, 0, 1, 0, 1, 0, -1, 0, 3.1391647e-07, 0, 3.6, 0)
 
-[node name="Wall_Window_2m_035" parent="." instance=ExtResource("7")]
-position = Vector3(4.55, 3.6, 2)
-rotation = Vector3(0, 0, 0)
+[node name="Railing_Wedge30_008" parent="." unique_id=714534252 instance=ExtResource("3")]
+transform = Transform3D(3.1391647e-07, 0, 1, 0, 1, 0, -1, 0, 3.1391647e-07, 0, 3.6, 0)
 
-[node name="Window_Frame_036" parent="." instance=ExtResource("9")]
-position = Vector3(4.55, 3.6, 2)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_009" parent="." unique_id=1032372374 instance=ExtResource("2")]
+transform = Transform3D(-0.49999985, 0, 0.8660255, 0, 1, 0, -0.8660255, 0, -0.49999985, 0, 3.6, 0)
 
-[node name="Wall_Window_2m_037" parent="." instance=ExtResource("7")]
-position = Vector3(4.55, 3.6, -2)
-rotation = Vector3(0, 3.141593, 0)
+[node name="Railing_Wedge30_010" parent="." unique_id=692094765 instance=ExtResource("3")]
+transform = Transform3D(-0.49999985, 0, 0.8660255, 0, 1, 0, -0.8660255, 0, -0.49999985, 0, 3.6, 0)
 
-[node name="Window_Frame_038" parent="." instance=ExtResource("9")]
-position = Vector3(4.55, 3.6, -2)
-rotation = Vector3(0, 3.141593, 0)
+[node name="Support_Brace_011" parent="." unique_id=656532573 instance=ExtResource("15")]
+transform = Transform3D(-0.49999985, 0, 0.8660255, 0, 1, 0, -0.8660255, 0, -0.49999985, -0.8, 0.95, -1.38564)
 
-[node name="Wall_Solid_2m_039" parent="." instance=ExtResource("5")]
-position = Vector3(1.55, 3.6, 1)
-rotation = Vector3(0, 1.570796, 0)
+[node name="Platform_Wedge30_012" parent="." unique_id=1861758153 instance=ExtResource("2")]
+transform = Transform3D(-0.8660255, 0, 0.49999982, 0, 1, 0, -0.49999982, 0, -0.8660255, 0, 3.6, 0)
 
-[node name="Wall_Solid_2m_040" parent="." instance=ExtResource("5")]
-position = Vector3(5.55, 3.6, 1)
-rotation = Vector3(0, 1.570796, 0)
+[node name="Railing_Wedge30_013" parent="." unique_id=1979937955 instance=ExtResource("3")]
+transform = Transform3D(-0.8660255, 0, 0.49999982, 0, 1, 0, -0.49999982, 0, -0.8660255, 0, 3.6, 0)
 
-[node name="Wall_Solid_2m_041" parent="." instance=ExtResource("5")]
-position = Vector3(1.55, 3.6, -1)
-rotation = Vector3(0, 1.570796, 0)
+[node name="Platform_Wedge30_014" parent="." unique_id=191937002 instance=ExtResource("2")]
+transform = Transform3D(-1, 0, -3.2584137e-07, 0, 1, 0, 3.2584137e-07, 0, -1, 0, 3.6, 0)
 
-[node name="Wall_Solid_2m_042" parent="." instance=ExtResource("5")]
-position = Vector3(5.55, 3.6, -1)
-rotation = Vector3(0, 1.570796, 0)
+[node name="Railing_Wedge30_015" parent="." unique_id=1470895997 instance=ExtResource("3")]
+transform = Transform3D(-1, 0, -3.2584137e-07, 0, 1, 0, 3.2584137e-07, 0, -1, 0, 3.6, 0)
 
-[node name="Gable_4m_043" parent="." instance=ExtResource("10")]
-position = Vector3(3.55, 6.4, 2)
-rotation = Vector3(0, 0, 0)
+[node name="Support_Brace_016" parent="." unique_id=1529273710 instance=ExtResource("15")]
+transform = Transform3D(-1, 0, -3.2584137e-07, 0, 1, 0, 3.2584137e-07, 0, -1, -1.6, 0.95, -1.95943e-16)
 
-[node name="Gable_4m_044" parent="." instance=ExtResource("10")]
-position = Vector3(3.55, 6.4, -2)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_017" parent="." unique_id=575744757 instance=ExtResource("2")]
+transform = Transform3D(-0.8660256, 0, -0.49999958, 0, 1, 0, 0.49999958, 0, -0.8660256, 0, 3.6, 0)
 
-[node name="Roof_Gabled_4x4_045" parent="." instance=ExtResource("11")]
-position = Vector3(3.55, 6.4, 0)
-rotation = Vector3(0, 0, 0)
+[node name="Railing_Wedge30_018" parent="." unique_id=1098705100 instance=ExtResource("3")]
+transform = Transform3D(-0.8660256, 0, -0.49999958, 0, 1, 0, 0.49999958, 0, -0.8660256, 0, 3.6, 0)
 
-[node name="Stair_Step_046" parent="." instance=ExtResource("12")]
-position = Vector3(0, 0.2, 10.95)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_019" parent="." unique_id=1832067353 instance=ExtResource("2")]
+transform = Transform3D(-0.5000003, 0, -0.8660252, 0, 1, 0, 0.8660252, 0, -0.5000003, 0, 3.6, 0)
 
-[node name="Stair_Step_047" parent="." instance=ExtResource("12")]
-position = Vector3(0, 0.4, 10.65)
-rotation = Vector3(0, 0, 0)
+[node name="Railing_Wedge30_020" parent="." unique_id=705448533 instance=ExtResource("3")]
+transform = Transform3D(-0.5000003, 0, -0.8660252, 0, 1, 0, 0.8660252, 0, -0.5000003, 0, 3.6, 0)
 
-[node name="Stair_Step_048" parent="." instance=ExtResource("12")]
-position = Vector3(0, 0.6, 10.35)
-rotation = Vector3(0, 0, 0)
+[node name="Support_Brace_021" parent="." unique_id=1054616952 instance=ExtResource("15")]
+transform = Transform3D(-0.5000003, 0, -0.8660252, 0, 1, 0, 0.8660252, 0, -0.5000003, -0.8, 0.95, 1.38564)
 
-[node name="Stair_Step_049" parent="." instance=ExtResource("12")]
-position = Vector3(0, 0.8, 10.05)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_022" parent="." unique_id=456729243 instance=ExtResource("2")]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 3.6, 0)
 
-[node name="Stair_Step_050" parent="." instance=ExtResource("12")]
-position = Vector3(0, 1, 9.75)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_023" parent="." unique_id=1427608266 instance=ExtResource("2")]
+transform = Transform3D(0.50000036, 0, -0.8660252, 0, 1, 0, 0.8660252, 0, 0.50000036, 0, 3.6, 0)
 
-[node name="Stair_Step_051" parent="." instance=ExtResource("12")]
-position = Vector3(0, 1.2, 9.45)
-rotation = Vector3(0, 0, 0)
+[node name="Railing_Wedge30_024" parent="." unique_id=575650987 instance=ExtResource("3")]
+transform = Transform3D(0.50000036, 0, -0.8660252, 0, 1, 0, 0.8660252, 0, 0.50000036, 0, 3.6, 0)
 
-[node name="Stair_Step_052" parent="." instance=ExtResource("12")]
-position = Vector3(0, 1.4, 9.15)
-rotation = Vector3(0, 0, 0)
+[node name="Support_Brace_025" parent="." unique_id=1118466774 instance=ExtResource("15")]
+transform = Transform3D(0.50000036, 0, -0.8660252, 0, 1, 0, 0.8660252, 0, 0.50000036, 0.8, 0.95, 1.38564)
 
-[node name="Stair_Step_053" parent="." instance=ExtResource("12")]
-position = Vector3(0, 1.6, 8.85)
-rotation = Vector3(0, 0, 0)
+[node name="Platform_Wedge30_026" parent="." unique_id=157079307 instance=ExtResource("2")]
+transform = Transform3D(0.86602557, 0, -0.49999976, 0, 1, 0, 0.49999976, 0, 0.86602557, 0, 3.6, 0)
 
-[node name="Stair_Step_054" parent="." instance=ExtResource("12")]
-position = Vector3(0, 1.8, 8.55)
-rotation = Vector3(0, 0, 0)
+[node name="Floor_2x2_027" parent="." unique_id=1976998872 instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55, 3.6093569, 1)
 
-[node name="Stair_Step_055" parent="." instance=ExtResource("12")]
-position = Vector3(0, 2, 8.25)
-rotation = Vector3(0, 0, 0)
+[node name="Floor_2x2_028" parent="." unique_id=518394115 instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55, 3.6093569, -1)
 
-[node name="Stair_Step_056" parent="." instance=ExtResource("12")]
-position = Vector3(0, 2.2, 7.95)
-rotation = Vector3(0, 0, 0)
+[node name="Floor_2x2_029" parent="." unique_id=379455169 instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55, 3.6093569, 1)
 
-[node name="Stair_Step_057" parent="." instance=ExtResource("12")]
-position = Vector3(0, 2.4, 7.65)
-rotation = Vector3(0, 0, 0)
+[node name="Floor_2x2_030" parent="." unique_id=923062324 instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55, 3.6093569, -1)
 
-[node name="Stair_Step_058" parent="." instance=ExtResource("12")]
-position = Vector3(0, 2.6, 7.35)
-rotation = Vector3(0, 0, 0)
+[node name="Wall_Door_2m_031" parent="." unique_id=1128620978 instance=ExtResource("6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55, 3.6, 2)
 
-[node name="Stair_Step_059" parent="." instance=ExtResource("12")]
-position = Vector3(0, 2.8, 7.05)
-rotation = Vector3(0, 0, 0)
+[node name="Door_Frame_032" parent="." unique_id=1220019405 instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.55, 3.6, 2)
 
-[node name="Stair_Step_060" parent="." instance=ExtResource("12")]
-position = Vector3(0, 3, 6.75)
-rotation = Vector3(0, 0, 0)
+[node name="Wall_Window_2m_033" parent="." unique_id=2057481520 instance=ExtResource("7")]
+transform = Transform3D(-1, 0, -3.2584137e-07, 0, 1, 0, 3.2584137e-07, 0, -1, 2.55, 3.6, -2)
 
-[node name="Stair_Step_061" parent="." instance=ExtResource("12")]
-position = Vector3(0, 3.2, 6.45)
-rotation = Vector3(0, 0, 0)
+[node name="Window_Frame_034" parent="." unique_id=410150707 instance=ExtResource("9")]
+transform = Transform3D(-1, 0, -3.2584137e-07, 0, 1, 0, 3.2584137e-07, 0, -1, 2.55, 3.6, -2)
 
-[node name="Stair_Step_062" parent="." instance=ExtResource("12")]
-position = Vector3(0, 3.4, 6.15)
-rotation = Vector3(0, 0, 0)
+[node name="Wall_Window_2m_035" parent="." unique_id=1472563048 instance=ExtResource("7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55, 3.6, 2)
 
-[node name="Stair_Step_063" parent="." instance=ExtResource("12")]
-position = Vector3(0, 3.6, 5.85)
-rotation = Vector3(0, 0, 0)
+[node name="Window_Frame_036" parent="." unique_id=1091030496 instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.55, 3.6, 2)
 
-[node name="Stair_Stringers_064" parent="." instance=ExtResource("13")]
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
+[node name="Wall_Window_2m_037" parent="." unique_id=407330436 instance=ExtResource("7")]
+transform = Transform3D(-1, 0, -3.2584137e-07, 0, 1, 0, 3.2584137e-07, 0, -1, 4.55, 3.6, -2)
 
-[node name="Stair_Rails_065" parent="." instance=ExtResource("14")]
-position = Vector3(0, 0, 0)
-rotation = Vector3(0, 0, 0)
+[node name="Window_Frame_038" parent="." unique_id=1114727477 instance=ExtResource("9")]
+transform = Transform3D(-1, 0, -3.2584137e-07, 0, 1, 0, 3.2584137e-07, 0, -1, 4.55, 3.6, -2)
 
-[node name="Arch_Pier_066" parent="." instance=ExtResource("16")]
-position = Vector3(-9.77, 0, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Wall_Solid_2m_039" parent="." unique_id=799465950 instance=ExtResource("5")]
+transform = Transform3D(3.1391647e-07, 0, 1, 0, 1, 0, -1, 0, 3.1391647e-07, 1.55, 3.6, 1)
 
-[node name="Arch_Pier_067" parent="." instance=ExtResource("16")]
-position = Vector3(-6.23, 0, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Wall_Solid_2m_040" parent="." unique_id=687794854 instance=ExtResource("5")]
+transform = Transform3D(3.1391647e-07, 0, 1, 0, 1, 0, -1, 0, 3.1391647e-07, 5.55, 3.6, 1)
 
-[node name="Arch_Voussoir_01_068" parent="." instance=ExtResource("17")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Wall_Solid_2m_041" parent="." unique_id=1338317925 instance=ExtResource("5")]
+transform = Transform3D(3.1391647e-07, 0, 1, 0, 1, 0, -1, 0, 3.1391647e-07, 1.55, 3.6, -1)
 
-[node name="Arch_Voussoir_02_069" parent="." instance=ExtResource("18")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Wall_Solid_2m_042" parent="." unique_id=102890026 instance=ExtResource("5")]
+transform = Transform3D(3.1391647e-07, 0, 1, 0, 1, 0, -1, 0, 3.1391647e-07, 5.55, 3.6, -1)
 
-[node name="Arch_Voussoir_03_070" parent="." instance=ExtResource("19")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Gable_4m_043" parent="." unique_id=86261095 instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.55, 6.4, 2)
 
-[node name="Arch_Voussoir_04_071" parent="." instance=ExtResource("20")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Gable_4m_044" parent="." unique_id=911201556 instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.55, 6.4, -2)
 
-[node name="Arch_Voussoir_05_072" parent="." instance=ExtResource("21")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Roof_Gabled_4x4_045" parent="." unique_id=1224091937 instance=ExtResource("11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.55, 6.4, 0)
 
-[node name="Arch_Voussoir_06_073" parent="." instance=ExtResource("22")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Stair_Step_046" parent="." unique_id=762973035 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 10.95)
 
-[node name="Arch_Voussoir_07_074" parent="." instance=ExtResource("23")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Stair_Step_047" parent="." unique_id=658390572 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 10.65)
 
-[node name="Arch_Voussoir_08_075" parent="." instance=ExtResource("24")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Stair_Step_048" parent="." unique_id=1176910357 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 10.35)
 
-[node name="Arch_Voussoir_09_076" parent="." instance=ExtResource("25")]
-position = Vector3(-8, 2.5, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Stair_Step_049" parent="." unique_id=859618479 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 10.05)
 
-[node name="Arch_Moss_Cap_077" parent="." instance=ExtResource("26")]
-position = Vector3(-9.77, 2.56, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Stair_Step_050" parent="." unique_id=2066420642 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9.75)
 
-[node name="Arch_Moss_Cap_078" parent="." instance=ExtResource("26")]
-position = Vector3(-6.23, 2.56, 1)
-rotation = Vector3(0, 0, 0)
+[node name="Stair_Step_051" parent="." unique_id=628432161 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 9.45)
+
+[node name="Stair_Step_052" parent="." unique_id=1547878985 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 9.15)
+
+[node name="Stair_Step_053" parent="." unique_id=305067499 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 8.85)
+
+[node name="Stair_Step_054" parent="." unique_id=1823791985 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 8.55)
+
+[node name="Stair_Step_055" parent="." unique_id=983672691 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8.25)
+
+[node name="Stair_Step_056" parent="." unique_id=286858414 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 7.95)
+
+[node name="Stair_Step_057" parent="." unique_id=258682711 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 7.65)
+
+[node name="Stair_Step_058" parent="." unique_id=1435990231 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 7.35)
+
+[node name="Stair_Step_059" parent="." unique_id=1910725204 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 7.05)
+
+[node name="Stair_Step_060" parent="." unique_id=560928777 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6.75)
+
+[node name="Stair_Step_061" parent="." unique_id=1614735465 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 6.45)
+
+[node name="Stair_Step_062" parent="." unique_id=240472129 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 6.15)
+
+[node name="Stair_Step_063" parent="." unique_id=1836233144 instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 5.85)
+
+[node name="Stair_Stringers_064" parent="." unique_id=602693959 instance=ExtResource("13")]
+
+[node name="Stair_Rails_065" parent="." unique_id=1937130115 instance=ExtResource("14")]
+
+[node name="Arch_Pier_066" parent="." unique_id=1014460195 instance=ExtResource("16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.77, 0, 1)
+
+[node name="Arch_Pier_067" parent="." unique_id=1364031815 instance=ExtResource("16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.23, 0, 1)
+
+[node name="Arch_Voussoir_01_068" parent="." unique_id=383860466 instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Voussoir_02_069" parent="." unique_id=1419958169 instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Voussoir_03_070" parent="." unique_id=569636743 instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Voussoir_04_071" parent="." unique_id=1175804277 instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Voussoir_05_072" parent="." unique_id=731454783 instance=ExtResource("21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Voussoir_06_073" parent="." unique_id=1898034499 instance=ExtResource("22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Voussoir_07_074" parent="." unique_id=1215431801 instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Voussoir_08_075" parent="." unique_id=424841361 instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Voussoir_09_076" parent="." unique_id=1029287437 instance=ExtResource("25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2.5, 1)
+
+[node name="Arch_Moss_Cap_077" parent="." unique_id=75385585 instance=ExtResource("26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.77, 2.56, 1)
+
+[node name="Arch_Moss_Cap_078" parent="." unique_id=1358103038 instance=ExtResource("26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.23, 2.56, 1)
+
+[node name="dead_sparrot2" parent="." unique_id=406476769 instance=ExtResource("27_b2g7p")]
+transform = Transform3D(1.8572941, 0, 0.741929, 0, 2, 0, -0.741929, 0, 1.8572941, 2.395718, 3.6340396, -0.8120739)
