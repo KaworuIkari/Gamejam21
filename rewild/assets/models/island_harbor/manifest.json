@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Dock_Apron_30x10",
+    "triangles": 9094,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Pier_8x12",
+    "triangles": 10774,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Pier_Head_20x6",
+    "triangles": 5734,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Shore_Yard_30x16",
+    "triangles": 1772,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Boat_Shed_Walls",
+    "triangles": 3772,
+    "collision_triangles": 162
+  },
+  {
+    "name": "Boat_Shed_Frame",
+    "triangles": 4700,
+    "collision_triangles": 48
+  },
+  {
+    "name": "Boat_Shed_Roof",
+    "triangles": 9896,
+    "collision_triangles": 150
+  },
+  {
+    "name": "Shed_Sliding_Doors",
+    "triangles": 2044,
+    "collision_triangles": 48
+  },
+  {
+    "name": "Harbor_Sign",
+    "triangles": 4068,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Shed_Wear",
+    "triangles": 5284,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Workboat_Hull",
+    "triangles": 654,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Boat_Gunwale",
+    "triangles": 704,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Boat_Rubbing_Strake",
+    "triangles": 704,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Boat_Wheelhouse",
+    "triangles": 1504,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Boat_Fittings",
+    "triangles": 1836,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Boat_Lifering",
+    "triangles": 1536,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Boat_Cradle",
+    "triangles": 2680,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Harbor_Office",
+    "triangles": 5808,
+    "collision_triangles": 350
+  },
+  {
+    "name": "Office_Threshold_Ramp",
+    "triangles": 12,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Crate_Timber",
+    "triangles": 1344,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Bollard",
+    "triangles": 608,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Rope_Coil",
+    "triangles": 4096,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Dock_Fender",
+    "triangles": 1624,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Dock_Rail_4m",
+    "triangles": 940,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Safety_Lifering",
+    "triangles": 1660,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Dock_Lamp",
+    "triangles": 480,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Cargo_Crane",
+    "triangles": 3056,
+    "collision_triangles": 24
+  },
+  {
+    "name": "Terrain_Fitted_Piles",
+    "triangles": 14664,
+    "collision_triangles": 624
+  },
+  {
+    "name": "Pile_Cross_Braces",
+    "triangles": 18612,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Approach_Ramp",
+    "triangles": 12,
+    "collision_triangles": 12
+  },
+  {
+    "name": "Approach_Ramp_Rails",
+    "triangles": 352,
+    "collision_triangles": 0
+  },
+  {
+    "name": "Robot_2m_Reference",
+    "triangles": 4208,
+    "collision_triangles": 0
+  }
+]

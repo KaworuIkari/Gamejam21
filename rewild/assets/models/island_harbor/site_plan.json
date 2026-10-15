@@ -1,0 +1,324 @@
+{
+  "source_scene": "res://levels/meadow_hand/meadow_hand.tscn",
+  "terrain_node": "NavigationRegion3D/Terrain3D",
+  "terrain_top_level": true,
+  "region_size": 256,
+  "vertex_spacing": 1.0,
+  "root_godot_position": [
+    -212.0,
+    30.7,
+    -12.0
+  ],
+  "root_godot_y_rotation_degrees": 90,
+  "site_bounds_blender": {
+    "x": [
+      -15,
+      15
+    ],
+    "y": [
+      -25,
+      23
+    ]
+  },
+  "land_height_range": [
+    28.08786964416504,
+    30.00000762939453
+  ],
+  "height_grid": {
+    "xmin": -26,
+    "ymin": -33,
+    "step": 1,
+    "shape": [
+      68,
+      53
+    ]
+  },
+  "piles": [
+    {
+      "x": -13,
+      "y": -19,
+      "terrain_local_z": -0.699992370605468,
+      "world_x": -193.0,
+      "world_z": 1.0,
+      "terrain_world_y": 30.00000762939453,
+      "pile_bottom": -1.199992370605468,
+      "pile_top": -0.22,
+      "length": 0.9799923706054681
+    },
+    {
+      "x": -13,
+      "y": -11,
+      "terrain_local_z": -0.699992370605468,
+      "world_x": -201.0,
+      "world_z": 1.0,
+      "terrain_world_y": 30.00000762939453,
+      "pile_bottom": -1.199992370605468,
+      "pile_top": -0.22,
+      "length": 0.9799923706054681
+    },
+    {
+      "x": -13,
+      "y": -3,
+      "terrain_local_z": -0.699992370605468,
+      "world_x": -209.0,
+      "world_z": 1.0,
+      "terrain_world_y": 30.00000762939453,
+      "pile_bottom": -1.199992370605468,
+      "pile_top": -0.22,
+      "length": 0.9799923706054681
+    },
+    {
+      "x": -13,
+      "y": 3,
+      "terrain_local_z": -0.699992370605468,
+      "world_x": -215.0,
+      "world_z": 1.0,
+      "terrain_world_y": 30.00000762939453,
+      "pile_bottom": -1.199992370605468,
+      "pile_top": -0.22,
+      "length": 0.9799923706054681
+    },
+    {
+      "x": 0,
+      "y": -19,
+      "terrain_local_z": -1.2768127441406243,
+      "world_x": -193.0,
+      "world_z": -12.0,
+      "terrain_world_y": 29.423187255859375,
+      "pile_bottom": -1.7768127441406243,
+      "pile_top": -0.22,
+      "length": 1.5568127441406243
+    },
+    {
+      "x": 0,
+      "y": -11,
+      "terrain_local_z": -1.0544063568115227,
+      "world_x": -201.0,
+      "world_z": -12.0,
+      "terrain_world_y": 29.645593643188477,
+      "pile_bottom": -1.5544063568115227,
+      "pile_top": -0.22,
+      "length": 1.3344063568115228
+    },
+    {
+      "x": 0,
+      "y": -3,
+      "terrain_local_z": -0.7613384246826165,
+      "world_x": -209.0,
+      "world_z": -12.0,
+      "terrain_world_y": 29.938661575317383,
+      "pile_bottom": -1.2613384246826165,
+      "pile_top": -0.22,
+      "length": 1.0413384246826165
+    },
+    {
+      "x": 0,
+      "y": 3,
+      "terrain_local_z": -0.6999942779541009,
+      "world_x": -215.0,
+      "world_z": -12.0,
+      "terrain_world_y": 30.0000057220459,
+      "pile_bottom": -1.1999942779541009,
+      "pile_top": -0.22,
+      "length": 0.9799942779541009
+    },
+    {
+      "x": 13,
+      "y": -19,
+      "terrain_local_z": -2.4760276794433587,
+      "world_x": -193.0,
+      "world_z": -25.0,
+      "terrain_world_y": 28.22397232055664,
+      "pile_bottom": -2.9760276794433587,
+      "pile_top": -0.22,
+      "length": 2.7560276794433585
+    },
+    {
+      "x": 13,
+      "y": -11,
+      "terrain_local_z": -1.6958000183105462,
+      "world_x": -201.0,
+      "world_z": -25.0,
+      "terrain_world_y": 29.004199981689453,
+      "pile_bottom": -2.195800018310546,
+      "pile_top": -0.22,
+      "length": 1.9758000183105462
+    },
+    {
+      "x": 13,
+      "y": -3,
+      "terrain_local_z": -0.9679080963134759,
+      "world_x": -209.0,
+      "world_z": -25.0,
+      "terrain_world_y": 29.732091903686523,
+      "pile_bottom": -1.4679080963134759,
+      "pile_top": -0.22,
+      "length": 1.2479080963134759
+    },
+    {
+      "x": 13,
+      "y": 3,
+      "terrain_local_z": -0.7331001281738274,
+      "world_x": -215.0,
+      "world_z": -25.0,
+      "terrain_world_y": 29.966899871826172,
+      "pile_bottom": -1.2331001281738274,
+      "pile_top": -0.22,
+      "length": 1.0131001281738274
+    },
+    {
+      "x": -3.5,
+      "y": 7,
+      "terrain_local_z": -0.6999999999999993,
+      "world_x": -219.0,
+      "world_z": -8.5,
+      "terrain_world_y": 30.0,
+      "pile_bottom": -1.1999999999999993,
+      "pile_top": -0.22,
+      "length": 0.9799999999999993
+    },
+    {
+      "x": -3.5,
+      "y": 12,
+      "terrain_local_z": -0.7815553665161126,
+      "world_x": -224.0,
+      "world_z": -8.5,
+      "terrain_world_y": 29.918444633483887,
+      "pile_bottom": -1.2815553665161126,
+      "pile_top": -0.22,
+      "length": 1.0615553665161126
+    },
+    {
+      "x": -3.5,
+      "y": 17,
+      "terrain_local_z": -5.1764738082885735,
+      "world_x": -229.0,
+      "world_z": -8.5,
+      "terrain_world_y": 25.523526191711426,
+      "pile_bottom": -5.6764738082885735,
+      "pile_top": -0.22,
+      "length": 5.456473808288574
+    },
+    {
+      "x": 3.5,
+      "y": 7,
+      "terrain_local_z": -0.7100059509277337,
+      "world_x": -219.0,
+      "world_z": -15.5,
+      "terrain_world_y": 29.989994049072266,
+      "pile_bottom": -1.2100059509277337,
+      "pile_top": -0.22,
+      "length": 0.9900059509277337
+    },
+    {
+      "x": 3.5,
+      "y": 12,
+      "terrain_local_z": -1.6938688278198235,
+      "world_x": -224.0,
+      "world_z": -15.5,
+      "terrain_world_y": 29.006131172180176,
+      "pile_bottom": -2.1938688278198235,
+      "pile_top": -0.22,
+      "length": 1.9738688278198235
+    },
+    {
+      "x": 3.5,
+      "y": 17,
+      "terrain_local_z": -16.80936641693115,
+      "world_x": -229.0,
+      "world_z": -15.5,
+      "terrain_world_y": 13.890633583068848,
+      "pile_bottom": -17.30936641693115,
+      "pile_top": -0.22,
+      "length": 17.089366416931153
+    },
+    {
+      "x": -9,
+      "y": 18,
+      "terrain_local_z": -2.8906185150146477,
+      "world_x": -230.0,
+      "world_z": -3.0,
+      "terrain_world_y": 27.80938148498535,
+      "pile_bottom": -3.3906185150146477,
+      "pile_top": -0.22,
+      "length": 3.1706185150146475
+    },
+    {
+      "x": -9,
+      "y": 22,
+      "terrain_local_z": -14.882061195373534,
+      "world_x": -234.0,
+      "world_z": -3.0,
+      "terrain_world_y": 15.817938804626465,
+      "pile_bottom": -15.382061195373534,
+      "pile_top": -0.22,
+      "length": 15.162061195373534
+    },
+    {
+      "x": -3,
+      "y": 18,
+      "terrain_local_z": -9.10691566467285,
+      "world_x": -230.0,
+      "world_z": -9.0,
+      "terrain_world_y": 21.59308433532715,
+      "pile_bottom": -9.60691566467285,
+      "pile_top": -0.22,
+      "length": 9.38691566467285
+    },
+    {
+      "x": -3,
+      "y": 22,
+      "terrain_local_z": -19.562950325012206,
+      "world_x": -234.0,
+      "world_z": -9.0,
+      "terrain_world_y": 11.137049674987793,
+      "pile_bottom": -20.062950325012206,
+      "pile_top": -0.22,
+      "length": 19.842950325012207
+    },
+    {
+      "x": 3,
+      "y": 18,
+      "terrain_local_z": -19.289491844177245,
+      "world_x": -230.0,
+      "world_z": -15.0,
+      "terrain_world_y": 11.410508155822754,
+      "pile_bottom": -19.789491844177245,
+      "pile_top": -0.22,
+      "length": 19.569491844177247
+    },
+    {
+      "x": 3,
+      "y": 22,
+      "terrain_local_z": -18.118656349182128,
+      "world_x": -234.0,
+      "world_z": -15.0,
+      "terrain_world_y": 12.581343650817871,
+      "pile_bottom": -18.618656349182128,
+      "pile_top": -0.22,
+      "length": 18.39865634918213
+    },
+    {
+      "x": 9,
+      "y": 18,
+      "terrain_local_z": -21.809437942504882,
+      "world_x": -230.0,
+      "world_z": -21.0,
+      "terrain_world_y": 8.890562057495117,
+      "pile_bottom": -22.309437942504882,
+      "pile_top": -0.22,
+      "length": 22.089437942504883
+    },
+    {
+      "x": 9,
+      "y": 22,
+      "terrain_local_z": -17.079987716674804,
+      "world_x": -234.0,
+      "world_z": -21.0,
+      "terrain_world_y": 13.620012283325195,
+      "pile_bottom": -17.579987716674804,
+      "pile_top": -0.22,
+      "length": 17.359987716674805
+    }
+  ]
+}
