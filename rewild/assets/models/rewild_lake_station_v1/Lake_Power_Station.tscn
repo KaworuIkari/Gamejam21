@@ -1,9 +1,9 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bwta3o637nr8p"]
 
-[ext_resource type="Script" path="res://assets/models/rewild_lake_station_v1/lake_power_station.gd" id="1_3fohw"]
-[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Dormant.glb" id="2_83cxm"]
-[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Ready.glb" id="3_77a8w"]
-[ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Active.glb" id="4_lfgt0"]
+[ext_resource type="Script" uid="uid://bxl33s0iiwc3d" path="res://assets/models/rewild_lake_station_v1/lake_power_station.gd" id="1_3fohw"]
+[ext_resource type="PackedScene" uid="uid://ddvv208ofrp2m" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Dormant.glb" id="2_83cxm"]
+[ext_resource type="PackedScene" uid="uid://bbegbaql522kn" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Ready.glb" id="3_77a8w"]
+[ext_resource type="PackedScene" uid="uid://oe15f23jxm2r" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station_Active.glb" id="4_lfgt0"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_t34in"]
 height = 2.9
@@ -19,12 +19,12 @@ metadata/category = "Recoverable"
 
 [node name="Visuals" type="Node3D" parent="." unique_id=1054315630]
 
-[node name="Dormant" type="Node3D" parent="Visuals" unique_id=1499472771 instance=ExtResource("2_83cxm")]
+[node name="Dormant" parent="Visuals" unique_id=1499472771 instance=ExtResource("2_83cxm")]
 
-[node name="Ready" type="Node3D" parent="Visuals" unique_id=1280645502 instance=ExtResource("3_77a8w")]
+[node name="Ready" parent="Visuals" unique_id=1280645502 instance=ExtResource("3_77a8w")]
 visible = false
 
-[node name="Active" type="Node3D" parent="Visuals" unique_id=2124079986 instance=ExtResource("4_lfgt0")]
+[node name="Active" parent="Visuals" unique_id=2124079986 instance=ExtResource("4_lfgt0")]
 visible = false
 
 [node name="Body" type="StaticBody3D" parent="." unique_id=1956772811]
