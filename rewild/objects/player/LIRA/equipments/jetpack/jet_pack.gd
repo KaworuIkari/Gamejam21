@@ -28,10 +28,11 @@ func _ready() -> void:
 		flame.visible = false
 
 
-## Tap: short flare.
+@onready var thrust_sound: FmodEventEmitter3D = $FmodEventEmitter3D
+var _thrust_playing := false
+
 func burst() -> void:
 	_burst = 1.0
-
 
 ## Hold: call every frame with the jetpack's state; spool 0..1 scales the flame.
 func set_thrust(active: bool, spool: float = 1.0) -> void:
@@ -46,6 +47,14 @@ func _process(delta: float) -> void:
 	var on := intensity > 0.01
 	var cam := get_viewport().get_camera_3d()
 	var length := lerpf(length_idle, 1.0, intensity)
+
+	# audio
+	if on and not _thrust_playing:
+		_thrust_playing = true
+		thrust_sound.play()
+	elif not on and _thrust_playing:
+		_thrust_playing = false
+		thrust_sound.stop()
 
 	for i in flames.size():
 		var flame := flames[i]
