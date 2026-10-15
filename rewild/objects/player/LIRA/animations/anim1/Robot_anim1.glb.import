@@ -12379,7 +12379,7 @@ _subresources={
 },
 "run_back_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/run_back.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/run_back_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://5o7u1egmf2dh",
 "settings/loop_mode": 1,
@@ -14435,7 +14435,7 @@ _subresources={
 },
 "run_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/run.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/run_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://bv7b7phu28egj",
 "settings/loop_mode": 1,
@@ -16491,7 +16491,7 @@ _subresources={
 },
 "strafe_left_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/strafe_left.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/strafe_left_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://c0d43mdd10spn",
 "settings/loop_mode": 1,
@@ -18547,7 +18547,7 @@ _subresources={
 },
 "strafe_right_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/strafe_right.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/strafe_right_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://cqdxav7sj6h2u",
 "settings/loop_mode": 1,
@@ -20603,7 +20603,7 @@ _subresources={
 },
 "swimming_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/swimming.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/swimming_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://1l1780bby1tm",
 "settings/loop_mode": 1,
@@ -22659,7 +22659,7 @@ _subresources={
 },
 "swimming_treading_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/swimming_treading.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/swimming_treading_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://ck2nakpnvxnvp",
 "settings/loop_mode": 1,
@@ -24715,7 +24715,7 @@ _subresources={
 },
 "walk_back_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/walk_back.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/walk_back_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://b03x7tsm6sdjl",
 "settings/loop_mode": 1,
@@ -26771,7 +26771,7 @@ _subresources={
 },
 "walk_left_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/walk_left.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/walk_left_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://b5mmg8qqrnd3b",
 "settings/loop_mode": 1,
@@ -28827,7 +28827,7 @@ _subresources={
 },
 "walk_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/walk.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/walk_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://cekfu84l1u46o",
 "settings/loop_mode": 1,
@@ -30883,7 +30883,7 @@ _subresources={
 },
 "walk_right_rig": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/walk_right.res",
+"save_to_file/fallback_path": "res://objects/player/LIRA/animations/anim1/walk_right_rig.res",
 "save_to_file/keep_custom_tracks": true,
 "save_to_file/path": "uid://b84tswb7cuajp",
 "settings/loop_mode": 1,

@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Fuselage_Continuous",
+    "triangles": 968,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Hull_Surface_Details",
+    "triangles": 3476,
+    "collision": "none"
+  },
+  {
+    "name": "Cockpit_Fittings",
+    "triangles": 176,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Tail_Spars",
+    "triangles": 220,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Rib_Intact",
+    "triangles": 288,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Rib_Open",
+    "triangles": 192,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Cargo_Floor_3m",
+    "triangles": 508,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Bulkhead_Open",
+    "triangles": 220,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Torn_Skin_Lip",
+    "triangles": 232,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Salvaged_Access_Ramp",
+    "triangles": 584,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Wing_Attached_Broken",
+    "triangles": 208,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Wing_Detached",
+    "triangles": 154,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Tail_Fin_Detached",
+    "triangles": 18,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Engine_Nacelle_Broken",
+    "triangles": 1188,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Engine_Turbine",
+    "triangles": 112,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Engine_Mount",
+    "triangles": 176,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Cargo_Box",
+    "triangles": 980,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Cargo_Case_Small",
+    "triangles": 176,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Workbench",
+    "triangles": 308,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Bench_Tools",
+    "triangles": 168,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Portable_Lamp",
+    "triangles": 416,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Lamp_Stand",
+    "triangles": 220,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Concrete_Barrier",
+    "triangles": 116,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Fence_3m",
+    "triangles": 1552,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Fence_Bent",
+    "triangles": 660,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Debris_Cluster_1",
+    "triangles": 308,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Debris_Cluster_2",
+    "triangles": 308,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Debris_Cluster_3",
+    "triangles": 308,
+    "collision": "static mesh"
+  },
+  {
+    "name": "Dry_Grass",
+    "triangles": 16,
+    "collision": "none"
+  },
+  {
+    "name": "DeadTree_Original",
+    "triangles": 5802,
+    "collision": "none"
+  },
+  {
+    "name": "Rock_Original",
+    "triangles": 342,
+    "collision": "none"
+  },
+  {
+    "name": "Impact_Earth_Bed",
+    "triangles": 116,
+    "collision": "static mesh"
+  }
+]

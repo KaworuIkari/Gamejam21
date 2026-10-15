@@ -1,5 +1,6 @@
 extends RealController
 class_name LIRA_Character
+const SafeCameraArm = preload("res://objects/player/LIRA/scripts/safe_camera_arm.gd")
 const JetpackHUD = preload("res://ui/in_game/jetpack/jetpack_hud.gd")
 var settings_invert_y: bool:
 	get:
@@ -10,7 +11,7 @@ var anim_dir := Vector2.ZERO   # character rotation for diagonal walks
 @export var stopping_tweak : float = 20.0  # tweak how fast velocity decreases after moving, to match the locomotion -> idle Xfade Time visually
 
 # Called when the node enters the scene tree for the first time.
-@onready var spring_arm_3d: SpringArm3D = $CameraPivot/SpringArm3D
+@onready var spring_arm_3d: SafeCameraArm = $CameraPivot/SpringArm3D
 @onready var robot: MeshInstance3D = $Robot/root/Skeleton3D/Robot
 @onready var animation_script: LIRA_AnimBP = $AnimationScript
 @onready var anim_player: AnimationPlayer = $Robot/AnimationPlayer
@@ -86,7 +87,7 @@ func _ready() -> void:
 		quests.ability_changed.connect(func(_a: StringName, _l: int) -> void: _apply_abilities())
 	_apply_abilities()
 
-	spring_arm_3d.add_excluded_object(self)
+	spring_arm_3d.add_excluded_object(get_rid())
 
 	face.setup(robot, 4)
 	var energy_hud := JetpackHUD.new()
@@ -109,8 +110,7 @@ func _physics_process(delta: float) -> void:
 	# move camera sideways when aiming
 	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
 	var target := yaw_basis * _target_pivot_offset
-	var t := 1.0 - exp(-aim_offset_lerp_speed * delta)
-	camera_pivot.position = camera_pivot.position.lerp(target, t)
+	spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
 
 func _apply_movement(delta : float) -> void:
 	var is_moving = input_dir != Vector2.ZERO and is_on_floor()

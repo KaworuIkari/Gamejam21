@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cyr2yne1jhnyv"]
 
+[ext_resource type="Script" path="res://objects/player/LIRA/scripts/safe_camera_arm.gd" id="SafeCameraArm"]
 [ext_resource type="PackedScene" uid="uid://bjc6i5o1apw4f" path="res://objects/player/LIRA/equipments/jetpack/jet_pack.tscn" id="2_n661r"]
 [ext_resource type="Script" uid="uid://7vgbtgd81gai" path="res://objects/player/LIRA/lira.gd" id="2_xaedf"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://c6m8qiernvaoi" path="res://objects/player/LIRA/tree/LIRA_anim_tree.tres" id="3_xaedf"]
@@ -1156,6 +1157,7 @@ parameters/RightFingers/blend_amount = 1.0
 unique_name_in_owner = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=1360265433]
+script = ExtResource("SafeCameraArm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 spring_length = 3.5
 

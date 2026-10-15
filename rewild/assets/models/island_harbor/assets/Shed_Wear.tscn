@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Shed_Wear.glb" id="1"]
+[node name="Shed_Wear" type="Node3D"]
+[node name="Visual" parent="." instance=ExtResource("1")]
