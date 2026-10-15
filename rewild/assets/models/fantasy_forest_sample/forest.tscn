@@ -1,0 +1,343 @@
+[gd_scene load_steps=27 format=3]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/GiantTree_18m.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Platform_Wedge30.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Railing_Wedge30.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Floor_2x2.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Wall_Solid_2m.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Wall_Door_2m.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Wall_Window_2m.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Door_Frame.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Window_Frame.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Gable_4m.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Roof_Gabled_4x4.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Stair_Step.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Stair_Stringers.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Stair_Rails.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Support_Brace.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Pier.tscn" id="16"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_01.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_02.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_03.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_04.tscn" id="20"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_05.tscn" id="21"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_06.tscn" id="22"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_07.tscn" id="23"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_08.tscn" id="24"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_09.tscn" id="25"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Arch_Moss_Cap.tscn" id="26"]
+[node name="FantasyForest" type="Node3D"]
+[node name="GiantTree_18m_000" parent="." instance=ExtResource("1")]
+position = Vector3(0, 0, 0)
+rotation = Vector3(0, 0, 0)
+
+[node name="Platform_Wedge30_001" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 0, 0)
+
+[node name="Support_Brace_002" parent="." instance=ExtResource("15")]
+position = Vector3(1.6, 0.95, -0)
+rotation = Vector3(0, 0, 0)
+
+[node name="Platform_Wedge30_003" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 0.5235988, 0)
+
+[node name="Platform_Wedge30_004" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 1.047198, 0)
+
+[node name="Railing_Wedge30_005" parent="." instance=ExtResource("3")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 1.047198, 0)
+
+[node name="Support_Brace_006" parent="." instance=ExtResource("15")]
+position = Vector3(0.8, 0.95, -1.38564)
+rotation = Vector3(0, 1.047198, 0)
+
+[node name="Platform_Wedge30_007" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 1.570796, 0)
+
+[node name="Railing_Wedge30_008" parent="." instance=ExtResource("3")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 1.570796, 0)
+
+[node name="Platform_Wedge30_009" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 2.094395, 0)
+
+[node name="Railing_Wedge30_010" parent="." instance=ExtResource("3")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 2.094395, 0)
+
+[node name="Support_Brace_011" parent="." instance=ExtResource("15")]
+position = Vector3(-0.8, 0.95, -1.38564)
+rotation = Vector3(0, 2.094395, 0)
+
+[node name="Platform_Wedge30_012" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 2.617994, 0)
+
+[node name="Railing_Wedge30_013" parent="." instance=ExtResource("3")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 2.617994, 0)
+
+[node name="Platform_Wedge30_014" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 3.141593, 0)
+
+[node name="Railing_Wedge30_015" parent="." instance=ExtResource("3")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 3.141593, 0)
+
+[node name="Support_Brace_016" parent="." instance=ExtResource("15")]
+position = Vector3(-1.6, 0.95, -1.95943e-16)
+rotation = Vector3(0, 3.141593, 0)
+
+[node name="Platform_Wedge30_017" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 3.665191, 0)
+
+[node name="Railing_Wedge30_018" parent="." instance=ExtResource("3")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 3.665191, 0)
+
+[node name="Platform_Wedge30_019" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 4.18879, 0)
+
+[node name="Railing_Wedge30_020" parent="." instance=ExtResource("3")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 4.18879, 0)
+
+[node name="Support_Brace_021" parent="." instance=ExtResource("15")]
+position = Vector3(-0.8, 0.95, 1.38564)
+rotation = Vector3(0, 4.18879, 0)
+
+[node name="Platform_Wedge30_022" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 4.712389, 0)
+
+[node name="Platform_Wedge30_023" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 5.235988, 0)
+
+[node name="Railing_Wedge30_024" parent="." instance=ExtResource("3")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 5.235988, 0)
+
+[node name="Support_Brace_025" parent="." instance=ExtResource("15")]
+position = Vector3(0.8, 0.95, 1.38564)
+rotation = Vector3(0, 5.235988, 0)
+
+[node name="Platform_Wedge30_026" parent="." instance=ExtResource("2")]
+position = Vector3(0, 3.6, 0)
+rotation = Vector3(0, 5.759587, 0)
+
+[node name="Floor_2x2_027" parent="." instance=ExtResource("4")]
+position = Vector3(2.55, 3.6, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Floor_2x2_028" parent="." instance=ExtResource("4")]
+position = Vector3(2.55, 3.6, -1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Floor_2x2_029" parent="." instance=ExtResource("4")]
+position = Vector3(4.55, 3.6, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Floor_2x2_030" parent="." instance=ExtResource("4")]
+position = Vector3(4.55, 3.6, -1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Wall_Door_2m_031" parent="." instance=ExtResource("6")]
+position = Vector3(2.55, 3.6, 2)
+rotation = Vector3(0, 0, 0)
+
+[node name="Door_Frame_032" parent="." instance=ExtResource("8")]
+position = Vector3(2.55, 3.6, 2)
+rotation = Vector3(0, 0, 0)
+
+[node name="Wall_Window_2m_033" parent="." instance=ExtResource("7")]
+position = Vector3(2.55, 3.6, -2)
+rotation = Vector3(0, 3.141593, 0)
+
+[node name="Window_Frame_034" parent="." instance=ExtResource("9")]
+position = Vector3(2.55, 3.6, -2)
+rotation = Vector3(0, 3.141593, 0)
+
+[node name="Wall_Window_2m_035" parent="." instance=ExtResource("7")]
+position = Vector3(4.55, 3.6, 2)
+rotation = Vector3(0, 0, 0)
+
+[node name="Window_Frame_036" parent="." instance=ExtResource("9")]
+position = Vector3(4.55, 3.6, 2)
+rotation = Vector3(0, 0, 0)
+
+[node name="Wall_Window_2m_037" parent="." instance=ExtResource("7")]
+position = Vector3(4.55, 3.6, -2)
+rotation = Vector3(0, 3.141593, 0)
+
+[node name="Window_Frame_038" parent="." instance=ExtResource("9")]
+position = Vector3(4.55, 3.6, -2)
+rotation = Vector3(0, 3.141593, 0)
+
+[node name="Wall_Solid_2m_039" parent="." instance=ExtResource("5")]
+position = Vector3(1.55, 3.6, 1)
+rotation = Vector3(0, 1.570796, 0)
+
+[node name="Wall_Solid_2m_040" parent="." instance=ExtResource("5")]
+position = Vector3(5.55, 3.6, 1)
+rotation = Vector3(0, 1.570796, 0)
+
+[node name="Wall_Solid_2m_041" parent="." instance=ExtResource("5")]
+position = Vector3(1.55, 3.6, -1)
+rotation = Vector3(0, 1.570796, 0)
+
+[node name="Wall_Solid_2m_042" parent="." instance=ExtResource("5")]
+position = Vector3(5.55, 3.6, -1)
+rotation = Vector3(0, 1.570796, 0)
+
+[node name="Gable_4m_043" parent="." instance=ExtResource("10")]
+position = Vector3(3.55, 6.4, 2)
+rotation = Vector3(0, 0, 0)
+
+[node name="Gable_4m_044" parent="." instance=ExtResource("10")]
+position = Vector3(3.55, 6.4, -2)
+rotation = Vector3(0, 0, 0)
+
+[node name="Roof_Gabled_4x4_045" parent="." instance=ExtResource("11")]
+position = Vector3(3.55, 6.4, 0)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_046" parent="." instance=ExtResource("12")]
+position = Vector3(0, 0.2, 10.95)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_047" parent="." instance=ExtResource("12")]
+position = Vector3(0, 0.4, 10.65)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_048" parent="." instance=ExtResource("12")]
+position = Vector3(0, 0.6, 10.35)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_049" parent="." instance=ExtResource("12")]
+position = Vector3(0, 0.8, 10.05)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_050" parent="." instance=ExtResource("12")]
+position = Vector3(0, 1, 9.75)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_051" parent="." instance=ExtResource("12")]
+position = Vector3(0, 1.2, 9.45)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_052" parent="." instance=ExtResource("12")]
+position = Vector3(0, 1.4, 9.15)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_053" parent="." instance=ExtResource("12")]
+position = Vector3(0, 1.6, 8.85)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_054" parent="." instance=ExtResource("12")]
+position = Vector3(0, 1.8, 8.55)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_055" parent="." instance=ExtResource("12")]
+position = Vector3(0, 2, 8.25)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_056" parent="." instance=ExtResource("12")]
+position = Vector3(0, 2.2, 7.95)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_057" parent="." instance=ExtResource("12")]
+position = Vector3(0, 2.4, 7.65)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_058" parent="." instance=ExtResource("12")]
+position = Vector3(0, 2.6, 7.35)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_059" parent="." instance=ExtResource("12")]
+position = Vector3(0, 2.8, 7.05)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_060" parent="." instance=ExtResource("12")]
+position = Vector3(0, 3, 6.75)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_061" parent="." instance=ExtResource("12")]
+position = Vector3(0, 3.2, 6.45)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_062" parent="." instance=ExtResource("12")]
+position = Vector3(0, 3.4, 6.15)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Step_063" parent="." instance=ExtResource("12")]
+position = Vector3(0, 3.6, 5.85)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Stringers_064" parent="." instance=ExtResource("13")]
+position = Vector3(0, 0, 0)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stair_Rails_065" parent="." instance=ExtResource("14")]
+position = Vector3(0, 0, 0)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Pier_066" parent="." instance=ExtResource("16")]
+position = Vector3(-9.77, 0, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Pier_067" parent="." instance=ExtResource("16")]
+position = Vector3(-6.23, 0, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_01_068" parent="." instance=ExtResource("17")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_02_069" parent="." instance=ExtResource("18")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_03_070" parent="." instance=ExtResource("19")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_04_071" parent="." instance=ExtResource("20")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_05_072" parent="." instance=ExtResource("21")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_06_073" parent="." instance=ExtResource("22")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_07_074" parent="." instance=ExtResource("23")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_08_075" parent="." instance=ExtResource("24")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Voussoir_09_076" parent="." instance=ExtResource("25")]
+position = Vector3(-8, 2.5, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Moss_Cap_077" parent="." instance=ExtResource("26")]
+position = Vector3(-9.77, 2.56, 1)
+rotation = Vector3(0, 0, 0)
+
+[node name="Arch_Moss_Cap_078" parent="." instance=ExtResource("26")]
+position = Vector3(-6.23, 2.56, 1)
+rotation = Vector3(0, 0, 0)

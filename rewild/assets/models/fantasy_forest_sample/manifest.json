@@ -1,0 +1,158 @@
+[
+  {
+    "name": "GiantTree_18m",
+    "triangles": 9849,
+    "collision": "approximate trunk cylinder",
+    "file": "assets/GiantTree_18m.glb"
+  },
+  {
+    "name": "Platform_Wedge30",
+    "triangles": 128,
+    "collision": "static triangle mesh",
+    "file": "assets/Platform_Wedge30.glb"
+  },
+  {
+    "name": "Railing_Wedge30",
+    "triangles": 176,
+    "collision": "static triangle mesh",
+    "file": "assets/Railing_Wedge30.glb"
+  },
+  {
+    "name": "Floor_2x2",
+    "triangles": 440,
+    "collision": "static triangle mesh",
+    "file": "assets/Floor_2x2.glb"
+  },
+  {
+    "name": "Wall_Solid_2m",
+    "triangles": 572,
+    "collision": "static triangle mesh",
+    "file": "assets/Wall_Solid_2m.glb"
+  },
+  {
+    "name": "Wall_Door_2m",
+    "triangles": 572,
+    "collision": "static triangle mesh",
+    "file": "assets/Wall_Door_2m.glb"
+  },
+  {
+    "name": "Wall_Window_2m",
+    "triangles": 836,
+    "collision": "static triangle mesh",
+    "file": "assets/Wall_Window_2m.glb"
+  },
+  {
+    "name": "Door_Frame",
+    "triangles": 132,
+    "collision": "static triangle mesh",
+    "file": "assets/Door_Frame.glb"
+  },
+  {
+    "name": "Window_Frame",
+    "triangles": 308,
+    "collision": "static triangle mesh",
+    "file": "assets/Window_Frame.glb"
+  },
+  {
+    "name": "Gable_4m",
+    "triangles": 140,
+    "collision": "static triangle mesh",
+    "file": "assets/Gable_4m.glb"
+  },
+  {
+    "name": "Roof_Gabled_4x4",
+    "triangles": 5412,
+    "collision": "static triangle mesh",
+    "file": "assets/Roof_Gabled_4x4.glb"
+  },
+  {
+    "name": "Stair_Step",
+    "triangles": 44,
+    "collision": "static triangle mesh",
+    "file": "assets/Stair_Step.glb"
+  },
+  {
+    "name": "Stair_Stringers",
+    "triangles": 88,
+    "collision": "static triangle mesh",
+    "file": "assets/Stair_Stringers.glb"
+  },
+  {
+    "name": "Stair_Rails",
+    "triangles": 704,
+    "collision": "static triangle mesh",
+    "file": "assets/Stair_Rails.glb"
+  },
+  {
+    "name": "Support_Brace",
+    "triangles": 44,
+    "collision": "static triangle mesh",
+    "file": "assets/Support_Brace.glb"
+  },
+  {
+    "name": "Arch_Pier",
+    "triangles": 264,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Pier.glb"
+  },
+  {
+    "name": "Arch_Voussoir_01",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_01.glb"
+  },
+  {
+    "name": "Arch_Voussoir_02",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_02.glb"
+  },
+  {
+    "name": "Arch_Voussoir_03",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_03.glb"
+  },
+  {
+    "name": "Arch_Voussoir_04",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_04.glb"
+  },
+  {
+    "name": "Arch_Voussoir_05",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_05.glb"
+  },
+  {
+    "name": "Arch_Voussoir_06",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_06.glb"
+  },
+  {
+    "name": "Arch_Voussoir_07",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_07.glb"
+  },
+  {
+    "name": "Arch_Voussoir_08",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_08.glb"
+  },
+  {
+    "name": "Arch_Voussoir_09",
+    "triangles": 12,
+    "collision": "static triangle mesh",
+    "file": "assets/Arch_Voussoir_09.glb"
+  },
+  {
+    "name": "Arch_Moss_Cap",
+    "triangles": 220,
+    "collision": "none",
+    "file": "assets/Arch_Moss_Cap.glb"
+  }
+]

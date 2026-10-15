@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Sand_Drift_1.glb" id="1"]
+[node name="Sand_Drift_1" type="Node3D"]
+[node name="Visual" parent="." instance=ExtResource("1")]
