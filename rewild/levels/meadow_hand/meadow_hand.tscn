@@ -51,9 +51,10 @@
 [ext_resource type="PackedScene" uid="uid://bue8p06xysq0" path="res://assets/models/radio_telescope_station/observatory.tscn" id="56_chsj8"]
 [ext_resource type="PackedScene" uid="uid://7xm0d8swck0i" path="res://assets/models/stylized_nature/Fern/Fern_1.gltf" id="57_0tkcr"]
 [ext_resource type="PackedScene" uid="uid://bgd8r5s8fjcqa" path="res://assets/models/stylized_nature/Flower/Flower_3_Group.gltf" id="58_f26gw"]
-[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/forest.tscn" id="58_xk220"]
+[ext_resource type="PackedScene" uid="uid://tlwxc2t2titl" path="res://assets/models/fantasy_forest_sample/forest.tscn" id="58_xk220"]
 [ext_resource type="PackedScene" uid="uid://d2q8or3xmhw53" path="res://assets/models/stylized_nature/Flower/Flower_3_Single.gltf" id="59_a2o6s"]
 [ext_resource type="PackedScene" uid="uid://x48h5dxjm0cg" path="res://assets/models/stylized_nature/Flower/Flower_4_Group.gltf" id="60_qpxyu"]
+[ext_resource type="PackedScene" uid="uid://c1w4yemqss2g5" path="res://objects/animals/fox/fox.tscn" id="60_ta6ao"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_pumphouse_v1/Ruined_Pump_House_Golden.tscn" id="61_0tkcr"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station.tscn" id="64_qpxyu"]
 [ext_resource type="Texture2D" uid="uid://dwj44t5iy0mbj" path="res://assets/textures/ground/sand/sand_alb_ht.png" id="90_sandalb"]
@@ -401,70 +402,70 @@ shader_parameter/growth_origin = Vector2(-512, -512)
 shader_parameter/growth_size = 1024.0
 shader_parameter/wind_direction = Vector2(1, 1)
 
-[sub_resource type="Resource" id="Resource_py7ju"]
+[sub_resource type="Resource" id="Resource_qpxyu"]
 script = ExtResource("33_82jtq")
 amount = 68
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_xk220"]
+[sub_resource type="Resource" id="Resource_eb5gu"]
 script = ExtResource("34_cuhk7")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(20, 360, 20)
 scale = Vector3(0.1, 0.1, 0.1)
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_ta6ao"]
+[sub_resource type="Resource" id="Resource_bx7x2"]
 script = ExtResource("35_1hpyx")
 offset_step = 0.2
 consecutive_step_multiplier = 0.75
 restrict_height = true
 
-[sub_resource type="Resource" id="Resource_0tkcr"]
+[sub_resource type="Resource" id="Resource_lqonk"]
 script = ExtResource("36_628xv")
 ray_length = 50.0
 ray_offset = 5.0
 align_with_collision_normal = true
 max_slope = 35.0
 
-[sub_resource type="Resource" id="Resource_f26gw"]
+[sub_resource type="Resource" id="Resource_nexx3"]
 script = ExtResource("31_375q5")
-stack = Array[ExtResource("32_ld6y3")]([SubResource("Resource_py7ju"), SubResource("Resource_xk220"), SubResource("Resource_ta6ao"), SubResource("Resource_0tkcr")])
+stack = Array[ExtResource("32_ld6y3")]([SubResource("Resource_qpxyu"), SubResource("Resource_eb5gu"), SubResource("Resource_bx7x2"), SubResource("Resource_lqonk")])
 
 [sub_resource type="Resource" id="Resource_f4qme"]
 script = ExtResource("39_hx1um")
 radius = 232.48956
 metadata/_custom_type_script = "uid://ba7ljvtfgk4cp"
 
-[sub_resource type="Resource" id="Resource_a2o6s"]
+[sub_resource type="Resource" id="Resource_e2osj"]
 script = ExtResource("33_82jtq")
 amount = 50
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_qpxyu"]
+[sub_resource type="Resource" id="Resource_hw7lc"]
 script = ExtResource("34_cuhk7")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(20, 360, 20)
 scale = Vector3(0.116, 2, 0.1)
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_eb5gu"]
+[sub_resource type="Resource" id="Resource_lu54j"]
 script = ExtResource("35_1hpyx")
 offset_step = 0.2
 consecutive_step_multiplier = 0.75
 restrict_height = true
 
-[sub_resource type="Resource" id="Resource_bx7x2"]
+[sub_resource type="Resource" id="Resource_0keae"]
 script = ExtResource("36_628xv")
 ray_length = 50.0
 ray_offset = 5.0
 align_with_collision_normal = true
 max_slope = 35.0
 
-[sub_resource type="Resource" id="Resource_lqonk"]
+[sub_resource type="Resource" id="Resource_kwmld"]
 script = ExtResource("31_375q5")
-stack = Array[ExtResource("32_ld6y3")]([SubResource("Resource_a2o6s"), SubResource("Resource_qpxyu"), SubResource("Resource_eb5gu"), SubResource("Resource_bx7x2")])
+stack = Array[ExtResource("32_ld6y3")]([SubResource("Resource_e2osj"), SubResource("Resource_hw7lc"), SubResource("Resource_lu54j"), SubResource("Resource_0keae")])
 
 [sub_resource type="Resource" id="Resource_0mr6x"]
 script = ExtResource("39_hx1um")
@@ -503,6 +504,9 @@ metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1903030697]
 environment = SubResource("Environment_2lqwi")
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1770652987]
+bank_paths = ["res://assets/audio/fmod_bank/Desktop/Master.strings.bank", "res://assets/audio/fmod_bank/Desktop/Master.bank"]
 
 [node name="Sun" type="DirectionalLight3D" parent="." unique_id=1401015878]
 transform = Transform3D(0.90630776, 0.28278682, -0.3140666, 0, 0.7431448, 0.6691306, 0.42261827, -0.6064383, 0.6735179, 0, 0, 0)
@@ -769,7 +773,7 @@ transform = Transform3D(1.9562008, 0.07742904, -2.2731657, -0.16678534, 2.995072
 [node name="Rocks" type="Node3D" parent="Enviroment_permanent" unique_id=2076582704]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40215302, -1.8823013, -188.52237)
 script = ExtResource("30_8v0hq")
-modifier_stack = SubResource("Resource_f26gw")
+modifier_stack = SubResource("Resource_nexx3")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 metadata/_custom_type_script = "uid://dgqq1tf8prx5s"
@@ -818,7 +822,7 @@ metadata/asset_placer_res_id = "uid://cgj5yxpofpljy"
 [node name="Trees" type="Node3D" parent="Environment_restorable" unique_id=1149217190]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -119.0166, 27.463577, -24.4515)
 script = ExtResource("30_8v0hq")
-modifier_stack = SubResource("Resource_lqonk")
+modifier_stack = SubResource("Resource_kwmld")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 metadata/_custom_type_script = "uid://dgqq1tf8prx5s"
@@ -869,9 +873,6 @@ unlock_when = NodePath("../Enviroment_permanent/North_water_source/Ruined_Pump_H
 bloom_radius = 10.0
 bloom_time = 7.0
 
-[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1770652987]
-bank_paths = ["res://assets/audio/fmod_bank/Desktop/Master.strings.bank", "res://assets/audio/fmod_bank/Desktop/Master.bank"]
-
 [node name="Leon" parent="." unique_id=1356049292 instance=ExtResource("53_0npfb")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -38.287693, 28.696035, -51.837772)
 
@@ -884,705 +885,6 @@ surface_material_override/0 = ExtResource("54_2w8tj")
 
 [node name="DesertRoboticsLaboratory" parent="." unique_id=1562604612 instance=ExtResource("55_2w8tj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.277954, 30.500086, 2.5628805)
-
-[node name="Main_Floor_001" parent="DesertRoboticsLaboratory" index="0" unique_id=1186835314]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 12.075569, -0.46679497, -26.034992)
-
-[node name="Power_Floor_002" parent="DesertRoboticsLaboratory" index="1" unique_id=741457623]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -20.62209, -1.9131203, -26.307743)
-
-[node name="Store_Floor_003" parent="DesertRoboticsLaboratory" index="2" unique_id=470106817]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -16.217743, -1.4994125, 8.321584)
-
-[node name="Test_Pad_004" parent="DesertRoboticsLaboratory" index="3" unique_id=1093381692]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 10.0008545, -0.3144436, 4.9363546)
-
-[node name="Test_Markings_005" parent="DesertRoboticsLaboratory" index="4" unique_id=1869959674]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 10.0008545, -0.3144436, 4.9363546)
-
-[node name="Wall_Window_4m_006" parent="DesertRoboticsLaboratory" index="5" unique_id=1565639818]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.1115952, -0.46679497, -40.060654)
-
-[node name="Wall_Eroded_Low_007" parent="DesertRoboticsLaboratory" index="6" unique_id=2072577428]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.1013107, -0.46679497, -36.060665)
-
-[node name="Wall_Window_4m_008" parent="DesertRoboticsLaboratory" index="7" unique_id=416910836]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.0910263, -0.46679497, -32.06068)
-
-[node name="Wall_Eroded_Tall_009" parent="DesertRoboticsLaboratory" index="8" unique_id=979476917]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.0807495, -0.46679497, -28.060692)
-
-[node name="Wall_Window_4m_010" parent="DesertRoboticsLaboratory" index="9" unique_id=357365841]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.070465, -0.46679497, -24.060707)
-
-[node name="Wall_Eroded_Tall_011" parent="DesertRoboticsLaboratory" index="10" unique_id=1310968343]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.0396194, -0.46679497, -12.060744)
-
-[node name="Doorway_Wide_8m_012" parent="DesertRoboticsLaboratory" index="11" unique_id=1944078181]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.0550385, -0.46679497, -18.060726)
-
-[node name="Threshold_Ramp_013" parent="DesertRoboticsLaboratory" index="12" unique_id=715291966]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 1.0550461, -0.5867958, -18.063295)
-
-[node name="Sign_Assembly_014" parent="DesertRoboticsLaboratory" index="13" unique_id=1861101234]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 1.505043, 4.0032063, -18.062138)
-
-[node name="Wall_Solid_4m_015" parent="DesertRoboticsLaboratory" index="14" unique_id=396230248]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 22.111526, -0.46679497, -40.00924)
-
-[node name="Wall_Window_4m_016" parent="DesertRoboticsLaboratory" index="15" unique_id=1548685770]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 22.101242, -0.46679497, -36.009254)
-
-[node name="Wall_Window_4m_017" parent="DesertRoboticsLaboratory" index="16" unique_id=1957451731]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 22.090965, -0.46679497, -32.009266)
-
-[node name="Wall_Solid_4m_018" parent="DesertRoboticsLaboratory" index="17" unique_id=616180114]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 22.08068, -0.46679497, -28.009277)
-
-[node name="Wall_Window_4m_019" parent="DesertRoboticsLaboratory" index="18" unique_id=856349532]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 22.070396, -0.46679497, -24.009293)
-
-[node name="Wall_Eroded_Tall_020" parent="DesertRoboticsLaboratory" index="19" unique_id=671994014]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 22.060112, -0.46679497, -20.009304)
-
-[node name="Wall_Eroded_Low_021" parent="DesertRoboticsLaboratory" index="20" unique_id=387741936]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 22.049828, -0.46679497, -16.00932)
-
-[node name="Wall_Eroded_Tall_022" parent="DesertRoboticsLaboratory" index="21" unique_id=1956429220]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 22.03955, -0.46679497, -12.009331)
-
-[node name="Wall_Eroded_Low_023" parent="DesertRoboticsLaboratory" index="22" unique_id=516914733]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 4.1167297, -0.46679497, -42.055504)
-
-[node name="Wall_Eroded_Tall_024" parent="DesertRoboticsLaboratory" index="23" unique_id=23076613]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 8.1167145, -0.46679497, -42.045223)
-
-[node name="Wall_Window_4m_025" parent="DesertRoboticsLaboratory" index="24" unique_id=125114762]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 12.116699, -0.46679497, -42.034943)
-
-[node name="Wall_Solid_4m_026" parent="DesertRoboticsLaboratory" index="25" unique_id=2044406243]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 16.116692, -0.46679497, -42.02466)
-
-[node name="Wall_Window_4m_027" parent="DesertRoboticsLaboratory" index="26" unique_id=1164954668]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 20.116676, -0.46679497, -42.014374)
-
-[node name="Wall_Eroded_Low_028" parent="DesertRoboticsLaboratory" index="27" unique_id=841353281]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 4.0344696, -0.46679497, -10.05561)
-
-[node name="Wall_Eroded_Low_029" parent="DesertRoboticsLaboratory" index="28" unique_id=1319167351]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 8.034454, -0.46679497, -10.045327)
-
-[node name="Wall_Window_4m_030" parent="DesertRoboticsLaboratory" index="29" unique_id=118805645]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 12.034439, -0.46679497, -10.035045)
-
-[node name="Wall_Eroded_Tall_031" parent="DesertRoboticsLaboratory" index="30" unique_id=1179154182]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 16.034424, -0.46679497, -10.024762)
-
-[node name="Wall_Eroded_Tall_032" parent="DesertRoboticsLaboratory" index="31" unique_id=873118311]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 20.034416, -0.46679497, -10.01448)
-
-[node name="Partition_4m_033" parent="DesertRoboticsLaboratory" index="32" unique_id=1284218065]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 12.075569, -0.46679497, -26.034992)
-
-[node name="Partition_Door_4m_034" parent="DesertRoboticsLaboratory" index="33" unique_id=1724623632]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 16.075562, -0.46679497, -26.024708)
-
-[node name="Partition_4m_035" parent="DesertRoboticsLaboratory" index="34" unique_id=2037195333]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 20.075546, -0.46679497, -26.014427)
-
-[node name="Sign_Service_036" parent="DesertRoboticsLaboratory" index="35" unique_id=148022494]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 16.074913, 2.8132038, -25.774712)
-
-[node name="Column_Fractured_037" parent="DesertRoboticsLaboratory" index="36" unique_id=1590844322]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.1167374, -0.46679497, -42.060646)
-
-[node name="Column_Intact_038" parent="DesertRoboticsLaboratory" index="37" unique_id=1515682403]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.116707, -0.46679497, -42.04008)
-
-[node name="Column_Intact_039" parent="DesertRoboticsLaboratory" index="38" unique_id=1207306164]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.116669, -0.46679497, -42.00923)
-
-[node name="Column_Intact_040" parent="DesertRoboticsLaboratory" index="39" unique_id=659075686]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.0961685, -0.46679497, -34.060673)
-
-[node name="Column_Intact_041" parent="DesertRoboticsLaboratory" index="40" unique_id=1038064476]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.096146, -0.46679497, -34.040108)
-
-[node name="Column_Intact_042" parent="DesertRoboticsLaboratory" index="41" unique_id=144481380]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.096107, -0.46679497, -34.00926)
-
-[node name="Column_Intact_043" parent="DesertRoboticsLaboratory" index="42" unique_id=1191267023]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.0756073, -0.46679497, -26.0607)
-
-[node name="Column_Intact_044" parent="DesertRoboticsLaboratory" index="43" unique_id=1728679997]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.075577, -0.46679497, -26.040134)
-
-[node name="Column_Intact_045" parent="DesertRoboticsLaboratory" index="44" unique_id=2008367605]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.075539, -0.46679497, -26.009285)
-
-[node name="Column_Intact_046" parent="DesertRoboticsLaboratory" index="45" unique_id=1422954403]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.055016, -0.46679497, -18.040161)
-
-[node name="Column_Intact_047" parent="DesertRoboticsLaboratory" index="46" unique_id=1529076244]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.05497, -0.46679497, -18.009312)
-
-[node name="Column_Intact_048" parent="DesertRoboticsLaboratory" index="47" unique_id=1471974978]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 2.0344772, -0.46679497, -10.060752)
-
-[node name="Column_Fractured_049" parent="DesertRoboticsLaboratory" index="48" unique_id=1393458205]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.034447, -0.46679497, -10.040187)
-
-[node name="Column_Intact_050" parent="DesertRoboticsLaboratory" index="49" unique_id=570985019]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.034409, -0.46679497, -10.009339)
-
-[node name="Roof_Truss_8m_051" parent="DesertRoboticsLaboratory" index="50" unique_id=1808757154]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.106422, 4.733206, -38.040096)
-
-[node name="Roof_Truss_8m_052" parent="DesertRoboticsLaboratory" index="51" unique_id=15850000]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.106384, 4.733206, -38.009247)
-
-[node name="Roof_Truss_8m_053" parent="DesertRoboticsLaboratory" index="52" unique_id=1717626213]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.085861, 4.733206, -30.04012)
-
-[node name="Roof_Truss_8m_054" parent="DesertRoboticsLaboratory" index="53" unique_id=303023691]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.085823, 4.733206, -30.009274)
-
-[node name="Roof_Truss_8m_055" parent="DesertRoboticsLaboratory" index="54" unique_id=733743110]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.065292, 4.733206, -22.040146)
-
-[node name="Roof_Truss_8m_056" parent="DesertRoboticsLaboratory" index="55" unique_id=1878274484]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.065254, 4.733206, -22.0093)
-
-[node name="Roof_Truss_8m_057" parent="DesertRoboticsLaboratory" index="56" unique_id=2011781494]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 10.044731, 4.733206, -14.040174)
-
-[node name="Roof_Truss_8m_058" parent="DesertRoboticsLaboratory" index="57" unique_id=490486477]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 22.044693, 4.733206, -14.009325)
-
-[node name="Roof_Fractured_4m_059" parent="DesertRoboticsLaboratory" index="58" unique_id=2131347527]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 8.111572, 5.5132046, -40.04523)
-
-[node name="Roof_Panel_4m_060" parent="DesertRoboticsLaboratory" index="59" unique_id=791347160]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 20.111534, 5.5132046, -40.01438)
-
-[node name="Roof_Panel_4m_061" parent="DesertRoboticsLaboratory" index="60" unique_id=1744541658]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 4.101303, 5.5132046, -36.055527)
-
-[node name="Roof_Fractured_4m_062" parent="DesertRoboticsLaboratory" index="61" unique_id=757737070]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 8.101288, 5.5132046, -36.045242)
-
-[node name="Roof_Fractured_4m_063" parent="DesertRoboticsLaboratory" index="62" unique_id=2047140832]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 16.101265, 5.5132046, -36.024677)
-
-[node name="Roof_Panel_4m_064" parent="DesertRoboticsLaboratory" index="63" unique_id=224668487]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 20.10125, 5.5132046, -36.014393)
-
-[node name="Roof_Fractured_4m_065" parent="DesertRoboticsLaboratory" index="64" unique_id=571969198]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 16.09098, 5.5132046, -32.02469)
-
-[node name="Roof_Panel_4m_066" parent="DesertRoboticsLaboratory" index="65" unique_id=238352190]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 20.090965, 5.5132046, -32.01441)
-
-[node name="Roof_Panel_4m_067" parent="DesertRoboticsLaboratory" index="66" unique_id=1575450134]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 20.080688, 5.5132046, -28.01442)
-
-[node name="Roof_Panel_4m_068" parent="DesertRoboticsLaboratory" index="67" unique_id=1080519798]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 20.070404, 5.5132046, -24.014435)
-
-[node name="Roof_Fractured_4m_069" parent="DesertRoboticsLaboratory" index="68" unique_id=1768550735]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 20.06012, 5.5132046, -20.014446)
-
-[node name="Roof_Fractured_4m_070" parent="DesertRoboticsLaboratory" index="69" unique_id=1878323423]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 20.049835, 5.5132046, -16.01446)
-
-[node name="Roof_Truss_8m_071" parent="DesertRoboticsLaboratory" index="70" unique_id=389953580]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 6.116722, 4.733206, -42.050365)
-
-[node name="Roof_Truss_8m_072" parent="DesertRoboticsLaboratory" index="71" unique_id=203754578]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 14.116692, 4.733206, -42.0298)
-
-[node name="Roof_Truss_8m_073" parent="DesertRoboticsLaboratory" index="72" unique_id=575881962]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 18.116684, 4.733206, -42.019516)
-
-[node name="Roof_Truss_8m_074" parent="DesertRoboticsLaboratory" index="73" unique_id=1319871694]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 6.0961533, 4.733206, -34.050392)
-
-[node name="Roof_Truss_8m_075" parent="DesertRoboticsLaboratory" index="74" unique_id=1359112206]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 14.09613, 4.733206, -34.029823)
-
-[node name="Roof_Truss_8m_076" parent="DesertRoboticsLaboratory" index="75" unique_id=1051939110]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 18.096115, 4.733206, -34.019543)
-
-[node name="Roof_Truss_8m_077" parent="DesertRoboticsLaboratory" index="76" unique_id=1022942718]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 6.075592, 4.733206, -26.050415)
-
-[node name="Roof_Truss_8m_078" parent="DesertRoboticsLaboratory" index="77" unique_id=1831014458]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 14.075562, 4.733206, -26.02985)
-
-[node name="Roof_Truss_8m_079" parent="DesertRoboticsLaboratory" index="78" unique_id=1738971187]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 18.075554, 4.733206, -26.01957)
-
-[node name="Roof_Truss_8m_080" parent="DesertRoboticsLaboratory" index="79" unique_id=1786613844]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 6.055023, 4.733206, -18.050442)
-
-[node name="Roof_Truss_8m_081" parent="DesertRoboticsLaboratory" index="80" unique_id=1542953564]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 14.055, 4.733206, -18.029877)
-
-[node name="Roof_Truss_8m_082" parent="DesertRoboticsLaboratory" index="81" unique_id=2079486703]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 18.054985, 4.733206, -18.019594)
-
-[node name="Slab_Collapsed_083" parent="DesertRoboticsLaboratory" index="82" unique_id=1552828481]
-transform = Transform3D(-0.2106615, 0.24483785, -0.9464018, 0.36638898, 0.91733193, 0.15576199, 0.9063005, -0.31393862, -0.28295183, 14.108986, 0.1632042, -39.029808)
-
-[node name="Slab_Collapsed_084" parent="DesertRoboticsLaboratory" index="83" unique_id=2104594667]
-transform = Transform3D(0.6098286, -0.1659882, -0.77495575, 0.243946, 0.969661, -0.015726298, 0.7540552, -0.17945732, 0.6318199, 11.111565, -0.08679581, -40.037518)
-
-[node name="Slab_Collapsed_085" parent="DesertRoboticsLaboratory" index="84" unique_id=2024691021]
-transform = Transform3D(-0.36209953, 0.19754809, -0.91096616, 0.18542999, 0.973019, 0.137298, 0.91350925, -0.11920454, -0.38896105, 4.119301, -0.03679657, -43.055504)
-
-[node name="Slab_Collapsed_086" parent="DesertRoboticsLaboratory" index="85" unique_id=1569157096]
-transform = Transform3D(-0.5130776, 0.13255095, -0.8480459, -0.18990499, 0.94598913, 0.26275402, 0.837071, 0.29586178, -0.46019462, 20.039558, 0.013204575, -12.014472)
-
-[node name="Assembly_Table_087" parent="DesertRoboticsLaboratory" index="86" unique_id=534159817]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 19.101257, -0.46679497, -36.016964)
-
-[node name="Assembly_Table_088" parent="DesertRoboticsLaboratory" index="87" unique_id=1920940741]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 19.090973, -0.46679497, -32.01698)
-
-[node name="Mechanical_Arm_089" parent="DesertRoboticsLaboratory" index="88" unique_id=1515148845]
-transform = Transform3D(0.29306316, 0, -0.9560935, 0, 1, 0, 0.9560935, 0, 0.29306316, 12.10128, -0.46679497, -36.03496)
-
-[node name="Mechanical_Arm_090" parent="DesertRoboticsLaboratory" index="89" unique_id=2002479718]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 12.085854, -0.46679497, -30.03498)
-
-[node name="Conveyor_4m_091" parent="DesertRoboticsLaboratory" index="90" unique_id=1706221662]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 12.093567, -0.46679497, -33.03497)
-
-[node name="Repair_Workbench_092" parent="DesertRoboticsLaboratory" index="91" unique_id=1733829480]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 7.909004, -0.46679497, -39.045746)
-
-[node name="Control_Console_093" parent="DesertRoboticsLaboratory" index="92" unique_id=405033437]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 7.883293, -0.46679497, -29.04578)
-
-[node name="Service_Cradle_094" parent="DesertRoboticsLaboratory" index="93" unique_id=1785345508]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 18.862694, -0.46679497, -21.017529)
-
-[node name="Repair_Workbench_095" parent="DesertRoboticsLaboratory" index="94" unique_id=906682696]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 21.06269, -0.46679497, -21.011871)
-
-[node name="Service_Cradle_096" parent="DesertRoboticsLaboratory" index="95" unique_id=418979375]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 18.847267, -0.46679497, -15.017548)
-
-[node name="Repair_Workbench_097" parent="DesertRoboticsLaboratory" index="96" unique_id=1087999538]
-transform = Transform3D(0.0025707574, 0, 0.9999967, 0, 1, 0, -0.9999967, 0, 0.0025707574, 21.047264, -0.46679497, -15.011892)
-
-[node name="Repair_Workbench_098" parent="DesertRoboticsLaboratory" index="97" unique_id=932305645]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 9.5653, -0.46679497, -22.041431)
-
-[node name="Control_Console_099" parent="DesertRoboticsLaboratory" index="98" unique_id=1079654]
-transform = Transform3D(0.9999967, 0, -0.0025706263, 0, 1, 0, 0.0025706263, 0, 0.9999967, 12.040092, -0.46679497, -12.235035)
-
-[node name="Parts_Rack_100" parent="DesertRoboticsLaboratory" index="99" unique_id=1621352092]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 19.111534, -0.46679497, -40.016953)
-
-[node name="Parts_Rack_101" parent="DesertRoboticsLaboratory" index="100" unique_id=1168916284]
-transform = Transform3D(-0.9999967, 0, 0.0025707139, 0, 1, 0, -0.0025707139, 0, -0.9999967, 20.080688, -0.46679497, -28.01442)
-
-[node name="Spare_Actuator_102" parent="DesertRoboticsLaboratory" index="101" unique_id=271773362]
-transform = Transform3D(-0.00257067, 0, -0.9999967, 0, 1, 0, 0.9999967, 0, -0.00257067, 19.103828, 0.8132038, -37.016964)
-
-[node name="Spare_Actuator_103" parent="DesertRoboticsLaboratory" index="102" unique_id=156747620]
-transform = Transform3D(-0.7191447, 0, -0.69486064, 0, 1, 0, 0.69486064, 0, -0.7191447, 10.085861, -0.46679497, -30.04012)
-
-[node name="Spare_Actuator_104" parent="DesertRoboticsLaboratory" index="103" unique_id=888787161]
-transform = Transform3D(0.29306316, 0, -0.9560935, 0, 1, 0, 0.9560935, 0, 0.29306316, 10.765297, -0.46679497, -22.038345)
-
-[node name="Component_Crate_105" parent="DesertRoboticsLaboratory" index="104" unique_id=935779540]
-transform = Transform3D(-0.15197933, 0, -0.98838377, 0, 1, 0, 0.98838377, 0, -0.15197933, 9.111572, -0.46679497, -40.04266)
-
-[node name="Component_Crate_106" parent="DesertRoboticsLaboratory" index="105" unique_id=980365672]
-transform = Transform3D(-0.15197933, 0, -0.98838377, 0, 1, 0, 0.98838377, 0, -0.15197933, 18.080696, -0.46679497, -28.019562)
-
-[node name="Component_Crate_107" parent="DesertRoboticsLaboratory" index="106" unique_id=244358705]
-transform = Transform3D(-0.15197933, 0, -0.98838377, 0, 1, 0, 0.98838377, 0, -0.15197933, 20.067833, -0.46679497, -23.014435)
-
-[node name="Wall_Window_4m_108" parent="DesertRoboticsLaboratory" index="107" unique_id=1830235286]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -24.619473, -2.1013794, -20.308952)
-
-[node name="Wall_Solid_4m_109" parent="DesertRoboticsLaboratory" index="108" unique_id=1278173715]
-transform = Transform3D(-0.99924546, -0.038839072, 6.624164e-05, -0.03883815, 0.99923056, 0.0054846117, -0.0002792082, 0.005477909, -0.999985, -24.618675, -2.0355682, -32.308773)
-
-[node name="Doorway_4m_110" parent="DesertRoboticsLaboratory" index="109" unique_id=1100678431]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -20.622482, -1.9460297, -20.307835)
-
-[node name="Wall_Solid_4m_111" parent="DesertRoboticsLaboratory" index="110" unique_id=360222799]
-transform = Transform3D(-0.99924546, -0.038839072, 6.624164e-05, -0.03883815, 0.99923056, 0.0054846117, -0.0002792082, 0.005477909, -0.999985, -20.621693, -1.8802109, -32.307655)
-
-[node name="Wall_Window_4m_112" parent="DesertRoboticsLaboratory" index="111" unique_id=377282268]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -16.625504, -1.7906742, -20.306717)
-
-[node name="Wall_Solid_4m_113" parent="DesertRoboticsLaboratory" index="112" unique_id=1084545844]
-transform = Transform3D(-0.99924546, -0.038839072, 6.624164e-05, -0.03883815, 0.99923056, 0.0054846117, -0.0002792082, 0.005477909, -0.999985, -16.624706, -1.7248592, -32.306538)
-
-[node name="Wall_Window_4m_114" parent="DesertRoboticsLaboratory" index="113" unique_id=475653283]
-transform = Transform3D(-6.619821e-05, -0.038839072, -0.99924546, -0.005484616, 0.9992305, -0.03883816, 0.99998474, 0.005477909, -0.00027916452, -26.617828, -2.168089, -22.309483)
-
-[node name="Wall_Window_4m_115" parent="DesertRoboticsLaboratory" index="114" unique_id=502207223]
-transform = Transform3D(-6.619821e-05, -0.038839072, -0.99924546, -0.005484616, 0.9992305, -0.03883816, 0.99998474, 0.005477909, -0.00027916452, -26.617569, -2.1461525, -26.309422)
-
-[node name="Wall_Window_4m_116" parent="DesertRoboticsLaboratory" index="115" unique_id=1003341707]
-transform = Transform3D(-6.619821e-05, -0.038839072, -0.99924546, -0.005484616, 0.9992305, -0.03883816, 0.99998474, 0.005477909, -0.00027916452, -26.617298, -2.1242123, -30.30936)
-
-[node name="Wall_Eroded_Low_117" parent="DesertRoboticsLaboratory" index="116" unique_id=576609277]
-transform = Transform3D(-6.619821e-05, -0.038839072, -0.99924546, -0.005484616, 0.9992305, -0.03883816, 0.99998474, 0.005477909, -0.00027916452, -14.626881, -1.7020302, -22.30613)
-
-[node name="Wall_Eroded_Tall_118" parent="DesertRoboticsLaboratory" index="117" unique_id=1667056282]
-transform = Transform3D(-6.619821e-05, -0.038839072, -0.99924546, -0.005484616, 0.9992305, -0.03883816, 0.99998474, 0.005477909, -0.00027916452, -14.626614, -1.6800938, -26.306072)
-
-[node name="Wall_Window_4m_119" parent="DesertRoboticsLaboratory" index="118" unique_id=1275546334]
-transform = Transform3D(-6.619821e-05, -0.038839072, -0.99924546, -0.005484616, 0.9992305, -0.03883816, 0.99998474, 0.005477909, -0.00027916452, -14.62635, -1.6581554, -30.306011)
-
-[node name="Sign_Power_120" parent="DesertRoboticsLaboratory" index="119" unique_id=863328897]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -20.790684, 2.378336, -19.864124)
-
-[node name="Threshold_Ramp_121" parent="DesertRoboticsLaboratory" index="120" unique_id=1029356396]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -20.617893, -2.0714226, -19.308506)
-
-[node name="Column_Intact_122" parent="DesertRoboticsLaboratory" index="121" unique_id=1315980504]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -26.617962, -2.179058, -20.30951)
-
-[node name="Column_Intact_123" parent="DesertRoboticsLaboratory" index="122" unique_id=1150226698]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -26.617165, -2.113243, -32.30933)
-
-[node name="Column_Intact_124" parent="DesertRoboticsLaboratory" index="123" unique_id=944676655]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -14.627014, -1.7129993, -20.30616)
-
-[node name="Column_Intact_125" parent="DesertRoboticsLaboratory" index="124" unique_id=1772458359]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -14.626217, -1.6471844, -32.30598)
-
-[node name="Roof_Truss_8m_126" parent="DesertRoboticsLaboratory" index="125" unique_id=1495477131]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -22.822414, 3.2161694, -28.279789)
-
-[node name="Roof_Truss_8m_127" parent="DesertRoboticsLaboratory" index="126" unique_id=1398150070]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -22.822151, 3.2381115, -32.27973)
-
-[node name="Roof_Truss_8m_128" parent="DesertRoboticsLaboratory" index="127" unique_id=832126932]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -18.825432, 3.3715267, -28.278671)
-
-[node name="Roof_Truss_8m_129" parent="DesertRoboticsLaboratory" index="128" unique_id=1427735004]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -18.825165, 3.3934612, -32.278614)
-
-[node name="Roof_Panel_4m_130" parent="DesertRoboticsLaboratory" index="129" unique_id=2052938476]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -24.851196, 3.9178944, -28.276073)
-
-[node name="Roof_Panel_4m_131" parent="DesertRoboticsLaboratory" index="130" unique_id=1184859555]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -24.850933, 3.9398327, -32.276012)
-
-[node name="Roof_Panel_4m_132" parent="DesertRoboticsLaboratory" index="131" unique_id=376593035]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -20.854214, 4.073248, -28.27496)
-
-[node name="Roof_Panel_4m_133" parent="DesertRoboticsLaboratory" index="132" unique_id=703973890]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -20.85395, 4.09519, -32.2749)
-
-[node name="Roof_Fractured_4m_134" parent="DesertRoboticsLaboratory" index="133" unique_id=578269597]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -16.857231, 4.228594, -28.273842)
-
-[node name="Roof_Fractured_4m_135" parent="DesertRoboticsLaboratory" index="134" unique_id=1153760787]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -16.856964, 4.25054, -32.27378)
-
-[node name="Generator_136" parent="DesertRoboticsLaboratory" index="135" unique_id=1378626042]
-transform = Transform3D(-6.619821e-05, -0.038839072, -0.99924546, -0.005484616, 0.9992305, -0.03883816, 0.99998474, 0.005477909, -0.00027916452, -23.619694, -2.0186672, -28.308556)
-
-[node name="Power_Unit_137" parent="DesertRoboticsLaboratory" index="136" unique_id=95596179]
-transform = Transform3D(6.611068e-05, -0.038839072, 0.99924546, 0.0054846066, 0.9992305, 0.03883816, -0.99998474, 0.0054779076, 0.00027907713, -16.025433, -1.7234974, -28.30643)
-
-[node name="Cooling_Tank_138" parent="DesertRoboticsLaboratory" index="137" unique_id=1610365508]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -24.618744, -2.0410519, -31.308788)
-
-[node name="Cooling_Tank_139" parent="DesertRoboticsLaboratory" index="138" unique_id=335522647]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -16.624771, -1.7303448, -31.306557)
-
-[node name="Ventilator_140" parent="DesertRoboticsLaboratory" index="139" unique_id=1609867001]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -24.855728, 4.048765, -30.275387)
-
-[node name="Pipe_Run_4m_141" parent="DesertRoboticsLaboratory" index="140" unique_id=2054098507]
-transform = Transform3D(0.99924546, -0.03883908, -6.615424e-05, 0.03883816, 0.99923056, -0.0054846094, 0.0002791209, 0.0054779095, 0.999985, -20.621727, -1.883503, -31.707668)
-
-[node name="Wall_Eroded_Tall_142" parent="DesertRoboticsLaboratory" index="141" unique_id=1375730746]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -12.489597, -1.1509609, 2.158832)
-
-[node name="Wall_Window_4m_143" parent="DesertRoboticsLaboratory" index="142" unique_id=1114678570]
-transform = Transform3D(0.9985052, -0.031995058, 0.044312328, 0.03358801, 0.9987985, -0.03568274, -0.043117434, 0.037117768, 0.99838024, -11.957848, -1.579155, 14.139396)
-
-[node name="Doorway_4m_144" parent="DesertRoboticsLaboratory" index="143" unique_id=1348706958]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -16.48362, -1.2853146, 2.3313017)
-
-[node name="Wall_Window_4m_145" parent="DesertRoboticsLaboratory" index="144" unique_id=639514034]
-transform = Transform3D(0.9985052, -0.031995058, 0.044312328, 0.03358801, 0.9987985, -0.03568274, -0.043117434, 0.037117768, 0.99838024, -15.951866, -1.7135067, 14.311866)
-
-[node name="Wall_Eroded_Tall_146" parent="DesertRoboticsLaboratory" index="145" unique_id=685818907]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -20.477638, -1.4196663, 2.5037727)
-
-[node name="Wall_Window_4m_147" parent="DesertRoboticsLaboratory" index="146" unique_id=1853235363]
-transform = Transform3D(0.9985052, -0.031995058, 0.044312328, 0.03358801, 0.9987985, -0.03568274, -0.043117434, 0.037117768, 0.99838024, -19.945885, -1.8478603, 14.484334)
-
-[node name="Wall_Eroded_Low_148" parent="DesertRoboticsLaboratory" index="147" unique_id=2139548445]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -10.403961, -1.1551514, 4.0693583)
-
-[node name="Wall_Window_4m_149" parent="DesertRoboticsLaboratory" index="148" unique_id=2022673941]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -10.226707, -1.2978821, 8.062878)
-
-[node name="Wall_Window_4m_150" parent="DesertRoboticsLaboratory" index="149" unique_id=1515307085]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -10.049454, -1.4406147, 12.056399)
-
-[node name="Wall_Window_4m_151" parent="DesertRoboticsLaboratory" index="150" unique_id=557617786]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -22.386024, -1.5582066, 4.586767)
-
-[node name="Wall_Window_4m_152" parent="DesertRoboticsLaboratory" index="151" unique_id=869616777]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -22.208775, -1.7009373, 8.58029)
-
-[node name="Wall_Window_4m_153" parent="DesertRoboticsLaboratory" index="152" unique_id=999206015]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -22.031525, -1.8436699, 12.573812)
-
-[node name="Sign_Storage_154" parent="DesertRoboticsLaboratory" index="153" unique_id=1342733718]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -16.638279, 3.0038128, 2.0908155)
-
-[node name="Threshold_Ramp_155" parent="DesertRoboticsLaboratory" index="154" unique_id=656386194]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -16.52409, -1.3694878, 1.3284664)
-
-[node name="Column_Fractured_156" parent="DesertRoboticsLaboratory" index="155" unique_id=1307560644]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -10.492592, -1.083786, 2.072597)
-
-[node name="Column_Intact_157" parent="DesertRoboticsLaboratory" index="156" unique_id=707329479]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -9.960838, -1.51198, 14.053159)
-
-[node name="Column_Intact_158" parent="DesertRoboticsLaboratory" index="157" unique_id=1287679423]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -22.474644, -1.4868431, 2.5900073)
-
-[node name="Column_Intact_159" parent="DesertRoboticsLaboratory" index="158" unique_id=1202238485]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -21.942898, -1.9150352, 14.570569)
-
-[node name="Roof_Truss_8m_160" parent="DesertRoboticsLaboratory" index="159" unique_id=935134516]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -14.121231, 3.5474186, 14.418643)
-
-[node name="Roof_Truss_8m_161" parent="DesertRoboticsLaboratory" index="160" unique_id=2002920210]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -18.115253, 3.413065, 14.591115)
-
-[node name="Roof_Fractured_4m_162" parent="DesertRoboticsLaboratory" index="161" unique_id=1166268728]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -12.237801, 4.465029, 12.364598)
-
-[node name="Roof_Panel_4m_163" parent="DesertRoboticsLaboratory" index="162" unique_id=782667870]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -16.231827, 4.330675, 12.537068)
-
-[node name="Roof_Panel_4m_164" parent="DesertRoboticsLaboratory" index="163" unique_id=876729535]
-transform = Transform3D(-0.9985052, -0.031995054, -0.044312418, -0.033588015, 0.9987985, 0.035682738, 0.043117523, 0.037117768, -0.99838024, -20.225842, 4.1963215, 12.709538)
-
-[node name="Parts_Rack_165" parent="DesertRoboticsLaboratory" index="164" unique_id=1630539298]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -12.090782, -1.4721088, 11.144256)
-
-[node name="Parts_Rack_166" parent="DesertRoboticsLaboratory" index="165" unique_id=370777543]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -20.078827, -1.7408104, 11.489194)
-
-[node name="Parts_Rack_167" parent="DesertRoboticsLaboratory" index="166" unique_id=1382106257]
-transform = Transform3D(-0.044312425, -0.031995058, 0.99850523, 0.03568275, 0.9987987, 0.03358802, -0.9983803, 0.03711777, -0.043117527, -12.268036, -1.3293781, 7.150732)
-
-[node name="Component_Crate_168" parent="DesertRoboticsLaboratory" index="167" unique_id=1988090956]
-transform = Transform3D(-0.993915, -0.031995054, 0.10539974, -0.027878504, 0.9987987, 0.040301394, -0.10656258, 0.037117776, -0.9936129, -20.300385, -1.5623989, 6.4972935)
-
-[node name="Component_Crate_169" parent="DesertRoboticsLaboratory" index="168" unique_id=731979881]
-transform = Transform3D(-0.9697984, -0.031995058, -0.24180111, -0.04000756, 0.99879855, 0.028298581, 0.2406052, 0.037117768, -0.96991336, -19.390507, -1.4574451, 4.4574156)
-
-[node name="Component_Crate_170" parent="DesertRoboticsLaboratory" index="169" unique_id=765185587]
-transform = Transform3D(-0.93694025, -0.031995066, 0.3480216, -0.01704111, 0.9987985, 0.04594576, -0.3490734, 0.037117768, -0.9363598, -13.399475, -1.2559147, 4.19871)
-
-[node name="Slab_Collapsed_171" parent="DesertRoboticsLaboratory" index="170" unique_id=1222477816]
-transform = Transform3D(-0.90557456, 0.17873408, -0.38469326, 0.051447816, 0.9464788, 0.3186397, 0.4210559, 0.2687601, -0.8663024, -11.414627, -0.8091965, 4.1265793)
-
-[node name="Test_Gantry_172" parent="DesertRoboticsLaboratory" index="171" unique_id=1848890684]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 9.985535, -0.3144436, 7.9363155)
-
-[node name="Test_Obstacle_173" parent="DesertRoboticsLaboratory" index="172" unique_id=1181090514]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 13.011024, -0.3144436, 2.9516988)
-
-[node name="Test_Obstacle_174" parent="DesertRoboticsLaboratory" index="173" unique_id=226913903]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 9.021286, -0.3144436, 0.9312997)
-
-[node name="Mechanical_Arm_175" parent="DesertRoboticsLaboratory" index="174" unique_id=1334367493]
-transform = Transform3D(0.99998695, 0, -0.005106125, 0, 1, 0, 0.005106125, 0, 0.99998695, 6.9804688, -0.3144436, 8.920984)
-
-[node name="Test_Bollard_176" parent="DesertRoboticsLaboratory" index="175" unique_id=1557002228]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 15.528862, -0.3144436, -0.53549147)
-
-[node name="Test_Bollard_177" parent="DesertRoboticsLaboratory" index="176" unique_id=1186497897]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 15.472694, -0.3144436, 10.464366)
-
-[node name="Test_Bollard_178" parent="DesertRoboticsLaboratory" index="177" unique_id=171543022]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 4.529007, -0.3144436, -0.59165764)
-
-[node name="Test_Bollard_179" parent="DesertRoboticsLaboratory" index="178" unique_id=422013489]
-transform = Transform3D(-0.99998695, 0, 0.0051060375, 0, 1, 0, -0.0051060375, 0, -0.99998695, 4.4728394, -0.3144436, 10.408199)
-
-[node name="Control_Console_180" parent="DesertRoboticsLaboratory" index="179" unique_id=1647946329]
-transform = Transform3D(-0.82021177, 0, -0.57205945, 0, 1, 0, 0.57205945, 0, -0.82021177, 20.236923, -0.3565941, 6.762824)
-
-[node name="Fence_4m_181" parent="DesertRoboticsLaboratory" index="180" unique_id=61365579]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1812973, -0.6584015, 14.48227)
-
-[node name="Fence_4m_182" parent="DesertRoboticsLaboratory" index="181" unique_id=630703815]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.181297, -0.6584015, 14.48227)
-
-[node name="Fence_4m_183" parent="DesertRoboticsLaboratory" index="182" unique_id=1583428605]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.181297, -0.6584015, 14.48227)
-
-[node name="Fence_4m_184" parent="DesertRoboticsLaboratory" index="183" unique_id=894181530]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.301735, -0.6584015, 14.48227)
-
-[node name="Fence_4m_185" parent="DesertRoboticsLaboratory" index="184" unique_id=224834358]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 24.701355, -0.6584015, 8.482271)
-
-[node name="Fence_4m_186" parent="DesertRoboticsLaboratory" index="185" unique_id=1089865845]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 24.701355, -0.6584015, 4.4822702)
-
-[node name="Robot_2m_Reference_190" parent="DesertRoboticsLaboratory" index="186" unique_id=1150643148]
-transform = Transform3D(-0.0334749, 0, -0.9994399, 0, 1, 0, 0.9994399, 0, -0.0334749, 18.753334, -0.16258049, -21.021534)
-
-[node name="Rubble_Cluster_1_191" parent="DesertRoboticsLaboratory" index="187" unique_id=1523884876]
-transform = Transform3D(-0.9903135, 0, 0.13884725, 0, 1, 0, -0.13884725, 0, -0.9903135, 3.1193008, -0.5567951, -43.058075)
-
-[node name="Rubble_Cluster_2_192" parent="DesertRoboticsLaboratory" index="188" unique_id=12553012]
-transform = Transform3D(-0.97082794, 0, 0.23977652, 0, 1, 0, -0.23977652, 0, -0.97082794, 4.1141586, -0.44679642, -41.05551)
-
-[node name="Rubble_Cluster_3_193" parent="DesertRoboticsLaboratory" index="189" unique_id=295072691]
-transform = Transform3D(0.85642713, 0, 0.51626825, 0, 1, 0, -0.51626825, 0, 0.85642713, 13.108986, -0.44679642, -39.03238)
-
-[node name="Rubble_Cluster_4_194" parent="DesertRoboticsLaboratory" index="190" unique_id=1253514171]
-transform = Transform3D(0.6032117, 0, -0.7975813, 0, 1, 0, 0.7975813, 0, 0.6032117, 15.111549, -0.44679642, -40.027237)
-
-[node name="Rubble_Cluster_1_195" parent="DesertRoboticsLaboratory" index="191" unique_id=1698970365]
-transform = Transform3D(-0.997856, 0, 0.065448076, 0, 1, 0, -0.065448076, 0, -0.997856, 13.11927, -0.5567951, -43.032368)
-
-[node name="Rubble_Cluster_2_196" parent="DesertRoboticsLaboratory" index="192" unique_id=1277279496]
-transform = Transform3D(-0.99998116, 0, -0.0061882697, 0, 1, 0, 0.0061882697, 0, -0.99998116, 17.114113, -0.44679642, -41.02209)
-
-[node name="Rubble_Cluster_3_197" parent="DesertRoboticsLaboratory" index="193" unique_id=195063724]
-transform = Transform3D(-0.014161937, 0, 0.99989986, 0, 1, 0, -0.99989986, 0, -0.014161937, 15.106407, -0.44679642, -38.02724)
-
-[node name="Rubble_Cluster_4_198" parent="DesertRoboticsLaboratory" index="194" unique_id=1311502991]
-transform = Transform3D(-0.9940718, 0, -0.108722925, 0, 1, 0, 0.108722925, 0, -0.9940718, 3.0987396, -0.44679642, -35.058098)
-
-[node name="Rubble_Cluster_1_199" parent="DesertRoboticsLaboratory" index="195" unique_id=1964286418]
-transform = Transform3D(0.30626413, 0, 0.9519469, 0, 1, 0, -0.9519469, 0, 0.30626413, 1.0807495, -0.5567951, -28.063263)
-
-[node name="Rubble_Cluster_2_200" parent="DesertRoboticsLaboratory" index="196" unique_id=2084417979]
-transform = Transform3D(0.60393894, 0, 0.7970301, 0, 1, 0, -0.7970301, 0, 0.60393894, 21.03955, -0.44679642, -12.011902)
-
-[node name="Rubble_Cluster_3_201" parent="DesertRoboticsLaboratory" index="197" unique_id=843947286]
-transform = Transform3D(0.039696995, 0, -0.9992115, 0, 1, 0, 0.9992115, 0, 0.039696995, 20.034416, -0.5567951, -10.01448)
-
-[node name="Rubble_Cluster_4_202" parent="DesertRoboticsLaboratory" index="198" unique_id=437960164]
-transform = Transform3D(0.9256627, 0, 0.3783497, 0, 1, 0, -0.3783497, 0, 0.9256627, 14.03186, -0.5567951, -9.029906)
-
-[node name="Rubble_Cluster_1_203" parent="DesertRoboticsLaboratory" index="199" unique_id=1589523068]
-transform = Transform3D(-0.9796371, 0, 0.20077798, 0, 1, 0, -0.20077798, 0, -0.9796371, 10.031876, -0.5567951, -9.040189)
-
-[node name="Rubble_Cluster_2_204" parent="DesertRoboticsLaboratory" index="200" unique_id=1197793422]
-transform = Transform3D(-0.9985258, 0, 0.05427966, 0, 1, 0, -0.05427966, 0, -0.9985258, 5.037033, -0.44679642, -11.053037)
-
-[node name="Rubble_Cluster_3_205" parent="DesertRoboticsLaboratory" index="201" unique_id=130356179]
-transform = Transform3D(-0.912691, -0.038839094, 0.4068002, -0.03324252, 0.9992303, 0.02081863, -0.40729567, 0.0054779183, -0.91327953, -15.622696, -1.8362827, -21.30692)
-
-[node name="Rubble_Cluster_4_206" parent="DesertRoboticsLaboratory" index="202" unique_id=623529998]
-transform = Transform3D(-0.88585645, -0.038839076, 0.46233144, -0.031894885, 0.99923027, 0.022829782, -0.46286243, 0.0054778983, -0.8864136, -13.624004, -1.7421551, -24.306316)
-
-[node name="Rubble_Cluster_1_207" parent="DesertRoboticsLaboratory" index="203" unique_id=1720837276]
-transform = Transform3D(0.00046650335, -0.038839072, -0.9992456, -0.0054639094, 0.99923044, -0.03884107, 0.99998486, 0.0054778997, 0.000253931, -15.622498, -1.819828, -24.306873)
-
-[node name="Rubble_Cluster_2_208" parent="DesertRoboticsLaboratory" index="204" unique_id=922295135]
-transform = Transform3D(-0.32953358, -0.03199507, 0.94360167, 0.024518717, 0.9987989, 0.042429306, -0.9438257, 0.037117783, -0.3283532, -9.402573, -1.2114563, 4.0228996)
-
-[node name="Rubble_Cluster_3_209" parent="DesertRoboticsLaboratory" index="205" unique_id=1255256592]
-transform = Transform3D(-0.7855845, -0.031995058, -0.61792713, -0.04808993, 0.9987983, 0.00942193, 0.61688334, 0.037117768, -0.78617924, -11.443893, -1.2429504, 3.110754)
-
-[node name="Rubble_Cluster_4_210" parent="DesertRoboticsLaboratory" index="206" unique_id=1110579853]
-transform = Transform3D(-0.8765833, -0.031995054, 0.48018605, -0.010199644, 0.99879855, 0.047931015, -0.48114258, 0.037117768, -0.87585646, -13.44091, -1.3101254, 3.196989)
-
-[node name="Rubble_Cluster_1_211" parent="DesertRoboticsLaboratory" index="207" unique_id=1649939227]
-transform = Transform3D(-0.3792504, -0.03199506, 0.9247402, 0.022227492, 0.99879867, 0.043673225, -0.9250266, 0.037117783, -0.37808365, -10.312454, -1.3164082, 6.0627794)
-
-[node name="Rubble_Cluster_2_212" parent="DesertRoboticsLaboratory" index="208" unique_id=387008429]
-transform = Transform3D(0.11525694, -0.031995058, 0.99282056, 0.040576056, 0.99879855, 0.027477235, -0.9925069, 0.037117768, 0.11641673, -22.516083, -1.5410519, 1.5882859)
-
-[node name="Rubble_Cluster_3_213" parent="DesertRoboticsLaboratory" index="209" unique_id=1380952934]
-transform = Transform3D(-0.9876076, -0.03883909, -0.15205978, -0.039220378, 0.99923056, -0.00049204193, 0.1519619, 0.005477912, -0.9883711, -13.623539, -1.703762, -31.30621)
-
-[node name="Sand_Drift_2_215" parent="DesertRoboticsLaboratory" index="210" unique_id=372856559]
-transform = Transform3D(-0.32448488, 0, -1.3046501, 0, 1.34439, 0, 1.3046501, 0, -0.32448488, 18.119255, -0.5617962, -43.019512)
-
-[node name="Sand_Drift_2_221" parent="DesertRoboticsLaboratory" index="211" unique_id=97805051]
-transform = Transform3D(0.5640289, 0, -1.0507034, 0, 1.1925199, 0, 1.0507034, 0, 0.5640289, 21.042122, -0.45179558, -13.011899)
-
-[node name="Sand_Drift_2_227" parent="DesertRoboticsLaboratory" index="212" unique_id=333018699]
-transform = Transform3D(-1.0149707, -0.03401617, -0.31465414, -0.04415951, 1.0618923, 0.027646478, 0.3133916, 0.03946249, -1.0151644, -9.313789, -1.2878189, 6.019475)
-
-[node name="Sand_Drift_3_228" parent="DesertRoboticsLaboratory" index="213" unique_id=762988525]
-transform = Transform3D(-0.9860404, -0.036677863, -0.58353364, -0.0532245, 1.1449829, 0.017970249, 0.58225775, 0.042550337, -0.98655885, -13.485058, -1.279438, 2.1984243)
-
-[node name="Sand_Drift_1_232" parent="DesertRoboticsLaboratory" index="214" unique_id=1502392525]
-transform = Transform3D(0.6956526, 0, -1.100392, 0, 1.30185, 0, 1.100392, 0, 0.6956526, 14.114128, -0.45179558, -41.0298)
-
-[node name="Sand_Drift_1_229" parent="DesertRoboticsLaboratory" index="215" unique_id=799417883]
-transform = Transform3D(-1.0708723, -0.035268154, 0.2589785, -0.024633978, 1.1009756, 0.0480737, -0.26020548, 0.04091491, -1.0703741, -19.942848, -1.9427471, 14.480807)
-
-[node name="Sand_Drift_2_233" parent="DesertRoboticsLaboratory" index="216" unique_id=225528061]
-transform = Transform3D(-0.40837893, 0, -0.8159629, 0, 0.912452, 0, 0.8159629, 0, -0.40837893, 19.111534, -0.45179558, -40.016953)
-
-[node name="Sand_Drift_3_234" parent="DesertRoboticsLaboratory" index="217" unique_id=378575128]
-transform = Transform3D(0.3511124, 0, -1.2587067, 0, 1.3067598, 0, 1.2587067, 0, 0.3511124, 21.065262, -0.45179558, -22.011868)
-
-[node name="Dry_Grass_235" parent="DesertRoboticsLaboratory" index="218" unique_id=1711744088]
-transform = Transform3D(0.02295611, -0.031995054, 0.9992244, 0.037861347, 0.99879867, 0.0311116, -0.99901944, 0.037117776, 0.024139913, -7.895546, -2.2286186, 14.937505)
-
-[node name="Dry_Grass_236" parent="DesertRoboticsLaboratory" index="219" unique_id=439083452]
-transform = Transform3D(-0.8139744, 0, 0.5809014, 0, 1, 0, -0.5809014, 0, -0.8139744, 19.121819, -0.5867958, -44.016937)
-
-[node name="Dry_Grass_237" parent="DesertRoboticsLaboratory" index="220" unique_id=1549744540]
-transform = Transform3D(-0.28564787, -0.038839098, -0.95754737, -0.016355779, 0.9992304, -0.035650656, 0.9581949, 0.0054779067, -0.28606316, -12.623001, -1.6839314, -33.306065)
-
-[node name="Dry_Grass_238" parent="DesertRoboticsLaboratory" index="221" unique_id=301001094]
-transform = Transform3D(-0.31968054, -0.03883909, -0.94672924, -0.017619211, 0.9992303, -0.035043478, 0.9473615, 0.005477914, -0.3201186, -13.622967, -1.7831001, -22.30651)
-
-[node name="Dry_Grass_239" parent="DesertRoboticsLaboratory" index="222" unique_id=582045694]
-transform = Transform3D(0.8852771, -0.031995058, 0.46396258, 0.045558356, 0.9987985, -0.018051313, -0.4628278, 0.03711777, 0.8856711, -11.6201935, -1.1301804, -0.8838787)
-
-[node name="Dry_Grass_240" parent="DesertRoboticsLaboratory" index="223" unique_id=410179085]
-transform = Transform3D(0.891715, 0, 0.452597, 0, 1, 0, -0.452597, 0, 0.891715, 21.181297, -0.28504562, 15.48227)
-
-[node name="Dry_Grass_241" parent="DesertRoboticsLaboratory" index="224" unique_id=52194447]
-transform = Transform3D(-0.598778, 0, -0.800915, 0, 1, 0, 0.800915, 0, -0.598778, 28.66829, 0, -3.7311277)
-
-[node name="Dry_Grass_242" parent="DesertRoboticsLaboratory" index="225" unique_id=177414383]
-transform = Transform3D(-0.7079725, -0.031995058, -0.7055147, -0.048861563, 0.9987984, 0.0037363265, 0.7045476, 0.03711776, -0.70868546, -23.557945, -1.568922, 0.6319094)
-
-[node name="Dry_Grass_243" parent="DesertRoboticsLaboratory" index="226" unique_id=712025781]
-transform = Transform3D(-0.40878832, 0, 0.91262984, 0, 1, 0, -0.91262984, 0, -0.40878832, 22.024124, 0.042236328, -6.0093527)
-
-[node name="Floor_Crack_244" parent="DesertRoboticsLaboratory" index="227" unique_id=382910218]
-transform = Transform3D(-0.29797488, 0, -0.95457417, 0, 1, 0, 0.95457417, 0, -0.29797488, 5.096161, -0.46679497, -34.05296)
-
-[node name="Floor_Crack_245" parent="DesertRoboticsLaboratory" index="228" unique_id=847894941]
-transform = Transform3D(0.38704905, 0, -0.9220591, 0, 1, 0, 0.9220591, 0, 0.38704905, 6.0678787, -0.46679497, -23.050426)
-
-[node name="Floor_Crack_246" parent="DesertRoboticsLaboratory" index="229" unique_id=1080545108]
-transform = Transform3D(-0.64618206, 0, -0.7631834, 0, 1, 0, 0.7631834, 0, -0.64618206, 15.047287, -0.46679497, -15.027316)
-
-[node name="Floor_Crack_247" parent="DesertRoboticsLaboratory" index="230" unique_id=1778358610]
-transform = Transform3D(0.92039186, -0.038839087, 0.3890633, 0.0379081, 0.9992304, 0.010072616, -0.38915515, 0.0054779067, 0.92115587, -20.622223, -1.9240894, -24.307777)
-
-[node name="Floor_Crack_248" parent="DesertRoboticsLaboratory" index="231" unique_id=539000750]
-transform = Transform3D(-0.96700406, -0.03199505, 0.25274488, -0.021542892, 0.9987984, 0.04401496, -0.25384948, 0.03711776, -0.9665316, -16.262054, -1.463726, 7.323203)
-
-[node name="Floor_Crack_249" parent="DesertRoboticsLaboratory" index="232" unique_id=880182497]
-transform = Transform3D(-0.6256016, 0, -0.7801428, 0, 1, 0, 0.7801428, 0, -0.6256016, 11.990616, -0.3144436, 6.946541)
 
 [node name="RadioObservatory" parent="." unique_id=697393943 instance=ExtResource("56_chsj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.910645, 32.614014, 58.277084)
@@ -1671,11 +973,13 @@ transform = Transform3D(0.41658813, 0, 0.90909535, 0, 1, 0, -0.90909535, 0, 0.41
 [node name="IslandHarbor" parent="." unique_id=1277843673 instance=ExtResource("Harbor_20261015")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -212, 30.7, -12)
 
+[node name="Fox" parent="." unique_id=1518329467 instance=ExtResource("60_ta6ao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9676, 35.125984, -84.41997)
+
 [editable path="Water/Lake"]
 [editable path="Water/River"]
 [editable path="Water/Sea"]
 [editable path="Water/StylizedWater2"]
 [editable path="Water/CrashsiteOutpostV2"]
 [editable path="Leon2"]
-[editable path="DesertRoboticsLaboratory"]
 [editable path="RadioObservatory"]

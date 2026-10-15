@@ -32,3 +32,4 @@ script = SubResource("GDScript_mvceg")
 [node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=340247086]
 event_name = "event:/LIRA/jetpack"
 event_guid = "{6163e72b-96f5-4cd3-8f9a-1f0d51256afa}"
+volume = 0.6
