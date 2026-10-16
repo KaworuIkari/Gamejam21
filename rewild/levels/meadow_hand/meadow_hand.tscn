@@ -58,6 +58,7 @@
 [ext_resource type="PackedScene" uid="uid://x48h5dxjm0cg" path="res://assets/models/stylized_nature/Flower/Flower_4_Group.gltf" id="60_qpxyu"]
 [ext_resource type="PackedScene" uid="uid://c1w4yemqss2g5" path="res://objects/animals/fox/fox.tscn" id="60_ta6ao"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_pumphouse_v1/Ruined_Pump_House_Golden.tscn" id="61_0tkcr"]
+[ext_resource type="PackedScene" uid="uid://b6xv74dhxaksy" path="res://assets/models/desert_robotics_laboratory/robotics_lab_house_4.tscn" id="63_a2o6s"]
 [ext_resource type="PackedScene" uid="uid://bwta3o637nr8p" path="res://assets/models/rewild_lake_station_v1/Lake_Power_Station.tscn" id="64_qpxyu"]
 [ext_resource type="Texture2D" uid="uid://dwj44t5iy0mbj" path="res://assets/textures/ground/sand/sand_alb_ht.png" id="90_sandalb"]
 [ext_resource type="Texture2D" uid="uid://wjnkwo3qgaqg" path="res://assets/textures/sky/sky_100_2k.png" id="91_skypano"]
@@ -393,70 +394,70 @@ shader_parameter/growth_origin = Vector2(-512, -512)
 shader_parameter/growth_size = 1024.0
 shader_parameter/wind_direction = Vector2(1, 1)
 
-[sub_resource type="Resource" id="Resource_bx7x2"]
+[sub_resource type="Resource" id="Resource_qpxyu"]
 script = ExtResource("33_82jtq")
 amount = 68
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_lqonk"]
+[sub_resource type="Resource" id="Resource_eb5gu"]
 script = ExtResource("34_cuhk7")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(20, 360, 20)
 scale = Vector3(0.1, 0.1, 0.1)
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_nexx3"]
+[sub_resource type="Resource" id="Resource_bx7x2"]
 script = ExtResource("35_1hpyx")
 offset_step = 0.2
 consecutive_step_multiplier = 0.75
 restrict_height = true
 
-[sub_resource type="Resource" id="Resource_e2osj"]
+[sub_resource type="Resource" id="Resource_lqonk"]
 script = ExtResource("36_628xv")
 ray_length = 50.0
 ray_offset = 5.0
 align_with_collision_normal = true
 max_slope = 35.0
 
-[sub_resource type="Resource" id="Resource_hw7lc"]
+[sub_resource type="Resource" id="Resource_nexx3"]
 script = ExtResource("31_375q5")
-stack = Array[ExtResource("32_ld6y3")]([SubResource("Resource_bx7x2"), SubResource("Resource_lqonk"), SubResource("Resource_nexx3"), SubResource("Resource_e2osj")])
+stack = Array[ExtResource("32_ld6y3")]([SubResource("Resource_qpxyu"), SubResource("Resource_eb5gu"), SubResource("Resource_bx7x2"), SubResource("Resource_lqonk")])
 
 [sub_resource type="Resource" id="Resource_f4qme"]
 script = ExtResource("39_hx1um")
 radius = 232.48956
 metadata/_custom_type_script = "uid://ba7ljvtfgk4cp"
 
-[sub_resource type="Resource" id="Resource_lu54j"]
+[sub_resource type="Resource" id="Resource_e2osj"]
 script = ExtResource("33_82jtq")
 amount = 50
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_0keae"]
+[sub_resource type="Resource" id="Resource_hw7lc"]
 script = ExtResource("34_cuhk7")
 position = Vector3(0.15, 0.15, 0.15)
 rotation = Vector3(20, 360, 20)
 scale = Vector3(0.116, 2, 0.1)
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_kwmld"]
+[sub_resource type="Resource" id="Resource_lu54j"]
 script = ExtResource("35_1hpyx")
 offset_step = 0.2
 consecutive_step_multiplier = 0.75
 restrict_height = true
 
-[sub_resource type="Resource" id="Resource_vfyd3"]
+[sub_resource type="Resource" id="Resource_0keae"]
 script = ExtResource("36_628xv")
 ray_length = 50.0
 ray_offset = 5.0
 align_with_collision_normal = true
 max_slope = 35.0
 
-[sub_resource type="Resource" id="Resource_5vhap"]
+[sub_resource type="Resource" id="Resource_kwmld"]
 script = ExtResource("31_375q5")
-stack = Array[ExtResource("32_ld6y3")]([SubResource("Resource_lu54j"), SubResource("Resource_0keae"), SubResource("Resource_kwmld"), SubResource("Resource_vfyd3")])
+stack = Array[ExtResource("32_ld6y3")]([SubResource("Resource_e2osj"), SubResource("Resource_hw7lc"), SubResource("Resource_lu54j"), SubResource("Resource_0keae")])
 
 [sub_resource type="Resource" id="Resource_0mr6x"]
 script = ExtResource("39_hx1um")
@@ -763,7 +764,7 @@ transform = Transform3D(1.9562008, 0.07742904, -2.2731657, -0.16678534, 2.995072
 [node name="Rocks" type="Node3D" parent="Enviroment_permanent" unique_id=2076582704]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40215302, -1.8823013, -188.52237)
 script = ExtResource("30_8v0hq")
-modifier_stack = SubResource("Resource_hw7lc")
+modifier_stack = SubResource("Resource_nexx3")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 metadata/_custom_type_script = "uid://dgqq1tf8prx5s"
@@ -813,7 +814,7 @@ metadata/asset_placer_res_id = "uid://cgj5yxpofpljy"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -119.0166, 27.463577, -24.4515)
 script = ExtResource("30_8v0hq")
 render_mode = 1
-modifier_stack = SubResource("Resource_5vhap")
+modifier_stack = SubResource("Resource_kwmld")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(15, 15, 15)
 metadata/_custom_type_script = "uid://dgqq1tf8prx5s"
@@ -895,7 +896,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.59869003, 0)
 surface_material_override/0 = ExtResource("54_2w8tj")
 
 [node name="DesertRoboticsLaboratory" parent="." unique_id=1562604612 instance=ExtResource("55_2w8tj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.277954, 30.500086, 2.5628805)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.277954, 29.4808, 2.5628805)
 
 [node name="RadioObservatory" parent="." unique_id=697393943 instance=ExtResource("56_chsj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.910645, 32.614014, 58.277084)
@@ -911,6 +912,9 @@ transform = Transform3D(0.09116908, -0.21479471, 0.9723947, 0.02005063, 0.976659
 
 [node name="Fox" parent="." unique_id=1518329467 instance=ExtResource("60_ta6ao")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9676, 35.125984, -84.41997)
+
+[node name="RoboticsLabHouse4" parent="." unique_id=1745798474 instance=ExtResource("63_a2o6s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.21257, 28.652138, 47.53864)
 
 [editable path="Water/Lake"]
 [editable path="Water/River"]

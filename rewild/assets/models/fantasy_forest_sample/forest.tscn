@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Gable_4m.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Roof_Gabled_4x4.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://cp150bxb6cwfr" path="res://assets/models/fantasy_forest_sample/assets/Stair_Step.tscn" id="12"]
-[ext_resource type="PackedScene" uid="uid://ceexiotgoowka" path="res://assets/models/fantasy_forest_sample/stair_face.tscn" id="13_odti5"]
+[ext_resource type="PackedScene" uid="uid://ct811wkh67k10" path="res://assets/models/fantasy_forest_sample/stair_face.tscn" id="13_odti5"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Support_Brace.tscn" id="15"]
 [ext_resource type="PackedScene" uid="uid://chb76mn2tr72c" path="res://objects/animals/sparrot/dead_sparrot.glb" id="27_b2g7p"]
 

@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ct811wkh67k10"]
+[gd_scene format=3 uid="uid://ceexiotgoowka"]
 
 [ext_resource type="PackedScene" uid="uid://cp150bxb6cwfr" path="res://assets/models/fantasy_forest_sample/assets/Stair_Step.tscn" id="1_ou5wo"]
 [ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Stair_Rails.tscn" id="2_rqyqp"]
