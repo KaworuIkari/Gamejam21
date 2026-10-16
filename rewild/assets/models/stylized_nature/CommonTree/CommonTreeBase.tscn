@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://tx3ney2ntgvd"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mrhpl"]
+radius = 1.6919972
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mrhpl"]
+radius = 0.44580078
+height = 3.6032715
+
+[node name="CommonTree1" type="Node3D" unique_id=2099265172 groups=["nav_blockers"]]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=322415688]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1889937867]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.747104, 0)
+shape = SubResource("SphereShape3D_mrhpl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1581323526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6324463, 0)
+shape = SubResource("CapsuleShape3D_mrhpl")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=1155285371]
+transform = Transform3D(0.9996105, 0, -0.027908245, 0, 1, 0, 0.027908245, 0, 0.9996105, 0, 0, 0)
+radius = 0.85
+height = 5.0
+vertices = PackedVector3Array(0.4421601, 0, 0.6124168, 0.626941, 0, -0.09954468, -0.033736173, 0, -0.6518493, -0.77587676, 0, -0.29583067, -0.49978527, 0, 0.5952272)
+affect_navigation_mesh = true
