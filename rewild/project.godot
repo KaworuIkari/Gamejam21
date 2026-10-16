@@ -85,6 +85,7 @@ enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg", "res://addons/
 [global_group]
 
 player=""
+nav_blockers=""
 
 [gui]
 
@@ -180,6 +181,10 @@ dialogue_history={
 [internationalization]
 
 locale/translations=PackedStringArray("res://i18n/dialogue_xbot.en.translation", "res://i18n/dialogue_xbot.zh_CN.translation", "res://i18n/strings.en.translation", "res://i18n/strings.zh_CN.translation")
+
+[navigation]
+
+3d/warnings/navmesh_edge_merge_errors=false
 
 [physics]
 
