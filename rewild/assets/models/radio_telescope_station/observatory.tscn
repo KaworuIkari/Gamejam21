@@ -1,4 +1,12 @@
 [gd_scene format=4 uid="uid://bue8p06xysq0"]
+
+[ext_resource type="Texture2D" uid="uid://cnl4bmr8vmog" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Sage_painted_steel.png" id="1_2ec5l"]
+[ext_resource type="Texture2D" uid="uid://bjtxu13mdmobb" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Chalk_ivory.png" id="2_r4cu1"]
+[ext_resource type="Texture2D" uid="uid://clse3b0cpqupb" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Foundation_stone.png" id="3_vd6wb"]
+[ext_resource type="Texture2D" uid="uid://dkoekvsthxlqa" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_-2.png" id="4_m1ech"]
+[ext_resource type="Texture2D" uid="uid://d4cc28fuvkkry" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_-1.png" id="5_ll2na"]
+[ext_resource type="Texture2D" uid="uid://0gk6qgtwcfik" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_1.png" id="6_gtm8q"]
+[ext_resource type="Texture2D" uid="uid://ymswcxrwd662" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_2.png" id="7_17xxh"]
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Access_Ladder.tres" id="RadioCollision_0"]
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Auxiliary_Cabinet.tres" id="RadioCollision_1"]
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Base_Plates.tres" id="RadioCollision_2"]
@@ -22,14 +30,6 @@
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Tower_Bracing.tres" id="RadioCollision_20"]
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Tower_Legs.tres" id="RadioCollision_21"]
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Yoke.tres" id="RadioCollision_22"]
-
-[ext_resource type="Texture2D" uid="uid://cnl4bmr8vmog" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Sage_painted_steel.png" id="1_2ec5l"]
-[ext_resource type="Texture2D" uid="uid://bjtxu13mdmobb" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Chalk_ivory.png" id="2_r4cu1"]
-[ext_resource type="Texture2D" uid="uid://clse3b0cpqupb" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Foundation_stone.png" id="3_vd6wb"]
-[ext_resource type="Texture2D" uid="uid://dkoekvsthxlqa" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_-2.png" id="4_m1ech"]
-[ext_resource type="Texture2D" uid="uid://d4cc28fuvkkry" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_-1.png" id="5_ll2na"]
-[ext_resource type="Texture2D" uid="uid://0gk6qgtwcfik" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_1.png" id="6_gtm8q"]
-[ext_resource type="Texture2D" uid="uid://ymswcxrwd662" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_2.png" id="7_17xxh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w752n"]
 resource_name = "Sage_painted_steel"
@@ -1411,11 +1411,26 @@ shadow_mesh = SubResource("ArrayMesh_47xp7")
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_oud82")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Access_Ladder" unique_id=400188361]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Access_Ladder/MeshCollision" unique_id=999848491]
+shape = ExtResource("RadioCollision_0")
+
 [node name="Auxiliary_Cabinet" type="MeshInstance3D" parent="Model" unique_id=654825051]
 mesh = SubResource("ArrayMesh_hgb2w")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Auxiliary_Cabinet" unique_id=776753756]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Auxiliary_Cabinet/MeshCollision" unique_id=2051313880]
+shape = ExtResource("RadioCollision_1")
+
 [node name="Base_Plates" type="MeshInstance3D" parent="Model" unique_id=677679583]
 mesh = SubResource("ArrayMesh_hg3q3")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Base_Plates" unique_id=524528468]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Base_Plates/MeshCollision" unique_id=747390649]
+shape = ExtResource("RadioCollision_2")
 
 [node name="Base_Wear" type="MeshInstance3D" parent="Model" unique_id=1757725827]
 mesh = SubResource("ArrayMesh_76xjw")
@@ -1423,28 +1438,63 @@ mesh = SubResource("ArrayMesh_76xjw")
 [node name="Bollards" type="MeshInstance3D" parent="Model" unique_id=943396370]
 mesh = SubResource("ArrayMesh_0llxj")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Bollards" unique_id=2111914037]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Bollards/MeshCollision" unique_id=1633272983]
+shape = ExtResource("RadioCollision_3")
+
 [node name="Center_Instrument" type="MeshInstance3D" parent="Model" unique_id=352856774]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1on81")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Center_Instrument" unique_id=1338773649]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Center_Instrument/MeshCollision" unique_id=615325243]
+shape = ExtResource("RadioCollision_4")
 
 [node name="Cross_Braces" type="MeshInstance3D" parent="Model" unique_id=1333354626]
 transform = Transform3D(-0.99144495, -0.11001618, -0.07023896, -0.106920704, 0.9931835, -0.046416763, 0.07486677, -0.038509663, -0.9964497, 0, 0, 0)
 mesh = SubResource("ArrayMesh_v067g")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Cross_Braces" unique_id=1996319447]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Cross_Braces/MeshCollision" unique_id=56468012]
+shape = ExtResource("RadioCollision_5")
+
 [node name="Elevation_Bearings" type="MeshInstance3D" parent="Model" unique_id=2134256250]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ex6w5")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Elevation_Bearings" unique_id=1460256828]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Elevation_Bearings/MeshCollision" unique_id=120282046]
+shape = ExtResource("RadioCollision_6")
 
 [node name="Feed_Footings" type="MeshInstance3D" parent="Model" unique_id=643317058]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_cdy1s")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Feed_Footings" unique_id=681853053]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Feed_Footings/MeshCollision" unique_id=1604311518]
+shape = ExtResource("RadioCollision_7")
+
 [node name="Feed_Supports" type="MeshInstance3D" parent="Model" unique_id=1809146732]
 transform = Transform3D(0.9999512, -0.009086952, -0.0038807902, -0.008094002, -0.5280161, -0.8491959, 0.005667482, 0.8491859, -0.5280639, 0, 3.8146973e-06, 0)
 mesh = SubResource("ArrayMesh_ij76y")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Feed_Supports" unique_id=456559749]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Feed_Supports/MeshCollision" unique_id=240469318]
+shape = ExtResource("RadioCollision_8")
+
 [node name="Foundations" type="MeshInstance3D" parent="Model" unique_id=487867245]
 mesh = SubResource("ArrayMesh_jqw2w")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Foundations" unique_id=1866023687]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Foundations/MeshCollision" unique_id=15362029]
+shape = ExtResource("RadioCollision_9")
 
 [node name="Panel_Joint_Markings" type="MeshInstance3D" parent="Model" unique_id=416542142]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
@@ -1454,188 +1504,115 @@ mesh = SubResource("ArrayMesh_b8j5i")
 transform = Transform3D(2.3841858e-07, 0.9961937, 0.08716674, 0.81915206, 0.049996614, -0.57139325, -0.5735764, 0.07140294, -0.8160341, 0, 0, 0)
 mesh = SubResource("ArrayMesh_t8f6v")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Radial_Trusses" unique_id=2145857941]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Radial_Trusses/MeshCollision" unique_id=1177614204]
+shape = ExtResource("RadioCollision_10")
+
 [node name="Rear_Hoops" type="MeshInstance3D" parent="Model" unique_id=771196517]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3a7xj")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Rear_Hoops" unique_id=1488986056]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Rear_Hoops/MeshCollision" unique_id=1791850390]
+shape = ExtResource("RadioCollision_11")
 
 [node name="Rear_Hub" type="MeshInstance3D" parent="Model" unique_id=1534044791]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ogmi4")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Rear_Hub" unique_id=1738167603]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Rear_Hub/MeshCollision" unique_id=1243995122]
+shape = ExtResource("RadioCollision_12")
+
 [node name="Receiver" type="MeshInstance3D" parent="Model" unique_id=1640756993]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_u73xy")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Receiver" unique_id=381239644]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Receiver/MeshCollision" unique_id=896086522]
+shape = ExtResource("RadioCollision_13")
 
 [node name="Reflector_Continuous" type="MeshInstance3D" parent="Model" unique_id=1600721960]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_qux1b")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Continuous" unique_id=913285672]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Continuous/MeshCollision" unique_id=1812667146]
+shape = ExtResource("RadioCollision_14")
+
 [node name="Reflector_Mounts" type="MeshInstance3D" parent="Model" unique_id=1314354841]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_4iris")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Mounts" unique_id=1953573950]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Mounts/MeshCollision" unique_id=549210650]
+shape = ExtResource("RadioCollision_15")
 
 [node name="Reflector_Rim" type="MeshInstance3D" parent="Model" unique_id=6137330]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3vbgg")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Rim" unique_id=1617475117]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Rim/MeshCollision" unique_id=1869753862]
+shape = ExtResource("RadioCollision_16")
+
 [node name="Service_Platform" type="MeshInstance3D" parent="Model" unique_id=1477896392]
 mesh = SubResource("ArrayMesh_mukne")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Platform" unique_id=2075512326]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Service_Platform/MeshCollision" unique_id=1484651949]
+shape = ExtResource("RadioCollision_17")
+
 [node name="Service_Pod" type="MeshInstance3D" parent="Model" unique_id=1303531761]
 mesh = SubResource("ArrayMesh_d5q06")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Pod" unique_id=1865543018]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Service_Pod/MeshCollision" unique_id=1419881097]
+shape = ExtResource("RadioCollision_18")
 
 [node name="Service_Railings" type="MeshInstance3D" parent="Model" unique_id=820001062]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_x46cx")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Railings" unique_id=1509917105]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Service_Railings/MeshCollision" unique_id=223037367]
+shape = ExtResource("RadioCollision_19")
+
 [node name="Tower_Bracing" type="MeshInstance3D" parent="Model" unique_id=1028523790]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_bobqu")
+
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Tower_Bracing" unique_id=1729702912]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Tower_Bracing/MeshCollision" unique_id=400874023]
+shape = ExtResource("RadioCollision_20")
 
 [node name="Tower_Legs" type="MeshInstance3D" parent="Model" unique_id=1033403899]
 transform = Transform3D(-0.8282833, 0.17019168, 0.5338363, -2.2351742e-08, 0.95275307, -0.30374596, -0.56030923, -0.25158778, -0.7891495, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3notu")
 
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Tower_Legs" unique_id=240624428]
+
+[node name="Shape" type="CollisionShape3D" parent="Model/Tower_Legs/MeshCollision" unique_id=83558413]
+shape = ExtResource("RadioCollision_21")
+
 [node name="Yoke" type="MeshInstance3D" parent="Model" unique_id=1711748358]
 transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_xghgk")
 
-[node name="StaticBody" type="StaticBody3D" parent="." unique_id=1407610296]
+[node name="MeshCollision" type="StaticBody3D" parent="Model/Yoke" unique_id=311719837]
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Access_Ladder"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Access_Ladder/MeshCollision"]
-shape = ExtResource("RadioCollision_0")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Auxiliary_Cabinet"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Auxiliary_Cabinet/MeshCollision"]
-shape = ExtResource("RadioCollision_1")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Base_Plates"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Base_Plates/MeshCollision"]
-shape = ExtResource("RadioCollision_2")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Bollards"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Bollards/MeshCollision"]
-shape = ExtResource("RadioCollision_3")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Center_Instrument"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Center_Instrument/MeshCollision"]
-shape = ExtResource("RadioCollision_4")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Cross_Braces"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Cross_Braces/MeshCollision"]
-shape = ExtResource("RadioCollision_5")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Elevation_Bearings"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Elevation_Bearings/MeshCollision"]
-shape = ExtResource("RadioCollision_6")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Feed_Footings"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Feed_Footings/MeshCollision"]
-shape = ExtResource("RadioCollision_7")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Feed_Supports"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Feed_Supports/MeshCollision"]
-shape = ExtResource("RadioCollision_8")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Foundations"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Foundations/MeshCollision"]
-shape = ExtResource("RadioCollision_9")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Radial_Trusses"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Radial_Trusses/MeshCollision"]
-shape = ExtResource("RadioCollision_10")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Rear_Hoops"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Rear_Hoops/MeshCollision"]
-shape = ExtResource("RadioCollision_11")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Rear_Hub"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Rear_Hub/MeshCollision"]
-shape = ExtResource("RadioCollision_12")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Receiver"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Receiver/MeshCollision"]
-shape = ExtResource("RadioCollision_13")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Continuous"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Continuous/MeshCollision"]
-shape = ExtResource("RadioCollision_14")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Mounts"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Mounts/MeshCollision"]
-shape = ExtResource("RadioCollision_15")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Rim"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Rim/MeshCollision"]
-shape = ExtResource("RadioCollision_16")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Platform"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Service_Platform/MeshCollision"]
-shape = ExtResource("RadioCollision_17")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Pod"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Service_Pod/MeshCollision"]
-shape = ExtResource("RadioCollision_18")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Railings"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Service_Railings/MeshCollision"]
-shape = ExtResource("RadioCollision_19")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Tower_Bracing"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Tower_Bracing/MeshCollision"]
-shape = ExtResource("RadioCollision_20")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Tower_Legs"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Tower_Legs/MeshCollision"]
-shape = ExtResource("RadioCollision_21")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Yoke"]
-collision_layer = 1
-collision_mask = 1
-[node name="Shape" type="CollisionShape3D" parent="Model/Yoke/MeshCollision"]
+[node name="Shape" type="CollisionShape3D" parent="Model/Yoke/MeshCollision" unique_id=2123594559]
 shape = ExtResource("RadioCollision_22")
+
+[node name="StaticBody" type="StaticBody3D" parent="." unique_id=1407610296]

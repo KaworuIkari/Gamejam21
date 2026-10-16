@@ -15,7 +15,7 @@ enum CameraMode {
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var camera_3d: Camera3D = %Camera3D
 @onready var spring_arm: SpringArm3D = camera_pivot.get_node("SpringArm3D")
-@onready var character: Node3D = $character
+@onready var character: Node3D
 
 ## Movement Settings
 ## -----------------------------------------------------------------------------
@@ -82,6 +82,9 @@ func _ready() -> void:
 	spring_arm.spring_length = target_camera_distance
 	if character:
 		character.visible = camera_mode == CameraMode.THIRD_PERSON
+	if get_script().resource_path == "res://addons/real-controller/character.gd":
+		# base class fallback
+		character = $character
 
 func _physics_process(delta: float) -> void:
 	_handle_gravity_and_jump(delta)
