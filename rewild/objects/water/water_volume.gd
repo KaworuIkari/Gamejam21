@@ -19,6 +19,11 @@ func _ready() -> void:
 		push_error("WaterVolume: assign sea_plane in inspector")
 		set_process(false)
 		return
+	add_to_group(&"water_volumes")   # lets characters find every water body
+	_setup_sea()
+
+## Call if sea_plane moves or resizes at runtime.
+func refresh_bounds() -> void:
 	_setup_sea()
 
 func _setup_sea() -> void:
@@ -74,3 +79,17 @@ func clamp_xz(xz: Vector2, margin: float) -> Vector2:
 		clampf(xz.x, _sea_min.x + margin, _sea_max.x - margin),
 		clampf(xz.y, _sea_min.y + margin, _sea_max.y - margin)
 	)
+
+## Player-facing queries. These only read cached bounds and surface height,
+## so they never touch the terrain or raycast the physics space.
+
+## XZ point inside the sea plane footprint.
+func contains_xz(xz: Vector2) -> bool:
+	return xz.x >= _sea_min.x and xz.x <= _sea_max.x and xz.y >= _sea_min.y and xz.y <= _sea_max.y
+
+func get_surface_y() -> float:
+	return _surface_y
+
+## Below the surface and inside the footprint.
+func is_submerged_point(p: Vector3) -> bool:
+	return p.y < _surface_y and contains_xz(Vector2(p.x, p.z))

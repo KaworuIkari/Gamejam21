@@ -2,7 +2,7 @@ extends Node
 class_name LIRA_AnimBP
 
 @onready var tree: AnimationTree = $"../AnimationTree"
-@onready var player: RealController = $".."
+@onready var player: LIRA_Character = $".."
 @onready var character: Node3D = $"../Robot"
 @onready var collision_shape_3d: CollisionShape3D = $"../CollisionShape3D"
 @onready var skeleton: Skeleton3D = $"../Robot/root/Skeleton3D"
@@ -28,6 +28,7 @@ var is_running : bool = false
 var is_jumping : bool = false
 var is_using_double_jump : bool = false
 var is_falling : bool = false
+var is_swimming : bool = false
 
 # locomotion
 var target_direction: Vector2 = Vector2.ZERO
@@ -51,6 +52,13 @@ var aim_blend_tweak : float = 15
 @onready var aim_correction: AimCorrection = $"../Robot/root/Skeleton3D/AimCorrection"
 @onready var aim_trajectory: AimTrajectory = $"../AimTrajectory"
 
+# swimming
+const swim_blend_pos = "parameters/Swim/blend_amount"   # the Blend2 that takes Swimming as its blend input
+var swim_moving := false     # hysteresis-filtered; read by transition expressions
+@export var swim_blend_tweak := 8.0
+@export var swim_start_speed := 0.5   # speed needed to switch from swim_idle to swim
+@export var swim_stop_speed := 0.2    # speed below which swim returns to swim_idle
+
 func _ready():
 	tree.advance_expression_base_node = get_path()
 	torso_pb = tree.get(torso_pb_pos)
@@ -61,7 +69,12 @@ func _ready():
 func _process(delta: float) -> void:
 	if player == null or tree == null:
 		return
-		
+	is_swimming = player.in_water
+	_update_swim_blend(delta)
+	if player.in_water:
+		update_aim_anim(delta)
+		_update_swim_states()
+		return
 	is_walking = player.is_walking
 	is_running = player.is_sprinting
 	is_moving = is_walking or is_running
@@ -131,6 +144,7 @@ func rotate_toward_camera(delta: float, input_dir: Vector2) -> void:
 		_cancel_turn()
 	_update_turn(delta)               # always, so an active turn finishes even if aiming is released
 	if is_aiming:
+		# proceudural aiming for arm
 		aim_correction.desired_dir_world = aim_trajectory.arm_direction()
 		if not moving:
 			var err := absf(angle_difference(character.rotation.y, cam_yaw))
@@ -261,3 +275,16 @@ func _update_turn(delta: float) -> void:
 	character.rotation.y = _turn_from + _turn_delta * k
 	if _turn_t >= _turn_dur:
 		_finish_turn()
+
+func _update_swim_blend(delta: float) -> void:
+	var target := 1.0 if player.in_water else 0.0
+	var cur: float = tree.get(swim_blend_pos)
+	tree.set(swim_blend_pos, lerpf(cur, target, delta * swim_blend_tweak))
+
+func _update_swim_states() -> void:
+	var speed := Vector2(player.velocity.x, player.velocity.z).length()
+	if swim_moving:
+		if speed < swim_stop_speed:
+			swim_moving = false
+	elif speed > swim_start_speed:
+		swim_moving = true
