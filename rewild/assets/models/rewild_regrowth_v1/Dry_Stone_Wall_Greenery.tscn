@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_v1/growing_greenery.gd" id="1_irwci"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Dry_Stone_Wall_Greenery.glb" id="2_u63nw"]
+
+[node name="Dry_Stone_Wall_Greenery" type="Node3D" unique_id=55038881]
+script = ExtResource("1_irwci")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1144571156 instance=ExtResource("2_u63nw")]

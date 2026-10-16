@@ -1,13 +1,16 @@
 extends Node
-## Throw the little Leon statue into the lake and the giant Leon rises out of the sea:
-## the ground rumbles, the camera and controller shake, then the giant slowly climbs up
-## to where it's placed in the editor. Until then it waits `rise_depth` below.
+## Once the pump has filled the lake, throw the little Leon statue into it and the giant
+## Leon rises out of the sea: the ground rumbles, the camera and controller shake, then
+## the giant slowly climbs up to where it's placed in the editor. Until then it waits
+## hidden below the sea.
 
 ## The little Leon LIRA carries and throws.
 @export var statue: Node3D
-## The lake to throw it into.
-@export var lake: ThrowTarget
+## The water to throw it into.
+@export var lake: MeshInstance3D
 @export var giant: Node3D
+## Only works once this is on (e.g. the pumphouse's WaterFlowSwitch that fills the lake).
+@export var requires: Node
 ## The sea it rises out of: it waits with its top this far below the surface.
 @export var sea: Node3D
 @export var hidden_margin := 5.0
@@ -53,13 +56,16 @@ func _ready() -> void:
 		throwable = Throwable.new()
 		throwable.name = "StatueThrowable"
 		throwable.prop = statue
-		throwable.target = lake
+		throwable.target_water = lake
 		add_child(throwable)
 		throwable.landed.connect(_on_statue_landed)
 
 
 func _on_statue_landed(in_target: bool) -> void:
 	if not in_target or awakened:
+		return
+	if requires and not requires.get(&"is_on"):
+		throwable.in_target = false  # no water yet: it can be picked up again
 		return
 	awakened = true
 	# The statue sinks out of sight.

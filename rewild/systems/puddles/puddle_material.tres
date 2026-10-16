@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3]
+
+[ext_resource type="Shader" path="res://shaders/water/water_surface.gdshader" id="1_water"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_water")
+shader_parameter/shallow_color = Color(0.45, 0.9, 0.93, 1)
+shader_parameter/deep_color = Color(0.06, 0.36, 0.72, 1)
+shader_parameter/sky_tint = Color(0.8, 0.9, 1, 1)
+shader_parameter/color_depth = 0.5
+shader_parameter/murkiness = 0.45
+shader_parameter/refraction = 0.015
+shader_parameter/ripple_scale = 1.5
+shader_parameter/ripple_strength = 0.1
+shader_parameter/wave_height = 0.0
+shader_parameter/foam_width = 0.05
+shader_parameter/caustic_strength = 0.9
+shader_parameter/caustic_scale = 2.0
+shader_parameter/sparkle_strength = 1.2
+shader_parameter/sparkle_threshold = 0.6
+shader_parameter/use_height_field = true

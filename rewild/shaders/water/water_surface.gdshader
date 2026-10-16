@@ -71,6 +71,25 @@ uniform float blob_density : hint_range(0.0, 3.0) = 1.2;   // how quickly the co
 uniform float blob_clarity : hint_range(0.0, 1.0) = 0.25;  // how much of the scene shows through
 uniform float blob_foam : hint_range(0.0, 1.0) = 0.6;      // rim foam strength (0 = none)
 
+// Puddles (systems/puddles/puddle.gd): a grid mesh whose vertices are lifted to a
+// simulated water surface over the terrain. Dry vertices drop below the ground, so
+// the shoreline is where the surface meets the terrain. No waves in this mode.
+group_uniforms puddle;
+uniform bool use_height_field = false;
+uniform sampler2D ground_map : filter_nearest, repeat_disable;  // terrain height per cell (RF)
+uniform sampler2D depth_map : filter_nearest, repeat_disable;   // water depth per cell (RF)
+uniform float half_extent = 11.0;   // set by puddle.gd
+uniform float cell_size = 0.35;     // set by puddle.gd
+uniform float puddle_lift = 0.01;   // keeps thin films above the terrain
+uniform float puddle_edge = 0.006;  // films thinner than this fade out
+varying float puddle_water;
+
+float puddle_surface(ivec2 c) {
+	c = clamp(c, ivec2(0), textureSize(depth_map, 0) - 1);
+	float d = texelFetch(depth_map, c, 0).r;
+	return texelFetch(ground_map, c, 0).r + (d > 0.0005 ? d + puddle_lift : -0.08);
+}
+
 // --- sin-free hashes (no precision loss at large coordinates) ---
 vec3 hash33(vec3 p3) {
 	p3 = fract(p3 * vec3(0.1031, 0.1030, 0.0973));
@@ -156,38 +175,53 @@ vec3 view_from_depth(vec2 uv, float raw, mat4 inv_proj) {
 }
 
 void vertex() {
-	vec3 lp = VERTEX * local_noise_scale;                  // local-space coordinates, before any displacement
-	vec3 wp0 = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	noise_pos = use_local_coords ? lp : wp0;
-	vec3 fd = use_local_coords ? flow_direction : mat3(MODEL_MATRIX) * flow_direction;
-	flow_dir = length(fd) > 0.0001 ? normalize(fd) : vec3(0.0, 0.0, 1.0);
-	float t = (TIME + time_offset) * wave_speed;
-
-	if (use_local_coords) {
-		// Displace along the surface normal; the wave moves with the mesh.
-		float e = 0.05;
-		float h = wave3(lp, t);
-		vec3 g = vec3(wave3(lp + vec3(e, 0.0, 0.0), t) - h,
-			wave3(lp + vec3(0.0, e, 0.0), t) - h,
-			wave3(lp + vec3(0.0, 0.0, e), t) - h) / e;       // slope in local space
-		vec3 n = normalize(NORMAL);
-		vec3 gt = g - dot(g, n) * n;                         // only the part along the surface tilts the normal
-		VERTEX += n * h * wave_height;
-		NORMAL = normalize(n - gt * wave_height * local_noise_scale);
+	puddle_water = 1.0;
+	if (use_height_field) {
+		ivec2 c = ivec2(round((VERTEX.xz + half_extent) / cell_size));
+		puddle_water = texelFetch(depth_map, c, 0).r;
+		VERTEX.y = puddle_surface(c);
+		float dx = puddle_surface(c + ivec2(1, 0)) - puddle_surface(c - ivec2(1, 0));
+		float dz = puddle_surface(c + ivec2(0, 1)) - puddle_surface(c - ivec2(0, 1));
+		NORMAL = puddle_water > 0.0005 ? normalize(vec3(-dx, 2.0 * cell_size, -dz)) : vec3(0.0, 1.0, 0.0);
 		world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+		noise_pos = world_pos;
+		flow_dir = vec3(0.0, 0.0, 1.0);
 	} else {
-		float e = 0.1;
-		float h = wave(wp0.xz, t);
-		float hx = wave(wp0.xz + vec2(e, 0.0), t) - h;
-		float hz = wave(wp0.xz + vec2(0.0, e), t) - h;
-		VERTEX.y += h * wave_height;
-		NORMAL = normalize(vec3(-hx * wave_height / e, 1.0, -hz * wave_height / e));
-		world_pos = wp0;
-		world_pos.y += h * wave_height;
+		vec3 lp = VERTEX * local_noise_scale;                  // local-space coordinates, before any displacement
+		vec3 wp0 = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+		noise_pos = use_local_coords ? lp : wp0;
+		vec3 fd = use_local_coords ? flow_direction : mat3(MODEL_MATRIX) * flow_direction;
+		flow_dir = length(fd) > 0.0001 ? normalize(fd) : vec3(0.0, 0.0, 1.0);
+		float t = (TIME + time_offset) * wave_speed;
+
+		if (use_local_coords) {
+			// Displace along the surface normal; the wave moves with the mesh.
+			float e = 0.05;
+			float h = wave3(lp, t);
+			vec3 g = vec3(wave3(lp + vec3(e, 0.0, 0.0), t) - h,
+				wave3(lp + vec3(0.0, e, 0.0), t) - h,
+				wave3(lp + vec3(0.0, 0.0, e), t) - h) / e;       // slope in local space
+			vec3 n = normalize(NORMAL);
+			vec3 gt = g - dot(g, n) * n;                         // only the part along the surface tilts the normal
+			VERTEX += n * h * wave_height;
+			NORMAL = normalize(n - gt * wave_height * local_noise_scale);
+			world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+		} else {
+			float e = 0.1;
+			float h = wave(wp0.xz, t);
+			float hx = wave(wp0.xz + vec2(e, 0.0), t) - h;
+			float hz = wave(wp0.xz + vec2(0.0, e), t) - h;
+			VERTEX.y += h * wave_height;
+			NORMAL = normalize(vec3(-hx * wave_height / e, 1.0, -hz * wave_height / e));
+			world_pos = wp0;
+			world_pos.y += h * wave_height;
+		}
 	}
 }
 
 void fragment() {
+	if (use_height_field && puddle_water < puddle_edge * 0.25)
+		discard;
 	vec4 cuts[4] = vec4[4](cutout_0, cutout_1, cutout_2, cutout_3);
 	for (int i = 0; i < 4; i++) {
 		if (cuts[i].z > 0.0 && all(lessThan(abs(world_pos.xz - cuts[i].xy), cuts[i].zw))
@@ -284,5 +318,5 @@ void fragment() {
 		ROUGHNESS = 1.0;
 		SPECULAR = 0.0;
 	}
-	ALPHA = 1.0;
+	ALPHA = use_height_field ? smoothstep(puddle_edge * 0.25, puddle_edge, puddle_water) : 1.0;
 }

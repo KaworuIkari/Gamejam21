@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_v1/growing_greenery.gd" id="1_llejf"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Abandoned_Handcart_Greenery.glb" id="2_y5bff"]
+
+[node name="Abandoned_Handcart_Greenery" type="Node3D" unique_id=315070748]
+script = ExtResource("1_llejf")
+
+[node name="Visual" type="Node3D" parent="." unique_id=292123037 instance=ExtResource("2_y5bff")]

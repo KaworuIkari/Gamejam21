@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_v1/growing_greenery.gd" id="1_wawsj"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Trail_Sign_Greenery.glb" id="2_xd27b"]
+
+[node name="Trail_Sign_Greenery" type="Node3D" unique_id=1634180441]
+script = ExtResource("1_wawsj")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1823762107 instance=ExtResource("2_xd27b")]

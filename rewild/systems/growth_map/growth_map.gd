@@ -60,7 +60,7 @@ var wet_texture: ImageTexture
 ## Green this close (metres) in front of a patch edge pulls the edge towards it.
 @export var attract_distance := 16.0
 ## Share of spread_speed an edge keeps with no green in range (0 = lone patches stay put).
-@export_range(0.0, 1.0) var lone_spread := 1.0
+@export_range(0.0, 1.0) var lone_spread := 0.2
 ## Speed by growth phase: x = how green the patch is at the edge (0..1), y = speed
 ## multiplier. Default: sprouting patches barely creep, full meadow spreads at full speed.
 @export var spread_by_growth: Curve

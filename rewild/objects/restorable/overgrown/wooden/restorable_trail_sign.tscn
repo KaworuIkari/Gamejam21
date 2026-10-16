@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Trail_Sign_Barren.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Trail_Sign_Greenery.tscn" id="2_green"]
+
+[node name="RestorableTrailSign" instance=ExtResource("1_base")]
+
+[node name="Greenery" parent="." instance=ExtResource("2_green")]

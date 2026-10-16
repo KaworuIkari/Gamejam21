@@ -3,11 +3,11 @@ class_name Throwable extends Node
 ## anywhere and point `prop` at the prop's root. Press interact nearby to grab it: it shrinks to `held_size` and sits
 ## in LIRA's right hand. Press interact again to throw it where the camera looks.
 ## Collision bodies under the prop are switched off while it's carried or flying.
-## If it comes down in `target` (a ThrowTarget) `landed` says so.
+## If it comes down in `target_water` while there's water in it, `landed` says so.
 
 signal picked_up
 signal thrown
-## in_target: it came down in `target`.
+## in_target: it came down in target_water.
 signal landed(in_target: bool)
 
 ## The Node3D that gets carried and thrown.
@@ -20,8 +20,8 @@ signal landed(in_target: bool)
 ## Extra upward lift on top of the camera direction (0 = straight along the view).
 @export var throw_lift := 0.45
 @export var gravity := 14.0
-## Where it's meant to be thrown (e.g. the lake).
-@export var target: ThrowTarget
+## The water it's meant to be thrown into (a StylizedWater, e.g. the frog lake).
+@export var target_water: MeshInstance3D
 @export var pickup_key := "THROW_PICKUP_PROMPT"
 @export var throw_key := "THROW_THROW_PROMPT"
 @export var player_group: StringName = &"player"
@@ -32,7 +32,7 @@ const HAND_PATH := ^"Robot/root/Skeleton3D/hand_r"
 enum State { RESTING, HELD, FLYING }
 
 var state := State.RESTING
-## Set when it has come down in `target`; it can't be picked up again then.
+## Set when it has come down in target_water; it can't be picked up again then.
 var in_target := false
 
 var _player: Node3D
@@ -41,6 +41,7 @@ var _bodies: Array[Node] = []
 var _center := Vector3.ZERO  # middle of the meshes, in the prop's unscaled local space
 var _scale := 1.0
 var _velocity := Vector3.ZERO
+var _terrain: Terrain3D
 var _home: Transform3D  # where it rested at start; it goes back there if thrown into the void
 var _throw_y := 0.0
 
@@ -85,15 +86,22 @@ func _physics_process(delta: float) -> void:
 		_prompt.configure(&"interact", pickup_key)
 		landed.emit(false)
 		return
-	if target and target.contains(to):  # reached the water surface
+	if _in_water(to):
 		_land(to, true)
 		return
-	var query := PhysicsRayQueryParameters3D.create(from, to)
+	# Start the ray a little above: skimming a slope, a ray from right at the surface can
+	# slip under it, and from underground it never hits anything again.
+	var query := PhysicsRayQueryParameters3D.create(from + Vector3.UP * 0.5, to)
 	if _player is CollisionObject3D:
 		query.exclude = [(_player as CollisionObject3D).get_rid()]
 	var hit := prop.get_world_3d().direct_space_state.intersect_ray(query)
 	if hit:
-		_land(hit.position, target != null and target.contains(hit.position, 0.3))
+		_land(hit.position, _in_water(hit.position))
+		return
+	var ground := _ground_height(to)
+	if to.y < ground:  # still went under: put it on the surface
+		var on_ground := Vector3(to.x, ground, to.z)
+		_land(on_ground, _in_water(on_ground))
 		return
 	prop.global_position += to - from
 	prop.rotate_object_local(Vector3.RIGHT, delta * 4.0)  # tumble
@@ -154,6 +162,16 @@ func _follow_hand() -> void:
 	prop.global_position = hand.global_position + facing.z * 0.25 - facing * (_center * size) + Vector3(0, 0.1, 0)
 
 
+func _ground_height(point: Vector3) -> float:
+	if _terrain == null or not is_instance_valid(_terrain):
+		var found := get_tree().root.find_children("*", "Terrain3D", true, false)
+		if found.is_empty():
+			return -INF
+		_terrain = found[0]
+	var h: float = _terrain.data.get_height(point)
+	return -INF if is_nan(h) else h
+
+
 func _set_size(s: float) -> void:
 	prop.scale = Vector3.ONE * s
 
@@ -169,6 +187,28 @@ func _can_act() -> bool:
 		return false
 	var dialogic := get_node_or_null(^"/root/Dialogic")
 	return dialogic == null or dialogic.current_timeline == null
+
+
+## Came down in the water: inside its footprint and no higher than its surface right now
+## (a drained lake sits far below its bed, so landing on the dry bed doesn't count).
+func _in_water(point: Vector3) -> bool:
+	return target_water != null and _in_footprint(point) and point.y <= target_water.global_position.y + 0.3
+
+
+func _in_footprint(point: Vector3) -> bool:
+	# Water fitted to its basin knows its exact shape (white = water).
+	var img: Image = target_water.get(&"_basin_image")
+	if img:
+		var r: Vector4 = target_water.get(&"_basin_rect")
+		var u := (point.x - r.x + r.z) / (2.0 * r.z)
+		var v := (point.z - r.y + r.w) / (2.0 * r.w)
+		if u < 0.0 or u >= 1.0 or v < 0.0 or v >= 1.0:
+			return false
+		return img.get_pixel(int(u * img.get_width()), int(v * img.get_height())).r > 0.5
+	var plane := target_water.mesh as PlaneMesh
+	var half := plane.size * 0.5 if plane else Vector2(20, 20)
+	var p := target_water.to_local(point)
+	return absf(p.x) <= half.x and absf(p.z) <= half.y
 
 
 func _collect_bodies(node: Node) -> void:
