@@ -44,7 +44,7 @@ _subresources={
 "Leaves_Pine": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://assets/models/stylized_nature/Materials/leaves_pine.tres",
-"use_external/path": "res://assets/models/stylized_nature/Materials/leaves_pine.tres"
+"use_external/path": "uid://bi8kpwe70epd8"
 }
 }
 }
