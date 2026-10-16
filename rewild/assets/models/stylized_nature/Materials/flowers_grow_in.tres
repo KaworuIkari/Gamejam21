@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://systems/growth_map/grow_in_flower.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://b2demo6pu5vww" path="res://assets/models/stylized_nature/Textures/Flowers.png" id="2_albedo"]
+
+[resource]
+resource_name = "Flowers_GrowIn"
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/albedo_texture = ExtResource("2_albedo")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/map_origin = Vector2(-512, -512)
+shader_parameter/map_size = 1024.0
+shader_parameter/grow_start = 0.6
+shader_parameter/grow_full = 0.9
+shader_parameter/jitter = 0.08
+shader_parameter/wait_for_dry = true

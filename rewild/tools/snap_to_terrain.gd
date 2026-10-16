@@ -9,7 +9,7 @@
 extends EditorScript
 
 ## true: the model's lowest point touches the ground (works whatever the origin is).
-## false: the node's origin touches the ground.
+## false: the node's origin touches the ground. Clearables (litter) always use their origin.
 const USE_MODEL_BOTTOM := true
 ## Sink objects slightly so their edges don't float on slopes.
 const SINK := 0.05
@@ -34,7 +34,9 @@ func _run() -> void:
 		if is_nan(height):
 			push_warning("snap_to_terrain: %s is outside the terrain" % node.name)
 			continue
-		var bottom_offset := _bottom_offset(node) if USE_MODEL_BOTTOM else 0.0
+		# Litter piles have stray bits hanging below their base, so they sit by origin.
+		var by_bottom := USE_MODEL_BOTTOM and not node is Clearable
+		var bottom_offset := _bottom_offset(node) if by_bottom else 0.0
 		var target := Vector3(pos.x, height - bottom_offset - SINK, pos.z)
 		undo.add_do_property(node, "global_position", target)
 		undo.add_undo_property(node, "global_position", pos)

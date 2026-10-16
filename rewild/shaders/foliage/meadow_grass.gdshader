@@ -8,6 +8,11 @@ render_mode skip_vertex_transform, cull_disabled, blend_mix, depth_draw_always, 
 #include "res://shaders/common/meadow_palette.gdshaderinc"
 
 uniform vec2 wind_direction = vec2(1.0, 1.0);
+// BARREN: dead grass on the desert. Lower coverage = more clumps; density = share of
+// blades inside a clump; height = how tall they are compared with full meadow grass.
+uniform float dry_coverage : hint_range(0.0, 1.0) = 0.36;
+uniform float dry_density : hint_range(0.0, 1.0) = 0.6;
+uniform float dry_height : hint_range(0.0, 1.0) = 0.75;
 
 varying vec4 data;
 
@@ -40,11 +45,18 @@ void vertex() {
 	meadow_col = meadow_color(blade_xz) * (0.9 + 0.25 * m_hash(blade_xz * 7.31 + 1.3));
 	// Half-grown grass is still dry and yellow.
 	meadow_col = mix(srgb(vec3(0.72, 0.70, 0.30)), meadow_col, smoothstep(0.3, 0.9, g));
+	// BARREN: sparse clumps of dead, straw-coloured grass survive on the desert.
+	// They are the same blades, so they green up and grow tall when the ground revives.
+	float clumps = smoothstep(dry_coverage, dry_coverage + 0.18, m_fbm(blade_xz * 0.11 + 31.0));
+	float dry = clumps * step(1.0 - dry_density, m_hash(blade_xz * 3.17 + 8.1));
+	vec3 straw = mix(srgb(vec3(0.62, 0.50, 0.30)), srgb(vec3(0.84, 0.74, 0.48)), m_hash(blade_xz * 5.3));
+	meadow_col = mix(straw, meadow_col, smoothstep(0.0, 0.35, g));
 	// Taller, lusher tufts in patches (the base of the ribbon sits at y = -0.55).
 	VERTEX.y = (VERTEX.y + 0.55) * (0.7 + 0.6 * m_fbm(blade_xz * 0.08)) - 0.55;
-	// GROWTH: no grass on desert; blades rise out of the ground as it greens.
-	VERTEX.y = (VERTEX.y + 0.55) * g - 0.55;
-	VERTEX.xz *= step(0.02, g); // fully barren: collapse the blade so nothing is drawn
+	// GROWTH: blades rise out of the ground as it greens; dry tufts stay short.
+	float height = max(g, dry * dry_height * (0.6 + 0.6 * m_hash(blade_xz * 9.7)));
+	VERTEX.y = (VERTEX.y + 0.55) * height - 0.55;
+	VERTEX.xz *= step(0.02, height); // bare ground: collapse the blade so nothing is drawn
 
 	// World space vertex
 	vec3 w_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
