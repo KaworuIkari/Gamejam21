@@ -15,7 +15,7 @@ enum CameraMode {
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var camera_3d: Camera3D = %Camera3D
 @onready var spring_arm: SpringArm3D = camera_pivot.get_node("SpringArm3D")
-@onready var character: Node3D
+@onready var character: Node3D = $character
 
 ## Movement Settings
 ## -----------------------------------------------------------------------------
