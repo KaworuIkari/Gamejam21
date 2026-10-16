@@ -900,89 +900,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.277954, 30.500086, 2.56288
 [node name="RadioObservatory" parent="." unique_id=697393943 instance=ExtResource("56_chsj8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 103.910645, 32.614014, 58.277084)
 
-[node name="Access_Ladder" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="0" unique_id=981915188]
-transform = Transform3D(-0.3500188, 0, -0.93674266, 0, 1, 0, 0.93674266, 0, -0.3500188, 17.863281, -3.0712185, 57.06729)
-
-[node name="Auxiliary_Cabinet" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="1" unique_id=654825051]
-transform = Transform3D(-0.32274747, 0, -0.94648504, 0, 1, 0, 0.94648504, 0, -0.32274747, 13.556824, -2.3320942, 55.494125)
-
-[node name="Base_Plates" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="2" unique_id=677679583]
-transform = Transform3D(0.35001895, 0, 0.9367426, 0, 1, 0, -0.9367426, 0, 0.35001895, 17.863281, -3.0712185, 57.06729)
-
-[node name="Base_Wear" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="3" unique_id=1757725827]
-transform = Transform3D(0.35001895, 0, 0.9367426, 0, 1, 0, -0.9367426, 0, 0.35001895, 17.863281, -3.0712185, 57.06729)
-
-[node name="Bollards" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="4" unique_id=943396370]
-transform = Transform3D(0.35001895, 0, 0.9367426, 0, 1, 0, -0.9367426, 0, 0.35001895, 17.863281, -3.0712185, 57.06729)
-
-[node name="Center_Instrument" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="5" unique_id=352856774]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Cross_Braces" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="6" unique_id=1333354626]
-transform = Transform3D(-0.27689365, -0.0745814, -0.95800185, -0.106920704, 0.9931835, -0.046416763, 0.9549334, 0.089577734, -0.28298044, 17.863281, -3.0712185, 57.06729)
-
-[node name="Elevation_Bearings" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="7" unique_id=2134256250]
-transform = Transform3D(-0.9367426, 0.35001895, 0, 0, 0, -1, -0.35001895, -0.9367426, 0, 17.863281, -3.0712185, 57.06729)
-
-[node name="Feed_Footings" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="8" unique_id=643317058]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Feed_Supports" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="9" unique_id=1809146732]
-transform = Transform3D(0.35531086, 0.79228795, -0.49601832, -0.008094002, -0.5280161, -0.8491959, -0.9347133, 0.3057433, -0.18119708, 17.863281, -3.0712147, 57.06729)
-
-[node name="Foundations" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="10" unique_id=487867245]
-transform = Transform3D(0.35001895, 0, 0.9367426, 0, 1, 0, -0.9367426, 0, 0.35001895, 17.863281, -3.0712185, 57.06729)
-
-[node name="Panel_Joint_Markings" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="11" unique_id=416542142]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Radial_Trusses" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="12" unique_id=1742479683]
-transform = Transform3D(-0.5372934, 0.41557282, -0.7339039, 0.81915206, 0.049996626, -0.57139325, -0.20076282, -0.9081847, -0.3672802, 17.863281, -3.0712185, 57.06729)
-
-[node name="Rear_Hoops" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="13" unique_id=771196517]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Rear_Hub" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="14" unique_id=1534044791]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Receiver" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="15" unique_id=1640756993]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Reflector_Continuous" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="16" unique_id=1600721960]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Reflector_Mounts" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="17" unique_id=1314354841]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Reflector_Rim" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="18" unique_id=6137330]
-transform = Transform3D(0.35001895, 0.7673348, 0.53729326, 0, 0.5735762, -0.81915224, -0.9367426, 0.28671882, 0.20076254, 17.863281, -3.0712185, 57.06729)
-
-[node name="Service_Platform" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="19" unique_id=1477896392]
-transform = Transform3D(0.35001895, 0, 0.9367426, 0, 1, 0, -0.9367426, 0, 0.35001895, 17.863281, -3.0712185, 57.06729)
-
-[node name="Service_Pod" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="20" unique_id=1303531761]
-transform = Transform3D(-0.33356246, 0, -0.94272804, 0, 1, 0, 0.94272804, 0, -0.33356246, 16.00306, -2.3680954, 56.31611)
-
-[node name="Service_Railings" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="21" unique_id=820001062]
-transform = Transform3D(-0.3500188, 0, -0.93674266, 0, 1, 0, 0.93674266, 0, -0.3500188, 17.863281, -3.0712185, 57.06729)
-
-[node name="Tower_Bracing" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="22" unique_id=1028523790]
-transform = Transform3D(-0.9367426, 0.35001895, 0, 0, 0, -1, -0.35001895, -0.9367426, 0, 17.863281, -3.0712185, 57.06729)
-
-[node name="Tower_Legs" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="23" unique_id=1033403899]
-transform = Transform3D(-0.8147805, -0.17610271, -0.5523772, -1.0009362e-08, 0.9527532, -0.30374599, 0.57976955, -0.24748632, -0.7762846, 17.863281, -3.0712185, 57.06729)
-
-[node name="Yoke" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="24" unique_id=1711748358]
-transform = Transform3D(0.9367426, -0.35001895, 0, 0, 0, -1, 0.35001895, 0.9367426, 0, 17.863281, -3.0712185, 57.06729)
-
-[node name="FantasyForest" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="25" unique_id=322730228 instance=ExtResource("58_xk220")]
-transform = Transform3D(0.41658813, 0, 0.90909535, 0, 1, 0, -0.90909535, 0, 0.41658813, -254.20653, -2.4008236, 29.231758)
-
-[node name="FantasyForestArch" parent="RadioObservatory/Model" parent_id_path=PackedInt32Array(697393943, 1221102328) index="26" unique_id=652589415 instance=ExtResource("59_0tkcr")]
-transform = Transform3D(0.09116908, -0.21479471, 0.9723947, 0.02005063, 0.9766592, 0.21385677, -0.99563354, 0, 0.0933479, -136.81456, -17.676014, 17.262703)
-
 [node name="IslandHarbor" parent="." unique_id=1277843673 instance=ExtResource("Harbor_20261015")]
 transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -212, 30.7, -12)
+
+[node name="FantasyForest" parent="." unique_id=322730228 instance=ExtResource("58_xk220")]
+transform = Transform3D(0.41658813, 0, 0.90909535, 0, 1, 0, -0.90909535, 0, 0.41658813, -150.29588, 30.21319, 87.50884)
+
+[node name="FantasyForestArch" parent="." unique_id=652589415 instance=ExtResource("59_0tkcr")]
+transform = Transform3D(0.09116908, -0.21479471, 0.9723947, 0.02005063, 0.9766592, 0.21385677, -0.99563354, 0, 0.0933479, -32.903915, 14.938, 75.53979)
 
 [node name="Fox" parent="." unique_id=1518329467 instance=ExtResource("60_ta6ao")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9676, 35.125984, -84.41997)
@@ -993,4 +918,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9676, 35.125984, -84.41997)
 [editable path="Water/StylizedWater2"]
 [editable path="Water/CrashsiteOutpostV2"]
 [editable path="Leon2"]
-[editable path="RadioObservatory"]
