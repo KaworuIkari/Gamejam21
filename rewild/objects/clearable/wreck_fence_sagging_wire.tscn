@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/world_objects/clearable.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_wreck_v1/Fence_Sagging_Wire.tscn" id="2"]
+
+[node name="Wreck_Fence_Sagging_Wire" type="Node3D"]
+script = ExtResource("1")
+tags = Array[StringName]([&"garbage"])
+radius = 3.0
+bloom_radius = 5.0
+
+[node name="Fence_Sagging_Wire" parent="." instance=ExtResource("2")]

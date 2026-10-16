@@ -60,15 +60,46 @@ uniform float growth_size = 1024.0;        // must match GrowthMap.MAP_SIZE
 // 0 = dry, 1 = soaked (GrowthMap.wet_texture). Black by default: nothing is wet.
 uniform sampler2D wet_map : hint_default_black, filter_linear, repeat_disable;
 
+// Dried-mud cracks: 1 on the thin lines between irregular plates, 0 inside them.
+float mud_cracks(vec2 p) {
+	vec2 i = floor(p);
+	vec2 f = fract(p);
+	float d1 = 8.0;
+	float d2 = 8.0;
+	for (int y = -1; y <= 1; y++) {
+		for (int x = -1; x <= 1; x++) {
+			vec2 o = vec2(float(x), float(y));
+			float d = length(o + m_hash2(i + o) * 0.8 + 0.1 - f);
+			d2 = d < d1 ? d1 : min(d2, d);
+			d1 = min(d1, d);
+		}
+	}
+	float px = length(fwidth(p));
+	// Fade the lines out once they're thinner than a pixel, so far ground doesn't shimmer.
+	return (1.0 - smoothstep(0.04, 0.04 + px * 1.5, d2 - d1)) * (1.0 - smoothstep(0.08, 0.25, px));
+}
+
+// Dry, worn-out land: dusty ochre with clay patches, straw-coloured scrub patches,
+// cracked mud in the low dark areas and scattered grit, instead of one flat sand.
 vec3 desert_color(vec2 wp) {
 	float big = m_fbm(wp * 0.015 + 7.0);
-	// Wind-streaked dunes: stretch the noise along one axis.
+	float mid = m_fbm(wp * 0.06 + 23.0);
+	// Wind-streaked drifts: stretch the noise along one axis.
 	float streak = m_fbm(vec2(wp.x * 0.02, wp.y * 0.12) + 19.0);
-	vec3 dark = srgb(vec3(0.66, 0.47, 0.25));
-	vec3 base = srgb(vec3(0.80, 0.61, 0.34));
-	vec3 pale = srgb(vec3(0.90, 0.76, 0.50));
-	vec3 c = mix(dark, base, smoothstep(0.30, 0.55, big));
-	return mix(c, pale, smoothstep(0.55, 0.75, streak) * 0.8);
+	vec3 clay = srgb(vec3(0.62, 0.42, 0.27));  // reddish packed earth
+	vec3 base = srgb(vec3(0.76, 0.61, 0.40));  // dusty ochre
+	vec3 pale = srgb(vec3(0.86, 0.76, 0.56));  // bleached drifts
+	vec3 straw = srgb(vec3(0.72, 0.66, 0.40)); // ground under dead scrub
+	vec3 c = mix(clay, base, smoothstep(0.30, 0.55, big + (mid - 0.5) * 0.3));
+	c = mix(c, straw, smoothstep(0.55, 0.72, m_fbm(wp * 0.03 + 61.0)) * 0.7);
+	c = mix(c, pale, smoothstep(0.58, 0.78, streak) * 0.6);
+	// Cracked mud where the ground is darkest (old puddles).
+	float mud = smoothstep(0.45, 0.30, big + (mid - 0.5) * 0.4);
+	c *= 1.0 - mud_cracks(wp * 0.7) * mud * 0.45;
+	// Grit: small darker and lighter speckles.
+	float g = m_noise(wp * 6.3);
+	c *= 1.0 - smoothstep(0.82, 0.92, g) * 0.08 + smoothstep(0.16, 0.06, g) * 0.05;
+	return c * (0.94 + 0.12 * m_noise(wp * 0.35));
 }
 
 float growth_raw(vec2 wp) {
