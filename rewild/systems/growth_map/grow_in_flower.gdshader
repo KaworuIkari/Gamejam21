@@ -23,7 +23,10 @@ uniform float grow_full : hint_range(0.0, 1.0) = 0.9;
 // Per-prop random shift of those thresholds, so neighbours don't pop in sync.
 uniform float jitter : hint_range(0.0, 0.5) = 0.08;
 // Stay closed while the watered ground is still wet (like the particle flowers).
-uniform bool wait_for_dry = true;
+// Off by default: wetness has no memory, so re-watering green ground would close
+// props that had already opened until it dried again. Growth itself never goes down,
+// so with this off a prop that has opened stays open.
+uniform bool wait_for_dry = false;
 
 
 float hash(vec3 p) {

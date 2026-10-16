@@ -10,6 +10,8 @@ extends Node
 signal changed
 ## Emitted for every watering, so tasks and zones can count it.
 signal watered(world_pos: Vector3, radius: float)
+## Emitted when the restoration percentages (progress_total, progress_regions()) change.
+signal progress_changed
 
 const MAP_ORIGIN := Vector2(-512.0, -512.0)  # world XZ of the crater's corner
 const MAP_SIZE := 1024.0               # crater size in world metres (not mask pixels)
@@ -58,7 +60,7 @@ var wet_texture: ImageTexture
 ## Green this close (metres) in front of a patch edge pulls the edge towards it.
 @export var attract_distance := 16.0
 ## Share of spread_speed an edge keeps with no green in range (0 = lone patches stay put).
-@export_range(0.0, 1.0) var lone_spread := 0.0
+@export_range(0.0, 1.0) var lone_spread := 1.0
 ## Speed by growth phase: x = how green the patch is at the edge (0..1), y = speed
 ## multiplier. Default: sprouting patches barely creep, full meadow spreads at full speed.
 @export var spread_by_growth: Curve
@@ -99,6 +101,23 @@ var _p_reach := PackedInt32Array()
 var _p_lone := PackedFloat32Array()
 var _p_lut: Array[PackedFloat32Array] = []
 var _lut_cache := {}                   # Curve -> PackedFloat32Array
+
+@export_group("Restoration progress")
+## Ground below this terrain height (sea, lake beds) doesn't count towards the percentages.
+@export var land_min_height := 20.0
+## Seconds between measurements while the ground is changing.
+@export var progress_interval := 1.0
+
+## Share of all land that is green, 0..1.
+var progress_total := 0.0
+var _progress_regions: Array[Node] = []      # GrowthRegion, in scene order
+var _progress_values := PackedFloat32Array() # per region, 0..1
+var _land := PackedByteArray()               # 1 = land (counts), filled by attach_terrain
+var _count_idx := PackedInt32Array()         # sampled land pixels that count
+var _count_region := PackedByteArray()       # per sample: 0 = no region, k = _progress_regions[k - 1]
+var _progress_layout_dirty := true
+var _progress_dirty := true
+var _progress_timer := 0.0
 
 
 func _ready() -> void:
@@ -147,6 +166,11 @@ func _process(delta: float) -> void:
 		image.set_data(RES, RES, false, Image.FORMAT_R8, _data)
 		texture.update(image)
 		changed.emit()
+		_progress_dirty = true
+	_progress_timer += delta
+	if (_progress_dirty or _progress_layout_dirty) and _progress_timer >= progress_interval:
+		_progress_timer = 0.0
+		_measure_progress()
 
 
 func attach_terrain(terrain: Terrain3D) -> void:
@@ -154,6 +178,7 @@ func attach_terrain(terrain: Terrain3D) -> void:
 	terrain.material.set_shader_param("wet_map", wet_texture)
 	if always_green_slot >= 0:
 		seed_from_terrain(terrain, always_green_slot)
+	_build_land(terrain)
 	_wake_all()
 
 
@@ -819,6 +844,119 @@ func coverage(world_pos: Vector3, radius: float, step: int = 2) -> float:
 			total += 1
 			sum += _data[i]
 	return float(sum) / (total * 255.0) if total > 0 else 1.0
+
+
+# --- Restoration progress -----------------------------------------------------
+# Every second pixel on both axes is sampled (4 m apart): about a tenth of a
+# millisecond per thousand land samples, measured at most once per progress_interval.
+
+## Called by GrowthRegion when it is added, removed, moved or resized.
+func add_progress_region(region: Node) -> void:
+	if not _progress_regions.has(region):
+		_progress_regions.append(region)
+	update_progress_regions()
+
+
+func remove_progress_region(region: Node) -> void:
+	_progress_regions.erase(region)
+	update_progress_regions()
+
+
+func update_progress_regions() -> void:
+	_progress_layout_dirty = true
+	_progress_timer = progress_interval  # measure on the next frame
+
+
+## [{id, title, value}] per GrowthRegion in scene order; value is 0..1.
+func progress_regions() -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for k in _progress_regions.size():
+		var r = _progress_regions[k]
+		if is_instance_valid(r) and k < _progress_values.size():
+			out.append({"id": r.region_id, "title": r.title, "value": _progress_values[k]})
+	return out
+
+
+## 0..1 for one region (by GrowthRegion.region_id), -1 if there is no such region.
+func region_progress(id: StringName) -> float:
+	for d in progress_regions():
+		if d.id == id:
+			return d.value
+	return -1.0
+
+
+func _build_land(terrain: Terrain3D) -> void:
+	var data := terrain.data
+	if data == null:
+		return
+	_land.resize(RES * RES)
+	_land.fill(0)
+	for y in range(0, RES, 2):
+		for x in range(0, RES, 2):
+			var wp := Vector3(MAP_ORIGIN.x + (x + 0.5) * PIXEL_M, 0.0, MAP_ORIGIN.y + (y + 0.5) * PIXEL_M)
+			if not data.has_regionp(wp):
+				continue
+			var h := data.get_height(wp)
+			if not is_nan(h) and h >= land_min_height:
+				_land[y * RES + x] = 1
+	_progress_layout_dirty = true
+
+
+func _build_progress_layout() -> void:
+	_progress_layout_dirty = false
+	_progress_regions = _progress_regions.filter(func(r): return is_instance_valid(r))
+	var region_of := PackedByteArray()
+	region_of.resize(RES * RES)
+	# Big to small, so the smaller region wins where two overlap.
+	var order := _progress_regions.duplicate()
+	order.sort_custom(func(a, b): return a.radius > b.radius)
+	for region in order:
+		var k := _progress_regions.find(region) + 1
+		var c := world_to_px(region.global_position)
+		var r: float = region.radius / PIXEL_M
+		for y in range(maxi(int(c.y - r - 1.0), 0), mini(int(c.y + r + 1.0), RES - 1) + 1):
+			for x in range(maxi(int(c.x - r - 1.0), 0), mini(int(c.x + r + 1.0), RES - 1) + 1):
+				if Vector2(x + 0.5, y + 0.5).distance_to(c) < r:
+					region_of[y * RES + x] = k
+	var has_land := _land.size() == RES * RES
+	var has_soil := soil.size() == RES * RES
+	_count_idx.clear()
+	_count_region.clear()
+	for y in range(0, RES, 2):
+		for x in range(0, RES, 2):
+			var i := y * RES + x
+			if (has_land and _land[i] == 0) or (has_soil and soil[i] == 0):
+				continue
+			_count_idx.append(i)
+			_count_region.append(region_of[i])
+
+
+func _measure_progress() -> void:
+	if _progress_layout_dirty:
+		_build_progress_layout()
+	_progress_dirty = false
+	var n := _progress_regions.size() + 1
+	var sums := PackedInt64Array()
+	var counts := PackedInt64Array()
+	sums.resize(n)
+	counts.resize(n)
+	var total := 0
+	for k in _count_idx.size():
+		var g := _data[_count_idx[k]]
+		var r := _count_region[k]
+		sums[r] += g
+		counts[r] += 1
+		total += g
+	var values := PackedFloat32Array()
+	values.resize(n - 1)
+	for k in range(1, n):
+		values[k - 1] = float(sums[k]) / (counts[k] * 255.0) if counts[k] > 0 else 0.0
+	var t := float(total) / (_count_idx.size() * 255.0) if not _count_idx.is_empty() else 0.0
+	if values == _progress_values and is_equal_approx(t, progress_total):
+		return
+	_progress_values = values
+	progress_total = t
+	progress_changed.emit()
 
 
 # --- Helpers -------------------------------------------------------------------

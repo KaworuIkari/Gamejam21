@@ -1,12 +1,16 @@
 extends CanvasLayer
 ## Owns the HUD entry and Tab routing. PauseMenu owns pause and mouse state.
-## Also shows the tracked quest (top left) and quest / unlock notices (top centre).
+## Also shows the tracked quest and the restoration percentages (top left) and
+## quest / unlock notices (top centre).
 const ACTION := &"task_terminal"
 const TaskPage = preload("res://ui/in_game/tasks/task_page.gd")
 var _pause_menu: CanvasLayer
 var _tracker: VBoxContainer
 var _tracker_title: Label
 var _tracker_step: Label
+var _restore: VBoxContainer
+var _restore_total: Label
+var _restore_regions: Label
 var _toast: Label
 var _toast_queue: Array[String] = []
 var _toast_tween: Tween
@@ -28,6 +32,7 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_refresh_binding()
+		_refresh_restoration()
 
 func _process(_delta: float) -> void:
 	_hud.visible = not get_tree().paused and not _dialogue_active() and not SceneRouter.is_busy()
@@ -45,14 +50,19 @@ func _input(event: InputEvent) -> void:
 # --- Quest HUD ------------------------------------------------------------------------
 
 func _build_quest_hud() -> void:
+	var column := VBoxContainer.new()
+	column.position = Vector2(32, 32)
+	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	column.add_theme_constant_override(&"separation", 14)
+	_hud.add_child(column)
 	_tracker = VBoxContainer.new()
-	_tracker.position = Vector2(32, 32)
 	_tracker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_tracker_title = _hud_label(26)
 	_tracker_step = _hud_label(22)
 	_tracker.add_child(_tracker_title)
 	_tracker.add_child(_tracker_step)
-	_hud.add_child(_tracker)
+	column.add_child(_tracker)
+	_build_restoration_hud(column)
 	_toast = _hud_label(32)
 	_toast.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
 	_toast.grow_horizontal = Control.GROW_DIRECTION_BOTH
@@ -93,6 +103,36 @@ func _refresh_tracker() -> void:
 		return
 	var p: Vector2i = quests.step_progress(q, i)
 	_tracker_step.text = "› " + tr(q.steps[i].text) + ("  %d/%d" % [p.x, p.y] if p.y > 1 else "")
+
+# --- Restoration HUD ------------------------------------------------------------------
+
+func _build_restoration_hud(column: Control) -> void:
+	_restore = VBoxContainer.new()
+	_restore.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_restore.add_theme_constant_override(&"separation", 2)
+	_restore_total = _hud_label(22)
+	_restore_regions = _hud_label(18)
+	_restore.add_child(_restore_total)
+	_restore.add_child(_restore_regions)
+	column.add_child(_restore)
+	var growth := get_node_or_null(^"/root/GrowthMap")
+	if growth == null:
+		_restore.hide()
+		return
+	growth.progress_changed.connect(_refresh_restoration)
+	_refresh_restoration()
+
+func _refresh_restoration() -> void:
+	var growth := get_node_or_null(^"/root/GrowthMap")
+	var regions: Array[Dictionary] = growth.progress_regions() if growth else []
+	_restore.visible = not regions.is_empty()
+	if regions.is_empty():
+		return
+	_restore_total.text = "%s  %d%%" % [tr("RESTORE_TOTAL"), TaskPage.percent(growth.progress_total)]
+	var lines: Array[String] = []
+	for r in regions:
+		lines.append("%s  %d%%" % [tr(r.title), TaskPage.percent(r.value)])
+	_restore_regions.text = "\n".join(lines)
 
 ## Queued so a quest completing, its reward and the next quest each get their moment.
 func _notify(text: String) -> void:
