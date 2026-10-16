@@ -50,6 +50,23 @@ var wet_texture: ImageTexture
 @export_range(0.0, 1.0) var fill_wetness := 1.0
 @export var fill_interval := 0.4
 
+@export_group("Spreading")
+## Green patches creep towards each other on their own. An edge moves at up to this
+## many metres per second when other green is right in front of it, slower the
+## further away that green is. GrowthSpreadRegion nodes override these per area.
+@export var spread_speed := 0.3
+## Green this close (metres) in front of a patch edge pulls the edge towards it.
+@export var attract_distance := 16.0
+## Share of spread_speed an edge keeps with no green in range (0 = lone patches stay put).
+@export_range(0.0, 1.0) var lone_spread := 0.0
+## Speed by growth phase: x = how green the patch is at the edge (0..1), y = speed
+## multiplier. Default: sprouting patches barely creep, full meadow spreads at full speed.
+@export var spread_by_growth: Curve
+## Ground at least this green (0..255) counts as a patch: it spreads and attracts.
+@export_range(1, 255) var spread_min_source := 128
+## Milliseconds per frame the spreading may use; it catches up over later frames.
+@export var spread_budget_ms := 2.0
+
 var _data := PackedByteArray()
 var _base := PackedByteArray()  # permanent green (painted slot, GrowthSeeds); clear() returns here
 var _wet := PackedByteArray()
@@ -63,6 +80,26 @@ var _dirty := false
 var _spreading := false
 var _noise := FastNoiseLite.new()
 
+const TILE := 16                       # spreading works on tiles of TILE x TILE pixels
+const TILES := RES / TILE
+const PIXEL_M := MAP_SIZE / RES        # metres per pixel
+const DIR_X := [1, -1, 0, 0, 1, 1, -1, -1]
+const DIR_Y := [0, 0, 1, -1, 1, -1, 1, -1]
+var _tile_active := PackedByteArray()  # 1 if the tile is in _tile_queue
+var _tile_queue := PackedInt32Array()  # tiles that have (or may have) moving edges
+var _tile_time := PackedFloat32Array() # _clock when the tile was last stepped
+var _queue_pos := 0
+var _clock := 0.0
+var _spread_regions: Array[Node] = []
+var _region_of := PackedByteArray()    # per pixel: 0 = map defaults, k = _spread_regions[k - 1]
+var _regions_dirty := false
+# Per region index (0 = defaults): speed, attraction reach in pixels, lone share, phase table.
+var _p_speed := PackedFloat32Array()
+var _p_reach := PackedInt32Array()
+var _p_lone := PackedFloat32Array()
+var _p_lut: Array[PackedFloat32Array] = []
+var _lut_cache := {}                   # Curve -> PackedFloat32Array
+
 
 func _ready() -> void:
 	_data.resize(RES * RES)  # zero-filled: all barren
@@ -74,9 +111,22 @@ func _ready() -> void:
 	wet_image = Image.create_from_data(RES, RES, false, Image.FORMAT_R8, _wet)
 	wet_texture = ImageTexture.create_from_image(wet_image)
 	_noise.frequency = 0.08  # in pixels; lower = larger blobs
+	_tile_active.resize(TILES * TILES)
+	_tile_time.resize(TILES * TILES)
+	_region_of.resize(RES * RES)
+	if spread_by_growth == null:
+		spread_by_growth = Curve.new()
+		spread_by_growth.add_point(Vector2(0.5, 0.15))
+		spread_by_growth.add_point(Vector2(0.75, 0.5))
+		spread_by_growth.add_point(Vector2(1.0, 1.0))
 
 
 func _process(delta: float) -> void:
+	_clock += delta
+	if _regions_dirty:
+		_rebuild_regions()
+	if not _tile_queue.is_empty():
+		_spread_step()
 	if not _active.is_empty():
 		_tick += delta
 		var step := 1.0 / tick_rate
@@ -104,6 +154,7 @@ func attach_terrain(terrain: Terrain3D) -> void:
 	terrain.material.set_shader_param("wet_map", wet_texture)
 	if always_green_slot >= 0:
 		seed_from_terrain(terrain, always_green_slot)
+	_wake_all()
 
 
 # --- 0. Permanent green: ground that is green from the start ---------------------
@@ -137,6 +188,7 @@ func seed_circle(world_pos: Vector3, radius: float) -> void:
 			var dn := Vector2(x + 0.5, y + 0.5).distance_to(c) / r + _noise.get_noise_2d(x, y) * 0.3
 			if dn < 1.0:
 				_add_base(y * RES + x, int(255.0 * (1.0 - smoothstep(0.6, 1.0, dn))))
+	_wake_px(c, r)
 	_dirty = true
 
 
@@ -193,6 +245,7 @@ func reveal_mask(mask: Texture2D, duration: float = 4.0, gain: float = 5.0, cuto
 
 	var tween := create_tween()
 	tween.tween_method(_apply_mask.bind(idx, from, to, delay), 0.0, 1.0, duration)
+	tween.finished.connect(_wake_all)
 
 
 ## Called every frame by the tween, t: 0 -> 1. Touches only the precomputed pixels.
@@ -243,11 +296,13 @@ func reveal_from(world_pos: Vector3, duration: float = 6.0, max_radius: float = 
 			for i in b:
 				_data[i] = maxi(_data[i], _cap(i, target[i]))
 		_dirty = true
+		_wake_all()
 		return
 
 	var state := {"done": 0}  # buckets below this index are finished
 	var tween := create_tween()
 	tween.tween_method(_apply_reveal.bind(buckets, delay, target, ramp, state), 0.0, 1.0, duration)
+	tween.finished.connect(_wake_all)
 
 
 func _apply_reveal(t: float, buckets: Array[PackedInt32Array], delay: PackedFloat32Array,
@@ -337,6 +392,7 @@ func _simulate(dt: float) -> void:
 
 func _mark_changed(i: int) -> void:
 	var p := Vector2i(i % RES, i / RES)
+	_wake_px(Vector2(p), 0.0)
 	if _changed_rect.has_area():
 		_changed_rect = _changed_rect.expand(p).expand(p + Vector2i.ONE)
 	else:
@@ -469,6 +525,7 @@ func paint(world_pos: Vector3, radius: float, strength: float = 1.0, edge_noise:
 				continue
 			var i := y * RES + x
 			_data[i] = _cap(i, _data[i] + int(shape * strength * 255.0))
+	_wake_px(c, r)
 	_dirty = true
 
 
@@ -500,6 +557,218 @@ func spread(iterations: int = 4, rate: float = 0.5, min_source: int = 128) -> vo
 				await get_tree().process_frame
 		_dirty = true
 	_spreading = false
+	_wake_all()
+
+
+# --- 4. Natural spreading: patches creep towards each other -------------------
+# Only tiles with moving edges are stepped, within spread_budget_ms per frame; each
+# tile remembers when it last ran, so its edges move by real time however often
+# that is. Edits elsewhere (watering, painting, blooms) wake the tiles around them.
+
+## Called by GrowthSpreadRegion when it is added, removed, moved or resized.
+func add_spread_region(region: Node) -> void:
+	if not _spread_regions.has(region):
+		_spread_regions.append(region)
+	_regions_dirty = true
+
+
+func remove_spread_region(region: Node) -> void:
+	_spread_regions.erase(region)
+	_regions_dirty = true
+
+
+func update_spread_regions() -> void:
+	_regions_dirty = true
+
+
+func _rebuild_regions() -> void:
+	_regions_dirty = false
+	_region_of.fill(0)
+	_spread_regions = _spread_regions.filter(func(r): return is_instance_valid(r))
+	# Whole-map regions first, then big to small, so the most specific region wins.
+	var order := _spread_regions.duplicate()
+	order.sort_custom(func(a, b):
+		if a.everywhere != b.everywhere:
+			return a.everywhere
+		return a.radius > b.radius)
+	for region in order:
+		var k := _spread_regions.find(region) + 1
+		if k > 255 or not region.enabled:
+			continue
+		if region.everywhere:
+			_region_of.fill(k)
+			continue
+		var c := world_to_px(region.global_position)
+		var r: float = region.radius / PIXEL_M
+		for y in range(maxi(int(c.y - r - 1.0), 0), mini(int(c.y + r + 1.0), RES - 1) + 1):
+			for x in range(maxi(int(c.x - r - 1.0), 0), mini(int(c.x + r + 1.0), RES - 1) + 1):
+				# Noisy rim so the change of speed doesn't draw a circle in the meadow.
+				if Vector2(x + 0.5, y + 0.5).distance_to(c) / r + _noise.get_noise_2d(x, y) * 0.15 < 1.0:
+					_region_of[y * RES + x] = k
+	_wake_all()
+
+
+## Per-frame copy of the settings of the map and every region, so the hot loop reads arrays.
+func _refresh_spread_params() -> void:
+	var n := _spread_regions.size() + 1
+	_p_speed.resize(n)
+	_p_reach.resize(n)
+	_p_lone.resize(n)
+	_p_lut.resize(n)
+	_p_speed[0] = spread_speed
+	_p_reach[0] = maxi(1, int(attract_distance / PIXEL_M))
+	_p_lone[0] = lone_spread
+	_p_lut[0] = _lut(spread_by_growth)
+	for k in range(1, n):
+		var region = _spread_regions[k - 1]
+		if not is_instance_valid(region):
+			_p_speed[k] = 0.0
+			continue
+		_p_speed[k] = region.speed
+		_p_reach[k] = maxi(1, int(region.attract_distance / PIXEL_M))
+		_p_lone[k] = region.lone_spread
+		_p_lut[k] = _lut(region.spread_by_growth if region.spread_by_growth else spread_by_growth)
+
+
+## Curve sampled at every growth byte (0..255).
+func _lut(curve: Curve) -> PackedFloat32Array:
+	if _lut_cache.has(curve):
+		return _lut_cache[curve]
+	var t := PackedFloat32Array()
+	t.resize(256)
+	for v in 256:
+		t[v] = maxf(0.0, curve.sample(v / 255.0)) if curve else 1.0
+	_lut_cache[curve] = t
+	return t
+
+
+func _spread_step() -> void:
+	_refresh_spread_params()
+	var start := Time.get_ticks_usec()
+	var limit := int(spread_budget_ms * 1000.0)
+	var steps := _tile_queue.size()  # each tile at most once per frame
+	while steps > 0 and not _tile_queue.is_empty() and Time.get_ticks_usec() - start < limit:
+		steps -= 1
+		if _queue_pos >= _tile_queue.size():
+			_queue_pos = 0
+		var t := _tile_queue[_queue_pos]
+		if _spread_tile(t):
+			_queue_pos += 1
+		else:
+			_tile_active[t] = 0
+			_tile_queue.remove_at(_queue_pos)
+
+
+## Advances the patch edges in one tile. Returns false once nothing in it can move.
+func _spread_tile(t: int) -> bool:
+	var dt := minf(_clock - _tile_time[t], 1.0)
+	if dt <= 0.0:
+		return true
+	_tile_time[t] = _clock
+	var src := spread_min_source
+	var x0 := (t % TILES) * TILE
+	var y0 := (t / TILES) * TILE
+	var has_soil := soil.size() == RES * RES
+	var moving := false
+	var max_reach := 0
+	var hit_i := PackedInt32Array()
+	var hit_v := PackedInt32Array()
+	for y in range(y0, y0 + TILE):
+		for x in range(x0, x0 + TILE):
+			var i := y * RES + x
+			var g := _data[i]
+			if g >= 255 or (has_soil and g >= soil[i]):
+				continue
+			var m := 0
+			if x > 0: m = _data[i - 1]
+			if x < RES - 1: m = maxi(m, _data[i + 1])
+			if y > 0: m = maxi(m, _data[i - RES])
+			if y < RES - 1: m = maxi(m, _data[i + RES])
+			if m < src:
+				continue  # not on a patch edge
+			var r := _region_of[i]
+			var speed := _p_speed[r] * _p_lut[r][m]
+			if speed <= 0.0:
+				continue
+			var reach := _p_reach[r]
+			max_reach = maxi(max_reach, reach)
+			speed *= lerpf(_p_lone[r], 1.0, _attraction(x, y, reach))
+			if speed <= 0.0:
+				continue
+			moving = true
+			# Uneven per-pixel speed (0.5..1) so edges advance raggedly, not as rings.
+			var rnd := 0.5 + 0.5 * float(((i * 2654435761) >> 11) & 255) / 255.0
+			# Time for ground to reach patch level = time for the edge to move one pixel.
+			var gain := float(src) * speed / PIXEL_M * dt * rnd
+			var whole := int(gain)
+			if randf() < gain - whole:
+				whole += 1
+			if whole > 0:
+				hit_i.append(i)
+				hit_v.append(g + whole)
+	# Written after the pass, so an edge moves at most one pixel per step.
+	for k in hit_i.size():
+		_data[hit_i[k]] = _cap(hit_i[k], hit_v[k])
+	if not hit_i.is_empty():
+		_dirty = true
+		# Ground that just turned green may pull or feed edges in neighbouring tiles.
+		_wake_rect(Rect2i(x0, y0, TILE, TILE).grow(max_reach + 1))
+	return moving
+
+
+## 0..1: how strongly other green ahead of this edge pixel pulls it. Looks along
+## 8 directions that lead away from the patch it borders; the nearest green wins.
+## A ray leaving a convex patch can't hit that patch again, so a lone round patch
+## isn't pulled by itself, while gaps, notches and nearby patches are.
+func _attraction(x: int, y: int, reach: int) -> float:
+	var src := spread_min_source
+	var best := 0.0
+	for k in 8:
+		var dx: int = DIR_X[k]
+		var dy: int = DIR_Y[k]
+		var bx := x - dx
+		var by := y - dy
+		if bx < 0 or by < 0 or bx >= RES or by >= RES or _data[by * RES + bx] < src:
+			continue  # no patch behind this direction
+		var step := 1.4142 if dx != 0 and dy != 0 else 1.0
+		var steps := int(reach / step)
+		var ax := x
+		var ay := y
+		for s in range(1, steps + 1):
+			ax += dx
+			ay += dy
+			if ax < 0 or ay < 0 or ax >= RES or ay >= RES:
+				break
+			if _data[ay * RES + ax] >= src:
+				best = maxf(best, 1.0 - (s - 1) * step / reach)
+				break
+		if best >= 1.0:
+			break
+	return best
+
+
+func _wake_px(c: Vector2, r: float) -> void:
+	var m := r + float(_p_reach[0] if not _p_reach.is_empty() else int(attract_distance / PIXEL_M)) + 1.0
+	_wake_rect(Rect2i(int(c.x - m), int(c.y - m), int(2.0 * m) + 1, int(2.0 * m) + 1))
+
+
+func _wake_rect(rect: Rect2i) -> void:
+	if _tile_active.is_empty():
+		return
+	rect = rect.intersection(Rect2i(0, 0, RES, RES))
+	if not rect.has_area():
+		return
+	for ty in range(rect.position.y / TILE, (rect.end.y - 1) / TILE + 1):
+		for tx in range(rect.position.x / TILE, (rect.end.x - 1) / TILE + 1):
+			var t := ty * TILES + tx
+			if _tile_active[t] == 0:
+				_tile_active[t] = 1
+				_tile_time[t] = _clock
+				_tile_queue.append(t)
+
+
+func _wake_all() -> void:
+	_wake_rect(Rect2i(0, 0, RES, RES))
 
 
 # --- Save / load -------------------------------------------------------------
@@ -517,6 +786,7 @@ func load_progress(path: String = SAVE_PATH) -> bool:
 		return false
 	_data = _to_map_image(img).get_data()
 	_dirty = true
+	_wake_all()
 	return true
 
 
@@ -529,6 +799,7 @@ func clear() -> void:
 	_changed_rect = Rect2i()
 	_dirty = true
 	_wet_dirty = true
+	_wake_all()
 
 
 ## Average growth (0..1) inside a circle. Used by GrowthZone to decide when an area is done.

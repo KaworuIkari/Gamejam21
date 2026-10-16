@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/world_objects/restorable.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/DeadTree/DeadTree_2.gltf" id="2"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/Pine/Pine_2.gltf" id="3"]
+
+[node name="RestorablePine2" type="Node3D"]
+script = ExtResource("1")
+stages = Array[PackedScene]([ExtResource("2"), ExtResource("3")])
+quest_event = &"tree_restored"
