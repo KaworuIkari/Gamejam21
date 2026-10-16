@@ -44,7 +44,7 @@ _subresources={
 "Leaves_NormalTree": {
 "use_external/enabled": true,
 "use_external/fallback_path": "res://assets/models/stylized_nature/Materials/leaves_normal_tree.tres",
-"use_external/path": "uid://<invalid>"
+"use_external/path": "uid://dctsgv7yqs2lu"
 }
 }
 }

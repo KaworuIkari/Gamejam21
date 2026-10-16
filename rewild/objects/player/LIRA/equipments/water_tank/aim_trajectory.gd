@@ -24,7 +24,7 @@ var landing_valid := false
 
 var _mesh := ImmediateMesh.new()
 
-@onready var sound_emitter : FmodEventEmitter2D = $FmodEventEmitter2D
+@onready var sound_emitter : FmodEventEmitter3D = $FmodEventEmitter3D
 
 func _ready() -> void:
 	var mi := MeshInstance3D.new()

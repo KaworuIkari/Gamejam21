@@ -39,6 +39,7 @@ var _screen_layer: CanvasLayer
 
 
 func _ready() -> void:
+	add_to_group(&"water_surfaces")
 	if is_nan(full_level):
 		full_level = global_position.y
 	if fit_to_basin or not cutouts.is_empty():
@@ -104,6 +105,8 @@ func _process(_delta: float) -> void:
 
 ## True when `point` is inside the water's footprint and below its (wavy) surface.
 func is_point_underwater(point: Vector3) -> bool:
+	if not holds_point(point):
+		return false
 	if not covers(point):
 		return false
 	for w in cutouts:
@@ -253,3 +256,15 @@ func _notification(what: int) -> void:
 					node.queue_free()
 				else:
 					node.free()
+
+func get_surface_y() -> float:
+	return global_position.y
+
+## True when the point is in this water's basin (or footprint) and not inside a cutout.
+func holds_point(point: Vector3) -> bool:
+	if not covers(point):
+		return false
+	for w in cutouts:
+		if is_instance_valid(w) and w.covers(point):
+			return false
+	return true
