@@ -57,3 +57,11 @@ ability is unlocked.
 ## Testing
 
 Debug builds: **F9** completes the current step of the tracked quest.
+
+## Quest 05 — radar framework
+
+05_radar_station.tres follows 04_energy_core. Its sole completion gate is mountain_restoration >= 40. It deliberately does not require a fixed litter count, a separate visit gate, or startup confirmation. Mountain retains its authored region position/radius; the radar model is outside this measurement region by design for this version.
+
+levels/meadow_hand/radar_story.gd places six cleanup props near RadioObservatory, enables them and the existing cabinet's startup interaction after quest 04, and records radar_reached/radar_garbage/radar_started for later expansion. radar_access is derived from quest 04 completion; it is not a new key puzzle. Startup currently records a persistent flag and removes its interaction glimmer; mechanical repair, dish animation, story dialogue, and quest 06 remain future work.
+
+Mountain recovery uses GrowthMap.region_progress with whole percentage points, comparing against saved counters so startup and reload do not add the same progress twice. Pre-restored mountain ground counts once 05 opens. No new equipment reward is authored for 05. Task and prompt strings are in i18n/strings.csv in Chinese and English.

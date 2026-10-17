@@ -231,3 +231,10 @@ QUEST_CORE_STEP_CLEAN,清理工厂环境,Clear the factory grounds
 QUEST_CORE_STEP_RESTORE,提升工厂区复苏度,Raise the factory area's recovery
 QUEST_CORE_STEP_ACTIVATE,激活储能核心,Activate the energy core
 QUEST_CORE_STEP_DELIVER,返回湖心终端交付储能核心,Return to the lake terminal with the core
+
+QUEST_RADAR_TITLE,重启山地雷达,Restart the mountain radar
+QUEST_RADAR_DESC,湖心终端已安排下一项任务：带着升级后的装备和密钥前往雷达站，清理周边环境，尝试修复并启动雷达。山地区域复苏度达到40%即可完成本阶段。,The lake terminal has assigned your next mission: take your upgraded equipment and key to the radar station. Clear the surroundings and attempt to repair and start the radar. Restore the mountain region to 40% to complete this stage.
+QUEST_RADAR_LOCATION,山地区域 / 雷达站,Mountain region / Radar station
+QUEST_RADAR_STEP_RESTORE,山地区域复苏度达到40%,Restore the mountain region to 40%
+INTERACT_RADAR_START,按 %s 尝试修复并启动雷达,Press %s to attempt radar repair and startup
+CLEAR_LOCKED_RADAR,完成湖心终端的上一项任务后再处理此处环境,Complete the previous lake terminal mission before clearing this area

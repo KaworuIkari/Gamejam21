@@ -38,6 +38,7 @@ const PUMP_HOUSE_GREEN_RADIUS := 25.0
 ## Plain trees report "tree_restored" too, once the ground under them is green.
 const TreeRegrowth := preload("res://systems/world_objects/tree_regrowth.gd")
 ## What stays switched off at the start of a new game (animals, companion bot).
+const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
 const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
 @onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/CameraPivot/SpringArm3D/Camera3D
@@ -78,6 +79,11 @@ func _ready() -> void:
 	factory.initial = initial
 	factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
 	add_child(factory)
+	var radar := RadarStory.new()
+	radar.name = "RadarStory"
+	radar.anchor = $RadioObservatory
+	radar.terrain = terrain
+	add_child(radar)
 	var regrowth := TreeRegrowth.new()
 	regrowth.name = "TreeRegrowth"
 	add_child(regrowth)
