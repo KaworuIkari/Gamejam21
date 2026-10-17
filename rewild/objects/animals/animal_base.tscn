@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://hvdafxspbowl"]
+
+[ext_resource type="Script" uid="uid://fqryeddjuf04" path="res://objects/animals/animal_base.gd" id="1_4rk34"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xie46"]
+radius = 0.2
+
+[node name="AnimalBase" type="CharacterBody3D" unique_id=1591991278]
+script = ExtResource("1_4rk34")
+debug = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=256457580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("SphereShape3D_xie46")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1135822814]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="DebugLabel3D" type="Label3D" parent="." unique_id=1114967018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2282006, 0)
+billboard = 1
+text = "Animal Base"
+font_size = 50
