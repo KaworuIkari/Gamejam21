@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://systems/growth_map/overgrowth.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" path="res://assets/models/rewild_regrowth_v1/Factory_Greenery_Flowers2.png" id="2_albedo"]
+
+[resource]
+resource_name = "Flowers"
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/albedo_texture = ExtResource("2_albedo")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor = 0.2
+shader_parameter/map_origin = Vector2(-512, -512)
+shader_parameter/map_size = 1024.0
+shader_parameter/grow_start = 0.7
+shader_parameter/grow_full = 0.95
+shader_parameter/jitter = 0.1
+shader_parameter/clump_size = 0.3
+shader_parameter/sparse_tint = Color(0.9, 0.85, 0.6, 1)
+shader_parameter/fresh_glow = 0.25

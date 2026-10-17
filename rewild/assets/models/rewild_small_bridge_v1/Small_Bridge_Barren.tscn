@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_small_bridge_v1/Small_Bridge_Barren.glb" id="1"]
+
+[sub_resource type="BoxShape3D" id="Shape0"]
+size = Vector3(6, 0.2, 2.2)
+
+[sub_resource type="BoxShape3D" id="Shape1"]
+size = Vector3(6, 1.15, 0.13)
+
+[sub_resource type="BoxShape3D" id="Shape2"]
+size = Vector3(6, 1.15, 0.13)
+
+[sub_resource type="BoxShape3D" id="Shape3"]
+size = Vector3(0.6, 0.89, 2.5)
+
+[sub_resource type="BoxShape3D" id="Shape4"]
+size = Vector3(0.6, 0.89, 2.5)
+
+[node name="Small_Bridge_Barren" type="Node3D"]
+
+[node name="Visual" parent="." instance=ExtResource("1")]
+
+[node name="Collision" type="StaticBody3D" parent="."]
+
+[node name="Shape0" type="CollisionShape3D" parent="Collision"]
+position = Vector3(0, -0.1, 0)
+shape = SubResource("Shape0")
+
+[node name="Shape1" type="CollisionShape3D" parent="Collision"]
+position = Vector3(0, 0.575, -1.12)
+shape = SubResource("Shape1")
+
+[node name="Shape2" type="CollisionShape3D" parent="Collision"]
+position = Vector3(0, 0.575, 1.12)
+shape = SubResource("Shape2")
+
+[node name="Shape3" type="CollisionShape3D" parent="Collision"]
+position = Vector3(-2.7, -0.655, 0)
+shape = SubResource("Shape3")
+
+[node name="Shape4" type="CollisionShape3D" parent="Collision"]
+position = Vector3(2.7, -0.655, 0)
+shape = SubResource("Shape4")

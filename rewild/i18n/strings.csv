@@ -209,3 +209,11 @@ QUEST_EMPTY_ARCHIVE,暂无已完成的任务,No completed quests yet
 ABILITY_WATER_GUN,水枪,Water gun
 ABILITY_JETPACK,喷气背包,Jetpack
 ABILITY_LEVEL,%s Lv%d,%s Lv%d
+RESTORE_TITLE,生态恢复,Restoration
+RESTORE_TOTAL,生态恢复,Restoration
+REGION_LAKE,湖区,Lake area
+REGION_FOREST,森林,Forest
+REGION_MOUNTAIN,山地,Mountain
+REGION_FACTORY,工厂区,Factory area
+THROW_PICKUP_PROMPT,按 %s 拿起,Press %s to pick up
+THROW_THROW_PROMPT,按 %s 扔出,Press %s to throw

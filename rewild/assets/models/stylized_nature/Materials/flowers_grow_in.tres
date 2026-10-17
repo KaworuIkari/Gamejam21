@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" format=3]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bfsid33vft1le"]
 
-[ext_resource type="Shader" path="res://systems/growth_map/grow_in_flower.gdshader" id="1_shader"]
+[ext_resource type="Shader" uid="uid://d32j26u87wlem" path="res://systems/growth_map/grow_in_flower.gdshader" id="1_shader"]
 [ext_resource type="Texture2D" uid="uid://b2demo6pu5vww" path="res://assets/models/stylized_nature/Textures/Flowers.png" id="2_albedo"]
 
 [resource]

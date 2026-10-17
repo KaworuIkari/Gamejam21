@@ -1,0 +1,647 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Round_Thin.gltf" id="1_28ghw"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Round_Small_3.gltf" id="2_0pysw"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Square_Small_2.gltf" id="3_u8e8d"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Square_Small_1.gltf" id="4_1li2s"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Square_Wide.gltf" id="5_2ghi6"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Round_Small_1.gltf" id="6_nefmc"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Square_Small_3.gltf" id="7_bva28"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Square_Thin.gltf" id="8_hnor2"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Round_Small_2.gltf" id="9_nem6j"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/RockPath/RockPath_Round_Wide.gltf" id="10_nefnk"]
+
+[node name="RockRoad" type="Node3D" unique_id=1211244899]
+
+[node name="RockPath_Round_Thin_0" type="Node3D" parent="." unique_id=2145691913 instance=ExtResource("1_28ghw")]
+transform = Transform3D(1.2591373, -0.018964007, 1.8702908, -0.021932982, 1.5779402, 0.04741838, -1.8703583, -0.031270597, 1.2585356, -37.302853, 29.89481, 1.1034191)
+
+[node name="RockPath_Round_Thin_1" type="Node3D" parent="." unique_id=1512181123 instance=ExtResource("1_28ghw")]
+transform = Transform3D(1.3958648, -0.0029600123, 1.9643584, -0.0056659635, 1.6868465, 0.00921364, -1.9643546, -0.0069688982, 1.3958408, -38.586506, 29.921907, 3.7396462)
+
+[node name="RockPath_Round_Small_3_0" type="Node3D" parent="." unique_id=764823656 instance=ExtResource("2_0pysw")]
+transform = Transform3D(0.26666483, 0.0015639291, -1.9080306, -0.0035008881, 1.3486005, 0.0017666142, 1.9080288, 0.002255865, 0.2666683, -37.02247, 29.941484, 6.5245676)
+
+[node name="RockPath_Square_Small_2_0" type="Node3D" parent="." unique_id=738654374 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-1.5739131, -0.008006086, -0.12128453, -0.006278821, 1.1040227, -0.0672489, 0.12166072, -0.046596177, -1.5725175, -41.75353, 29.866985, 1.1548169)
+
+[node name="RockPath_Round_Thin_2" type="Node3D" parent="." unique_id=613839023 instance=ExtResource("1_28ghw")]
+transform = Transform3D(1.5811982, 0, 1.5923268, 0, 1.5708244, 0, -1.5923268, 0, 1.5811982, -40.756413, 29.932434, 6.1919847)
+
+[node name="RockPath_Square_Small_1_0" type="Node3D" parent="." unique_id=426108533 instance=ExtResource("4_1li2s")]
+transform = Transform3D(0.9863787, 0.007402052, -1.6616983, -0.012931325, 1.3526688, 0.0046208976, 1.6616818, 0.0061326865, 0.9864246, -38.42906, 29.939194, 9.083215)
+
+[node name="RockPath_Square_Small_2_1" type="Node3D" parent="." unique_id=998951478 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-1.5491738, 0, 0.015944239, 0, 1.0844792, 0, -0.015944239, 0, -1.5491738, -42.142845, 29.953505, 7.460557)
+
+[node name="RockPath_Round_Thin_3" type="Node3D" parent="." unique_id=1370651676 instance=ExtResource("1_28ghw")]
+transform = Transform3D(1.4467094, 0, 1.6761329, 0, 1.5498937, 0, -1.6761329, 0, 1.4467094, -42.588406, 29.933582, 8.316248)
+
+[node name="RockPath_Round_Small_3_1" type="Node3D" parent="." unique_id=1290431706 instance=ExtResource("2_0pysw")]
+transform = Transform3D(1.621575, 0, 1.2571725, 0, 1.4362779, 0, -1.2571725, 0, 1.621575, -44.80758, 29.938278, 6.1267185)
+
+[node name="RockPath_Square_Wide_0" type="Node3D" parent="." unique_id=120663191 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(2.4758482, 0, 0.77695775, 0, 1.8164276, 0, -0.77695775, 0, 2.4758482, -44.918053, 29.922161, 9.97793)
+
+[node name="RockPath_Round_Small_1_0" type="Node3D" parent="." unique_id=978997531 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-0.8530317, 0.0021425, 1.4558772, 0.0020638022, 1.1811639, -0.002338171, -1.4558789, 0.00041903785, -0.853034, -41.65774, 29.949, 12.3650875)
+
+[node name="RockPath_Square_Wide_1" type="Node3D" parent="." unique_id=405021270 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(2.495329, 0, 0.09369945, 0, 1.7479613, 0, -0.09369945, 0, 2.495329, -49.123848, 29.925095, 11.448211)
+
+[node name="RockPath_Square_Small_3_0" type="Node3D" parent="." unique_id=1148762635 instance=ExtResource("7_bva28")]
+transform = Transform3D(0.8136568, 0, -1.1949484, 0, 1.0119635, 0, 1.1949484, 0, 0.8136568, -49.64005, 29.95664, 8.074382)
+
+[node name="RockPath_Square_Thin_0" type="Node3D" parent="." unique_id=1897546686 instance=ExtResource("8_hnor2")]
+transform = Transform3D(2.298741, 0, -0.2810442, 0, 1.6211003, 0, 0.2810442, 0, 2.298741, -53.561474, 29.930532, 11.680586)
+
+[node name="RockPath_Square_Small_1_1" type="Node3D" parent="." unique_id=1928427635 instance=ExtResource("4_1li2s")]
+transform = Transform3D(-1.4871054, 0, -1.4264197, 0, 1.4424341, 0, 1.4264197, 0, -1.4871054, -54.825043, 29.938185, 15.309548)
+
+[node name="RockPath_Square_Small_3_1" type="Node3D" parent="." unique_id=344131756 instance=ExtResource("7_bva28")]
+transform = Transform3D(-2.0136807, 0, 0.09601257, 0, 1.4111779, 0, -0.09601257, 0, -2.0136807, -52.229115, 29.93953, 8.158944)
+
+[node name="RockPath_Square_Thin_1" type="Node3D" parent="." unique_id=2007463258 instance=ExtResource("8_hnor2")]
+transform = Transform3D(2.296433, 0, -0.21952504, 0, 1.6148312, 0, 0.21952504, 0, 2.296433, -56.682827, 29.930803, 11.396041)
+
+[node name="RockPath_Round_Small_2_0" type="Node3D" parent="." unique_id=1306409185 instance=ExtResource("9_nem6j")]
+transform = Transform3D(-0.10530013, 0, -1.5479116, 0, 1.0860424, 0, 1.5479116, 0, -0.10530013, -55.98792, 29.953463, 14.960562)
+
+[node name="RockPath_Round_Small_3_2" type="Node3D" parent="." unique_id=2116617550 instance=ExtResource("2_0pysw")]
+transform = Transform3D(1.5679725, 0, 0.15941912, 0, 1.103239, 0, -0.15941912, 0, 1.5679725, -58.578484, 29.952726, 11.1107)
+
+[node name="RockPath_Square_Wide_2" type="Node3D" parent="." unique_id=1797317471 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(0.403734, 0, -2.549672, 0, 1.8070074, 0, 2.549672, 0, 0.403734, -59.768467, 29.922564, 11.0884905)
+
+[node name="RockPath_Square_Small_1_2" type="Node3D" parent="." unique_id=809052836 instance=ExtResource("4_1li2s")]
+transform = Transform3D(0.7461367, 0, 1.2012784, 0, 0.9898975, 0, -1.2012784, 0, 0.7461367, -59.09996, 29.957584, 15.379665)
+
+[node name="RockPath_Square_Small_3_2" type="Node3D" parent="." unique_id=1775019729 instance=ExtResource("7_bva28")]
+transform = Transform3D(0.37288916, 0, 2.0481822, 0, 1.4572946, 0, -2.0481822, 0, 0.37288916, -59.78659, 29.937551, 7.9585433)
+
+[node name="RockPath_Square_Thin_2" type="Node3D" parent="." unique_id=845209428 instance=ExtResource("8_hnor2")]
+transform = Transform3D(2.3424072, 0, -0.6317171, 0, 1.6982666, 0, 0.6317171, 0, 2.3424072, -64.697525, 29.927225, 10.871242)
+
+[node name="RockPath_Square_Small_2_2" type="Node3D" parent="." unique_id=656670481 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(0.522033, 0, -1.5363222, 0, 1.1358144, 0, 1.5363222, 0, 0.522033, -64.27047, 29.95133, 15.053768)
+
+[node name="RockPath_Round_Small_3_3" type="Node3D" parent="." unique_id=117822742 instance=ExtResource("2_0pysw")]
+transform = Transform3D(0.4351942, 0, -1.7703335, 0, 1.276128, 0, 1.7703335, 0, 0.4351942, -64.38642, 29.945316, 7.478592)
+
+[node name="RockPath_Square_Wide_3" type="Node3D" parent="." unique_id=1364311902 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-0.61322427, 0, -2.128652, 0, 1.5506546, 0, 2.128652, 0, -0.61322427, -68.021545, 29.933552, 10.91692)
+
+[node name="RockPath_Round_Small_3_4" type="Node3D" parent="." unique_id=764108847 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-1.7294666, 0, -0.41479555, 0, 1.2449594, 0, 0.41479555, 0, -1.7294666, -69.679375, 29.946653, 14.205236)
+
+[node name="RockPath_Square_Small_3_3" type="Node3D" parent="." unique_id=1500000356 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.7823621, 0, -0.6602636, 0, 1.3305088, 0, 0.6602636, 0, 1.7823621, -68.05437, 29.942987, 7.387603)
+
+[node name="RockPath_Round_Wide_0" type="Node3D" parent="." unique_id=1665841048 instance=ExtResource("10_nefnk")]
+transform = Transform3D(2.4213157, 0, 0.36116722, 0, 1.7136725, 0, -0.36116722, 0, 2.4213157, -71.88839, 29.926565, 10.892014)
+
+[node name="RockPath_Square_Thin_3" type="Node3D" parent="." unique_id=1549216448 instance=ExtResource("8_hnor2")]
+transform = Transform3D(2.1210515, 0, 0.7637836, 0, 1.5780653, 0, -0.7637836, 0, 2.1210515, -76.07814, 29.932379, 11.247231)
+
+[node name="RockPath_Round_Small_1_1" type="Node3D" parent="." unique_id=868107142 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.6062578, 0, 0.4355502, 0, 1.1649834, 0, -0.4355502, 0, -1.6062578, -77.028595, 29.950079, 14.337765)
+
+[node name="RockPath_Square_Thin_4" type="Node3D" parent="." unique_id=995954500 instance=ExtResource("8_hnor2")]
+transform = Transform3D(2.4583452, 0, 0.6516471, 0, 1.7802728, 0, -0.6516471, 0, 2.4583452, -79.13049, 29.923708, 11.399849)
+
+[node name="RockPath_Square_Small_3_4" type="Node3D" parent="." unique_id=1408988103 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.3648734, 0, 0.47399774, 0, 1.0113857, 0, -0.47399774, 0, 1.3648734, -78.3584, 29.956663, 14.823876)
+
+[node name="RockPath_Square_Small_2_3" type="Node3D" parent="." unique_id=1601308714 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-1.3204411, 0, 0.6990387, 0, 1.0458431, 0, -0.6990387, 0, -1.3204411, -81.24026, 29.955185, 11.484113)
+
+[node name="RockPath_Square_Thin_5" type="Node3D" parent="." unique_id=864898731 instance=ExtResource("8_hnor2")]
+transform = Transform3D(2.3180537, 0, 0.99444497, 0, 1.7656512, 0, -0.99444497, 0, 2.3180537, -82.52287, 29.924337, 11.850282)
+
+[node name="RockPath_Round_Small_2_1" type="Node3D" parent="." unique_id=345955160 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.3366982, 0, 0.7850695, 0, 1.0851345, 0, -0.7850695, 0, 1.3366982, -82.57674, 29.9535, 15.560667)
+
+[node name="RockPath_Round_Small_1_2" type="Node3D" parent="." unique_id=1081478479 instance=ExtResource("6_nefmc")]
+transform = Transform3D(1.6561203, 0, 0.7219171, 0, 1.2646384, 0, -0.7219171, 0, 1.6561203, -82.60114, 29.945807, 8.315819)
+
+[node name="RockPath_Round_Wide_1" type="Node3D" parent="." unique_id=1898955841 instance=ExtResource("10_nefnk")]
+transform = Transform3D(2.2264364, 0, 0.6736754, 0, 1.6282874, 0, -0.6736754, 0, 2.2264364, -85.92598, 29.930223, 12.357753)
+
+[node name="RockPath_Round_Small_1_3" type="Node3D" parent="." unique_id=78380709 instance=ExtResource("6_nefmc")]
+transform = Transform3D(0.93943, 0, 1.717349, 0, 1.3702518, 0, -1.717349, 0, 0.93943, -85.699326, 29.941282, 16.696386)
+
+[node name="RockPath_Square_Wide_4" type="Node3D" parent="." unique_id=304107836 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(0.1931758, 0, -2.242569, 0, 1.5756117, 0, 2.242569, 0, 0.1931758, -90.11536, 29.932482, 13.764972)
+
+[node name="RockPath_Round_Small_1_4" type="Node3D" parent="." unique_id=675255486 instance=ExtResource("6_nefmc")]
+transform = Transform3D(1.3511016, 0, -1.2260019, 0, 1.2771032, 0, 1.2260019, 0, 1.3511016, -90.36811, 29.945276, 16.79578)
+
+[node name="RockPath_Round_Small_2_2" type="Node3D" parent="." unique_id=235470993 instance=ExtResource("9_nem6j")]
+transform = Transform3D(0.9098932, 0, -1.6579096, 0, 1.3238275, 0, 1.6579096, 0, 0.9098932, -92.40779, 29.943272, 10.080408)
+
+[node name="RockPath_Square_Small_2_4" type="Node3D" parent="." unique_id=102075015 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-1.1157131, 0, -0.91479284, 0, 1.0099576, 0, 0.91479284, 0, -1.1157131, -92.56323, 29.956724, 14.760473)
+
+[node name="RockPath_Square_Wide_5" type="Node3D" parent="." unique_id=1620435700 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(1.0133002, 0, -2.3525293, 0, 1.7930349, 0, 2.3525293, 0, 1.0133002, -94.12478, 29.923162, 14.150317)
+
+[node name="RockPath_Round_Small_2_3" type="Node3D" parent="." unique_id=1958582703 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.1811049, 0, -0.8726938, 0, 1.0279765, 0, 0.8726938, 0, 1.1811049, -93.79083, 29.955952, 17.536669)
+
+[node name="RockPath_Round_Small_3_5" type="Node3D" parent="." unique_id=1799409937 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-1.6092112, 0, 0.32435423, 0, 1.1491021, 0, -0.32435423, 0, -1.6092112, -94.35811, 29.950762, 11.345071)
+
+[node name="RockPath_Round_Wide_2" type="Node3D" parent="." unique_id=377779322 instance=ExtResource("10_nefnk")]
+transform = Transform3D(2.0292015, 0, 0.8801667, 0, 1.5483063, 0, -0.8801667, 0, 2.0292015, -98.429985, 29.93365, 15.673206)
+
+[node name="RockPath_Round_Small_3_6" type="Node3D" parent="." unique_id=141929410 instance=ExtResource("2_0pysw")]
+transform = Transform3D(1.3266536, 0, -0.727322, 0, 1.0590625, 0, 0.727322, 0, 1.3266536, -97.61188, 29.954617, 19.11326)
+
+[node name="RockPath_Round_Small_3_7" type="Node3D" parent="." unique_id=1272598775 instance=ExtResource("2_0pysw")]
+transform = Transform3D(1.5279405, 0, -1.3633982, 0, 1.4334552, 0, 1.3633982, 0, 1.5279405, -99.57275, 29.938574, 12.348469)
+
+[node name="RockPath_Square_Wide_6" type="Node3D" parent="." unique_id=674491431 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(2.0746167, 0, 1.3811152, 0, 1.7446035, 0, -1.3811152, 0, 2.0746167, -101.8248, 29.92524, 17.730562)
+
+[node name="RockPath_Round_Small_1_5" type="Node3D" parent="." unique_id=1165448454 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.8645025, 0, -0.32232156, 0, 1.3245105, 0, 0.32232156, 0, -1.8645025, -105.12014, 29.943243, 15.79588)
+
+[node name="RockPath_Square_Wide_7" type="Node3D" parent="." unique_id=1883411298 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(2.2023928, 0, 0.9617231, 0, 1.682251, 0, -0.9617231, 0, 2.2023928, -105.72065, 29.927912, 20.061863)
+
+[node name="RockPath_Square_Small_3_5" type="Node3D" parent="." unique_id=1333940764 instance=ExtResource("7_bva28")]
+transform = Transform3D(-0.71900487, 0, -1.912188, 0, 1.4300284, 0, 1.912188, 0, -0.71900487, -109.02957, 29.93872, 17.902191)
+
+[node name="RockPath_Square_Thin_6" type="Node3D" parent="." unique_id=1371316579 instance=ExtResource("8_hnor2")]
+transform = Transform3D(1.516779, 0, 2.0832078, 0, 1.8038245, 0, -2.0832078, 0, 1.516779, -109.3746, 29.9227, 22.898514)
+
+[node name="RockPath_Round_Small_3_8" type="Node3D" parent="." unique_id=2134677772 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-1.9980023, 0, -0.14721735, 0, 1.4023931, 0, 0.14721735, 0, -1.9980023, -107.05577, 29.939905, 26.353859)
+
+[node name="RockPath_Square_Small_3_6" type="Node3D" parent="." unique_id=651614566 instance=ExtResource("7_bva28")]
+transform = Transform3D(-0.16863222, 0, -1.8259479, 0, 1.2836027, 0, 1.8259479, 0, -0.16863222, -110.248825, 29.944996, 19.644018)
+
+[node name="RockPath_Square_Thin_7" type="Node3D" parent="." unique_id=1191210845 instance=ExtResource("8_hnor2")]
+transform = Transform3D(1.3068571, 0, 1.8602068, 0, 1.5913641, 0, -1.8602068, 0, 1.3068571, -111.67685, 29.931807, 25.27121)
+
+[node name="RockPath_Square_Small_3_7" type="Node3D" parent="." unique_id=1339098395 instance=ExtResource("7_bva28")]
+transform = Transform3D(-1.2642933, 0, -1.5910845, 0, 1.4225659, 0, 1.5910845, 0, -1.2642933, -114.29953, 29.939041, 23.06362)
+
+[node name="RockPath_Square_Thin_8" type="Node3D" parent="." unique_id=392198981 instance=ExtResource("8_hnor2")]
+transform = Transform3D(1.2262989, 0, 2.0577152, 0, 1.6767887, 0, -2.0577152, 0, 1.2262989, -113.85164, 29.928144, 27.379068)
+
+[node name="RockPath_Round_Wide_3" type="Node3D" parent="." unique_id=1532196450 instance=ExtResource("10_nefnk")]
+transform = Transform3D(1.9402398, 0, -1.099315, 0, 1.5610194, 0, 1.099315, 0, 1.9402398, -115.748024, 29.933107, 29.956438)
+
+[node name="RockPath_Round_Small_1_6" type="Node3D" parent="." unique_id=218639435 instance=ExtResource("6_nefmc")]
+transform = Transform3D(0.68633807, 0, -1.8457042, 0, 1.3784285, 0, 1.8457042, 0, 0.68633807, -112.418945, 29.940931, 31.391638)
+
+[node name="RockPath_Square_Small_1_3" type="Node3D" parent="." unique_id=1435030455 instance=ExtResource("4_1li2s")]
+transform = Transform3D(-1.6148694, 0, -0.53652126, 0, 1.1911643, 0, 0.53652126, 0, -1.6148694, -118.664406, 29.948957, 27.577316)
+
+[node name="RockPath_Square_Thin_9" type="Node3D" parent="." unique_id=355654173 instance=ExtResource("8_hnor2")]
+transform = Transform3D(1.0986542, 0, 2.159489, 0, 1.6960284, 0, -2.159489, 0, 1.0986542, -118.33728, 29.927322, 32.858406)
+
+[node name="RockPath_Square_Small_2_5" type="Node3D" parent="." unique_id=1195564702 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-1.5392892, 0, 1.1127386, 0, 1.3295575, 0, -1.1127386, 0, -1.5392892, -120.851555, 29.943026, 30.580715)
+
+[node name="RockPath_Square_Thin_10" type="Node3D" parent="." unique_id=608749983 instance=ExtResource("8_hnor2")]
+transform = Transform3D(1.4126762, 0, 1.912298, 0, 1.6642547, 0, -1.912298, 0, 1.4126762, -120.15818, 29.928682, 35.382847)
+
+[node name="RockPath_Square_Small_3_8" type="Node3D" parent="." unique_id=1820110192 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.462243, 0, 1.0547806, 0, 1.2620821, 0, -1.0547806, 0, 1.462243, -123.833374, 29.945919, 33.590294)
+
+[node name="RockPath_Round_Small_2_4" type="Node3D" parent="." unique_id=2096273276 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.4202936, 0, 0.65533227, 0, 1.0949339, 0, -0.65533227, 0, 1.4202936, -122.44719, 29.953081, 36.18926)
+
+[node name="RockPath_Square_Wide_8" type="Node3D" parent="." unique_id=432826140 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(1.7334936, 0, -1.4503202, 0, 1.5821283, 0, 1.4503202, 0, 1.7334936, -121.66008, 29.932201, 37.909824)
+
+[node name="RockPath_Round_Small_1_7" type="Node3D" parent="." unique_id=1060481765 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.4739822, 0, -0.33644634, 0, 1.0583249, 0, 0.33644634, 0, -1.4739822, -119.14217, 29.954649, 40.353798)
+
+[node name="RockPath_Square_Small_2_6" type="Node3D" parent="." unique_id=1409546500 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(0.06655661, 0, 1.5827144, 0, 1.1088793, 0, -1.5827144, 0, 0.06655661, -124.1848, 29.952484, 34.966072)
+
+[node name="RockPath_Square_Thin_11" type="Node3D" parent="." unique_id=1127887047 instance=ExtResource("8_hnor2")]
+transform = Transform3D(1.4993258, 0, 1.9755388, 0, 1.7360468, 0, -1.9755388, 0, 1.4993258, -123.78591, 29.925606, 41.586067)
+
+[node name="RockPath_Square_Small_1_4" type="Node3D" parent="." unique_id=1291562212 instance=ExtResource("4_1li2s")]
+transform = Transform3D(-0.60733366, 0, 1.3601922, 0, 1.0427362, 0, -1.3601922, 0, -0.60733366, -120.67738, 29.955318, 42.714546)
+
+[node name="RockPath_Square_Small_1_5" type="Node3D" parent="." unique_id=711617511 instance=ExtResource("4_1li2s")]
+transform = Transform3D(1.4712447, 0, 0.86659276, 0, 1.1952475, 0, -0.86659276, 0, 1.4712447, -127.08199, 29.948784, 40.641888)
+
+[node name="RockPath_Round_Small_2_5" type="Node3D" parent="." unique_id=1561810368 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.2511786, 0, -0.45579347, 0, 0.93212974, 0, 0.45579347, 0, 1.2511786, -124.11122, 29.96006, 43.72401)
+
+[node name="RockPath_Square_Wide_9" type="Node3D" parent="." unique_id=486254922 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(0.74680835, 0, 2.2882314, 0, 1.6849113, 0, -2.2882314, 0, 0.74680835, -125.346664, 29.9278, 44.51655)
+
+[node name="RockPath_Square_Small_3_9" type="Node3D" parent="." unique_id=2030783478 instance=ExtResource("7_bva28")]
+transform = Transform3D(-1.665064, 0, 0.16649236, 0, 1.171357, 0, -0.16649236, 0, -1.665064, -128.48447, 29.949806, 42.535896)
+
+[node name="RockPath_Round_Thin_4" type="Node3D" parent="." unique_id=246163 instance=ExtResource("1_28ghw")]
+transform = Transform3D(1.1059287, 0, 2.1613975, 0, 1.6995327, 0, -2.1613975, 0, 1.1059287, -126.5894, 29.927168, 48.76628)
+
+[node name="RockPath_Square_Small_1_6" type="Node3D" parent="." unique_id=425226070 instance=ExtResource("4_1li2s")]
+transform = Transform3D(0.029679777, 0, -1.4442172, 0, 1.0111655, 0, 1.4442172, 0, 0.029679777, -123.88321, 29.956675, 50.565796)
+
+[node name="RockPath_Square_Wide_10" type="Node3D" parent="." unique_id=438953731 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(2.204804, 0, -0.62406945, 0, 1.6039966, 0, 0.62406945, 0, 2.204804, -127.37656, 29.931263, 51.990917)
+
+[node name="RockPath_Square_Small_3_10" type="Node3D" parent="." unique_id=1459276065 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.5008333, 0, 0.6519317, 0, 1.145418, 0, -0.6519317, 0, 1.5008333, -123.89875, 29.950918, 53.68773)
+
+[node name="RockPath_Round_Thin_5" type="Node3D" parent="." unique_id=1316501058 instance=ExtResource("1_28ghw")]
+transform = Transform3D(0.34273872, 0, 2.5485778, 0, 1.8000646, 0, -2.5485778, 0, 0.34273872, -127.85722, 29.92286, 56.044712)
+
+[node name="RockPath_Square_Small_2_7" type="Node3D" parent="." unique_id=157832706 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-1.187276, 0, -0.9455161, 0, 1.0624388, 0, 0.9455161, 0, -1.187276, -124.47721, 29.954475, 57.580517)
+
+[node name="RockPath_Square_Small_1_7" type="Node3D" parent="." unique_id=2111685239 instance=ExtResource("4_1li2s")]
+transform = Transform3D(1.4470007, 0, -0.64759386, 0, 1.1097128, 0, 0.64759386, 0, 1.4470007, -130.78635, 29.952448, 54.728294)
+
+[node name="RockPath_Square_Small_3_11" type="Node3D" parent="." unique_id=1359523183 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.3119246, 0, 0.6959688, 0, 1.0395691, 0, -0.6959688, 0, 1.3119246, -126.50322, 29.955454, 58.253784)
+
+[node name="RockPath_Round_Thin_6" type="Node3D" parent="." unique_id=1483821975 instance=ExtResource("1_28ghw")]
+transform = Transform3D(0.27088198, 0, 2.3163204, 0, 1.632474, 0, -2.3163204, 0, 0.27088198, -128.15375, 29.930042, 59.447563)
+
+[node name="RockPath_Round_Small_2_6" type="Node3D" parent="." unique_id=1192647411 instance=ExtResource("9_nem6j")]
+transform = Transform3D(0.5409002, 0, 1.9397442, 0, 1.4096235, 0, -1.9397442, 0, 0.5409002, -124.49237, 29.939594, 59.176926)
+
+[node name="RockPath_Round_Small_3_9" type="Node3D" parent="." unique_id=1924651594 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-0.9660571, 0, -1.7161909, 0, 1.3785874, 0, 1.7161909, 0, -0.9660571, -131.13603, 29.940926, 58.35628)
+
+[node name="RockPath_Round_Thin_7" type="Node3D" parent="." unique_id=1512836783 instance=ExtResource("1_28ghw")]
+transform = Transform3D(0.6705436, 0, 2.4166112, 0, 1.7555407, 0, -2.4166112, 0, 0.6705436, -128.18523, 29.92477, 62.42129)
+
+[node name="RockPath_Round_Small_3_10" type="Node3D" parent="." unique_id=1166291713 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-0.9160915, 0, 1.6559072, 0, 1.3246938, 0, -1.6559072, 0, -0.9160915, -131.55002, 29.943235, 61.80218)
+
+[node name="RockPath_Round_Wide_4" type="Node3D" parent="." unique_id=695391561 instance=ExtResource("10_nefnk")]
+transform = Transform3D(2.2226121, 0, 0.009938064, 0, 1.5558441, 0, -0.009938064, 0, 2.2226121, -128.31447, 29.93333, 65.679886)
+
+[node name="RockPath_Round_Small_3_11" type="Node3D" parent="." unique_id=1533868333 instance=ExtResource("2_0pysw")]
+transform = Transform3D(1.2650105, 0, -0.9772184, 0, 1.1189511, 0, 0.9772184, 0, 1.2650105, -132.25204, 29.952053, 67.00353)
+
+[node name="RockPath_Round_Thin_8" type="Node3D" parent="." unique_id=961097318 instance=ExtResource("1_28ghw")]
+transform = Transform3D(0.66535527, 0, 2.2753136, 0, 1.6594208, 0, -2.2753136, 0, 0.66535527, -128.95274, 29.92889, 69.89545)
+
+[node name="RockPath_Round_Small_3_12" type="Node3D" parent="." unique_id=311234385 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-0.6826127, 0, 1.6713072, 0, 1.2637331, 0, -1.6713072, 0, -0.6826127, -125.608246, 29.945848, 70.84933)
+
+[node name="RockPath_Square_Small_3_12" type="Node3D" parent="." unique_id=996668575 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.3437401, 0, 1.248949, 0, 1.2841731, 0, -1.248949, 0, 1.3437401, -132.3515, 29.944971, 70.41717)
+
+[node name="RockPath_Square_Small_1_8" type="Node3D" parent="." unique_id=859283672 instance=ExtResource("4_1li2s")]
+transform = Transform3D(-0.31535944, 0, 1.2068065, 0, 0.87313145, 0, -1.2068065, 0, -0.31535944, -129.50089, 29.962587, 71.83198)
+
+[node name="RockPath_Square_Wide_11" type="Node3D" parent="." unique_id=1940548691 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(2.3213384, 0, -0.35372734, 0, 1.6436942, 0, 0.35372734, 0, 2.3213384, -128.95145, 29.929564, 73.168785)
+
+[node name="RockPath_Square_Small_1_9" type="Node3D" parent="." unique_id=1749289391 instance=ExtResource("4_1li2s")]
+transform = Transform3D(0.50504464, 0, 1.4102173, 0, 1.0485483, 0, -1.4102173, 0, 0.50504464, -125.089775, 29.95507, 73.69111)
+
+[node name="RockPath_Round_Small_1_8" type="Node3D" parent="." unique_id=1356212832 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-0.4815804, 0, -1.5371884, 0, 1.1276016, 0, 1.5371884, 0, -0.4815804, -131.99869, 29.951681, 72.830574)
+
+[node name="RockPath_Square_Wide_12" type="Node3D" parent="." unique_id=159552577 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-0.6690513, 0, 2.2821, 0, 1.6647068, 0, -2.2821, 0, -0.6690513, -128.44777, 29.928663, 77.25602)
+
+[node name="RockPath_Round_Small_1_9" type="Node3D" parent="." unique_id=519958256 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.6519469, 0, -0.6200899, 0, 1.235146, 0, 0.6200899, 0, -1.6519469, -124.7294, 29.947073, 76.967354)
+
+[node name="RockPath_Square_Thin_12" type="Node3D" parent="." unique_id=722593775 instance=ExtResource("8_hnor2")]
+transform = Transform3D(0.22850959, 0, 2.250792, 0, 1.5836535, 0, -2.250792, 0, 0.22850959, -128.51126, 29.932137, 81.42276)
+
+[node name="RockPath_Round_Small_1_10" type="Node3D" parent="." unique_id=1571495220 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.8938196, 0, 0.12584534, 0, 1.3285973, 0, -0.12584534, 0, -1.8938196, -131.52386, 29.943068, 82.598045)
+
+[node name="RockPath_Square_Small_3_13" type="Node3D" parent="." unique_id=847709583 instance=ExtResource("7_bva28")]
+transform = Transform3D(-0.6727849, 0, -1.0753167, 0, 0.88790953, 0, 1.0753167, 0, -0.6727849, -128.12064, 29.961956, 83.25709)
+
+[node name="RockPath_Round_Thin_9" type="Node3D" parent="." unique_id=693546877 instance=ExtResource("1_28ghw")]
+transform = Transform3D(0.1116974, 0, 2.4156857, 0, 1.6927866, 0, -2.4156857, 0, 0.1116974, -127.9229, 29.92746, 84.370895)
+
+[node name="RockPath_Square_Small_2_8" type="Node3D" parent="." unique_id=1659395521 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(1.5758759, 0, 0.74993455, 0, 1.2216527, 0, -0.74993455, 0, 1.5758759, -124.03939, 29.94765, 84.325005)
+
+[node name="RockPath_Square_Small_3_14" type="Node3D" parent="." unique_id=1522872681 instance=ExtResource("7_bva28")]
+transform = Transform3D(-1.5084511, 0, 0.12181715, 0, 1.0593532, 0, -0.12181715, 0, -1.5084511, -130.81609, 29.954607, 85.70972)
+
+[node name="RockPath_Round_Small_2_7" type="Node3D" parent="." unique_id=2103452206 instance=ExtResource("9_nem6j")]
+transform = Transform3D(-1.3032135, 0, 0.46409827, 0, 0.9683691, 0, -0.46409827, 0, -1.3032135, -127.95913, 29.958508, 86.40235)
+
+[node name="RockPath_Square_Wide_13" type="Node3D" parent="." unique_id=1613659834 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(2.4398513, 0, 0.87176, 0, 1.8136404, 0, -0.87176, 0, 2.4398513, -127.40035, 29.92228, 87.583374)
+
+[node name="RockPath_Round_Small_3_13" type="Node3D" parent="." unique_id=278093280 instance=ExtResource("2_0pysw")]
+transform = Transform3D(1.6850466, 0, -0.62232023, 0, 1.2574043, 0, 0.62232023, 0, 1.6850466, -122.97745, 29.94612, 88.400566)
+
+[node name="RockPath_Round_Small_1_11" type="Node3D" parent="." unique_id=566877852 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-0.31348848, 0, -1.9342526, 0, 1.3716443, 0, 1.9342526, 0, -0.31348848, -130.67853, 29.941223, 86.592514)
+
+[node name="RockPath_Square_Thin_13" type="Node3D" parent="." unique_id=117600887 instance=ExtResource("8_hnor2")]
+transform = Transform3D(-0.6232637, 0, 2.4386652, 0, 1.7619357, 0, -2.4386652, 0, -0.6232637, -125.84664, 29.924494, 91.88157)
+
+[node name="RockPath_Round_Small_1_12" type="Node3D" parent="." unique_id=2113418741 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-0.95244044, 0, -1.5152462, 0, 1.2528071, 0, 1.5152462, 0, -0.95244044, -123.20452, 29.946316, 89.77571)
+
+[node name="RockPath_Square_Small_3_15" type="Node3D" parent="." unique_id=1394593724 instance=ExtResource("7_bva28")]
+transform = Transform3D(-1.4959694, 0, -0.037464406, 0, 1.0475069, 0, 0.037464406, 0, -1.4959694, -123.59674, 29.955112, 93.234505)
+
+[node name="RockPath_Square_Wide_14" type="Node3D" parent="." unique_id=2110879200 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-0.8664085, 0, 2.0313935, 0, 1.5459106, 0, -2.0313935, 0, -0.8664085, -124.49159, 29.933754, 95.04614)
+
+[node name="RockPath_Round_Small_2_8" type="Node3D" parent="." unique_id=1086392065 instance=ExtResource("9_nem6j")]
+transform = Transform3D(-1.869443, 0, 0.3013769, 0, 1.3255061, 0, -0.3013769, 0, -1.869443, -120.59376, 29.943201, 94.453896)
+
+[node name="RockPath_Square_Small_2_9" type="Node3D" parent="." unique_id=1576809475 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(0.85646576, 0, 1.8585387, 0, 1.4324709, 0, -1.8585387, 0, 0.85646576, -128.04118, 29.938616, 95.86188)
+
+[node name="RockPath_Round_Wide_5" type="Node3D" parent="." unique_id=888200587 instance=ExtResource("10_nefnk")]
+transform = Transform3D(-1.6351911, 0, 1.6837076, 0, 1.6429465, 0, -1.6837076, 0, -1.6351911, -122.33509, 29.929598, 98.546776)
+
+[node name="RockPath_Square_Small_1_10" type="Node3D" parent="." unique_id=681738962 instance=ExtResource("4_1li2s")]
+transform = Transform3D(0.61339974, 0, 1.5848022, 0, 1.1895587, 0, -1.5848022, 0, 0.61339974, -118.58741, 29.949026, 98.06422)
+
+[node name="RockPath_Square_Thin_14" type="Node3D" parent="." unique_id=1162430287 instance=ExtResource("8_hnor2")]
+transform = Transform3D(-0.98429835, 0, 1.9935522, 0, 1.5563148, 0, -1.9935522, 0, -0.98429835, -120.20693, 29.933306, 102.345795)
+
+[node name="RockPath_Square_Small_3_16" type="Node3D" parent="." unique_id=1851776603 instance=ExtResource("7_bva28")]
+transform = Transform3D(0.4558339, 0, 1.3442267, 0, 0.9935883, 0, -1.3442267, 0, 0.4558339, -117.10034, 29.957426, 99.5639)
+
+[node name="RockPath_Square_Thin_15" type="Node3D" parent="." unique_id=1854097606 instance=ExtResource("8_hnor2")]
+transform = Transform3D(-1.0246291, 0, 2.1453817, 0, 1.664253, 0, -2.1453817, 0, -1.0246291, -118.34127, 29.928682, 104.41451)
+
+[node name="RockPath_Square_Small_1_11" type="Node3D" parent="." unique_id=1743066056 instance=ExtResource("4_1li2s")]
+transform = Transform3D(-1.6332165, 0, 0.50613236, 0, 1.1968907, 0, -0.50613236, 0, -1.6332165, -115.51095, 29.948711, 102.75464)
+
+[node name="RockPath_Round_Small_2_9" type="Node3D" parent="." unique_id=799302659 instance=ExtResource("9_nem6j")]
+transform = Transform3D(-1.2257568, 0, 0.9777579, 0, 1.0975701, 0, -0.9777579, 0, -1.2257568, -120.66795, 29.952969, 106.538704)
+
+[node name="RockPath_Round_Wide_6" type="Node3D" parent="." unique_id=620115323 instance=ExtResource("10_nefnk")]
+transform = Transform3D(-1.8510619, 0, 1.6020602, 0, 1.7136462, 0, -1.6020602, 0, -1.8510619, -116.581696, 29.926563, 107.00959)
+
+[node name="RockPath_Square_Small_1_12" type="Node3D" parent="." unique_id=499946854 instance=ExtResource("4_1li2s")]
+transform = Transform3D(0.92336327, 0, -0.7733097, 0, 0.8430882, 0, 0.7733097, 0, 0.92336327, -115.11894, 29.963875, 109.50735)
+
+[node name="RockPath_Square_Wide_15" type="Node3D" parent="." unique_id=1159982749 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-1.8767338, 0, 1.4087436, 0, 1.6426435, 0, -1.4087436, 0, -1.8767338, -113.4248, 29.92961, 110.12802)
+
+[node name="RockPath_Square_Small_2_10" type="Node3D" parent="." unique_id=1073671830 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-2.0252557, 0, -0.40979648, 0, 1.4464096, 0, 0.40979648, 0, -2.0252557, -114.14391, 29.938019, 113.53599)
+
+[node name="RockPath_Square_Wide_16" type="Node3D" parent="." unique_id=16257198 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-1.9510576, 0, 1.4658054, 0, 1.708231, 0, -1.4658054, 0, -1.9510576, -110.23577, 29.926798, 112.96752)
+
+[node name="RockPath_Round_Small_2_10" type="Node3D" parent="." unique_id=751321204 instance=ExtResource("9_nem6j")]
+transform = Transform3D(-1.4294066, 0, 0.46856976, 0, 1.0529734, 0, -0.46856976, 0, -1.4294066, -106.9668, 29.954882, 111.0886)
+
+[node name="RockPath_Round_Small_3_14" type="Node3D" parent="." unique_id=1896060130 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-0.5560096, 0, -1.76974, 0, 1.2985191, 0, 1.76974, 0, -0.5560096, -110.73265, 29.944357, 115.942635)
+
+[node name="RockPath_Square_Wide_17" type="Node3D" parent="." unique_id=33128092 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(0.824654, 0, 2.045681, 0, 1.5439507, 0, -2.045681, 0, 0.824654, -106.67437, 29.93384, 115.25607)
+
+[node name="RockPath_Square_Small_1_13" type="Node3D" parent="." unique_id=1978221908 instance=ExtResource("4_1li2s")]
+transform = Transform3D(-0.5687431, 0, 1.6177179, 0, 1.2003479, 0, -1.6177179, 0, -0.5687431, -105.18691, 29.948565, 111.72692)
+
+[node name="RockPath_Round_Small_3_15" type="Node3D" parent="." unique_id=372406509 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-0.6417716, 0, -1.1278613, 0, 0.9083675, 0, 1.1278613, 0, -0.6417716, -103.87898, 29.961079, 115.67606)
+
+[node name="RockPath_Square_Thin_16" type="Node3D" parent="." unique_id=2086507428 instance=ExtResource("8_hnor2")]
+transform = Transform3D(-2.1285, 0, 0.8907324, 0, 1.615153, 0, -0.8907324, 0, -2.1285, -103.25088, 29.930786, 117.05842)
+
+[node name="RockPath_Round_Small_2_11" type="Node3D" parent="." unique_id=850894350 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.7205937, 0, 0.74783945, 0, 1.3132616, 0, -0.74783945, 0, 1.7205937, -101.5718, 29.943724, 114.10611)
+
+[node name="RockPath_Square_Small_3_17" type="Node3D" parent="." unique_id=1866839738 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.6378405, 0, 0.72551805, 0, 1.2539378, 0, -0.72551805, 0, 1.6378405, -104.66652, 29.946268, 120.873764)
+
+[node name="RockPath_Round_Small_3_16" type="Node3D" parent="." unique_id=1203390427 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-1.1902729, 0, -0.4076331, 0, 0.8806975, 0, 0.4076331, 0, -1.1902729, -101.48331, 29.962263, 117.83916)
+
+[node name="RockPath_Square_Thin_17" type="Node3D" parent="." unique_id=868379429 instance=ExtResource("8_hnor2")]
+transform = Transform3D(-2.1637664, 0, 0.8724255, 0, 1.6331183, 0, -0.8724255, 0, -2.1637664, -100.850204, 29.930017, 119.18453)
+
+[node name="RockPath_Round_Small_2_12" type="Node3D" parent="." unique_id=925475199 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.0180112, 0, -0.9994836, 0, 0.9986511, 0, 0.9994836, 0, 1.0180112, -102.42057, 29.957209, 121.554146)
+
+[node name="RockPath_Square_Small_2_11" type="Node3D" parent="." unique_id=550807724 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(0.061208215, 0, -1.5916493, 0, 1.1149781, 0, 1.5916493, 0, 0.061208215, -99.59641, 29.952223, 120.74466)
+
+[node name="RockPath_Round_Thin_10" type="Node3D" parent="." unique_id=2041803772 instance=ExtResource("1_28ghw")]
+transform = Transform3D(-1.7361126, 0, 1.3687253, 0, 1.5475378, 0, -1.3687253, 0, -1.7361126, -98.45137, 29.933685, 121.17436)
+
+[node name="RockPath_Round_Small_1_13" type="Node3D" parent="." unique_id=1508545877 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-0.045930605, 0, -1.9562026, 0, 1.3697193, 0, 1.9562026, 0, -0.045930605, -95.237015, 29.941305, 118.840836)
+
+[node name="RockPath_Square_Small_2_12" type="Node3D" parent="." unique_id=686041835 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-1.6306428, 0, 0.12724684, 0, 1.1449201, 0, -0.12724684, 0, -1.6306428, -99.68527, 29.95094, 124.50943)
+
+[node name="RockPath_Round_Small_1_14" type="Node3D" parent="." unique_id=165022907 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.2261028, 0, -0.03478333, 0, 0.8586173, 0, 0.03478333, 0, -1.2261028, -97.14845, 29.963207, 122.48442)
+
+[node name="RockPath_Square_Wide_18" type="Node3D" parent="." unique_id=1960775032 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-2.3123503, 0, 0.992296, 0, 1.7613891, 0, -0.992296, 0, -2.3123503, -95.79577, 29.924517, 122.38385)
+
+[node name="RockPath_Square_Small_2_13" type="Node3D" parent="." unique_id=1222075813 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(1.7195892, 0, 0.80942225, 0, 1.3303963, 0, -0.80942225, 0, 1.7195892, -93.227936, 29.942991, 120.53634)
+
+[node name="RockPath_Round_Wide_7" type="Node3D" parent="." unique_id=1322076277 instance=ExtResource("10_nefnk")]
+transform = Transform3D(1.621708, 0, 1.633038, 0, 1.6110269, 0, -1.633038, 0, 1.621708, -92.535164, 29.930964, 125.46701)
+
+[node name="RockPath_Square_Small_1_14" type="Node3D" parent="." unique_id=759187667 instance=ExtResource("4_1li2s")]
+transform = Transform3D(2.0147126, 0, -0.37354645, 0, 1.4343345, 0, 0.37354645, 0, 2.0147126, -95.3961, 29.938536, 126.87147)
+
+[node name="RockPath_Round_Small_1_15" type="Node3D" parent="." unique_id=862939142 instance=ExtResource("6_nefmc")]
+transform = Transform3D(1.251884, 0, 0.8090213, 0, 1.0433825, 0, -0.8090213, 0, 1.251884, -90.93131, 29.955292, 127.806946)
+
+[node name="RockPath_Round_Wide_8" type="Node3D" parent="." unique_id=1754906008 instance=ExtResource("10_nefnk")]
+transform = Transform3D(0.8334979, 0, 2.1290796, 0, 1.6004913, 0, -2.1290796, 0, 0.8334979, -89.00394, 29.931416, 127.65833)
+
+[node name="RockPath_Square_Small_2_14" type="Node3D" parent="." unique_id=1323050708 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-0.6975713, 0, 1.3584806, 0, 1.0689793, 0, -1.3584806, 0, -0.6975713, -91.82196, 29.954195, 130.2244)
+
+[node name="RockPath_Square_Small_2_15" type="Node3D" parent="." unique_id=482074970 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-1.294833, 0, 0.0073516387, 0, 0.90639764, 0, -0.0073516387, 0, -1.294833, -87.01288, 29.961163, 129.43587)
+
+[node name="RockPath_Round_Wide_9" type="Node3D" parent="." unique_id=1719776723 instance=ExtResource("10_nefnk")]
+transform = Transform3D(-1.9717888, 0, 1.4645, 0, 1.7193104, 0, -1.4645, 0, -1.9717888, -85.62974, 29.926323, 129.80319)
+
+[node name="RockPath_Square_Small_2_16" type="Node3D" parent="." unique_id=1768331502 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-0.944944, 0, 1.6970959, 0, 1.3597045, 0, -1.6970959, 0, -0.944944, -82.86544, 29.941734, 126.89364)
+
+[node name="RockPath_Square_Small_1_15" type="Node3D" parent="." unique_id=742861787 instance=ExtResource("4_1li2s")]
+transform = Transform3D(1.8009833, 0, -0.42238918, 0, 1.2948966, 0, 0.42238918, 0, 1.8009833, -85.814156, 29.944511, 133.87677)
+
+[node name="RockPath_Round_Small_3_17" type="Node3D" parent="." unique_id=832859827 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-0.96578723, 0, 0.74925935, 0, 0.8556436, 0, -0.74925935, 0, -0.96578723, -83.1296, 29.963335, 131.15372)
+
+[node name="RockPath_Square_Wide_19" type="Node3D" parent="." unique_id=2132269585 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(0.931805, 0, 2.1907365, 0, 1.6664685, 0, -2.1907365, 0, 0.931805, -81.35775, 29.928587, 131.79462)
+
+[node name="RockPath_Square_Small_2_17" type="Node3D" parent="." unique_id=852893525 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(0.8130003, 0, 1.1836567, 0, 1.0051798, 0, -1.1836567, 0, 0.8130003, -83.06571, 29.956928, 134.67386)
+
+[node name="RockPath_Square_Thin_18" type="Node3D" parent="." unique_id=1506299362 instance=ExtResource("8_hnor2")]
+transform = Transform3D(-1.9418212, 0, 1.2632133, 0, 1.621581, 0, -1.2632133, 0, -1.9418212, -77.85099, 29.93051, 134.0459)
+
+[node name="RockPath_Round_Small_2_13" type="Node3D" parent="." unique_id=594504578 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.388816, 0, -0.18258043, 0, 0.9805362, 0, 0.18258043, 0, 1.388816, -79.85243, 29.957983, 136.96725)
+
+[node name="RockPath_Square_Small_2_18" type="Node3D" parent="." unique_id=1101303842 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-0.0962936, 0, -1.2098505, 0, 0.8495736, 0, 1.2098505, 0, -0.0962936, -76.77917, 29.963598, 135.91864)
+
+[node name="RockPath_Square_Wide_20" type="Node3D" parent="." unique_id=263797951 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-2.0321712, 0, 1.396267, 0, 1.725934, 0, -1.396267, 0, -2.0321712, -75.59513, 29.926039, 136.05661)
+
+[node name="RockPath_Square_Small_3_18" type="Node3D" parent="." unique_id=837664162 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.4724749, 0, 1.3790909, 0, 1.4122097, 0, -1.3790909, 0, 1.4724749, -73.92386, 29.939484, 132.67139)
+
+[node name="RockPath_Round_Thin_11" type="Node3D" parent="." unique_id=666561359 instance=ExtResource("1_28ghw")]
+transform = Transform3D(-1.8144466, 0, 1.295457, 0, 1.5606115, 0, -1.295457, 0, -1.8144466, -71.572586, 29.933123, 137.87206)
+
+[node name="RockPath_Round_Small_3_18" type="Node3D" parent="." unique_id=2088045783 instance=ExtResource("2_0pysw")]
+transform = Transform3D(1.0403187, 0, -1.5471992, 0, 1.305099, 0, 1.5471992, 0, 1.0403187, -69.69653, 29.944075, 135.7739)
+
+[node name="RockPath_Square_Small_3_19" type="Node3D" parent="." unique_id=23136079 instance=ExtResource("7_bva28")]
+transform = Transform3D(-0.93239415, 0, 1.4591373, 0, 1.2121204, 0, -1.4591373, 0, -0.93239415, -72.6729, 29.94806, 141.68167)
+
+[node name="RockPath_Square_Thin_19" type="Node3D" parent="." unique_id=981836818 instance=ExtResource("8_hnor2")]
+transform = Transform3D(-1.8575236, 0, 1.4967344, 0, 1.6698496, 0, -1.4967344, 0, -1.8575236, -69.087135, 29.928444, 139.62057)
+
+[node name="RockPath_Round_Small_1_16" type="Node3D" parent="." unique_id=1952806216 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.934401, 0, 0.7078996, 0, 1.441903, 0, -0.7078996, 0, -1.934401, -66.63486, 29.938213, 137.7402)
+
+[node name="RockPath_Round_Small_2_14" type="Node3D" parent="." unique_id=397543554 instance=ExtResource("9_nem6j")]
+transform = Transform3D(-0.26766738, 0, -1.7120636, 0, 1.2130027, 0, 1.7120636, 0, -0.26766738, -70.36088, 29.948023, 143.33638)
+
+[node name="RockPath_Round_Thin_12" type="Node3D" parent="." unique_id=352295835 instance=ExtResource("1_28ghw")]
+transform = Transform3D(-1.7309455, 0, 1.8828552, 0, 1.7903197, 0, -1.8828552, 0, -1.7309455, -66.71235, 29.923279, 141.67433)
+
+[node name="RockPath_Round_Small_3_19" type="Node3D" parent="." unique_id=15530170 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-0.8489025, 0, 1.2019266, 0, 1.0300384, 0, -1.2019266, 0, -0.8489025, -68.78716, 29.955864, 144.56369)
+
+[node name="RockPath_Round_Wide_10" type="Node3D" parent="." unique_id=1546644479 instance=ExtResource("10_nefnk")]
+transform = Transform3D(-1.9011865, 0, 1.6121602, 0, 1.7448924, 0, -1.6121602, 0, -1.9011865, -64.32491, 29.925222, 144.08354)
+
+[node name="RockPath_Square_Small_2_19" type="Node3D" parent="." unique_id=1004965246 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(1.1325524, 0, -1.182079, 0, 1.1459463, 0, 1.182079, 0, 1.1325524, -63.477623, 29.950895, 140.01299)
+
+[node name="RockPath_Round_Small_2_15" type="Node3D" parent="." unique_id=1083371207 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.4189678, 0, -0.90735406, 0, 1.1789881, 0, 0.90735406, 0, 1.4189678, -62.958324, 29.94948, 146.86972)
+
+[node name="RockPath_Square_Wide_21" type="Node3D" parent="." unique_id=1193518711 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(1.3621687, 0, 2.1972673, 0, 1.8096709, 0, -2.1972673, 0, 1.3621687, -60.863873, 29.922451, 147.10156)
+
+[node name="RockPath_Square_Small_2_20" type="Node3D" parent="." unique_id=1481690182 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(-0.49169704, 0, 1.3920583, 0, 1.033441, 0, -1.3920583, 0, -0.49169704, -58.987762, 29.955717, 149.44702)
+
+[node name="RockPath_Round_Wide_11" type="Node3D" parent="." unique_id=1356881839 instance=ExtResource("10_nefnk")]
+transform = Transform3D(-1.7773067, 0, 1.6863374, 0, 1.7150075, 0, -1.6863374, 0, -1.7773067, -57.2903, 29.926508, 150.18771)
+
+[node name="RockPath_Square_Small_3_20" type="Node3D" parent="." unique_id=1480094711 instance=ExtResource("7_bva28")]
+transform = Transform3D(-1.2857778, 0, 1.0360502, 0, 1.1558746, 0, -1.0360502, 0, -1.2857778, -60.86196, 29.95047, 151.71452)
+
+[node name="RockPath_Square_Small_2_21" type="Node3D" parent="." unique_id=1055847196 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(0.40152147, 0, -1.1788138, 0, 0.8717239, 0, 1.1788138, 0, 0.40152147, -56.05472, 29.962648, 152.98393)
+
+[node name="RockPath_Round_Thin_13" type="Node3D" parent="." unique_id=418605793 instance=ExtResource("1_28ghw")]
+transform = Transform3D(-2.2874973, 0, 1.2231525, 0, 1.8157879, 0, -1.2231525, 0, -2.2874973, -54.157063, 29.922188, 153.66057)
+
+[node name="RockPath_Round_Small_1_17" type="Node3D" parent="." unique_id=1826045602 instance=ExtResource("6_nefmc")]
+transform = Transform3D(1.7789553, 0, -0.5396424, 0, 1.3013028, 0, 0.5396424, 0, 1.7789553, -52.864162, 29.944237, 150.40001)
+
+[node name="RockPath_Round_Thin_14" type="Node3D" parent="." unique_id=1586610692 instance=ExtResource("1_28ghw")]
+transform = Transform3D(-1.7265289, 0, 1.8956121, 0, 1.7948207, 0, -1.8956121, 0, -1.7265289, -51.523865, 29.923086, 155.91731)
+
+[node name="RockPath_Round_Small_2_16" type="Node3D" parent="." unique_id=986460366 instance=ExtResource("9_nem6j")]
+transform = Transform3D(1.0687385, 0, 0.9846534, 0, 1.0172288, 0, -0.9846534, 0, 1.0687385, -49.685875, 29.956411, 152.87448)
+
+[node name="RockPath_Round_Small_1_18" type="Node3D" parent="." unique_id=590299616 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-0.30392304, 0, -1.6026719, 0, 1.1418642, 0, 1.6026719, 0, -0.30392304, -53.507843, 29.95107, 158.76976)
+
+[node name="RockPath_Round_Small_1_19" type="Node3D" parent="." unique_id=32117845 instance=ExtResource("6_nefmc")]
+transform = Transform3D(1.5178728, 0, -0.19189806, 0, 1.0709686, 0, 0.19189806, 0, 1.5178728, -50.54969, 29.95411, 158.04512)
+
+[node name="RockPath_Square_Wide_22" type="Node3D" parent="." unique_id=1551161289 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-1.9649594, 0, 1.1568224, 0, 1.5961387, 0, -1.1568224, 0, -1.9649594, -48.68014, 29.931602, 157.68503)
+
+[node name="RockPath_Square_Small_1_16" type="Node3D" parent="." unique_id=272542880 instance=ExtResource("4_1li2s")]
+transform = Transform3D(-0.49527544, 0, 1.7138368, 0, 1.2487762, 0, -1.7138368, 0, -0.49527544, -46.62081, 29.94649, 154.82976)
+
+[node name="RockPath_Round_Thin_15" type="Node3D" parent="." unique_id=1938723263 instance=ExtResource("1_28ghw")]
+transform = Transform3D(-1.4945458, 0, 1.9971203, 0, 1.7460976, 0, -1.9971203, 0, -1.4945458, -45.659416, 29.925177, 160.24968)
+
+[node name="RockPath_Round_Small_1_20" type="Node3D" parent="." unique_id=339009348 instance=ExtResource("6_nefmc")]
+transform = Transform3D(1.4756019, 0, -0.7803724, 0, 1.1684722, 0, 0.7803724, 0, 1.4756019, -48.256268, 29.94993, 162.462)
+
+[node name="RockPath_Square_Small_1_17" type="Node3D" parent="." unique_id=484381427 instance=ExtResource("4_1li2s")]
+transform = Transform3D(1.2991741, 0, 0.63559914, 0, 1.0124235, 0, -0.63559914, 0, 1.2991741, -44.473286, 29.956617, 162.0378)
+
+[node name="RockPath_Square_Wide_23" type="Node3D" parent="." unique_id=1538663289 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-2.201692, 0, 1.1312882, 0, 1.7327312, 0, -1.1312882, 0, -2.201692, -43.467503, 29.925747, 162.43086)
+
+[node name="RockPath_Square_Small_2_22" type="Node3D" parent="." unique_id=2047033354 instance=ExtResource("3_u8e8d")]
+transform = Transform3D(0.7301083, 0, 1.7513064, 0, 1.328181, 0, -1.7513064, 0, 0.7301083, -40.60438, 29.943085, 159.90761)
+
+[node name="RockPath_Square_Wide_24" type="Node3D" parent="." unique_id=660429771 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(-1.8052258, 0, 1.7919753, 0, 1.7805357, 0, -1.7919753, 0, -1.8052258, -39.719566, 29.923698, 165.33633)
+
+[node name="RockPath_Square_Small_1_18" type="Node3D" parent="." unique_id=1029762863 instance=ExtResource("4_1li2s")]
+transform = Transform3D(1.7349199, 0, 1.0143217, 0, 1.4067729, 0, -1.0143217, 0, 1.7349199, -38.981377, 29.939718, 161.08601)
+
+[node name="RockPath_Round_Small_3_20" type="Node3D" parent="." unique_id=1016940251 instance=ExtResource("2_0pysw")]
+transform = Transform3D(-0.12389052, 0, -1.4739031, 0, 1.0353706, 0, 1.4739031, 0, -0.12389052, -41.90617, 29.955637, 168.34593)
+
+[node name="RockPath_Square_Small_1_19" type="Node3D" parent="." unique_id=2005038423 instance=ExtResource("4_1li2s")]
+transform = Transform3D(0.64558446, 0, -1.075546, 0, 0.8780965, 0, 1.075546, 0, 0.64558446, -38.025394, 29.962376, 167.94006)
+
+[node name="RockPath_Round_Wide_12" type="Node3D" parent="." unique_id=902754788 instance=ExtResource("10_nefnk")]
+transform = Transform3D(-1.779345, 0, 1.8319838, 0, 1.7877065, 0, -1.8319838, 0, -1.779345, -35.706024, 29.923391, 168.10216)
+
+[node name="RockPath_Round_Small_1_21" type="Node3D" parent="." unique_id=44927419 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.0114632, 0.026056984, -1.2637309, 0.023246055, 1.1330649, 0.029073479, 1.2640653, 1.29669e-05, -1.0117302, -34.135845, 29.951376, 164.74733)
+
+[node name="RockPath_Round_Small_3_21" type="Node3D" parent="." unique_id=747240115 instance=ExtResource("2_0pysw")]
+transform = Transform3D(1.2081211, 0, 1.5707458, 0, 1.3871307, 0, -1.5707458, 0, 1.2081211, -37.878036, 29.940561, 170.9514)
+
+[node name="RockPath_Square_Small_3_21" type="Node3D" parent="." unique_id=1367032401 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.6874602, 0.006920588, -0.17136599, -0.009835966, 1.1872975, 0.000998868, 0.1713689, 0, 1.6874889, -34.456707, 29.949123, 171.02197)
+
+[node name="RockPath_Square_Wide_25" type="Node3D" parent="." unique_id=452331993 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(2.132537, 0.05636691, 1.0520753, -0.073101655, 1.664554, -0.03382761, -1.0526171, -0.0014032992, 2.1337886, -33.453938, 29.923466, 172.08641)
+
+[node name="RockPath_Square_Small_3_22" type="Node3D" parent="." unique_id=213926017 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.6102862, 0.025689937, -0.5671011, -0.03991776, 1.1950071, -0.0028683925, 0.5668837, 0.011173105, 1.6107019, -30.447714, 29.854324, 169.21478)
+
+[node name="RockPath_Round_Small_2_17" type="Node3D" parent="." unique_id=605716082 instance=ExtResource("9_nem6j")]
+transform = Transform3D(-0.39691597, 0.15752381, -1.5700028, 0.038247477, 1.1335144, 0.22243144, 1.585587, 0.012089943, -0.39838028, -32.53451, 29.88643, 174.78154)
+
+[node name="RockPath_Square_Thin_20" type="Node3D" parent="." unique_id=1270552727 instance=ExtResource("8_hnor2")]
+transform = Transform3D(-1.482472, 0.2062725, 1.8525172, 0.30793762, 1.6571842, -0.13015075, -1.8503588, 0.11052785, -1.5058607, -30.89475, 29.573978, 175.80527)
+
+[node name="RockPath_Square_Wide_26" type="Node3D" parent="." unique_id=888819255 instance=ExtResource("5_2ghi6")]
+transform = Transform3D(1.9929478, -0.122887805, 1.1439289, -0.09588853, 1.571544, 0.51159704, -1.1533421, -0.34300494, 1.9341482, -29.203438, 29.24216, 178.42075)
+
+[node name="RockPath_Round_Small_2_18" type="Node3D" parent="." unique_id=1755229545 instance=ExtResource("9_nem6j")]
+transform = Transform3D(0.20967919, -0.027512848, 1.3934265, 0.042891502, 0.9860316, 0.033278327, -1.3933207, 0.026213277, 0.21071953, -26.909212, 29.363077, 176.24113)
+
+[node name="RockPath_Square_Small_3_23" type="Node3D" parent="." unique_id=747256371 instance=ExtResource("7_bva28")]
+transform = Transform3D(1.3106681, 0.19596934, 0.90895617, -0.23850347, 1.1164591, -0.14732815, -0.92070246, -0.010240654, 1.3321114, -32.764763, 29.922636, 179.02792)
+
+[node name="RockPath_Round_Thin_16" type="Node3D" parent="." unique_id=741225330 instance=ExtResource("1_28ghw")]
+transform = Transform3D(-1.2788666, -0.0032124962, 1.847095, -0.009355493, 1.5726169, -0.00089555164, -1.8470769, -0.005741099, -1.2788744, -27.509422, 29.92843, 182.20354)
+
+[node name="RockPath_Square_Small_3_24" type="Node3D" parent="." unique_id=289579028 instance=ExtResource("7_bva28")]
+transform = Transform3D(0.11320848, 0.007981173, 1.4199924, -0.05087905, 0.99653095, -0.0073744506, -1.4191264, -0.035091314, 0.11354197, -24.204023, 29.914536, 180.56413)
+
+[node name="RockPath_Round_Small_1_22" type="Node3D" parent="." unique_id=1565345320 instance=ExtResource("6_nefmc")]
+transform = Transform3D(-1.0828242, 1.6641914e-05, -1.1203018, 0.0035144577, 1.0906442, -0.0033638242, 1.1202964, -0.0034053517, -1.082819, -30.549065, 29.949617, 183.12689)
+
+[node name="RockPath_Round_Small_2_19" type="Node3D" parent="." unique_id=1505541208 instance=ExtResource("9_nem6j")]
+transform = Transform3D(-1.2627984, 0, -0.5262443, 0, 0.9576433, 0, 0.5262443, 0, -1.2627984, -26.9358, 29.95892, 183.97327)
