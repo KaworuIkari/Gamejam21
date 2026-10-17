@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_v1/growing_greenery.gd" id="1_1ln8o"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Split_Rail_Fence_Greenery.glb" id="2_jg1t5"]
+
+[node name="Split_Rail_Fence_Greenery" type="Node3D" unique_id=87954707]
+script = ExtResource("1_1ln8o")
+
+[node name="Visual" type="Node3D" parent="." unique_id=568969583 instance=ExtResource("2_jg1t5")]

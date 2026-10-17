@@ -1,6 +1,7 @@
 extends Control
 ## Presentation only. Shows the Quests autoload's quests when there are any (res://quests/),
 ## otherwise the demo record. The demo row is the template for the real quest rows.
+## Above the quests it shows how green the land is, in total and per GrowthRegion.
 signal close_requested
 
 const UIScaler = preload("res://ui/layout/ui_scaler.gd")
@@ -17,6 +18,10 @@ var _selected := true
 var _tracking := false
 var _rows: Array[Button] = []
 var _selected_id: StringName = &""
+var _restore: VBoxContainer
+var _restore_total: Label
+var _restore_total_bar: Label
+var _restore_rows: VBoxContainer
 
 ## A real provider can supply a display snapshot without putting gameplay logic here.
 ## Fields: title, description, location, steps (Array[String]), completed_steps (int).
@@ -44,6 +49,7 @@ func _ready() -> void:
 			if visible:
 				_render())
 	resized.connect(_update_layout)
+	_build_restoration()
 	_render()
 	_update_layout()
 	hide()
@@ -51,6 +57,7 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
 		_render()
+		_render_restoration()
 
 func open() -> void:
 	_archive = false
@@ -59,6 +66,7 @@ func open() -> void:
 	var tq: Quest = _quests().tracked_quest() if _quest_mode() else null
 	_selected_id = tq.get_id() if tq else &""
 	_render()
+	_render_restoration()
 	show()
 	_update_layout()
 	if _quest_mode():
@@ -140,6 +148,70 @@ func _fill_steps(lines: Array) -> void:
 		if line[1]:
 			label.add_theme_color_override(&"font_color", Color(0.6, 0.69, 0.56))
 		step_container.add_child(label)
+
+# --- Restoration -----------------------------------------------------------------------
+
+const BAR_CELLS := 20
+
+func _build_restoration() -> void:
+	_restore = VBoxContainer.new()
+	_restore.add_theme_constant_override(&"separation", 6)
+	var total := _restore_row()
+	_restore_total = total.get_child(0)
+	_restore_total_bar = total.get_child(1)
+	_restore.add_child(total)
+	_restore_rows = VBoxContainer.new()
+	_restore.add_child(_restore_rows)
+	_restore.add_child(HSeparator.new())
+	var content := %Filters.get_parent()
+	content.add_child(_restore)
+	content.move_child(_restore, 0)
+	var growth := get_node_or_null(^"/root/GrowthMap")
+	if growth:
+		growth.progress_changed.connect(func() -> void:
+			if visible:
+				_render_restoration())
+	_render_restoration()
+
+func _render_restoration() -> void:
+	var growth := get_node_or_null(^"/root/GrowthMap")
+	var regions: Array[Dictionary] = growth.progress_regions() if growth else []
+	_restore.visible = not regions.is_empty()
+	if regions.is_empty():
+		return
+	_restore_total.text = tr("RESTORE_TITLE")
+	_restore_total_bar.text = _bar(growth.progress_total)
+	var rows := _restore_rows.get_children()
+	for i in maxi(rows.size(), regions.size()):
+		if i >= regions.size():
+			rows[i].queue_free()
+			continue
+		var row: HBoxContainer = rows[i] if i < rows.size() else null
+		if row == null:
+			row = _restore_row()
+			row.modulate = Color(0.6, 0.69, 0.56)
+			_restore_rows.add_child(row)
+		row.get_child(0).text = "  " + tr(regions[i].title)
+		row.get_child(1).text = _bar(regions[i].value)
+
+## Name in a fixed-width column, then the bar, so every bar starts at the same x.
+func _restore_row() -> HBoxContainer:
+	var row := HBoxContainer.new()
+	var name_label := Label.new()
+	name_label.custom_minimum_size.x = 200
+	row.add_child(name_label)
+	row.add_child(Label.new())
+	return row
+
+## 0..1 -> whole percent; only shows 100 once the ground is really all green.
+static func percent(value: float) -> int:
+	return mini(int(value * 100.0), 99) if value < 0.995 else 100
+
+## "[■■■■□□□□…] 23%"
+func _bar(value: float) -> String:
+	var p := percent(value)
+	var filled := int(p / 100.0 * BAR_CELLS)
+	return "[%s%s] %3d%%" % ["■".repeat(filled), "□".repeat(BAR_CELLS - filled), p]
 
 # --- Real quests ----------------------------------------------------------------------
 

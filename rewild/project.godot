@@ -32,6 +32,7 @@ Quests="*res://systems/quests/quest_log.gd"
 UIAudio="*res://autoload/ui/ui_audio.gd"
 FmodManager="*uid://cds10pm7hwn3p"
 WorldEvents="*uid://x8dnsf2xkr0k"
+Puddles="*res://systems/puddles/puddles.gd"
 
 [debug]
 

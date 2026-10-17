@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" format=3]
+
+[ext_resource type="Shader" path="res://systems/growth_map/overgrowth.gdshader" id="1_shader"]
+
+[resource]
+resource_name = "Moss olive"
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/albedo_color = Color(0.545098, 0.619608, 0.34902, 1)
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/map_origin = Vector2(-512, -512)
+shader_parameter/map_size = 1024.0
+shader_parameter/grow_start = 0.35
+shader_parameter/grow_full = 0.7
+shader_parameter/jitter = 0.1
+shader_parameter/clump_size = 0.35
+shader_parameter/sparse_tint = Color(0.78, 0.72, 0.45, 1)
+shader_parameter/fresh_glow = 0.25
