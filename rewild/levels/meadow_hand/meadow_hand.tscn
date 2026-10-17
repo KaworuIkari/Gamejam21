@@ -30,16 +30,16 @@
 [ext_resource type="Script" uid="uid://dgqq1tf8prx5s" path="res://addons/proton_scatter/src/scatter.gd" id="30_8v0hq"]
 [ext_resource type="PackedScene" uid="uid://q5g68s303xuk" path="res://objects/animals/shark/animal_shark.tscn" id="30_lf2va"]
 [ext_resource type="Script" uid="uid://ba8jou0xje0c7" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="31_375q5"]
-[ext_resource type="PackedScene" uid="uid://dluvtf1jvdc4k" path="res://objects/animals/animal_helpers/animal_spawner.tscn" id="31_lvj5s"]
 [ext_resource type="Script" uid="uid://b5s7ggmsi8g5u" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="32_ld6y3"]
-[ext_resource type="PackedScene" uid="uid://dbrlmc7rwn285" path="res://objects/animals/chicken/animal_chicken.tscn" id="32_t7m7w"]
 [ext_resource type="Script" uid="uid://gjjh4mw1wn51" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="33_82jtq"]
 [ext_resource type="Script" uid="uid://bsgufyjcr5i6g" path="res://objects/interactables/interact_trigger.gd" id="34_2w8tj"]
 [ext_resource type="Script" uid="uid://b0332hlb7q5t1" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="34_cuhk7"]
+[ext_resource type="PackedScene" uid="uid://dj0sb2onfcp0f" path="res://objects/animals/crab/animal_crab.tscn" id="34_lkvlt"]
 [ext_resource type="Script" uid="uid://dc4rwlje6dfca" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="35_1hpyx"]
 [ext_resource type="Script" uid="uid://w31c6xppomyg" path="res://objects/water/water_flow_switch.gd" id="35_chsj8"]
 [ext_resource type="Script" uid="uid://it6ja2wjneak" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="36_628xv"]
 [ext_resource type="Script" uid="uid://c85i0481q4uog" path="res://addons/proton_scatter/src/scatter_item.gd" id="37_0mr6x"]
+[ext_resource type="PackedScene" uid="uid://dbrlmc7rwn285" path="res://objects/animals/chicken/animal_chicken.tscn" id="38_31emk"]
 [ext_resource type="Script" uid="uid://dx7e7heldjwmg" path="res://addons/proton_scatter/src/scatter_shape.gd" id="38_npsn8"]
 [ext_resource type="Script" uid="uid://ba7ljvtfgk4cp" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="39_hx1um"]
 [ext_resource type="Script" uid="uid://stwgokpcvk0m" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="40_375q5"]
@@ -93,6 +93,7 @@
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_grass_wispy_short.tscn" id="94_fgwd8"]
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_bush_flowers.tscn" id="95_ps1mq"]
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_petal_1.tscn" id="95_q5qyh"]
+[ext_resource type="PackedScene" uid="uid://d34ecpcbknq2e" path="res://objects/animals/fox/animal_fox.tscn" id="96_de71v"]
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_petal_5.tscn" id="96_ve4se"]
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_petal_4.tscn" id="97_4hg0i"]
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_petal_3.tscn" id="98_ln2to"]
@@ -109,6 +110,12 @@
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Plane_Greenery.tscn" id="PlaneGreenery_20261017"]
 [ext_resource type="PackedScene" path="res://objects/interactables/readables/readable_note.tscn" id="ReadableNoteScene"]
 [ext_resource type="PackedScene" path="res://levels/meadow_hand/rock_road.tscn" id="RockRoad_20261017"]
+
+[ext_resource type="PackedScene" uid="uid://dluvtf1jvdc4k" path="res://objects/animals/animal_helpers/animal_spawner.tscn" id="31_lvj5s"]
+
+[ext_resource type="PackedScene" uid="uid://dbrlmc7rwn285" path="res://objects/animals/chicken/animal_chicken.tscn" id="32_t7m7w"]
+
+[ext_resource type="PackedScene" uid="uid://db2wta2nor7sj" path="res://objects/animals/seagull/animal_seagull.tscn" id="20_brdle"]
 
 [sub_resource type="Gradient" id="Gradient_jk6td"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -905,21 +912,60 @@ walk_speed = 7.0
 sprint_speed = 29.200000000000003
 jump_velocity = 4.6
 
-[node name="Animals" type="Node3D" parent="." unique_id=29639103]
+[node name="Animals" type="Node3D" parent="SubViewportContainer/PixelateSubViewport" unique_id=29639103]
 
-[node name="Fish" type="Node3D" parent="Animals" unique_id=1933286653]
+[node name="AnimalCrab" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=1591991278 instance=ExtResource("34_lkvlt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.332455, 25.274546, 225.75255)
 
-[node name="AnimalShark" parent="Animals/Fish" unique_id=896278617 node_paths=PackedStringArray("sea_plane", "terrain") instance=ExtResource("30_lf2va")]
+[node name="AnimalSeagull" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=1987472582 instance=ExtResource("20_brdle")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.414333, 58.898666, 213.91249)
+
+[node name="Skeleton3D" parent="SubViewportContainer/PixelateSubViewport/Animals/AnimalSeagull/seagull/Seagull" parent_id_path=PackedInt32Array(1987472582, 737309334, 1541477137) index="0" unique_id=1884341351]
+bones/5/rotation = Quaternion(0.06599434, 7.854822e-09, -4.1094785e-09, 0.99782)
+bones/10/rotation = Quaternion(0.70529646, -0.09090336, -0.07520505, 0.6990262)
+bones/10/scale = Vector3(1.0053456, 1.0053455, 1.0053452)
+bones/11/rotation = Quaternion(-0.0010590459, 0.25765407, 0.02110569, 0.9660061)
+bones/12/rotation = Quaternion(0.00045719856, -0.3351704, -0.015462025, 0.94203055)
+bones/13/rotation = Quaternion(0.008204701, -0.02808758, 0.024387348, 0.9992743)
+bones/14/rotation = Quaternion(0.005547568, -0.033306465, -0.0009315102, 0.9994294)
+bones/20/rotation = Quaternion(-0.6884821, -0.048119932, 0.123610824, 0.71301985)
+bones/20/scale = Vector3(1.0040318, 0.9999997, 0.9999997)
+bones/21/rotation = Quaternion(-0.0029169293, 0.25764865, -0.005069012, 0.966221)
+bones/22/position = Vector3(-0.12688433, 0.0006751488, -1.1319358e-08)
+bones/22/rotation = Quaternion(0.0003128087, -0.3351578, 0.00966163, 0.9421125)
+bones/23/rotation = Quaternion(-0.0032854846, -0.028084751, 0.0053052227, 0.99958616)
+bones/24/rotation = Quaternion(0.0028420712, -0.033298545, 0.001662935, 0.99944013)
+bones/31/position = Vector3(-0.0028803064, -0.0764062, 2.568514e-08)
+bones/31/rotation = Quaternion(0.042918194, 1.962533e-11, 7.882865e-10, 0.99907863)
+bones/32/position = Vector3(-0.002880307, -0.07897564, -2.8552591e-09)
+bones/32/rotation = Quaternion(0.034984674, 1.2288335e-11, 5.462502e-10, 0.99938786)
+bones/35/rotation = Quaternion(0.29489174, -0.04775604, 0.005513995, 0.9543206)
+bones/40/rotation = Quaternion(0.30274937, -0.1262007, 0.04426854, 0.94364)
+bones/41/rotation = Quaternion(0.47786576, -0.15492892, -0.017900504, 0.8644773)
+
+[node name="PCam_Seagull" parent="SubViewportContainer/PixelateSubViewport/Animals/AnimalSeagull" index="3" unique_id=693118989]
+transform = Transform3D(-1, 0, 0, 0, 0.8833466, 0.46872032, 0, 0.46872035, -0.8833466, 0, 1.9829154, -3.7369797)
+
+[node name="Fish" type="Node3D" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=1933286653]
+
+[node name="AnimalShark" parent="SubViewportContainer/PixelateSubViewport/Animals/Fish" unique_id=896278617 node_paths=PackedStringArray("sea_plane", "terrain") instance=ExtResource("30_lf2va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275124, 14.021549, -146.18945)
-sea_plane = NodePath("../../../Water/Sea")
-terrain = NodePath("../../../NavigationRegion3D/Terrain3D")
+sea_plane = NodePath("../../../../../Water/Sea")
+terrain = NodePath("../../../../../NavigationRegion3D/Terrain3D")
 
-[node name="AnimalSpawner" parent="Animals" unique_id=503472948 instance=ExtResource("31_lvj5s")]
+[node name="AnimalSpawner" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=503472948 instance=ExtResource("31_lvj5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 49.41139, -62.70341)
 animal_scene = ExtResource("32_t7m7w")
 count = 3
 radius = 20.0
 spawn_on_ready = false
+
+[node name="AnimalFox" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=565286370 instance=ExtResource("96_de71v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.414333, 30.655788, 213.91249)
+debug = false
+
+[node name="AnimalChicken" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=255445494 instance=ExtResource("38_31emk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.26384, 27.389458, 217.34738)
 
 [node name="Enviroment_permanent" type="Node3D" parent="." unique_id=1242502599]
 
@@ -1463,6 +1509,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 107.887665, 54.52788, 99.3774
 [node name="Restorable_Fern_1" parent="." unique_id=1365728454 instance=ExtResource("105_lkvlt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.94717, 54.543877, 97.77543)
 
+[node name="RoboticsLabHouse5" parent="." unique_id=786935500 instance=ExtResource("63_a2o6s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.21257, 28.652138, 47.53864)
+
 [editable path="Water/pond"]
 [editable path="Water/Lake"]
 [editable path="Water/River"]
@@ -1470,4 +1519,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 106.94717, 54.543877, 97.7754
 [editable path="Water/StylizedWater2"]
 [editable path="Water/CrashsiteOutpostV2"]
 [editable path="Water/Froglake"]
+[editable path="SubViewportContainer/PixelateSubViewport/Animals/AnimalSeagull"]
+[editable path="SubViewportContainer/PixelateSubViewport/Animals/AnimalSeagull/seagull"]
+[editable path="SubViewportContainer/PixelateSubViewport/Animals/AnimalSeagull/PCam_Seagull"]
 [editable path="Leon2"]
