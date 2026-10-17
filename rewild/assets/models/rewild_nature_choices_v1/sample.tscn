@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_nature_choices_v1/A_Woodland_Log_Restorable.tscn" id="1_d4rsk"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_nature_choices_v1/B_Woodland_Ruin_Restorable.tscn" id="2_n7q0d"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_nature_choices_v1/C_Salvaged_Bench_Restorable.tscn" id="3_od8s8"]
+
+[sub_resource type="Environment" id="Environment_bc8lo"]
+background_mode = 1
+background_color = Color(0.15, 0.18, 0.16, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.85, 0.75, 1)
+ambient_light_energy = 0.7
+
+[node name="RegrowthGallery" type="Node3D" unique_id=1146214390]
+
+[node name="A_Woodland_Log_Barren" type="Node3D" parent="." unique_id=1475441204 instance=ExtResource("1_d4rsk")]
+
+[node name="B_Woodland_Ruin_Barren" type="Node3D" parent="." unique_id=1770404995 instance=ExtResource("2_n7q0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="C_Salvaged_Bench_Barren" type="Node3D" parent="." unique_id=495189431 instance=ExtResource("3_od8s8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="@WorldEnvironment@5" type="WorldEnvironment" parent="." unique_id=1946100609]
+environment = SubResource("Environment_bc8lo")
+
+[node name="@DirectionalLight3D@6" type="DirectionalLight3D" parent="." unique_id=1650780983]
+transform = Transform3D(0.8660254, 0.40957603, -0.28678823, 0, 0.57357645, 0.81915206, 0.5, -0.7094065, 0.49673176, 0, 0, 0)
+
+[node name="@Camera3D@7" type="Camera3D" parent="." unique_id=1525832150]
+transform = Transform3D(0.9396926, -0.17101006, 0.2961981, 0, 0.8660254, 0.5, -0.34202012, -0.4698463, 0.81379765, 12, 8, 12)
+projection = 1
+current = true
+size = 16.0
