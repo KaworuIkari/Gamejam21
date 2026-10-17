@@ -61,6 +61,12 @@ uniform bool use_basin_mask = false;
 uniform sampler2D basin_mask : hint_default_white, filter_linear, repeat_disable;
 instance uniform vec4 basin_rect = vec4(0.0);  // centre xz, half size
 
+group_uniforms tank;
+uniform bool use_tank = false;
+uniform float cap_radius = 0.155;                       // set from WaterTank, follows bottom_radius
+uniform float cap_edge : hint_range(0.0, 0.5) = 0.18;   // rim weld width, as a fraction of the radius
+uniform float tank_wave_scale = 26.0;                   // wave() is tuned for a lake; the tank is 0.15 m
+
 float cutout_mask(int i, vec2 uv) {
 	if (i == 0) return textureLod(cutout_mask_0, uv, 0.0).r;
 	if (i == 1) return textureLod(cutout_mask_1, uv, 0.0).r;
@@ -176,7 +182,27 @@ vec3 view_from_depth(vec2 uv, float raw, mat4 inv_proj) {
 
 void vertex() {
 	puddle_water = 1.0;
-	if (use_height_field) {
+	if (use_tank) {
+		float t = (TIME + time_offset) * wave_speed;
+		noise_pos = VERTEX * local_noise_scale;
+		flow_dir = vec3(0.0, 0.0, 1.0);
+
+		float surf = smoothstep(0.2, 0.7, -NORMAL.y);          // 1 on the bottom cap, 0 on the wall
+		float r = length(VERTEX.xz) / max(cap_radius, 0.0001);
+		float weld = 1.0 - smoothstep(1.0 - cap_edge, 1.0, r); // 0 at the rim
+		float amp = wave_height * surf * weld;
+
+		float e = 0.02;
+		vec2 wp = VERTEX.xz * tank_wave_scale;
+		float h = wave(wp, t);
+		float hx = wave(wp + vec2(e, 0.0), t) - h;
+		float hz = wave(wp + vec2(0.0, e), t) - h;
+
+		VERTEX.y += h * amp;
+		if (surf > 0.5)
+			NORMAL = normalize(vec3(hx * amp / e, -1.0, hz * amp / e));
+		world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+	}else if (use_height_field) {
 		ivec2 c = ivec2(round((VERTEX.xz + half_extent) / cell_size));
 		puddle_water = texelFetch(depth_map, c, 0).r;
 		VERTEX.y = puddle_surface(c);
