@@ -6,6 +6,35 @@
 filter_enabled = true
 filters = ["..", "root/Skeleton3D:arm_stretch.r", "root/Skeleton3D:forearm_stretch.r", "root/Skeleton3D:hand.r", "root/Skeleton3D:index1.r", "root/Skeleton3D:index2.r", "root/Skeleton3D:index3.r", "root/Skeleton3D:middle1.r", "root/Skeleton3D:middle2.r", "root/Skeleton3D:middle3.r", "root/Skeleton3D:pinky1.r", "root/Skeleton3D:pinky2.r", "root/Skeleton3D:pinky3.r", "root/Skeleton3D:ring1.r", "root/Skeleton3D:ring2.r", "root/Skeleton3D:ring3.r", "root/Skeleton3D:shoulder.r", "root/Skeleton3D:thumb1.r", "root/Skeleton3D:thumb2.r", "root/Skeleton3D:thumb3.r"]
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_gmice"]
+filter_enabled = true
+filters = ["root/Skeleton3D:ear.l", "root/Skeleton3D:ear.r"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g8v1d"]
+animation = &"Robot_anim3/ear_idle_loop_rig"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6jtc7"]
+animation = &"Robot_anim3/ear_twitch_rig"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bi7sg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_al7g4"]
+advance_mode = 2
+advance_expression = "twitch_ear"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0e0ti"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_60aqe"]
+states/ear_idle/node = SubResource("AnimationNodeAnimation_g8v1d")
+states/ear_idle/position = Vector2(412.66666, 94)
+states/ear_twitch/node = SubResource("AnimationNodeAnimation_6jtc7")
+states/ear_twitch/position = Vector2(595.3333, 94.22222)
+transitions = ["Start", "ear_idle", SubResource("AnimationNodeStateMachineTransition_bi7sg"), "ear_idle", "ear_twitch", SubResource("AnimationNodeStateMachineTransition_al7g4"), "ear_twitch", "ear_idle", SubResource("AnimationNodeStateMachineTransition_0e0ti")]
+graph_offset = Vector2(135, 16)
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7jbh6"]
 animation = &"Robot_anim2/gun_aim_rig"
 
@@ -90,7 +119,8 @@ transitions = ["Start", "swim_idle", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(18, -40)
 
 [resource]
-nodes/output/position = Vector2(240, 266.66666)
+graph_offset = Vector2(-411.14063, 325.51785)
+nodes/output/position = Vector2(493.33334, 266.66666)
 nodes/Torso/node = ExtResource("1_jdw11")
 nodes/Torso/position = Vector2(-613.3333, 80)
 nodes/Gun/node = SubResource("AnimationNodeStateMachine_bi7sg")
@@ -105,4 +135,8 @@ nodes/Swim/node = SubResource("AnimationNodeBlend2_hx2yo")
 nodes/Swim/position = Vector2(-386.66666, 80)
 nodes/Swimming/node = SubResource("AnimationNodeStateMachine_ftcwy")
 nodes/Swimming/position = Vector2(-613.3333, 266.66666)
-node_connections = [&"output", 0, &"RightFingers", &"Aim", 0, &"Swim", &"Aim", 1, &"Gun", &"RightFingers", 0, &"Aim", &"RightFingers", 1, &"Hand", &"Swim", 0, &"Torso", &"Swim", 1, &"Swimming"]
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_gmice")
+nodes/Blend2/position = Vector2(280, 320)
+nodes/Ear/node = SubResource("AnimationNodeStateMachine_60aqe")
+nodes/Ear/position = Vector2(-93.333336, 626.6667)
+node_connections = [&"output", 0, &"Blend2", &"Aim", 0, &"Swim", &"Aim", 1, &"Gun", &"RightFingers", 0, &"Aim", &"RightFingers", 1, &"Hand", &"Swim", 0, &"Torso", &"Swim", 1, &"Swimming", &"Blend2", 0, &"RightFingers", &"Blend2", 1, &"Ear"]

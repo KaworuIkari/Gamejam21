@@ -3,11 +3,11 @@
 [ext_resource type="ArrayMesh" uid="uid://ewuu66j580cm" path="res://objects/player/LIRA/equipments/water_tank/WaterTank_tank.res" id="1_y0824"]
 [ext_resource type="Material" uid="uid://dc6btv3rapucg" path="res://objects/player/LIRA/equipments/water_tank/water_tank_mat.tres" id="2_7eek8"]
 [ext_resource type="Script" uid="uid://c7a57k8snjvxo" path="res://objects/player/LIRA/equipments/water_tank/water_tank.gd" id="3_7eek8"]
-[ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="5_0g07r"]
+[ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="4_bi8wa"]
 
 [sub_resource type="Curve3D" id="Curve3D_bi8wa"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, -0.021983778, 0.09037784, 0.12600207, 0.0014906172, 1.4912213, -0.25669673, 0.00015428137, 0.1543439, -0.02656854, -0.00036875208, -0.36890155, 0.06350219, -0.012421808, 1.0449086, -0.22772075, 0, 0, 0.3743274, 0, 0, 0, 0, 0, 0),
+"points": PackedVector3Array(0, 0, 0, -0.021702154, 0.112383805, 0.17846958, -0.11000291, 1.5838994, -0.37702957, 0.039106853, 0.12488238, -0.16681573, -0.08351122, -0.2666816, 0.35622868, -0.5957132, 1.8288909, -0.64353144, -0.26303405, -0.091850966, -0.35688773, 0, 0, 0, -0.27762717, 1.0486143, 0.33799493),
 "tilts": PackedFloat32Array(0, 0, 0)
 }
 point_count = 3
@@ -15,14 +15,14 @@ point_count = 3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqtik"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_c82li"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_0g07r"]
 top_radius = 0.145
 bottom_radius = 0.155
-height = 0.2
+height = 0.4510742
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5wno"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c82li"]
 render_priority = 0
-shader = ExtResource("5_0g07r")
+shader = ExtResource("4_bi8wa")
 shader_parameter/shallow_color = Color(0.45, 0.9, 0.93, 1)
 shader_parameter/deep_color = Color(0.06, 0.36, 0.72, 1)
 shader_parameter/sky_tint = Color(0.8, 0.9, 1, 1)
@@ -31,7 +31,7 @@ shader_parameter/murkiness = 0.45
 shader_parameter/refraction = 0.025
 shader_parameter/ripple_scale = 0.5
 shader_parameter/ripple_strength = 0.12
-shader_parameter/wave_height = 0.05
+shader_parameter/wave_height = 0.06
 shader_parameter/wave_speed = 1.0
 shader_parameter/use_local_coords = true
 shader_parameter/local_noise_scale = 1.0
@@ -46,17 +46,26 @@ shader_parameter/sparkle_strength = 1.2
 shader_parameter/sparkle_threshold = 0.6
 shader_parameter/underwater_fog_color = Color(0.1, 0.42, 0.58, 1)
 shader_parameter/underwater_fog_density = 0.08
+shader_parameter/use_basin_mask = false
+shader_parameter/use_tank = true
+shader_parameter/cap_radius = 0.155
+shader_parameter/cap_edge = 0.18
+shader_parameter/tank_wave_scale = 26.0
 shader_parameter/blob_density = 1.2
 shader_parameter/blob_clarity = 0.25
 shader_parameter/blob_foam = 0.6
+shader_parameter/use_height_field = false
+shader_parameter/half_extent = 11.0
+shader_parameter/cell_size = 0.35
+shader_parameter/puddle_lift = 0.01
+shader_parameter/puddle_edge = 0.006
 
-[node name="Tank" type="MeshInstance3D" unique_id=1308716164 node_paths=PackedStringArray("anchor_start", "anchor_end")]
+[node name="Tank" type="MeshInstance3D" unique_id=1308716164 node_paths=PackedStringArray("anchor_start")]
 process_mode = 3
 mesh = ExtResource("1_y0824")
 surface_material_override/0 = ExtResource("2_7eek8")
 script = ExtResource("3_7eek8")
 anchor_start = NodePath("TubeStart")
-anchor_end = NodePath("")
 
 [node name="Path3D" type="Path3D" parent="." unique_id=2079714481]
 curve = SubResource("Curve3D_bi8wa")
@@ -78,9 +87,13 @@ smooth_faces = true
 material = SubResource("StandardMaterial3D_vqtik")
 
 [node name="TankWater" type="MeshInstance3D" parent="." unique_id=964947035]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.307, -0.264)
-mesh = SubResource("CylinderMesh_c82li")
-surface_material_override/0 = SubResource("ShaderMaterial_c5wno")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1714737, -0.264)
+mesh = SubResource("CylinderMesh_0g07r")
+surface_material_override/0 = SubResource("ShaderMaterial_c82li")
 
 [node name="TubeStart" type="Node3D" parent="." unique_id=2059603440]
 transform = Transform3D(0.98107797, 0.14036916, -0.13335186, 0.19051115, -0.5770738, 0.79416114, 0.034522012, -0.80453897, -0.59289646, 0.0014906172, 1.4912213, -0.25669673)
+
+[node name="TankFillUpSound" type="FmodEventEmitter3D" parent="." unique_id=1316031303]
+event_name = "event:/LIRA/TankFill"
+event_guid = "{9c444ccd-2c9e-49b7-a565-0d4fb4f37b83}"

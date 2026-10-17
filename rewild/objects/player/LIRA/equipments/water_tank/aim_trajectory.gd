@@ -24,7 +24,7 @@ var landing_valid := false
 
 var _mesh := ImmediateMesh.new()
 
-@onready var sound_emitter : FmodEventEmitter3D = $FmodEventEmitter3D
+@onready var sound_emitter : FmodEventEmitter2D = $WaterGunSound
 
 func _ready() -> void:
 	var mi := MeshInstance3D.new()
@@ -48,7 +48,6 @@ func fire() -> void:
 	var blob : WaterBlob = blob_scene.instantiate()
 	sound_emitter.play_one_shot()
 	blob.splash_radius = player.splash_radius   # grows with the water gun's level
-	blob.on_blob_die.connect(player._on_blob_landed)
 	get_tree().current_scene.add_child(blob)
 	blob.launch(muzzle.global_position, world_velocity, gravity, collision_mask, player.get_rid())
 

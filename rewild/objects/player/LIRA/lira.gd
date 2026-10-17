@@ -34,7 +34,8 @@ var _fire_cd := 0.0
 ## Per level (first entry = level 1): splash radius of one shot, in metres.
 @export var water_gun_splash := PackedFloat32Array([4.0, 6.0, 8.0])
 ## Per level: seconds between shots.
-@export var water_gun_cooldown := PackedFloat32Array([0.35, 0.25, 0.18])
+@export var water_gun_cooldown := PackedFloat32Array([0.6, 0.45, 0.35])
+@export var water_tank_capacity := PackedFloat32Array([10, 20, 30])
 ## Per level: jetpack energy (fuel).
 @export var jetpack_energy := PackedFloat32Array([100.0, 160.0, 240.0])
 var water_gun_level := 0
@@ -47,6 +48,9 @@ var splash_radius := 4.0
 @export var aim_camera_distance : float = 2.5
 var _target_pivot_offset := Vector3.ZERO
 
+# water tank
+@onready var tank: WaterTank = $Robot/root/Skeleton3D/spine_02_x/Tank
+@onready var water_gun_pos: Node3D = $Robot/root/Skeleton3D/hand_r/WaterGunPos
 
 # jetpack
 @export_group("Jetpack")
@@ -138,9 +142,17 @@ func _physics_process(delta: float) -> void:
 	# udpate face
 	_idle_time = _idle_time + delta if velocity.length() < 0.1 else 0.0
 	face.base = _pick_base_mood()
+	_announce(face.base)
 	face.stress = 0.0             # e.g. 1.0 - health / max_health
 
 	_fire_cd = maxf(0.0, _fire_cd - delta)
+	if Input.is_action_pressed("use"):
+		try_shoot()
+
+	var filling := in_water and tank.level < 1.0
+	tank.set_filling(filling)
+	if filling:
+		tank.refill(delta)
 
 	# move camera sideways when aiming
 	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
@@ -202,6 +214,7 @@ func _apply_abilities() -> void:
 	if water_gun_level > 0:
 		splash_radius = _per_level(water_gun_splash, water_gun_level, splash_radius)
 		fire_cooldown = _per_level(water_gun_cooldown, water_gun_level, fire_cooldown)
+		tank.capacity = _per_level(water_tank_capacity, water_gun_level, tank.capacity)
 	jetpack.visible = jetpack_level > 0
 	if jetpack_level > 0:
 		max_energy = _per_level(jetpack_energy, jetpack_level, max_energy)
@@ -215,13 +228,17 @@ func _per_level(values: PackedFloat32Array, level: int, fallback: float) -> floa
 ## Gives (or takes away) the water gun: shows the tank and gun and allows aiming.
 func set_water_gun(enabled: bool) -> void:
 	has_water_gun = enabled
-	$Robot/root/Skeleton3D/spine_02_x/Tank.visible = enabled
-	$Robot/root/Skeleton3D/hand_r/WaterGunPos.visible = enabled
+	tank.visible = enabled
+	water_gun_pos.visible = enabled
 	if not enabled and animation_script.is_aiming:
 		on_aim(false)
 
 func try_shoot() -> void:                   # call this from the input code that used to set is_shooting
 	if not animation_script.is_aiming or _fire_cd > 0.0:
+		return
+	if not tank.consume_shot():
+		react(RobotFace.Mood.QUESTION, 1, 0.8)   # dry: LIRA notices
+		_fire_cd = 0.4                           # stop re-checking every frame while held
 		return
 	_fire_cd = fire_cooldown
 	aim_trajectory.fire()
@@ -248,10 +265,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_event = event.duplicate()
 		camera_event.relative.y = -event.relative.y
 	super(camera_event)
-	if event.is_action_pressed("use"):
-		if animation_script.is_aiming and not animation_script.is_shooting:
-			animation_script.is_shooting = true
-			try_shoot()
 	if event.is_action_pressed("use2") and has_water_gun:
 		on_aim(true)
 	elif event.is_action_released("use2"):
@@ -296,6 +309,7 @@ func _handle_jetpack(delta: float) -> void:
 		_regen_timer = regen_delay
 		animation_script.is_using_double_jump = true
 		jetpack.burst()
+		react(RobotFace.Mood.CORRECT, 1, 0.6)
 		SettingsManager.play_feedback(0.35, 0.55, 0.16)
 	if not _jet_armed:
 		return
@@ -352,6 +366,20 @@ func _consume_anim_triggers() -> void:
 		animation_script.is_using_double_jump = false
 
 ###### Mood ######
+signal mood_changed_signal(mood: RobotFace.Mood)
+var current_mood: RobotFace.Mood = RobotFace.Mood.SMILE
+
+## Dialogue, quests, anything: LIRA reacts and the UI hears about it.
+func react(mood: RobotFace.Mood, priority := 1, time := 1.0) -> void:
+	face.react(mood, priority, time)
+	_announce(mood)
+
+func _announce(m: RobotFace.Mood) -> void:
+	if m == current_mood:
+		return
+	current_mood = m
+	mood_changed_signal.emit(m)
+
 func _pick_base_mood() -> RobotFace.Mood:
 	if animation_script.is_aiming:                 # use whichever script owns this flag
 		return RobotFace.Mood.WATCHING
@@ -359,18 +387,7 @@ func _pick_base_mood() -> RobotFace.Mood:
 		return RobotFace.Mood.CAT
 	return RobotFace.Mood.SMILE
 
-# events
-func _on_hurt() -> void:
-	face.react(RobotFace.Mood.DISGUST, 2, 1.4)           # urgent: skips the hold
-
-func _on_blob_landed(on_target: bool) -> void:
-	if on_target:
-		face.react(RobotFace.Mood.CORRECT, 1, 1.0)       # watered something that grows
-	else:
-		face.react(RobotFace.Mood.QUESTION, 1, 1.2)      # wasted shot
-
-
-# footsteps
+####### Footsteps ##########
 @onready var sound_emitter_footstep : FmodEventEmitter3D = $Robot/root/Skeleton3D/FootstepEmitter
 var surface_type : int = 0
 
@@ -494,6 +511,7 @@ func _end_dive() -> void:
 	_sound_emitter_water.play()
 
 func _enter_water() -> void:
+	react(RobotFace.Mood.QUESTION, 1, 1.0)
 	in_water = true
 	is_floating = true
 	is_diving = false
@@ -589,6 +607,7 @@ func _swim_sound_idle() -> void:
 var _air_peak_y := -INF                # highest feet height since last landing or entering water
 func _play_sound_water_big_splash() -> void:
 	_sound_emitter_big_splash.play()
+	react(RobotFace.Mood.DISGUST, 2, 1.2)
 
 # Records the highest feet height since the last landing. Resets on land or in water.
 func _track_air_height() -> void:

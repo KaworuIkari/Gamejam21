@@ -15,11 +15,13 @@ const turn_pb_pos = "parameters/Torso/Idle/Turn/playback"
 const walk_blend_pos = "parameters/Torso/Locomotion/WalkBlend/blend_position"
 const run_blend_pos = "parameters/Torso/Locomotion/RunBlend/blend_position"
 const aim_blend_pos = "parameters/Aim/blend_amount"
+const ear_pb_pos = "parameters/Ear/playback"
 
 var torso_pb: AnimationNodeStateMachinePlayback
 var idle_pb: AnimationNodeStateMachinePlayback
 var idle_stand_pb: AnimationNodeStateMachinePlayback
 var idle_turn_pb: AnimationNodeStateMachinePlayback
+var ear_pb: AnimationNodeStateMachinePlayback
 
 # Advanced Expression
 var is_moving : bool = false
@@ -59,16 +61,23 @@ var swim_moving := false     # hysteresis-filtered; read by transition expressio
 @export var swim_start_speed := 0.5   # speed needed to switch from swim_idle to swim
 @export var swim_stop_speed := 0.2    # speed below which swim returns to swim_idle
 
+# ear
+@export var ear_twitch_chance := 0.3
+var twitch_ear := false
+var _ear_elapsed := 0.0
+
 func _ready():
 	tree.advance_expression_base_node = get_path()
 	torso_pb = tree.get(torso_pb_pos)
 	idle_pb = tree.get(idle_pb_pos)
 	idle_stand_pb = tree.get(idle_stand_pb_pos)
 	idle_turn_pb = tree.get(turn_pb_pos)
+	ear_pb = tree.get(ear_pb_pos)
 
 func _process(delta: float) -> void:
 	if player == null or tree == null:
 		return
+	_update_ear(delta)
 	is_swimming = player.in_water
 	_update_swim_blend(delta)
 	if player.in_water:
@@ -288,3 +297,14 @@ func _update_swim_states() -> void:
 			swim_moving = false
 	elif speed > swim_start_speed:
 		swim_moving = true
+
+func _update_ear(delta: float) -> void:
+	if ear_pb.get_current_node() != &"ear_idle":
+		twitch_ear = false          # consumed: we're in ear_twitch now
+		_ear_elapsed = 0.0
+		return
+	_ear_elapsed += delta
+	var l := ear_pb.get_current_length()
+	if l > 0.0 and _ear_elapsed >= l:
+		_ear_elapsed -= l           # one loop completed
+		twitch_ear = randf() < ear_twitch_chance
