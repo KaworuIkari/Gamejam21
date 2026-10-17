@@ -111,7 +111,7 @@ func open_steps(q: Quest) -> Array[int]:
 
 ## How many steps are finished.
 func done_steps(q: Quest) -> int:
-	if status(q) == Status.DONE:
+	if status(q) == Status.DONE and not (q.parallel and q.complete_any):
 		return q.steps.size()
 	var n := 0
 	for i in q.steps.size():
@@ -124,7 +124,7 @@ func done_steps(q: Quest) -> int:
 func step_progress(q: Quest, index: int) -> Vector2i:
 	var st := q.steps[index]
 	var s := _state(q)
-	if s.status == Status.DONE or _is_done(q, index):
+	if _is_done(q, index):
 		return Vector2i(st.count, st.count)
 	if s.status == Status.LOCKED or (not q.parallel and index > _group_end(q, s.step)):
 		return Vector2i(0, st.count)
@@ -177,6 +177,13 @@ func load_from_save() -> void:
 		_states[StringName(k)] = {"status": int(s.get("status", 0)), "step": int(s.get("step", 0)),
 				"baselines": Array(s.get("baselines", [])).map(func(v): return int(v)),
 				"done": Array(s.get("done", [])).map(func(v): return int(v))}
+	# Sequential quests can gain new trailing story steps. A save completed against
+	# the older resource must continue from those new steps (05 formerly ended at 40%).
+	for quest in quests:
+		var restored := _state(quest)
+		if not quest.parallel and restored.status == Status.DONE and restored.step < quest.steps.size():
+			restored.status = Status.ACTIVE
+			_begin_step(quest)
 	tracked = StringName(data.get("tracked", ""))
 	_evaluate()
 	for a in _abilities:
@@ -237,7 +244,7 @@ func _step_count(q: Quest, index: int) -> int:
 func _is_done(q: Quest, index: int) -> bool:
 	var s := _state(q)
 	if s.status == Status.DONE:
-		return true
+		return index in s.done if q.parallel and q.complete_any else true
 	if s.status != Status.ACTIVE:
 		return false
 	if q.parallel:
@@ -286,7 +293,7 @@ func _evaluate() -> void:
 						break
 					s.step = last + 1
 					_begin_step(q)
-			if (s.done.size() if q.parallel else s.step) >= q.steps.size():
+			if (q.parallel and q.complete_any and not s.done.is_empty()) or (s.done.size() if q.parallel else s.step) >= q.steps.size():
 				s.status = Status.DONE
 				for a in q.rewards:
 					grant(a, q.rewards[a])
@@ -322,7 +329,32 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event.keycode == KEY_F9:
 		var q := tracked_quest()
-		if q:
+		if q and not q.complete_any: # A finale choice requires its world interaction and confirmation.
 			var st := q.steps[current_step(q)]
 			var p := step_progress(q, current_step(q))
 			report(st.event, maxi(1, p.y - p.x))
+
+## Display progress independently of a final route's completion event.
+func step_label(q: Quest, index: int) -> String:
+	var step := q.steps[index]
+	var text := tr(step.text)
+	if step.progress_event != &"" and step.progress_target > 0:
+		text += "  (%d/%d)" % [clampi(event_count(step.progress_event),0,step.progress_target),step.progress_target]
+	elif step.count > 1:
+		var progress := step_progress(q,index)
+		text += "  (%d/%d)" % [progress.x,progress.y]
+	return text
+
+## Consume and commit a single mutually exclusive outcome before emitting changes.
+## Keeping these mutations together prevents the other route taking the same module.
+func complete_choice(q: Quest, index: int, item: StringName) -> bool:
+	if not q.parallel or not q.complete_any or status(q) != Status.ACTIVE \
+			or index < 0 or index >= q.steps.size() or not has_ability(item):
+		return false
+	_abilities.erase(item)
+	var event := q.steps[index].event
+	_counters[event] = event_count(event) + q.steps[index].count
+	_evaluate()
+	ability_changed.emit(item,0)
+	_changed()
+	return true

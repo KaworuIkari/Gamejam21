@@ -16,3 +16,7 @@ class_name QuestStep extends Resource
 ## On: opens together with the step before it. Such steps can be done in any order and the
 ## quest moves on once all of them are done (e.g. "clear 8 litter" and "restore the area").
 @export var with_previous := false
+
+## Optional intermediate collection display; does not complete the route.
+@export var progress_event: StringName = &""
+@export var progress_target := 0

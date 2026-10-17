@@ -19,11 +19,11 @@ title = "REGION_FOREST"
 radius = 95.0
 
 [node name="Mountain" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 30, -200)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.01512, 54.404922, 89.50297)
 script = ExtResource("1_region")
 region_id = &"mountain"
 title = "REGION_MOUNTAIN"
-radius = 150.0
+radius = 90.0
 
 [node name="Factory" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 30, 20)

@@ -45,6 +45,7 @@ var _nearby: Array[Node3D] = []
 var _restored := false
 var _hold := 0.0
 var _hold_lock := false   # after a hold completes, wait for release before the next use
+var _terminal_busy := false
 var _terminal_open := false
 @onready var _zone: Area3D = $InteractionZone
 @onready var _prompt: Label3D = $Prompt
@@ -132,15 +133,19 @@ func _needs_hold() -> bool:
 
 
 func _open_terminal() -> void:
-	if not open_terminal:
+	if not open_terminal or _terminal_busy:
 		return
+	_terminal_busy = true
 	var quests := get_node_or_null(^"/root/Quests")
 	if quests and not quests.terminal_unlocked():
 		await _first_contact(quests)
-	if quests and quests.ability_level(&"energy_core") >= 2 and quests.event_count(core_delivered_event) == 0:
+	if quests and quests.ability_level(&"energy_core") >= 2 and quests.has_ability(&"radar_key") and quests.event_count(core_delivered_event) == 0:
 		await _play_timeline(core_delivery_timeline)
 		_report(core_delivered_event)
+	if quests:
+		await _submit_radar_information(quests)
 	_show_terminal()
+	_terminal_busy = false
 
 
 ## The first use: a dialogue, then the player owns the action terminal.
@@ -243,3 +248,29 @@ func restore_save_data(data: Dictionary) -> void:
 	_restored = true
 	if is_node_ready():
 		_apply_state()
+
+
+## Only a physical return to the lake terminal can deliver quest 05.
+## Tab remains a task viewer and cannot grant this reward remotely.
+func _submit_radar_information(quests: Node) -> void:
+	var quest: Quest = load("res://quests/05_radar_station.tres")
+	if quests.status(quest) != quests.Status.ACTIVE or quests.current_step(quest) != quest.steps.size() - 1:
+		return
+	if quests.event_count(&"radar_coordinates") < 1 or quests.event_count(&"radar_started") < 1 \
+			or quests.event_count(&"mountain_restoration") < 30:
+		return
+	var dialogic := get_node_or_null(^"/root/Dialogic")
+	if dialogic == null or dialogic.current_timeline != null:
+		return
+	var scene := get_tree().current_scene
+	var timeline := DialogicTimeline.new()
+	for key in ["RADAR_DELIVERY_RECEIVED", "RADAR_DELIVERY_REWARD", "FINALE_BRIEFING_DEVICE", "FINALE_BRIEFING_BOAT"]:
+		var event := DialogicTextEvent.new()
+		event.text = tr(key)
+		timeline.events.append(event)
+	timeline.events_processed = true
+	dialogic.start(timeline)
+	await dialogic.timeline_ended
+	if is_inside_tree() and get_tree().current_scene == scene and not SceneRouter.is_busy() \
+			and quests.event_count(&"radar_delivered") == 0:
+		quests.report(&"radar_delivered")

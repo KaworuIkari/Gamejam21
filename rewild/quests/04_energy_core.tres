@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Quest" format=3]
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://de6c6xi5d4okk"]
 
 [ext_resource type="Script" uid="uid://duc3hutu3bkfv" path="res://systems/quests/quest.gd" id="1"]
 [ext_resource type="Script" uid="uid://bes5e7vhx38hw" path="res://systems/quests/quest_step.gd" id="2"]
@@ -27,6 +27,11 @@ script = ExtResource("2")
 text = "QUEST_CORE_STEP_ACTIVATE"
 event = &"core_activated"
 
+[sub_resource type="Resource" id="step_key"]
+script = ExtResource("2")
+text = "QUEST_CORE_STEP_KEY"
+event = &"robot_key_received"
+
 [sub_resource type="Resource" id="step_deliver"]
 script = ExtResource("2")
 text = "QUEST_CORE_STEP_DELIVER"
@@ -38,7 +43,7 @@ title = "QUEST_CORE_TITLE"
 description = "QUEST_CORE_DESC"
 location = "QUEST_CORE_LOCATION"
 requires = Array[ExtResource("1")]([ExtResource("3")])
-steps = Array[ExtResource("2")]([SubResource("step_reach"), SubResource("step_clean"), SubResource("step_restore"), SubResource("step_activate"), SubResource("step_deliver")])
+steps = Array[ExtResource("2")]([SubResource("step_reach"), SubResource("step_clean"), SubResource("step_restore"), SubResource("step_activate"), SubResource("step_key"), SubResource("step_deliver")])
 rewards = Dictionary[StringName, int]({
 &"jetpack": 2,
 &"water_gun": 2
