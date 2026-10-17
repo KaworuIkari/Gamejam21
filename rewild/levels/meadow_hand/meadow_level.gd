@@ -41,7 +41,7 @@ const TreeRegrowth := preload("res://systems/world_objects/tree_regrowth.gd")
 const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
 const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
-@onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/CameraPivot/SpringArm3D/Camera3D
+@onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/Camera3D
 @onready var player: Node3D = $SubViewportContainer/PixelateSubViewport/LIRA
 
 func _enter_tree() -> void:
@@ -69,7 +69,7 @@ func _ready() -> void:
 	add_child(awakening)
 	var initial := InitialState.new()
 	initial.name = "InitialState"
-	initial.dormant = [$Animals, $SubViewportContainer/PixelateSubViewport/CubeBotCompanion]
+	initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals, $SubViewportContainer/PixelateSubViewport/CubeBotCompanion]
 	initial.green_spots = {$Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
 	add_child(initial)
 	var factory := FactoryStory.new()

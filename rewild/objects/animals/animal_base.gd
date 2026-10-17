@@ -54,6 +54,30 @@ var _slow_tick_timer := 0.0
 
 # === Lifecycle ===
 
+## Margin over the geometric turn radius. Below ~1.2 the animal clips corners into partial orbits.
+const TURN_MARGIN := 1.4
+var _arrive_radius := 0.0
+## The highest speed this animal can ask for. Override when a state runs faster than walk_speed.
+func _max_speed() -> float:
+	return walk_speed
+func _min_lookahead_for(speed: float) -> float:
+	return speed / maxf(max_turn_rate, 0.01) * TURN_MARGIN
+func _min_lookahead() -> float:
+	return _min_lookahead_for(_max_speed())
+func _validate_steering() -> void:
+	var need := _min_lookahead()
+	if path_advance_distance < need:
+		push_error("%s: path_advance_distance %.2f < %.2f required by max speed %.1f / max_turn_rate %.1f. Clamped — the animal would orbit its waypoints." % [
+			name, path_advance_distance, need, _max_speed(), max_turn_rate])
+		path_advance_distance = need
+	var arrive_need := need * 0.9
+	if waypoint_radius < arrive_need:
+		push_error("%s: waypoint_radius %.2f < %.2f required. Clamped — arrival would never register." % [
+			name, waypoint_radius, arrive_need])
+		waypoint_radius = arrive_need
+	agent.path_desired_distance = path_advance_distance
+	agent.target_desired_distance = waypoint_radius
+
 func _ready() -> void:
 	if agent == null:
 		agent = get_node_or_null("NavigationAgent3D")
@@ -61,9 +85,8 @@ func _ready() -> void:
 		push_error("%s: needs a NavigationAgent3D" % name)
 		set_physics_process(false)
 		return
-	agent.path_desired_distance = path_advance_distance
-	agent.target_desired_distance = waypoint_radius
-	agent.avoidance_enabled = false
+	_validate_steering()
+	agent.avoidance_enabled = true
 	if animation_player:
 		animation_player.playback_default_blend_time = blend_time
 	if debug_label:
@@ -115,9 +138,12 @@ func _debug_text() -> String:
 
 ## Walks the agent's path at the given speed. Call every frame while following a leg.
 func _steer_along_path(speed: float) -> void:
+	var lookahead := maxf(path_advance_distance, _min_lookahead_for(speed))  # clamp to avoid circular motion entirely, failsafe
+	agent.path_desired_distance = lookahead
+	agent.target_desired_distance = maxf(_arrive_radius, lookahead * 0.9)
 	var to := agent.get_next_path_position() - global_position
 	to.y = 0.0
-	if to.length() < 0.05:  # standing on the current path point: aim at the next one
+	if to.length() < 0.05:
 		var path := agent.get_current_navigation_path()
 		var idx := agent.get_current_navigation_path_index() + 1
 		if idx < path.size():
@@ -136,6 +162,7 @@ func _leg_done(delta: float) -> bool:
 ## Call when a new leg (route point or target) is set.
 func _begin_leg() -> void:
 	_leg_time = 0.0
+	_arrive_radius = agent.target_desired_distance
 
 
 # === Motion ===
