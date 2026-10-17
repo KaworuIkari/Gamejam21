@@ -375,7 +375,7 @@ func _on_blob_landed(on_target: bool) -> void:
 var surface_type : int = 0
 
 @onready var terrain: Terrain3D = %Terrain3D
-@export var sand_texture_ids: PackedInt32Array = [3]  # Terrain3D texture slot(s) that are sand
+@export var sand_texture_ids: PackedInt32Array = [2]  # Terrain3D texture slot(s) that are sand
 @export var grass_threshold := 0.5
 
 @onready var left_foot_ray: RayCast3D = $Robot/root/Skeleton3D/FootIKModifier/LeftFootRay
