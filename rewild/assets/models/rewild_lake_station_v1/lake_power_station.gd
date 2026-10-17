@@ -17,9 +17,16 @@ enum State { DORMANT, READY, ACTIVE }
 @export var hold_time := 1.0
 ## Once active, interacting opens the task terminal (instead of only pressing Tab).
 @export var open_terminal := true
+## Played the first time the terminal is used; the player gets the action terminal when
+## it ends. Empty = hand it over without a dialogue.
+@export_file("*.dtl") var first_contact_timeline := "res://dialogue/timelines/LakeTerminal/first_contact.dtl"
 ## The player gets the water gun when they close the terminal opened here. Usually
 ## better done as a quest reward (step event = terminal_event).
 @export var give_water_gun := false
+## Played when the player hands in the activated energy core (quest 04); then
+## `core_delivered_event` is reported and the terminal opens as usual.
+@export_file("*.dtl") var core_delivery_timeline := "res://dialogue/timelines/LakeTerminal/core_delivery.dtl"
+@export var core_delivered_event: StringName = &"core_delivered"
 @export_group("Quest events")
 ## Reported to the quests when the station is activated.
 @export var activate_event: StringName = &"station_activated"
@@ -127,6 +134,29 @@ func _needs_hold() -> bool:
 func _open_terminal() -> void:
 	if not open_terminal:
 		return
+	var quests := get_node_or_null(^"/root/Quests")
+	if quests and not quests.terminal_unlocked():
+		await _first_contact(quests)
+	if quests and quests.ability_level(&"energy_core") >= 2 and quests.event_count(core_delivered_event) == 0:
+		await _play_timeline(core_delivery_timeline)
+		_report(core_delivered_event)
+	_show_terminal()
+
+
+## The first use: a dialogue, then the player owns the action terminal.
+func _first_contact(quests: Node) -> void:
+	await _play_timeline(first_contact_timeline)
+	quests.unlock_terminal()
+
+
+func _play_timeline(path: String) -> void:
+	var dialogic := get_node_or_null(^"/root/Dialogic")
+	if dialogic and not path.is_empty():
+		dialogic.start(path)
+		await dialogic.timeline_ended
+
+
+func _show_terminal() -> void:
 	var menu := get_tree().get_first_node_in_group(&"pause_menu")
 	if menu and menu.has_method(&"open_terminal"):
 		menu.open_terminal()

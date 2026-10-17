@@ -8,13 +8,15 @@ extends Node
 
 signal changed
 signal quest_started(quest: Quest)
-signal step_completed(quest: Quest, index: int)
 signal quest_completed(quest: Quest)
 signal ability_changed(ability: StringName, level: int)
 
 enum Status { LOCKED, ACTIVE, DONE }
 
 const FOLDER := "res://quests/"
+## The action terminal (and the HUD readouts it drives) is an ability: the player
+## finds it at the lake station, so a new game starts without it.
+const TERMINAL := &"task_terminal"
 
 var quests: Array[Quest] = []
 ## The quest the HUD shows. Empty = the first active one.
@@ -22,7 +24,9 @@ var tracked: StringName = &""
 
 var _counters: Dictionary = {}   # event -> times reported
 var _abilities: Dictionary = {}  # ability -> level
-var _states: Dictionary = {}     # quest id -> {status, step, baseline}
+## quest id -> {status, step, baselines, done}. step: the open step of a one-after-another
+## quest. baselines: event count when each step opened. done: steps of a parallel quest finished.
+var _states: Dictionary = {}
 
 
 func _ready() -> void:
@@ -60,6 +64,14 @@ func has_ability(ability: StringName) -> bool:
 	return ability_level(ability) > 0
 
 
+func terminal_unlocked() -> bool:
+	return has_ability(TERMINAL)
+
+
+func unlock_terminal() -> void:
+	grant(TERMINAL)
+
+
 func event_count(event: StringName) -> int:
 	return int(_counters.get(event, 0))
 
@@ -70,17 +82,51 @@ func status(q: Quest) -> Status:
 	return _state(q).status
 
 
+## The step to show: the open one, or for a parallel quest the first unfinished one.
 func current_step(q: Quest) -> int:
-	return _state(q).step
+	var s := _state(q)
+	if s.status != Status.ACTIVE:
+		return s.step
+	var first: int = 0 if q.parallel else s.step
+	var last: int = q.steps.size() - 1 if q.parallel else _group_end(q, s.step)
+	for i in range(first, last + 1):
+		if not _is_done(q, i):
+			return i
+	return q.steps.size() if q.parallel else s.step
+
+
+## The steps that can be worked on now and are not done yet (several for a parallel quest).
+func open_steps(q: Quest) -> Array[int]:
+	var out: Array[int] = []
+	var s := _state(q)
+	if s.status != Status.ACTIVE:
+		return out
+	var first: int = 0 if q.parallel else s.step
+	var last: int = q.steps.size() - 1 if q.parallel else _group_end(q, s.step)
+	for i in range(first, last + 1):
+		if not _is_done(q, i):
+			out.append(i)
+	return out
+
+
+## How many steps are finished.
+func done_steps(q: Quest) -> int:
+	if status(q) == Status.DONE:
+		return q.steps.size()
+	var n := 0
+	for i in q.steps.size():
+		if _is_done(q, i):
+			n += 1
+	return n
 
 
 ## How far a step is: x = done so far, y = needed.
 func step_progress(q: Quest, index: int) -> Vector2i:
 	var st := q.steps[index]
 	var s := _state(q)
-	if s.status == Status.DONE or index < s.step:
+	if s.status == Status.DONE or _is_done(q, index):
 		return Vector2i(st.count, st.count)
-	if s.status == Status.LOCKED or index > s.step:
+	if s.status == Status.LOCKED or (not q.parallel and index > _group_end(q, s.step)):
 		return Vector2i(0, st.count)
 	return Vector2i(clampi(_step_count(q, index), 0, st.count), st.count)
 
@@ -129,7 +175,8 @@ func load_from_save() -> void:
 	for k in data.get("quests", {}):
 		var s: Dictionary = data.quests[k]
 		_states[StringName(k)] = {"status": int(s.get("status", 0)), "step": int(s.get("step", 0)),
-				"baseline": int(s.get("baseline", 0))}
+				"baselines": Array(s.get("baselines", [])).map(func(v): return int(v)),
+				"done": Array(s.get("done", [])).map(func(v): return int(v))}
 	tracked = StringName(data.get("tracked", ""))
 	_evaluate()
 	for a in _abilities:
@@ -173,14 +220,39 @@ func _load_quests() -> void:
 func _state(q: Quest) -> Dictionary:
 	var id := q.get_id()
 	if not _states.has(id):
-		_states[id] = {"status": Status.LOCKED, "step": 0, "baseline": 0}
+		_states[id] = {"status": Status.LOCKED, "step": 0, "baselines": [], "done": []}
 	return _states[id]
 
 
 func _step_count(q: Quest, index: int) -> int:
 	var st := q.steps[index]
 	var n := event_count(st.event)
-	return n if st.count_earlier else n - int(_state(q).baseline)
+	if st.count_earlier:
+		return n
+	var baselines: Array = _state(q).baselines
+	return n - (int(baselines[index]) if index < baselines.size() else 0)
+
+
+## Has this step been finished (a parallel quest: counted enough; otherwise: passed)?
+func _is_done(q: Quest, index: int) -> bool:
+	var s := _state(q)
+	if s.status == Status.DONE:
+		return true
+	if s.status != Status.ACTIVE:
+		return false
+	if q.parallel:
+		return index in s.done
+	if index < s.step:
+		return true
+	return index <= _group_end(q, s.step) and _step_count(q, index) >= q.steps[index].count
+
+
+## Last step of the group that starts at `first` (steps marked with_previous join it).
+func _group_end(q: Quest, first: int) -> int:
+	var last := first
+	while last + 1 < q.steps.size() and q.steps[last + 1].with_previous:
+		last += 1
+	return last
 
 
 ## Starts quests whose requirements are met and moves active ones along, until nothing
@@ -194,16 +266,27 @@ func _evaluate() -> void:
 			if s.status == Status.LOCKED and q.requires.all(func(r: Quest) -> bool: return r != null and status(r) == Status.DONE):
 				s.status = Status.ACTIVE
 				s.step = 0
-				_begin_step(q)
+				s.done = []
+				_start_quest(q)
 				quest_started.emit(q)
 				again = true
 			if s.status != Status.ACTIVE:
 				continue
-			while s.step < q.steps.size() and _step_count(q, s.step) >= q.steps[s.step].count:
-				step_completed.emit(q, s.step)
-				s.step += 1
-				_begin_step(q)
-			if s.step >= q.steps.size():
+			if q.parallel:
+				for i in q.steps.size():
+					if not i in s.done and _step_count(q, i) >= q.steps[i].count:
+						s.done.append(i)
+			else:
+				while s.step < q.steps.size():
+					var last := _group_end(q, s.step)
+					var open := false
+					for i in range(s.step, last + 1):
+						open = open or _step_count(q, i) < q.steps[i].count
+					if open:
+						break
+					s.step = last + 1
+					_begin_step(q)
+			if (s.done.size() if q.parallel else s.step) >= q.steps.size():
 				s.status = Status.DONE
 				for a in q.rewards:
 					grant(a, q.rewards[a])
@@ -211,10 +294,22 @@ func _evaluate() -> void:
 				again = true
 
 
+## Remembers the event counts at the start, for steps that only count what happens later.
+func _start_quest(q: Quest) -> void:
+	var s := _state(q)
+	s.baselines = []
+	for st in q.steps:
+		s.baselines.append(event_count(st.event))
+
+
+## One-after-another quests: the next step starts counting now.
 func _begin_step(q: Quest) -> void:
 	var s := _state(q)
+	while s.baselines.size() < q.steps.size():
+		s.baselines.append(0)
 	if s.step < q.steps.size():
-		s.baseline = event_count(q.steps[s.step].event)
+		for i in range(s.step, _group_end(q, s.step) + 1):
+			s.baselines[i] = event_count(q.steps[i].event)
 
 
 func _changed() -> void:

@@ -35,10 +35,10 @@ func _notification(what: int) -> void:
 		_refresh_restoration()
 
 func _process(_delta: float) -> void:
-	_hud.visible = not get_tree().paused and not _dialogue_active() and not SceneRouter.is_busy()
+	_hud.visible = _terminal_unlocked() and not get_tree().paused and not _dialogue_active() and not SceneRouter.is_busy()
 
 func _input(event: InputEvent) -> void:
-	if event.is_echo() or not event.is_action_pressed(ACTION):
+	if event.is_echo() or not event.is_action_pressed(ACTION) or not _terminal_unlocked():
 		return
 	if _page.is_open():
 		get_viewport().set_input_as_handled()
@@ -78,7 +78,8 @@ func _build_quest_hud() -> void:
 	quests.quest_started.connect(func(q: Quest) -> void: _notify(tr("QUEST_TOAST_STARTED") % tr(q.title)))
 	quests.quest_completed.connect(func(q: Quest) -> void: _notify(tr("QUEST_TOAST_DONE") % tr(q.title)))
 	quests.ability_changed.connect(func(a: StringName, level: int) -> void:
-		_notify(tr("QUEST_TOAST_ABILITY") % TaskPage.ability_name(a, level)))
+		if a != quests.TERMINAL and level > 0:
+			_notify(tr("QUEST_TOAST_ABILITY") % TaskPage.ability_name(a, level)))
 	_refresh_tracker()
 
 func _hud_label(size: int) -> Label:
@@ -96,13 +97,12 @@ func _refresh_tracker() -> void:
 	_tracker.visible = q != null
 	if q == null:
 		return
-	var i: int = quests.current_step(q)
 	_tracker_title.text = tr(q.title)
-	if i >= q.steps.size():
-		_tracker_step.text = ""
-		return
-	var p: Vector2i = quests.step_progress(q, i)
-	_tracker_step.text = "› " + tr(q.steps[i].text) + ("  %d/%d" % [p.x, p.y] if p.y > 1 else "")
+	var lines: Array[String] = []
+	for i in quests.open_steps(q):
+		var p: Vector2i = quests.step_progress(q, i)
+		lines.append("› " + tr(q.steps[i].text) + ("  %d/%d" % [p.x, p.y] if p.y > 1 else ""))
+	_tracker_step.text = "\n".join(lines)
 
 # --- Restoration HUD ------------------------------------------------------------------
 
@@ -150,8 +150,13 @@ func _next_toast() -> void:
 	_toast_tween.tween_property(_toast, "modulate:a", 0.0, 0.5)
 	_toast_tween.tween_callback(_next_toast)
 
+## Until the player finds the terminal at the lake station there is no entry, no Tab and no HUD readout.
+func _terminal_unlocked() -> bool:
+	var quests := get_node_or_null(^"/root/Quests")
+	return quests == null or quests.terminal_unlocked()
+
 func _request_open() -> void:
-	if is_instance_valid(_pause_menu) and not _dialogue_active() and not SceneRouter.is_busy():
+	if is_instance_valid(_pause_menu) and _terminal_unlocked() and not _dialogue_active() and not SceneRouter.is_busy():
 		_pause_menu.open_terminal()
 
 func _request_close() -> void:

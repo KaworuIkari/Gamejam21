@@ -23,14 +23,14 @@ var _idle_time := 0.0
 # trajectory and shooting
 @onready var aim_trajectory: AimTrajectory = $AimTrajectory
 @export var fire_cooldown := 0.35
-var has_water_gun := true
+var has_water_gun := false
 var _fire_cd := 0.0
 
 # abilities: unlocked and upgraded by quest rewards (Quests autoload)
 @export_group("Abilities")
 ## Levels LIRA has from the start; quests can only raise them. 0 = locked.
-@export_range(0, 9) var start_water_gun_level := 1
-@export_range(0, 9) var start_jetpack_level := 1
+@export_range(0, 9) var start_water_gun_level := 0
+@export_range(0, 9) var start_jetpack_level := 0
 ## Per level (first entry = level 1): splash radius of one shot, in metres.
 @export var water_gun_splash := PackedFloat32Array([4.0, 6.0, 8.0])
 ## Per level: seconds between shots.
@@ -90,12 +90,14 @@ var _last_printed_energy := -1.0
 @export var dive_depth := 1.5                           # chest depth below the waterline that counts as underwater (m)
 @export_range(0.0, 1.0) var resurface_fraction := 0.5   # a dive ends when chest depth is below dive_depth * this
 @export var dive_vertical_speed := 2.5                  # Space rises, Ctrl sinks
+@export var swim_hop_speed := 7.0                       # Space while floating (no jetpack yet): a hop to climb onto the bank
 @export var dive_accel := 8.0
 
 var in_water := false
 var is_floating := false
 var is_diving := false
 var is_head_underwater := false
+var _swim_hopping := false
 
 var _water_list: Array[StylizedWater] = []
 var _current_water: StylizedWater
@@ -527,6 +529,7 @@ func _exit_water() -> void:
 	is_diving = false
 	is_head_underwater = false
 	_dive_reached_depth = false
+	_swim_hopping = false
 	_set_foot_ik(true)
 	_swim_sound(false)
 	surface_type = Surface.GOBI
@@ -559,6 +562,15 @@ func _water_vertical(delta: float) -> void:
 		if Input.is_key_pressed(KEY_CTRL):
 			v -= 1.0
 		velocity.y = move_toward(velocity.y, v * dive_vertical_speed, dive_accel * delta)
+		return
+	# A hop (Space, before the jetpack is found) lifts us over the bank; gravity brings us down.
+	if _swim_hopping:
+		velocity.y += get_gravity().y * delta
+		_swim_hopping = velocity.y > 0.0
+		return
+	if not frozen and jetpack_level <= 0 and Input.is_action_just_pressed("jump"):
+		_swim_hopping = true
+		velocity.y = swim_hop_speed
 		return
 	# Floating: jetpack can lift us out. Otherwise a spring holds the chest at the waterline.
 	_handle_jetpack(delta)

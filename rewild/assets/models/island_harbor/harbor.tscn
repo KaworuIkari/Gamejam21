@@ -31,8 +31,9 @@
 [ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Pile_Cross_Braces.tscn" id="29"]
 [ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Approach_Ramp.tscn" id="30"]
 [ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Approach_Ramp_Rails.tscn" id="31"]
+[ext_resource type="Script" path="res://systems/world_objects/auto_blocker.gd" id="auto_blocker"]
 
-[node name="IslandHarbor" type="Node3D" unique_id=823293967]
+[node name="IslandHarbor" type="Node3D" unique_id=823293967 groups=["nav_blockers"]]
 
 [node name="Shore_Yard_30x16_000" parent="." unique_id=1001492895 instance=ExtResource("4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
@@ -262,3 +263,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -22)
 
 [node name="Dock_Lamp_077" parent="." unique_id=705603743 instance=ExtResource("26")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -22)
+
+[node name="AutoBlocker" type="Node" parent="."]
+script = ExtResource("auto_blocker")

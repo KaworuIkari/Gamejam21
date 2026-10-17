@@ -18,6 +18,8 @@ var _selected := true
 var _tracking := false
 var _rows: Array[Button] = []
 var _selected_id: StringName = &""
+## The player folded the open quest shut: do not pick the first one again.
+var _collapsed := false
 var _restore: VBoxContainer
 var _restore_total: Label
 var _restore_total_bar: Label
@@ -65,6 +67,7 @@ func open() -> void:
 	_tracking = false
 	var tq: Quest = _quests().tracked_quest() if _quest_mode() else null
 	_selected_id = tq.get_id() if tq else &""
+	_collapsed = false
 	_render()
 	_render_restoration()
 	show()
@@ -88,6 +91,7 @@ func is_open() -> bool:
 
 func _set_archive(archive: bool) -> void:
 	_archive = archive
+	_collapsed = false
 	_render()
 
 func _select_demo() -> void:
@@ -239,13 +243,14 @@ func _selected_quest() -> Quest:
 	return null
 
 func _select_quest(id: StringName) -> void:
-	_selected_id = &"" if _selected_id == id else id
+	_collapsed = _selected_id == id
+	_selected_id = &"" if _collapsed else id
 	_render()
 
 func _render_quests() -> void:
 	var quests := _quests()
 	var listed := _listed()
-	if _selected_quest() == null:
+	if _selected_quest() == null and not _collapsed:
 		_selected_id = listed[0].get_id() if not listed.is_empty() else &""
 	%Filters.visible = true
 	%ListHeader.visible = not listed.is_empty()
@@ -307,10 +312,15 @@ func _render_quests() -> void:
 
 func _done_steps(q: Quest) -> int:
 	var quests := _quests()
-	return q.steps.size() if quests.status(q) == quests.Status.DONE else quests.current_step(q)
+	return quests.done_steps(q)
 
 ## "Water gun Lv2" from an ability name; unknown names are shown as written.
 static func ability_name(ability: StringName, level: int) -> String:
+	# Quest items (e.g. the energy core) have a name per level and no "Lv".
+	var item_key := "ITEM_%s_%d" % [String(ability).to_upper(), level]
+	var item := TranslationServer.translate(item_key)
+	if item != item_key:
+		return item
 	var key := "ABILITY_" + String(ability).to_upper()
 	var text := TranslationServer.translate(key)
 	if text == key:

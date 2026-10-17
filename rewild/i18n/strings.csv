@@ -217,3 +217,17 @@ REGION_MOUNTAIN,山地,Mountain
 REGION_FACTORY,工厂区,Factory area
 THROW_PICKUP_PROMPT,按 %s 拿起,Press %s to pick up
 THROW_THROW_PROMPT,按 %s 扔出,Press %s to throw
+
+READ_NOTE_PROMPT,按 %s 阅读纸条,Press %s to read note
+CLEAR_LOCKED_CORE,%s 需要先取得储能核心,%s Needs the energy core first
+INTERACT_CORE_PROMPT,按 %s 激活储能核心,Press %s to activate the energy core
+ITEM_ENERGY_CORE_1,未激活的储能核心,Inactive energy core
+ITEM_ENERGY_CORE_2,已激活的储能核心,Activated energy core
+QUEST_CORE_TITLE,唤醒储能核心,Wake the energy core
+QUEST_CORE_DESC,废弃工厂里还留着能量的火种。清理工厂，用储能核心唤醒沉睡的小机器人，再把核心带回湖心终端。,The abandoned factory still holds a spark of power. Clear it out and wake the sleeping bot with the energy core then bring the core back to the lake terminal.
+QUEST_CORE_LOCATION,废弃工厂 / 湖心终端,Abandoned factory / Lake terminal
+QUEST_CORE_STEP_REACH,前往废弃工厂,Head to the abandoned factory
+QUEST_CORE_STEP_CLEAN,清理工厂环境,Clear the factory grounds
+QUEST_CORE_STEP_RESTORE,提升工厂区复苏度,Raise the factory area's recovery
+QUEST_CORE_STEP_ACTIVATE,激活储能核心,Activate the energy core
+QUEST_CORE_STEP_DELIVER,返回湖心终端交付储能核心,Return to the lake terminal with the core

@@ -33,6 +33,12 @@ const GROW_IN_FLOWERS := preload("res://assets/models/stylized_nature/Materials/
 const RESTORATION_REGIONS := preload("res://levels/meadow_hand/restoration_regions.tscn")
 ## Throwing little Leon (Leon2) into the frog lake raises the giant Leon from the sea.
 const LeonAwakening := preload("res://levels/meadow_hand/leon_awakening.gd")
+## Green ground around the pump house at the start of a new game, in metres.
+const PUMP_HOUSE_GREEN_RADIUS := 25.0
+## Plain trees report "tree_restored" too, once the ground under them is green.
+const TreeRegrowth := preload("res://systems/world_objects/tree_regrowth.gd")
+## What stays switched off at the start of a new game (animals, companion bot).
+const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
 @onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/Camera3D
 @onready var player: Node3D = $SubViewportContainer/PixelateSubViewport/LIRA
@@ -60,6 +66,21 @@ func _ready() -> void:
 	awakening.sea = $Water/Sea
 	awakening.requires = $Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
 	add_child(awakening)
+	var initial := InitialState.new()
+	initial.name = "InitialState"
+	initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals, $SubViewportContainer/PixelateSubViewport/CubeBotCompanion]
+	initial.green_spots = {$Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
+	add_child(initial)
+	var factory := FactoryStory.new()
+	factory.name = "FactoryStory"
+	factory.anchor = $DesertRoboticsLaboratory
+	factory.terrain = terrain
+	factory.initial = initial
+	factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
+	add_child(factory)
+	var regrowth := TreeRegrowth.new()
+	regrowth.name = "TreeRegrowth"
+	add_child(regrowth)
 	add_child(PAUSE_MENU.instantiate())
 	world_bgm.play()
 

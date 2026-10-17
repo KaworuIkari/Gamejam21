@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/TwistedTree/TwistedTree_2.gltf" id="1_model"]
+
+[sub_resource type="CylinderShape3D" id="Trunk"]
+radius = 1.2
+height = 6.0
+
+[node name="TwistedTree2" type="Node3D" groups=["nav_blockers"]]
+
+[node name="Model" parent="." instance=ExtResource("1_model")]
+
+[node name="Trunk" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("Trunk")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+height = 6.0
+vertices = PackedVector3Array(0.000, 0, 1.400, 0.990, 0, 0.990, 1.400, 0, 0.000, 0.990, 0, -0.990, 0.000, 0, -1.400, -0.990, 0, -0.990, -1.400, 0, -0.000, -0.990, 0, 0.990)
