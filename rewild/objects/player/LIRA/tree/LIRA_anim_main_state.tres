@@ -307,6 +307,7 @@ states/Start/position = Vector2(194.66667, 106)
 states/WalkBlend/node = SubResource("AnimationNodeBlendSpace2D_1q5hs")
 states/WalkBlend/position = Vector2(447.33334, 73.11111)
 transitions = ["Start", "WalkBlend", SubResource("AnimationNodeStateMachineTransition_xxx1e"), "WalkBlend", "RunBlend", SubResource("AnimationNodeStateMachineTransition_j6vfq"), "RunBlend", "WalkBlend", SubResource("AnimationNodeStateMachineTransition_m1ino")]
+graph_offset = Vector2(20, 22)
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jdw11"]
 xfade_time = 0.2
@@ -370,7 +371,7 @@ state_machine_type = 1
 states/Idle/node = SubResource("AnimationNodeStateMachine_2yvgq")
 states/Idle/position = Vector2(423.6667, 187)
 states/JumpAir/node = SubResource("AnimationNodeAnimation_84a1x")
-states/JumpAir/position = Vector2(685.11115, 173.33331)
+states/JumpAir/position = Vector2(685.11115, 172.66664)
 states/JumpEnd/node = SubResource("AnimationNodeAnimation_tcfsi")
 states/JumpEnd/position = Vector2(562.3333, 260.66666)
 states/JumpStart/node = SubResource("AnimationNodeAnimation_2yvgq")
@@ -379,4 +380,4 @@ states/Locomotion/node = SubResource("AnimationNodeStateMachine_3m032")
 states/Locomotion/position = Vector2(429.66666, 74.333336)
 states/Start/position = Vector2(184, 157.33333)
 transitions = ["Locomotion", "Idle", SubResource("AnimationNodeStateMachineTransition_jdw11"), "Idle", "Locomotion", SubResource("AnimationNodeStateMachineTransition_by2w6"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_spjav"), "Locomotion", "JumpStart", SubResource("AnimationNodeStateMachineTransition_u8nfu"), "JumpStart", "JumpAir", SubResource("AnimationNodeStateMachineTransition_pxaim"), "Idle", "JumpAir", SubResource("AnimationNodeStateMachineTransition_bbnu2"), "Locomotion", "JumpAir", SubResource("AnimationNodeStateMachineTransition_v6joj"), "Idle", "JumpStart", SubResource("AnimationNodeStateMachineTransition_2yvgq"), "JumpAir", "JumpEnd", SubResource("AnimationNodeStateMachineTransition_dvdqv"), "JumpEnd", "Idle", SubResource("AnimationNodeStateMachineTransition_ulwi0"), "JumpEnd", "Locomotion", SubResource("AnimationNodeStateMachineTransition_3v8jb"), "JumpAir", "JumpStart", SubResource("AnimationNodeStateMachineTransition_tg7cs")]
-graph_offset = Vector2(71, 52)
+graph_offset = Vector2(-9, 62)

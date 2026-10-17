@@ -1121,13 +1121,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.13109416, -0.10885434)
 transform = Transform3D(0.97902584, 0.19902968, 0.043565124, -0.1972017, 0.8719467, 0.44813657, 0.051205665, -0.44732708, 0.8929055, -0.08853209, 0.2997805, -0.10589492)
 
 [node name="FootstepEmitter" type="FmodEventEmitter3D" parent="Robot/root/Skeleton3D" unique_id=888009807]
-event_name = "event:/Footsteps"
+event_name = "event:/Footsteps/Footsteps"
 event_guid = "{f4a5fff1-3b6a-457a-a2b9-54f8e0fb6d26}"
-volume = 0.15
+volume = 0.5
 fmod_parameters/SurfaceType/id = 5640664174279263746
 fmod_parameters/SurfaceType = "Gobi"
 fmod_parameters/SurfaceType/labels = PackedStringArray("Gobi", "Grass", "Sand")
 fmod_parameters/SurfaceType/variant_type = 4
+
+[node name="WaterSoundEmitter" type="FmodEventEmitter3D" parent="Robot/root/Skeleton3D" unique_id=1749105812]
+event_name = "event:/LIRA/Emerge"
+event_guid = "{b57fcb10-693b-45f5-94c6-b6f639ba5622}"
+fmod_parameters/Emerge/id = 9217951417779098640
+fmod_parameters/Emerge = 0
+fmod_parameters/Emerge/variant_type = 2
+
+[node name="SwimSoundEmitter" type="FmodEventEmitter3D" parent="Robot/root/Skeleton3D" unique_id=1234146517]
+event_name = "event:/LIRA/Swim_BreastStroke"
+event_guid = "{dd615e76-48e6-40db-b05e-bcbfdd3ba895}"
+volume = 0.5
+
+[node name="SwimIdleSoundEmitter" type="FmodEventEmitter3D" parent="Robot/root/Skeleton3D" unique_id=200181185]
+event_name = "event:/LIRA/Swim_Idle"
+event_guid = "{0cdfa33b-1be3-463d-9495-b2836809efc7}"
+
+[node name="BigSplashSoundEmitter" type="FmodEventEmitter3D" parent="Robot/root/Skeleton3D" unique_id=66190238]
+event_name = "event:/LIRA/big_Splash"
+event_guid = "{e877a2ed-4af9-4ab0-ae23-a8c6d87e5a62}"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Robot" unique_id=1353543350]
 libraries/Robot_anim1 = SubResource("AnimationLibrary_sujh3")
@@ -1152,6 +1172,7 @@ parameters/Torso/Locomotion/RunBlend/blend_position = Vector2(0.2587719, 0.50458
 parameters/Torso/Locomotion/WalkBlend/blend_position = Vector2(0, 0)
 parameters/Aim/blend_amount = 0.0
 parameters/RightFingers/blend_amount = 1.0
+parameters/Swim/blend_amount = 0.0
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=985096004]
 unique_name_in_owner = true
@@ -1176,7 +1197,7 @@ mesh = SubResource("QuadMesh_0yw1p")
 script = ExtResource("11_vqtik")
 blob_scene = ExtResource("12_mjkbt")
 
-[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="AimTrajectory" unique_id=987754384]
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="AimTrajectory" unique_id=1434181839]
 event_name = "event:/LIRA/watergun"
 event_guid = "{aee3dde8-e986-4e85-ab49-06bccba4aa39}"
 

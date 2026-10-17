@@ -58,16 +58,51 @@ transitions = ["Start", "Robot_anim2_hand_grip_rig", SubResource("AnimationNodeS
 filter_enabled = true
 filters = ["root/Skeleton3D:index1.r", "root/Skeleton3D:index2.r", "root/Skeleton3D:index3.r", "root/Skeleton3D:middle1.r", "root/Skeleton3D:middle2.r", "root/Skeleton3D:middle3.r", "root/Skeleton3D:pinky1.r", "root/Skeleton3D:pinky2.r", "root/Skeleton3D:pinky3.r", "root/Skeleton3D:ring1.r", "root/Skeleton3D:ring2.r", "root/Skeleton3D:ring3.r", "root/Skeleton3D:thumb1.r", "root/Skeleton3D:thumb2.r", "root/Skeleton3D:thumb3.r"]
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_hx2yo"]
+filter_enabled = true
+filters = ["", "..", "root/Skeleton3D:arm_stretch.l", "root/Skeleton3D:arm_stretch.r", "root/Skeleton3D:foot.l", "root/Skeleton3D:foot.r", "root/Skeleton3D:forearm_stretch.l", "root/Skeleton3D:forearm_stretch.r", "root/Skeleton3D:hand.l", "root/Skeleton3D:hand.r", "root/Skeleton3D:head.x", "root/Skeleton3D:index1.l", "root/Skeleton3D:index1.r", "root/Skeleton3D:index2.l", "root/Skeleton3D:index2.r", "root/Skeleton3D:index3.l", "root/Skeleton3D:index3.r", "root/Skeleton3D:leg_stretch.l", "root/Skeleton3D:leg_stretch.r", "root/Skeleton3D:middle1.l", "root/Skeleton3D:middle1.r", "root/Skeleton3D:middle2.l", "root/Skeleton3D:middle2.r", "root/Skeleton3D:middle3.l", "root/Skeleton3D:middle3.r", "root/Skeleton3D:neck.x", "root/Skeleton3D:pinky1.l", "root/Skeleton3D:pinky1.r", "root/Skeleton3D:pinky2.l", "root/Skeleton3D:pinky2.r", "root/Skeleton3D:pinky3.l", "root/Skeleton3D:pinky3.r", "root/Skeleton3D:ring1.l", "root/Skeleton3D:ring1.r", "root/Skeleton3D:ring2.l", "root/Skeleton3D:ring2.r", "root/Skeleton3D:ring3.l", "root/Skeleton3D:ring3.r", "root/Skeleton3D:root.x", "root/Skeleton3D:shoulder.l", "root/Skeleton3D:shoulder.r", "root/Skeleton3D:spine_01.x", "root/Skeleton3D:spine_02.x", "root/Skeleton3D:thigh_stretch.l", "root/Skeleton3D:thigh_stretch.r", "root/Skeleton3D:thumb1.l", "root/Skeleton3D:thumb1.r", "root/Skeleton3D:thumb2.l", "root/Skeleton3D:thumb2.r", "root/Skeleton3D:thumb3.l", "root/Skeleton3D:thumb3.r", "root/Skeleton3D:toes_01.l", "root/Skeleton3D:toes_01.r"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_60aqe"]
+animation = &"Robot_anim1/swimming_rig"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ue2qr"]
+animation = &"Robot_anim1/swimming_treading_rig"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6jtc7"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vypbv"]
+xfade_time = 0.4
+advance_mode = 2
+advance_expression = "swim_moving"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tqcjb"]
+xfade_time = 0.4
+advance_mode = 2
+advance_expression = "not swim_moving"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ftcwy"]
+states/swim/node = SubResource("AnimationNodeAnimation_60aqe")
+states/swim/position = Vector2(622.6666, 99.67901)
+states/swim_idle/node = SubResource("AnimationNodeAnimation_ue2qr")
+states/swim_idle/position = Vector2(408, 100.27983)
+transitions = ["Start", "swim_idle", SubResource("AnimationNodeStateMachineTransition_6jtc7"), "swim_idle", "swim", SubResource("AnimationNodeStateMachineTransition_vypbv"), "swim", "swim_idle", SubResource("AnimationNodeStateMachineTransition_tqcjb")]
+graph_offset = Vector2(18, -40)
+
 [resource]
-graph_offset = Vector2(-414.66782, -34.63148)
+nodes/output/position = Vector2(240, 266.66666)
 nodes/Torso/node = ExtResource("1_jdw11")
-nodes/Torso/position = Vector2(-506.66666, 120)
+nodes/Torso/position = Vector2(-613.3333, 80)
 nodes/Gun/node = SubResource("AnimationNodeStateMachine_bi7sg")
-nodes/Gun/position = Vector2(-506.66666, 333.33334)
+nodes/Gun/position = Vector2(-386.66666, 333.33334)
 nodes/Aim/node = SubResource("AnimationNodeBlend2_7jbh6")
-nodes/Aim/position = Vector2(-146.66667, 120)
+nodes/Aim/position = Vector2(-133.33333, 173.33333)
 nodes/RightFingers/node = SubResource("AnimationNodeBlend2_vypbv")
 nodes/RightFingers/position = Vector2(73.05184, 273.27246)
 nodes/Hand/node = SubResource("AnimationNodeStateMachine_6jtc7")
-nodes/Hand/position = Vector2(-493.33334, 533.3333)
-node_connections = [&"output", 0, &"RightFingers", &"Aim", 0, &"Torso", &"Aim", 1, &"Gun", &"RightFingers", 0, &"Aim", &"RightFingers", 1, &"Hand"]
+nodes/Hand/position = Vector2(-160, 440)
+nodes/Swim/node = SubResource("AnimationNodeBlend2_hx2yo")
+nodes/Swim/position = Vector2(-386.66666, 80)
+nodes/Swimming/node = SubResource("AnimationNodeStateMachine_ftcwy")
+nodes/Swimming/position = Vector2(-613.3333, 266.66666)
+node_connections = [&"output", 0, &"RightFingers", &"Aim", 0, &"Swim", &"Aim", 1, &"Gun", &"RightFingers", 0, &"Aim", &"RightFingers", 1, &"Hand", &"Swim", 0, &"Torso", &"Swim", 1, &"Swimming"]

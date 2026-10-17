@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c88j3oj0lf6om" path="res://assets/textures/ground/rock023/rock023_alb_ht.png" id="17_a2o6s"]
 [ext_resource type="Texture2D" uid="uid://c307hdmos4gtm" path="res://assets/textures/ground/rock023/rock023_nrm_rgh.png" id="18_qpxyu"]
 [ext_resource type="Texture2D" uid="uid://bmq4tm542dkiv" path="res://assets/textures/ground/crater/BaseColor_Desert.jpg" id="19_eb5gu"]
+[ext_resource type="PackedScene" uid="uid://db2wta2nor7sj" path="res://objects/animals/seagull/animal_seagull.tscn" id="20_brdle"]
 [ext_resource type="Texture2D" uid="uid://b56l82fo6np2o" path="res://assets/textures/ground/crater/BaseColor_Vegetation.jpg" id="20_bx7x2"]
 [ext_resource type="PackedScene" uid="uid://cq3grnhe7p3ym" path="res://assets/models/stylized_nature/RockPath/RockPath_Round_Small_1.gltf" id="21_2w8tj"]
 [ext_resource type="Texture2D" uid="uid://c0i5pvpve1nux" path="res://assets/textures/ground/desert/desert_albedo.png" id="21_lqonk"]
@@ -57,7 +58,6 @@
 [ext_resource type="PackedScene" uid="uid://d3ptis2xh8253" path="res://assets/models/fantasy_forest_sample/forest_arch.tscn" id="59_0tkcr"]
 [ext_resource type="PackedScene" uid="uid://d2q8or3xmhw53" path="res://assets/models/stylized_nature/Flower/Flower_3_Single.gltf" id="59_a2o6s"]
 [ext_resource type="PackedScene" uid="uid://x48h5dxjm0cg" path="res://assets/models/stylized_nature/Flower/Flower_4_Group.gltf" id="60_qpxyu"]
-[ext_resource type="PackedScene" uid="uid://c1w4yemqss2g5" path="res://objects/animals/fox/fox.tscn" id="60_ta6ao"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_pumphouse_v1/Ruined_Pump_House_Golden.tscn" id="61_0tkcr"]
 [ext_resource type="PackedScene" uid="uid://b6xv74dhxaksy" path="res://assets/models/desert_robotics_laboratory/robotics_lab_house_4.tscn" id="63_a2o6s"]
 [ext_resource type="PackedScene" uid="uid://dagw5jwcpg312" path="res://assets/models/stylized_nature/TwistedTree/TwistedTree_5.gltf" id="63_bx7x2"]
@@ -648,6 +648,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 342.91605, 54.48801, 548.5976
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1903030697]
 environment = SubResource("Environment_2lqwi")
 
+[node name="WorldBGM" type="FmodEventEmitter2D" parent="." unique_id=1742352443]
+event_name = "event:/BGM/Snowman"
+event_guid = "{0d3c9ddb-7127-45bd-bdcb-64e05328d28a}"
+
 [node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1770652987]
 bank_paths = ["res://assets/audio/fmod_bank/Desktop/Master.strings.bank", "res://assets/audio/fmod_bank/Desktop/Master.bank"]
 
@@ -897,9 +901,6 @@ sprint_speed = 29.200000000000003
 jump_velocity = 4.6
 
 [node name="Animals" type="Node3D" parent="." unique_id=29639103]
-
-[node name="Fox" parent="Animals" unique_id=1518329467 instance=ExtResource("60_ta6ao")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9676, 35.125984, -84.41997)
 
 [node name="Fish" type="Node3D" parent="Animals" unique_id=1933286653]
 

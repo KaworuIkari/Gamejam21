@@ -75,6 +75,37 @@ var _regen_timer := 0.0
 var _debug_timer := 0.0
 var _last_printed_energy := -1.0
 
+# swimming
+@export_group("Water")
+@export var chest_ratio := 0.7                          # water this deep (fraction of capsule height) starts swimming
+@export var swim_speed := 3.5
+@export var swim_accel := 10.0
+@export var swim_drag := 6.0
+@export var float_stiffness := 8.0                      # pulls chest to the waterline
+@export var float_max_speed := 3.0
+@export var dive_depth := 1.5                           # chest depth below the waterline that counts as underwater (m)
+@export_range(0.0, 1.0) var resurface_fraction := 0.5   # a dive ends when chest depth is below dive_depth * this
+@export var dive_vertical_speed := 2.5                  # Space rises, Ctrl sinks
+@export var dive_accel := 8.0
+
+var in_water := false
+var is_floating := false
+var is_diving := false
+var is_head_underwater := false
+
+var _water_list: Array[StylizedWater] = []
+var _current_water: StylizedWater
+var _water_rescan := 0.0
+var _water_surface_y := 0.0
+var _ctrl_was_down := false
+var _dive_reached_depth := false                        # the dive has gone below dive_depth at least once
+
+@onready var _body_shape: CollisionShape3D = $CollisionShape3D
+@onready var _foot_ik: Node = $Robot/root/Skeleton3D/FootIKModifier
+@onready var _sound_emitter_water: FmodEventEmitter3D = $Robot/root/Skeleton3D/WaterSoundEmitter
+@onready var _sound_emitter_swim: FmodEventEmitter3D = $Robot/root/Skeleton3D/SwimSoundEmitter
+@onready var _sound_emitter_swim_idle: FmodEventEmitter3D = $Robot/root/Skeleton3D/SwimIdleSoundEmitter
+@onready var _sound_emitter_big_splash: FmodEventEmitter3D = $Robot/root/Skeleton3D/BigSplashSoundEmitter
 
 
 func _ready() -> void:
@@ -95,10 +126,14 @@ func _ready() -> void:
 	energy_hud.configure(self)
 	get_tree().root.add_child.call_deferred(energy_hud)
 	tree_exiting.connect(energy_hud.queue_free)
+	_refresh_water_list()
+	_setup_swim_idle_pool()
 	
 
 func _physics_process(delta: float) -> void:
+	_update_water(delta)
 	super(delta)
+	_swim_sound(in_water and velocity.length_squared() > 0.25)   # loop plays while moving in water
 	
 	# udpate face
 	_idle_time = _idle_time + delta if velocity.length() < 0.1 else 0.0
@@ -113,6 +148,9 @@ func _physics_process(delta: float) -> void:
 	spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
 
 func _apply_movement(delta : float) -> void:
+	if in_water:
+		_water_horizontal(delta)
+		return
 	var is_moving = input_dir != Vector2.ZERO and is_on_floor()
 	if not is_on_floor():
 		return  # no air control: keep the velocity from take-off
@@ -132,6 +170,9 @@ func _apply_movement(delta : float) -> void:
 		velocity.z = move_toward(velocity.z, 0, current_speed * delta * stopping_tweak)
 		
 func _handle_character_rotation(delta: float) -> void:
+	if in_water:
+		_water_rotation(delta)
+		return
 	if input_dir == Vector2.ZERO:
 		anim_dir = Vector2.ZERO
 		return                                   # idle: keep last facing
@@ -188,6 +229,8 @@ func try_shoot() -> void:                   # call this from the input code that
 	animation_script.aim_correction.kick()
 
 func on_aim(is_aiming : bool) -> void:
+	if is_aiming and in_water:
+		return
 	if is_aiming:
 		_update_camera_distance(aim_camera_distance)
 		_target_pivot_offset = aim_offset
@@ -218,6 +261,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _handle_gravity_and_jump(delta: float) -> void:
+	if in_water:
+		_water_vertical(delta)
+		_handle_energy_regen(delta)
+		_debug_energy(delta)
+		_consume_anim_triggers()
+		jetpack.set_thrust(_thrusting, _spool)
+		return
 	super(delta)  # gravity + ground jump
 	if is_on_floor():
 		_end_thrust()
@@ -230,6 +280,9 @@ func _handle_gravity_and_jump(delta: float) -> void:
 	jetpack.set_thrust(_thrusting, _spool)
 
 func _handle_jetpack(delta: float) -> void:
+	if frozen or jetpack_level <= 0 or is_diving:   # <- add "or is_diving"
+		_end_thrust()
+		return
 	if frozen or jetpack_level <= 0:
 		_end_thrust()
 		return
@@ -322,14 +375,14 @@ func _on_blob_landed(on_target: bool) -> void:
 var surface_type : int = 0
 
 @onready var terrain: Terrain3D = %Terrain3D
-@export var sand_texture_ids: PackedInt32Array = [3]  # Terrain3D texture slot(s) that are sand
+@export var sand_texture_ids: PackedInt32Array = [2]  # Terrain3D texture slot(s) that are sand
 @export var grass_threshold := 0.5
 
 @onready var left_foot_ray: RayCast3D = $Robot/root/Skeleton3D/FootIKModifier/LeftFootRay
 @onready var right_foot_ray: RayCast3D = $Robot/root/Skeleton3D/FootIKModifier/RightFootRay
 
-const SURFACE_LABELS := ["Gobi", "Grass", "Sand"]
-enum Surface { GOBI, GRASS, SAND }
+const SURFACE_LABELS := ["Gobi", "Grass", "Sand", "Water"]
+enum Surface { GOBI, GRASS, SAND, WATER }
 
 func _footstep() -> void:
 	surface_type = _detect_surface()
@@ -338,6 +391,10 @@ func _footstep() -> void:
 	sound_emitter_footstep.play()
 
 func _detect_surface() -> int:
+	# Shallow water: the feet are below the waterline. Deep water is skipped entirely, since footsteps don't play while swimming.
+	var vol := _find_water()
+	if vol and vol.get_surface_y() > _feet_y():
+		return Surface.WATER
 	# The planted foot is the lower one, and that is the foot the animation event fires for
 	var ray := left_foot_ray
 	if right_foot_ray.global_position.y < left_foot_ray.global_position.y:
@@ -357,3 +414,203 @@ func _detect_surface() -> int:
 		return Surface.GRASS
 	# Default
 	return Surface.GOBI
+
+# ---------- water ----------
+func _refresh_water_list() -> void:
+	_water_list.clear()
+	for n in get_tree().get_nodes_in_group(&"water_surfaces"):
+		if n is StylizedWater:
+			_water_list.append(n)
+
+func _update_water(delta: float) -> void:
+	_handle_touchdown()   # before _track_air_height, which overwrites the peak
+	_track_air_height()
+	_water_rescan -= delta
+	if _water_rescan <= 0.0:
+		_water_rescan = 0.5
+		_refresh_water_list()
+
+	var vol := _find_water()
+	var h := _capsule_height()
+	var feet := _feet_y()
+	var ratio := chest_ratio if not in_water else chest_ratio - 0.15   # hysteresis
+	var deep := vol != null and (vol.get_surface_y() - feet) >= ratio * h
+
+	if deep and not in_water:
+		_enter_water()
+	elif not deep and in_water:
+		_exit_water()
+	if not in_water:
+		return
+
+	_water_surface_y = vol.get_surface_y()
+	is_head_underwater = feet + h < _water_surface_y
+	_check_dive_input()
+	if is_diving:
+		var depth := _water_surface_y - _chest_y()  # chest depth
+		if depth >= dive_depth:
+			_dive_reached_depth = true
+		if _dive_reached_depth and depth <= dive_depth * resurface_fraction:
+			_end_dive()
+
+func _find_water() -> StylizedWater:
+	if is_instance_valid(_current_water) and _current_water.holds_point(global_position):
+		return _current_water
+	_current_water = null
+	for v in _water_list:
+		if is_instance_valid(v) and v.holds_point(global_position):
+			_current_water = v
+			break
+	return _current_water
+
+func _capsule_height() -> float:
+	var s := _body_shape.shape
+	var h = s.get("height") if s else null
+	return float(h) if h != null else 2.0
+
+func _feet_y() -> float:
+	return _body_shape.global_position.y - _capsule_height() * 0.5
+
+func _chest_y() -> float:
+	return _feet_y() + chest_ratio * _capsule_height()
+
+func _check_dive_input() -> void:
+	var ctrl := Input.is_key_pressed(KEY_CTRL)
+	if ctrl and not _ctrl_was_down and is_floating:
+		_start_dive()
+	_ctrl_was_down = ctrl
+
+func _start_dive() -> void:
+	is_floating = false
+	is_diving = true
+	_dive_reached_depth = false
+	_play_sound_water(true)
+	_sound_emitter_water.play()
+
+func _end_dive() -> void:
+	is_diving = false
+	is_floating = true
+	_play_sound_water(false)
+	_sound_emitter_water.play()
+
+func _enter_water() -> void:
+	in_water = true
+	is_floating = true
+	is_diving = false
+	_dive_reached_depth = false
+	_end_thrust()
+	on_aim(false)
+	_set_foot_ik(false)
+	_sound_emitter_water.play()
+
+func _exit_water() -> void:
+	in_water = false
+	is_floating = false
+	is_diving = false
+	is_head_underwater = false
+	_dive_reached_depth = false
+	_set_foot_ik(true)
+	_swim_sound(false)
+	surface_type = Surface.GOBI
+
+func _play_sound_water(emerge : bool = false) -> void:  # false 0, true 1
+	_sound_emitter_water.set_parameter("Emerge", emerge)
+	_sound_emitter_water.play()
+
+func _set_foot_ik(on: bool) -> void:
+	if _foot_ik:
+		_foot_ik.set("active", on)   # SkeletonModifier3D property; adjust if your modifier differs
+
+func _water_horizontal(delta: float) -> void:
+	var wish := Vector3(direction.x, 0.0, direction.z)
+	var target := Vector3.ZERO
+	if wish.length_squared() > 0.001:
+		target = wish.normalized() * swim_speed * input_strength
+	var rate := swim_accel if target.length_squared() > 0.0001 else swim_drag
+	var h := Vector3(velocity.x, 0.0, velocity.z).move_toward(target, rate * delta)
+	velocity.x = h.x
+	velocity.z = h.z
+	is_sprinting = false
+	is_walking = false
+
+func _water_vertical(delta: float) -> void:
+	if is_diving:
+		var v := 0.0
+		if Input.is_action_pressed("jump"):
+			v += 1.0
+		if Input.is_key_pressed(KEY_CTRL):
+			v -= 1.0
+		velocity.y = move_toward(velocity.y, v * dive_vertical_speed, dive_accel * delta)
+		return
+	# Floating: jetpack can lift us out. Otherwise a spring holds the chest at the waterline.
+	_handle_jetpack(delta)
+	if not _thrusting and not _jet_armed:
+		var err := _water_surface_y - _chest_y()
+		velocity.y = clampf(err * float_stiffness, -float_max_speed, float_max_speed)
+
+func _water_rotation(delta: float) -> void:
+	var dir := Vector3(direction.x, 0.0, direction.z)
+	if dir.length_squared() < 0.001:
+		return   # no input: keep last facing, so vertical-only dives don't spin the mesh
+	character.rotation.y = lerp_angle(character.rotation.y, atan2(dir.x, dir.z), rotation_speed * delta)
+
+# swim sound loops
+var _swim_loop_on := false
+func _swim_sound(active: bool) -> void:
+	if active == _swim_loop_on:
+		return   # only act on change, since calling start() on a playing loop may restart it
+	_swim_loop_on = active
+	if active:
+		_sound_emitter_swim.play()
+	else:
+		_sound_emitter_swim.stop()
+
+# several (two for now) emitters pooled for idle swim sound!
+const SWIM_VOICES := 2
+var _swim_idle_pool: Array[FmodEventEmitter3D] = []
+var _swim_idle_pool_next := 0
+func _setup_swim_idle_pool() -> void:
+	_swim_idle_pool.append(_sound_emitter_swim_idle)
+	var parent := _sound_emitter_swim_idle.get_parent()
+	for i in SWIM_VOICES - 1:
+		var e := _sound_emitter_swim_idle.duplicate() as FmodEventEmitter3D
+		parent.add_child(e)
+		e.transform = _sound_emitter_swim_idle.transform
+		_swim_idle_pool.append(e)
+func _swim_sound_idle() -> void:
+	var e := _swim_idle_pool[_swim_idle_pool_next]
+	_swim_idle_pool_next = (_swim_idle_pool_next + 1) % _swim_idle_pool.size()
+	e.play()
+
+# water splash when drop from above, and falling sound (footstep) without water
+@export var big_splash_drop := 1.5     # fall distance (m) before entering water that counts as a big splash
+@export var big_splash_speed := 2.0    # impact speed (m/s) that counts as a big splash
+var _air_peak_y := -INF                # highest feet height since last landing or entering water
+func _play_sound_water_big_splash() -> void:
+	_sound_emitter_big_splash.play()
+
+# Records the highest feet height since the last landing. Resets on land or in water.
+func _track_air_height() -> void:
+	if in_water or is_on_floor():
+		_air_peak_y = _feet_y()
+	else:
+		_air_peak_y = maxf(_air_peak_y, _feet_y())
+
+# Runs once per landing. Water takes priority over ground.
+func _handle_touchdown() -> void:
+	var feet := _feet_y()
+	if _air_peak_y <= feet:
+		return   # not falling: walking, idle, or still rising
+	var drop := _air_peak_y - feet
+	var vol := _find_water()
+	if vol != null and vol.get_surface_y() > feet:
+		if drop >= big_splash_drop:
+			_play_sound_water_big_splash()
+	elif is_on_floor():
+		if drop >= big_splash_drop:
+			_footstep()
+		else:
+			return   # ground bump: keep tracking
+	else:
+		return   # still airborne
+	_air_peak_y = feet   # consume the fall
