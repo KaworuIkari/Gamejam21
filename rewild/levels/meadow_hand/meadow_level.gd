@@ -34,7 +34,7 @@ const RESTORATION_REGIONS := preload("res://levels/meadow_hand/restoration_regio
 ## Throwing little Leon (Leon2) into the frog lake raises the giant Leon from the sea.
 const LeonAwakening := preload("res://levels/meadow_hand/leon_awakening.gd")
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
-@onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/CameraPivot/SpringArm3D/Camera3D
+@onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/Camera3D
 @onready var player: Node3D = $SubViewportContainer/PixelateSubViewport/LIRA
 
 func _enter_tree() -> void:

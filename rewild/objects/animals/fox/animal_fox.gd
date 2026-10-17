@@ -65,13 +65,28 @@ var _tick_timer := 0.0
 
 
 # === Lifecycle ===
+func _max_speed() -> float:
+	return maxf(walk_speed, run_speed)
 
 func _ready() -> void:
 	super._ready()
+	# avoid circular motion
+	var follow_need := _min_lookahead_for(walk_speed) * 0.9
+	if follow_slack * 0.5 < follow_need:
+		push_error("AnimalFox: follow_slack %.2f gives an arrival radius below %.2f. Clamped." % [follow_slack, follow_need])
+		follow_slack = follow_need * 2.0
+	var leg_need := _min_lookahead() * 2.0
+	if escape_leg < leg_need:
+		push_error("AnimalFox: escape_leg %.2f < %.2f (two turn radii). Clamped — legs shorter than this cannot be steered." % [escape_leg, leg_need])
+		escape_leg = leg_need
+	
 	if animation_player == null:
 		push_error("AnimalFox: assign an AnimationPlayer in the inspector")
 		set_physics_process(false)
 		return
+	walk_anim = "walking_rig"
+	idle_anim = "idle_rig"
+
 	WorldEvents.happened.connect(_on_world_event)
 	_tick_timer = randf() * tick_interval  # stagger foxes so they do not all think on one frame
 	_enter_idle()
@@ -224,7 +239,8 @@ func _tick_follow(delta: float) -> void:
 func _set_target(p: Vector3, arrive := -1.0) -> void:
 	_target = p
 	_has_target = true
-	agent.target_desired_distance = waypoint_radius if arrive < 0.0 else arrive
+	var want := waypoint_radius if arrive < 0.0 else arrive
+	agent.target_desired_distance = maxf(want, _min_lookahead_for(walk_speed) * 0.9)
 	agent.target_position = p
 	_begin_leg()
 

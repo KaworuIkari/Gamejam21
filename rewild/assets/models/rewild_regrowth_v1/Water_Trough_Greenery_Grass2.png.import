@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8mvdark2jvil"
-path="res://.godot/imported/Water_Trough_Greenery_Grass2.png-35f9d4ba9833a171667c09e8a5a51d78.ctex"
+path.s3tc="res://.godot/imported/Water_Trough_Greenery_Grass2.png-35f9d4ba9833a171667c09e8a5a51d78.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "65e952cad2f8af346002eeb0ee93dc27"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Water_Trough_Greenery_Grass2.png"
-dest_files=["res://.godot/imported/Water_Trough_Greenery_Grass2.png-35f9d4ba9833a171667c09e8a5a51d78.ctex"]
+dest_files=["res://.godot/imported/Water_Trough_Greenery_Grass2.png-35f9d4ba9833a171667c09e8a5a51d78.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0
