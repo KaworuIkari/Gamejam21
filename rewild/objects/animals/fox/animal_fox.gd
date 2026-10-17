@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends AnimalBase
 class_name AnimalFox
 ## IDLE ⇄ WANDER when far from the player.
 ## WATCH (stand still, face the player) at middle distance.
@@ -14,10 +14,6 @@ class_name AnimalFox
 
 enum State { IDLE, WANDER, WATCH, ALERT, AVOID, INVESTIGATE, FOLLOW }
 
-@export_group("Nodes")
-@export var animation_player: AnimationPlayer  # auto-found if empty
-@export var agent: NavigationAgent3D  # auto-found if empty
-
 @export_group("Distance Bands")
 @export var flee_radius := 10.0  # closer than this: bark, then run
 @export var calm_radius := 30.0  # farther than this: roam freely
@@ -25,17 +21,8 @@ enum State { IDLE, WANDER, WATCH, ALERT, AVOID, INVESTIGATE, FOLLOW }
 @export var escape_clear_factor := 2.0
 
 @export_group("Movement")
-@export var walk_speed := 2.8
 @export var run_speed := 7.0
-@export var acceleration := 8.0
-@export var turn_speed := 10.0  # body yaw toward facing direction
-@export var max_turn_rate := 5.0  # rad/s heading change; lower = wider curves
-## Must stay above run_speed / max_turn_rate, or the fox orbits path points
-## it can never reach. At 7.0 / 5.0 that lower bound is 1.4 m.
-@export var path_advance_distance := 2.0
-@export var waypoint_radius := 3.0  # the agent's arrival distance; keep above the line above
-@export var move_timeout := 12.0  # failsafe: give up on one leg after this long
-@export var model_faces_positive_z := true
+@export var tick_interval := 2.0  # how often decisions are made
 
 @export_group("Idle & Wander")
 @export var idle_time := Vector2(3.0, 9.0)
@@ -56,89 +43,65 @@ enum State { IDLE, WANDER, WATCH, ALERT, AVOID, INVESTIGATE, FOLLOW }
 @export var follow_slack := 1.5  # dead zone, so the fox is not re-targeting constantly
 @export var calm_exit := true  # on grace expiry, back off quietly instead of bolting
 
-@export_group("Animation")
-@export var blend_time := 0.2
-@export var idle_anim := "idle_rig"
-@export var walk_anim := "walking_rig"
+@export_group("Animation Clips")
 @export var run_anim := "running_rig"
 @export var bark_anim := "bark_rig"
-
-@export_group("Debug")
-@export var debug := false
-
-const TICK := 2.0
 
 var state := State.IDLE
 
 var _target := Vector3.ZERO
 var _has_target := false
-var _leg_time := 0.0
 
-var _desired_h := Vector3.ZERO  # wanted horizontal velocity this frame
-var _face_dir := Vector3.ZERO  # explicit facing override this frame
-var _heading := Vector3.ZERO  # rate-limited travel direction
-
-var _tick_timer := 0.0
 var _idle_timer := 0.0
 var _escape_time := 0.0
 var _escape_dir := Vector3.ZERO  # carried between legs so the route arcs
 var _investigate_timer := 0.0
 var _grace := 0.0
 var _event_pos := Vector3.ZERO
-var _barking := false
+var _tick_timer := 0.0
 
 @onready var lira: LIRA_Character = get_tree().get_first_node_in_group("player")
 @onready var bark_sound: FmodEventEmitter3D = $fox_rigged/root/Skeleton3D/Retopo_fox_002/FmodEventEmitter3DBark
-@onready var debug_label: Label3D = get_node_or_null("DebugLabel3D")
 
 
 # === Lifecycle ===
 
 func _ready() -> void:
+	super._ready()
 	if animation_player == null:
-		animation_player = get_node_or_null("fox_rigged/AnimationPlayer")
-	if agent == null:
-		agent = get_node_or_null("NavigationAgent3D")
-	if animation_player == null or agent == null:
-		push_error("AnimalFox: needs an AnimationPlayer and a NavigationAgent3D")
+		push_error("AnimalFox: assign an AnimationPlayer in the inspector")
 		set_physics_process(false)
 		return
-	animation_player.playback_default_blend_time = blend_time
-	agent.path_desired_distance = path_advance_distance
-	agent.target_desired_distance = waypoint_radius
-	agent.avoidance_enabled = false
 	WorldEvents.happened.connect(_on_world_event)
-	_tick_timer = randf() * TICK  # stagger foxes so they do not all think on one frame
+	_tick_timer = randf() * tick_interval  # stagger foxes so they do not all think on one frame
 	_enter_idle()
 
 
-func _physics_process(delta: float) -> void:
-	_desired_h = Vector3.ZERO
-	_face_dir = Vector3.ZERO
+func _nav_ready() -> bool:
+	return is_instance_valid(lira) and super._nav_ready()
+
+
+# === State machine ===
+
+func _tick_state(delta: float) -> void:
 	_grace = maxf(_grace - delta, 0.0)
 
-	if _nav_ready():
-		_tick_timer -= delta
-		if _tick_timer <= 0.0:
-			_tick_timer = TICK
-			_decide()
+	_tick_timer -= delta
+	if _tick_timer <= 0.0:
+		_tick_timer = tick_interval
+		_decide()
 
-		match state:
-			State.IDLE: _tick_idle(delta)
-			State.WANDER: _tick_wander(delta)
-			State.WATCH: _tick_watch()
-			State.ALERT: _tick_alert()
-			State.AVOID: _tick_avoid(delta)
-			State.INVESTIGATE: _tick_investigate(delta)
-			State.FOLLOW: _tick_follow(delta)
-
-	_apply_motion(delta)
-	_face(delta)
-	_animate()
-	_update_debug_label()
+	match state:
+		State.IDLE: _tick_idle(delta)
+		State.WANDER: _tick_wander(delta)
+		State.WATCH: _tick_watch()
+		State.ALERT: _tick_alert()
+		State.AVOID: _tick_avoid(delta)
+		State.INVESTIGATE: _tick_investigate(delta)
+		State.FOLLOW: _tick_follow(delta)
 
 
-# === Decisions (every TICK seconds) ===
+# === Decisions (every tick_interval seconds) ===
 
 func _decide() -> void:
 	# These two run to completion and cannot be interrupted.
@@ -157,11 +120,9 @@ func _decide() -> void:
 		_decide_follow(dist)
 		return
 
-	if state == State.FOLLOW:
-		# Grace just ended.
-		if calm_exit:
-			_enter_idle()
-			return
+	if state == State.FOLLOW and calm_exit:
+		_enter_idle()  # grace just ended
+		return
 
 	if dist < flee_radius:
 		_enter_alert()
@@ -207,13 +168,13 @@ func _tick_alert() -> void:
 
 
 func _bark() -> void:
-	_barking = true
+	animation_locked = true
 	bark_sound.play()
 	animation_player.play(bark_anim)
 	await animation_player.animation_finished
 	if not is_inside_tree():
 		return
-	_barking = false
+	animation_locked = false
 	if state == State.ALERT:
 		_enter_avoid()
 
@@ -258,38 +219,29 @@ func _tick_follow(delta: float) -> void:
 		_face_dir = lira.global_position - global_position
 
 
-# === Targets (the agent owns waypoint advancement) ===
+# === Targets ===
 
-func _set_target(p: Vector3, arrive := waypoint_radius) -> void:
+func _set_target(p: Vector3, arrive := -1.0) -> void:
 	_target = p
 	_has_target = true
-	_leg_time = 0.0
-	agent.target_desired_distance = arrive
+	agent.target_desired_distance = waypoint_radius if arrive < 0.0 else arrive
 	agent.target_position = p
+	_begin_leg()
 
 
 func _clear_target() -> void:
 	_has_target = false
 
 
-## Steers toward the current target. Returns true once the agent reports arrival.
+## Steers toward the current target. Returns true once the leg is done.
 func _follow_target(delta: float, speed: float) -> bool:
 	if not _has_target:
 		return true
-	_leg_time += delta
-	# The path needs a frame to exist, so do not trust the agent before then.
-	if (_leg_time > 0.1 and agent.is_navigation_finished()) or _leg_time >= move_timeout:
+	if _leg_done(delta):
 		_clear_target()
 		return true
 	_steer_along_path(speed)
 	return false
-
-
-func _steer_along_path(speed: float) -> void:
-	var to := agent.get_next_path_position() - global_position
-	to.y = 0.0
-	if to.length() > 0.05:
-		_desired_h = to.normalized() * speed
 
 
 ## One leg of the escape. Each leg drifts from the last, so the overall route curves.
@@ -314,60 +266,15 @@ func _next_escape_leg() -> void:
 
 
 func _wander_target() -> Vector3:
-	var a := randf() * TAU
-	var r := sqrt(randf()) * wander_radius
-	return _closest_nav_point(global_position + Vector3(cos(a) * r, 0.0, sin(a) * r))
+	return _random_nav_point(global_position, wander_radius)
 
 
-# === Motion ===
+# === Animation ===
 
-func _apply_motion(delta: float) -> void:
-	var cur := Vector3(velocity.x, 0.0, velocity.z)
-	var target_speed := _desired_h.length()
-	var h: Vector3
-
-	if target_speed > 0.01:  # turn the heading at a limited rate, so corners become curves
-		if _heading == Vector3.ZERO:
-			_heading = cur.normalized() if cur.length() > 0.1 else _flat_forward()
-		var angle := _heading.signed_angle_to(_desired_h / target_speed, Vector3.UP)
-		_heading = _heading.rotated(Vector3.UP, clampf(angle, -max_turn_rate * delta, max_turn_rate * delta))
-		var turn_slow := clampf(0.5 + 0.5 * cos(angle), 0.25, 1.0)  # slow down on sharp turns
-		h = _heading * move_toward(cur.length(), target_speed * turn_slow, acceleration * delta)
-	else:
-		h = cur.move_toward(Vector3.ZERO, acceleration * delta)
-		if h.length() < 0.05:
-			_heading = Vector3.ZERO
-
-	velocity.x = h.x
-	velocity.z = h.z
-	if is_on_floor():
-		velocity.y = minf(velocity.y, 0.0)
-	else:
-		velocity += get_gravity() * delta
-	move_and_slide()
-
-	# Face where we actually move, unless a state asked for something else.
-	if _face_dir == Vector3.ZERO and h.length() > 0.1:
-		_face_dir = h
-
-
-func _face(delta: float) -> void:
-	var d := Vector3(_face_dir.x, 0.0, _face_dir.z)
-	if d.length() < 0.01:
-		return
-	var yaw := atan2(d.x, d.z) if model_faces_positive_z else atan2(-d.x, -d.z)
-	rotation.y = lerp_angle(rotation.y, yaw, 1.0 - exp(-turn_speed * delta))
-
-
-func _animate() -> void:
-	if _barking:
-		return
-	var speed := Vector2(velocity.x, velocity.z).length()
-	var clip := idle_anim
-	if speed > 0.15:
-		clip = run_anim if state == State.AVOID else walk_anim
-	if animation_player.current_animation != clip:
-		animation_player.play(clip)
+func _pick_clip() -> String:
+	if not is_moving:
+		return idle_anim
+	return run_anim if state == State.AVOID else walk_anim
 
 
 # === World events ===
@@ -388,36 +295,11 @@ func _on_world_event(pos: Vector3, kind: StringName, interest: float) -> void:
 
 # === Helpers ===
 
-func _nav_ready() -> bool:
-	return is_instance_valid(lira) \
-			and NavigationServer3D.map_get_iteration_id(agent.get_navigation_map()) > 0
-
-
-func _closest_nav_point(p: Vector3) -> Vector3:
-	return NavigationServer3D.map_get_closest_point(agent.get_navigation_map(), p)
-
-
-func _flat_dist(p: Vector3) -> float:
-	return Vector2(p.x - global_position.x, p.z - global_position.z).length()
-
-
-func _flat_forward() -> Vector3:
-	var f := global_basis.z if model_faces_positive_z else -global_basis.z
-	f.y = 0.0
-	return f.normalized() if f.length() > 1e-3 else Vector3.FORWARD
-
-
 func _player_distance() -> float:
 	return global_position.distance_to(lira.global_position)
 
 
-func _update_debug_label() -> void:
-	if debug_label == null:
-		return
-	debug_label.visible = debug
-	if not debug:
-		return
-
+func _debug_text() -> String:
 	var lines := "%s  %.0fm" % [State.keys()[state], _player_distance()]
 
 	if _has_target:
@@ -432,5 +314,4 @@ func _update_debug_label() -> void:
 
 	if _grace > 0.0:
 		lines += "\ngrace %.0fs" % _grace
-
-	debug_label.text = lines
+	return lines

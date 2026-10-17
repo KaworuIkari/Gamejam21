@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://db2wta2nor7sj"]
+
+[ext_resource type="Script" uid="uid://djrdhwskrxs2p" path="res://objects/animals/seagull/animal_seagull.gd" id="1_5xych"]
+[ext_resource type="PackedScene" uid="uid://crdxka5vqgwe3" path="res://objects/animals/seagull/seagull.glb" id="1_g6lic"]
+
+[node name="AnimalSeagull" type="Node3D" unique_id=1987472582]
+script = ExtResource("1_5xych")
+
+[node name="Sing" type="FmodEventEmitter3D" parent="." unique_id=779922030]
+event_name = "event:/Chicken/Sing"
+event_guid = "{6ef15e15-5ec9-4108-8243-2ce9290c9ad0}"
+
+[node name="seagull" parent="." unique_id=737309334 instance=ExtResource("1_g6lic")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="Skeleton3D" parent="seagull/Seagull" parent_id_path=PackedInt32Array(737309334, 1936066328) index="0" unique_id=1239372513]
+bones/4/rotation = Quaternion(-0.19940725, 2.7871974e-09, -7.009108e-08, 0.9799168)
+bones/5/rotation = Quaternion(0.06346586, 7.859622e-09, -4.110435e-09, 0.9979841)
+bones/6/rotation = Quaternion(0.17684278, -4.7654236e-09, 7.367448e-08, 0.98423916)
+bones/10/position = Vector3(0.05494316, 0.018644504, -0.010258875)
+bones/10/rotation = Quaternion(0.7104766, -0.08797399, -0.06854404, 0.6948277)
+bones/10/scale = Vector3(1.0128216, 1.0128217, 1.0128213)
+bones/11/rotation = Quaternion(-0.0014368474, 0.25767285, 0.015374819, 0.96610886)
+bones/12/rotation = Quaternion(0.0008847298, -0.33518782, -0.007956137, 0.9421174)
+bones/13/rotation = Quaternion(0.006665711, -0.028084718, 0.02107787, 0.99936104)
+bones/14/rotation = Quaternion(-0.004990556, -0.033259984, -0.0074566174, 0.9994065)
+bones/20/rotation = Quaternion(-0.7024806, -0.07403592, 0.09859687, 0.700941)
+bones/21/rotation = Quaternion(-0.0039789136, 0.25761417, -0.012792118, 0.966155)
+bones/22/position = Vector3(-0.1268854, 0.00020822906, -2.2177602e-08)
+bones/22/rotation = Quaternion(0.0011414861, -0.3350692, 0.022324964, 0.9419284)
+bones/23/rotation = Quaternion(-0.008485367, -0.028084312, -0.0022852554, 0.999567)
+bones/24/rotation = Quaternion(-0.00088779145, -0.03327802, -0.0052205, 0.9994322)
+bones/28/rotation = Quaternion(-0.031034898, 0.12958795, -0.0040578777, 0.99107385)
+bones/31/position = Vector3(-0.004366569, -0.0764062, 8.992103e-09)
+bones/31/rotation = Quaternion(0.03191517, 1.0944405e-11, 7.884542e-10, 0.9994907)
+bones/32/position = Vector3(-0.0043665688, -0.078975655, -4.4677506e-10)
+bones/32/rotation = Quaternion(0.022300677, 5.357485e-12, 5.463661e-10, 0.9997514)
+bones/34/position = Vector3(0.03231245, 0.05064796, 0.024393007)
+bones/34/rotation = Quaternion(0.4749149, -0.011722579, 0.078575745, 0.8764385)
+bones/35/rotation = Quaternion(0.28246036, -0.048107557, 0.005612786, 0.95805556)
+bones/36/rotation = Quaternion(0.58017844, 0.08177771, 0.0043566525, 0.8103619)
+bones/39/position = Vector3(-0.032312445, 0.043895006, 0.01512786)
+bones/39/rotation = Quaternion(0.8951563, 0.10540035, 0.06236522, -0.42859828)
+bones/40/rotation = Quaternion(0.30130687, -0.1263347, 0.04432566, 0.94408107)
+bones/41/rotation = Quaternion(0.4713905, -0.15702882, -0.015172416, 0.8676998)
+
+[editable path="seagull"]
