@@ -2,6 +2,48 @@
 
 [ext_resource type="Script" uid="uid://djrdhwskrxs2p" path="res://objects/animals/seagull/animal_seagull.gd" id="1_5xych"]
 [ext_resource type="PackedScene" uid="uid://crdxka5vqgwe3" path="res://objects/animals/seagull/seagull.glb" id="1_g6lic"]
+[ext_resource type="PackedScene" uid="uid://cv2wykdmn5n2l" path="res://systems/cameras/rewild_phantom_camera.tscn" id="3_hql6w"]
+[ext_resource type="Script" uid="uid://cuffvge5ad4aa" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_3d.gd" id="4_csjw4"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_csjw4"]
+animation = &"fly_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0mjqg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_csjw4"]
+states/fly_idle/node = SubResource("AnimationNodeAnimation_csjw4")
+states/fly_idle/position = Vector2(303.33334, 109.333336)
+transitions = ["Start", "fly_idle", SubResource("AnimationNodeStateMachineTransition_0mjqg")]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jrwr"]
+animation = &"fly_wings"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c8rf0"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_1jrwr"]
+states/fly_wings/node = SubResource("AnimationNodeAnimation_1jrwr")
+states/fly_wings/position = Vector2(327.33334, 99.111115)
+transitions = ["Start", "fly_wings", SubResource("AnimationNodeStateMachineTransition_c8rf0")]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0mjqg"]
+filter_enabled = true
+filters = ["Seagull/Skeleton3D:LF_SHOULDER__Skeleton", "Seagull/Skeleton3D:LF_WRIST__Skeleton", "Seagull/Skeleton3D:RT_SHOULDER__Skeleton", "Seagull/Skeleton3D:RT_WRIST__Skeleton"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_0yw1p"]
+nodes/Fly/node = SubResource("AnimationNodeStateMachine_csjw4")
+nodes/Fly/position = Vector2(-173.33333, 93.333336)
+nodes/Wings/node = SubResource("AnimationNodeStateMachine_1jrwr")
+nodes/Wings/position = Vector2(-192.66667, 300)
+nodes/WingsBlend/node = SubResource("AnimationNodeBlend2_0mjqg")
+nodes/WingsBlend/position = Vector2(120, 106.666664)
+node_connections = [&"output", 0, &"WingsBlend", &"WingsBlend", 0, &"Fly", &"WingsBlend", 1, &"Wings"]
+
+[sub_resource type="Resource" id="Resource_hql6w"]
+script = ExtResource("4_csjw4")
+amplitude = 14.444
+metadata/_custom_type_script = "uid://cuffvge5ad4aa"
 
 [node name="AnimalSeagull" type="Node3D" unique_id=1987472582]
 script = ExtResource("1_5xych")
@@ -11,37 +53,60 @@ event_name = "event:/Chicken/Sing"
 event_guid = "{6ef15e15-5ec9-4108-8243-2ce9290c9ad0}"
 
 [node name="seagull" parent="." unique_id=737309334 instance=ExtResource("1_g6lic")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+transform = Transform3D(-1.3113416e-07, 0, -3, 0, 3, 0, 3, 0, -1.3113416e-07, 0, 0, 0)
 
-[node name="Skeleton3D" parent="seagull/Seagull" parent_id_path=PackedInt32Array(737309334, 1936066328) index="0" unique_id=1239372513]
-bones/4/rotation = Quaternion(-0.19940725, 2.7871974e-09, -7.009108e-08, 0.9799168)
-bones/5/rotation = Quaternion(0.06346586, 7.859622e-09, -4.110435e-09, 0.9979841)
-bones/6/rotation = Quaternion(0.17684278, -4.7654236e-09, 7.367448e-08, 0.98423916)
+[node name="Skeleton3D" parent="seagull/Seagull" parent_id_path=PackedInt32Array(737309334, 243983652) index="0" unique_id=294901283]
+bones/4/rotation = Quaternion(-0.19940725, 2.7871956e-09, -7.009108e-08, 0.9799168)
+bones/5/rotation = Quaternion(0.07183126, 6.519035e-09, -3.6173233e-09, 0.9974168)
+bones/6/rotation = Quaternion(0.17684278, -4.7654236e-09, 7.367447e-08, 0.98423916)
 bones/10/position = Vector3(0.05494316, 0.018644504, -0.010258875)
-bones/10/rotation = Quaternion(0.7104766, -0.08797399, -0.06854404, 0.6948277)
-bones/10/scale = Vector3(1.0128216, 1.0128217, 1.0128213)
-bones/11/rotation = Quaternion(-0.0014368474, 0.25767285, 0.015374819, 0.96610886)
-bones/12/rotation = Quaternion(0.0008847298, -0.33518782, -0.007956137, 0.9421174)
-bones/13/rotation = Quaternion(0.006665711, -0.028084718, 0.02107787, 0.99936104)
-bones/14/rotation = Quaternion(-0.004990556, -0.033259984, -0.0074566174, 0.9994065)
-bones/20/rotation = Quaternion(-0.7024806, -0.07403592, 0.09859687, 0.700941)
-bones/21/rotation = Quaternion(-0.0039789136, 0.25761417, -0.012792118, 0.966155)
-bones/22/position = Vector3(-0.1268854, 0.00020822906, -2.2177602e-08)
-bones/22/rotation = Quaternion(0.0011414861, -0.3350692, 0.022324964, 0.9419284)
-bones/23/rotation = Quaternion(-0.008485367, -0.028084312, -0.0022852554, 0.999567)
-bones/24/rotation = Quaternion(-0.00088779145, -0.03327802, -0.0052205, 0.9994322)
-bones/28/rotation = Quaternion(-0.031034898, 0.12958795, -0.0040578777, 0.99107385)
-bones/31/position = Vector3(-0.004366569, -0.0764062, 8.992103e-09)
-bones/31/rotation = Quaternion(0.03191517, 1.0944405e-11, 7.884542e-10, 0.9994907)
-bones/32/position = Vector3(-0.0043665688, -0.078975655, -4.4677506e-10)
-bones/32/rotation = Quaternion(0.022300677, 5.357485e-12, 5.463661e-10, 0.9997514)
+bones/10/rotation = Quaternion(0.7036603, -0.09266812, -0.07872814, 0.7000549)
+bones/10/scale = Vector3(1.0009655, 1.0009654, 1.0009651)
+bones/11/rotation = Quaternion(-0.00058045244, 0.2576694, 0.013561745, 0.9661378)
+bones/12/rotation = Quaternion(-0.00063041126, -0.33518267, -0.012324317, 0.94207245)
+bones/13/rotation = Quaternion(0.0013864874, -0.028072067, 0.009724621, 0.9995577)
+bones/14/rotation = Quaternion(-0.01386792, -0.03318421, -0.03272054, 0.99881727)
+bones/20/rotation = Quaternion(-0.70618397, -0.08751314, 0.08500589, 0.697438)
+bones/20/scale = Vector3(0.9939993, 0.99999976, 0.99999976)
+bones/21/rotation = Quaternion(-0.0017035431, 0.2576647, 0.00071480835, 0.9662327)
+bones/22/position = Vector3(-0.1268854, 0.00021207772, -1.4341815e-08)
+bones/22/rotation = Quaternion(0.0003607289, -0.33515418, 0.010393926, 0.94210595)
+bones/23/rotation = Quaternion(-0.016362613, -0.028020537, -0.024370225, 0.9991763)
+bones/24/rotation = Quaternion(-0.010368107, -0.033216655, -0.022715358, 0.99913627)
+bones/28/rotation = Quaternion(-0.031034896, 0.12958795, -0.004057878, 0.99107385)
+bones/31/position = Vector3(-0.0017844131, -0.0764062, 2.5690543e-08)
+bones/31/rotation = Quaternion(0.019227676, -8.43009e-11, 7.528074e-10, 0.9998151)
+bones/32/position = Vector3(-0.0017844134, -0.07897562, -2.3365459e-08)
+bones/32/rotation = Quaternion(0.011667388, -4.544396e-13, 5.4639077e-10, 0.99993193)
 bones/34/position = Vector3(0.03231245, 0.05064796, 0.024393007)
 bones/34/rotation = Quaternion(0.4749149, -0.011722579, 0.078575745, 0.8764385)
-bones/35/rotation = Quaternion(0.28246036, -0.048107557, 0.005612786, 0.95805556)
-bones/36/rotation = Quaternion(0.58017844, 0.08177771, 0.0043566525, 0.8103619)
+bones/35/rotation = Quaternion(0.28600127, -0.0480084, 0.005584777, 0.95700955)
+bones/36/rotation = Quaternion(0.5801784, 0.08177769, 0.00435667, 0.810362)
 bones/39/position = Vector3(-0.032312445, 0.043895006, 0.01512786)
 bones/39/rotation = Quaternion(0.8951563, 0.10540035, 0.06236522, -0.42859828)
-bones/40/rotation = Quaternion(0.30130687, -0.1263347, 0.04432566, 0.94408107)
-bones/41/rotation = Quaternion(0.4713905, -0.15702882, -0.015172416, 0.8676998)
+bones/40/rotation = Quaternion(0.30338404, -0.12614162, 0.044243354, 0.94344527)
+bones/41/rotation = Quaternion(0.49481878, -0.15120709, -0.025501763, 0.85535985)
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1312289964]
+root_node = NodePath("../seagull")
+tree_root = SubResource("AnimationNodeBlendTree_0yw1p")
+anim_player = NodePath("../seagull/AnimationPlayer")
+parameters/WingsBlend/blend_amount = 0.0
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." unique_id=435055426]
+event_name = "event:/Seagull/Cry"
+event_guid = "{204d6548-e084-4864-af58-d40b687dfa27}"
+
+[node name="PCam_Seagull" parent="." unique_id=693118989 node_paths=PackedStringArray("look_at_target") instance=ExtResource("3_hql6w")]
+transform = Transform3D(-1, 0, 0, 0, 0.88334626, 0.46872097, 0, 0.468721, -0.88334614, 0, 1.9829154, -3.7369797)
+look_at_mode = 2
+look_at_target = NodePath("..")
+noise = SubResource("Resource_hql6w")
+align_transform_with_view = Callable()
+align_rotation_with_view = Callable()
+
+[node name="CameraView" parent="PCam_Seagull" index="0" unique_id=250864998]
+view_name = &"seagull"
 
 [editable path="seagull"]
+[editable path="PCam_Seagull"]

@@ -552,7 +552,8 @@ func _water_rotation(delta: float) -> void:
 	var dir := Vector3(direction.x, 0.0, direction.z)
 	if dir.length_squared() < 0.001:
 		return   # no input: keep last facing, so vertical-only dives don't spin the mesh
-	character.rotation.y = lerp_angle(character.rotation.y, atan2(dir.x, dir.z), rotation_speed * delta)
+	character.global_rotation.y = lerp_angle(
+		character.global_rotation.y, atan2(dir.x, dir.z), rotation_speed * delta)
 
 # swim sound loops
 var _swim_loop_on := false

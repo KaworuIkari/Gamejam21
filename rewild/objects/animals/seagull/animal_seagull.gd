@@ -9,10 +9,6 @@ class_name AnimalSeagull
 
 enum State { FLOCK, DIVE, RECOVER }
 
-# @export_group("Nodes")
-# @export var terrain: Terrain3D
-@onready var terrain : Terrain3D = get_tree().root.find_child("Terrain3D", true, false)
-
 @export_group("Island")
 @export var flight_center := Vector3.ZERO  ## world-space island centre
 @export var island_radius := 150.0  ## soft boundary; gulls turn back past 80% of this
@@ -65,7 +61,26 @@ enum State { FLOCK, DIVE, RECOVER }
 @export var dive_max_time := 3.0
 @export var recover_time := 2.5
 
-@onready var _player = get_tree().get_first_node_in_group("player") as LIRA_Character
+@export_group("Wings")
+@export var wings_blend_param := "parameters/WingsBlend/blend_amount"
+@export var flap_interval_mean := 5.0  ## mean seconds of gliding between flap bursts
+@export var flap_interval_sd := 5.0  ## standard deviation of that gap
+@export var flap_interval_min := 1.0  ## floor: the gaussian tail would otherwise go negative
+@export var flap_duration := Vector2(0.8, 2.0)  ## how long one burst lasts
+@export var wings_blend_speed := 6.0  ## lerp rate toward the target blend
+var _flap_timer := 0.0
+var _flapping := false
+var _wings_blend := 0.0
+
+@export_group("Camera")
+@export var sing_delay := 2.0
+var _sing_timer := -1.0
+
+@onready var terrain: Terrain3D = get_tree().root.find_child("Terrain3D", true, false)
+@onready var _player: LIRA_Character = get_tree().get_first_node_in_group("player")
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var _sound_emitter: FmodEventEmitter3D = $FmodEventEmitter3D
+@onready var _camera_view: CameraView = $PCam_Seagull/CameraView
 
 var velocity := Vector3.ZERO
 var _state := State.FLOCK
@@ -83,6 +98,10 @@ var _forward := Vector3.FORWARD
 
 func _ready() -> void:
 	add_to_group("seagulls")
+	if terrain == null:
+		push_error("%s: no node named Terrain3D in the tree" % get_path())
+	if _player == null:
+		push_error("%s: no node in group 'player'" % get_path())
 	_affinity = randf_range(0.3, 1.0)
 	_hover_height = randf_range(hover_min, hover_max)
 	_wander_angle = randf() * TAU
@@ -90,6 +109,10 @@ func _ready() -> void:
 	velocity = _forward * randf_range(min_speed, max_speed)
 	_think_timer = randf() * think_interval
 	_dive_cooldown = randf() * dive_cooldown.y
+	animation_tree.active = true
+	animation_tree.set(wings_blend_param, 0.0)
+	_flap_timer = randf() * flap_interval_mean
+	CameraDirector.view_changed.connect(_on_camera_view_changed)
 	_think()
 
 
@@ -108,7 +131,8 @@ func _physics_process(delta: float) -> void:
 	_state_timer -= delta
 	_clamp_to_floor()
 	_update_facing(delta)
-
+	_update_wings(delta)
+	_update_sing(delta)
 
 func _think() -> void:
 	_dive_cooldown = maxf(_dive_cooldown - think_interval, 0.0)
@@ -340,3 +364,31 @@ func _update_facing(delta: float) -> void:
 		up_vec = Vector3.RIGHT
 	var target_basis := Basis.looking_at(dir, up_vec, model_faces_positive_z)
 	global_basis = global_basis.orthonormalized().slerp(target_basis, 1.0 - exp(-face_smoothing * delta))
+
+func _update_wings(delta: float) -> void:
+	_flap_timer -= delta
+	if _flap_timer <= 0.0:
+		_flapping = not _flapping
+		if _flapping:
+			_flap_timer = randf_range(flap_duration.x, flap_duration.y)
+		else:
+			_flap_timer = maxf(randfn(flap_interval_mean, flap_interval_sd), flap_interval_min)
+	var target := 1.0 if _flapping else 0.0
+	_wings_blend = lerpf(_wings_blend, target, 1.0 - exp(-wings_blend_speed * delta))
+	animation_tree.set(wings_blend_param, _wings_blend)
+
+func _on_camera_view_changed(previous: StringName, current: StringName) -> void:
+	var mine := _camera_view.view_name
+	if current == mine and previous != mine:
+		_sing_timer = sing_delay
+	elif current != mine:
+		_sing_timer = -1.0  # left the view before the cry landed
+
+
+func _update_sing(delta: float) -> void:
+	if _sing_timer < 0.0:
+		return
+	_sing_timer -= delta
+	if _sing_timer <= 0.0:
+		_sing_timer = -1.0
+		_sound_emitter.play()
