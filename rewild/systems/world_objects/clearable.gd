@@ -32,7 +32,7 @@ static var _focus: Clearable
 @export var message_key := "CLEAR_PROMPT"
 @export var locked_key := "CLEAR_LOCKED"
 
-const PROMPT_SCENE = preload("res://ui/in_game/interaction/interaction_prompt.tscn")
+const PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_prompt.tscn")
 
 var is_cleared := false
 
@@ -87,6 +87,7 @@ func _process(delta: float) -> void:
 			_prompt_locked = locked
 			_prompt.configure(&"interact", locked_key if locked else message_key)
 		_prompt.set_available(focused and _can_act())
+		_prompt.set_interactable(not locked)
 
 	if focused and _can_act() and not is_locked() and Input.is_action_pressed(&"interact"):
 		_hold += delta
@@ -94,10 +95,13 @@ func _process(delta: float) -> void:
 		var k := _hold / hold_time
 		position = _base_position + Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)) * 0.06 * k
 		if _hold >= hold_time:
+			_prompt.play_activation()
 			clear()
 	elif _hold > 0.0:
 		_hold = 0.0
 		position = _base_position
+	if _prompt:
+		_prompt.set_hold_progress(_hold / maxf(hold_time, 0.001))
 
 
 ## Also callable from code (cutscenes, debug skip).
@@ -146,7 +150,10 @@ func _update_focus() -> void:
 
 
 func _can_act() -> bool:
-	if get_tree().paused:
+	# The lake terminal provides the reason and authorization to start clearing.
+	# This ability is persisted by Quests, so loaded games keep the unlock.
+	var quests := get_node_or_null(^"/root/Quests")
+	if quests == null or not quests.terminal_unlocked() or get_tree().paused:
 		return false
 	var dialogic := get_node_or_null(^"/root/Dialogic")
 	return dialogic == null or dialogic.current_timeline == null

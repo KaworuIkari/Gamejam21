@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://objects/interactables/readables/readable_note.gd" id="1_script"]
+
+[sub_resource type="SphereShape3D" id="Range"]
+radius = 2.4
+
+[sub_resource type="StandardMaterial3D" id="PaperMaterial"]
+albedo_color = Color(0.93, 0.9, 0.76, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="PaperMesh"]
+material = SubResource("PaperMaterial")
+size = Vector3(0.34, 0.006, 0.24)
+
+[sub_resource type="StandardMaterial3D" id="InkMaterial"]
+albedo_color = Color(0.24, 0.32, 0.28, 1)
+roughness = 1.0
+
+[sub_resource type="BoxMesh" id="InkLine"]
+material = SubResource("InkMaterial")
+size = Vector3(0.21, 0.001, 0.008)
+
+[sub_resource type="StandardMaterial3D" id="SparkMaterial"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+albedo_color = Color(1, 0.92, 0.65, 0.8)
+
+[sub_resource type="QuadMesh" id="SparkMesh"]
+material = SubResource("SparkMaterial")
+size = Vector2(0.025, 0.025)
+
+[node name="ReadableNote" type="Area3D"]
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+script = ExtResource("1_script")
+radius = 2.4
+
+[node name="ReadRange" type="CollisionShape3D" parent="."]
+shape = SubResource("Range")
+
+[node name="Paper" type="MeshInstance3D" parent="."]
+mesh = SubResource("PaperMesh")
+
+[node name="Line1" type="MeshInstance3D" parent="Paper"]
+position = Vector3(0, 0.004, -0.05)
+mesh = SubResource("InkLine")
+
+[node name="Line2" type="MeshInstance3D" parent="Paper"]
+position = Vector3(0, 0.004, -0.015)
+mesh = SubResource("InkLine")
+
+[node name="Line3" type="MeshInstance3D" parent="Paper"]
+position = Vector3(-0.035, 0.004, 0.02)
+scale = Vector3(0.66, 1, 1)
+mesh = SubResource("InkLine")
+
+[node name="SoftSparkles" type="CPUParticles3D" parent="."]
+position = Vector3(0, 0.045, 0)
+amount = 6
+lifetime = 2.4
+mesh = SubResource("SparkMesh")
+emission_shape = 1
+emission_sphere_radius = 0.16
+direction = Vector3(0, 1, 0)
+spread = 15.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.025
+initial_velocity_max = 0.065
+scale_amount_min = 0.4
+scale_amount_max = 1.0

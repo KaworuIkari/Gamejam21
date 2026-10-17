@@ -19,7 +19,9 @@ top-left corner show them automatically.
        events like the pump); off = only what happens after the step starts ("clear 10 *more*").
    - **Rewards**: ability → level, e.g. `water_gun: 2`, `jetpack: 1`.
 
-Steps are done one after another. A quest is done when its last step is.
+Steps are done one after another. A quest is done when its last step is. A step with
+**With Previous** ticked opens together with the step before it (do both in any order).
+Tick **Parallel** on the quest to open all steps at once, in any order; it is done when every step is.
 
 ## Events
 

@@ -30,6 +30,7 @@
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Tower_Bracing.tres" id="RadioCollision_20"]
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Tower_Legs.tres" id="RadioCollision_21"]
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Yoke.tres" id="RadioCollision_22"]
+[ext_resource type="Script" path="res://systems/world_objects/auto_blocker.gd" id="auto_blocker"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w752n"]
 resource_name = "Sage_painted_steel"
@@ -1403,7 +1404,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_47xp7")
 
-[node name="RadioObservatory" type="Node3D" unique_id=589914880]
+[node name="RadioObservatory" type="Node3D" unique_id=589914880 groups=["nav_blockers"]]
 
 [node name="Model" type="Node3D" parent="." unique_id=1221102328]
 
@@ -1616,3 +1617,7 @@ mesh = SubResource("ArrayMesh_xghgk")
 shape = ExtResource("RadioCollision_22")
 
 [node name="StaticBody" type="StaticBody3D" parent="." unique_id=1407610296]
+
+[node name="AutoBlocker" type="Node" parent="."]
+script = ExtResource("auto_blocker")
+solid = false
