@@ -113,6 +113,8 @@ eat_state_name = "eat"
 casual_sing_radius = 12.0
 casual_sing_chance = 0.6
 animation_player = NodePath("chicken_anim1/AnimationPlayer")
+path_advance_distance = 2.0
+waypoint_radius = 2.0
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=256457580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -121,14 +123,14 @@ shape = SubResource("SphereShape3D_kr4sc")
 [node name="chicken_anim1" parent="." index="3" unique_id=1619175089 instance=ExtResource("1_5em7j")]
 transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0, 0)
 
-[node name="Skeleton3D" parent="chicken_anim1/wil_chicken_01" parent_id_path=PackedInt32Array(1619175089, 626158636) index="0" unique_id=1424680579]
+[node name="Skeleton3D" parent="chicken_anim1/wil_chicken_01" parent_id_path=PackedInt32Array(1619175089, 257078629) index="0" unique_id=2054775393]
 bones/1/position = Vector3(1.0791511e-08, -0.028109955, -0.246881)
 bones/1/rotation = Quaternion(-8.881785e-16, 3.6948217e-15, -1.7763568e-15, 1)
 bones/3/rotation = Quaternion(0.0030025882, -8.4588786e-16, 1.3124722e-10, 0.99999547)
 bones/4/rotation = Quaternion(-0.70658803, 5.0038217e-16, -3.0885932e-08, 0.70762515)
-bones/5/rotation = Quaternion(-0.005771778, 5.1221805e-09, -2.2272202e-09, 0.99998343)
-bones/6/rotation = Quaternion(0.7124829, 1.2056142e-15, 3.114362e-08, 0.7016895)
-bones/7/rotation = Quaternion(9.290396e-09, 0.030598743, -0.006229927, 0.9995124)
+bones/5/rotation = Quaternion(0.0016883651, -3.674612e-12, -3.6567327e-10, 0.99999857)
+bones/6/rotation = Quaternion(0.7124829, 1.2463693e-15, 3.114362e-08, 0.7016895)
+bones/7/rotation = Quaternion(9.334637e-09, -0.024651641, -0.0030808991, 0.9996914)
 bones/9/position = Vector3(0.022293381, 0.057688735, 0.019675767)
 bones/9/rotation = Quaternion(0.17445011, 0.21001036, 0.24600184, 0.9300248)
 bones/11/position = Vector3(-0.022293365, 0.056764413, 0.015633108)
@@ -141,8 +143,8 @@ bones/16/rotation = Quaternion(0.42062804, -0.34908807, -0.01943234, 0.837157)
 bones/18/rotation = Quaternion(0.72422403, -0.094391674, -0.52891827, -0.43224454)
 bones/19/position = Vector3(-0.114668965, -1.40303325e-08, 3.0412075e-08)
 bones/19/rotation = Quaternion(0.4016834, -0.33888024, -0.053390957, 0.8490937)
-bones/21/position = Vector3(1.4480184e-10, -0.1091015, -0.033330783)
-bones/21/rotation = Quaternion(0.20446558, -5.139574e-09, 6.710448e-09, 0.9788738)
+bones/21/position = Vector3(1.3049758e-09, -0.11238008, -0.020809479)
+bones/21/rotation = Quaternion(0.15783714, -2.3450483e-10, 8.136508e-09, 0.9874652)
 bones/24/position = Vector3(-0.0010538845, 0.014395654, 0.12524222)
 bones/24/rotation = Quaternion(-0.6652969, -0.0032464387, -0.025494233, 0.7461364)
 bones/25/rotation = Quaternion(0.38746828, 0.028918482, -0.12419037, 0.91302186)
@@ -157,12 +159,12 @@ bones/37/rotation = Quaternion(-0.023580674, -0.035621643, -0.14875261, 0.987951
 bones/41/position = Vector3(0.0029053881, -0.023226911, -0.0017519494)
 bones/41/rotation = Quaternion(0.9966603, 0.023199301, 0.021281704, 0.07534728)
 
-[node name="Sing" type="FmodEventEmitter3D" parent="chicken_anim1/wil_chicken_01/Skeleton3D/wil_chicken_01_001" parent_id_path=PackedInt32Array(1619175089, 342642833) index="0" unique_id=2013579890]
+[node name="Sing" type="FmodEventEmitter3D" parent="chicken_anim1/wil_chicken_01/Skeleton3D/wil_chicken_01_001" parent_id_path=PackedInt32Array(1619175089, 1239662442) index="0" unique_id=2013579890]
 event_name = "event:/Chicken/Sing"
 event_guid = "{6ef15e15-5ec9-4108-8243-2ce9290c9ad0}"
 volume = 0.5
 
-[node name="Sing2" type="FmodEventEmitter3D" parent="chicken_anim1/wil_chicken_01/Skeleton3D/wil_chicken_01_001" parent_id_path=PackedInt32Array(1619175089, 342642833) index="1" unique_id=489808919]
+[node name="Sing2" type="FmodEventEmitter3D" parent="chicken_anim1/wil_chicken_01/Skeleton3D/wil_chicken_01_001" parent_id_path=PackedInt32Array(1619175089, 1239662442) index="1" unique_id=489808919]
 event_name = "event:/Chicken/Sing2"
 event_guid = "{d7022e19-2c51-4b98-a253-27b52b318556}"
 volume = 0.5
