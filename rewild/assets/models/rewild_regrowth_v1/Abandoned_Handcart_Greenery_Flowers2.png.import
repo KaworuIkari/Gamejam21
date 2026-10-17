@@ -3,9 +3,10 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bfbc1tjrpxovi"
-path="res://.godot/imported/Abandoned_Handcart_Greenery_Flowers2.png-f196c59d0aaf5f6b1924b715f8c20c74.ctex"
+path.s3tc="res://.godot/imported/Abandoned_Handcart_Greenery_Flowers2.png-f196c59d0aaf5f6b1924b715f8c20c74.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "5bed2d81e5ffcdbbf003cc44d2ad4258"
@@ -14,11 +15,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Abandoned_Handcart_Greenery_Flowers2.png"
-dest_files=["res://.godot/imported/Abandoned_Handcart_Greenery_Flowers2.png-f196c59d0aaf5f6b1924b715f8c20c74.ctex"]
+dest_files=["res://.godot/imported/Abandoned_Handcart_Greenery_Flowers2.png-f196c59d0aaf5f6b1924b715f8c20c74.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -40,4 +41,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

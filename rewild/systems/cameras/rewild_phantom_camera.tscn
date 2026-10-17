@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cv2wykdmn5n2l"]
+
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="1_sh1bd"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_txkqb"]
+[ext_resource type="Script" uid="uid://rmux0r4m7vby" path="res://systems/cameras/camera_view.gd" id="3_rxf0w"]
+
+[sub_resource type="Resource" id="Resource_kg23i"]
+script = ExtResource("2_txkqb")
+
+[node name="RewildPhantomCamera" type="Node3D" unique_id=693118989]
+script = ExtResource("1_sh1bd")
+tween_resource = SubResource("Resource_kg23i")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="CameraView" type="Node" parent="." unique_id=250864998]
+script = ExtResource("3_rxf0w")

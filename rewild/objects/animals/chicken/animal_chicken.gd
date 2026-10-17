@@ -109,6 +109,8 @@ func _ready() -> void:
 	_reset_hunger(true)
 	_flap_timer = _exp(flap_interval_mean)
 	_enter_idle()
+	idle_anim = "idle"
+	walk_anim = "walk"
 
 
 # === State machine ===
