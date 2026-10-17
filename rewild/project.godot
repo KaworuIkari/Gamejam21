@@ -47,7 +47,10 @@ directories/dch_directory={
 "XBot": "res://dialogue/characters/XBot.dch"
 }
 directories/dtl_directory={
-"XBot_timeline": "res://dialogue/timelines/Mannequin/XBot_timeline.dtl"
+"XBot_timeline": "res://dialogue/timelines/Mannequin/XBot_timeline.dtl",
+"core_activated": "res://dialogue/timelines/Factory/core_activated.dtl",
+"core_delivery": "res://dialogue/timelines/LakeTerminal/core_delivery.dtl",
+"first_contact": "res://dialogue/timelines/LakeTerminal/first_contact.dtl"
 }
 layout/style_directory={
 "": "res://dialogue/styles/UI.tres",

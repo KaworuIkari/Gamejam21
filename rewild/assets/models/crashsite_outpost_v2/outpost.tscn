@@ -32,8 +32,9 @@
 [ext_resource type="PackedScene" path="res://assets/models/crashsite_outpost_v2/assets/DeadTree_Original.tscn" id="30"]
 [ext_resource type="PackedScene" path="res://assets/models/crashsite_outpost_v2/assets/Rock_Original.tscn" id="31"]
 [ext_resource type="PackedScene" path="res://assets/models/crashsite_outpost_v2/assets/Impact_Earth_Bed.tscn" id="32"]
+[ext_resource type="Script" path="res://systems/world_objects/auto_blocker.gd" id="auto_blocker"]
 
-[node name="CrashsiteOutpostV2" type="Node3D" unique_id=206184363]
+[node name="CrashsiteOutpostV2" type="Node3D" unique_id=206184363 groups=["nav_blockers"]]
 
 [node name="Fuselage_Continuous_000" parent="." unique_id=2055450498 instance=ExtResource("1")]
 
@@ -361,3 +362,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3.35, -1.2)
 light_color = Color(1, 0.59, 0.24, 1)
 light_energy = 1.4
 omni_range = 4.0
+
+[node name="AutoBlocker" type="Node" parent="."]
+script = ExtResource("auto_blocker")

@@ -13,3 +13,6 @@ class_name QuestStep extends Resource
 ## the pump, which can't happen again). Off: only what happens after this step starts
 ## counts, e.g. "clear 10 more garbage" after an earlier quest already asked for some.
 @export var count_earlier := true
+## On: opens together with the step before it. Such steps can be done in any order and the
+## quest moves on once all of them are done (e.g. "clear 8 litter" and "restore the area").
+@export var with_previous := false

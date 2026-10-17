@@ -36,8 +36,9 @@
 [ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Dry_Grass.tscn" id="34_fo4ds"]
 [ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Floor_Crack.tscn" id="35_jr65d"]
 [ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Main_Floor.tscn" id="36_ny45o"]
+[ext_resource type="Script" path="res://systems/world_objects/auto_blocker.gd" id="auto_blocker"]
 
-[node name="RoboticsLabHouse4" type="Node3D" unique_id=1745798474]
+[node name="RoboticsLabHouse4" type="Node3D" unique_id=1745798474 groups=["nav_blockers"]]
 
 [node name="Wall_Window_4m_006" parent="." unique_id=772580080 instance=ExtResource("1_7ra35")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.12, 0)
@@ -423,3 +424,6 @@ transform = Transform3D(0.764842, 0, -0.644218, 0, 1, 0, 0.644218, 0, 0.764842, 
 [node name="Main_Floor_001" parent="." unique_id=1450727421 instance=ExtResource("36_ny45o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.12, -10)
 visible = false
+
+[node name="AutoBlocker" type="Node" parent="."]
+script = ExtResource("auto_blocker")

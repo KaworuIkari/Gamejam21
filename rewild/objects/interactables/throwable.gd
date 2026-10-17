@@ -112,9 +112,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if state == State.RESTING and _can_pick_up():
 		get_viewport().set_input_as_handled()
+		_prompt.play_activation()
 		pick_up()
 	elif state == State.HELD and _can_act():
 		get_viewport().set_input_as_handled()
+		_prompt.play_activation()
 		throw()
 
 

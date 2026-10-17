@@ -45,6 +45,7 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not event.is_echo() and event.is_action_pressed(&"interact") and _can_use():
 		get_viewport().set_input_as_handled()
+		_prompt.play_activation()
 		use()
 
 

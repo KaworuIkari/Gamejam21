@@ -24,7 +24,7 @@ description = "QUEST_REGROW_DESC"
 location = "QUEST_REGROW_LOCATION"
 requires = Array[ExtResource("1")]([ExtResource("3")])
 steps = Array[ExtResource("2")]([SubResource("step_more_garbage"), SubResource("step_trees")])
+parallel = true
 rewards = Dictionary[StringName, int]({
-&"jetpack": 2,
-&"water_gun": 2
+&"energy_core": 1
 })
