@@ -76,8 +76,6 @@ var _thrusting := false
 var _hold_time := 0.0
 var _spool := 0.0
 var _regen_timer := 0.0
-var _debug_timer := 0.0
-var _last_printed_energy := -1.0
 
 # swimming
 @export_group("Water")
@@ -101,7 +99,6 @@ var _swim_hopping := false
 
 var _water_list: Array[StylizedWater] = []
 var _current_water: StylizedWater
-var _water_rescan := 0.0
 var _water_surface_y := 0.0
 var _ctrl_was_down := false
 var _dive_reached_depth := false                        # the dive has gone below dive_depth at least once
@@ -147,6 +144,7 @@ func _physics_process(delta: float) -> void:
 	_announce(face.base)
 	face.stress = 0.0             # e.g. 1.0 - health / max_health
 
+	# firing and refilling
 	_fire_cd = maxf(0.0, _fire_cd - delta)
 	if Input.is_action_pressed("use"):
 		try_shoot()
@@ -157,9 +155,9 @@ func _physics_process(delta: float) -> void:
 		tank.refill(delta)
 
 	# move camera sideways when aiming
-	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
-	var target := yaw_basis * _target_pivot_offset
-	spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
+	# var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
+	# var target := yaw_basis * _target_pivot_offset
+	# spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
 
 func _apply_movement(delta : float) -> void:
 	if in_water:
@@ -279,7 +277,6 @@ func _handle_gravity_and_jump(delta: float) -> void:
 	if in_water:
 		_water_vertical(delta)
 		_handle_energy_regen(delta)
-		_debug_energy(delta)
 		_consume_anim_triggers()
 		jetpack.set_thrust(_thrusting, _spool)
 		return
@@ -290,19 +287,11 @@ func _handle_gravity_and_jump(delta: float) -> void:
 		_handle_jetpack(delta)
 		_handle_air_control(delta)
 	_handle_energy_regen(delta)
-	_debug_energy(delta)
 	_consume_anim_triggers()
 	jetpack.set_thrust(_thrusting, _spool)
 
-func _handle_jetpack(delta: float) -> void:
-	if frozen or jetpack_level <= 0 or is_diving:   # <- add "or is_diving"
-		_end_thrust()
-		return
-	if frozen or jetpack_level <= 0:
-		_end_thrust()
-		return
-	# Tap: immediate burst (also the first frame of a hold)
-	if Input.is_action_just_pressed("jump") and energy >= burst_cost:
+func _try_burst_jetpack() -> void:
+	if energy >= burst_cost:
 		energy -= burst_cost
 		velocity.y = maxf(velocity.y, burst_velocity)  # also arrests a fall
 		_jet_armed = true
@@ -313,6 +302,17 @@ func _handle_jetpack(delta: float) -> void:
 		jetpack.burst()
 		react(RobotFace.Mood.CORRECT, 1, 0.6)
 		SettingsManager.play_feedback(0.35, 0.55, 0.16)
+
+func _handle_jetpack(delta: float) -> void:
+	if frozen or jetpack_level <= 0 or is_diving:
+		_end_thrust()
+		return
+	if frozen or jetpack_level <= 0:
+		_end_thrust()
+		return
+	# Tap: immediate burst (also the first frame of a hold)
+	if Input.is_action_just_pressed("jump"):
+		_try_burst_jetpack()
 	if not _jet_armed:
 		return
 	if not Input.is_action_pressed("jump") or energy <= 0.0:
@@ -351,15 +351,6 @@ func _handle_energy_regen(delta: float) -> void:
 	_regen_timer -= delta
 	if _regen_timer <= 0.0:
 		energy = minf(energy + regen_rate * delta, max_energy)
-
-
-func _debug_energy(delta: float) -> void:
-	_debug_timer -= delta
-	if _debug_timer > 0.0 or is_equal_approx(energy, _last_printed_energy):
-		return
-	_debug_timer = 0.2
-	_last_printed_energy = energy
-	# print("Jetpack energy: %.1f / %.0f%s" % [energy, max_energy, "  [THRUST]" if _thrusting else ""])
 
 func _consume_anim_triggers() -> void:
 	if not animation_script.is_using_double_jump:
@@ -438,16 +429,13 @@ func _detect_surface() -> int:
 func _refresh_water_list() -> void:
 	_water_list.clear()
 	for n in get_tree().get_nodes_in_group(&"water_surfaces"):
-		if n is StylizedWater:
+		if n is StylizedWater and n.visible:
+			print(n.name, " added to list")
 			_water_list.append(n)
 
 func _update_water(delta: float) -> void:
 	_handle_touchdown()   # before _track_air_height, which overwrites the peak
 	_track_air_height()
-	_water_rescan -= delta
-	if _water_rescan <= 0.0:
-		_water_rescan = 0.5
-		_refresh_water_list()
 
 	var vol := _find_water()
 	var h := _capsule_height()
@@ -568,10 +556,14 @@ func _water_vertical(delta: float) -> void:
 		velocity.y += get_gravity().y * delta
 		_swim_hopping = velocity.y > 0.0
 		return
-	if not frozen and jetpack_level <= 0 and Input.is_action_just_pressed("jump"):
-		_swim_hopping = true
-		velocity.y = swim_hop_speed
-		return
+	if not frozen and Input.is_action_just_pressed("jump"):
+		if jetpack_level <= 0:
+			_swim_hopping = true
+			velocity.y = swim_hop_speed
+			return
+		else:
+			_try_burst_jetpack()
+			return
 	# Floating: jetpack can lift us out. Otherwise a spring holds the chest at the waterline.
 	_handle_jetpack(delta)
 	if not _thrusting and not _jet_armed:

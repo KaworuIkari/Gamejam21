@@ -40,6 +40,7 @@ var _screen_layer: CanvasLayer
 
 func _ready() -> void:
 	add_to_group(&"water_surfaces")
+	print(name, " is ready")
 	if is_nan(full_level):
 		full_level = global_position.y
 	if fit_to_basin or not cutouts.is_empty():

@@ -95,7 +95,7 @@ func _process(delta: float) -> void:
 	update_aim_anim(delta)
 	
 	if player.input_dir != Vector2.ZERO:
-		var anim_dir := get_anim_direction(player.input_dir)
+		var anim_dir := get_anim_direction()
 		set_blend_vec(delta, anim_dir)
 	rotate_toward_camera(delta, player.input_dir)
 	
@@ -136,8 +136,10 @@ func random_idle(delta: float) -> void:
 			idle_stand_pb.travel(idle_variants.pick_random())
 	
 # Snap input to 45° sectors, return which of the 4 animations to blend.
-func get_anim_direction(input_dir: Vector2) -> Vector2:
-	var s := roundi(atan2(input_dir.x, -input_dir.y) / (PI / 4.0))   # -4..4
+func get_anim_direction() -> Vector2:
+	var h_vel : Vector2 = Vector2(player.velocity.x, player.velocity.z)
+	if h_vel.length() < 0.1: return Vector2(0, 0)
+	var s := roundi(atan2(player.input_dir.x, -player.input_dir.y) / (PI / 4.0))   # -4..4
 	var side := signi(s)
 	match absi(s):
 		0, 1: return Vector2(0, 1)        # forward and forward-diagonals
@@ -163,11 +165,11 @@ func rotate_toward_camera(delta: float, input_dir: Vector2) -> void:
 	else:
 		if not moving:
 			return
-		var s := roundi(atan2(input_dir.x, -input_dir.y) / (PI / 4.0))
-		var side := signi(s)
-		match absi(s):
-			1: off = s
-			3: off = s - 4 * side
+	var s := roundi(atan2(input_dir.x, -input_dir.y) / (PI / 4.0))
+	var side := signi(s)
+	match absi(s):
+		1: off = s
+		3: off = s - 4 * side
 	var target := cam_yaw - off * PI / 4.0
 	character.rotation.y = lerp_angle(character.rotation.y, target, player.rotation_speed * delta)
 
