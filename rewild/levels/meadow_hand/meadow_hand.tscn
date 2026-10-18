@@ -105,13 +105,16 @@
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_pine_4.tscn" id="103_2jys2"]
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_flower_3_single.tscn" id="104_o5h1p"]
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_fern.tscn" id="105_lkvlt"]
-[ext_resource type="Resource" path="res://dialogue/readables/crashsite_cargo_note.tres" id="CrashsiteNoteContent"]
+[ext_resource type="Resource" path="res://dialogue/readables/crashsite_cargo_note.tres" id="CrashsiteDeliveryContent"]
+[ext_resource type="Resource" path="res://dialogue/readables/crashsite_crew_tablet.tres" id="CrashsiteCrewContent"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Factory_Greenery.tscn" id="FactoryGreenery_20261017"]
 [ext_resource type="PackedScene" uid="uid://c7dqts37j7vc" path="res://assets/models/island_harbor/harbor.tscn" id="Harbor_20261015"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Harbour_Greenery.tscn" id="HarbourGreenery_20261017"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Plane_Greenery.tscn" id="PlaneGreenery_20261017"]
-[ext_resource type="PackedScene" path="res://objects/interactables/readables/readable_note.tscn" id="ReadableNoteScene"]
+[ext_resource type="PackedScene" path="res://objects/interactables/readables/readable_tablet.tscn" id="ReadableTabletScene"]
 [ext_resource type="PackedScene" path="res://levels/meadow_hand/rock_road.tscn" id="RockRoad_20261017"]
+
+[ext_resource type="Shader" path="res://shaders/water/underwater_fog.gdshader" id="31_bpwyu"]
 
 [sub_resource type="Gradient" id="Gradient_jk6td"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -915,7 +918,7 @@ metadata/_custom_type_script = "uid://bsgufyjcr5i6g"
 script = ExtResource("35_chsj8")
 trigger = NodePath("../InteractTrigger")
 quest_event = &"pump_started"
-rise = [null, null, null]
+rise = [NodePath("../../../../SubViewportContainer/PixelateSubViewport/Water/River"), NodePath("../../../../SubViewportContainer/PixelateSubViewport/Water/Lake"), NodePath("../../../../SubViewportContainer/PixelateSubViewport/Water/Froglake")]
 rise_height = 20.41
 rise_time = 4.0
 bank_height = 3.5
@@ -1092,9 +1095,16 @@ transform = Transform3D(0.93937314, 0, 0.34289798, 0, 1, 0, -0.34289798, 0, 0.93
 [node name="Engine_Mount_029" parent="CrashsiteOutpostV2" index="29" unique_id=661651632]
 transform = Transform3D(0.9101701, -0.247404, 0.332238, 0.204259, 0.965814, 0.159633, -0.36037403, -0.0774303, 0.92958903, -8.569313, 2.75, 8.757675)
 
-[node name="CrashsiteCargoNote" parent="CrashsiteOutpostV2/Cargo_Box_034" parent_id_path=PackedInt32Array(181033479, 738016966) index="2" unique_id=1777589251 instance=ExtResource("ReadableNoteScene")]
-transform = Transform3D(0.9915619, 0, -0.12963414, 0, 1, 0, 0.12963414, 0, 0.9915619, -0.08, 0.995, 0.02)
-content = ExtResource("CrashsiteNoteContent")
+[node name="CrashsiteDeliveryTablet" parent="CrashsiteOutpostV2/Cargo_Box_034" parent_id_path=PackedInt32Array(181033479, 738016966) index="2" unique_id=1777589251 instance=ExtResource("ReadableTabletScene")]
+transform = Transform3D(0.9915619, 0, -0.12963414, 0, 1, 0, 0.12963414, 0, 0.9915619, -0.08, 0.965, 0.02)
+content = ExtResource("CrashsiteDeliveryContent")
+read_event = &"cabin_delivery_read"
+
+[node name="CrashsiteCrewTablet" parent="CrashsiteOutpostV2/Cargo_Box_038" parent_id_path=PackedInt32Array(181033479, 1442820341) index="2" instance=ExtResource("ReadableTabletScene")]
+position = Vector3(0, 0.965, 0)
+rotation = Vector3(0, -0.15, 0)
+content = ExtResource("CrashsiteCrewContent")
+read_event = &"cabin_crew_read"
 
 [node name="Concrete_Barrier_045" parent="CrashsiteOutpostV2" index="45" unique_id=573222922]
 transform = Transform3D(0.9580493, 0, 0.28660512, 0, 1, 0, -0.28660512, 0, 0.9580493, -4.4874573, 0.047948837, 19.414581)

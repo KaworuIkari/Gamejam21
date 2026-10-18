@@ -1,6 +1,6 @@
 @tool
 extends DialogicLayoutLayer
-## 底部玻璃对话框：头像 + 头像上方名牌 + 正文 + 白色继续圆钮（点击推进时闪金色）+ 右下角按钮（自动 / 跳过 / 历史）
+## 全局底部对话框：姓名、正文、继续提示及自动 / 跳过 / 历史；不显示头像。
 ## 字号、文字速度、不透明度读取 SettingsManager（设置 > 语言与辅助 > 对话）。
 
 ## 对话字体覆盖。留空 = 使用项目主题字体（与菜单 / 设置一致，推荐）
@@ -11,8 +11,8 @@ extends DialogicLayoutLayer
 @export var name_font_size: int = 36
 ## 角落按钮字号
 @export var button_font_size: int = 24
-## 头像是像素画时关掉（最近邻采样）；3D 渲染图 / 手绘图保持开启（线性采样，缩小更平滑）
-@export var portrait_smooth_filter: bool = true
+## Full-screen system readout; only enabled by opening_ui.tscn.
+@export var system_boot: bool = false
 
 const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const SETTINGS_SECTION := "accessibility"
@@ -20,9 +20,6 @@ const NEXT_GOLD: Texture2D = preload("res://ui/theme/glass/next_circle_gold.png"
 
 @onready var _box: Control = %Box
 @onready var _panel: PanelContainer = %Panel
-@onready var _portrait_frame: Control = %PortraitFrame
-@onready var _portrait_clip: Control = %PortraitClip
-@onready var _portrait_container: Control = %DialogicNode_PortraitContainer
 @onready var _text: RichTextLabel = %DialogicNode_DialogText
 @onready var _name: Label = %DialogicNode_NameLabel
 @onready var _name_plate: Control = %NamePlate
@@ -48,10 +45,7 @@ func _ready() -> void:
 	_history_button.pressed.connect(_open_history)
 	var dialogic := DialogicUtil.autoload()
 	dialogic.Inputs.auto_advance.toggled.connect(_sync_auto_button)
-	dialogic.Text.speaker_updated.connect(_on_speaker_updated)
-	_portrait_clip.resized.connect(_refresh_portrait_layout)
 	_text.resized.connect(_place_name_plate)
-	_portrait_frame.visibility_changed.connect(_place_name_plate)
 	_next_indicator.visibility_changed.connect(func():
 		if not _next_indicator.visible:
 			_next_hidden_msec = Time.get_ticks_msec())
@@ -64,6 +58,8 @@ func _ready() -> void:
 	_sync_auto_button(dialogic.Inputs.auto_advance.is_enabled())
 	_update_button_texts()
 	_apply_export_overrides()
+	if system_boot:
+		_configure_system_boot()
 
 
 func _notification(what: int) -> void:
@@ -87,7 +83,6 @@ func _apply_export_overrides() -> void:
 	for b in [_auto_button, _skip_button, _history_button]:
 		UIType.apply_font(b, &"font", font)
 		b.add_theme_font_size_override(&"font_size", UIType.snap(button_font_size))
-	_portrait_frame.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR if portrait_smooth_filter else CanvasItem.TEXTURE_FILTER_NEAREST
 	_apply_opacity()
 
 
@@ -119,34 +114,20 @@ func _on_setting_changed(section: String, key: String, _value: Variant) -> void:
 		_apply_export_overrides()
 
 
-# ------------------------------------------------------------------ 头像 / 名牌
+# ------------------------------------------------------------------ 名牌
 
-func _on_speaker_updated(character: DialogicCharacter) -> void:
-	var has_portrait := character != null and not character.portraits.is_empty()
-	_portrait_frame.visible = has_portrait
-	_refresh_portrait_layout.call_deferred()
-	_place_name_plate.call_deferred()
-
-
-## 名牌骑在对话框上边缘，左边与头像对齐（没有头像时与正文对齐）
+## 名牌骑在对话框上边缘，与正文左侧对齐。
 func _place_name_plate() -> void:
+	if system_boot:
+		return
 	if not is_instance_valid(_name_plate) or not is_instance_valid(_text) or not is_instance_valid(_box):
 		return
 	var s := _box.get_global_transform().get_scale().x
 	if is_zero_approx(s):
 		return
-	var anchor_ctrl: Control = _portrait_frame if _portrait_frame.is_visible_in_tree() else _text
-	var x := (anchor_ctrl.global_position.x - _box.global_position.x) / s
+	var x := (_text.global_position.x - _box.global_position.x) / s
 	_name_plate.offset_left = x
 	_name_plate.offset_right = x + 1.0
-
-
-## 头像容器在布局完成前尺寸为 0，会把头像定位到错误位置；尺寸变化后重新对齐
-func _refresh_portrait_layout() -> void:
-	if not is_instance_valid(_portrait_container) or _portrait_clip.size == Vector2.ZERO:
-		return
-	_portrait_container.update_transform_from_properties()
-	_portrait_container.container_resized_during_game()
 
 
 # ------------------------------------------------------------------ 角落按钮
@@ -252,3 +233,37 @@ func _pulse_next_gold() -> void:
 	tw.tween_property(pulse, "scale", pulse.scale * 1.35, 0.4).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tw.tween_property(pulse, "modulate:a", 0.0, 0.4).from(1.0)
 	tw.chain().tween_callback(pulse.queue_free)
+
+
+## Reuse the same text renderer, controls and history without the bottom dialogue panel.
+func _configure_system_boot() -> void:
+	_box.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_panel.hide()
+	_name_plate.hide()
+	var column := VBoxContainer.new()
+	column.name = "SystemTextCenter"
+	column.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	column.anchor_left = 0.1
+	column.anchor_right = 0.9
+	column.alignment = BoxContainer.ALIGNMENT_CENTER
+	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_box.add_child(column)
+	_text.reparent(column)
+	_text.fit_content = true
+	_text.scroll_active = false
+	_text.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_text.add_theme_color_override(&"default_color", Color(0.91, 0.95, 0.93))
+	for button in [_auto_button, _skip_button, _history_button]:
+		for color in [&"font_color", &"font_hover_color", &"font_pressed_color", &"font_hover_pressed_color", &"font_focus_color"]:
+			button.add_theme_color_override(color, Color(0.91, 0.95, 0.93))
+	var buttons: Control = _auto_button.get_parent()
+	buttons.offset_right = -48.0
+	buttons.offset_left = -640.0
+	buttons.offset_top = -96.0
+	buttons.offset_bottom = -48.0
+	_next_indicator.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	_next_indicator.offset_left = 32.0
+	_next_indicator.offset_right = 33.0
+	_next_indicator.offset_top = -150.0
+	_next_indicator.offset_bottom = -149.0
+	_next_indicator.modulate = Color.WHITE

@@ -43,6 +43,10 @@ const FinaleStory = preload("res://levels/meadow_hand/finale_story.gd")
 const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
 ## What stays switched off at the start of a new game (animals, companion bot).
 const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
+const OpeningSequence := preload("res://levels/meadow_hand/opening_sequence.gd")
+const StartupChecks := preload("res://levels/meadow_hand/startup_checks.gd")
+const CabinStory := preload("res://levels/meadow_hand/cabin_story.gd")
+const PUMP_PATH := ^"Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch"
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
 @onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/Camera3D
 @onready var player: Node3D = $SubViewportContainer/PixelateSubViewport/LIRA
@@ -51,10 +55,23 @@ func _enter_tree() -> void:
 	# Before the player's _ready, so LIRA starts with the saved abilities.
 	var quests := get_node_or_null(^"/root/Quests")
 	if quests:
+		CabinStory.migrate_save(SaveManager.current_data)
 		quests.load_from_save()
+		get_node(PUMP_PATH).start_on = quests.event_count(&"pump_started") > 0
 
 func _ready() -> void:
-	pass
+	var opening := OpeningSequence.new()
+	opening.name = "OpeningSequence"
+	opening.player = player
+	add_child(opening)
+	var startup := StartupChecks.new()
+	startup.name = "StartupChecks"
+	startup.player = player
+	add_child(startup)
+	var cabin := CabinStory.new()
+	cabin.name = "CabinStory"
+	cabin.pump = get_node(PUMP_PATH)
+	add_child(cabin)
 	terrain.set_camera(player_camera)
 	GrowthMap.attach_terrain(terrain)
 	GrowthMap.attach_material($Plants/Grass.mesh_material_override)
@@ -70,9 +87,9 @@ func _ready() -> void:
 	var awakening := LeonAwakening.new()
 	awakening.name = "LeonAwakening"
 	awakening.statue = $Leon2
-	awakening.lake = $Water/Froglake
+	awakening.lake = $SubViewportContainer/PixelateSubViewport/Water/Froglake
 	awakening.giant = $Leon
-	awakening.sea = $Water/Sea
+	awakening.sea = $SubViewportContainer/PixelateSubViewport/Water/Sea
 	awakening.requires = $Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
 	add_child(awakening)
 	var initial := InitialState.new()

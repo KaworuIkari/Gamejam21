@@ -19,6 +19,8 @@ signal interacted
 
 const PROMPT_SCENE = preload("res://ui/in_game/interaction/interaction_prompt.tscn")
 
+## Optional story prerequisite; unset keeps normal prop behaviour.
+var can_interact: Callable
 var _player_inside := false
 var _used := false
 var _prompt: CanvasLayer
@@ -51,7 +53,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 ## Can also be called from code (e.g. a cutscene).
 func use() -> void:
-	if one_shot and _used:
+	if (one_shot and _used) or (can_interact.is_valid() and not can_interact.call()):
 		return
 	_used = true
 	interacted.emit()
@@ -61,7 +63,8 @@ func use() -> void:
 
 
 func _can_use() -> bool:
-	if not _player_inside or (one_shot and _used) or get_tree().paused:
+	if not _player_inside or (one_shot and _used) or get_tree().paused \
+			or (can_interact.is_valid() and not can_interact.call()):
 		return false
 	var dialogic := get_node_or_null(^"/root/Dialogic")
 	return dialogic == null or dialogic.current_timeline == null

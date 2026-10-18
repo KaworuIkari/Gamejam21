@@ -72,6 +72,13 @@ func unlock_terminal() -> void:
 	grant(TERMINAL)
 
 
+## The station hands over both tools; jetpack level remains zero until cleanup is submitted.
+func receive_starter_equipment() -> void:
+	unlock_terminal()
+	grant(&"water_gun")
+	grant(&"jetpack_equipped")
+
+
 func event_count(event: StringName) -> int:
 	return int(_counters.get(event, 0))
 
@@ -166,8 +173,6 @@ func load_from_save() -> void:
 	reset()
 	var save := get_node_or_null(^"/root/SaveManager")
 	var data: Dictionary = save.current_data.get("quests", {}) if save else {}
-	if data.is_empty():
-		return
 	for k in data.get("counters", {}):
 		_counters[StringName(k)] = int(data.counters[k])
 	for k in data.get("abilities", {}):
@@ -181,14 +186,24 @@ func load_from_save() -> void:
 	# the older resource must continue from those new steps (05 formerly ended at 40%).
 	for quest in quests:
 		var restored := _state(quest)
+		# Legacy cleanup saves already earned flight. Keep that reward and the next
+		# quest rather than reopening the newly appended station hand-in step.
+		if quest.get_id() == &"02_clean_up" and restored.status == Status.DONE and has_ability(&"jetpack"):
+			restored.step = quest.steps.size()
+			_counters[&"meadow_cleanup_delivered"] = maxi(1, event_count(&"meadow_cleanup_delivered"))
 		if not quest.parallel and restored.status == Status.DONE and restored.step < quest.steps.size():
 			restored.status = Status.ACTIVE
 			_begin_step(quest)
 	tracked = StringName(data.get("tracked", ""))
 	_evaluate()
+	# Older first-contact saves may have received the terminal before closing its
+	# page. Give them the starter tools too, without enabling a dormant jetpack.
+	if terminal_unlocked():
+		_abilities[&"water_gun"] = maxi(1, ability_level(&"water_gun"))
+		_abilities[&"jetpack_equipped"] = 1
 	for a in _abilities:
 		ability_changed.emit(a, _abilities[a])
-	changed.emit()
+	_changed()
 
 
 func _save() -> void:

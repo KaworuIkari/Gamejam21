@@ -324,6 +324,8 @@ func apply_dialogue_speed() -> void:
 		return
 	var idx := clampi(int(get_value("accessibility", "dialogue_text_speed")), 0, DIALOGUE_SPEEDS.size() - 1)
 	dialogic.Settings.text_speed = DIALOGUE_SPEEDS[idx]
+	# Dialogic notifies listeners before storing the value; refresh once it is stored.
+	dialogic.Text.update_text_speed()
 
 
 func _apply_volume(bus_name: String, percent: Variant) -> void:

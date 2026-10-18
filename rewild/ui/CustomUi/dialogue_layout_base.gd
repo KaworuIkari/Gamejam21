@@ -2,8 +2,7 @@
 extends DialogicLayoutBase
 ## 自定义对话布局的根节点（custom_ui_.tscn）。
 ## - 提供全局字体/字号/颜色给 Dialogic 自带的图层（如词汇表）读取
-## - 隐藏“站位立绘层”：join / leave / update 指令照常工作，但不在屏幕上画大立绘，
-##   说话人的头像统一显示在对话框左侧
+## - 隐藏角色图像，保留 Dialogic 的 join / leave / update 指令兼容性
 ## - 对话期间冻结玩家（不能移动/转视角）并显示鼠标，结束后恢复
 ## - 切换场景（如返回主菜单）时自动结束对话
 
@@ -15,8 +14,6 @@ extends DialogicLayoutBase
 ## Dialogic 自带图层（如词汇表）读取的全局字体。留空 = 使用项目主题字体（见 UIType）
 @export_file("*.ttf", "*.tres") var global_font: String = ""
 @export var global_font_size: int = UIType.MEDIUM
-## 是否在屏幕上显示站位立绘（关闭时只在对话框里显示说话人头像）
-@export var show_stage_portraits: bool = false
 
 
 var _tree_was_paused := false
@@ -136,4 +133,4 @@ func _apply_export_overrides() -> void:
 	set(&"layer", canvas_layer)
 	var stage := get_node_or_null(^"StagePortraitLayer") as CanvasItem
 	if stage:
-		stage.visible = show_stage_portraits
+		stage.hide()

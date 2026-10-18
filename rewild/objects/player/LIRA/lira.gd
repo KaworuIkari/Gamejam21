@@ -213,6 +213,7 @@ func _handle_character_rotation(delta: float) -> void:
 ## Water gun and jetpack levels: the higher of the start level and what quests granted.
 func _apply_abilities() -> void:
 	var quests := get_node_or_null(^"/root/Quests")
+	var previous_jetpack_level := jetpack_level
 	water_gun_level = maxi(start_water_gun_level, quests.ability_level(&"water_gun") if quests else 0)
 	jetpack_level = maxi(start_jetpack_level, quests.ability_level(&"jetpack") if quests else 0)
 	set_water_gun(water_gun_level > 0)
@@ -220,10 +221,14 @@ func _apply_abilities() -> void:
 		splash_radius = _per_level(water_gun_splash, water_gun_level, splash_radius)
 		fire_cooldown = _per_level(water_gun_cooldown, water_gun_level, fire_cooldown)
 		tank.capacity = _per_level(water_tank_capacity, water_gun_level, tank.capacity)
-	jetpack.visible = jetpack_level > 0
+	jetpack.visible = jetpack_level > 0 or (quests != null and quests.has_ability(&"jetpack_equipped"))
 	if jetpack_level > 0:
 		max_energy = _per_level(jetpack_energy, jetpack_level, max_energy)
-		energy = max_energy
+		energy = max_energy if jetpack_level > previous_jetpack_level else minf(energy, max_energy)
+	else:
+		energy = 0.0
+		_end_thrust()
+		jetpack.set_thrust(false)
 
 
 func _per_level(values: PackedFloat32Array, level: int, fallback: float) -> float:
@@ -312,9 +317,6 @@ func _handle_jetpack(delta: float) -> void:
 	if frozen or jetpack_level <= 0 or is_diving:
 		_end_thrust()
 		return
-	if frozen or jetpack_level <= 0:
-		_end_thrust()
-		return
 	# Tap: immediate burst (also the first frame of a hold)
 	if Input.is_action_just_pressed("jump"):
 		_try_burst_jetpack()
@@ -351,6 +353,9 @@ func _handle_air_control(delta: float) -> void:
 
 
 func _handle_energy_regen(delta: float) -> void:
+	if jetpack_level <= 0:
+		energy = 0.0
+		return
 	if _thrusting:
 		return
 	_regen_timer -= delta

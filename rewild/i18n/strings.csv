@@ -2,7 +2,7 @@ keys,zh_CN,en
 MENU_TITLE,自然涌现,Emergence
 MENU_SUBTITLE,一个机器人，一颗星球，慢慢变绿,"One robot, one planet, slowly turning green"
 MENU_CONTINUE,继续游戏,Continue
-MENU_NEW_GAME,新游戏,New Game
+MENU_NEW_GAME,新建游戏,New Game
 MENU_LOAD,读取存档,Load Game
 MENU_SETTINGS,设置,Settings
 MENU_QUIT,退出游戏,Quit
@@ -94,6 +94,7 @@ SLOT_SCREEN_LOAD,读取存档,Load Game
 SLOT_SCREEN_BROWSE,存档管理,Save Files
 SLOT_SCREEN_SAVE,选择存档位保存进度,Choose a slot to save progress
 SLOT_SCREEN_IN_GAME_MANAGE,游戏内存档管理,In-Game Save Files
+SLOT_CONFIRM_NEW,确定在存档 %d 中新建游戏吗？,Start a new game in slot %d?
 SLOT_CONFIRM_DELETE,确定删除存档 %d 吗？此操作无法撤销。,Delete slot %d? This cannot be undone.
 SLOT_CONFIRM_OVERWRITE,存档 %d 已有进度，确定覆盖吗？,Slot %d has progress. Overwrite it?
 LOC_CRASH_SITE,坠落地点,Crash Site
@@ -181,14 +182,13 @@ Wasteland,荒原,Wasteland
 Revival,复苏,Revival
 Golden meadow,金色草原,Golden meadow
 QUEST_WATER_TITLE,恢复水源,Restore the water source
-QUEST_WATER_DESC,湖泊早已干涸。启动北部泉眼的水泵让水重新流向湖泊，再唤醒湖心电站。,The lake ran dry long ago. Start the pump at the north spring so water flows back to the lake. Then wake the lake power station.
+QUEST_WATER_DESC,供水已恢复。前往中心岛重启湖心电站，接入管理终端。,"The water supply is restored. Head to the central island, restart the lake power station, and connect to its management terminal."
 QUEST_WATER_LOCATION,北部泉眼 / 湖心电站,North spring / Lake station
-QUEST_WATER_STEP_PUMP,启动北部泉眼的水泵,Start the pump at the north spring
 QUEST_WATER_STEP_STATION,长按 E 激活湖心电站,Hold E to activate the lake power station
 QUEST_WATER_STEP_TERMINAL,在电站终端查看任务,Check the station terminal
 QUEST_CLEAN_TITLE,清理草原,Clean up the meadow
-QUEST_CLEAN_DESC,垃圾堵塞了土地。长按 E 清理垃圾，让绿色重新蔓延。,Litter is choking the land. Hold E to clear it and let the green spread again.
-QUEST_CLEAN_LOCATION,草原,Meadow
+QUEST_CLEAN_DESC,背包已经装备，但能量不足。长按 E 清理草原上的10堆垃圾，再返回中心岛与湖心终端交互提交任务，恢复背包供能。,Your jetpack is equipped but has insufficient energy. Hold E to clear 10 meadow rubbish piles then return to the lake terminal on the central island to submit the task and restore jetpack power.
+QUEST_CLEAN_LOCATION,草原 / 中心岛湖心终端,Meadow / Central island lake terminal
 QUEST_CLEAN_STEP_GARBAGE,清理垃圾,Clear garbage
 QUEST_REGROW_TITLE,让树木复苏,Bring the trees back
 QUEST_REGROW_DESC,继续清理并浇灌枯树周围的土地。土地变绿后枯树会重新长叶。,Keep cleaning and water the ground around dead trees. They leaf out again once the ground is green.
@@ -267,8 +267,8 @@ FINALE_START_BOAT,按 %s 安装模块并启动小船,Press %s to install the mod
 FINALE_CONFIRM_DEVICE,确认使用唯一的混沌能量模块启动同步破坏器？这将进入结局一，小船路线将关闭。,Use the unique Chaos Energy Module to activate the Synchronization Disruptor? This locks Ending 1 and closes the boat route.
 FINALE_CONFIRM_BOAT,确认使用6个废料零件安装唯一的混沌能量模块并启动小船？这将进入结局二，同步破坏器路线将关闭。,Use 6 scrap parts to install the unique Chaos Energy Module and start the boat? This locks Ending 2 and closes the disruptor route.
 FINALE_CONFIRM_START,确认启动,Confirm startup
-FINALE_BRIEFING_DEVICE,湖心终端：携带混沌能量模块，前往雷达站二层启动同步破坏器。（剧情占位）,Lake terminal: Take the Chaos Energy Module to the radar upper platform and activate the Synchronization Disruptor. (Story placeholder.)
-FINALE_BRIEFING_BOAT,另一条路线：从港口垃圾堆收集6个废料零件，将模块安装到小船中并启动。（剧情占位）,Alternative route: Collect 6 scrap parts from harbor rubbish piles then install the module and start the boat. (Story placeholder.)
+FINALE_BRIEFING_DEVICE,湖心终端：携带混沌能量模块，[n]前往雷达站二层启动同步破坏器。（剧情占位）,Lake terminal: Take the Chaos Energy Module to the radar upper platform [n]and activate the Synchronization Disruptor. (Story placeholder.)
+FINALE_BRIEFING_BOAT,另一条路线：从港口垃圾堆收集6个废料零件，[n]将模块安装到小船中并启动。（剧情占位）,Alternative route: Collect 6 scrap parts from harbor rubbish piles [n]then install the module and start the boat. (Story placeholder.)
 ENDING_DEVICE_TITLE,结局一,Ending 1
 ENDING_DEVICE_BODY,同步破坏器已启动。\n混沌能量模块已使用，小船路线已关闭。\n\n（结局剧情与演出待补充）,The Synchronization Disruptor is active.\nThe Chaos Energy Module has been used and the boat route is closed.\n\n(Ending text and cinematic to be added.)
 ENDING_BOAT_TITLE,结局二,Ending 2
@@ -280,3 +280,59 @@ INTERACT_ROBOT_KEY,按 %s 与小机器人交谈获取密钥,Press %s to ask the 
 ROBOT_KEY_RECOVERY,小机器人：这是雷达站的密钥，已传输给你。（剧情占位）,Companion bot: The radar key has been transferred to you. (Story placeholder.)
 QUEST_OPTIONAL,可选,Optional
 QUEST_RADAR_OPTIONAL_CLEAN,清理雷达周边垃圾,Clear rubbish around the radar station
+QUEST_CLEAN_STEP_DELIVER,返回中心岛向湖心终端提交任务，启用喷气背包,Return to the central island lake terminal to submit the task and enable the jetpack
+ITEM_JETPACK_EQUIPPED_1,喷气背包（能量不足）,Jetpack (insufficient energy)
+JETPACK_LOCKED_CLEANUP,背包能量不足：清理10堆草原垃圾后返回中心岛启用。,Jetpack energy insufficient: clear 10 meadow rubbish piles then return to the central island to enable it.
+JETPACK_LOCKED_RETURN,背包能量不足：草原清理已达标，返回中心岛提交任务后启用。,Jetpack energy insufficient: cleanup target reached. Return to the central island to submit the task and enable it.
+CLEAN_DELIVERY_RECEIVED,湖心终端：草原清理记录已确认，任务提交完成。,Lake terminal: Meadow cleanup verified. Task submitted.
+CLEAN_DELIVERY_JETPACK,湖心终端：正在恢复背包供能……喷气背包已启用。,Lake terminal: Restoring jetpack power... Jetpack enabled.
+QUEST_TOAST_JETPACK_ENABLED,喷气背包已恢复供能，可以使用了。,Jetpack power restored. Ready for use.
+OPENING_BOOT,环境工程试验机 LIRA，\n系统重启中，\n\n当前电源剩余……80%……,Environmental Engineering Test Unit LIRA\nSystem reboot in progress\n\nRemaining power... 80%...
+OPENING_ACCIDENT,运输事故确认，机组无应答。\n\n当前位置：第七自治试验岛。,Transport accident confirmed. No response from crew.\n\nCurrent location: Autonomous Test Island No. 7.
+OPENING_SCAN,检查受损情况……,Checking for damage...
+OPENING_MODULES,检查完毕！\n\n行动模块：未受损……\n语言模块：轻微损伤……\n记忆模块：受损严重……\n思维模块：轻微损伤……,Diagnostics complete!\n\nLocomotion module: undamaged...\nLanguage module: minor damage...\nMemory module: severe damage...\nCognition module: minor damage...
+OPENING_STATUS,各模块综合状态：良好。,Overall module status: Good.
+OPENING_REPAIR,尝试修复：失败,Repair attempt: Failed
+OPENING_START,允许启动机体。,Body activation authorized.
+OPENING_OBJECTIVE,应急目标：\n\n恢复通信，报告位置，等待回收。,Emergency objective:\n\nRestore communications.\nReport location. Await recovery.
+STARTUP_HEADER,LIRA // 本机记录,LIRA // LOCAL LOG
+STARTUP_INTRO_TITLE,行动模块复核,Locomotion diagnostics
+STARTUP_INTRO_BODY,机体已启动。开始复核感知与行动反馈。,Body activated. Checking perception and locomotion feedback.
+STARTUP_LOOK_TITLE,视觉反馈,Visual feedback
+STARTUP_LOOK_BODY,调整观察方向，确认周边环境。,Adjust viewing direction. Check the surroundings.
+STARTUP_LOOK_INPUT,移动鼠标，转动视野,Move the mouse to look around
+STARTUP_LOOK_PAD,转动右摇杆，调整视野,Move the right stick to look around
+STARTUP_WALK_TITLE,行动反馈,Locomotion feedback
+STARTUP_WALK_BODY,测试行走，确认步态稳定。,Test walking. Confirm gait stability.
+STARTUP_MOVE_PAD,左摇杆移动,Move with the left stick
+STARTUP_JUMP_TITLE,关节响应,Joint response
+STARTUP_JUMP_BODY,进行离地测试，检查关节响应。,Perform a lift-off test. Check joint response.
+STARTUP_PRESS_JUMP,按 %s 跳跃,Press %s to jump
+STARTUP_SPRINT_TITLE,动力输出,Power output
+STARTUP_SPRINT_BODY,提高移动速度，检查动力输出。,Increase movement speed. Check power output.
+STARTUP_HOLD_SPRINT,按住 %s，并使用 %s 奔跑,Hold %s and use %s to sprint
+STARTUP_FEEDBACK_OK,✓ 反馈正常,✓ Feedback normal
+QUEST_CABIN_TITLE,机舱调查,Cabin investigation
+QUEST_CABIN_DESC,调查机舱内的两份平板记录，再启动北部水泵，恢复湖心站供水。,"Read both tablet records in the cabin, then start the northern pump to restore the lake station’s water supply."
+QUEST_CABIN_STEP,调查机舱内部，确认事故情况,Investigate the cabin interior and assess the accident
+STARTUP_CURRENT_TARGET,当前目标：%s,Current objective: %s
+READ_TABLET_PROMPT,按 %s 阅读平板,Press %s to read tablet
+REREAD_TABLET_PROMPT,按 %s 重读平板,Press %s to reread tablet
+QUEST_CABIN_DELIVERY,读完设备投送记录,Read the equipment delivery record
+QUEST_CABIN_CREW,读完机组人员离线记录,Read the crew’s offline log
+QUEST_CABIN_PUMP,前往被植被覆盖的水泵房启动水泵,Go to the overgrown pump house and start the pump
+ACT_ONE_TITLE,第一幕,Act I
+TABLET_POWER,电源接通。,Power connected.
+TABLET_DELIVERY_TITLE,第七自治试验场｜设备投送记录：,Autonomous Test Site Seven | Equipment Delivery Record:
+TABLET_DELIVERY_PURPOSE,本岛用于测试无人系统恢复战后环境的能力，,"This island tests the ability of unmanned systems to restore postwar environments,"
+TABLET_DELIVERY_SCOPE,包括供水、植被修复与设施维护。,"including water supply, vegetation recovery, and facility maintenance."
+TABLET_DELIVERY_UNIT,本次投送：工程试验机 LIRA。,Current delivery: engineering test unit LIRA.
+TABLET_DELIVERY_CONNECT,备注：抵达后，接入湖心管理终端领取作业指令。,"Note: Upon arrival, connect to the lake’s central management terminal for work instructions."
+TABLET_DELIVERY_REPORT,该终端负责全岛设备调度，并向军方回传试验数据。,The terminal coordinates equipment across the island and transmits test data to the military.
+TABLET_CREW_TITLE,机组人员离线记录：,Crew Offline Log:
+TABLET_CREW_STAFF,岛上的值守人员早撤了，这次投送仍由旧系统接管。,The island’s duty staff pulled out long ago. The old system is still handling this delivery.
+TABLET_CREW_CONTACT,落地后得先让 LIRA 联系上湖心终端，我们才能回传交接报告。,"Once we land, LIRA needs to contact the lake terminal before we can send back the handover report."
+TABLET_CREW_SUPPLY,维护图显示，北部泵站断供，,The maintenance map shows a supply failure at the northern pumping station.
+TABLET_CREW_SHUTDOWN,湖心站因此保护停机。,The lake station has shut down as a protective measure.
+TABLET_CREW_PUMP,先启动北边的水泵，等水流回湖里，,"Start the northern pump first. Once water flows back into the lake,"
+TABLET_CREW_RETURN,再去中心岛重启终端，但愿那里还有人能接收报告。,head to the central island and restart the terminal. Hopefully someone there can still receive the report.
