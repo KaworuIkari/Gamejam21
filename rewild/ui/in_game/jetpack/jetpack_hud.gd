@@ -26,7 +26,7 @@ func _ready() -> void:
 	_gauge.hide()
 
 func _process(delta: float) -> void:
-	if not is_instance_valid(_player):
+	if not is_instance_valid(_player) or not _player.jetpack.visible:
 		_gauge.hide()
 		return
 	var dialogic := get_node_or_null("/root/Dialogic")

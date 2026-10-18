@@ -81,7 +81,10 @@ func _build_quest_hud() -> void:
 	quests.quest_completed.connect(func(q: Quest) -> void: _notify(tr("QUEST_TOAST_DONE") % tr(q.title)))
 	quests.ability_changed.connect(func(a: StringName, level: int) -> void:
 		if a != quests.TERMINAL and level > 0:
-			_notify(tr("QUEST_TOAST_ABILITY") % TaskPage.ability_name(a, level)))
+			if a == &"jetpack" and level == 1:
+				_notify(tr("QUEST_TOAST_JETPACK_ENABLED"))
+			else:
+				_notify(tr("QUEST_TOAST_ABILITY") % TaskPage.ability_name(a, level)))
 	_refresh_tracker()
 
 func _hud_label(size: int) -> Label:
@@ -107,6 +110,8 @@ func _refresh_tracker() -> void:
 	for optional in q.optional_steps:
 		if quests.event_count(optional.event) < optional.count:
 			lines.append("› " + TaskPage.optional_step_label(optional,quests))
+	if quests.has_ability(&"jetpack_equipped") and not quests.has_ability(&"jetpack"):
+		lines.append(tr("JETPACK_LOCKED_RETURN" if quests.event_count(&"garbage") >= 10 else "JETPACK_LOCKED_CLEANUP"))
 	_tracker_step.text = "\n".join(lines)
 
 # --- Restoration HUD ------------------------------------------------------------------

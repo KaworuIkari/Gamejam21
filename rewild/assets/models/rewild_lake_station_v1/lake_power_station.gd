@@ -139,6 +139,8 @@ func _open_terminal() -> void:
 	var quests := get_node_or_null(^"/root/Quests")
 	if quests and not quests.terminal_unlocked():
 		await _first_contact(quests)
+	if quests:
+		await _submit_meadow_cleanup(quests)
 	if quests and quests.ability_level(&"energy_core") >= 2 and quests.has_ability(&"radar_key") and quests.event_count(core_delivered_event) == 0:
 		await _play_timeline(core_delivery_timeline)
 		_report(core_delivered_event)
@@ -148,10 +150,34 @@ func _open_terminal() -> void:
 	_terminal_busy = false
 
 
-## The first use: a dialogue, then the player owns the action terminal.
+## First contact equips both tools immediately; flight awaits the cleanup hand-in.
 func _first_contact(quests: Node) -> void:
 	await _play_timeline(first_contact_timeline)
-	quests.unlock_terminal()
+	quests.receive_starter_equipment()
+
+
+## Only interacting with the physical station submits cleanup, never opening Tab.
+func _submit_meadow_cleanup(quests: Node) -> void:
+	var quest: Quest = load("res://quests/02_clean_up.tres")
+	if quests.status(quest) != quests.Status.ACTIVE or quests.current_step(quest) != quest.steps.size() - 1:
+		return
+	if quests.event_count(&"garbage") < quest.steps[0].count:
+		return
+	var dialogic := get_node_or_null(^"/root/Dialogic")
+	if dialogic == null or dialogic.current_timeline != null:
+		return
+	var scene := get_tree().current_scene
+	var timeline := DialogicTimeline.new()
+	for key in ["CLEAN_DELIVERY_RECEIVED", "CLEAN_DELIVERY_JETPACK"]:
+		var event := DialogicTextEvent.new()
+		event.text = tr(key)
+		timeline.events.append(event)
+	timeline.events_processed = true
+	dialogic.start(timeline)
+	await dialogic.timeline_ended
+	if is_inside_tree() and get_tree().current_scene == scene and not SceneRouter.is_busy() \
+			and quests.status(quest) == quests.Status.ACTIVE and quests.event_count(&"meadow_cleanup_delivered") == 0:
+		quests.report(&"meadow_cleanup_delivered")
 
 
 func _play_timeline(path: String) -> void:

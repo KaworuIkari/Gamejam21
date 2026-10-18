@@ -187,8 +187,8 @@ QUEST_WATER_STEP_PUMP,启动北部泉眼的水泵,Start the pump at the north sp
 QUEST_WATER_STEP_STATION,长按 E 激活湖心电站,Hold E to activate the lake power station
 QUEST_WATER_STEP_TERMINAL,在电站终端查看任务,Check the station terminal
 QUEST_CLEAN_TITLE,清理草原,Clean up the meadow
-QUEST_CLEAN_DESC,垃圾堵塞了土地。长按 E 清理垃圾，让绿色重新蔓延。,Litter is choking the land. Hold E to clear it and let the green spread again.
-QUEST_CLEAN_LOCATION,草原,Meadow
+QUEST_CLEAN_DESC,背包已经装备，但能量不足。长按 E 清理草原上的10堆垃圾，再返回中心岛与湖心终端交互提交任务，恢复背包供能。,Your jetpack is equipped but has insufficient energy. Hold E to clear 10 meadow rubbish piles then return to the lake terminal on the central island to submit the task and restore jetpack power.
+QUEST_CLEAN_LOCATION,草原 / 中心岛湖心终端,Meadow / Central island lake terminal
 QUEST_CLEAN_STEP_GARBAGE,清理垃圾,Clear garbage
 QUEST_REGROW_TITLE,让树木复苏,Bring the trees back
 QUEST_REGROW_DESC,继续清理并浇灌枯树周围的土地。土地变绿后枯树会重新长叶。,Keep cleaning and water the ground around dead trees. They leaf out again once the ground is green.
@@ -280,3 +280,10 @@ INTERACT_ROBOT_KEY,按 %s 与小机器人交谈获取密钥,Press %s to ask the 
 ROBOT_KEY_RECOVERY,小机器人：这是雷达站的密钥，已传输给你。（剧情占位）,Companion bot: The radar key has been transferred to you. (Story placeholder.)
 QUEST_OPTIONAL,可选,Optional
 QUEST_RADAR_OPTIONAL_CLEAN,清理雷达周边垃圾,Clear rubbish around the radar station
+QUEST_CLEAN_STEP_DELIVER,返回中心岛向湖心终端提交任务，启用喷气背包,Return to the central island lake terminal to submit the task and enable the jetpack
+ITEM_JETPACK_EQUIPPED_1,喷气背包（能量不足）,Jetpack (insufficient energy)
+JETPACK_LOCKED_CLEANUP,背包能量不足：清理10堆草原垃圾后返回中心岛启用。,Jetpack energy insufficient: clear 10 meadow rubbish piles then return to the central island to enable it.
+JETPACK_LOCKED_RETURN,背包能量不足：草原清理已达标，返回中心岛提交任务后启用。,Jetpack energy insufficient: cleanup target reached. Return to the central island to submit the task and enable it.
+CLEAN_DELIVERY_RECEIVED,湖心终端：草原清理记录已确认，任务提交完成。,Lake terminal: Meadow cleanup verified. Task submitted.
+CLEAN_DELIVERY_JETPACK,湖心终端：正在恢复背包供能……喷气背包已启用。,Lake terminal: Restoring jetpack power... Jetpack enabled.
+QUEST_TOAST_JETPACK_ENABLED,喷气背包已恢复供能，可以使用了。,Jetpack power restored. Ready for use.

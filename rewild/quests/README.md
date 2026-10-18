@@ -58,6 +58,25 @@ ability is unlocked.
 
 Debug builds: **F9** completes the current step of the tracked quest.
 
+## Starter equipment and meadow cleanup hand-in
+
+First contact with the physical lake terminal grants `water_gun: 1` and
+`jetpack_equipped: 1` immediately after the briefing, before opening the task
+page. `jetpack_equipped` shows the backpack model but grants no flight. Until
+`jetpack` reaches level 1, energy stays at zero and cannot regenerate. The HUD
+explains that cleanup and a return to the central island are required.
+
+02 now has two sequential steps: clear 10 `garbage`, then physically return to
+the lake station and report `meadow_cleanup_delivered`. Clearing alone leaves
+02 active, keeps 03 locked, and does not enable flight. The station plays the
+submission/power-restoration briefing before reporting the delivery event;
+the existing 02 reward enables `jetpack: 1`. Tab only views the task page.
+
+Existing saves that already completed 02 and earned flight retain both flight
+and their subsequent quest progress. Existing terminal owners gain the starter
+equipment flag and water gun when loading, without prematurely enabling flight.
+The first quest's water-gun reward remains an idempotent fallback.
+
 ## Quest 05 — radar information
 
 04 grants `radar_key: 1` through the companion bot dialogue. Existing saves
