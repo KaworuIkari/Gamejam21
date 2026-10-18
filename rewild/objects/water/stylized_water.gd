@@ -37,6 +37,12 @@ var _cut_masks: Array = [null, null, null, null]
 var _fog_quad: MeshInstance3D
 var _screen_layer: CanvasLayer
 
+@onready var water_volume : WaterVolume = $WaterVolume
+var _wave_height_cache:float = 0.06
+var _wave_speed_cache:float = 1.0
+
+# signal fog_quad_signal(use: bool)
+
 
 func _ready() -> void:
 	add_to_group(&"water_surfaces")
@@ -48,11 +54,20 @@ func _ready() -> void:
 		var mat := get_active_material(0)
 		if mat:
 			set_surface_override_material(0, mat.duplicate())
+
 	var surface := get_active_material(0) as ShaderMaterial
 	if surface:
 		surface.set_shader_parameter("underwater_fog_color", underwater_fog_color)
 		surface.set_shader_parameter("underwater_fog_density", underwater_fog_density)
 
+		var h = surface.get_shader_parameter("wave_height")
+		var s = surface.get_shader_parameter("wave_speed")
+		_wave_height_cache = h
+		_wave_speed_cache = s
+	else:
+		push_error("Assign water surface material in ", name, " with proper wave height and speed")
+
+	## do this in inspector, and only once under camera
 	_fog_quad = MeshInstance3D.new()
 	_fog_quad.name = "UnderwaterFog"
 	var quad := QuadMesh.new()
@@ -68,6 +83,7 @@ func _ready() -> void:
 	_fog_quad.material_override = fog_mat
 	_fog_quad.visible = false
 
+	# not looking very good and barely noticable 2D effect
 	_screen_layer = CanvasLayer.new()
 	_screen_layer.name = "UnderwaterScreen"
 	_screen_layer.layer = 10
@@ -85,44 +101,36 @@ func _process(_delta: float) -> void:
 	if fit_to_basin and basin_mask == null:
 		_build_basin()
 	_update_cutouts()
-	var cam := camera if is_instance_valid(camera) else _find_camera()
-	if cam == null:
-		return
-	# The effects must live in the camera's own viewport (it may be a SubViewport).
-	if _fog_quad.get_parent() != cam:
-		if _fog_quad.get_parent():
-			_fog_quad.get_parent().remove_child(_fog_quad)
-		cam.add_child(_fog_quad)
-	if _screen_layer.get_parent() != cam.get_viewport():
-		if _screen_layer.get_parent():
-			_screen_layer.get_parent().remove_child(_screen_layer)
-		cam.get_viewport().add_child.call_deferred(_screen_layer)
+	if camera == null:
+		camera = _find_camera()
+		if camera == null:
+			push_error("Stylized water ", name, " failed to find camera by _find_camera()")
+	else:
+		# The effects must live in the camera's own viewport (it may be a SubViewport).
+		if _fog_quad.get_parent() != camera:
+			if _fog_quad.get_parent():
+				_fog_quad.get_parent().remove_child(_fog_quad)
+			camera.add_child(_fog_quad)
+		if _screen_layer.get_parent() != camera.get_viewport():
+			if _screen_layer.get_parent():
+				_screen_layer.get_parent().remove_child(_screen_layer)
+			camera.get_viewport().add_child.call_deferred(_screen_layer)
 
-	# Hidden water (e.g. not switched on yet by WaterFlowSwitch) can't be dived into.
-	var under := is_point_underwater(cam.global_position)
-	_fog_quad.visible = under
-	_screen_layer.visible = under
+		# Hidden water (e.g. not switched on yet by WaterFlowSwitch) can't be dived into.
+		var under := is_point_underwater(camera.global_position)
+		_fog_quad.visible = under
+		_screen_layer.visible = under
+
+		# future optimization, one fog_quad under camera reused
+		# fog_quad_signal.emit(is_point_underwater(camera.global_position))
 
 
 ## True when `point` is inside the water's footprint and below its (wavy) surface.
 func is_point_underwater(point: Vector3) -> bool:
 	if not holds_point(point):
 		return false
-	if not covers(point):
-		return false
-	for w in cutouts:
-		if is_instance_valid(w) and w.covers(point):
-			return false
-	var surface := get_active_material(0) as ShaderMaterial
-	var height := 0.06
-	var speed := 1.0
-	if surface: # unset parameters read back as null, so keep the shader defaults then
-		var h = surface.get_shader_parameter("wave_height")
-		var s = surface.get_shader_parameter("wave_speed")
-		height = h if h != null else height
-		speed = s if s != null else speed
-	var t := Time.get_ticks_msec() / 1000.0 * speed
-	return point.y < global_position.y + _wave(Vector2(point.x, point.z), t) * height
+	var t := Time.get_ticks_msec() / 1000.0 * _wave_speed_cache
+	return point.y < global_position.y + _wave(Vector2(point.x, point.z), t) * _wave_height_cache
 
 
 ## True when `point` is inside this water's footprint (its basin, if traced), at any height.
@@ -213,6 +221,7 @@ func _footprint() -> Vector4:
 
 
 func _update_cutouts() -> void:
+	# maximum 4 cutouts, add more in gdshader if you wish
 	for i in 4:
 		var w: StylizedWater = cutouts[i] if i < cutouts.size() else null
 		var v := w._footprint() if is_instance_valid(w) else Vector4.ZERO
@@ -242,27 +251,31 @@ func _find_camera() -> Camera3D:
 	return null
 
 
-func _exit_tree() -> void:
-	# The effect nodes live under the camera, so hide them when the water leaves.
-	for node in [_fog_quad, _screen_layer]:
-		if is_instance_valid(node):
-			node.visible = false
+# func _exit_tree() -> void:
+# 	# The effect nodes live under the camera, so hide them when the water leaves.
+# 	for node in [_fog_quad, _screen_layer]:
+# 		if is_instance_valid(node):
+# 			node.visible = false
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_PREDELETE:
-		for node in [_fog_quad, _screen_layer]:
-			if is_instance_valid(node):
-				if node.is_inside_tree():
-					node.queue_free()
-				else:
-					node.free()
+# func _notification(what: int) -> void:
+# 	if what == NOTIFICATION_PREDELETE:
+# 		for node in [_fog_quad, _screen_layer]:
+# 			if is_instance_valid(node):
+# 				if node.is_inside_tree():
+# 					node.queue_free()
+# 				else:
+# 					node.free()
 
-func get_surface_y() -> float:
+func get_plane_surface_y() -> float:
 	return global_position.y
 
 ## True when the point is in this water's basin (or footprint) and not inside a cutout.
 func holds_point(point: Vector3) -> bool:
+	# alternative version, without cut-out
+	# return water_volume.is_point_submerged(point)
+
+	# original version
 	if not covers(point):
 		return false
 	for w in cutouts:

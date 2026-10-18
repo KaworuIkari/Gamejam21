@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_petal_3.tscn" id="21_wh6lg"]
 [ext_resource type="PackedScene" path="res://objects/restorable/restorable_petal_2.tscn" id="22_2yqq3"]
 [ext_resource type="Texture2D" uid="uid://wjnkwo3qgaqg" path="res://assets/textures/sky/sky_100_2k.png" id="23_otx12"]
-[ext_resource type="PackedScene" uid="uid://dg7htfejywn14" path="res://objects/water/stylized_water.tscn" id="24_xhuqs"]
 [ext_resource type="PackedScene" uid="uid://cq3grnhe7p3ym" path="res://assets/models/stylized_nature/RockPath/RockPath_Round_Small_1.gltf" id="25_x7q4c"]
 [ext_resource type="PackedScene" uid="uid://d3sr0a7dxfkr8" path="res://addons/terrain_3d/extras/particle_example/Terrain3DParticles.tscn" id="26_qdlbs"]
 [ext_resource type="Shader" uid="uid://cmpxta76v4jv0" path="res://shaders/foliage/meadow_particles.gdshader" id="27_otuti"]
@@ -655,36 +654,6 @@ shadow_enabled = true
 shadow_blur = 1.5
 directional_shadow_max_distance = 150.0
 
-[node name="Water" type="Node3D" parent="." unique_id=767359125]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -79.78649, -0.8510814, 59.27674)
-
-[node name="Pond" parent="Water" unique_id=323264992 instance=ExtResource("24_xhuqs")]
-transform = Transform3D(-1.0003864, 0, -0.37306494, 0, 1, 0, 0.68793803, 0, -0.54250413, 105.34386, 26.807768, -97.29939)
-visible = false
-fit_to_basin = true
-
-[node name="Lake" parent="Water" unique_id=706848416 instance=ExtResource("24_xhuqs")]
-transform = Transform3D(0.74166876, 0, -2.3874493, 0, 1, 0, 2.3874493, 0, 0.74166876, 34.268665, 25.417225, 13.025017)
-fit_to_basin = true
-
-[node name="River" parent="Water" unique_id=1647048401 instance=ExtResource("24_xhuqs")]
-transform = Transform3D(3.008634, 0, -1.8451486, 0, 1, 0, 2.6359262, 0, 2.1060436, 49.472565, 25.392574, -86.523575)
-fit_to_basin = true
-
-[node name="Sea" parent="Water" unique_id=274193213 node_paths=PackedStringArray("cutouts") instance=ExtResource("24_xhuqs")]
-transform = Transform3D(999.99835, 0, 0, 0, 1, 0, 0, 0, 999.99835, 19.829552, 25.74011, 109.67724)
-cutouts = [NodePath("../Lake"), NodePath("../River"), NodePath("../Froglake"), NodePath("../Pond")]
-
-[node name="RockPath_Round_Small_12" parent="Water" unique_id=978997531 instance=ExtResource("25_x7q4c")]
-transform = Transform3D(0.42481565, 0.22199084, -2.9614549, -0.9627169, 2.840349, 0.074810706, 2.8093903, 0.939755, 0.47344598, 55.0652, 28.53387, 140.36954)
-
-[node name="StylizedWater2" parent="Water" unique_id=919906792 instance=ExtResource("24_xhuqs")]
-transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.3, 39.32513, 46.827694, -161.39017)
-
-[node name="Froglake" parent="Water" unique_id=474069884 instance=ExtResource("24_xhuqs")]
-transform = Transform3D(1.1866715, 0, -3.8199217, 0, 4, 0, 3.8199217, 0, 1.1866715, -86.81138, 26.5587, -115.8292)
-fit_to_basin = true
-
 [node name="Plants" type="Node3D" parent="." unique_id=1370453621]
 
 [node name="Flowers" parent="Plants" unique_id=1832075260 node_paths=PackedStringArray("terrain") instance=ExtResource("26_qdlbs")]
@@ -748,7 +717,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.414333, 58.898666, 213.91
 
 [node name="AnimalShark" parent="SubViewportContainer/PixelateSubViewport/Animals/Fish" unique_id=896278617 node_paths=PackedStringArray("sea_plane", "terrain") instance=ExtResource("34_dt3md")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275124, 14.021549, -146.18945)
-sea_plane = NodePath("../../../../../Water/Sea")
+sea_plane = NodePath("")
 terrain = NodePath("../../../../../NavigationRegion3D/Terrain3D")
 
 [node name="AnimalSpawner" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=503472948 instance=ExtResource("35_vsbv1")]
@@ -845,7 +814,7 @@ metadata/_custom_type_script = "uid://bsgufyjcr5i6g"
 script = ExtResource("57_gfpjy")
 trigger = NodePath("../InteractTrigger")
 quest_event = &"pump_started"
-rise = [NodePath("../../../../Water/River"), NodePath("../../../../Water/Lake"), NodePath("../../../../Water/Froglake")]
+rise = [NodePath(""), NodePath(""), NodePath("")]
 rise_height = 20.41
 rise_time = 4.0
 bank_height = 3.5
@@ -1286,10 +1255,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 284.04056, 24.527874, -32.293
 [node name="Restorable_Fern_1" parent="Items" unique_id=1365728454 instance=ExtResource("111_y0amj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 283.10007, 24.543869, -33.89498)
 
-[editable path="Water/Pond"]
-[editable path="Water/Lake"]
-[editable path="Water/River"]
-[editable path="Water/Sea"]
-[editable path="Water/StylizedWater2"]
-[editable path="Water/Froglake"]
 [editable path="Leon2"]

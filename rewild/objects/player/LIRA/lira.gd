@@ -91,6 +91,9 @@ var _regen_timer := 0.0
 @export var swim_hop_speed := 7.0                       # Space while floating (no jetpack yet): a hop to climb onto the bank
 @export var dive_accel := 8.0
 
+var _cached_water_volume:StylizedWater = null
+var _water_pos_y_offset : Vector3 # if this is 0, the bottom of capsule is always slightly under terrain3D
+
 var in_water := false
 var is_floating := false
 var is_diving := false
@@ -131,10 +134,12 @@ func _ready() -> void:
 	tree_exiting.connect(energy_hud.queue_free)
 	_refresh_water_list()
 	_setup_swim_idle_pool()
+
+	_water_pos_y_offset = Vector3(0.0, _capsule_height() * 0.1, 0.0)
 	
 
 func _physics_process(delta: float) -> void:
-	_update_water(delta)
+	_update_water()
 	super(delta)
 	_swim_sound(in_water and velocity.length_squared() > 0.25)   # loop plays while moving in water
 	
@@ -402,8 +407,8 @@ func _footstep() -> void:
 
 func _detect_surface() -> int:
 	# Shallow water: the feet are below the waterline. Deep water is skipped entirely, since footsteps don't play while swimming.
-	var vol := _find_water()
-	if vol and vol.get_surface_y() > _feet_y():
+	var vol := _cached_water_volume
+	if vol and vol.get_plane_surface_y() > _feet_y():
 		return Surface.WATER
 	# The planted foot is the lower one, and that is the foot the animation event fires for
 	var ray := left_foot_ray
@@ -433,15 +438,19 @@ func _refresh_water_list() -> void:
 			print(n.name, " added to list")
 			_water_list.append(n)
 
-func _update_water(delta: float) -> void:
+func _update_water() -> void:
+	_cached_water_volume = _find_water()
+
 	_handle_touchdown()   # before _track_air_height, which overwrites the peak
 	_track_air_height()
 
-	var vol := _find_water()
+	var vol : StylizedWater = _cached_water_volume
 	var h := _capsule_height()
 	var feet := _feet_y()
 	var ratio := chest_ratio if not in_water else chest_ratio - 0.15   # hysteresis
-	var deep := vol != null and (vol.get_surface_y() - feet) >= ratio * h
+	var deep : bool = vol != null and (vol.get_plane_surface_y() - feet) >= ratio * h
+	if vol:
+		print((vol.get_plane_surface_y() - feet) >= ratio * h, feet, vol.get_plane_surface_y())
 
 	if deep and not in_water:
 		_enter_water()
@@ -450,7 +459,7 @@ func _update_water(delta: float) -> void:
 	if not in_water:
 		return
 
-	_water_surface_y = vol.get_surface_y()
+	_water_surface_y = vol.get_plane_surface_y()
 	is_head_underwater = feet + h < _water_surface_y
 	_check_dive_input()
 	if is_diving:
@@ -461,11 +470,12 @@ func _update_water(delta: float) -> void:
 			_end_dive()
 
 func _find_water() -> StylizedWater:
-	if is_instance_valid(_current_water) and _current_water.holds_point(global_position):
+	var lira_pos := global_position+_water_pos_y_offset
+	if is_instance_valid(_current_water) and _current_water.holds_point(lira_pos):
 		return _current_water
 	_current_water = null
 	for v in _water_list:
-		if is_instance_valid(v) and v.holds_point(global_position):
+		if is_instance_valid(v) and v.holds_point(lira_pos):
 			_current_water = v
 			break
 	return _current_water
@@ -626,8 +636,8 @@ func _handle_touchdown() -> void:
 	if _air_peak_y <= feet:
 		return   # not falling: walking, idle, or still rising
 	var drop := _air_peak_y - feet
-	var vol := _find_water()
-	if vol != null and vol.get_surface_y() > feet:
+	var vol := _cached_water_volume
+	if vol != null and vol.get_plane_surface_y() > feet:
 		if drop >= big_splash_drop:
 			_play_sound_water_big_splash()
 	elif is_on_floor():
