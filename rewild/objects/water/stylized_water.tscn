@@ -2,29 +2,14 @@
 
 [ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="1_surface"]
 [ext_resource type="Script" uid="uid://dbw45q6plb6q5" path="res://objects/water/stylized_water.gd" id="2_script"]
-[ext_resource type="Material" uid="uid://cp2yc8ptl23xc" path="res://shaders/water/stylzied_meniscus.tres" id="3_mg86q"]
 [ext_resource type="Script" uid="uid://brao2v7bh3ju6" path="res://objects/water/water_volume.gd" id="3_scr68"]
-[ext_resource type="Shader" uid="uid://d4h4v6xg38rv7" path="res://shaders/water/underwater_fog.gdshader" id="4_32soj"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_0yw1p"]
-size = Vector2(2, 2)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ryjh"]
-render_priority = -1
-shader = ExtResource("4_32soj")
-shader_parameter/fog_color = Color(0.1, 0.42, 0.58, 1)
-shader_parameter/fog_density = 0.08
-shader_parameter/max_fog = 0.95
-shader_parameter/max_distance = 10.0
-shader_parameter/above_fade = 0.5
-shader_parameter/mesh_half = Vector2(1, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_mg86q"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_water"]
 size = Vector2(40, 40)
-subdivide_width = 300
-subdivide_depth = 300
+subdivide_width = 80
+subdivide_depth = 80
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gkoxu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_water"]
 render_priority = 0
 shader = ExtResource("1_surface")
 shader_parameter/shallow_color = Color(0.45, 0.9, 0.93, 1)
@@ -50,10 +35,6 @@ shader_parameter/sparkle_strength = 1.2
 shader_parameter/sparkle_threshold = 0.6
 shader_parameter/underwater_fog_color = Color(0.1, 0.42, 0.58, 1)
 shader_parameter/underwater_fog_density = 0.08
-shader_parameter/underside_darkness = 0.8
-shader_parameter/underside_distort = 3.0
-shader_parameter/underside_fog_min = 0.5
-shader_parameter/underside_gloss = 0.0
 shader_parameter/use_basin_mask = false
 shader_parameter/use_tank = false
 shader_parameter/cap_radius = 0.155
@@ -68,29 +49,12 @@ shader_parameter/cell_size = 0.35
 shader_parameter/puddle_lift = 0.01
 shader_parameter/puddle_edge = 0.006
 
-[node name="StylizedWater" type="Node3D" unique_id=1470401479]
+[node name="StylizedWater" type="MeshInstance3D" unique_id=323264992]
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_water")
+surface_material_override/0 = SubResource("ShaderMaterial_water")
 script = ExtResource("2_script")
 
-[node name="WaterVolume" type="Node3D" parent="." unique_id=391076161 node_paths=PackedStringArray("sea_plane")]
+[node name="WaterVolume" type="Node" parent="." unique_id=1527532477 node_paths=PackedStringArray("sea_plane")]
 script = ExtResource("3_scr68")
-sea_plane = NodePath("../WaterMesh")
-
-[node name="MeniscusQuad" type="MeshInstance3D" parent="." unique_id=1196342869]
-visible = false
-material_override = ExtResource("3_mg86q")
-cast_shadow = 0
-extra_cull_margin = 16384.0
-gi_mode = 0
-mesh = SubResource("QuadMesh_0yw1p")
-
-[node name="FogQuad" type="MeshInstance3D" parent="." unique_id=99550011]
-material_override = SubResource("ShaderMaterial_3ryjh")
-cast_shadow = 0
-extra_cull_margin = 16384.0
-gi_mode = 0
-mesh = SubResource("QuadMesh_0yw1p")
-
-[node name="WaterMesh" type="MeshInstance3D" parent="." unique_id=895033439]
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_mg86q")
-surface_material_override/0 = SubResource("ShaderMaterial_gkoxu")
+sea_plane = NodePath("..")

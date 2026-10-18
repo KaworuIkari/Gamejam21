@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://ba8g841l3u1fd" path="res://assets/textures/ground/desert/desert_normal.png" id="22_nexx3"]
 [ext_resource type="PackedScene" uid="uid://2vtwlkg57vub" path="res://objects/player/cubebot/cubebot.tscn" id="26_5ass5"]
 [ext_resource type="PackedScene" uid="uid://cyr2yne1jhnyv" path="res://objects/player/LIRA/LIRA.tscn" id="29_ae10e"]
+[ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="29_yo2dp"]
 [ext_resource type="Script" uid="uid://dgqq1tf8prx5s" path="res://addons/proton_scatter/src/scatter.gd" id="30_8v0hq"]
 [ext_resource type="PackedScene" uid="uid://q5g68s303xuk" path="res://objects/animals/shark/animal_shark.tscn" id="30_lf2va"]
 [ext_resource type="Script" uid="uid://ba8jou0xje0c7" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="31_375q5"]
@@ -445,6 +446,51 @@ shader_parameter/dry_coverage = 0.36
 shader_parameter/dry_density = 0.6
 shader_parameter/dry_height = 0.75
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_water"]
+size = Vector2(40, 40)
+subdivide_width = 80
+subdivide_depth = 80
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_water"]
+render_priority = 0
+shader = ExtResource("29_yo2dp")
+shader_parameter/shallow_color = Color(0.45, 0.9, 0.93, 1)
+shader_parameter/deep_color = Color(0.06, 0.36, 0.72, 1)
+shader_parameter/sky_tint = Color(0.8, 0.9, 1, 1)
+shader_parameter/color_depth = 2.5
+shader_parameter/murkiness = 0.45
+shader_parameter/refraction = 0.025
+shader_parameter/ripple_scale = 0.5
+shader_parameter/ripple_strength = 0.12
+shader_parameter/wave_height = 0.06
+shader_parameter/wave_speed = 1.0
+shader_parameter/use_local_coords = false
+shader_parameter/local_noise_scale = 1.0
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/foam_width = 0.3
+shader_parameter/flow_direction = Vector3(0, 0, 1)
+shader_parameter/flow_speed = 0.0
+shader_parameter/flow_foam = 0.0
+shader_parameter/caustic_strength = 0.9
+shader_parameter/caustic_scale = 0.6
+shader_parameter/sparkle_strength = 1.2
+shader_parameter/sparkle_threshold = 0.6
+shader_parameter/underwater_fog_color = Color(0.1, 0.42, 0.58, 1)
+shader_parameter/underwater_fog_density = 0.08
+shader_parameter/use_basin_mask = false
+shader_parameter/use_tank = false
+shader_parameter/cap_radius = 0.155
+shader_parameter/cap_edge = 0.18
+shader_parameter/tank_wave_scale = 26.0
+shader_parameter/blob_density = 1.2
+shader_parameter/blob_clarity = 0.25
+shader_parameter/blob_foam = 0.6
+shader_parameter/use_height_field = false
+shader_parameter/half_extent = 11.0
+shader_parameter/cell_size = 0.35
+shader_parameter/puddle_lift = 0.01
+shader_parameter/puddle_edge = 0.006
+
 [sub_resource type="Resource" id="Resource_mqapr"]
 script = ExtResource("33_82jtq")
 amount = 68
@@ -714,28 +760,46 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -79.78649, 
 [node name="Pond" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=323264992 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(-1.0003864, 0, -0.37306494, 0, 1, 0, 0.68793803, 0, -0.54250413, 105.34386, 26.807768, -97.29939)
 visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_water")
+surface_material_override/0 = SubResource("ShaderMaterial_water")
 fit_to_basin = true
 
 [node name="Lake" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=1984976378 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(0.74166876, 0, -2.3874493, 0, 1, 0, 2.3874493, 0, 0.74166876, 34.268665, 25.417225, 13.025017)
 visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_water")
+surface_material_override/0 = SubResource("ShaderMaterial_water")
 fit_to_basin = true
 
 [node name="River" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=1080151137 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(3.008634, 0, -1.8451486, 0, 1, 0, 2.6359262, 0, 2.1060436, 49.472565, 25.392574, -86.523575)
 visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_water")
+surface_material_override/0 = SubResource("ShaderMaterial_water")
 fit_to_basin = true
 
 [node name="Sea" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=767396377 node_paths=PackedStringArray("cutouts") instance=ExtResource("14_i4ovm")]
 transform = Transform3D(999.99835, 0, 0, 0, 1, 0, 0, 0, 999.99835, 19.829552, 25.74011, 109.67724)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_water")
+surface_material_override/0 = SubResource("ShaderMaterial_water")
 cutouts = [NodePath("../Lake"), NodePath("../River"), NodePath("../Froglake"), NodePath("../Pond")]
 
 [node name="StylizedWater2" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=537853457 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.3, 39.32513, 46.827694, -161.39017)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_water")
+surface_material_override/0 = SubResource("ShaderMaterial_water")
 
 [node name="Froglake" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=964298104 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(1.1866715, 0, -3.8199217, 0, 4, 0, 3.8199217, 0, 1.1866715, -86.81138, 26.5587, -115.8292)
 visible = false
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_water")
+surface_material_override/0 = SubResource("ShaderMaterial_water")
 fit_to_basin = true
 
 [node name="CubeBotCompanion" parent="SubViewportContainer/PixelateSubViewport" unique_id=12817185 instance=ExtResource("26_5ass5")]
@@ -757,8 +821,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -53.414333, 58.898666, 213.91
 
 [node name="Fish" type="Node3D" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=1933286653]
 
-[node name="AnimalShark" parent="SubViewportContainer/PixelateSubViewport/Animals/Fish" unique_id=896278617 node_paths=PackedStringArray("terrain") instance=ExtResource("30_lf2va")]
+[node name="AnimalShark" parent="SubViewportContainer/PixelateSubViewport/Animals/Fish" unique_id=896278617 node_paths=PackedStringArray("sea_plane", "terrain") instance=ExtResource("30_lf2va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.275124, 14.021549, -146.18945)
+sea_plane = NodePath("../../../Water/Sea")
 terrain = NodePath("../../../../../NavigationRegion3D/Terrain3D")
 
 [node name="AnimalSpawner" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=503472948 instance=ExtResource("31_lvj5s")]
