@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cp2yc8ptl23xc"]
+
+[ext_resource type="Shader" uid="uid://cdfdi71coqg6q" path="res://shaders/water/water_surface_meniscus.gdshader" id="1_gc6on"]
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_gc6on")
+shader_parameter/water_level = 0.0
+shader_parameter/wave_height = 0.06
+shader_parameter/wave_speed = 1.0
+shader_parameter/meniscus_color = Color(0.80708814, 0.9231714, 0.9474388, 1)
+shader_parameter/meniscus_opacity = 0.7
+shader_parameter/clipping_plane_bias = 1.0
+shader_parameter/meniscus_px = 10.0
+shader_parameter/mesh_half = Vector2(1, 1)
