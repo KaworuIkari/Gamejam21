@@ -2,7 +2,10 @@
 ## dip in the terrain, and point `camera` at the player camera. When that camera goes
 ## below the surface it switches on underwater fog, tint, wobble and light shafts.
 class_name StylizedWater
-extends Node3D
+extends MeshInstance3D
+
+const FOG_SHADER := preload("res://shaders/water/underwater_fog.gdshader")
+const SCREEN_SHADER := preload("res://shaders/water/underwater_screen.gdshader")
 
 ## The camera that can dive. Leave empty to use the first active camera found.
 @export var camera: Camera3D
@@ -30,70 +33,104 @@ var basin_mask: ImageTexture
 var _basin_image: Image
 var _basin_rect := Vector4.ZERO
 var _cut_masks: Array = [null, null, null, null]
-@onready var water_mesh : MeshInstance3D = $WaterMesh
 
+var _fog_quad: MeshInstance3D
+var _screen_layer: CanvasLayer
 
-@export var meniscus_enabled : bool = false  # current method to costly, requires high sub-d mesh
-@onready var _fog_quad: MeshInstance3D = $FogQuad
-@onready var _meniscus_quad: MeshInstance3D = $MeniscusQuad
-@onready var fog_mat := _fog_quad.material_override as ShaderMaterial
-@onready var meniscus_mat := _meniscus_quad.material_override as ShaderMaterial
-@export var waterline_band := 0.5   ## metres above the surface the per-pixel fog stays on
+@onready var water_volume : WaterVolume = $WaterVolume
+var _wave_height_cache:float = 0.06
+var _wave_speed_cache:float = 1.0
+
+# signal fog_quad_signal(use: bool)
 
 
 func _ready() -> void:
 	add_to_group(&"water_surfaces")
+	print(name, " is ready")
 	if is_nan(full_level):
 		full_level = global_position.y
 	if fit_to_basin or not cutouts.is_empty():
 		# Masks are per water body, so stop sharing the scene's material.
-		var mat := water_mesh.get_active_material(0)
+		var mat := get_active_material(0)
 		if mat:
-			water_mesh.set_surface_override_material(0, mat.duplicate())
-	var surface := water_mesh.get_active_material(0) as ShaderMaterial
+			set_surface_override_material(0, mat.duplicate())
+
+	var surface := get_active_material(0) as ShaderMaterial
 	if surface:
 		surface.set_shader_parameter("underwater_fog_color", underwater_fog_color)
 		surface.set_shader_parameter("underwater_fog_density", underwater_fog_density)
-	_meniscus_quad.visible = meniscus_enabled
+
+		var h = surface.get_shader_parameter("wave_height")
+		var s = surface.get_shader_parameter("wave_speed")
+		_wave_height_cache = h
+		_wave_speed_cache = s
+	else:
+		push_error("Assign water surface material in ", name, " with proper wave height and speed")
+
+	## do this in inspector, and only once under camera
+	_fog_quad = MeshInstance3D.new()
+	_fog_quad.name = "UnderwaterFog"
+	var quad := QuadMesh.new()
+	quad.size = Vector2(2, 2)
+	_fog_quad.mesh = quad
+	_fog_quad.extra_cull_margin = 16384.0
+	_fog_quad.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var fog_mat := ShaderMaterial.new()
+	fog_mat.shader = FOG_SHADER
+	fog_mat.render_priority = -1 # under the water surface, which fogs its own underside
+	fog_mat.set_shader_parameter("fog_color", underwater_fog_color)
+	fog_mat.set_shader_parameter("fog_density", underwater_fog_density)
+	_fog_quad.material_override = fog_mat
+	_fog_quad.visible = false
+
+	# not looking very good and barely noticable 2D effect
+	_screen_layer = CanvasLayer.new()
+	_screen_layer.name = "UnderwaterScreen"
+	_screen_layer.layer = 10
+	var rect := ColorRect.new()
+	rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var screen_mat := ShaderMaterial.new()
+	screen_mat.shader = SCREEN_SHADER
+	rect.material = screen_mat
+	_screen_layer.add_child(rect)
+	_screen_layer.visible = false
+
 
 func _process(_delta: float) -> void:
 	if fit_to_basin and basin_mask == null:
 		_build_basin()
 	_update_cutouts()
-	var cam := camera if is_instance_valid(camera) else _find_camera()
-	if cam == null:
-		return
-	# Hidden water (e.g. not switched on yet by WaterFlowSwitch) can't be dived into.
-	# var inside := holds_point(cam.global_position)
-	
-	var show_quads : bool = _camera_over_water(cam.global_position)
-	_fog_quad.visible = show_quads  # also turned off in shader, but turn off here too as optimization
-	if meniscus_enabled:
-		_meniscus_quad.visible = show_quads
+	if camera == null:
+		camera = _find_camera()
+		if camera == null:
+			push_error("Stylized water ", name, " failed to find camera by _find_camera()")
+	else:
+		# The effects must live in the camera's own viewport (it may be a SubViewport).
+		if _fog_quad.get_parent() != camera:
+			if _fog_quad.get_parent():
+				_fog_quad.get_parent().remove_child(_fog_quad)
+			camera.add_child(_fog_quad)
+		if _screen_layer.get_parent() != camera.get_viewport():
+			if _screen_layer.get_parent():
+				_screen_layer.get_parent().remove_child(_screen_layer)
+			camera.get_viewport().add_child.call_deferred(_screen_layer)
 
-## Keep screen effects within visible water and its waterline band.
-func _camera_over_water(point: Vector3) -> bool:
-	return is_visible_in_tree() and holds_point(point) and point.y <= global_position.y + waterline_band
+		# Hidden water (e.g. not switched on yet by WaterFlowSwitch) can't be dived into.
+		var under := is_point_underwater(camera.global_position)
+		_fog_quad.visible = under
+		_screen_layer.visible = under
+
+		# future optimization, one fog_quad under camera reused
+		# fog_quad_signal.emit(is_point_underwater(camera.global_position))
+
 
 ## True when `point` is inside the water's footprint and below its (wavy) surface.
 func is_point_underwater(point: Vector3) -> bool:
-	if not holds_point(point):
+	if not is_visible_in_tree() or not holds_point(point):
 		return false
-	if not covers(point):
-		return false
-	for w in cutouts:
-		if is_instance_valid(w) and w.covers(point):
-			return false
-	var surface := water_mesh.get_active_material(0) as ShaderMaterial
-	var height := 0.06
-	var speed := 1.0
-	if surface: # unset parameters read back as null, so keep the shader defaults then
-		var h = surface.get_shader_parameter("wave_height")
-		var s = surface.get_shader_parameter("wave_speed")
-		height = h if h != null else height
-		speed = s if s != null else speed
-	var t := Time.get_ticks_msec() / 1000.0 * speed
-	return point.y < global_position.y + _wave(Vector2(point.x, point.z), t) * height
+	var t := Time.get_ticks_msec() / 1000.0 * _wave_speed_cache
+	return point.y < global_position.y + _wave(Vector2(point.x, point.z), t) * _wave_height_cache
 
 
 ## True when `point` is inside this water's footprint (its basin, if traced), at any height.
@@ -124,7 +161,7 @@ func _build_basin() -> void:
 	var origin := Vector2(r.x - r.z, r.y - r.w)
 	var low := PackedByteArray()
 	low.resize(w * h)
-	var _seed := -1
+	var seed := -1
 	var seed_d := INF
 	var centre := Vector2(r.x, r.y)
 	for y in h:
@@ -137,12 +174,12 @@ func _build_basin() -> void:
 			var d := p.distance_squared_to(centre)
 			if d < seed_d:
 				seed_d = d
-				_seed = y * w + x
+				seed = y * w + x
 	var fill := PackedByteArray()
 	fill.resize(w * h)
-	if _seed >= 0:
-		var stack := PackedInt32Array([_seed])
-		fill[_seed] = 255
+	if seed >= 0:
+		var stack := PackedInt32Array([seed])
+		fill[seed] = 255
 		while not stack.is_empty():
 			var i := stack[stack.size() - 1]
 			stack.resize(stack.size() - 1)
@@ -162,11 +199,11 @@ func _build_basin() -> void:
 	_basin_image = Image.create_from_data(w, h, false, Image.FORMAT_L8, fill)
 	basin_mask = ImageTexture.create_from_image(_basin_image)
 	_basin_rect = r
-	var surface := water_mesh.get_active_material(0) as ShaderMaterial
+	var surface := get_active_material(0) as ShaderMaterial
 	if surface:
 		surface.set_shader_parameter("use_basin_mask", true)
 		surface.set_shader_parameter("basin_mask", basin_mask)
-	water_mesh.set_instance_shader_parameter("basin_rect", r)
+	set_instance_shader_parameter("basin_rect", r)
 
 
 func _get_terrain() -> Terrain3D:
@@ -178,20 +215,21 @@ func _get_terrain() -> Terrain3D:
 
 ## World XZ footprint as (centre x, centre z, half width, half depth).
 func _footprint() -> Vector4:
-	var box := global_transform * water_mesh.mesh.get_aabb()
+	var box := global_transform * mesh.get_aabb()
 	var c := box.get_center()
 	return Vector4(c.x, c.z, box.size.x * 0.5, box.size.z * 0.5)
 
 
 func _update_cutouts() -> void:
+	# maximum 4 cutouts, add more in gdshader if you wish
 	for i in 4:
 		var w: StylizedWater = cutouts[i] if i < cutouts.size() else null
 		var v := w._footprint() if is_instance_valid(w) else Vector4.ZERO
-		water_mesh.set_instance_shader_parameter("cutout_%d" % i, v)
+		set_instance_shader_parameter("cutout_%d" % i, v)
 		var m: Texture2D = w.basin_mask if is_instance_valid(w) else null
 		if m != _cut_masks[i]:
 			_cut_masks[i] = m
-			var surface := water_mesh.get_active_material(0) as ShaderMaterial
+			var surface := get_active_material(0) as ShaderMaterial
 			if surface:
 				surface.set_shader_parameter("cutout_mask_%d" % i, m)
 
@@ -213,25 +251,31 @@ func _find_camera() -> Camera3D:
 	return null
 
 
-func _exit_tree() -> void:
-	# The effect nodes live under the camera, so hide them when the water leaves.
-	if is_instance_valid(_fog_quad):
-		_fog_quad.visible = false
+# func _exit_tree() -> void:
+# 	# The effect nodes live under the camera, so hide them when the water leaves.
+# 	for node in [_fog_quad, _screen_layer]:
+# 		if is_instance_valid(node):
+# 			node.visible = false
 
 
-func _notification(what: int) -> void:
-	if what == NOTIFICATION_PREDELETE:
-		if is_instance_valid(_fog_quad):
-			if _fog_quad.is_inside_tree():
-				_fog_quad.queue_free()
-			else:
-				_fog_quad.free()
+# func _notification(what: int) -> void:
+# 	if what == NOTIFICATION_PREDELETE:
+# 		for node in [_fog_quad, _screen_layer]:
+# 			if is_instance_valid(node):
+# 				if node.is_inside_tree():
+# 					node.queue_free()
+# 				else:
+# 					node.free()
 
-func get_surface_y() -> float:
+func get_plane_surface_y() -> float:
 	return global_position.y
 
 ## True when the point is in this water's basin (or footprint) and not inside a cutout.
 func holds_point(point: Vector3) -> bool:
+	# alternative version, without cut-out
+	# return water_volume.is_point_submerged(point)
+
+	# original version
 	if not covers(point):
 		return false
 	for w in cutouts:

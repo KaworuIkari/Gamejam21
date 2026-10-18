@@ -35,10 +35,6 @@ uniform float sparkle_threshold : hint_range(0.0, 1.0) = 0.6; // higher = fewer 
 group_uniforms underwater; // looking up at the surface from below (StylizedWater keeps these in sync)
 uniform vec3 underwater_fog_color : source_color = vec3(0.10, 0.42, 0.58);
 uniform float underwater_fog_density = 0.08;
-uniform float underside_darkness : hint_range(0.0, 1.0) = 0.8; // how much darker than the front-face view
-uniform float underside_distort : hint_range(0.0, 4.0) = 3.0;   // refraction multiplier vs the front face
-uniform float underside_fog_min : hint_range(0.0, 1.0) = 0.5;  // fog even when looking straight up
-uniform float underside_gloss : hint_range(0.0, 1.0) = 0.6;     // tinted sheen / sparkle strength
 
 uniform sampler2D screen_tex : hint_screen_texture, filter_linear_mipmap, repeat_disable;
 uniform sampler2D depth_tex : hint_depth_texture, filter_nearest, repeat_disable;
@@ -338,30 +334,15 @@ void fragment() {
 		ROUGHNESS = mix(0.04, 0.9, foam);
 		SPECULAR = 0.5 * (1.0 - foam);
 	} else {
-		float ndv = clamp(dot(n0, VIEW), 0.0, 1.0);   // 1 = looking straight up at the surface
-
-		// Distorted sky/world above, same ripple push as the front face, then darkened and tinted.
-		vec3 above = textureLod(screen_tex, SCREEN_UV + ripple * refraction * underside_distort, 0.0).rgb;
-		above *= mix(vec3(1.0), deep_color, 0.5);
-		above *= 1.0 - underside_darkness;
-
-		// Fog: distance-based, with a floor so it is never crystal clear, and more fog at grazing angles.
-		float dist_fog = 1.0 - exp(-length(VERTEX) * underwater_fog_density);
-		float angle_fog = pow(1.0 - ndv, 2.0);
-		float fog = clamp(max(dist_fog, angle_fog) , underside_fog_min, 1.0);
-		vec3 col = mix(above, underwater_fog_color, fog);
-		// vec3 col = above;
-
-		// Subtle tinted gloss: soft sparkles and a faint rim, in water colours, never white.
-		float sp = gn01(np * 18.0 + vec3(t * 1.2, 1.3, 0.0)) * gn01(np * 13.0 - vec3(t * 1.0, 7.9, 0.0));
-		sp = smoothstep(0.55, 0.75, sp);
-		vec3 sheen = mix(shallow_color, underwater_fog_color, 0.5);
-		col += sheen * (sp * 0.35 + pow(1.0 - ndv, 3.0) * 0.25) * underside_gloss * (1.0 - fog * 0.5);
-
+		// From below: a bright "window" to the world above, fading to water at grazing angles.
+		vec3 above = textureLod(screen_tex, SCREEN_UV + ripple * refraction * 2.0, 0.0).rgb;
+		float window = smoothstep(0.45, 0.8, clamp(dot(n0, VIEW), 0.0, 1.0));
+		vec3 col = mix(underwater_fog_color * 1.2, above * mix(vec3(1.0), shallow_color, 0.4), window);
+		float fog = 1.0 - exp(-length(VERTEX) * underwater_fog_density);
 		ALBEDO = vec3(0.0);
-		EMISSION = col;
-		ROUGHNESS = 0.3;
-		SPECULAR = 0.15 * underside_gloss;
+		EMISSION = mix(col, underwater_fog_color, fog);
+		ROUGHNESS = 1.0;
+		SPECULAR = 0.0;
 	}
 	ALPHA = use_height_field ? smoothstep(puddle_edge * 0.25, puddle_edge, puddle_water) : 1.0;
 }

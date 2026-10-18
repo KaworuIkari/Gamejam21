@@ -79,6 +79,7 @@ func _ready() -> void:
 	for mat in TREE_LEAVES:
 		GrowthMap.attach_material(mat)
 	GrowthMap.attach_material(GROW_IN_FLOWERS)
+
 	var restoration_regions := RESTORATION_REGIONS.instantiate()
 	add_child(restoration_regions)
 	# The playable mountain is the radar hill. Follow its placed anchor each load.
@@ -86,9 +87,9 @@ func _ready() -> void:
 	var awakening := LeonAwakening.new()
 	awakening.name = "LeonAwakening"
 	awakening.statue = $Leon2
-	awakening.lake = $Water/Froglake
+	awakening.lake = $SubViewportContainer/PixelateSubViewport/Water/Froglake
 	awakening.giant = $Leon
-	awakening.sea = $Water/Sea
+	awakening.sea = $SubViewportContainer/PixelateSubViewport/Water/Sea
 	awakening.requires = $Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
 	add_child(awakening)
 	var initial := InitialState.new()

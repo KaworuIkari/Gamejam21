@@ -76,8 +76,6 @@ var _thrusting := false
 var _hold_time := 0.0
 var _spool := 0.0
 var _regen_timer := 0.0
-var _debug_timer := 0.0
-var _last_printed_energy := -1.0
 
 # swimming
 @export_group("Water")
@@ -93,6 +91,9 @@ var _last_printed_energy := -1.0
 @export var swim_hop_speed := 7.0                       # Space while floating (no jetpack yet): a hop to climb onto the bank
 @export var dive_accel := 8.0
 
+var _cached_water_volume:StylizedWater = null
+var _water_pos_y_offset : Vector3 # if this is 0, the bottom of capsule is always slightly under terrain3D
+
 var in_water := false
 var is_floating := false
 var is_diving := false
@@ -101,7 +102,6 @@ var _swim_hopping := false
 
 var _water_list: Array[StylizedWater] = []
 var _current_water: StylizedWater
-var _water_rescan := 0.0
 var _water_surface_y := 0.0
 var _ctrl_was_down := false
 var _dive_reached_depth := false                        # the dive has gone below dive_depth at least once
@@ -134,10 +134,12 @@ func _ready() -> void:
 	tree_exiting.connect(energy_hud.queue_free)
 	_refresh_water_list()
 	_setup_swim_idle_pool()
+
+	_water_pos_y_offset = Vector3(0.0, _capsule_height() * 0.1, 0.0)
 	
 
 func _physics_process(delta: float) -> void:
-	_update_water(delta)
+	_update_water()
 	super(delta)
 	_swim_sound(in_water and velocity.length_squared() > 0.25)   # loop plays while moving in water
 	
@@ -147,6 +149,7 @@ func _physics_process(delta: float) -> void:
 	_announce(face.base)
 	face.stress = 0.0             # e.g. 1.0 - health / max_health
 
+	# firing and refilling
 	_fire_cd = maxf(0.0, _fire_cd - delta)
 	if Input.is_action_pressed("use"):
 		try_shoot()
@@ -157,9 +160,9 @@ func _physics_process(delta: float) -> void:
 		tank.refill(delta)
 
 	# move camera sideways when aiming
-	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
-	var target := yaw_basis * _target_pivot_offset
-	spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
+	# var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
+	# var target := yaw_basis * _target_pivot_offset
+	# spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
 
 func _apply_movement(delta : float) -> void:
 	if in_water:
@@ -284,7 +287,6 @@ func _handle_gravity_and_jump(delta: float) -> void:
 	if in_water:
 		_water_vertical(delta)
 		_handle_energy_regen(delta)
-		_debug_energy(delta)
 		_consume_anim_triggers()
 		jetpack.set_thrust(_thrusting, _spool)
 		return
@@ -295,16 +297,11 @@ func _handle_gravity_and_jump(delta: float) -> void:
 		_handle_jetpack(delta)
 		_handle_air_control(delta)
 	_handle_energy_regen(delta)
-	_debug_energy(delta)
 	_consume_anim_triggers()
 	jetpack.set_thrust(_thrusting, _spool)
 
-func _handle_jetpack(delta: float) -> void:
-	if frozen or jetpack_level <= 0 or is_diving:
-		_end_thrust()
-		return
-	# Tap: immediate burst (also the first frame of a hold)
-	if Input.is_action_just_pressed("jump") and energy >= burst_cost:
+func _try_burst_jetpack() -> void:
+	if energy >= burst_cost:
 		energy -= burst_cost
 		velocity.y = maxf(velocity.y, burst_velocity)  # also arrests a fall
 		_jet_armed = true
@@ -315,6 +312,14 @@ func _handle_jetpack(delta: float) -> void:
 		jetpack.burst()
 		react(RobotFace.Mood.CORRECT, 1, 0.6)
 		SettingsManager.play_feedback(0.35, 0.55, 0.16)
+
+func _handle_jetpack(delta: float) -> void:
+	if frozen or jetpack_level <= 0 or is_diving:
+		_end_thrust()
+		return
+	# Tap: immediate burst (also the first frame of a hold)
+	if Input.is_action_just_pressed("jump"):
+		_try_burst_jetpack()
 	if not _jet_armed:
 		return
 	if not Input.is_action_pressed("jump") or energy <= 0.0:
@@ -356,15 +361,6 @@ func _handle_energy_regen(delta: float) -> void:
 	_regen_timer -= delta
 	if _regen_timer <= 0.0:
 		energy = minf(energy + regen_rate * delta, max_energy)
-
-
-func _debug_energy(delta: float) -> void:
-	_debug_timer -= delta
-	if _debug_timer > 0.0 or is_equal_approx(energy, _last_printed_energy):
-		return
-	_debug_timer = 0.2
-	_last_printed_energy = energy
-	# print("Jetpack energy: %.1f / %.0f%s" % [energy, max_energy, "  [THRUST]" if _thrusting else ""])
 
 func _consume_anim_triggers() -> void:
 	if not animation_script.is_using_double_jump:
@@ -416,8 +412,8 @@ func _footstep() -> void:
 
 func _detect_surface() -> int:
 	# Shallow water: the feet are below the waterline. Deep water is skipped entirely, since footsteps don't play while swimming.
-	var vol := _find_water()
-	if vol and vol.get_surface_y() > _feet_y():
+	var vol := _cached_water_volume
+	if vol and vol.get_plane_surface_y() > _feet_y():
 		return Surface.WATER
 	# The planted foot is the lower one, and that is the foot the animation event fires for
 	var ray := left_foot_ray
@@ -443,22 +439,21 @@ func _detect_surface() -> int:
 func _refresh_water_list() -> void:
 	_water_list.clear()
 	for n in get_tree().get_nodes_in_group(&"water_surfaces"):
-		if n is StylizedWater:
+		if n is StylizedWater and n.visible:
+			print(n.name, " added to list")
 			_water_list.append(n)
 
-func _update_water(delta: float) -> void:
+func _update_water() -> void:
+	_cached_water_volume = _find_water()
+
 	_handle_touchdown()   # before _track_air_height, which overwrites the peak
 	_track_air_height()
-	_water_rescan -= delta
-	if _water_rescan <= 0.0:
-		_water_rescan = 0.5
-		_refresh_water_list()
 
-	var vol := _find_water()
+	var vol : StylizedWater = _cached_water_volume
 	var h := _capsule_height()
 	var feet := _feet_y()
 	var ratio := chest_ratio if not in_water else chest_ratio - 0.15   # hysteresis
-	var deep := vol != null and (vol.get_surface_y() - feet) >= ratio * h
+	var deep : bool = vol != null and (vol.get_plane_surface_y() - feet) >= ratio * h
 
 	if deep and not in_water:
 		_enter_water()
@@ -467,7 +462,7 @@ func _update_water(delta: float) -> void:
 	if not in_water:
 		return
 
-	_water_surface_y = vol.get_surface_y()
+	_water_surface_y = vol.get_plane_surface_y()
 	is_head_underwater = feet + h < _water_surface_y
 	_check_dive_input()
 	if is_diving:
@@ -478,11 +473,12 @@ func _update_water(delta: float) -> void:
 			_end_dive()
 
 func _find_water() -> StylizedWater:
-	if is_instance_valid(_current_water) and _current_water.holds_point(global_position):
+	var lira_pos := global_position+_water_pos_y_offset
+	if is_instance_valid(_current_water) and _current_water.holds_point(lira_pos):
 		return _current_water
 	_current_water = null
 	for v in _water_list:
-		if is_instance_valid(v) and v.holds_point(global_position):
+		if is_instance_valid(v) and v.holds_point(lira_pos):
 			_current_water = v
 			break
 	return _current_water
@@ -573,10 +569,14 @@ func _water_vertical(delta: float) -> void:
 		velocity.y += get_gravity().y * delta
 		_swim_hopping = velocity.y > 0.0
 		return
-	if not frozen and jetpack_level <= 0 and Input.is_action_just_pressed("jump"):
-		_swim_hopping = true
-		velocity.y = swim_hop_speed
-		return
+	if not frozen and Input.is_action_just_pressed("jump"):
+		if jetpack_level <= 0:
+			_swim_hopping = true
+			velocity.y = swim_hop_speed
+			return
+		else:
+			_try_burst_jetpack()
+			return
 	# Floating: jetpack can lift us out. Otherwise a spring holds the chest at the waterline.
 	_handle_jetpack(delta)
 	if not _thrusting and not _jet_armed:
@@ -639,8 +639,8 @@ func _handle_touchdown() -> void:
 	if _air_peak_y <= feet:
 		return   # not falling: walking, idle, or still rising
 	var drop := _air_peak_y - feet
-	var vol := _find_water()
-	if vol != null and vol.get_surface_y() > feet:
+	var vol := _cached_water_volume
+	if vol != null and vol.get_plane_surface_y() > feet:
 		if drop >= big_splash_drop:
 			_play_sound_water_big_splash()
 	elif is_on_floor():

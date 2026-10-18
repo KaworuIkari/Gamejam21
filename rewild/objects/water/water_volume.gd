@@ -1,5 +1,5 @@
 # WaterVolume.gd
-extends Node3D
+extends Node
 class_name WaterVolume
 
 ## Reusable water volume: bounds = above seabed terrain, below sea plane surface
@@ -7,12 +7,11 @@ class_name WaterVolume
 
 @export var sea_plane: MeshInstance3D
 @export_flags_3d_physics var seabed_mask := 1
-@onready var terrain: Terrain3D = get_node_or_null("/root/Node3D/Terrain3D")
+var terrain: Terrain3D
 
 var _surface_y := 0.0
 var _sea_min := Vector2.ZERO
 var _sea_max := Vector2.ZERO
-var _terrain_data: Object
 
 func _ready() -> void:
 	if sea_plane == null:
@@ -31,19 +30,22 @@ func _setup_sea() -> void:
 	_surface_y = sea_plane.global_position.y
 	_sea_min = Vector2(aabb.position.x, aabb.position.z)
 	_sea_max = _sea_min + Vector2(aabb.size.x, aabb.size.z)
-	if terrain:
-		_terrain_data = terrain.get("data")
-		if _terrain_data == null:
-			_terrain_data = terrain.get("storage")
+
+	if Engine.is_editor_hint(): 
+		terrain = get_tree().get_edited_scene_root().find_child("Terrain3D")
+	else:
+		terrain = get_tree().get_current_scene().find_child("Terrain3D")
+	if not terrain:
+		push_error("Terrain3D not found in WaterVolume", name)
 
 ## Seabed height at XZ; returns NAN in holes / outside terrain
 func get_seabed_height(xz: Vector2) -> float:
-	if _terrain_data and _terrain_data.has_method("get_height"):
-		return _terrain_data.get_height(Vector3(xz.x, 0.0, xz.y))
-	var from := Vector3(xz.x, _surface_y, xz.y)
-	var q := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * 1000.0, seabed_mask)
-	var r := get_world_3d().direct_space_state.intersect_ray(q)
-	return NAN if r.is_empty() else r.position.y
+	# if _terrain_data and _terrain_data.has_method("get_height"):
+	return terrain.data.get_height(Vector3(xz.x, 0.0, xz.y))
+	# var from := Vector3(xz.x, _surface_y, xz.y)
+	# var q := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * 1000.0, seabed_mask)
+	# var r := get_world_3d().direct_space_state.intersect_ray(q)
+	# return NAN if r.is_empty() else r.position.y
 
 ## Seabed normal at XZ, sampled over radius e
 func get_seabed_normal(xz: Vector2, e: float) -> Vector3:
@@ -87,9 +89,16 @@ func clamp_xz(xz: Vector2, margin: float) -> Vector2:
 func contains_xz(xz: Vector2) -> bool:
 	return xz.x >= _sea_min.x and xz.x <= _sea_max.x and xz.y >= _sea_min.y and xz.y <= _sea_max.y
 
-func get_surface_y() -> float:
-	return _surface_y
+func _wave(p: Vector2, t: float) -> float:
+	return sin(p.dot(Vector2(0.8, 0.6)) * 1.3 + t * 1.1) * 0.5 \
+		+ sin(p.dot(Vector2(-0.5, 0.9)) * 2.1 + t * 1.7) * 0.3 \
+		+ sin(p.dot(Vector2(0.2, -1.0)) * 3.3 + t * 2.3) * 0.2
 
-## Below the surface and inside the footprint.
-func is_submerged_point(p: Vector3) -> bool:
-	return p.y < _surface_y and contains_xz(Vector2(p.x, p.z))
+# func get_surface_y(point: Vector3) -> float:
+# 	var t := Time.get_ticks_msec() / 1000.0 * _wave_speed_cache
+# 	return global_position.y + _wave(Vector2(point.x, point.z), t) * _wave_height_cache
+
+# ## Below the surface and inside the footprint.
+# func is_point_submerged(p: Vector3) -> bool:
+# 	# print(p, get_seabed_height(Vector2(p.x, p.z)), get_surface_y(p))
+# 	return contains_xz(Vector2(p.x, p.z)) and p.y < get_surface_y(p) and get_seabed_height(Vector2(p.x, p.z)) < p.y

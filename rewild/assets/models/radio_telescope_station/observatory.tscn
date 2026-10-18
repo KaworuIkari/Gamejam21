@@ -7,30 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://d4cc28fuvkkry" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_-1.png" id="5_ll2na"]
 [ext_resource type="Texture2D" uid="uid://0gk6qgtwcfik" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_1.png" id="6_gtm8q"]
 [ext_resource type="Texture2D" uid="uid://ymswcxrwd662" path="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Panel_tone_2.png" id="7_17xxh"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Access_Ladder.tres" id="RadioCollision_0"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Auxiliary_Cabinet.tres" id="RadioCollision_1"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Base_Plates.tres" id="RadioCollision_2"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Bollards.tres" id="RadioCollision_3"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Center_Instrument.tres" id="RadioCollision_4"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Cross_Braces.tres" id="RadioCollision_5"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Elevation_Bearings.tres" id="RadioCollision_6"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Feed_Footings.tres" id="RadioCollision_7"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Feed_Supports.tres" id="RadioCollision_8"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Foundations.tres" id="RadioCollision_9"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Radial_Trusses.tres" id="RadioCollision_10"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Rear_Hoops.tres" id="RadioCollision_11"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Rear_Hub.tres" id="RadioCollision_12"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Receiver.tres" id="RadioCollision_13"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Reflector_Continuous.tres" id="RadioCollision_14"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Reflector_Mounts.tres" id="RadioCollision_15"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Reflector_Rim.tres" id="RadioCollision_16"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Service_Platform.tres" id="RadioCollision_17"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Service_Pod.tres" id="RadioCollision_18"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Service_Railings.tres" id="RadioCollision_19"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Tower_Bracing.tres" id="RadioCollision_20"]
+[ext_resource type="Script" uid="uid://crbidvxnfo134" path="res://systems/world_objects/auto_blocker.gd" id="auto_blocker"]
 [ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Tower_Legs.tres" id="RadioCollision_21"]
-[ext_resource type="Shape3D" path="res://assets/models/radio_telescope_station/collision_shapes/Yoke.tres" id="RadioCollision_22"]
-[ext_resource type="Script" path="res://systems/world_objects/auto_blocker.gd" id="auto_blocker"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w752n"]
 resource_name = "Sage_painted_steel"
@@ -104,6 +82,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nv5ks")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vd6wb"]
+size = Vector3(0.72500014, 9.1, 0.07499981)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mohy"]
 resource_name = "Chalk_ivory"
@@ -365,6 +346,12 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ekngr")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_m1ech"]
+points = PackedVector3Array(6.072946, 1.1278329, 6.135269, 5.864731, -0.01735127, 5.927054, 5.864731, -0.01735127, 6.065864, 6.142351, -0.01735127, 5.927054, 5.934136, 1.1278329, 5.857649, 5.864731, 1.1278329, 6.065864, 6.072946, -0.01735127, 6.135269, 6.142351, 1.1278329, 5.927054, 6.072946, -0.01735127, 5.857649, 5.8994603, 0.9543066, 6.135269, 6.142351, -0.01735127, 6.065864, 5.864731, 0.9543066, 5.892351, 5.934136, -0.01735127, 5.857649, 6.072946, 1.1278329, 5.857649, 6.142351, 1.1278329, 6.065864, 5.934136, -0.01735127, 6.135269, 6.107649, 0.74591804, 6.135269, 5.864731, 0.74591804, 6.1005397, 5.864731, 1.1278329, 5.927054, 5.934136, 1.1278329, 6.135269, 6.107649, 0.9543066, 6.135269, 5.864731, 0.74591804, 5.892351)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ll2na"]
+points = PackedVector3Array(-5.864731, 0.9543066, 6.1005397, -6.142351, -0.01735127, 5.927054, -6.072946, -0.01735127, 5.857649, -6.142351, 1.1278329, 5.927054, -6.072946, -0.01735127, 6.135269, -5.864731, -0.01735127, 5.927054, -5.934136, 1.1278329, 5.857649, -6.072946, 1.1278329, 6.135269, -5.934136, -0.01735127, 6.135269, -6.142351, 1.1278329, 6.065864, -5.864731, 1.1278329, 5.927054, -5.934136, -0.01735127, 5.857649, -6.142351, -0.01735127, 6.065864, -6.072946, 1.1278329, 5.857649, -5.934136, 1.1278329, 6.135269, -5.864731, -0.01735127, 6.065864, -6.107649, 0.74591804, 6.135269, -5.864731, 0.9543066, 5.892351, -5.8994603, 0.74591804, 6.135269, -5.864731, 1.1278329, 6.065864, -6.107649, 0.9543066, 6.135269, -5.864731, 0.74591804, 5.892351)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_58ccw"]
 _surfaces = [{
@@ -922,6 +909,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2dwnu")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gtm8q"]
+points = PackedVector3Array(0.56728745, 16.746422, -11.656451, -0.6214252, 15.536112, -11.958863, -0.6223451, 15.535351, -11.807783, 0.6107314, 15.492195, -11.980691, -0.059911694, 16.72677, -12.501494, -0.23269464, 16.70296, -11.288875, 0.112928964, 15.493487, -11.268574, -0.14636227, 15.4918995, -12.4782915, -0.5987214, 16.72277, -12.066563, 0.39271945, 16.721884, -12.36781, 0.30609676, 15.559897, -12.431583, -0.33744884, 15.497817, -11.358688, -0.53616875, 16.747355, -11.591129, -0.3361082, 15.371999, -11.68072, 0.52437127, 15.491969, -11.548108, 0.32775363, 16.699486, -11.334984, -0.40260947, 15.560887, -12.36625, 0.5888742, 16.702915, -12.110302, 0.15459606, 15.371205, -12.235457, -0.3617955, 16.745178, -12.369064, 0.36630273, 15.374554, -11.745252, 0.520707, 15.560406, -12.237689, 0.13512038, 16.726442, -11.265635, -0.35356098, 15.379263, -12.041305, -0.5263673, 15.586837, -11.532493, -0.6227329, 16.703703, -11.76448, 0.6275874, 16.676754, -11.829744, -0.03794386, 15.580521, -11.247632, 0.32724693, 15.560605, -11.335828, 0.113309965, 16.703848, -12.500354, -0.44923738, 16.724949, -11.439922, -0.53363425, 15.558842, -12.217311)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ld8gp"]
 resource_name = "Panel_tone_-2"
 cull_mode = 2
@@ -1084,6 +1074,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_v6n07")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_17xxh"]
+points = PackedVector3Array(-11.417963, 12.797353, -15.559783, 11.792346, 12.798403, -9.669265, 11.417531, 12.797262, -8.195676, 0.9656575, 8.306115, -14.133295, -3.682725, 12.797229, -0.46032494, 2.209776, 12.7988825, -23.67006, -1.3102361, 8.927282, -6.9616127, -8.437141, 10.57102, -9.180163, -4.6426415, 9.90567, -17.847685, 9.196501, 11.9358425, -18.008818, 5.970052, 9.905716, -7.2359104, 4.6336246, 12.362972, -1.1857431, -9.509503, 12.780599, -4.5637836, -6.2265673, 12.784374, -22.134247, 5.9665365, 9.573954, -15.191342, -4.916587, 8.927246, -13.186903, 1.6790371, 10.2350445, -19.935833, 7.3142157, 12.780572, -21.386833, -3.6893432, 10.570034, -3.826433, 4.9163737, 8.92731, -10.56822, 1.0136203, 10.571495, -3.0775058, 8.800403, 10.571498, -12.890242, 7.3139906, 12.7804985, -2.3687623, -2.3986385, 11.602369, -22.159233, -9.145931, 11.249532, -15.941525, -11.468814, 12.373675, -9.729822, -1.6058571, 8.314263, -9.952509, -5.5885296, 9.580678, -7.933457, 11.417655, 12.797289, -15.559684, 1.9345486, 8.628014, -8.330497, 4.333714, 10.236281, -18.877966, -1.3103306, 8.9271755, -16.793806)
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_0mtsh"]
 _surfaces = [{
 "aabb": AABB(-11.940001, 8.076855, -23.81771, 23.880001, 4.4762535, 23.880005),
@@ -1186,6 +1179,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k36ch")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_etus6"]
+points = PackedVector3Array(2.9460318, 8.320106, -1.5820904, -2.9460318, 8.043968, -4.2519317, -2.9460318, 8.320106, -4.2519317, 2.9460318, 8.043968, -4.2519317, -2.9460318, 8.043968, -1.5820904, -2.9460318, 8.320106, -1.5820904, 2.9460318, 8.320106, -4.2519317, 2.9460318, 8.043968, -1.5820904)
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_8evvg"]
 _surfaces = [{
 "aabb": AABB(-1.55, 0, -2.8058553, 3.1, 2.6, 3.4),
@@ -1268,6 +1264,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_8evvg")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_i4f0d"]
+size = Vector3(3.1, 2.6, 3.54)
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_e1xt7"]
 _surfaces = [{
 "aabb": AABB(-2.8300009, 8.2, 1.5758549, 5.660001, 1.1300001, 2.6600008),
@@ -1301,6 +1300,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e1xt7")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0yw1p"]
+size = Vector3(0.08, 1.045, 2.5)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cpm5q"]
 _surfaces = [{
@@ -1414,24 +1416,15 @@ mesh = SubResource("ArrayMesh_oud82")
 
 [node name="MeshCollision" type="StaticBody3D" parent="Model/Access_Ladder" unique_id=400188361]
 
-[node name="Shape" type="CollisionShape3D" parent="Model/Access_Ladder/MeshCollision" unique_id=999848491]
-shape = ExtResource("RadioCollision_0")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Access_Ladder/MeshCollision" unique_id=481763559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1250005, 4.75, 4.305855)
+shape = SubResource("BoxShape3D_vd6wb")
 
 [node name="Auxiliary_Cabinet" type="MeshInstance3D" parent="Model" unique_id=654825051]
 mesh = SubResource("ArrayMesh_hgb2w")
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Auxiliary_Cabinet" unique_id=776753756]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Auxiliary_Cabinet/MeshCollision" unique_id=2051313880]
-shape = ExtResource("RadioCollision_1")
-
 [node name="Base_Plates" type="MeshInstance3D" parent="Model" unique_id=677679583]
 mesh = SubResource("ArrayMesh_hg3q3")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Base_Plates" unique_id=524528468]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Base_Plates/MeshCollision" unique_id=747390649]
-shape = ExtResource("RadioCollision_2")
 
 [node name="Base_Wear" type="MeshInstance3D" parent="Model" unique_id=1757725827]
 mesh = SubResource("ArrayMesh_76xjw")
@@ -1441,61 +1434,34 @@ mesh = SubResource("ArrayMesh_0llxj")
 
 [node name="MeshCollision" type="StaticBody3D" parent="Model/Bollards" unique_id=2111914037]
 
-[node name="Shape" type="CollisionShape3D" parent="Model/Bollards/MeshCollision" unique_id=1633272983]
-shape = ExtResource("RadioCollision_3")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/Bollards/MeshCollision" unique_id=1456177584]
+shape = SubResource("ConvexPolygonShape3D_m1ech")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Bollards/MeshCollision" unique_id=254609956]
+shape = SubResource("ConvexPolygonShape3D_ll2na")
 
 [node name="Center_Instrument" type="MeshInstance3D" parent="Model" unique_id=352856774]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_1on81")
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Center_Instrument" unique_id=1338773649]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Center_Instrument/MeshCollision" unique_id=615325243]
-shape = ExtResource("RadioCollision_4")
-
 [node name="Cross_Braces" type="MeshInstance3D" parent="Model" unique_id=1333354626]
 transform = Transform3D(-0.99144495, -0.11001618, -0.07023896, -0.106920704, 0.9931835, -0.046416763, 0.07486677, -0.038509663, -0.9964497, 0, 0, 0)
 mesh = SubResource("ArrayMesh_v067g")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Cross_Braces" unique_id=1996319447]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Cross_Braces/MeshCollision" unique_id=56468012]
-shape = ExtResource("RadioCollision_5")
 
 [node name="Elevation_Bearings" type="MeshInstance3D" parent="Model" unique_id=2134256250]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ex6w5")
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Elevation_Bearings" unique_id=1460256828]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Elevation_Bearings/MeshCollision" unique_id=120282046]
-shape = ExtResource("RadioCollision_6")
-
 [node name="Feed_Footings" type="MeshInstance3D" parent="Model" unique_id=643317058]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_cdy1s")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Feed_Footings" unique_id=681853053]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Feed_Footings/MeshCollision" unique_id=1604311518]
-shape = ExtResource("RadioCollision_7")
 
 [node name="Feed_Supports" type="MeshInstance3D" parent="Model" unique_id=1809146732]
 transform = Transform3D(0.9999512, -0.009086952, -0.0038807902, -0.008094002, -0.5280161, -0.8491959, 0.005667482, 0.8491859, -0.5280639, 0, 3.8146973e-06, 0)
 mesh = SubResource("ArrayMesh_ij76y")
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Feed_Supports" unique_id=456559749]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Feed_Supports/MeshCollision" unique_id=240469318]
-shape = ExtResource("RadioCollision_8")
-
 [node name="Foundations" type="MeshInstance3D" parent="Model" unique_id=487867245]
 mesh = SubResource("ArrayMesh_jqw2w")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Foundations" unique_id=1866023687]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Foundations/MeshCollision" unique_id=15362029]
-shape = ExtResource("RadioCollision_9")
 
 [node name="Panel_Joint_Markings" type="MeshInstance3D" parent="Model" unique_id=416542142]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
@@ -1505,28 +1471,13 @@ mesh = SubResource("ArrayMesh_b8j5i")
 transform = Transform3D(2.3841858e-07, 0.9961937, 0.08716674, 0.81915206, 0.049996614, -0.57139325, -0.5735764, 0.07140294, -0.8160341, 0, 0, 0)
 mesh = SubResource("ArrayMesh_t8f6v")
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Radial_Trusses" unique_id=2145857941]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Radial_Trusses/MeshCollision" unique_id=1177614204]
-shape = ExtResource("RadioCollision_10")
-
 [node name="Rear_Hoops" type="MeshInstance3D" parent="Model" unique_id=771196517]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3a7xj")
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Rear_Hoops" unique_id=1488986056]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Rear_Hoops/MeshCollision" unique_id=1791850390]
-shape = ExtResource("RadioCollision_11")
-
 [node name="Rear_Hub" type="MeshInstance3D" parent="Model" unique_id=1534044791]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ogmi4")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Rear_Hub" unique_id=1738167603]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Rear_Hub/MeshCollision" unique_id=1243995122]
-shape = ExtResource("RadioCollision_12")
 
 [node name="Receiver" type="MeshInstance3D" parent="Model" unique_id=1640756993]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
@@ -1534,8 +1485,8 @@ mesh = SubResource("ArrayMesh_u73xy")
 
 [node name="MeshCollision" type="StaticBody3D" parent="Model/Receiver" unique_id=381239644]
 
-[node name="Shape" type="CollisionShape3D" parent="Model/Receiver/MeshCollision" unique_id=896086522]
-shape = ExtResource("RadioCollision_13")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Receiver/MeshCollision" unique_id=1323710693]
+shape = SubResource("ConvexPolygonShape3D_gtm8q")
 
 [node name="Reflector_Continuous" type="MeshInstance3D" parent="Model" unique_id=1600721960]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
@@ -1543,42 +1494,33 @@ mesh = SubResource("ArrayMesh_qux1b")
 
 [node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Continuous" unique_id=913285672]
 
-[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Continuous/MeshCollision" unique_id=1812667146]
-shape = ExtResource("RadioCollision_14")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Reflector_Continuous/MeshCollision" unique_id=1106288163]
+shape = SubResource("ConvexPolygonShape3D_17xxh")
 
 [node name="Reflector_Mounts" type="MeshInstance3D" parent="Model" unique_id=1314354841]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_4iris")
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Mounts" unique_id=1953573950]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Mounts/MeshCollision" unique_id=549210650]
-shape = ExtResource("RadioCollision_15")
-
 [node name="Reflector_Rim" type="MeshInstance3D" parent="Model" unique_id=6137330]
 transform = Transform3D(1, 0, 0, 0, 0.5735762, -0.81915224, 0, 0.81915224, 0.5735762, 0, 0, 0)
 mesh = SubResource("ArrayMesh_3vbgg")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Reflector_Rim" unique_id=1617475117]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Reflector_Rim/MeshCollision" unique_id=1869753862]
-shape = ExtResource("RadioCollision_16")
 
 [node name="Service_Platform" type="MeshInstance3D" parent="Model" unique_id=1477896392]
 mesh = SubResource("ArrayMesh_mukne")
 
 [node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Platform" unique_id=2075512326]
 
-[node name="Shape" type="CollisionShape3D" parent="Model/Service_Platform/MeshCollision" unique_id=1484651949]
-shape = ExtResource("RadioCollision_17")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Service_Platform/MeshCollision" unique_id=1711325609]
+shape = SubResource("ConvexPolygonShape3D_etus6")
 
 [node name="Service_Pod" type="MeshInstance3D" parent="Model" unique_id=1303531761]
 mesh = SubResource("ArrayMesh_d5q06")
 
 [node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Pod" unique_id=1865543018]
 
-[node name="Shape" type="CollisionShape3D" parent="Model/Service_Pod/MeshCollision" unique_id=1419881097]
-shape = ExtResource("RadioCollision_18")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Service_Pod/MeshCollision" unique_id=854300549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -1.0358553)
+shape = SubResource("BoxShape3D_i4f0d")
 
 [node name="Service_Railings" type="MeshInstance3D" parent="Model" unique_id=820001062]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
@@ -1586,17 +1528,21 @@ mesh = SubResource("ArrayMesh_x46cx")
 
 [node name="MeshCollision" type="StaticBody3D" parent="Model/Service_Railings" unique_id=1509917105]
 
-[node name="Shape" type="CollisionShape3D" parent="Model/Service_Railings/MeshCollision" unique_id=223037367]
-shape = ExtResource("RadioCollision_19")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Model/Service_Railings/MeshCollision" unique_id=1912501644]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7978816, 8.797025, 2.9378462)
+shape = SubResource("BoxShape3D_0yw1p")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Model/Service_Railings/MeshCollision" unique_id=1272424531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4421716, 8.797025, 2.9285564)
+shape = SubResource("BoxShape3D_0yw1p")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Model/Service_Railings/MeshCollision" unique_id=906121161]
+transform = Transform3D(-4.371138e-08, 0, 1, 0, 1, 0, -1, 0, -4.371138e-08, 0.5019224, 8.797025, 4.215996)
+shape = SubResource("BoxShape3D_0yw1p")
 
 [node name="Tower_Bracing" type="MeshInstance3D" parent="Model" unique_id=1028523790]
 transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_bobqu")
-
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Tower_Bracing" unique_id=1729702912]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Tower_Bracing/MeshCollision" unique_id=400874023]
-shape = ExtResource("RadioCollision_20")
 
 [node name="Tower_Legs" type="MeshInstance3D" parent="Model" unique_id=1033403899]
 transform = Transform3D(-0.8282833, 0.17019168, 0.5338363, -2.2351742e-08, 0.95275307, -0.30374596, -0.56030923, -0.25158778, -0.7891495, 0, 0, 0)
@@ -1611,13 +1557,6 @@ shape = ExtResource("RadioCollision_21")
 transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, 0, 0, 0)
 mesh = SubResource("ArrayMesh_xghgk")
 
-[node name="MeshCollision" type="StaticBody3D" parent="Model/Yoke" unique_id=311719837]
-
-[node name="Shape" type="CollisionShape3D" parent="Model/Yoke/MeshCollision" unique_id=2123594559]
-shape = ExtResource("RadioCollision_22")
-
-[node name="StaticBody" type="StaticBody3D" parent="." unique_id=1407610296]
-
-[node name="AutoBlocker" type="Node" parent="."]
+[node name="AutoBlocker" type="Node" parent="." unique_id=948392828]
 script = ExtResource("auto_blocker")
 solid = false
