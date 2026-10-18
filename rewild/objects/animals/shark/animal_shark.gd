@@ -13,7 +13,7 @@ enum State { PATROL, HUNT, DESCEND, SLEEP }
 @onready var debug_label: Label3D = get_node_or_null("DebugLabel3D")
 
 @export_group("Sea")
-@export var sea_plane: MeshInstance3D  # water surface; its mesh bounds the sea horizontally
+@export var sea_plane: StylizedWater  # water surface; its mesh bounds the sea horizontally
 @export var terrain: Node3D  # the Terrain3D node
 @export_flags_3d_physics var seabed_mask := 1  # raycast fallback if the Terrain3D API is missing
 @export var clearance := 0.75  # extra space kept between the body and surface / terrain
