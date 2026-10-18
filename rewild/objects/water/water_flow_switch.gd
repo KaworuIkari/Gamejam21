@@ -65,10 +65,6 @@ func _ready() -> void:
 	if start_on:
 		is_on = true
 		_apply_swaps()
-		for piece in water + rise:
-			if piece:
-				piece.visible = true
-				_set_particles(piece, true)
 		if irrigate:
 			_irrigate_all_now.call_deferred() # after Terrain3D has loaded its data
 		return
@@ -78,8 +74,6 @@ func _ready() -> void:
 			_set_particles(piece, false)
 	for piece in rise:
 		if piece:
-			piece.visible = false
-			_set_particles(piece, false)
 			if piece is StylizedWater: # its basin is traced at the full height
 				piece.full_level = piece.global_position.y
 			piece.position.y = _rest_y[piece] - rise_height
@@ -123,9 +117,6 @@ func _start_rise(from: Vector3) -> void:
 	for piece in rise:
 		if piece == null:
 			continue
-		# Rising water may be saved hidden in the level, just like river pieces.
-		piece.visible = true
-		_set_particles(piece, true)
 		var rest: float = _rest_y[piece]
 		if irrigate: # the banks of the full lake, measured at its full height
 			var low := piece.position.y

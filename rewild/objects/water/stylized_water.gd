@@ -127,7 +127,7 @@ func _process(_delta: float) -> void:
 
 ## True when `point` is inside the water's footprint and below its (wavy) surface.
 func is_point_underwater(point: Vector3) -> bool:
-	if not is_visible_in_tree() or not holds_point(point):
+	if not holds_point(point):
 		return false
 	var t := Time.get_ticks_msec() / 1000.0 * _wave_speed_cache
 	return point.y < global_position.y + _wave(Vector2(point.x, point.z), t) * _wave_height_cache
