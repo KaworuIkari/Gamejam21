@@ -119,7 +119,6 @@ transitions = ["Start", "swim_idle", SubResource("AnimationNodeStateMachineTrans
 graph_offset = Vector2(18, -40)
 
 [resource]
-graph_offset = Vector2(-411.14063, 325.51785)
 nodes/output/position = Vector2(493.33334, 266.66666)
 nodes/Torso/node = ExtResource("1_jdw11")
 nodes/Torso/position = Vector2(-613.3333, 80)
