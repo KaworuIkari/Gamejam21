@@ -88,11 +88,17 @@ func _restore_mouse_after_key_release() -> void:
 static func restore_gameplay_mouse() -> void:
 	var dialogic = Engine.get_main_loop().root.get_node_or_null(^"Dialogic")
 	var in_dialogue: bool = dialogic != null and dialogic.current_timeline != null
+	in_dialogue = in_dialogue or Engine.get_main_loop().get_first_node_in_group(&"opening_sequence") != null
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if in_dialogue else Input.MOUSE_MODE_CAPTURED
 
 
 func is_open() -> bool:
 	return visible
+
+
+## Allows the pre-terminal hint to appear above the pause overview, not its submenus.
+func is_showing_overview() -> bool:
+	return visible and _overlay.visible
 
 
 func _unhandled_input(event: InputEvent) -> void:

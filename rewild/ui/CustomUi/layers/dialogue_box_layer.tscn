@@ -2,8 +2,6 @@
 
 [ext_resource type="Theme" path="res://ui/theme/light/light_theme.tres" id="12_light"]
 [ext_resource type="Script" path="res://ui/CustomUi/layers/dialogue_box_layer.gd" id="1_box"]
-[ext_resource type="Script" path="res://addons/dialogic/Modules/Character/node_portrait_container.gd" id="2_portrait"]
-[ext_resource type="Script" path="res://addons/dialogic/Resources/flex_vector.gd" id="3_flex"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_name_label.gd" id="4_name"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_dialog_text.gd" id="5_text"]
 [ext_resource type="Script" path="res://addons/dialogic/Modules/Text/node_type_sound.gd" id="6_sound"]
@@ -12,21 +10,6 @@
 [ext_resource type="Texture2D" path="res://ui/theme/glass/nameplate.png" id="9_plate"]
 [ext_resource type="Script" path="res://dialogue/styles/text_effect_shake.gd" id="10_shake"]
 [ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="11_glass"]
-
-[sub_resource type="Resource" id="Flex_size"]
-script = ExtResource("3_flex")
-x_value = 1.0
-y_value = 1.0
-
-[sub_resource type="Resource" id="Flex_pos"]
-script = ExtResource("3_flex")
-x_value = 0.5
-y_value = 1.0
-
-[sub_resource type="Resource" id="Flex_origin"]
-script = ExtResource("3_flex")
-x_value = 0.5
-y_value = 1.0
 
 [sub_resource type="StyleBoxFlat" id="Plate"]
 bg_color = Color(1, 0.99, 0.95, 0.20)
@@ -82,51 +65,13 @@ grow_vertical = 2
 mouse_filter = 2
 material = ExtResource("11_glass")
 
-[node name="HBox" type="HBoxContainer" parent="Box/Panel"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/separation = 28
-
-[node name="PortraitFrame" type="PanelContainer" parent="Box/Panel/HBox"]
-unique_name_in_owner = true
-texture_filter = 2
-custom_minimum_size = Vector2(176, 176)
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 2
-theme_type_variation = &"SlotCard"
-
-[node name="PortraitClip" type="Control" parent="Box/Panel/HBox/PortraitFrame"]
-unique_name_in_owner = true
-clip_contents = true
-layout_mode = 2
-mouse_filter = 2
-
-[node name="DialogicNode_PortraitContainer" type="Control" parent="Box/Panel/HBox/PortraitFrame/PortraitClip"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("2_portrait")
-mode = 1
-container_ids = PackedStringArray("speaker")
-size_mode = 2
-container_size = SubResource("Flex_size")
-container_position = SubResource("Flex_pos")
-container_origin = SubResource("Flex_origin")
-debug_character_portrait = "speaker"
-
-[node name="TextColumn" type="VBoxContainer" parent="Box/Panel/HBox"]
+[node name="TextColumn" type="VBoxContainer" parent="Box/Panel"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="DialogicNode_DialogText" type="RichTextLabel" parent="Box/Panel/HBox/TextColumn" node_paths=PackedStringArray("textbox_root")]
+[node name="DialogicNode_DialogText" type="RichTextLabel" parent="Box/Panel/TextColumn" node_paths=PackedStringArray("textbox_root")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -135,27 +80,27 @@ theme_override_colors/default_color = Color(0.22, 0.29, 0.28, 1)
 theme_override_constants/line_separation = 8
 bbcode_enabled = true
 text = "对话文本预览 Dialogue preview"
-scroll_following = true
+scroll_active = false
 custom_effects = [SubResource("Shake2")]
 visible_characters_behavior = 1
 script = ExtResource("5_text")
-textbox_root = NodePath("../../../..")
+textbox_root = NodePath("../../..")
 
-[node name="DialogicNode_TypeSounds" type="AudioStreamPlayer" parent="Box/Panel/HBox/TextColumn/DialogicNode_DialogText"]
+[node name="DialogicNode_TypeSounds" type="AudioStreamPlayer" parent="Box/Panel/TextColumn/DialogicNode_DialogText"]
 bus = &"SFX"
 script = ExtResource("6_sound")
 
-[node name="BottomSpacer" type="Control" parent="Box/Panel/HBox/TextColumn"]
-custom_minimum_size = Vector2(0, 58)
+[node name="BottomSpacer" type="Control" parent="Box/Panel/TextColumn"]
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 mouse_filter = 2
 
 [node name="NamePlate" type="PanelContainer" parent="Box"]
 unique_name_in_owner = true
 layout_mode = 1
-offset_left = 304.0
+offset_left = 48.0
 offset_top = -30.0
-offset_right = 305.0
+offset_right = 49.0
 offset_bottom = 30.0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("Plate")

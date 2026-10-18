@@ -83,7 +83,8 @@ func start_new_game(slot: int) -> void:
 	delete_slot(slot, false)
 	current_slot = slot
 	play_time = 0.0
-	current_data = {"location": "LOC_CRASH_SITE"}
+	current_data = {"location": "LOC_CRASH_SITE", "opening_page": 0,
+			"startup_checks": {"step": -1, "confirmed": false}}
 	save_current()
 
 

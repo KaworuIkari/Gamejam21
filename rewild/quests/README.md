@@ -186,3 +186,15 @@ is capped at six. Startup and hand-in still require only the authored 30%
 recovery / key / radar information stages. Cleanup is not an additional gate.
 
 Jetpack per-level energy is now [100, 200, 240]; only level 2 changed.
+
+## Quest 00 — startup checks and cabin investigation
+
+New saves have `startup_checks: {step: -1, confirmed: false}`. `levels/meadow_hand/startup_checks.gd` waits for the opening fade to finish, then runs perception, walking, jumping and sprinting checks in order. It samples actual camera/player feedback; pauses, dialogue and transitions suspend checks and the 2.5-second feedback hold. Sprinting accumulates 0.8 seconds of actual movement while sprint is held; a brief floor-contact loss or collision pauses progress rather than clearing it. Holding sprint while stationary cannot complete it. Only completed checks are persisted; partial motion is sampled afresh after loading.
+
+Presentation lives in `ui/in_game/startup/startup_hint.tscn` and its script: one non-modal upper-right card for both self-checks and the pre-terminal objective. Each new prompt slides down from above the screen while fading in, and slides up while fading out after at most 10 seconds. Expiry only hides the card; checks continue. Completed checks still advance after their 2.5-second feedback hold. The pause overview reviews the current card without consuming its timeout; settings/save submenus hide it. Obtaining the terminal retires this entire card. Wording is in `i18n/strings.csv` (`STARTUP_*`, `QUEST_CABIN_*`); key labels follow SettingsManager bindings and language changes.
+
+`00_investigate_cabin.tres` contains two parallel reading steps (`cabin_delivery_read`, `cabin_crew_read`), followed by `pump_started`. Both tablets must be read to the last confirmation; cancelling, opening only, or repeating a completed tablet does not add credit. The shared upper-right card keeps the single cabin objective during reading and switches to `QUEST_CABIN_PUMP` once both are read. All existing 10-second, pause-review and terminal-retirement rules apply.
+
+`levels/meadow_hand/cabin_story.gd` gates the pump interaction until both records are read. WaterFlowSwitch reports completion after the existing flow/rise animation, ending 00 and starting 01 at the lake station activation step. A non-blocking “第一幕 / Act I” card fades in and out once; edit its timing/presentation in `ui/in_game/story/act_title.*`. `act_one_started` is available for later camera/animation work.
+
+The level runs CabinStory.migrate_save before loading quests: old 01 indices shift past the removed pump step, prior progress/equipment are retained, and older saves without startup checks retain access to the pump. Completed pumps restore flowing water before child nodes become ready. `cabin_story_version` prevents repeat migration; `act_one_entered` prevents replaying the chapter card. These flags and reading event counters use normal SaveManager persistence; no extra save files are created. F6 without a fresh-save marker follows the legacy compatibility path. New games retain the opening and self-check sequence.

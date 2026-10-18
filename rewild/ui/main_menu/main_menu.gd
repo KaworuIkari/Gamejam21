@@ -1,10 +1,11 @@
 extends Control
-## 主菜单：继续 / 存档浏览 / 设置 / 退出
+## 主菜单：新建游戏 / 继续 / 存档浏览 / 设置 / 退出
 
 const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 
 @onready var _content: Control = %Content
+@onready var _new_game: Button = %NewGameButton
 @onready var _continue: Button = %ContinueButton
 @onready var _load: Button = %LoadButton
 @onready var _settings_button: Button = %SettingsButton
@@ -26,10 +27,11 @@ func _ready() -> void:
 	LightUI.frost(_slot_panel)
 	LightUI.soften_dim($SlotScreen/Dim)
 	_continue.theme_type_variation = &"LightPrimaryButton"
-	for button in [_continue, _load, _settings_button, _quit]:
+	for button in [_new_game, _continue, _load, _settings_button, _quit]:
 		LightUI.frost(button)
 	# 从游戏返回时鼠标可能还被镜头锁定
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	_new_game.pressed.connect(_open_save_browser.bind(SaveSlotList.Mode.NEW))
 	_continue.pressed.connect(_on_continue)
 	_load.pressed.connect(_open_save_browser)
 	_settings_button.pressed.connect(_on_settings)
@@ -56,7 +58,7 @@ func _refresh_buttons() -> void:
 
 
 func _focus_default() -> void:
-	(_load if _continue.disabled else _continue).grab_focus()
+	(_new_game if _continue.disabled else _continue).grab_focus()
 
 
 func _on_continue() -> void:
@@ -65,10 +67,10 @@ func _on_continue() -> void:
 		SceneRouter.goto_game()
 
 
-func _open_save_browser() -> void:
+func _open_save_browser(mode: SaveSlotList.Mode = SaveSlotList.Mode.BROWSE) -> void:
 	_return_focus = get_viewport().gui_get_focus_owner()
-	%SlotScreenTitle.text = "SLOT_SCREEN_BROWSE"
-	_slot_list.mode = SaveSlotList.Mode.BROWSE
+	%SlotScreenTitle.text = "SLOT_SCREEN_NEW" if mode == SaveSlotList.Mode.NEW else "SLOT_SCREEN_BROWSE"
+	_slot_list.mode = mode
 	_content.hide()
 	_slot_screen.show()
 	_slot_list.focus_first()

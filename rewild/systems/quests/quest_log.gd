@@ -173,8 +173,6 @@ func load_from_save() -> void:
 	reset()
 	var save := get_node_or_null(^"/root/SaveManager")
 	var data: Dictionary = save.current_data.get("quests", {}) if save else {}
-	if data.is_empty():
-		return
 	for k in data.get("counters", {}):
 		_counters[StringName(k)] = int(data.counters[k])
 	for k in data.get("abilities", {}):

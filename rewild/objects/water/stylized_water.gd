@@ -71,6 +71,10 @@ func _process(_delta: float) -> void:
 	if meniscus_enabled:
 		_meniscus_quad.visible = show_quads
 
+## Keep screen effects within visible water and its waterline band.
+func _camera_over_water(point: Vector3) -> bool:
+	return is_visible_in_tree() and holds_point(point) and point.y <= global_position.y + waterline_band
+
 ## True when `point` is inside the water's footprint and below its (wavy) surface.
 func is_point_underwater(point: Vector3) -> bool:
 	if not holds_point(point):

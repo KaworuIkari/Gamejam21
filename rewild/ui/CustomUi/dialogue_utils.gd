@@ -11,6 +11,20 @@ extends RefCounted
 static var _pause_reasons: Dictionary = {}
 
 
+## Translate an active page without restarting its typing animation while paused.
+static func refresh_current_text(text: String) -> void:
+	var dialogic := DialogicUtil.autoload()
+	var textboxes: Array = dialogic.Text.get_textboxes()
+	if textboxes.is_empty():
+		return
+	var label: RichTextLabel = textboxes[0]
+	var ratio := label.visible_ratio
+	label.text = text
+	label.visible_ratio = ratio
+	dialogic.Text.dialog_text = text
+	dialogic.Text.dialog_text_parsed = label.get_parsed_text()
+
+
 ## 登记一个暂停原因（重复登记同一原因无副作用）
 static func push_pause(reason: StringName) -> void:
 	_pause_reasons[reason] = true

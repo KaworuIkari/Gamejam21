@@ -1,15 +1,13 @@
-# 可复用阅读纸条
+# 可复用阅读物
 
-将 readable_note.tscn 拖入关卡，放在箱子、桌面等物体的表面上。纸面在局部 XZ 平面，朝向局部 +Y；抬高几毫米避免与承载表面重叠。
+纸条继续使用 `readable_note.tscn`；平板使用继承它的 `readable_tablet.tscn`，共享交互、最近目标筛选、按键重绑定及现有对话 UI。平板外形由简单网格组成，不新增贴图。纸条原有场景和其他关卡引用保留。
 
-在 Inspector 的 Content 指定一份 ReadableNoteContent 资源。正文放 dialogue/readables/，每张不同纸条使用独立资源；同一正文的重复实例可共享资源。坠机点第一张使用 crashsite_cargo_note.tres，正文有意留空。
+正文资源放 `dialogue/readables/`。`ReadableNoteContent` 的 Translation Key / Text Zh / Text En 仍供纸条使用；平板按 Page Keys 的顺序读取 `i18n/strings.csv`，每个键是一页。`TABLET_POWER` 为独立开机页，其余 `TABLET_DELIVERY_*`、`TABLET_CREW_*` 保存中英文正文。语言切换同步当前页和本次阅读历史，保留逐字显示进度。
 
-- Text Zh / Text En：中英文正文，可换行；英文留空时回退中文。
-- Translation Key：可选，填写 i18n/strings.csv 中的键以使用现有翻译体系，优先于直接正文。
-- Timeline：可选，填写正式 Dialogic 时间线路径时替代直接正文，支持更复杂剧情。
-- Radius：交互提示筛选距离；场景自带 ReadRange 球形范围，调整范围时同步修改球形半径。
-- One Shot：默认关闭，可反复阅读。
+主场景 `levels/meadow_hand/meadow_hand.tscn` 中，两块平板分别挂在 `Enviroment_permanent/CrashSite/CrashsiteOutpostV2/Cargo_Box_034/CrashsiteDeliveryTablet` 和 `Cargo_Box_038/CrashsiteCrewTablet`，随箱子一起移动。第一块沿用 `crashsite_cargo_note.tres`，第二块用 `crashsite_crew_tablet.tres`；原始机舱模型不改动。
 
-沿用现有对话 UI、玩家冻结/恢复、最近对话目标筛选、交互按键重绑定和按下反馈。阅读不依赖清理权限，不修改任务进度，也不授予终端或装备。空正文使用不可见占位字符，仍能打开对话框并正常推进关闭。
+每块平板的 Read Event 独立配置：`cabin_delivery_read` / `cabin_crew_read`。最后一页确认结束时才首次上报；中途退出不计数，重读不重复计数。已读后停止小光点，提示改成重读。记录随现有任务数据保存。Radius 和 ReadRange 球半径保持一致；One Shot 保持关闭以允许重读。
 
-首张纸条位于 meadow_hand 场景 Water/CrashsiteOutpostV2/Cargo_Box_034/CrashsiteCargoNote。原始模型资源不作修改。SoftSparkles 仅使用六个低速小光点，不使用大范围光源。
+任务顺序与旧存档迁移入口见 `quests/README.md`，流程在 `levels/meadow_hand/cabin_story.gd`，不在阅读物内硬编码任务顺序。
+
+平板、终端与其他对话统一使用 `dialogue/styles/UI.tres` → `ui/CustomUi/custom_ui_.tscn`，不显示人物头像。底部对话框保持原高度，较长内容通过 Page Keys 分页，最大字号下也不拉高面板；统一的尺寸和按钮入口见 `ui/CustomUi/README_对话UI.md`。

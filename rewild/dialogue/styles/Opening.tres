@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DialogicStyle" format=3]
+
+[ext_resource type="PackedScene" path="res://ui/CustomUi/opening_ui.tscn" id="1_layout"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_layer"]
+[ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style.gd" id="3_style"]
+
+[sub_resource type="Resource" id="Layout"]
+script = ExtResource("2_layer")
+scene = ExtResource("1_layout")
+
+[resource]
+script = ExtResource("3_style")
+name = "Opening"
+layer_info = {
+"": SubResource("Layout")
+}
+metadata/_latest_layer = ""

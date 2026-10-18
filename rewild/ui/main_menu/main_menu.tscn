@@ -76,6 +76,13 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 20
 
+[node name="NewGameButton" type="Button" parent="Content/VBox/Buttons" unique_id=5668880]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "MENU_NEW_GAME"
+alignment = 0
+
 [node name="ContinueButton" type="Button" parent="Content/VBox/Buttons" unique_id=1728757562]
 unique_name_in_owner = true
 layout_mode = 2
