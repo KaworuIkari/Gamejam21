@@ -96,8 +96,14 @@ func _process(delta: float) -> void:
 	
 	if player.input_dir != Vector2.ZERO:
 		var anim_dir := get_anim_direction(player.input_dir)
-		set_blend_vec(delta, anim_dir)
+		set_blend_vec(delta, get_anim_direction(player.input_dir) * _speed_fraction())
 	rotate_toward_camera(delta, player.input_dir)
+
+## How much of the commanded speed we're actually achieving. 0 against a wall.
+func _speed_fraction() -> float:
+	var v := Vector3(player.velocity.x, 0.0, player.velocity.z)
+	var ref: float = player.sprint_speed if is_running else player.walk_speed
+	return clampf(v.length() / maxf(ref, 0.01), 0.0, 1.0)
 	
 func debounce(delta: float) -> void:
 	# in case player tap left and right quickly
