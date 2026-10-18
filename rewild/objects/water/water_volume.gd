@@ -1,5 +1,5 @@
 # WaterVolume.gd
-extends Node3D
+extends Node
 class_name WaterVolume
 
 ## Reusable water volume: bounds = above seabed terrain, below sea plane surface
