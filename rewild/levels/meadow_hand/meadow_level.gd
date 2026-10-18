@@ -13,9 +13,8 @@ func _debug_height_volumes() -> void:
 
 ## temp: debug. Check the bus path and set_volume name against your GDExtension docs.
 func _debug_set_bus_volume(path: String, v: float) -> void:
-	var bus = FmodServer.get_bus(path)
-	if bus:
-		bus.set_volume(v)
+	# Keep the height test; multiply its gain by the user's audio setting.
+	SettingsManager.set_fmod_mix(path, v)
 
 
 const PAUSE_MENU = preload("res://ui/in_game/pause_menu.tscn")
@@ -37,6 +36,11 @@ const LeonAwakening := preload("res://levels/meadow_hand/leon_awakening.gd")
 const PUMP_HOUSE_GREEN_RADIUS := 25.0
 ## Plain trees report "tree_restored" too, once the ground under them is green.
 const TreeRegrowth := preload("res://systems/world_objects/tree_regrowth.gd")
+## Radar mission progression and cabinet interaction.
+const FinaleStory = preload("res://levels/meadow_hand/finale_story.gd")
+@export var finale_disruptor_camera: Camera3D
+@export var finale_boat_camera: Camera3D
+const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
 ## What stays switched off at the start of a new game (animals, companion bot).
 const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
@@ -57,7 +61,10 @@ func _ready() -> void:
 	for mat in TREE_LEAVES:
 		GrowthMap.attach_material(mat)
 	GrowthMap.attach_material(GROW_IN_FLOWERS)
-	add_child(RESTORATION_REGIONS.instantiate())
+	var restoration_regions := RESTORATION_REGIONS.instantiate()
+	add_child(restoration_regions)
+	# The playable mountain is the radar hill. Follow its placed anchor each load.
+	restoration_regions.get_node("Mountain").global_position = $RadioObservatory.global_position
 	var awakening := LeonAwakening.new()
 	awakening.name = "LeonAwakening"
 	awakening.statue = $Leon2
@@ -78,13 +85,30 @@ func _ready() -> void:
 	factory.initial = initial
 	factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
 	add_child(factory)
+	var radar := RadarStory.new()
+	radar.name = "RadarStory"
+	radar.anchor = $RadioObservatory
+	radar.terrain = terrain
+	add_child(radar)
+	var finale := FinaleStory.new()
+	finale.name = "FinaleStory"
+	finale.radar = $RadioObservatory
+	finale.harbor = $IslandHarbor
+	finale.terrain = terrain
+	finale.cameras = {&"disruptor":finale_disruptor_camera,&"boat":finale_boat_camera}
+	add_child(finale)
 	var regrowth := TreeRegrowth.new()
 	regrowth.name = "TreeRegrowth"
 	add_child(regrowth)
 	add_child(PAUSE_MENU.instantiate())
+	_debug_height_volumes()
+	SettingsManager.refresh_fmod_audio()
 	world_bgm.play()
 
 func _process(delta: float) -> void:
 	# UI 补丁：存档里的游戏时长
 	SaveManager.add_play_time(delta)
 	_debug_height_volumes()
+
+func _exit_tree() -> void:
+	SettingsManager.reset_fmod_mix()

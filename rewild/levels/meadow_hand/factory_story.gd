@@ -51,11 +51,16 @@ var companion: CubeBotCompanion
 ## Dialogue played when the core wakes the bot.
 var activation_timeline := "res://dialogue/timelines/Factory/core_activated.dtl"
 
+var _key_trigger: InteractTrigger
 var _trigger: InteractTrigger
 var _restored_percent := 0
 
 
 func _ready() -> void:
+	# Completed legacy saves already passed the bot's original key dialogue.
+	if Quests.event_count(&"core_delivered") > 0 and Quests.event_count(&"robot_key_received") == 0:
+		Quests.grant(&"radar_key")
+		Quests.report(&"robot_key_received")
 	var area := QuestArea.new()
 	area.name = "FactoryReached"
 	area.event = &"factory_reached"
@@ -96,6 +101,7 @@ func _report_restoration() -> void:
 
 ## The use spot appears once the grounds are clean, recovered, and LIRA carries the inactive core.
 func _check() -> void:
+	_check_key_recovery()
 	if _trigger or Quests.ability_level(CORE) != 1 or Quests.event_count(LITTER_EVENT) < LITTER_NEEDED \
 			or Quests.event_count(RESTORE_EVENT) < RESTORE_NEEDED:
 		return
@@ -136,3 +142,51 @@ func _activate_core() -> void:
 	var dialogic := get_node_or_null(^"/root/Dialogic")
 	if dialogic:
 		dialogic.start(activation_timeline)
+
+## The bot carries a repeatable recovery interaction until its key dialogue reaches
+## the grant event, including saves made while the original dialogue was incomplete.
+func _check_key_recovery() -> void:
+	if Quests.event_count(&"robot_key_received") > 0:
+		if is_instance_valid(_key_trigger):
+			_key_trigger._used = true
+			_key_trigger.one_shot = true
+			_key_trigger._prompt.set_available(false)
+		return
+	if Quests.ability_level(CORE) < 2 or not is_instance_valid(companion) or is_instance_valid(_key_trigger):
+		return
+	if not companion.active:
+		if initial:
+			initial.wake(companion)
+		companion.global_position = anchor.to_global(CORE_SPOT) + Vector3(2,0.5,0)
+		companion.active = true
+	_key_trigger = InteractTrigger.new()
+	_key_trigger.name = "RadarKeyConversation"
+	_key_trigger.one_shot = false
+	_key_trigger.message_key = "INTERACT_ROBOT_KEY"
+	_key_trigger.radius = 2.5
+	# The bot lives in the pixel SubViewport. Keep the UI-owning trigger in the
+	# main viewport and follow the bot, avoiding CanvasLayer teardown conflicts.
+	_key_trigger.position = to_local(companion.to_global(Vector3(0,0.6,0)))
+	add_child(_key_trigger)
+	_key_trigger.interacted.connect(_recover_radar_key)
+
+func _process(_delta: float) -> void:
+	if is_instance_valid(_key_trigger) and is_instance_valid(companion):
+		_key_trigger.global_position = companion.to_global(Vector3(0,0.6,0))
+
+func _recover_radar_key() -> void:
+	var dialogic := get_node_or_null(^"/root/Dialogic")
+	if dialogic == null or dialogic.current_timeline != null or Quests.event_count(&"robot_key_received") > 0:
+		return
+	var timeline := DialogicTimeline.new()
+	var text := DialogicTextEvent.new()
+	text.text = tr("ROBOT_KEY_RECOVERY")
+	timeline.events.append(text)
+	for entry in [["grant","radar_key"],["report","robot_key_received"]]:
+		var event := DialogicCallEvent.new()
+		event.autoload_name = "Quests"
+		event.method = entry[0]
+		event.arguments = [entry[1]]
+		timeline.events.append(event)
+	timeline.events_processed = true
+	dialogic.start(timeline)

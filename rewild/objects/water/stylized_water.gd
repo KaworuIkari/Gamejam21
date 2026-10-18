@@ -234,8 +234,3 @@ func holds_point(point: Vector3) -> bool:
 		if is_instance_valid(w) and w.covers(point):
 			return false
 	return true
-
-func _camera_over_water(p: Vector3) -> bool:
-	var box := water_mesh.global_transform * water_mesh.get_aabb()
-	return p.x >= box.position.x and p.x <= box.end.x \
-		and p.z >= box.position.z and p.z <= box.end.z

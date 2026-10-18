@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_nature_choices_v1/growing_greenery.gd" id="1_5ksqw"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_nature_choices_v1/B_Woodland_Ruin_Greenery.glb" id="2_ka210"]
+
+[node name="B_Woodland_Ruin_Greenery" type="Node3D" unique_id=1448452373]
+script = ExtResource("1_5ksqw")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1030095481 instance=ExtResource("2_ka210")]

@@ -59,6 +59,8 @@ func _build_quest_hud() -> void:
 	_tracker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_tracker_title = _hud_label(26)
 	_tracker_step = _hud_label(22)
+	_tracker_step.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	get_viewport().size_changed.connect(_refresh_tracker)
 	_tracker.add_child(_tracker_title)
 	_tracker.add_child(_tracker_step)
 	column.add_child(_tracker)
@@ -98,10 +100,13 @@ func _refresh_tracker() -> void:
 	if q == null:
 		return
 	_tracker_title.text = tr(q.title)
+	_tracker_step.custom_minimum_size.x = maxf(120,minf(620,get_viewport().get_visible_rect().size.x-64))
 	var lines: Array[String] = []
 	for i in quests.open_steps(q):
-		var p: Vector2i = quests.step_progress(q, i)
-		lines.append("› " + tr(q.steps[i].text) + ("  %d/%d" % [p.x, p.y] if p.y > 1 else ""))
+		lines.append("› " + quests.step_label(q,i))
+	for optional in q.optional_steps:
+		if quests.event_count(optional.event) < optional.count:
+			lines.append("› " + TaskPage.optional_step_label(optional,quests))
 	_tracker_step.text = "\n".join(lines)
 
 # --- Restoration HUD ------------------------------------------------------------------

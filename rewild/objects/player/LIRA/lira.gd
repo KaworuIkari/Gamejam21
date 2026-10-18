@@ -37,7 +37,7 @@ var _fire_cd := 0.0
 @export var water_gun_cooldown := PackedFloat32Array([0.6, 0.45, 0.35])
 @export var water_tank_capacity := PackedFloat32Array([10, 20, 30])
 ## Per level: jetpack energy (fuel).
-@export var jetpack_energy := PackedFloat32Array([100.0, 160.0, 240.0])
+@export var jetpack_energy := PackedFloat32Array([100.0, 200.0, 240.0])
 var water_gun_level := 0
 var jetpack_level := 0
 ## Splash radius of the next shot (set from water_gun_splash).

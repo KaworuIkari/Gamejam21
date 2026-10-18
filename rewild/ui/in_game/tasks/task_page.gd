@@ -272,7 +272,7 @@ func _render_quests() -> void:
 		row.button_pressed = q.get_id() == _selected_id
 		row.get_node("Row/Id").text = ("v %02d" if row.button_pressed else "> %02d") % (i + 1)
 		row.get_node("Row/RowTitle").text = tr(q.title)
-		row.get_node("Row/Progress").text = "%d/%d" % [_done_steps(q), q.steps.size()]
+		row.get_node("Row/Progress").text = tr("QUEST_CHOICE_DONE" if _archive else "QUEST_CHOICE_OPEN") if q.complete_any else "%d/%d" % [_done_steps(q), q.steps.size()]
 		var tracked: bool = quests.tracked_quest() == q
 		row.get_node("Row/DemoStatus").text = tr("QUEST_STATUS_DONE" if _archive
 				else "QUEST_STATUS_TRACKED" if tracked else "QUEST_STATUS_ACTIVE")
@@ -300,10 +300,12 @@ func _render_quests() -> void:
 	var lines: Array = []
 	for i in q.steps.size():
 		var p: Vector2i = quests.step_progress(q, i)
-		var line := tr(q.steps[i].text)
-		if p.y > 1:
-			line += "  (%d/%d)" % [p.x, p.y]
+		var line: String = quests.step_label(q,i)
+		if q.complete_any and quests.status(q) == quests.Status.DONE and p.x < p.y:
+			line += "  (" + tr("QUEST_CHOICE_SKIPPED") + ")"
 		lines.append([line, p.x >= p.y])
+	for optional in q.optional_steps:
+		lines.append([optional_step_label(optional,quests), quests.event_count(optional.event) >= optional.count])
 	_fill_steps(lines)
 	%TrackButton.visible = not _archive
 	var is_tracked: bool = quests.tracked_quest() == q
@@ -338,3 +340,8 @@ func _update_layout() -> void:
 	%Split.vertical = compact
 	%DemoStatus.visible = not compact
 	%StatusHeader.visible = not compact
+
+## Optional objectives use their world-event totals and have no sequential state.
+static func optional_step_label(step: QuestStep, quests: Node) -> String:
+	var amount := clampi(quests.event_count(step.event),0,step.count)
+	return "%s: %s  (%d/%d)" % [TranslationServer.translate("QUEST_OPTIONAL"), TranslationServer.translate(step.text),amount,step.count]

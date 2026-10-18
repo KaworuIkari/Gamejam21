@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://brlb12t1ligqu"]
+
+[ext_resource type="Script" uid="uid://duc3hutu3bkfv" path="res://systems/quests/quest.gd" id="1"]
+[ext_resource type="Script" uid="uid://bes5e7vhx38hw" path="res://systems/quests/quest_step.gd" id="2"]
+[ext_resource type="Resource" uid="uid://2x1vt60uxejs" path="res://quests/05_radar_station.tres" id="3"]
+
+[sub_resource type="Resource" id="disruptor"]
+script = ExtResource("2")
+text = "QUEST_FINALE_DEVICE"
+event = &"ending_disruptor"
+
+[sub_resource type="Resource" id="boat"]
+script = ExtResource("2")
+text = "QUEST_FINALE_BOAT"
+event = &"ending_boat"
+progress_event = &"harbor_parts"
+progress_target = 6
+
+[resource]
+script = ExtResource("1")
+title = "QUEST_FINALE_TITLE"
+description = "QUEST_FINALE_DESC"
+location = "QUEST_FINALE_LOCATION"
+requires = Array[ExtResource("1")]([ExtResource("3")])
+steps = Array[ExtResource("2")]([SubResource("disruptor"), SubResource("boat")])
+parallel = true
+complete_any = true

@@ -13,8 +13,10 @@ signal pending_changed(has_pending: bool)
 
 ## 子模块（由本节点创建，不需要单独注册 Autoload）
 const UIScaler = preload("res://ui/layout/ui_scaler.gd")
+const FmodAudioBridge = preload("res://autoload/ui/fmod_audio_bridge.gd")
 const ControllerFeedback = preload("res://autoload/ui/controller_feedback.gd")
 const PlayerSettingsBridge = preload("res://ui/common/player_settings_bridge.gd")
+var _audio_bridge: Node
 var _ui_scaler: Node
 var _player_bridge: Node
 
@@ -112,6 +114,9 @@ func _ready() -> void:
 	_player_bridge = PlayerSettingsBridge.new()
 	_player_bridge.name = &"PlayerSettingsBridge"
 	add_child(_player_bridge)
+	_audio_bridge = FmodAudioBridge.new()
+	_audio_bridge.name = &"FmodAudioBridge"
+	add_child(_audio_bridge)
 	# UI and dialogue players use SFX; create it before applying saved volume.
 	if AudioServer.get_bus_index("SFX") < 0:
 		AudioServer.add_bus()
@@ -534,3 +539,15 @@ func event_to_text(ev: InputEvent) -> String:
 			JOY_AXIS_TRIGGER_RIGHT: return "RT"
 		return "Axis %d" % ev.axis
 	return "?"
+
+
+## Scene-owned banks may become available after settings were loaded.
+func refresh_fmod_audio() -> void:
+	_audio_bridge.refresh()
+
+## Temporary height/cutscene mix multiplies user volume, never replaces it.
+func set_fmod_mix(path: String, gain: float) -> void:
+	_audio_bridge.set_mix(path,gain)
+
+func reset_fmod_mix() -> void:
+	_audio_bridge.reset_mix()
