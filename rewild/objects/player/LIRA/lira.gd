@@ -449,8 +449,6 @@ func _update_water() -> void:
 	var feet := _feet_y()
 	var ratio := chest_ratio if not in_water else chest_ratio - 0.15   # hysteresis
 	var deep : bool = vol != null and (vol.get_plane_surface_y() - feet) >= ratio * h
-	if vol:
-		print((vol.get_plane_surface_y() - feet) >= ratio * h, feet, vol.get_plane_surface_y())
 
 	if deep and not in_water:
 		_enter_water()
