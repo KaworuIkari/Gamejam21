@@ -54,6 +54,7 @@ func _enter_tree() -> void:
 		quests.load_from_save()
 
 func _ready() -> void:
+	pass
 	terrain.set_camera(player_camera)
 	GrowthMap.attach_terrain(terrain)
 	GrowthMap.attach_material($Plants/Grass.mesh_material_override)
@@ -61,6 +62,7 @@ func _ready() -> void:
 	for mat in TREE_LEAVES:
 		GrowthMap.attach_material(mat)
 	GrowthMap.attach_material(GROW_IN_FLOWERS)
+
 	var restoration_regions := RESTORATION_REGIONS.instantiate()
 	add_child(restoration_regions)
 	# The playable mountain is the radar hill. Follow its placed anchor each load.
