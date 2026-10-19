@@ -52,3 +52,6 @@ mono_crash.*.json
 # Ideas
 
 /ideas/
+
+# Blender
+.blend1
