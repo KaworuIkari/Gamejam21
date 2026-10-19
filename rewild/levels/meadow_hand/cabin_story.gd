@@ -1,31 +1,10 @@
 extends Node
-## Cabin investigation -> pump flow -> Act I. Quest resources own step ordering.
-signal act_one_started
-const TITLE = preload("res://ui/in_game/story/act_title.tscn")
+## Cabin investigation -> pump flow. Quest resources own step ordering.
 var pump: WaterFlowSwitch
-var _title_pending := false
 
 
 func _ready() -> void:
 	pump.trigger._used = pump.is_on
-	Quests.quest_completed.connect(_on_quest_completed)
-	for quest in Quests.quests:
-		if quest.get_id() == &"00_investigate_cabin" and Quests.status(quest) == Quests.Status.DONE:
-			_on_quest_completed(quest)
-
-
-func _on_quest_completed(quest: Quest) -> void:
-	if quest.get_id() == &"00_investigate_cabin" and not SaveManager.current_data.get("act_one_entered", false):
-		_title_pending = true
-
-
-func _process(_delta: float) -> void:
-	if not _title_pending or get_tree().paused or SceneRouter.is_busy() or Dialogic.current_timeline != null:
-		return
-	_title_pending = false
-	SaveManager.current_data["act_one_entered"] = true
-	add_child(TITLE.instantiate())
-	act_one_started.emit()
 
 
 ## The pump moved from 01 into 00. Migrate once, preserving later progress/equipment.

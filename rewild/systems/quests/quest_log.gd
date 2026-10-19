@@ -359,11 +359,24 @@ func step_label(q: Quest, index: int) -> String:
 ## Keeping these mutations together prevents the other route taking the same module.
 func complete_choice(q: Quest, index: int, item: StringName) -> bool:
 	if not q.parallel or not q.complete_any or status(q) != Status.ACTIVE \
-			or index < 0 or index >= q.steps.size() or not has_ability(item):
+			or index < 0 or index >= q.steps.size() or (item != &"" and not has_ability(item)):
 		return false
-	_abilities.erase(item)
+	if item != &"":
+		_abilities.erase(item)
 	var event := q.steps[index].event
 	_counters[event] = event_count(event) + q.steps[index].count
+	_evaluate()
+	if item != &"":
+		ability_changed.emit(item,0)
+	_changed()
+	return true
+
+## Record an installed item atomically, so reloads cannot consume it twice.
+func consume_and_report(item: StringName, event: StringName) -> bool:
+	if event == &"" or event_count(event) > 0 or not has_ability(item):
+		return false
+	_abilities.erase(item)
+	_counters[event] = 1
 	_evaluate()
 	ability_changed.emit(item,0)
 	_changed()

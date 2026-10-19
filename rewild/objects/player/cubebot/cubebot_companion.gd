@@ -52,6 +52,10 @@ const HARD_LANDING := 0.35  ## airborne longer than this plays Land
 @export var follow_distance := 2.2
 ## Beyond this distance from LIRA it drops whatever it's doing and catches up.
 @export var leash := 14.0
+## Following but not getting closer for this long (e.g. a wall the navmesh does not know):
+## hop over to LIRA instead.
+@export var stuck_time := 1.5
+@export var catch_up_height := 3.0
 ## LIRA counts as running above this horizontal speed.
 @export var lira_run_speed := 3.0
 @export_range(0.0, 1.0) var jump_chance := 0.08  ## per think tick while running
@@ -85,6 +89,9 @@ var _air_t := 0.0
 var _anim := &""
 var _anim_lock := false     # a one-shot (Jump_Start / Land) is playing
 var _last_curious_ms := -100000
+var _stuck_t := 0.0
+var _progress_from := Vector3.ZERO
+var _catching := false      # mid catch-up hop
 
 
 func _ready() -> void:
@@ -97,9 +104,13 @@ func _ready() -> void:
 # --- per frame: only movement and ground transitions ------------------------
 
 func _physics_process(delta: float) -> void:
+	if _catching:
+		return
 	_think_t -= delta
 	if _think_t <= 0.0:
 		_think()
+	if _check_stuck(delta):
+		return
 
 	var v := velocity
 	if is_on_floor():
@@ -346,6 +357,55 @@ func _on_landed() -> void:
 
 
 # --- helpers ----------------------------------------------------------------
+
+## True when it just started a catch-up hop because following made no progress.
+func _check_stuck(delta: float) -> bool:
+	var far := lira != null and global_position.distance_to(lira.global_position) > follow_distance * 3.0
+	if _speed <= 0.0 or not far or _mode != Mode.FOLLOW:
+		_stuck_t = 0.0
+		_progress_from = global_position
+		return false
+	if global_position.distance_to(_progress_from) > 0.5:
+		_stuck_t = 0.0
+		_progress_from = global_position
+		return false
+	_stuck_t += delta
+	if _stuck_t < stuck_time:
+		return false
+	_catch_up()
+	return true
+
+
+## A big hop that lands beside LIRA, over whatever was in the way.
+func _catch_up() -> void:
+	_catching = true
+	_stuck_t = 0.0
+	velocity = Vector3.ZERO
+	var from := global_position
+	var side := Vector3(from.x - lira.global_position.x, 0.0, from.z - lira.global_position.z)
+	side = side.normalized() if side.length() > 0.01 else Vector3.BACK
+	var to := lira.global_position + side * follow_distance
+	var map := _nav.get_navigation_map()
+	if NavigationServer3D.map_get_iteration_id(map) > 0:
+		var on_mesh := NavigationServer3D.map_get_closest_point(map, to)
+		if on_mesh.distance_to(to) < follow_distance:
+			to = on_mesh
+	_yaw_goal = _yaw_to(to)
+	rotation.y = _yaw_goal
+	_anim_lock = true
+	_play(&"Jump_Start", 0.05)
+	var height := catch_up_height + maxf(to.y - from.y, 0.0)
+	var hop := create_tween()
+	hop.tween_method(func(t: float) -> void:
+		global_position = from.lerp(to, t) + Vector3.UP * sin(t * PI) * height,
+		0.0, 1.0, clampf(from.distance_to(to) / 8.0, 0.5, 1.5))
+	await hop.finished
+	_catching = false
+	_air_t = 0.0
+	_progress_from = global_position
+	_anim_lock = true
+	_play(&"Land", 0.05)
+
 
 func _set_active(on: bool) -> void:
 	set_physics_process(on)

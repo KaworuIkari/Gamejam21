@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 		_message = key
 		_prompt.configure(&"interact",key)
 	_prompt.set_interactable(story.can_choose(route))
-	_prompt.set_available(super._can_use() and story.available() and not story.busy)
+	_prompt.set_available(super._can_use() and (story.boat_available() if route == &"boat" else story.available()) and not story.busy)
 
 func _can_use() -> bool:
 	return super._can_use() and story.can_choose(route)

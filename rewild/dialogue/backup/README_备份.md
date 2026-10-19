@@ -13,7 +13,7 @@
 
 | 原场景 | 键 | 原触发位置 |
 |---|---|---|
-| 草原清理提交（任务 02） | `CLEAN_DELIVERY_RECEIVED`（`CLEAN_DELIVERY_JETPACK` 已删除） | 湖心终端 `_submit_meadow_cleanup`，结束后上报 `meadow_cleanup_delivered` |
+| 草原清理提交（任务 02） | 已删除（文本见 git 历史） | 湖心终端 `_submit_meadow_cleanup`，结束后上报 `meadow_cleanup_delivered` |
 | 雷达信息提交（任务 05） | `RADAR_DELIVERY_RECEIVED`、`RADAR_DELIVERY_REWARD`、`FINALE_BRIEFING_DEVICE`、`FINALE_BRIEFING_BOAT` | 湖心终端 `_submit_radar_information`，结束后上报 `radar_delivered` |
 | 补领雷达密钥 | `INTERACT_ROBOT_KEY`、`ROBOT_KEY_RECOVERY` | `factory_story.gd` 的 `_check_key_recovery` |
 | 雷达读取中的密钥/返回提示 | `RADAR_READOUT_KEY`、`RADAR_READOUT_RETURN` | `radar_story.gd` 的 `make_readout_timeline`（现只保留坐标一页） |
