@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_nature_v2/growing_greenery.gd" id="1_o3j3v"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Old_Stone_Steps_Greenery.glb" id="2_i5c8m"]
+
+[node name="Old_Stone_Steps_Greenery" type="Node3D" unique_id=940689394]
+script = ExtResource("1_o3j3v")
+
+[node name="Visual" type="Node3D" parent="." unique_id=346894549 instance=ExtResource("2_i5c8m")]

@@ -1227,15 +1227,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 119.20009, -0.00074768066, 75
 
 [node name="RestorablePine1" parent="Items" unique_id=696908796 instance=ExtResource("107_lqhp7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 279.8532, 24.518742, -33.315376)
-thresholds = PackedFloat32Array(0.6)
+thresholds = PackedFloat32Array(0.15)
 
 [node name="RestorablePine2" parent="Items" unique_id=1314634842 instance=ExtResource("108_ek5g7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 286.4115, 24.468712, -33.419617)
-thresholds = PackedFloat32Array(0.6)
+thresholds = PackedFloat32Array(0.15)
 
 [node name="RestorablePine4" parent="Items" unique_id=732184373 instance=ExtResource("109_p35as")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 280.94785, 24.537704, -36.29828)
-thresholds = PackedFloat32Array(0.6)
+thresholds = PackedFloat32Array(0.15)
 
 [node name="Restorable_Petal_8" parent="Items" unique_id=1371044527 instance=ExtResource("22_2yqq3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 285.67154, 24.467152, -37.63572)

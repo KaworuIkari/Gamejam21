@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_nature_v2/growing_greenery.gd" id="1_2bm6m"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Broken_Cargo_Crate_Greenery.glb" id="2_h8kx6"]
+
+[node name="Broken_Cargo_Crate_Greenery" type="Node3D" unique_id=2131822080]
+script = ExtResource("1_2bm6m")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1986633795 instance=ExtResource("2_h8kx6")]

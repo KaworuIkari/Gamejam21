@@ -2,49 +2,29 @@
 
 [ext_resource type="Script" uid="uid://duc3hutu3bkfv" path="res://systems/quests/quest.gd" id="1"]
 [ext_resource type="Script" uid="uid://bes5e7vhx38hw" path="res://systems/quests/quest_step.gd" id="2"]
-[ext_resource type="Resource" uid="uid://b5b32qxhc3j6p" path="res://quests/03_regrow.tres" id="3"]
 
-[sub_resource type="Resource" id="step_reach"]
+[sub_resource type="Resource" id="step_gears"]
 script = ExtResource("2")
-text = "QUEST_CORE_STEP_REACH"
-event = &"factory_reached"
-
-[sub_resource type="Resource" id="step_clean"]
-script = ExtResource("2")
-text = "QUEST_CORE_STEP_CLEAN"
-event = &"factory_garbage"
-count = 8
-
-[sub_resource type="Resource" id="step_restore"]
-script = ExtResource("2")
-text = "QUEST_CORE_STEP_RESTORE"
-event = &"factory_restoration"
-count = 20
-with_previous = true
+text = "QUEST_CORE_STEP_GEARS"
+event = &"factory_gear"
+count = 6
 
 [sub_resource type="Resource" id="step_activate"]
 script = ExtResource("2")
 text = "QUEST_CORE_STEP_ACTIVATE"
 event = &"core_activated"
 
-[sub_resource type="Resource" id="step_key"]
+[sub_resource type="Resource" id="step_jetpack"]
 script = ExtResource("2")
-text = "QUEST_CORE_STEP_KEY"
-event = &"robot_key_received"
-
-[sub_resource type="Resource" id="step_deliver"]
-script = ExtResource("2")
-text = "QUEST_CORE_STEP_DELIVER"
-event = &"core_delivered"
+text = "QUEST_CORE_STEP_JETPACK"
+event = &"jetpack_delivered"
 
 [resource]
 script = ExtResource("1")
 title = "QUEST_CORE_TITLE"
 description = "QUEST_CORE_DESC"
 location = "QUEST_CORE_LOCATION"
-requires = Array[ExtResource("1")]([ExtResource("3")])
-steps = Array[ExtResource("2")]([SubResource("step_reach"), SubResource("step_clean"), SubResource("step_restore"), SubResource("step_activate"), SubResource("step_key"), SubResource("step_deliver")])
+steps = Array[ExtResource("2")]([SubResource("step_gears"), SubResource("step_activate"), SubResource("step_jetpack")])
 rewards = Dictionary[StringName, int]({
-&"jetpack": 2,
-&"water_gun": 2
+&"jetpack": 1
 })

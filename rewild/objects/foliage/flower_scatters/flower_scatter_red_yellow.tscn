@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://dgqq1tf8prx5s" path="res://addons/proton_scatter/src/scatter.gd" id="scatter"]
+[ext_resource type="Script" uid="uid://ba8jou0xje0c7" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="stack"]
+[ext_resource type="Script" uid="uid://b5s7ggmsi8g5u" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="base_mod"]
+[ext_resource type="Script" uid="uid://gjjh4mw1wn51" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="create_random"]
+[ext_resource type="Script" uid="uid://b0332hlb7q5t1" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="randomize"]
+[ext_resource type="Script" uid="uid://dc4rwlje6dfca" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="relax"]
+[ext_resource type="Script" uid="uid://it6ja2wjneak" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="project"]
+[ext_resource type="Script" uid="uid://c85i0481q4uog" path="res://addons/proton_scatter/src/scatter_item.gd" id="item"]
+[ext_resource type="Script" uid="uid://dx7e7heldjwmg" path="res://addons/proton_scatter/src/scatter_shape.gd" id="shape"]
+[ext_resource type="Script" uid="uid://ba7ljvtfgk4cp" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="sphere"]
+
+[sub_resource type="Resource" id="Resource_create"]
+script = ExtResource("create_random")
+amount = 22
+restrict_height = true
+reference_frame = 1
+
+[sub_resource type="Resource" id="Resource_randomize"]
+script = ExtResource("randomize")
+position = Vector3(0.15, 0, 0.15)
+rotation = Vector3(10, 360, 10)
+scale = Vector3(0.6, 0.6, 0.6)
+reference_frame = 2
+
+[sub_resource type="Resource" id="Resource_relax"]
+script = ExtResource("relax")
+offset_step = 0.2
+consecutive_step_multiplier = 0.75
+restrict_height = true
+
+[sub_resource type="Resource" id="Resource_project"]
+script = ExtResource("project")
+ray_length = 10.0
+ray_offset = 5.0
+remove_points_on_miss = false
+
+[sub_resource type="Resource" id="Resource_stack"]
+script = ExtResource("stack")
+stack = Array[ExtResource("base_mod")]([SubResource("Resource_create"), SubResource("Resource_randomize"), SubResource("Resource_relax"), SubResource("Resource_project")])
+
+[sub_resource type="Resource" id="Resource_sphere"]
+script = ExtResource("sphere")
+radius = 4.0
+metadata/_custom_type_script = "uid://ba7ljvtfgk4cp"
+
+[node name="FlowerScatter_RedYellow" type="Node3D"]
+script = ExtResource("scatter")
+render_mode = 1
+modifier_stack = SubResource("Resource_stack")
+Performance/use_chunks = true
+Performance/chunk_dimensions = Vector3(15, 15, 15)
+metadata/_custom_type_script = "uid://dgqq1tf8prx5s"
+
+[node name="ScatterShape" type="Node3D" parent="."]
+script = ExtResource("shape")
+shape = SubResource("Resource_sphere")
+metadata/_custom_type_script = "uid://dx7e7heldjwmg"
+
+[node name="Red" type="Node3D" parent="."]
+script = ExtResource("item")
+path = "res://objects/restorable/restorable_petal_3.tscn"
+metadata/_custom_type_script = "uid://c85i0481q4uog"
+
+[node name="Yellow" type="Node3D" parent="."]
+script = ExtResource("item")
+path = "res://objects/restorable/restorable_petal_4.tscn"
+metadata/_custom_type_script = "uid://c85i0481q4uog"
