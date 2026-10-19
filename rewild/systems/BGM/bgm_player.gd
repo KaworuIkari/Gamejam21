@@ -28,7 +28,7 @@ var _timer : Timer
 @export var no_repeat_window := 3                   ## don't replay any of the last N tracks
 
 @export_group("Debug")
-@export var time_divisor := 10.0                     ## set to 10 to test the cycle quickly
+@export var time_divisor := 1.0                     ## set to 10 to test the cycle quickly
 
 @export var track_count := 6
 @export var parameter_name := "track"
@@ -113,8 +113,11 @@ func _on_ability_changed(_ability: StringName, level: int) -> void:
 	_play_achievement_bgm(ACHIEVEMENT_FOR_LEVEL.get(level, 0))
 
 func _on_quest_completed(quest: Quest) -> void:
-	if quest.title == "jetpack_delivered":
-		_play_achievement_bgm(3)
+	match quest.title:
+		"jetpack_delivered":
+			_play_achievement_bgm(3)
+		"pump_started":
+			_play_quests_bgm(quest.title)
 
 
 @onready var _ending_bgm_emitter: FmodEventEmitter2D = $EndingBGM
@@ -128,3 +131,8 @@ func _play_ending_bgm(ending_type: int) -> void:
 @onready var _epic_bgm_emitter: FmodEventEmitter2D = $EpicBGM
 func _play_epic_bgm() -> void:
 	_epic_bgm_emitter.play()
+
+@onready var _quests_bgm_emitter: FmodEventEmitter2D = $QuestsBGM
+func _play_quests_bgm(quest_bgm_var: String) -> void:
+	_quests_bgm_emitter.set_parameter("Quest", quest_bgm_var)
+	_quests_bgm_emitter.play()

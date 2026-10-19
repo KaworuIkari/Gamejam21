@@ -28,4 +28,13 @@ fmod_parameters/Ending/labels = PackedStringArray("happy", "neutral", "sad")
 fmod_parameters/Ending/variant_type = 4
 
 [node name="EpicBGM" type="FmodEventEmitter2D" parent="." unique_id=1533685768]
-event_guid = "{0000005f-006e-0000-6f00-000064000000}"
+event_name = "event:/BGM/Epic"
+event_guid = "{516f9d88-5a37-4f1f-8878-049fe35d0b6e}"
+
+[node name="QuestsBGM" type="FmodEventEmitter2D" parent="." unique_id=19259673]
+event_name = "event:/BGM/Quests"
+event_guid = "{b4a2b2d2-1434-4c0c-b9c6-34b9d1fa795a}"
+fmod_parameters/Quest/id = 254885985628589380
+fmod_parameters/Quest = "pump_started"
+fmod_parameters/Quest/labels = PackedStringArray("pump_started", "Value B", "Value C")
+fmod_parameters/Quest/variant_type = 4

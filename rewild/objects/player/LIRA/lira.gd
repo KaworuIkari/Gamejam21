@@ -161,9 +161,9 @@ func _physics_process(delta: float) -> void:
 		tank.refill(delta)
 
 	# move camera sideways when aiming
-	# var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
-	# var target := yaw_basis * _target_pivot_offset
-	# spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
+	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
+	var target := yaw_basis * _target_pivot_offset
+	spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
 
 func _apply_movement(delta : float) -> void:
 	if in_water:
@@ -454,7 +454,7 @@ func _update_water() -> void:
 	var feet := _feet_y()
 	var ratio := chest_ratio if not in_water else chest_ratio - 0.15   # hysteresis
 	var deep : bool = vol != null and (vol.get_plane_surface_y() - feet) >= ratio * h
-	print(deep," ", vol)
+
 	if deep and not in_water:
 		_enter_water()
 	elif not deep and in_water:
