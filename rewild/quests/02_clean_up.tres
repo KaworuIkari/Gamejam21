@@ -9,6 +9,7 @@ script = ExtResource("2")
 text = "QUEST_CLEAN_STEP_GARBAGE"
 event = &"garbage"
 count = 10
+count_earlier = false
 
 [sub_resource type="Resource" id="step_deliver"]
 script = ExtResource("2")

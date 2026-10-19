@@ -46,7 +46,7 @@ const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
 const OpeningSequence := preload("res://levels/meadow_hand/opening_sequence.gd")
 const StartupChecks := preload("res://levels/meadow_hand/startup_checks.gd")
 const CabinStory := preload("res://levels/meadow_hand/cabin_story.gd")
-const PUMP_PATH := ^"Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch"
+const PUMP_PATH := ^"Enviroment/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch"
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
 @onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/Camera3D
 @onready var player: Node3D = $SubViewportContainer/PixelateSubViewport/LIRA
@@ -57,7 +57,7 @@ func _enter_tree() -> void:
 	if quests:
 		CabinStory.migrate_save(SaveManager.current_data)
 		quests.load_from_save()
-		get_node(PUMP_PATH).start_on = quests.event_count(&"pump_started") > 0
+	get_node(PUMP_PATH).start_on = quests.event_count(&"pump_started") > 0
 
 func _ready() -> void:
 	var opening := OpeningSequence.new()
@@ -83,36 +83,36 @@ func _ready() -> void:
 	var restoration_regions := RESTORATION_REGIONS.instantiate()
 	add_child(restoration_regions)
 	# The playable mountain is the radar hill. Follow its placed anchor each load.
-	restoration_regions.get_node("Mountain").global_position = $RadioObservatory.global_position
+	restoration_regions.get_node("Mountain").global_position = $Enviroment/East_Mountain/RadioObservatory.global_position
 	var awakening := LeonAwakening.new()
 	awakening.name = "LeonAwakening"
-	awakening.statue = $Leon2
+	awakening.statue = $Enviroment/North_frog_lake/Leon2
 	awakening.lake = $SubViewportContainer/PixelateSubViewport/Water/Froglake
-	awakening.giant = $Leon
+	awakening.giant = $Enviroment/North_frog_lake/Leon
 	awakening.sea = $SubViewportContainer/PixelateSubViewport/Water/Sea
-	awakening.requires = $Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
+	awakening.requires = $Enviroment/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
 	add_child(awakening)
 	var initial := InitialState.new()
 	initial.name = "InitialState"
 	initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals, $SubViewportContainer/PixelateSubViewport/CubeBotCompanion]
-	initial.green_spots = {$Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
+	initial.green_spots = {$Enviroment/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
 	add_child(initial)
 	var factory := FactoryStory.new()
 	factory.name = "FactoryStory"
-	factory.anchor = $DesertRoboticsLaboratory
+	factory.anchor = $Enviroment/East_Robot_factory/DesertRoboticsLaboratory
 	factory.terrain = terrain
 	factory.initial = initial
 	factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
 	add_child(factory)
 	var radar := RadarStory.new()
 	radar.name = "RadarStory"
-	radar.anchor = $RadioObservatory
+	radar.anchor = $Enviroment/East_Mountain/RadioObservatory
 	radar.terrain = terrain
 	add_child(radar)
 	var finale := FinaleStory.new()
 	finale.name = "FinaleStory"
-	finale.radar = $RadioObservatory
-	finale.harbor = $IslandHarbor
+	finale.radar = $Enviroment/East_Mountain/RadioObservatory
+	finale.harbor = $Enviroment/South_Harbour/IslandHarbor
 	finale.terrain = terrain
 	finale.cameras = {&"disruptor":finale_disruptor_camera,&"boat":finale_boat_camera}
 	add_child(finale)

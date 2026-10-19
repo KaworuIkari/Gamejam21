@@ -66,7 +66,9 @@ page. `jetpack_equipped` shows the backpack model but grants no flight. Until
 `jetpack` reaches level 1, energy stays at zero and cannot regenerate. The HUD
 explains that cleanup and a return to the central island are required.
 
-02 now has two sequential steps: clear 10 `garbage`, then physically return to
+Clearables (garbage included) can be cleared at any time, before the terminal too.
+02 now has two sequential steps: clear 10 more `garbage` (Count Earlier off: only
+piles cleared after 02 starts count), then physically return to
 the lake station and report `meadow_cleanup_delivered`. Clearing alone leaves
 02 active, keeps 03 locked, and does not enable flight. The station plays the
 submission/power-restoration briefing before reporting the delivery event;

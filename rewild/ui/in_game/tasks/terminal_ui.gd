@@ -4,6 +4,7 @@ extends CanvasLayer
 ## quest / unlock notices (top centre).
 const ACTION := &"task_terminal"
 const TaskPage = preload("res://ui/in_game/tasks/task_page.gd")
+const CLEAN_UP: Quest = preload("res://quests/02_clean_up.tres")
 var _pause_menu: CanvasLayer
 var _tracker: VBoxContainer
 var _tracker_title: Label
@@ -111,7 +112,8 @@ func _refresh_tracker() -> void:
 		if quests.event_count(optional.event) < optional.count:
 			lines.append("› " + TaskPage.optional_step_label(optional,quests))
 	if quests.has_ability(&"jetpack_equipped") and not quests.has_ability(&"jetpack"):
-		lines.append(tr("JETPACK_LOCKED_RETURN" if quests.event_count(&"garbage") >= 10 else "JETPACK_LOCKED_CLEANUP"))
+		var cleanup: Vector2i = quests.step_progress(CLEAN_UP, 0)
+		lines.append(tr("JETPACK_LOCKED_RETURN" if cleanup.x >= cleanup.y else "JETPACK_LOCKED_CLEANUP"))
 	_tracker_step.text = "\n".join(lines)
 
 # --- Restoration HUD ------------------------------------------------------------------

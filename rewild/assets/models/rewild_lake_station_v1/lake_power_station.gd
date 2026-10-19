@@ -161,8 +161,6 @@ func _submit_meadow_cleanup(quests: Node) -> void:
 	var quest: Quest = load("res://quests/02_clean_up.tres")
 	if quests.status(quest) != quests.Status.ACTIVE or quests.current_step(quest) != quest.steps.size() - 1:
 		return
-	if quests.event_count(&"garbage") < quest.steps[0].count:
-		return
 	var dialogic := get_node_or_null(^"/root/Dialogic")
 	if dialogic == null or dialogic.current_timeline != null:
 		return
