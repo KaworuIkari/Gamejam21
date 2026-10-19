@@ -36,7 +36,7 @@ var _fire_cd := 0.0
 ## Per fire-rate upgrade bought at the terminal (first entry = none): seconds between shots.
 @export var water_gun_cooldown := PackedFloat32Array([0.6, 0.48, 0.38, 0.3])
 ## Per tank upgrade bought at the terminal (first entry = none): water the tank holds.
-@export var water_tank_capacity := PackedFloat32Array([10, 15, 22, 30])
+@export var water_tank_capacity := PackedFloat32Array([15, 20, 25, 30])
 ## Per level: jetpack energy (fuel).
 @export var jetpack_energy := PackedFloat32Array([100.0, 200.0, 240.0])
 var water_gun_level := 0
@@ -158,9 +158,9 @@ func _physics_process(delta: float) -> void:
 	# Refilling is a hold at a water source, see objects/water/water_refill.gd.
 
 	# move camera sideways when aiming
-	# var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
-	# var target := yaw_basis * _target_pivot_offset
-	# spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
+	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
+	var target := yaw_basis * _target_pivot_offset
+	spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
 
 func _apply_movement(delta : float) -> void:
 	if in_water:
@@ -438,7 +438,6 @@ func _refresh_water_list() -> void:
 	_water_list.clear()
 	for n in get_tree().get_nodes_in_group(&"water_surfaces"):
 		if n is StylizedWater and n.visible:
-			print(n.name, " added to list")
 			_water_list.append(n)
 
 func _update_water() -> void:
@@ -472,11 +471,12 @@ func _update_water() -> void:
 
 func _find_water() -> StylizedWater:
 	var lira_pos := global_position+_water_pos_y_offset
-	if is_instance_valid(_current_water) and _current_water.holds_point(lira_pos):
+	if is_instance_valid(_current_water) and _current_water.is_point_underwater(lira_pos):
 		return _current_water
 	_current_water = null
 	for v in _water_list:
-		if is_instance_valid(v) and v.holds_point(lira_pos):
+		print
+		if is_instance_valid(v) and v.is_point_underwater(lira_pos):
 			_current_water = v
 			break
 	return _current_water

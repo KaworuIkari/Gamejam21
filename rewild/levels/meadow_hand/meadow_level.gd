@@ -1,22 +1,5 @@
 extends Node3D
 
-## temp: for testing only
-@onready var world_bgm : FmodEventEmitter2D = $WorldBGM
-## temp: debug height fade. Remove when done.
-const DBG_LOW_Y := 30.0    # SFX full, BGM silent
-const DBG_HIGH_Y := 40.0   # SFX silent, BGM full
-
-func _debug_height_volumes() -> void:
-	var t := clampf(inverse_lerp(DBG_LOW_Y, DBG_HIGH_Y, player.global_position.y), 0.0, 1.0)
-	_debug_set_bus_volume("bus:/SFX", 1.0 - t)
-	_debug_set_bus_volume("bus:/BGM", t)
-
-## temp: debug. Check the bus path and set_volume name against your GDExtension docs.
-func _debug_set_bus_volume(path: String, v: float) -> void:
-	# Keep the height test; multiply its gain by the user's audio setting.
-	SettingsManager.set_fmod_mix(path, v)
-
-
 const PAUSE_MENU = preload("res://ui/in_game/pause_menu.tscn")
 ## Leaf materials of the stylized_nature trees (set as external materials in their
 ## .gltf imports) and the FantasyForest giant tree: their leaves grow in with the
@@ -57,6 +40,7 @@ const OpeningSequence := preload("res://levels/meadow_hand/opening_sequence.gd")
 const StartupChecks := preload("res://levels/meadow_hand/startup_checks.gd")
 const CabinStory := preload("res://levels/meadow_hand/cabin_story.gd")
 const PUMP_PATH := ^"Enviroment/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch"
+@onready var bgm_player: BGM_Player = $BGM_Player
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
 @onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/Camera3D
 @onready var player: Node3D = $SubViewportContainer/PixelateSubViewport/LIRA
@@ -102,6 +86,8 @@ func _ready() -> void:
 	awakening.sea = $SubViewportContainer/PixelateSubViewport/Water/Sea
 	awakening.requires = $Enviroment/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
 	add_child(awakening)
+	awakening.awakening_started.connect(_on_leon_awakening_started)
+	awakening.awakening_finished.connect(_on_leon_awakening_finished)
 	var initial := InitialState.new()
 	initial.name = "InitialState"
 	initial.green_spots = {$Enviroment/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
@@ -141,14 +127,11 @@ func _ready() -> void:
 	regrowth.name = "TreeRegrowth"
 	add_child(regrowth)
 	add_child(PAUSE_MENU.instantiate())
-	_debug_height_volumes()
 	SettingsManager.refresh_fmod_audio()
-	world_bgm.play()
 
 func _process(delta: float) -> void:
 	# UI 补丁：存档里的游戏时长
 	SaveManager.add_play_time(delta)
-	_debug_height_volumes()
 
 func _exit_tree() -> void:
 	SettingsManager.reset_fmod_mix()
@@ -162,3 +145,10 @@ func _find_jetpack_prop() -> Node3D:
 			if not player.is_ancestor_of(node):
 				return node
 	return null
+
+
+func _on_leon_awakening_started() -> void:
+	bgm_player._play_epic_bgm()
+
+func _on_leon_awakening_finished() -> void:
+	bgm_player.release(5.0)  # optional: bring world music back after a long silence

@@ -48,7 +48,6 @@ var _wave_speed_cache:float = 1.0
 
 func _ready() -> void:
 	add_to_group(&"water_surfaces")
-	print(name, " is ready")
 	if is_nan(full_level):
 		full_level = global_position.y
 	if fit_to_basin or not cutouts.is_empty():
@@ -133,6 +132,9 @@ func is_point_underwater(point: Vector3) -> bool:
 		return false
 	var t := Time.get_ticks_msec() / 1000.0 * _wave_speed_cache
 	return point.y < global_position.y + _wave(Vector2(point.x, point.z), t) * _wave_height_cache
+
+	# alternative version, without cut-out
+	# return water_volume.is_point_submerged(point)
 
 
 ## True when `point` is inside this water's footprint (its basin, if traced), at any height.
@@ -274,9 +276,6 @@ func get_plane_surface_y() -> float:
 
 ## True when the point is in this water's basin (or footprint) and not inside a cutout.
 func holds_point(point: Vector3) -> bool:
-	# alternative version, without cut-out
-	# return water_volume.is_point_submerged(point)
-
 	# original version
 	if not covers(point):
 		return false

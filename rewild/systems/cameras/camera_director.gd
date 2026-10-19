@@ -42,9 +42,18 @@ func push(view: StringName) -> void:
 
 
 ## Hands control back to whatever sits beneath. Never empties the base.
-func pop() -> void:
-	if _stack.size() > 1:
-		_stack.pop_back()
+func pop(instant := false) -> void:
+	if _stack.size() <= 1:
+		return
+	_stack.pop_back()
+	var pcam := _views.get(_resolve()) as PhantomCamera3D
+	if instant and pcam != null and is_instance_valid(pcam):
+		var saved := pcam.tween_duration
+		pcam.tween_duration = 0.0
+		_apply()
+		await get_tree().process_frame
+		pcam.tween_duration = saved
+	else:
 		_apply()
 		
 func current() -> StringName:
