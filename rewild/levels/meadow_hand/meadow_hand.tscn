@@ -698,6 +698,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 342.91605, 54.48801, 548.5976
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1903030697]
 environment = SubResource("Environment_2lqwi")
 
+[node name="CrashsiteOutpostV2_Cargo_Box_038#CrashsiteCrewTablet" parent="." unique_id=1861671497 instance=ExtResource("ReadableTabletScene")]
+transform = Transform3D(0.9887711, 0, -0.14943814, 0, 1, 0, 0.14943814, 0, 0.9887711, 0, 0.965, 0)
+read_event = &"cabin_crew_read"
+content = ExtResource("CrashsiteCrewContent")
+
+[node name="CrashsiteOutpostV2_Cargo_Box_034#CrashsiteDeliveryTablet" parent="." unique_id=1777589251 instance=ExtResource("ReadableTabletScene")]
+transform = Transform3D(0.9915619, 0, -0.12963414, 0, 1, 0, 0.12963414, 0, 0.9915619, -0.08, 0.965, 0.02)
+read_event = &"cabin_delivery_read"
+content = ExtResource("CrashsiteDeliveryContent")
+
 [node name="WorldBGM" type="FmodEventEmitter2D" parent="." unique_id=1742352443]
 event_name = "event:/BGM/Snowman"
 event_guid = "{0d3c9ddb-7127-45bd-bdcb-64e05328d28a}"
@@ -780,12 +790,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_water")
 fit_to_basin = true
 
 [node name="Sea" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=767396377 node_paths=PackedStringArray("cutouts") instance=ExtResource("14_i4ovm")]
-transform = Transform3D(999.99835, 0, 0, 0, 1, 0, 0, 0, 999.99835, 19.829552, 25.74011, 109.67724)
+transform = Transform3D(100, 0, 0, 0, 0.1, 0, 0, 0, 100, 19.829552, 25.74011, 109.67724)
 mesh = SubResource("PlaneMesh_water")
 surface_material_override/0 = SubResource("ShaderMaterial_water")
 cutouts = [NodePath("../Lake"), NodePath("../River"), NodePath("../Froglake"), NodePath("../Pond")]
 
-[node name="StylizedWater2" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=537853457 instance=ExtResource("14_i4ovm")]
+[node name="PumpHouseWater" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=537853457 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.3, 39.32513, 46.827694, -161.39017)
 mesh = SubResource("PlaneMesh_water")
 surface_material_override/0 = SubResource("ShaderMaterial_water")
@@ -1543,3 +1553,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 283.10007, 24.543869, -33.894
 
 [editable path="Leon2"]
 [editable path="CrashsiteOutpostV2"]
+[editable path="CrashsiteOutpostV2/crashsite_edit"]
