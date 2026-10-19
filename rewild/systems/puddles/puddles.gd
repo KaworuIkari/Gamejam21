@@ -37,6 +37,15 @@ const Puddle := preload("res://systems/puddles/puddle.gd")
 ## Flow substeps per physics frame. More = water runs faster.
 @export var substeps := 1
 
+@export_group("Greening")
+## Ground under the water gets wet on the GrowthMap, so it greens wherever the water
+## runs or pools, not only where the blob landed.
+@export var green_ground := true
+## Water this deep (metres) soaks the ground fully; shallower water wets it less.
+@export var green_full_depth := 0.01
+## Seconds between handing the wet ground to the GrowthMap.
+@export var green_interval := 0.3
+
 @export_group("Look")
 @export var material: ShaderMaterial = preload("res://systems/puddles/puddle_material.tres")
 

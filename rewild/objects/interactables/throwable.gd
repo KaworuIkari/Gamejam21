@@ -13,7 +13,7 @@ signal landed(in_target: bool)
 ## The Node3D that gets carried and thrown.
 @export var prop: Node3D
 ## How close LIRA must be to the middle of the prop's meshes to grab it, in metres.
-@export var pickup_radius := 4.0
+@export var pickup_radius := 2.0
 ## Size of the prop's largest side while carried (and after it's thrown), in metres.
 @export var held_size := 0.9
 @export var throw_speed := 17.0

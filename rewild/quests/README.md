@@ -66,8 +66,10 @@ The terminal (Tab, or E at the lake station) has two columns
 
 - **Core battery**: charges with the average recovery of the four measured regions
   (lake, forest, mountain, factory; `levels/meadow_hand/restoration_regions.tscn`).
-  `levels/meadow_hand/battery_charge.gd` computes it and, once the terminal is awake
-  and the charge reaches 100%, grants the `battery` ability (for the boat ending).
+  `levels/meadow_hand/battery_charge.gd` computes it. At 100% the HUD says so once and
+  the terminal says to return; interacting with the lake station then hands over the
+  battery (`battery_collected`, ability `battery`) for the boat ending. Opening the
+  terminal with Tab does not.
   The HUD in the top-left shows the same charge and each region.
 - **Equipment upgrades**: every cleared Clearable tagged `garbage` is one material.
   Spending is recorded as `garbage_spent`, so material = garbage − spent. Two tracks,
@@ -123,10 +125,9 @@ ordinary garbage (they also record radar_litter_00..05 so they don't respawn).
 
 06 opens once 05 is done (the station's briefing dialogue was removed). Its two parallel steps are
 alternatives (`complete_any = true`), not two mandatory goals. Only the selected
-route is checked in the archive; the other is labelled unselected. Both routes
-appear on the HUD and in the task terminal. The boat's intermediate collection
-uses QuestStep.progress_event/target, displayed as harbor_parts 0/6, while its
-completion event remains ending_boat. Earlier quests keep their existing rules.
+route is checked in the archive; the other is labelled unselected. The boat route
+loads the radar coordinates and installs the battery (`boat_battery_installed`,
+the step's progress event) before `ending_boat`.
 
 FinaleStory is created by meadow_level.gd and uses the placed RadioObservatory
 and IslandHarbor. The disruptor is only soft particles and an interaction sphere
@@ -134,15 +135,9 @@ parented to Model/Service_Platform (the second-floor deck). The boat point is
 parented to Workboat_Hull_014/Visual/Workboat_Hull beside the existing hull.
 Moving those models carries their lights and interaction spheres with them.
 
-Ten harbor piles each offer one scrap part. Collection unlocks after 05. Six
-parts suffice; the displayed ledger caps at six. Per-pile events harbor_pile_00
-through harbor_pile_09 prevent repeated collection after loading. No inventory
-or harbor recovery percentage is required. Pile positions are relative to the
-harbor yard/apron and use terrain height if it rises above that surface.
-
 Startup always uses ConfirmPopup with cancel selected by default. The boat
-installs the module and starts in one confirmed action after collecting six
-parts. Before confirmation, both choices remain open. Quests.complete_choice
+departs in one confirmed action once the coordinates and battery are loaded.
+Before confirmation, both choices remain open. Quests.complete_choice
 consumes chaos_energy_module and commits exactly one branch synchronously.
 ending_disruptor/ending_boat lock the other route, persist in normal quest save
 data, and reopen the corresponding ending placeholder on subsequent loading.
@@ -169,6 +164,6 @@ Presentation lives in `ui/in_game/startup/startup_hint.tscn` and its script: one
 
 `00_investigate_cabin.tres` has one required step, `pump_started`. The two cabin tablets are optional reading (`optional_steps`: `cabin_delivery_read`, `cabin_crew_read`): they are counted only when read to the last confirmation and keep their glimmer until read, but the pump works without them. The shared upper-right card shows `QUEST_CABIN_PUMP` as the objective. All existing 10-second, pause-review and terminal-retirement rules apply.
 
-`levels/meadow_hand/cabin_story.gd` plays the Act I card. WaterFlowSwitch reports completion after the existing flow/rise animation, ending 00 and starting 01 at the lake station activation step. A non-blocking “第一幕 / Act I” card fades in and out once; edit its timing/presentation in `ui/in_game/story/act_title.*`. `act_one_started` is available for later camera/animation work.
+WaterFlowSwitch reports completion after the existing flow/rise animation, ending 00 and starting 01 at the lake station activation step. (The “第一幕 / Act I” card was removed.)
 
 The level runs CabinStory.migrate_save before loading quests: old 01 indices shift past the removed pump step, prior progress/equipment are retained, and older saves without startup checks retain access to the pump. Completed pumps restore flowing water before child nodes become ready. `cabin_story_version` prevents repeat migration; `act_one_entered` prevents replaying the chapter card. These flags and reading event counters use normal SaveManager persistence; no extra save files are created. F6 without a fresh-save marker follows the legacy compatibility path. New games retain the opening and self-check sequence.

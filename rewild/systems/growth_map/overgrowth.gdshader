@@ -12,7 +12,7 @@ uniform vec4 albedo_color : source_color = vec4(1.0);
 uniform float alpha_scissor : hint_range(0.0, 1.0) = 0.2;
 
 uniform sampler2D growth_map : hint_default_white, filter_linear, repeat_disable;
-uniform vec2 map_origin = vec2(-512.0);  // must match GrowthMap.MAP_ORIGIN
+uniform vec2 map_origin = vec2(-512.0, -640.0);  // must match GrowthMap.MAP_ORIGIN
 uniform float map_size = 1024.0;         // must match GrowthMap.MAP_SIZE
 
 group_uniforms growth;
