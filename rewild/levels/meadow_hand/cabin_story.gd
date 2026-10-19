@@ -7,16 +7,11 @@ var _title_pending := false
 
 
 func _ready() -> void:
-	pump.trigger.can_interact = _can_start_pump
 	pump.trigger._used = pump.is_on
 	Quests.quest_completed.connect(_on_quest_completed)
 	for quest in Quests.quests:
 		if quest.get_id() == &"00_investigate_cabin" and Quests.status(quest) == Quests.Status.DONE:
 			_on_quest_completed(quest)
-
-
-func _can_start_pump() -> bool:
-	return Quests.event_count(&"cabin_delivery_read") > 0 and Quests.event_count(&"cabin_crew_read") > 0
 
 
 func _on_quest_completed(quest: Quest) -> void:

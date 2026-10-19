@@ -93,8 +93,6 @@ func _objective_text() -> String:
 	if quest == null:
 		return ""
 	var objective := Quests.step_label(quest, Quests.current_step(quest))
-	if quest.get_id() == &"00_investigate_cabin" and Quests.current_step(quest) < 2:
-		objective = tr("QUEST_CABIN_STEP")
 	return tr("STARTUP_CURRENT_TARGET") % objective
 
 

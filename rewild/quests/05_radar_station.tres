@@ -2,19 +2,6 @@
 
 [ext_resource type="Script" uid="uid://duc3hutu3bkfv" path="res://systems/quests/quest.gd" id="1"]
 [ext_resource type="Script" uid="uid://bes5e7vhx38hw" path="res://systems/quests/quest_step.gd" id="2"]
-[ext_resource type="Resource" uid="uid://de6c6xi5d4okk" path="res://quests/04_energy_core.tres" id="3"]
-
-[sub_resource type="Resource" id="optional_clean"]
-script = ExtResource("2")
-text = "QUEST_RADAR_OPTIONAL_CLEAN"
-event = &"radar_garbage"
-count = 6
-
-[sub_resource type="Resource" id="step_restore"]
-script = ExtResource("2")
-text = "QUEST_RADAR_STEP_RESTORE"
-event = &"mountain_restoration"
-count = 30
 
 [sub_resource type="Resource" id="step_start"]
 script = ExtResource("2")
@@ -26,19 +13,12 @@ script = ExtResource("2")
 text = "QUEST_RADAR_STEP_COORDINATES"
 event = &"radar_coordinates"
 
-[sub_resource type="Resource" id="step_deliver"]
-script = ExtResource("2")
-text = "QUEST_RADAR_STEP_DELIVER"
-event = &"radar_delivered"
-
 [resource]
 script = ExtResource("1")
 title = "QUEST_RADAR_TITLE"
 description = "QUEST_RADAR_DESC"
 location = "QUEST_RADAR_LOCATION"
-requires = Array[ExtResource("1")]([ExtResource("3")])
-steps = Array[ExtResource("2")]([SubResource("step_restore"), SubResource("step_start"), SubResource("step_coordinates"), SubResource("step_deliver")])
-optional_steps = Array[ExtResource("2")]([SubResource("optional_clean")])
+steps = Array[ExtResource("2")]([SubResource("step_start"), SubResource("step_coordinates")])
 rewards = Dictionary[StringName, int]({
 &"chaos_energy_module": 1
 })

@@ -1,14 +1,10 @@
 extends CanvasLayer
 ## Owns the HUD entry and Tab routing. PauseMenu owns pause and mouse state.
-## Also shows the tracked quest and the restoration percentages (top left) and
-## quest / unlock notices (top centre).
+## Also shows the battery charge and region recovery (top left) and unlock notices
+## (top centre).
 const ACTION := &"task_terminal"
 const TaskPage = preload("res://ui/in_game/tasks/task_page.gd")
-const CLEAN_UP: Quest = preload("res://quests/02_clean_up.tres")
 var _pause_menu: CanvasLayer
-var _tracker: VBoxContainer
-var _tracker_title: Label
-var _tracker_step: Label
 var _restore: VBoxContainer
 var _restore_total: Label
 var _restore_regions: Label
@@ -28,7 +24,7 @@ func _ready() -> void:
 	_page.close_requested.connect(_request_close)
 	SettingsManager.bindings_changed.connect(_refresh_binding)
 	_refresh_binding()
-	_build_quest_hud()
+	_build_hud()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
@@ -48,23 +44,13 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 		_request_open()
 
-# --- Quest HUD ------------------------------------------------------------------------
+# --- HUD ------------------------------------------------------------------------------
 
-func _build_quest_hud() -> void:
+func _build_hud() -> void:
 	var column := VBoxContainer.new()
 	column.position = Vector2(32, 32)
 	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	column.add_theme_constant_override(&"separation", 14)
 	_hud.add_child(column)
-	_tracker = VBoxContainer.new()
-	_tracker.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_tracker_title = _hud_label(26)
-	_tracker_step = _hud_label(22)
-	_tracker_step.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	get_viewport().size_changed.connect(_refresh_tracker)
-	_tracker.add_child(_tracker_title)
-	_tracker.add_child(_tracker_step)
-	column.add_child(_tracker)
 	_build_restoration_hud(column)
 	_toast = _hud_label(32)
 	_toast.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
@@ -73,20 +59,14 @@ func _build_quest_hud() -> void:
 	_toast.position.y = 96
 	_toast.modulate.a = 0.0
 	_hud.add_child(_toast)
-	var quests := get_node_or_null(^"/root/Quests")
-	if quests == null:
-		_tracker.hide()
-		return
-	quests.changed.connect(_refresh_tracker)
-	quests.quest_started.connect(func(q: Quest) -> void: _notify(tr("QUEST_TOAST_STARTED") % tr(q.title)))
-	quests.quest_completed.connect(func(q: Quest) -> void: _notify(tr("QUEST_TOAST_DONE") % tr(q.title)))
-	quests.ability_changed.connect(func(a: StringName, level: int) -> void:
-		if a != quests.TERMINAL and level > 0:
-			if a == &"jetpack" and level == 1:
-				_notify(tr("QUEST_TOAST_JETPACK_ENABLED"))
-			else:
-				_notify(tr("QUEST_TOAST_ABILITY") % TaskPage.ability_name(a, level)))
-	_refresh_tracker()
+	# Unlock notices only; upgrades bought at the terminal show there instead.
+	Quests.ability_changed.connect(func(a: StringName, level: int) -> void:
+		if level <= 0 or a == Quests.TERMINAL or a in WaterGunUpgrades.TRACKS:
+			return
+		if a == &"jetpack" and level == 1:
+			_notify(tr("QUEST_TOAST_JETPACK_ENABLED"))
+		else:
+			_notify(tr("QUEST_TOAST_ABILITY") % TaskPage.ability_name(a, level)))
 
 func _hud_label(size: int) -> Label:
 	var l := Label.new()
@@ -96,25 +76,6 @@ func _hud_label(size: int) -> Label:
 	l.add_theme_constant_override(&"outline_size", 8)
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return l
-
-func _refresh_tracker() -> void:
-	var quests := get_node_or_null(^"/root/Quests")
-	var q: Quest = quests.tracked_quest() if quests else null
-	_tracker.visible = q != null
-	if q == null:
-		return
-	_tracker_title.text = tr(q.title)
-	_tracker_step.custom_minimum_size.x = maxf(120,minf(620,get_viewport().get_visible_rect().size.x-64))
-	var lines: Array[String] = []
-	for i in quests.open_steps(q):
-		lines.append("› " + quests.step_label(q,i))
-	for optional in q.optional_steps:
-		if quests.event_count(optional.event) < optional.count:
-			lines.append("› " + TaskPage.optional_step_label(optional,quests))
-	if quests.has_ability(&"jetpack_equipped") and not quests.has_ability(&"jetpack"):
-		var cleanup: Vector2i = quests.step_progress(CLEAN_UP, 0)
-		lines.append(tr("JETPACK_LOCKED_RETURN" if cleanup.x >= cleanup.y else "JETPACK_LOCKED_CLEANUP"))
-	_tracker_step.text = "\n".join(lines)
 
 # --- Restoration HUD ------------------------------------------------------------------
 
@@ -140,13 +101,13 @@ func _refresh_restoration() -> void:
 	_restore.visible = not regions.is_empty()
 	if regions.is_empty():
 		return
-	_restore_total.text = "%s  %d%%" % [tr("RESTORE_TOTAL"), TaskPage.percent(growth.progress_total)]
+	_restore_total.text = "%s  %d%%" % [tr("TERMINAL_BATTERY_CHARGE"), TaskPage.percent(BatteryCharge.charge())]
 	var lines: Array[String] = []
 	for r in regions:
 		lines.append("%s  %d%%" % [tr(r.title), TaskPage.percent(r.value)])
 	_restore_regions.text = "\n".join(lines)
 
-## Queued so a quest completing, its reward and the next quest each get their moment.
+## Queued so several unlocks in a row each get their moment.
 func _notify(text: String) -> void:
 	_toast_queue.append(text)
 	if _toast_tween == null or not _toast_tween.is_running():

@@ -33,9 +33,10 @@ var _fire_cd := 0.0
 @export_range(0, 9) var start_jetpack_level := 0
 ## Per level (first entry = level 1): splash radius of one shot, in metres.
 @export var water_gun_splash := PackedFloat32Array([4.0, 6.0, 8.0])
-## Per level: seconds between shots.
-@export var water_gun_cooldown := PackedFloat32Array([0.6, 0.45, 0.35])
-@export var water_tank_capacity := PackedFloat32Array([10, 20, 30])
+## Per fire-rate upgrade bought at the terminal (first entry = none): seconds between shots.
+@export var water_gun_cooldown := PackedFloat32Array([0.6, 0.48, 0.38, 0.3])
+## Per tank upgrade bought at the terminal (first entry = none): water the tank holds.
+@export var water_tank_capacity := PackedFloat32Array([10, 15, 22, 30])
 ## Per level: jetpack energy (fuel).
 @export var jetpack_energy := PackedFloat32Array([100.0, 200.0, 240.0])
 var water_gun_level := 0
@@ -219,8 +220,8 @@ func _apply_abilities() -> void:
 	set_water_gun(water_gun_level > 0)
 	if water_gun_level > 0:
 		splash_radius = _per_level(water_gun_splash, water_gun_level, splash_radius)
-		fire_cooldown = _per_level(water_gun_cooldown, water_gun_level, fire_cooldown)
-		tank.capacity = _per_level(water_tank_capacity, water_gun_level, tank.capacity)
+		fire_cooldown = _per_level(water_gun_cooldown, quests.ability_level(WaterGunUpgrades.RATE) + 1 if quests else 1, fire_cooldown)
+		tank.capacity = _per_level(water_tank_capacity, quests.ability_level(WaterGunUpgrades.TANK) + 1 if quests else 1, tank.capacity)
 	jetpack.visible = jetpack_level > 0 or (quests != null and quests.has_ability(&"jetpack_equipped"))
 	if jetpack_level > 0:
 		max_energy = _per_level(jetpack_energy, jetpack_level, max_energy)

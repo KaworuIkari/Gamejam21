@@ -1,0 +1,30 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_waterworks_nature_v1/Woodland_Pump_House_Restorable.tscn" id="1_7ui70"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_waterworks_nature_v1/Woodland_Wooden_Bridge_Restorable.tscn" id="2_gm0m8"]
+
+[sub_resource type="Environment" id="Environment_qdcjg"]
+background_mode = 1
+background_color = Color(0.15, 0.18, 0.16, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.85, 0.75, 1)
+ambient_light_energy = 0.7
+
+[node name="RegrowthGallery" type="Node3D" unique_id=1741814076]
+
+[node name="Woodland_Pump_House_Barren" type="Node3D" parent="." unique_id=765213712 instance=ExtResource("1_7ui70")]
+
+[node name="Woodland_Wooden_Bridge_Barren" type="Node3D" parent="." unique_id=624467264 instance=ExtResource("2_gm0m8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="@WorldEnvironment@4" type="WorldEnvironment" parent="." unique_id=2120116015]
+environment = SubResource("Environment_qdcjg")
+
+[node name="@DirectionalLight3D@5" type="DirectionalLight3D" parent="." unique_id=1694948328]
+transform = Transform3D(0.8660254, 0.40957603, -0.28678823, 0, 0.57357645, 0.81915206, 0.5, -0.7094065, 0.49673176, 0, 0, 0)
+
+[node name="@Camera3D@6" type="Camera3D" parent="." unique_id=1680162416]
+transform = Transform3D(0.9396926, -0.17101006, 0.2961981, 0, 0.8660254, 0.5, -0.34202012, -0.4698463, 0.81379765, 13, 9, 15)
+projection = 1
+current = true
+size = 19.0

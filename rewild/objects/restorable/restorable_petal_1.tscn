@@ -1,9 +1,9 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://mcn0ll0l1uuh"]
 
-[ext_resource type="Script" path="res://systems/world_objects/restorable.gd" id="1"]
-[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/Petal/Petal_1.gltf" id="2"]
+[ext_resource type="Script" uid="uid://b3v6o2hvrj2c1" path="res://systems/world_objects/restorable.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dv2gwn665oxvp" path="res://assets/models/stylized_nature/Petal/Petal_1.gltf" id="2"]
 
-[node name="Restorable_Petal_1" type="Node3D"]
+[node name="Restorable_Petal_1" type="Node3D" unique_id=1620603305]
 script = ExtResource("1")
 stages = Array[PackedScene]([null, ExtResource("2")])
 thresholds = PackedFloat32Array(0.65)

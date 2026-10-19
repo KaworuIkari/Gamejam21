@@ -41,7 +41,7 @@ const FinaleStory = preload("res://levels/meadow_hand/finale_story.gd")
 @export var finale_disruptor_camera: Camera3D
 @export var finale_boat_camera: Camera3D
 const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
-## What stays switched off at the start of a new game (animals, companion bot).
+## What stays switched off at the start of a new game (animals; the bot sleeps in FactoryStory).
 const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
 const OpeningSequence := preload("res://levels/meadow_hand/opening_sequence.gd")
 const StartupChecks := preload("res://levels/meadow_hand/startup_checks.gd")
@@ -94,14 +94,13 @@ func _ready() -> void:
 	add_child(awakening)
 	var initial := InitialState.new()
 	initial.name = "InitialState"
-	initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals, $SubViewportContainer/PixelateSubViewport/CubeBotCompanion]
+	initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals]
 	initial.green_spots = {$Enviroment/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
 	add_child(initial)
 	var factory := FactoryStory.new()
 	factory.name = "FactoryStory"
 	factory.anchor = $Enviroment/East_Robot_factory/DesertRoboticsLaboratory
 	factory.terrain = terrain
-	factory.initial = initial
 	factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
 	add_child(factory)
 	var radar := RadarStory.new()
@@ -116,6 +115,9 @@ func _ready() -> void:
 	finale.terrain = terrain
 	finale.cameras = {&"disruptor":finale_disruptor_camera,&"boat":finale_boat_camera}
 	add_child(finale)
+	var battery := BatteryCharge.new()
+	battery.name = "BatteryCharge"
+	add_child(battery)
 	var regrowth := TreeRegrowth.new()
 	regrowth.name = "TreeRegrowth"
 	add_child(regrowth)

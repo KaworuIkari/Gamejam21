@@ -9,7 +9,13 @@ signal animation_finished(anim_name: StringName)
 
 const EYE_BLUE := Color(0.25, 0.65, 1.0)
 const EYE_YELLOW := Color(1.0, 0.75, 0.12)
+const EYE_OFF := Color(0.04, 0.045, 0.05)
 
+## Off: the eye is a dark lens with no glow or light (e.g. a powered-down bot).
+@export var eye_on := true:
+	set(v):
+		eye_on = v
+		_apply_eye()
 ## 0 = blue, 1 = yellow. Animate it, tween it, or call glow_to().
 @export_range(0.0, 1.0) var eye_mix := 0.0:
 	set(v):
@@ -112,18 +118,21 @@ func _apply_eye() -> void:
 	if _glow_mat == null:
 		return
 	var c := eye_color()
-	_glow_mat.albedo_color = c
+	_glow_mat.albedo_color = c if eye_on else EYE_OFF
 	_glow_mat.emission = c
+	_glow_mat.emission_enabled = eye_on
 	_glow_mat.emission_energy_multiplier = eye_emission
-	_core_mat.albedo_color = c.lerp(Color.WHITE, 0.75)
+	_core_mat.albedo_color = c.lerp(Color.WHITE, 0.75) if eye_on else EYE_OFF
 	_core_mat.emission = c.lerp(Color.WHITE, 0.6)
+	_core_mat.emission_enabled = eye_on
 	_core_mat.emission_energy_multiplier = eye_emission * 1.4
+	var lit := eye_on and eye_light_energy > 0.0
 	_eye_light.light_color = c
 	_eye_light.light_energy = eye_light_energy
-	_eye_light.visible = eye_light_energy > 0.0
+	_eye_light.visible = lit
 	_beam.light_color = c
 	_beam.light_energy = eye_light_energy * 2.0
-	_beam.visible = cast_beam and eye_light_energy > 0.0
+	_beam.visible = cast_beam and lit
 
 
 # sounds

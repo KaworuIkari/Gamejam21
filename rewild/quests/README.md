@@ -1,8 +1,9 @@
 # Quests
 
 Every `.tres` file in this folder is a quest. Files run in name order, so prefix them
-`01_`, `02_`, ... The terminal (Tab, or E at the lake station) and the tracker in the
-top-left corner show them automatically.
+`01_`, `02_`, ... Quests are now internal bookkeeping (events, rewards, saves): the
+terminal no longer lists them and there is no quest tracker or quest toast. The
+terminal shows the battery charge and the equipment upgrades instead (see below).
 
 ## Add a quest
 
@@ -58,62 +59,69 @@ ability is unlocked.
 
 Debug builds: **F9** completes the current step of the tracked quest.
 
-## Starter equipment and meadow cleanup hand-in
+## Main flow after the terminal
+
+The terminal (Tab, or E at the lake station) has two columns
+(`ui/in_game/tasks/task_page.*`):
+
+- **Core battery**: charges with the average recovery of the four measured regions
+  (lake, forest, mountain, factory; `levels/meadow_hand/restoration_regions.tscn`).
+  `levels/meadow_hand/battery_charge.gd` computes it and, once the terminal is awake
+  and the charge reaches 100%, grants the `battery` ability (for the boat ending).
+  The HUD in the top-left shows the same charge and each region.
+- **Equipment upgrades**: every cleared Clearable tagged `garbage` is one material.
+  Spending is recorded as `garbage_spent`, so material = garbage − spent. Two tracks,
+  fire rate (`water_gun_rate`) and tank capacity (`water_tank`), 3 upgrades each at
+  5 material (`systems/upgrades/water_gun_upgrades.gd`: COST, MAX_LEVEL). Their
+  values are LIRA → Abilities → Water Gun Cooldown / Water Tank Capacity (first
+  entry = no upgrade). Splash radius still follows `water_gun` level.
 
 First contact with the physical lake terminal grants `water_gun: 1` and
-`jetpack_equipped: 1` immediately after the briefing, before opening the task
-page. `jetpack_equipped` shows the backpack model but grants no flight. Until
-`jetpack` reaches level 1, energy stays at zero and cannot regenerate. The HUD
-explains that cleanup and a return to the central island are required.
+`jetpack_equipped: 1` (backpack visible, no flight). Flight (`jetpack: 1`) comes from
+repairing the factory bot (quest 04). Robot and radar have no prerequisites.
 
-Clearables (garbage included) can be cleared at any time, before the terminal too.
-02 now has two sequential steps: clear 10 more `garbage` (Count Earlier off: only
-piles cleared after 02 starts count), then physically return to
-the lake station and report `meadow_cleanup_delivered`. Clearing alone leaves
-02 active, keeps 03 locked, and does not enable flight. The station plays the
-submission/power-restoration briefing before reporting the delivery event;
-the existing 02 reward enables `jetpack: 1`. Tab only views the task page.
+Removed dialogues and notices (station hand-ins, quest toasts, the bot's wake-up
+dialogue, radar key lines) are listed with their text keys in
+`dialogue/backup/README_备份.md`.
 
-Existing saves that already completed 02 and earned flight retain both flight
-and their subsequent quest progress. Existing terminal owners gain the starter
-equipment flag and water gun when loading, without prematurely enabling flight.
-The first quest's water-gun reward remains an idempotent fallback.
+## Quest 04 — gears and the sleeping bot
 
-## Quest 05 — radar information
+No prerequisites. Steps: collect 6 `factory_gear`, then `core_activated`; reward
+`jetpack: 1`.
 
-04 grants `radar_key: 1` through the companion bot dialogue. Existing saves
-with 04 already done receive the missing key when the level's RadarStory starts.
-The key is checked automatically and remains available after startup.
+The companion bot stands idle in the factory from the start (where
+`CubeBotCompanion` is placed in meadow_hand.tscn): not moving, eye dark with no
+glow or light (`CubeBot.eye_on = false`).
 
-05 runs in order: `mountain_restoration >= 30`, `radar_started`,
-`radar_coordinates`, then `radar_delivered`. The reward is
-`chaos_energy_module: 1`. Reaching 30% only unlocks startup; it does not finish
-the mission. Six radar-side litter props have the additional `radar_garbage` tag,
-but no specific litter count is required. Mountain now covers the radar hill with a 90 m radius. meadow_level.gd aligns
-its centre with the placed RadioObservatory on each load; adjust the radius in
-restoration_regions.tscn if the authored hill footprint changes.
+Gears (`objects/pickups/gear/gear_pickup.tscn`) are in the world from the start
+and are picked up with the interact key. Each reports `factory_gear` plus its own
+saved event, so collected gears stay with LIRA across saves and are not respawned.
 
-RadarStory attaches a RadarConsolePoint marker and interaction to the existing
-Model/Auxiliary_Cabinet, so moving that model also moves its light/use zone.
-Terrain height places the surrounding litter. GrowthMap percentage increments
-are compared against saved counters to avoid counting the same recovery twice.
-Pre-restored ground counts when 05 becomes available.
+Placing gears by hand: drag `gear_pickup.tscn` into meadow_hand.tscn (e.g. under
+`Enviroment/East_Robot_factory`) and move it with the gizmo; the origin is the
+gear's centre. Every GearPickup in the level is used and saved by its node path
+(`factory_gear_<snake_case path>`), so don't rename or re-parent them once
+players have saves. With none placed, FactoryStory falls back to its
+`GEAR_SPOTS` list. 6 are needed (`count` of the gear step in
+04_energy_core.tres and `GEARS_NEEDED` in factory_story.gd): change both together.
+Gear highlight: the SoftSparkles node.
 
-Readout and hand-in use the existing Dialogic layout. Bilingual text is in
-i18n/strings.csv: RADAR_READOUT_* and RADAR_DELIVERY_*. The exact coordinates
-are deliberately a placeholder. Interrupted reading can be resumed at the radar.
-Only E at the lake terminal submits information; opening tasks with Tab does not.
-All flags/key/module use the existing quest save data. No inventory is added.
-Quest 06 follows hand-in; see the final-choice section below.
+Near the sleeping bot a greyed prompt shows the gear count (`ROBOT_REPAIR_GEARS`).
+With every gear the bot glimmers and can be repaired: it shakes, its eye lights
+yellow and fades to blue, `core_activated` is reported (04 completes, jetpack
+enabled) and the bot follows LIRA. Timings are in `FactoryStory._repair`.
 
+## Quest 05 — radar coordinates
 
-Old one-step 05 saves resume at the appended startup/readout/delivery steps.
-QuestLog reconciles completed sequential quests whose saved step count is smaller
-than their current resource, preserving existing completed steps and counters.
+No prerequisites (no key, no mountain recovery). Steps: `radar_started`, then
+`radar_coordinates` (read the readout at the radar's auxiliary cabinet to the
+end); reward `chaos_energy_module: 1`, which the current finale still uses. The
+readout text is `RADAR_READOUT_COORDINATES`. Six litter piles around the radar are
+ordinary garbage (they also record radar_litter_00..05 so they don't respawn).
 
 ## Quest 06 — final choice
 
-05 hand-in now briefs both routes and opens 06. Its two parallel steps are
+06 opens once 05 is done (the station's briefing dialogue was removed). Its two parallel steps are
 alternatives (`complete_any = true`), not two mandatory goals. Only the selected
 route is checked in the archive; the other is labelled unselected. Both routes
 appear on the HUD and in the task terminal. The boat's intermediate collection
@@ -153,50 +161,14 @@ can use those hooks; no authored camera motion or boat movement is added yet.
 The ending placeholder pauses gameplay, so a future sequence should run with
 PROCESS_MODE_ALWAYS or take over presentation before opening that screen.
 
-### Key acquisition and old-save compatibility
-
-04 has an explicit bot-key dialogue step between core activation and delivery.
-The key is granted by the call events after the bot's key line in
-dialogue/timelines/Factory/core_activated.dtl, not by quest 04 equipment rewards.
-The bot has a recovery conversation until robot_key_received is recorded, so
-an interrupted dialogue can be resumed. Its trigger follows the bot from the
-main viewport to keep its CanvasLayer independent of the pixel SubViewport.
-Completed legacy saves keep their already-earned key and are reconciled with
-the appended quest steps. No password entry is needed and radar startup retains
-the key. Core hand-in requires that key to have been obtained.
-
-New strings, prompts, briefings and ending placeholders are bilingual in
-i18n/strings.csv (FINALE_*, ENDING_*, QUEST_FINALE_* and ROBOT_KEY_RECOVERY).
-The exact radar coordinates and final story text remain placeholders.
-
-
-The mountain_region_radar_hill_v2 counter migrates the changed measurement area
-once. An unfinished recovery step is recalculated from the actual new region;
-startup already earned and completed missions are preserved. No growth-map pixels
-or player save files are erased by this change. The quest threshold stays 30%.
-
-## Optional radar cleanup
-
-05 now displays its existing six radar-side clearables as an optional 0/6 goal
-on the task page and HUD. Quest.optional_steps is a separate display-only list
-of lifetime event counters; it never changes required-step indices, completion
-requirements, or old save states. Unfinished optional goals appear on the HUD
-while the quest is active, and remain visible on its archived task page.
-Each newly cleared pile also records radar_litter_00..05 so it is not respawned
-after loading. Existing radar_garbage totals are retained; displayed progress
-is capped at six. Startup and hand-in still require only the authored 30%
-recovery / key / radar information stages. Cleanup is not an additional gate.
-
-Jetpack per-level energy is now [100, 200, 240]; only level 2 changed.
-
 ## Quest 00 — startup checks and cabin investigation
 
 New saves have `startup_checks: {step: -1, confirmed: false}`. `levels/meadow_hand/startup_checks.gd` waits for the opening fade to finish, then runs perception, walking, jumping and sprinting checks in order. It samples actual camera/player feedback; pauses, dialogue and transitions suspend checks and the 2.5-second feedback hold. Sprinting accumulates 0.8 seconds of actual movement while sprint is held; a brief floor-contact loss or collision pauses progress rather than clearing it. Holding sprint while stationary cannot complete it. Only completed checks are persisted; partial motion is sampled afresh after loading.
 
 Presentation lives in `ui/in_game/startup/startup_hint.tscn` and its script: one non-modal upper-right card for both self-checks and the pre-terminal objective. Each new prompt slides down from above the screen while fading in, and slides up while fading out after at most 10 seconds. Expiry only hides the card; checks continue. Completed checks still advance after their 2.5-second feedback hold. The pause overview reviews the current card without consuming its timeout; settings/save submenus hide it. Obtaining the terminal retires this entire card. Wording is in `i18n/strings.csv` (`STARTUP_*`, `QUEST_CABIN_*`); key labels follow SettingsManager bindings and language changes.
 
-`00_investigate_cabin.tres` contains two parallel reading steps (`cabin_delivery_read`, `cabin_crew_read`), followed by `pump_started`. Both tablets must be read to the last confirmation; cancelling, opening only, or repeating a completed tablet does not add credit. The shared upper-right card keeps the single cabin objective during reading and switches to `QUEST_CABIN_PUMP` once both are read. All existing 10-second, pause-review and terminal-retirement rules apply.
+`00_investigate_cabin.tres` has one required step, `pump_started`. The two cabin tablets are optional reading (`optional_steps`: `cabin_delivery_read`, `cabin_crew_read`): they are counted only when read to the last confirmation and keep their glimmer until read, but the pump works without them. The shared upper-right card shows `QUEST_CABIN_PUMP` as the objective. All existing 10-second, pause-review and terminal-retirement rules apply.
 
-`levels/meadow_hand/cabin_story.gd` gates the pump interaction until both records are read. WaterFlowSwitch reports completion after the existing flow/rise animation, ending 00 and starting 01 at the lake station activation step. A non-blocking “第一幕 / Act I” card fades in and out once; edit its timing/presentation in `ui/in_game/story/act_title.*`. `act_one_started` is available for later camera/animation work.
+`levels/meadow_hand/cabin_story.gd` plays the Act I card. WaterFlowSwitch reports completion after the existing flow/rise animation, ending 00 and starting 01 at the lake station activation step. A non-blocking “第一幕 / Act I” card fades in and out once; edit its timing/presentation in `ui/in_game/story/act_title.*`. `act_one_started` is available for later camera/animation work.
 
 The level runs CabinStory.migrate_save before loading quests: old 01 indices shift past the removed pump step, prior progress/equipment are retained, and older saves without startup checks retain access to the pump. Completed pumps restore flowing water before child nodes become ready. `cabin_story_version` prevents repeat migration; `act_one_entered` prevents replaying the chapter card. These flags and reading event counters use normal SaveManager persistence; no extra save files are created. F6 without a fresh-save marker follows the legacy compatibility path. New games retain the opening and self-check sequence.

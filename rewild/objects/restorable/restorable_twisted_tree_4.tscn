@@ -7,4 +7,6 @@
 [node name="RestorableTwistedTree4" type="Node3D"]
 script = ExtResource("1")
 stages = Array[PackedScene]([ExtResource("2"), ExtResource("3")])
+thresholds = PackedFloat32Array(0.15)
 quest_event = &"tree_restored"
+quest_threshold = 0.6
