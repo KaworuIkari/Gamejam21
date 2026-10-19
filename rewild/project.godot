@@ -44,6 +44,11 @@ gdscript/warnings/int_as_enum_without_cast=0
 [dialogic]
 
 directories/dch_directory={
+"CompanionBot": "res://dialogue/characters/CompanionBot.dch",
+"CrewLog": "res://dialogue/characters/CrewLog.dch",
+"DeliveryRecord": "res://dialogue/characters/DeliveryRecord.dch",
+"LakeTerminal": "res://dialogue/characters/LakeTerminal.dch",
+"RadarSystem": "res://dialogue/characters/RadarSystem.dch",
 "XBot": "res://dialogue/characters/XBot.dch"
 }
 directories/dtl_directory={

@@ -25,6 +25,7 @@ func make_reading_timeline() -> DialogicTimeline:
 	for index in content.page_keys.size():
 		var event := DialogicTextEvent.new()
 		event.text = _page_text(index)
+		event.character = content.speaker
 		event.event_started.connect(_on_page_started.bind(index))
 		_reading.events.append(event)
 	if not _reading.events.is_empty():
@@ -61,4 +62,6 @@ func _notification(what: int) -> void:
 	for index in range(_page + 1):
 		if _history_start + index < history.size():
 			history[_history_start + index]["text"] = _page_text(index)
+			if content.speaker:
+				history[_history_start + index]["character"] = content.speaker.get_display_name_translated()
 	Dialogic.History.simple_history_changed.emit()

@@ -60,11 +60,6 @@ script = ExtResource("title_art")
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="Subtitle" type="Label" parent="Content/VBox" unique_id=2144128904]
-layout_mode = 2
-theme_type_variation = &"SubtitleLabel"
-text = "MENU_SUBTITLE"
-
 [node name="Spacer" type="Control" parent="Content/VBox" unique_id=869224220]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
@@ -110,23 +105,6 @@ layout_mode = 2
 theme_type_variation = &"MainMenuButton"
 text = "MENU_QUIT"
 alignment = 0
-
-[node name="Version" type="Label" parent="." unique_id=218623154]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -64.0
-offset_right = -40.0
-offset_bottom = -32.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_type_variation = &"HintLabel"
-text = "MENU_VERSION"
-horizontal_alignment = 2
 
 [node name="SlotScreen" type="Control" parent="." unique_id=1351271094]
 unique_name_in_owner = true

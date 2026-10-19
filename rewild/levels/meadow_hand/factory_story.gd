@@ -1,5 +1,6 @@
 class_name FactoryStory
 extends Node3D
+const SPEAKER = preload("res://dialogue/characters/CompanionBot.dch")
 ## The factory part of the energy-core story (quest 04), everything in one place:
 ## - reaching the factory is reported ("factory_reached");
 ## - litter is scattered around the factory for LIRA to clear (reported as "garbage", which
@@ -180,6 +181,7 @@ func _recover_radar_key() -> void:
 		return
 	var timeline := DialogicTimeline.new()
 	var text := DialogicTextEvent.new()
+	text.character = SPEAKER
 	text.text = tr("ROBOT_KEY_RECOVERY")
 	timeline.events.append(text)
 	for entry in [["grant","radar_key"],["report","robot_key_received"]]:

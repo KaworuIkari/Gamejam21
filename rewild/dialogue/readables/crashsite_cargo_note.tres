@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" path="res://objects/interactables/readables/readable_note_content.gd" id="1_content"]
 
+[ext_resource type="Resource" path="res://dialogue/characters/DeliveryRecord.dch" id="2_speaker"]
+
 [resource]
 script = ExtResource("1_content")
+speaker = ExtResource("2_speaker")
 page_keys = Array[String](["TABLET_POWER", "TABLET_DELIVERY_TITLE", "TABLET_DELIVERY_PURPOSE", "TABLET_DELIVERY_SCOPE", "TABLET_DELIVERY_UNIT", "TABLET_DELIVERY_CONNECT", "TABLET_DELIVERY_REPORT"])

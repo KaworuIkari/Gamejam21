@@ -16,7 +16,7 @@
 | 主菜单 / 设置 / 存档列表 | `ui/main_menu/`、`ui/settings/`、`ui/save_slots/` | 各自页面与交互 |
 | 暂停菜单 | `ui/in_game/pause_menu.gd` | 由关卡创建，管理游戏暂停和游戏内存档页面 |
 | ConfirmPopup | `ui/common/confirm_popup.gd` | 覆盖、删除等确认；默认聚焦取消 |
-| 对话布局 | `ui/CustomUi/` | 文本、头像、选项、输入、历史与对话期间的玩家冻结 |
+| 对话布局 | `ui/CustomUi/` | 文本、右上说话者名牌、选项、输入、历史与对话期间的玩家冻结 |
 | 对话样式 | `dialogue/styles/UI.tres` | 注册 `ui/CustomUi/custom_ui_.tscn` |
 | DialogueTrigger / DialogueUtils | `ui/CustomUi/dialogue_trigger.gd`、`ui/CustomUi/dialogue_utils.gd` | 交互触发与按原因管理对话暂停 |
 | 交互提示 | `ui/in_game/interaction/` | 显示实际绑定键，适配语言与输入设备 |
@@ -63,3 +63,5 @@
 手柄反馈的设备追踪与震动生命周期拆分到 autoload/ui/controller_feedback.gd，由 SettingsManager 创建；角色继续调用管理器的 play_feedback 接口。父控制器提供 camera_invert_y，LIRA 通过属性桥接复用父类摇杆逻辑。能量条缓存图标样式，仅在可见时请求重绘。
 
 设置分页音效：TabBar.tab_clicked 连接 UIAudio.play_settings_tab_sound，使用 assets/audio/ui/switch20.ogg，经 SFX 总线播放。重复点击当前分页也有声音；初始化与程序刷新不触发。音效播放器继承 UIAudio 的常驻处理模式，暂停时正常播放，播放结束自动清理。
+
+主菜单不显示副标题和右下角原型版本文案；对应节点、脚本引用及中英文键均已移除。菜单标题和按钮仍由 `ui/main_menu/` 维护。

@@ -1,12 +1,10 @@
 keys,zh_CN,en
 MENU_TITLE,自然涌现,Emergence
-MENU_SUBTITLE,一个机器人，一颗星球，慢慢变绿,"One robot, one planet, slowly turning green"
 MENU_CONTINUE,继续游戏,Continue
 MENU_NEW_GAME,新建游戏,New Game
 MENU_LOAD,读取存档,Load Game
 MENU_SETTINGS,设置,Settings
 MENU_QUIT,退出游戏,Quit
-MENU_VERSION,灰盒原型 v0.1,Greybox prototype v0.1
 MENU_QUIT_CONFIRM,确定要退出游戏吗？,Quit the game?
 UI_CONFIRM,确定,Confirm
 UI_CANCEL,取消,Cancel
@@ -246,8 +244,8 @@ RADAR_LOCKED_RECOVERY,%s 山地区域复苏度达到30%后可启动,%s Restore t
 RADAR_READOUT_KEY,密钥验证通过。雷达已启动，密钥已保留。,Key verified. Radar online. The key remains available.
 RADAR_READOUT_COORDINATES,已获取坐标信息。（具体坐标待填写）,Coordinates received. (Exact coordinates to be provided.)
 RADAR_READOUT_RETURN,返回湖心终端提交雷达信息。,Return to the lake terminal and submit the radar information.
-RADAR_DELIVERY_RECEIVED,湖心终端：雷达信息已接收，坐标已记录。,Lake terminal: Radar information received. Coordinates recorded.
-RADAR_DELIVERY_REWARD,湖心终端：混沌能量模块已交付。,Lake terminal: Chaos Energy Module issued.
+RADAR_DELIVERY_RECEIVED,雷达信息已接收，坐标已记录。,Radar information received. Coordinates recorded.
+RADAR_DELIVERY_REWARD,混沌能量模块已交付。,Chaos Energy Module issued.
 ITEM_RADAR_KEY_1,雷达密钥,Radar key
 ITEM_CHAOS_ENERGY_MODULE_1,混沌能量模块,Chaos Energy Module
 QUEST_FINALE_TITLE,最后的选择,The final choice
@@ -267,7 +265,7 @@ FINALE_START_BOAT,按 %s 安装模块并启动小船,Press %s to install the mod
 FINALE_CONFIRM_DEVICE,确认使用唯一的混沌能量模块启动同步破坏器？这将进入结局一，小船路线将关闭。,Use the unique Chaos Energy Module to activate the Synchronization Disruptor? This locks Ending 1 and closes the boat route.
 FINALE_CONFIRM_BOAT,确认使用6个废料零件安装唯一的混沌能量模块并启动小船？这将进入结局二，同步破坏器路线将关闭。,Use 6 scrap parts to install the unique Chaos Energy Module and start the boat? This locks Ending 2 and closes the disruptor route.
 FINALE_CONFIRM_START,确认启动,Confirm startup
-FINALE_BRIEFING_DEVICE,湖心终端：携带混沌能量模块，[n]前往雷达站二层启动同步破坏器。（剧情占位）,Lake terminal: Take the Chaos Energy Module to the radar upper platform [n]and activate the Synchronization Disruptor. (Story placeholder.)
+FINALE_BRIEFING_DEVICE,携带混沌能量模块，[n]前往雷达站二层启动同步破坏器。（剧情占位）,Take the Chaos Energy Module to the radar upper platform [n]and activate the Synchronization Disruptor. (Story placeholder.)
 FINALE_BRIEFING_BOAT,另一条路线：从港口垃圾堆收集6个废料零件，[n]将模块安装到小船中并启动。（剧情占位）,Alternative route: Collect 6 scrap parts from harbor rubbish piles [n]then install the module and start the boat. (Story placeholder.)
 ENDING_DEVICE_TITLE,结局一,Ending 1
 ENDING_DEVICE_BODY,同步破坏器已启动。\n混沌能量模块已使用，小船路线已关闭。\n\n（结局剧情与演出待补充）,The Synchronization Disruptor is active.\nThe Chaos Energy Module has been used and the boat route is closed.\n\n(Ending text and cinematic to be added.)
@@ -277,15 +275,15 @@ ENDING_SAVE_OK,结局进度已保存。,Ending progress saved.
 ENDING_SAVE_UNAVAILABLE,当前没有可保存的存档位。,No active save slot is available.
 QUEST_CORE_STEP_KEY,与小机器人对话获取雷达密钥,Speak to the companion bot to receive the radar key
 INTERACT_ROBOT_KEY,按 %s 与小机器人交谈获取密钥,Press %s to ask the companion bot for the radar key
-ROBOT_KEY_RECOVERY,小机器人：这是雷达站的密钥，已传输给你。（剧情占位）,Companion bot: The radar key has been transferred to you. (Story placeholder.)
+ROBOT_KEY_RECOVERY,这是雷达站的密钥，已传输给你。（剧情占位）,The radar key has been transferred to you. (Story placeholder.)
 QUEST_OPTIONAL,可选,Optional
 QUEST_RADAR_OPTIONAL_CLEAN,清理雷达周边垃圾,Clear rubbish around the radar station
 QUEST_CLEAN_STEP_DELIVER,返回中心岛向湖心终端提交任务，启用喷气背包,Return to the central island lake terminal to submit the task and enable the jetpack
 ITEM_JETPACK_EQUIPPED_1,喷气背包（能量不足）,Jetpack (insufficient energy)
 JETPACK_LOCKED_CLEANUP,背包能量不足：清理10堆草原垃圾后返回中心岛启用。,Jetpack energy insufficient: clear 10 meadow rubbish piles then return to the central island to enable it.
 JETPACK_LOCKED_RETURN,背包能量不足：草原清理已达标，返回中心岛提交任务后启用。,Jetpack energy insufficient: cleanup target reached. Return to the central island to submit the task and enable it.
-CLEAN_DELIVERY_RECEIVED,湖心终端：草原清理记录已确认，任务提交完成。,Lake terminal: Meadow cleanup verified. Task submitted.
-CLEAN_DELIVERY_JETPACK,湖心终端：正在恢复背包供能……喷气背包已启用。,Lake terminal: Restoring jetpack power... Jetpack enabled.
+CLEAN_DELIVERY_RECEIVED,草原清理记录已确认，任务提交完成。,Meadow cleanup verified. Task submitted.
+CLEAN_DELIVERY_JETPACK,正在恢复背包供能……喷气背包已启用。,Restoring jetpack power... Jetpack enabled.
 QUEST_TOAST_JETPACK_ENABLED,喷气背包已恢复供能，可以使用了。,Jetpack power restored. Ready for use.
 OPENING_BOOT,环境工程试验机 LIRA，\n系统重启中，\n\n当前电源剩余……80%……,Environmental Engineering Test Unit LIRA\nSystem reboot in progress\n\nRemaining power... 80%...
 OPENING_ACCIDENT,运输事故确认，机组无应答。\n\n当前位置：第七自治试验岛。,Transport accident confirmed. No response from crew.\n\nCurrent location: Autonomous Test Island No. 7.
@@ -336,3 +334,8 @@ TABLET_CREW_SUPPLY,维护图显示，北部泵站断供，,The maintenance map s
 TABLET_CREW_SHUTDOWN,湖心站因此保护停机。,The lake station has shut down as a protective measure.
 TABLET_CREW_PUMP,先启动北边的水泵，等水流回湖里，,"Start the northern pump first. Once water flows back into the lake,"
 TABLET_CREW_RETURN,再去中心岛重启终端，但愿那里还有人能接收报告。,head to the central island and restart the terminal. Hopefully someone there can still receive the report.
+SPEAKER_DELIVERY_RECORD,设备投送记录,Delivery Record
+SPEAKER_CREW_LOG,机组离线记录,Crew Offline Log
+SPEAKER_LAKE_TERMINAL,湖心终端,Lake Terminal
+SPEAKER_COMPANION_BOT,小机器人,Companion Bot
+SPEAKER_RADAR_SYSTEM,雷达站,Radar Station

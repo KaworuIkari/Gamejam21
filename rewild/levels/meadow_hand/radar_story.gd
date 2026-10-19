@@ -1,4 +1,5 @@
 extends Node3D
+const SPEAKER = preload("res://dialogue/characters/RadarSystem.dch")
 ## Quest 05: mountain recovery -> keyed startup/readout -> lake-terminal delivery.
 const QUEST = preload("res://quests/05_radar_station.tres")
 const PREVIOUS = preload("res://quests/04_energy_core.tres")
@@ -164,6 +165,7 @@ func make_readout_timeline() -> DialogicTimeline:
 	var timeline := DialogicTimeline.new()
 	for key in ["RADAR_READOUT_KEY","RADAR_READOUT_COORDINATES","RADAR_READOUT_RETURN"]:
 		var event := DialogicTextEvent.new()
+		event.character = SPEAKER
 		event.text = tr(key)
 		timeline.events.append(event)
 	timeline.events_processed = true

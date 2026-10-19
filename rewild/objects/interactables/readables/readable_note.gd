@@ -34,6 +34,8 @@ func make_reading_timeline() -> DialogicTimeline:
 	# Keep a truly blank story placeholder open until the player advances it.
 	# An empty string would make Dialogic skip the event without displaying UI.
 	event.text = body if not body.is_empty() else String.chr(0x200B)
+	if content is ReadableNoteContent:
+		event.character = content.speaker
 	reading.events = [event]
 	reading.events_processed = true
 	return reading

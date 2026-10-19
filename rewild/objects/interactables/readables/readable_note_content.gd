@@ -2,6 +2,8 @@ class_name ReadableNoteContent
 extends Resource
 ## One resource per story note. Translation keys use the project's existing CSV.
 @export var translation_key := ""
+## Optional source/speaker, shared by every page of this record.
+@export var speaker: DialogicCharacter
 ## Paginated tablets use these keys in order; paper notes keep their existing fields.
 @export var page_keys: Array[String] = []
 @export_multiline var text_zh := ""

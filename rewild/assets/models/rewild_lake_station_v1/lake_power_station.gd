@@ -1,4 +1,5 @@
 extends Node3D
+const SPEAKER = preload("res://dialogue/characters/LakeTerminal.dch")
 ## Self-contained prop controller. Task manager calls mark_task_completed(id).
 ## Uses the existing interact action; no project autoload dependencies.
 signal activated
@@ -170,6 +171,7 @@ func _submit_meadow_cleanup(quests: Node) -> void:
 	var timeline := DialogicTimeline.new()
 	for key in ["CLEAN_DELIVERY_RECEIVED", "CLEAN_DELIVERY_JETPACK"]:
 		var event := DialogicTextEvent.new()
+		event.character = SPEAKER
 		event.text = tr(key)
 		timeline.events.append(event)
 	timeline.events_processed = true
@@ -292,6 +294,7 @@ func _submit_radar_information(quests: Node) -> void:
 	var timeline := DialogicTimeline.new()
 	for key in ["RADAR_DELIVERY_RECEIVED", "RADAR_DELIVERY_REWARD", "FINALE_BRIEFING_DEVICE", "FINALE_BRIEFING_BOAT"]:
 		var event := DialogicTextEvent.new()
+		event.character = SPEAKER
 		event.text = tr(key)
 		timeline.events.append(event)
 	timeline.events_processed = true
