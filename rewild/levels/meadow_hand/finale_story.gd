@@ -49,8 +49,7 @@ func _make_disruptor() -> void:
 	_make_interaction(DEVICE,platform,spot,1.7)
 
 func _make_boat() -> void:
-	var boat := harbor.get_node("Workboat_Hull_014") as Node3D
-	var hull := boat.get_node("Visual/Workboat_Hull") as MeshInstance3D
+	var hull := harbor.get_node("island_harbour_edit/Boat") as MeshInstance3D
 	var box := hull.get_aabb()
 	# Beside the hull, reachable from the yard without entering its solid collider.
 	_make_interaction(BOAT,hull,Vector3(box.end.x+0.8,box.position.y+0.1,box.get_center().z),2.4)
