@@ -53,7 +53,7 @@ const PUMP_PATH := ^"Enviroment_permanent/North_water_source/Ruined_Pump_House_G
 
 func _enter_tree() -> void:
 	# Before the player's _ready, so LIRA starts with the saved abilities.
-	var quests := get_node_or_null(^"/root/Quests")
+	# var quests := get_node_or_null(^"/root/Quests")
 	if quests:
 		CabinStory.migrate_save(SaveManager.current_data)
 		quests.load_from_save()
@@ -80,49 +80,49 @@ func _ready() -> void:
 		GrowthMap.attach_material(mat)
 	GrowthMap.attach_material(GROW_IN_FLOWERS)
 
-	var restoration_regions := RESTORATION_REGIONS.instantiate()
-	add_child(restoration_regions)
-	# The playable mountain is the radar hill. Follow its placed anchor each load.
-	restoration_regions.get_node("Mountain").global_position = $RadioObservatory.global_position
-	var awakening := LeonAwakening.new()
-	awakening.name = "LeonAwakening"
-	awakening.statue = $Leon2
-	awakening.lake = $SubViewportContainer/PixelateSubViewport/Water/Froglake
-	awakening.giant = $Leon
-	awakening.sea = $SubViewportContainer/PixelateSubViewport/Water/Sea
-	awakening.requires = $Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
-	add_child(awakening)
-	var initial := InitialState.new()
-	initial.name = "InitialState"
-	initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals, $SubViewportContainer/PixelateSubViewport/CubeBotCompanion]
-	initial.green_spots = {$Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
-	add_child(initial)
-	var factory := FactoryStory.new()
-	factory.name = "FactoryStory"
-	factory.anchor = $DesertRoboticsLaboratory
-	factory.terrain = terrain
-	factory.initial = initial
-	factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
-	add_child(factory)
-	var radar := RadarStory.new()
-	radar.name = "RadarStory"
-	radar.anchor = $RadioObservatory
-	radar.terrain = terrain
-	add_child(radar)
-	var finale := FinaleStory.new()
-	finale.name = "FinaleStory"
-	finale.radar = $RadioObservatory
-	finale.harbor = $IslandHarbor
-	finale.terrain = terrain
-	finale.cameras = {&"disruptor":finale_disruptor_camera,&"boat":finale_boat_camera}
-	add_child(finale)
-	var regrowth := TreeRegrowth.new()
-	regrowth.name = "TreeRegrowth"
-	add_child(regrowth)
-	add_child(PAUSE_MENU.instantiate())
-	_debug_height_volumes()
-	SettingsManager.refresh_fmod_audio()
-	world_bgm.play()
+	# var restoration_regions := RESTORATION_REGIONS.instantiate()
+	# add_child(restoration_regions)
+	# # The playable mountain is the radar hill. Follow its placed anchor each load.
+	# restoration_regions.get_node("Mountain").global_position = $RadioObservatory.global_position
+	# var awakening := LeonAwakening.new()
+	# awakening.name = "LeonAwakening"
+	# awakening.statue = $Leon2
+	# awakening.lake = $SubViewportContainer/PixelateSubViewport/Water/Froglake
+	# awakening.giant = $Leon
+	# awakening.sea = $SubViewportContainer/PixelateSubViewport/Water/Sea
+	# awakening.requires = $Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
+	# add_child(awakening)
+	# var initial := InitialState.new()
+	# initial.name = "InitialState"
+	# initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals, $SubViewportContainer/PixelateSubViewport/CubeBotCompanion]
+	# initial.green_spots = {$Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
+	# add_child(initial)
+	# var factory := FactoryStory.new()
+	# factory.name = "FactoryStory"
+	# factory.anchor = $DesertRoboticsLaboratory
+	# factory.terrain = terrain
+	# factory.initial = initial
+	# factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
+	# add_child(factory)
+	# var radar := RadarStory.new()
+	# radar.name = "RadarStory"
+	# radar.anchor = $RadioObservatory
+	# radar.terrain = terrain
+	# add_child(radar)
+	# var finale := FinaleStory.new()
+	# finale.name = "FinaleStory"
+	# finale.radar = $RadioObservatory
+	# finale.harbor = $IslandHarbor
+	# finale.terrain = terrain
+	# finale.cameras = {&"disruptor":finale_disruptor_camera,&"boat":finale_boat_camera}
+	# add_child(finale)
+	# var regrowth := TreeRegrowth.new()
+	# regrowth.name = "TreeRegrowth"
+	# add_child(regrowth)
+	# add_child(PAUSE_MENU.instantiate())
+	# _debug_height_volumes()
+	# SettingsManager.refresh_fmod_audio()
+	# world_bgm.play()
 
 func _process(delta: float) -> void:
 	# UI 补丁：存档里的游戏时长
