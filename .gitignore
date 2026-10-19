@@ -54,4 +54,6 @@ mono_crash.*.json
 /ideas/
 
 # Blender
-.blend1
+*.blend1
+# Blender auto-backups
+*.blend[0-9]*
