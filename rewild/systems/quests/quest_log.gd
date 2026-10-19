@@ -72,11 +72,11 @@ func unlock_terminal() -> void:
 	grant(TERMINAL)
 
 
-## The station hands over both tools; jetpack level remains zero until cleanup is submitted.
+## The station hands over the action terminal and the water gun. The jetpack is in the
+## factory's power room; the repaired bot fetches it (FactoryStory).
 func receive_starter_equipment() -> void:
 	unlock_terminal()
 	grant(&"water_gun")
-	grant(&"jetpack_equipped")
 
 
 func event_count(event: StringName) -> int:
@@ -186,21 +186,16 @@ func load_from_save() -> void:
 	# the older resource must continue from those new steps (05 formerly ended at 40%).
 	for quest in quests:
 		var restored := _state(quest)
-		# Legacy cleanup saves already earned flight. Keep that reward and the next
-		# quest rather than reopening the newly appended station hand-in step.
-		if quest.get_id() == &"02_clean_up" and restored.status == Status.DONE and has_ability(&"jetpack"):
-			restored.step = quest.steps.size()
-			_counters[&"meadow_cleanup_delivered"] = maxi(1, event_count(&"meadow_cleanup_delivered"))
 		if not quest.parallel and restored.status == Status.DONE and restored.step < quest.steps.size():
 			restored.status = Status.ACTIVE
 			_begin_step(quest)
 	tracked = StringName(data.get("tracked", ""))
 	_evaluate()
 	# Older first-contact saves may have received the terminal before closing its
-	# page. Give them the starter tools too, without enabling a dormant jetpack.
+	# page. Give them the water gun too.
 	if terminal_unlocked():
 		_abilities[&"water_gun"] = maxi(1, ability_level(&"water_gun"))
-		_abilities[&"jetpack_equipped"] = 1
+	_abilities.erase(&"jetpack_equipped")  # the old unpowered backpack no longer exists
 	for a in _abilities:
 		ability_changed.emit(a, _abilities[a])
 	_changed()

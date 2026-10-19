@@ -150,10 +150,7 @@ func _update_focus() -> void:
 
 
 func _can_act() -> bool:
-	# The lake terminal provides the reason and authorization to start clearing.
-	# This ability is persisted by Quests, so loaded games keep the unlock.
-	var quests := get_node_or_null(^"/root/Quests")
-	if quests == null or not quests.terminal_unlocked() or get_tree().paused:
+	if get_tree().paused:
 		return false
 	var dialogic := get_node_or_null(^"/root/Dialogic")
 	return dialogic == null or dialogic.current_timeline == null

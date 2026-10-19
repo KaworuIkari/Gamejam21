@@ -1,47 +1,56 @@
 extends AnimalBase
 class_name AnimalFox
-## IDLE ⇄ WANDER when far from the player.
-## WATCH (stand still, face the player) at middle distance.
-## Player too close → ALERT (bark) → AVOID, which keeps issuing fresh escape legs
-## until the player is beyond calm_radius * escape_clear_factor.
-## WorldEvents always win over watching the player: INVESTIGATE faces the event
-## for 3 s and does nothing else.
-## A "water_blob" event grants a grace period: the fox turns bold and FOLLOWs the
-## player at half the flee radius instead of fleeing.
+## Starts lying hurt on its side (DOWN) until LIRA holds interact beside it; the rescue is
+## saved as `rescue_event`. It then gets up, hops and howls, gives LIRA `reward_item` (a key,
+## listed on the terminal), and lives:
+## IDLE ⇄ WANDER when the player is far; WATCH (stand still, face the player) at middle
+## distance; player close → FRIENDLY: it trots over, keeps about follow_distance away and
+## now and then hops, spins or howls (HAPPY). It stays friendly until the player is beyond
+## calm_radius.
+## WorldEvents always win over watching the player: INVESTIGATE faces the event for a while.
 ##
 ## Waypoint advancement is owned entirely by NavigationAgent3D: one target at a
 ## time, arrival decided by agent.is_navigation_finished().
 
-enum State { IDLE, WANDER, WATCH, ALERT, AVOID, INVESTIGATE, FOLLOW }
+enum State { DOWN, IDLE, WANDER, WATCH, FRIENDLY, HAPPY, INVESTIGATE }
+
+const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_prompt.tscn")
 
 @export_group("Distance Bands")
-@export var flee_radius := 10.0  # closer than this: bark, then run
-@export var calm_radius := 30.0  # farther than this: roam freely
-## AVOID ends only once the player is past calm_radius * this.
-@export var escape_clear_factor := 2.0
+@export var friendly_radius := 10.0  # closer than this: come over and play
+@export var calm_radius := 30.0  # farther than this: roam freely (and stop following)
 
 @export_group("Movement")
-@export var run_speed := 7.0
+@export var run_speed := 7.0  # catching up with the player
 @export var tick_interval := 2.0  # how often decisions are made
 
 @export_group("Idle & Wander")
 @export var idle_time := Vector2(3.0, 9.0)
 @export var wander_radius := 15.0
 
-@export_group("Escape")
-@export var escape_leg := 12.0  # length of one escape leg; shorter = curvier overall
-@export var escape_arc_deg := 60.0  # initial spread of the semicircle away from the player
-@export var escape_drift_deg := 35.0  # per-leg direction change; this is what makes it curve
-@export var escape_give_up := 60.0  # failsafe: stop fleeing after this long
+@export_group("Friendly")
+@export var follow_distance := 3.0
+@export var follow_slack := 1.5  # dead zone, so the fox is not re-targeting constantly
+## Chance per decision, while standing beside the player, to hop, spin or howl.
+@export_range(0.0, 1.0) var happy_chance := 0.35
+@export var hop_height := 0.35
+@export var howl_speed := 0.85  # bark clip played slower, nose up
+@export var howl_tilt_deg := 25.0
 
-@export_group("Events & Grace")
+@export_group("Rescue")
+## Saved when rescued; give each fox its own if there are several.
+@export var rescue_event: StringName = &"fox_rescued"
+## Given after the rescue howl; an ability in Quests, named by ITEM_<NAME>_1 in strings.csv.
+@export var reward_item: StringName = &"fox_key"
+@export var rescue_hold := 1.5  # seconds interact must be held
+@export var rescue_radius := 2.5
+@export var rescue_prompt := "FOX_RESCUE_PROMPT"
+@export var down_roll_deg := 90.0  # lying on its side
+@export var down_height := 0.15  # lifts the side-lying body out of the ground
+
+@export_group("Events")
 @export var curiosity_threshold := 0.6
 @export var investigate_time := 3.0
-@export var grace_kind: StringName = &"water_blob"
-@export var grace_time := 60.0
-@export var follow_factor := 0.3  # follow distance as a fraction of flee_radius
-@export var follow_slack := 1.5  # dead zone, so the fox is not re-targeting constantly
-@export var calm_exit := true  # on grace expiry, back off quietly instead of bolting
 
 @export_group("Animation Clips")
 @export var run_anim := "running_rig"
@@ -51,17 +60,20 @@ var state := State.IDLE
 
 var _target := Vector3.ZERO
 var _has_target := false
+var _running := false
 
 var _idle_timer := 0.0
-var _escape_time := 0.0
-var _escape_dir := Vector3.ZERO  # carried between legs so the route arcs
 var _investigate_timer := 0.0
-var _grace := 0.0
 var _event_pos := Vector3.ZERO
 var _tick_timer := 0.0
 
+var _prompt: CanvasLayer
+var _player_near := false
+var _hold := 0.0
+
 @onready var lira: LIRA_Character = get_tree().get_first_node_in_group("player")
 @onready var bark_sound: FmodEventEmitter3D = $fox_rigged/root/Skeleton3D/Retopo_fox_002/FmodEventEmitter3DBark
+@onready var _model: Node3D = $fox_rigged
 
 
 # === Lifecycle ===
@@ -71,15 +83,10 @@ func _max_speed() -> float:
 func _ready() -> void:
 	super._ready()
 	# avoid circular motion
-	var follow_need := _min_lookahead_for(walk_speed) * 0.9
+	var follow_need := _min_lookahead() * 0.9
 	if follow_slack * 0.5 < follow_need:
-		push_error("AnimalFox: follow_slack %.2f gives an arrival radius below %.2f. Clamped." % [follow_slack, follow_need])
 		follow_slack = follow_need * 2.0
-	var leg_need := _min_lookahead() * 2.0
-	if escape_leg < leg_need:
-		push_error("AnimalFox: escape_leg %.2f < %.2f (two turn radii). Clamped — legs shorter than this cannot be steered." % [escape_leg, leg_need])
-		escape_leg = leg_need
-	
+
 	if animation_player == null:
 		push_error("AnimalFox: assign an AnimationPlayer in the inspector")
 		set_physics_process(false)
@@ -89,7 +96,11 @@ func _ready() -> void:
 
 	WorldEvents.happened.connect(_on_world_event)
 	_tick_timer = randf() * tick_interval  # stagger foxes so they do not all think on one frame
-	_enter_idle()
+	if Quests.event_count(rescue_event) > 0:
+		_give_reward()  # in case a save happened during the rescue sequence
+		_enter_idle()
+	else:
+		_lie_down()
 
 
 func _nav_ready() -> bool:
@@ -99,8 +110,8 @@ func _nav_ready() -> bool:
 # === State machine ===
 
 func _tick_state(delta: float) -> void:
-	_grace = maxf(_grace - delta, 0.0)
-
+	if state == State.DOWN:
+		return
 	_tick_timer -= delta
 	if _tick_timer <= 0.0:
 		_tick_timer = tick_interval
@@ -109,43 +120,100 @@ func _tick_state(delta: float) -> void:
 	match state:
 		State.IDLE: _tick_idle(delta)
 		State.WANDER: _tick_wander(delta)
-		State.WATCH: _tick_watch()
-		State.ALERT: _tick_alert()
-		State.AVOID: _tick_avoid(delta)
+		State.WATCH, State.HAPPY: _face_dir = lira.global_position - global_position
+		State.FRIENDLY: _tick_friendly(delta)
 		State.INVESTIGATE: _tick_investigate(delta)
-		State.FOLLOW: _tick_follow(delta)
 
 
 # === Decisions (every tick_interval seconds) ===
 
 func _decide() -> void:
-	# These two run to completion and cannot be interrupted.
-	if state == State.ALERT or state == State.INVESTIGATE:
+	# These run to completion and cannot be interrupted.
+	if state == State.HAPPY or state == State.INVESTIGATE:
 		return
 
 	var dist := _player_distance()
-
-	if state == State.AVOID:
-		if _escape_time > escape_give_up or dist > calm_radius * escape_clear_factor:
-			_enter_idle()
-		return
-
-	# Grace period: the fox is bold, and tags along instead of fleeing.
-	if _grace > 0.0:
-		_decide_follow(dist)
-		return
-
-	if state == State.FOLLOW and calm_exit:
-		_enter_idle()  # grace just ended
-		return
-
-	if dist < flee_radius:
-		_enter_alert()
+	if dist < friendly_radius or (state == State.FRIENDLY and dist < calm_radius):
+		_decide_friendly(dist)
+	elif state == State.FRIENDLY:
+		_enter_idle()  # the player left
 	elif dist < calm_radius:
 		_clear_target()
 		state = State.WATCH
 	elif state == State.WATCH:
 		_enter_idle()
+
+
+# === Down and rescue ===
+
+func _lie_down() -> void:
+	state = State.DOWN
+	animation_locked = true
+	animation_player.play(idle_anim)
+	animation_player.seek(0.0, true)
+	animation_player.pause()
+	_model.rotation.z = deg_to_rad(down_roll_deg)
+	_model.position.y = down_height
+	var area := Area3D.new()
+	area.name = "RescueRange"
+	area.collision_layer = 0
+	area.collision_mask = 1
+	area.monitorable = false
+	var shape := CollisionShape3D.new()
+	var sphere := SphereShape3D.new()
+	sphere.radius = rescue_radius
+	shape.shape = sphere
+	area.add_child(shape)
+	add_child(area)
+	area.body_entered.connect(func(body: Node) -> void: if body == lira: _player_near = true)
+	area.body_exited.connect(func(body: Node) -> void: if body == lira: _player_near = false)
+	# The fox lives in the pixel SubViewport; a CanvasLayer parented there breaks on
+	# teardown, so the prompt lives under the root and goes away with the fox.
+	_prompt = HOLD_PROMPT_SCENE.instantiate()
+	get_tree().root.add_child.call_deferred(_prompt)
+	tree_exiting.connect(_prompt.queue_free)
+	_prompt.configure(&"interact", rescue_prompt)
+
+
+func _process(delta: float) -> void:
+	if state != State.DOWN or _prompt == null:
+		return
+	var dialogic := get_node_or_null(^"/root/Dialogic")
+	var can := _player_near and not get_tree().paused \
+			and (dialogic == null or dialogic.current_timeline == null)
+	_prompt.set_available(can)
+	if can and Input.is_action_pressed(&"interact"):
+		_hold += delta
+		if _hold >= rescue_hold:
+			_prompt.play_activation()
+			_rescue()
+	else:
+		_hold = 0.0
+	_prompt.set_hold_progress(_hold / rescue_hold)
+
+
+## Gets up, hops twice and howls, then carries on as a living fox.
+func _rescue() -> void:
+	state = State.HAPPY
+	_hold = 0.0
+	_prompt.set_available(false)
+	Quests.report(rescue_event)
+	animation_player.play(idle_anim)
+	var up := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	up.tween_property(_model, ^"rotation:z", 0.0, 0.7)
+	up.parallel().tween_property(_model, ^"position:y", 0.0, 0.7)
+	await up.finished
+	animation_locked = false
+	await _hop(2)
+	await _howl()
+	if is_inside_tree():
+		_give_reward()
+		_enter_idle()
+
+
+func _give_reward() -> void:
+	if reward_item != &"":
+		Quests.grant(reward_item)
 
 
 # === States ===
@@ -159,7 +227,7 @@ func _enter_idle() -> void:
 func _tick_idle(delta: float) -> void:
 	_idle_timer -= delta
 	if _idle_timer <= 0.0:
-		_set_target(_wander_target())
+		_set_target(_random_nav_point(global_position, wander_radius))
 		state = State.WANDER
 
 
@@ -168,43 +236,26 @@ func _tick_wander(delta: float) -> void:
 		_enter_idle()
 
 
-func _tick_watch() -> void:
-	_face_dir = lira.global_position - global_position  # stand still, head turned
-
-
-func _enter_alert() -> void:
-	_clear_target()
-	state = State.ALERT
-	_bark()
-
-
-func _tick_alert() -> void:
-	_face_dir = lira.global_position - global_position  # hold the player in view while barking
-
-
-func _bark() -> void:
-	animation_locked = true
-	bark_sound.play()
-	animation_player.play(bark_anim)
-	await animation_player.animation_finished
-	if not is_inside_tree():
+## Decided on the tick: stand beside the player (sometimes playing), or trot over.
+func _decide_friendly(dist: float) -> void:
+	state = State.FRIENDLY
+	if dist < follow_distance + follow_slack:
+		_clear_target()
+		if randf() < happy_chance:
+			_play_happy()
 		return
-	animation_locked = false
-	if state == State.ALERT:
-		_enter_avoid()
+	var out := global_position - lira.global_position
+	out.y = 0.0
+	out = out.normalized() if out.length() > 0.01 else Vector3.BACK
+	_running = dist > follow_distance * 3.0
+	_set_target(_closest_nav_point(lira.global_position + out * follow_distance), follow_slack * 0.5)
 
 
-func _enter_avoid() -> void:
-	_escape_time = 0.0
-	_escape_dir = Vector3.ZERO
-	_next_escape_leg()
-	state = State.AVOID
-
-
-func _tick_avoid(delta: float) -> void:
-	_escape_time += delta
-	if _follow_target(delta, run_speed):
-		_next_escape_leg()  # arrived: set the next leg now, do not wait for the tick
+func _tick_friendly(delta: float) -> void:
+	if _has_target:
+		_follow_target(delta, run_speed if _running else walk_speed)
+	else:
+		_face_dir = lira.global_position - global_position
 
 
 func _tick_investigate(delta: float) -> void:
@@ -214,24 +265,45 @@ func _tick_investigate(delta: float) -> void:
 		_enter_idle()
 
 
-## Decided on the tick: hold a band at flee_radius * follow_factor from the player.
-func _decide_follow(dist: float) -> void:
-	var want := flee_radius * follow_factor
-	if absf(dist - want) < follow_slack:
-		_clear_target()  # close enough: stand and watch
-	else:
-		var out := global_position - lira.global_position
-		out.y = 0.0
-		out = out.normalized() if out.length() > 0.01 else Vector3.BACK
-		_set_target(_closest_nav_point(lira.global_position + out * want), follow_slack * 0.5)
-	state = State.FOLLOW
+# === Happy moves ===
+
+func _play_happy() -> void:
+	state = State.HAPPY
+	match randi() % 3:
+		0: await _hop(2)
+		1: await _spin()
+		2: await _howl()
+	if state == State.HAPPY:
+		state = State.FRIENDLY
 
 
-func _tick_follow(delta: float) -> void:
-	if _has_target:
-		_follow_target(delta, walk_speed)
-	else:
-		_face_dir = lira.global_position - global_position
+func _hop(times: int) -> void:
+	var t := create_tween()
+	for i in times:
+		t.tween_property(_model, ^"position:y", hop_height, 0.16).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		t.tween_property(_model, ^"position:y", 0.0, 0.16).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	await t.finished
+
+
+func _spin() -> void:
+	var t := create_tween()
+	t.tween_property(_model, ^"rotation:y", TAU, 0.7).from(0.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await t.finished
+	_model.rotation.y = 0.0
+
+
+## The bark clip, slower and with the nose up, plus the fox call.
+func _howl() -> void:
+	animation_locked = true
+	bark_sound.play()
+	animation_player.play(bark_anim, -1, howl_speed)
+	var tilt := create_tween()
+	tilt.tween_property(_model, ^"rotation:x", -deg_to_rad(howl_tilt_deg), 0.25)
+	await animation_player.animation_finished
+	tilt = create_tween()
+	tilt.tween_property(_model, ^"rotation:x", 0.0, 0.25)
+	await tilt.finished
+	animation_locked = false
 
 
 # === Targets ===
@@ -240,13 +312,14 @@ func _set_target(p: Vector3, arrive := -1.0) -> void:
 	_target = p
 	_has_target = true
 	var want := waypoint_radius if arrive < 0.0 else arrive
-	agent.target_desired_distance = maxf(want, _min_lookahead_for(walk_speed) * 0.9)
+	agent.target_desired_distance = maxf(want, _min_lookahead() * 0.9)
 	agent.target_position = p
 	_begin_leg()
 
 
 func _clear_target() -> void:
 	_has_target = false
+	_running = false
 
 
 ## Steers toward the current target. Returns true once the leg is done.
@@ -260,49 +333,20 @@ func _follow_target(delta: float, speed: float) -> bool:
 	return false
 
 
-## One leg of the escape. Each leg drifts from the last, so the overall route curves.
-func _next_escape_leg() -> void:
-	if _escape_dir == Vector3.ZERO:
-		var away := global_position - lira.global_position
-		away.y = 0.0
-		away = away.normalized() if away.length() > 0.01 else Vector3.BACK
-		_escape_dir = away.rotated(Vector3.UP, deg_to_rad(randf_range(-escape_arc_deg, escape_arc_deg)))
-	else:
-		_escape_dir = _escape_dir.rotated(Vector3.UP, deg_to_rad(randf_range(-escape_drift_deg, escape_drift_deg)))
-
-	var candidate := global_position + _escape_dir * escape_leg
-	var snapped := _closest_nav_point(candidate)
-
-	# Ran into the edge of the nav mesh: turn hard and try once more.
-	if snapped.distance_to(candidate) > escape_leg * 0.5:
-		_escape_dir = _escape_dir.rotated(Vector3.UP, deg_to_rad(randf_range(90.0, 180.0)))
-		snapped = _closest_nav_point(global_position + _escape_dir * escape_leg)
-
-	_set_target(snapped)
-
-
-func _wander_target() -> Vector3:
-	return _random_nav_point(global_position, wander_radius)
-
-
 # === Animation ===
 
 func _pick_clip() -> String:
 	if not is_moving:
 		return idle_anim
-	return run_anim if state == State.AVOID else walk_anim
+	return run_anim if _running else walk_anim
 
 
 # === World events ===
 
-func _on_world_event(pos: Vector3, kind: StringName, interest: float) -> void:
-	if kind == grace_kind:
-		_grace = grace_time  # the fox has learned this one is harmless
-	if interest < curiosity_threshold:
+func _on_world_event(pos: Vector3, _kind: StringName, interest: float) -> void:
+	if interest < curiosity_threshold or state == State.DOWN or state == State.HAPPY:
 		return
-	if state == State.ALERT or state == State.AVOID:
-		return  # too busy fleeing to be curious
-	# Events outrank watching or following the player.
+	# Events outrank watching or playing with the player.
 	_clear_target()
 	_event_pos = pos
 	_investigate_timer = investigate_time
@@ -317,17 +361,9 @@ func _player_distance() -> float:
 
 func _debug_text() -> String:
 	var lines := "%s  %.0fm" % [State.keys()[state], _player_distance()]
-
 	if _has_target:
 		lines += "\ntarget %.2fm (arrive %.2f)" % [_flat_dist(_target), agent.target_desired_distance]
-		lines += "\npath   %.2fm (advance %.2f)" % [
-			_flat_dist(agent.get_next_path_position()), agent.path_desired_distance]
 		lines += "\nleg    %.1fs / %.0fs" % [_leg_time, move_timeout]
-		if agent.is_navigation_finished():
-			lines += "\nFINISHED"
 	else:
 		lines += "\nno target"
-
-	if _grace > 0.0:
-		lines += "\ngrace %.0fs" % _grace
 	return lines

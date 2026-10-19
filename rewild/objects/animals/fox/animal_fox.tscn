@@ -9,24 +9,7 @@ radius = 0.7
 
 [node name="AnimalFox" unique_id=1591991278 node_paths=PackedStringArray("animation_player") instance=ExtResource("1_auv3j")]
 script = ExtResource("2_u6hmh")
-flee_radius = 10.0
-calm_radius = 30.0
-escape_clear_factor = 2.0
-run_speed = 7.0
-tick_interval = 2.0
-idle_time = Vector2(3, 9)
 wander_radius = 60.0
-escape_leg = 12.0
-escape_arc_deg = 60.0
-escape_drift_deg = 35.0
-escape_give_up = 60.0
-curiosity_threshold = 0.6
-investigate_time = 3.0
-grace_kind = &"water_blob"
-grace_time = 60.0
-follow_factor = 0.3
-follow_slack = 1.5
-calm_exit = true
 run_anim = "running_rig"
 bark_anim = "bark_rig"
 animation_player = NodePath("fox_rigged/AnimationPlayer")

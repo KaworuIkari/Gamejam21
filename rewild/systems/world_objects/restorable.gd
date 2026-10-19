@@ -21,6 +21,9 @@ class_name Restorable extends Node3D
 @export var max_delay := 1.2
 ## Reported to the quests when it reaches its last stage (e.g. "tree_restored").
 @export var quest_event: StringName = &""
+## Ground greenness that reports quest_event instead, when 0 or more. Lets a tree swap to its
+## bare leafy model early (its leaf shader then grows the canopy in) but still count late.
+@export var quest_threshold := -1.0
 ## Which stage the editor shows.
 @export var preview_stage := 0:
 	set(v):
@@ -33,6 +36,7 @@ var _variants: Array = []   # Node3D or null per stage
 var _scales: Array[Vector3] = []
 var _growth: Node
 var _pending := false
+var _reported := false
 var _preview: Node3D
 
 
@@ -76,6 +80,10 @@ func _refresh(instant: bool) -> void:
 	while i < _variants.size() - 1 and g >= _threshold(i + 1):
 		i += 1
 	_show(i, instant)
+	if quest_threshold >= 0.0 and not _reported and g >= quest_threshold:
+		_reported = true
+		if not instant:  # already green when first seen: doesn't count
+			_report()
 
 
 func _threshold(index: int) -> float:
@@ -102,10 +110,14 @@ func _show(index: int, instant: bool) -> void:
 			var t := create_tween()
 			t.tween_interval(randf() * max_delay)
 			t.tween_property(v, "scale", full, pop_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	if first_time and not instant:
-		var quests := get_node_or_null(^"/root/Quests")
-		if quests:
-			quests.report(quest_event)
+	if first_time and not instant and quest_threshold < 0.0:
+		_report()
+
+
+func _report() -> void:
+	var quests := get_node_or_null(^"/root/Quests")
+	if quests:
+		quests.report(quest_event)
 
 
 # --- Editor preview -----------------------------------------------------------------

@@ -40,13 +40,21 @@ const TreeRegrowth := preload("res://systems/world_objects/tree_regrowth.gd")
 const FinaleStory = preload("res://levels/meadow_hand/finale_story.gd")
 @export var finale_disruptor_camera: Camera3D
 @export var finale_boat_camera: Camera3D
+## The jetpack prop in the factory power room; the repaired bot fetches it. Empty = the node
+## named "Jetpack" directly in this level (not LIRA's).
+@export var factory_jetpack: Node3D
+## Optional way into the power room: a Node3D whose child Marker3Ds are points in order,
+## from the ground outside to the jetpack (ground → window sill → floor inside). Empty =
+## the bot finds the window itself.
+@export var factory_jetpack_route: Node3D
 const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
-## What stays switched off at the start of a new game (animals, companion bot).
+## Permanent green patches at the start of a new game (nothing is kept dormant now: animals
+## are live from the start; the fox lies hurt until rescued, the bot sleeps in FactoryStory).
 const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
 const OpeningSequence := preload("res://levels/meadow_hand/opening_sequence.gd")
 const StartupChecks := preload("res://levels/meadow_hand/startup_checks.gd")
 const CabinStory := preload("res://levels/meadow_hand/cabin_story.gd")
-const PUMP_PATH := ^"Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch"
+const PUMP_PATH := ^"Enviroment/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch"
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
 @onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/Camera3D
 @onready var player: Node3D = $SubViewportContainer/PixelateSubViewport/LIRA
@@ -57,7 +65,7 @@ func _enter_tree() -> void:
 	if quests:
 		CabinStory.migrate_save(SaveManager.current_data)
 		quests.load_from_save()
-		get_node(PUMP_PATH).start_on = quests.event_count(&"pump_started") > 0
+	get_node(PUMP_PATH).start_on = quests.event_count(&"pump_started") > 0
 
 func _ready() -> void:
 	var opening := OpeningSequence.new()
@@ -83,39 +91,42 @@ func _ready() -> void:
 	var restoration_regions := RESTORATION_REGIONS.instantiate()
 	add_child(restoration_regions)
 	# The playable mountain is the radar hill. Follow its placed anchor each load.
-	restoration_regions.get_node("Mountain").global_position = $RadioObservatory.global_position
+	restoration_regions.get_node("Mountain").global_position = $Enviroment/East_Mountain/RadioObservatory.global_position
 	var awakening := LeonAwakening.new()
 	awakening.name = "LeonAwakening"
-	awakening.statue = $Leon2
+	awakening.statue = $Enviroment/North_frog_lake/Leon2
 	awakening.lake = $SubViewportContainer/PixelateSubViewport/Water/Froglake
-	awakening.giant = $Leon
+	awakening.giant = $Enviroment/North_frog_lake/Leon
 	awakening.sea = $SubViewportContainer/PixelateSubViewport/Water/Sea
-	awakening.requires = $Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
+	awakening.requires = $Enviroment/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch
 	add_child(awakening)
 	var initial := InitialState.new()
 	initial.name = "InitialState"
-	initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals, $SubViewportContainer/PixelateSubViewport/CubeBotCompanion]
-	initial.green_spots = {$Enviroment_permanent/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
+	initial.green_spots = {$Enviroment/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
 	add_child(initial)
 	var factory := FactoryStory.new()
 	factory.name = "FactoryStory"
-	factory.anchor = $DesertRoboticsLaboratory
+	factory.anchor = $Enviroment/East_Robot_factory/DesertRoboticsLaboratory
 	factory.terrain = terrain
-	factory.initial = initial
 	factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
+	factory.jetpack_prop = factory_jetpack if factory_jetpack else _find_jetpack_prop()
+	factory.route = factory_jetpack_route
 	add_child(factory)
 	var radar := RadarStory.new()
 	radar.name = "RadarStory"
-	radar.anchor = $RadioObservatory
+	radar.anchor = $Enviroment/East_Mountain/RadioObservatory
 	radar.terrain = terrain
 	add_child(radar)
 	var finale := FinaleStory.new()
 	finale.name = "FinaleStory"
-	finale.radar = $RadioObservatory
-	finale.harbor = $IslandHarbor
+	finale.radar = $Enviroment/East_Mountain/RadioObservatory
+	finale.harbor = $Enviroment/South_Harbour/IslandHarbor
 	finale.terrain = terrain
 	finale.cameras = {&"disruptor":finale_disruptor_camera,&"boat":finale_boat_camera}
 	add_child(finale)
+	var battery := BatteryCharge.new()
+	battery.name = "BatteryCharge"
+	add_child(battery)
 	var regrowth := TreeRegrowth.new()
 	regrowth.name = "TreeRegrowth"
 	add_child(regrowth)
@@ -131,3 +142,11 @@ func _process(delta: float) -> void:
 
 func _exit_tree() -> void:
 	SettingsManager.reset_fmod_mix()
+
+
+## The power-room jetpack when the export is empty: a node named "Jetpack" outside LIRA.
+func _find_jetpack_prop() -> Node3D:
+	for node in find_children("Jetpack", "Node3D", true, false):
+		if not player.is_ancestor_of(node):
+			return node
+	return null

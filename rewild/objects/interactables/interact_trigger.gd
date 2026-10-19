@@ -21,6 +21,10 @@ const PROMPT_SCENE = preload("res://ui/in_game/interaction/interaction_prompt.ts
 
 ## Optional story prerequisite; unset keeps normal prop behaviour.
 var can_interact: Callable
+## Optional: while can_interact refuses, the prompt stays up, greyed, with this text
+## (returns a prompt text; "%s" is the key), e.g. what is still missing. Unset hides it.
+var locked_text: Callable
+var _shown_text := ""
 var _player_inside := false
 var _used := false
 var _prompt: CanvasLayer
@@ -37,11 +41,19 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	_prompt = PROMPT_SCENE.instantiate()
 	add_child(_prompt)
+	_shown_text = message_key
 	_prompt.configure(&"interact", message_key)
 
 
 func _process(_delta: float) -> void:
-	_prompt.set_available(_can_use())
+	var usable := _can_use()
+	var locked := not usable and locked_text.is_valid() and _player_inside and not (one_shot and _used)
+	var text: String = locked_text.call() if locked else message_key
+	if text != _shown_text:
+		_shown_text = text
+		_prompt.configure(&"interact", text)
+	_prompt.set_interactable(not locked)
+	_prompt.set_available(usable or locked)
 
 
 func _unhandled_input(event: InputEvent) -> void:

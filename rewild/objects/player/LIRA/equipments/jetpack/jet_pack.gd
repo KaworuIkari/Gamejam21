@@ -3,6 +3,7 @@ class_name Jetpack
 ## Jetpack with two quad flames as children. Each flame yaws around its own rest
 ## local Y to face the camera, and stretches/fades with intensity.
 ## Flames: QuadMesh + jetpack_flame.gdshader. Drive with burst() and set_thrust().
+## Flames and the thrust sound are optional, so a bare jetpack mesh (e.g. a prop) works too.
 
 @export_group("Shape")
 @export var length_idle := 0.35        # fraction of full length at low intensity (1.0 = no stretch)
@@ -15,11 +16,15 @@ var intensity := 0.0
 var _thrust_target := 0.0
 var _burst := 0.0
 
-@onready var flames: Array[MeshInstance3D] = [$Flame, $Flame2]
+var flames: Array[MeshInstance3D] = []
 var _rest: Array[Transform3D] = []
 
 
 func _ready() -> void:
+	for flame_name in ["Flame", "Flame2"]:
+		var flame := get_node_or_null(flame_name) as MeshInstance3D
+		if flame:
+			flames.append(flame)
 	for flame in flames:
 		_rest.append(flame.transform)          # placement you set in the editor
 		if flame.mesh is QuadMesh:             # pivot at the top edge → grows away from the nozzle
@@ -28,7 +33,7 @@ func _ready() -> void:
 		flame.visible = false
 
 
-@onready var thrust_sound: FmodEventEmitter3D = $FmodEventEmitter3D
+@onready var thrust_sound: FmodEventEmitter3D = get_node_or_null(^"FmodEventEmitter3D")
 var _thrust_playing := false
 
 func burst() -> void:
@@ -49,10 +54,10 @@ func _process(delta: float) -> void:
 	var length := lerpf(length_idle, 1.0, intensity)
 
 	# audio
-	if on and not _thrust_playing:
+	if thrust_sound and on and not _thrust_playing:
 		_thrust_playing = true
 		thrust_sound.play()
-	elif not on and _thrust_playing:
+	elif thrust_sound and not on and _thrust_playing:
 		_thrust_playing = false
 		thrust_sound.stop()
 

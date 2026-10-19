@@ -11,7 +11,9 @@ height = 6.0
 [node name="RestorablePine4" type="Node3D" groups=["nav_blockers"]]
 script = ExtResource("1")
 stages = Array[PackedScene]([ExtResource("2"), ExtResource("3")])
+thresholds = PackedFloat32Array(0.15)
 quest_event = &"tree_restored"
+quest_threshold = 0.6
 
 [node name="Trunk" type="StaticBody3D" parent="."]
 

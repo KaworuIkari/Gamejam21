@@ -1,8 +1,15 @@
 extends Node
 class_name DebugNode
 
+const DEBUG_MENU = preload("res://ui/debug/debug_menu.gd")
+
 func _init() -> void:
 	RenderingServer.set_debug_generate_wireframes(true)
+
+## Debug builds get the floating cheat menu (F1), see ui/debug/debug_menu.gd.
+func _ready() -> void:
+	if OS.is_debug_build():
+		add_child.call_deferred(DEBUG_MENU.new()) # after the later autoloads (Quests)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F4:
