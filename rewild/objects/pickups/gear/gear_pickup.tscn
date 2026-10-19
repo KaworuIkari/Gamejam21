@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://objects/pickups/gear/gear_pickup.gd" id="1_script"]
+
+[sub_resource type="SphereShape3D" id="PickupRange"]
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="SparkMaterial"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 1
+albedo_color = Color(1, 0.92, 0.65, 0.8)
+
+[sub_resource type="QuadMesh" id="SparkMesh"]
+material = SubResource("SparkMaterial")
+size = Vector2(0.025, 0.025)
+
+[node name="GearPickup" type="Area3D"]
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+script = ExtResource("1_script")
+
+[node name="PickupRange" type="CollisionShape3D" parent="."]
+shape = SubResource("PickupRange")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="SoftSparkles" type="CPUParticles3D" parent="."]
+amount = 10
+lifetime = 2.4
+mesh = SubResource("SparkMesh")
+emission_shape = 1
+emission_sphere_radius = 0.35
+direction = Vector3(0, 1, 0)
+spread = 15.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.05
+initial_velocity_max = 0.12
+scale_amount_min = 0.8
+scale_amount_max = 2.0

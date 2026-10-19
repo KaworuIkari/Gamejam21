@@ -9,7 +9,7 @@
 extends EditorScript
 
 const CLEARABLE := preload("res://systems/world_objects/clearable.gd")
-## Reported to the quests when cleared; 02_clean_up counts "garbage".
+## Reported to the quests when cleared; "garbage" is upgrade material at the terminal.
 const TAGS: Array[StringName] = [&"garbage"]
 ## Extra reach beyond the prop's own size, so big wrecks can be cleared from their edge.
 const REACH := 2.0

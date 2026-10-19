@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_well_nature_v1/Woodland_Well_Restorable.tscn" id="1_2xd8f"]
+
+[sub_resource type="Environment" id="Environment_76dxh"]
+background_mode = 1
+background_color = Color(0.15, 0.18, 0.16, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.85, 0.75, 1)
+ambient_light_energy = 0.7
+
+[node name="RegrowthGallery" type="Node3D" unique_id=2026863240]
+
+[node name="Woodland_Well_Barren" type="Node3D" parent="." unique_id=2069900946 instance=ExtResource("1_2xd8f")]
+
+[node name="@WorldEnvironment@3" type="WorldEnvironment" parent="." unique_id=1524183664]
+environment = SubResource("Environment_76dxh")
+
+[node name="@DirectionalLight3D@4" type="DirectionalLight3D" parent="." unique_id=1785041496]
+transform = Transform3D(0.8660254, 0.40957603, -0.28678823, 0, 0.57357645, 0.81915206, 0.5, -0.7094065, 0.49673176, 0, 0, 0)
+
+[node name="@Camera3D@5" type="Camera3D" parent="." unique_id=702157739]
+transform = Transform3D(0.76604444, -0.20927115, 0.6077676, 0, 0.94551855, 0.32556814, -0.6427876, -0.24939966, 0.7243092, 5, 4, 6)
+projection = 1
+current = true
+size = 6.0

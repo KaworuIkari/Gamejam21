@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3]
+[ext_resource type="PackedScene" path="res://levels/meadow_hand/meadow_hand.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Harbour_Greenery.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Plane_Greenery.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Factory_Greenery.tscn" id="4"]
+[node name="MeadowWithRegrowth" instance=ExtResource("1")]
+[node name="GrowingGreenery" parent="Enviroment/South_Harbour/IslandHarbor" instance=ExtResource("2")]
+[node name="GrowingGreenery" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" instance=ExtResource("3")]
+[node name="GrowingGreenery" parent="Enviroment/East_Robot_factory/DesertRoboticsLaboratory" instance=ExtResource("4")]
+
+[node name="Overgrowth" parent="Enviroment/South_Harbour/IslandHarbor"]
+visible = false
+process_mode = 4
+
+[node name="Overgrowth" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2"]
+visible = false
+process_mode = 4
+
+[node name="Overgrowth" parent="Enviroment/East_Robot_factory/DesertRoboticsLaboratory"]
+visible = false
+process_mode = 4
