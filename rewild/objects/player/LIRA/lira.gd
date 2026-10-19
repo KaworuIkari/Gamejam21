@@ -132,7 +132,8 @@ func _ready() -> void:
 	energy_hud.configure(self)
 	get_tree().root.add_child.call_deferred(energy_hud)
 	tree_exiting.connect(energy_hud.queue_free)
-	_refresh_water_list()
+	# Water siblings may become ready after LIRA; collect them after scene setup.
+	_refresh_water_list.call_deferred()
 	_setup_swim_idle_pool()
 
 	_water_pos_y_offset = Vector3(0.0, _capsule_height() * 0.1, 0.0)
@@ -244,7 +245,7 @@ func set_water_gun(enabled: bool) -> void:
 		on_aim(false)
 
 func try_shoot() -> void:                   # call this from the input code that used to set is_shooting
-	if not animation_script.is_aiming or _fire_cd > 0.0:
+	if not has_water_gun or not animation_script.is_aiming or _fire_cd > 0.0:
 		return
 	if not tank.consume_shot():
 		react(RobotFace.Mood.QUESTION, 1, 0.8)   # dry: LIRA notices
@@ -256,7 +257,7 @@ func try_shoot() -> void:                   # call this from the input code that
 	animation_script.aim_correction.kick()
 
 func on_aim(is_aiming : bool) -> void:
-	if is_aiming and in_water:
+	if is_aiming and (not has_water_gun or in_water):
 		return
 	if is_aiming:
 		_update_camera_distance(aim_camera_distance)
@@ -439,8 +440,8 @@ func _detect_surface() -> int:
 func _refresh_water_list() -> void:
 	_water_list.clear()
 	for n in get_tree().get_nodes_in_group(&"water_surfaces"):
-		if n is StylizedWater and n.visible:
-			print(n.name, " added to list")
+		# Keep dormant surfaces too: the pump can reveal them later.
+		if n is StylizedWater:
 			_water_list.append(n)
 
 func _update_water() -> void:
@@ -473,14 +474,15 @@ func _update_water() -> void:
 			_end_dive()
 
 func _find_water() -> StylizedWater:
-	var lira_pos := global_position+_water_pos_y_offset
-	if is_instance_valid(_current_water) and _current_water.holds_point(lira_pos):
-		return _current_water
+	var lira_pos := global_position + _water_pos_y_offset
 	_current_water = null
-	for v in _water_list:
-		if is_instance_valid(v) and v.holds_point(lira_pos):
-			_current_water = v
-			break
+	for water in _water_list:
+		if not is_instance_valid(water) or not water.is_visible_in_tree() or not water.holds_point(lira_pos):
+			continue
+		# A raised pool can overlap the sea's footprint. Recheck even while cached
+		# in the sea, and use the highest local surface for depth and buoyancy.
+		if _current_water == null or water.get_plane_surface_y() > _current_water.get_plane_surface_y():
+			_current_water = water
 	return _current_water
 
 func _capsule_height() -> float:

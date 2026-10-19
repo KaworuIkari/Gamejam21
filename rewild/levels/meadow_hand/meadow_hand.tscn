@@ -810,7 +810,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -142.28001, 36.465416, 97.889
 
 [node name="LIRA" parent="SubViewportContainer/PixelateSubViewport" unique_id=223261986 groups=["player"] instance=ExtResource("29_ae10e")]
 transform = Transform3D(-0.567996, 0, -0.8230313, 0, 1, 0, 0.8230313, 0, -0.567996, -14.604189, 26.252432, 232.62567)
-start_water_gun_level = 1
 speed = 2.1
 jump_velocity = 4.6
 

@@ -198,3 +198,9 @@ Presentation lives in `ui/in_game/startup/startup_hint.tscn` and its script: one
 `levels/meadow_hand/cabin_story.gd` gates the pump interaction until both records are read. WaterFlowSwitch reports completion after the existing flow/rise animation, ending 00 and starting 01 at the lake station activation step. A non-blocking “第一幕 / Act I” card fades in and out once; edit its timing/presentation in `ui/in_game/story/act_title.*`. `act_one_started` is available for later camera/animation work.
 
 The level runs CabinStory.migrate_save before loading quests: old 01 indices shift past the removed pump step, prior progress/equipment are retained, and older saves without startup checks retain access to the pump. Completed pumps restore flowing water before child nodes become ready. `cabin_story_version` prevents repeat migration; `act_one_entered` prevents replaying the chapter card. These flags and reading event counters use normal SaveManager persistence; no extra save files are created. F6 without a fresh-save marker follows the legacy compatibility path. New games retain the opening and self-check sequence.
+
+## 开局装备与水池检测维护
+
+主关卡 LIRA 不覆盖 `start_water_gun_level`，沿用角色默认 0。水枪和水箱在首次湖心终端交谈后由 `receive_starter_equipment()` 解锁；01 的奖励是兼容性兜底。未获取时不能持枪、瞄准或发射，已保存的装备等级照常恢复。背包仍需清理任务交付后才能飞行。
+
+`objects/player/LIRA/lira.gd` 在场景初始化结束后延迟调用 `_refresh_water_list()`，收集全部 `water_surfaces`（包括水泵后续显示的水面）；实际查询时忽略隐藏水面和已移除节点。重叠水面每帧选择最高的有效局部水面，避免北部水池被低处海面抢先匹配。保留现有 `in_water`、游泳动画、浮力和空格出水跳跃，不需要喷气背包或新增动画。调整水面位置时同步核对水池边缘的出水路径。
