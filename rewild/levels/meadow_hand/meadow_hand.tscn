@@ -839,12 +839,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_water")
 fit_to_basin = true
 
 [node name="Sea" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=767396377 node_paths=PackedStringArray("cutouts") instance=ExtResource("14_i4ovm")]
-transform = Transform3D(999.998, 0, 0, 0, 1, 0, 0, 0, 999.998, 19.829552, 25.74011, 109.67724)
+transform = Transform3D(100, 0, 0, 0, 0.1, 0, 0, 0, 100, 19.829552, 25.74011, 109.67724)
 mesh = SubResource("PlaneMesh_water")
 surface_material_override/0 = SubResource("ShaderMaterial_water")
 cutouts = [NodePath("../Lake"), NodePath("../River"), NodePath("../Froglake"), NodePath("../Pond")]
 
-[node name="StylizedWater2" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=537853457 instance=ExtResource("14_i4ovm")]
+[node name="PumpHouseWater" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=537853457 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(0.3, 0, 0, 0, 1, 0, 0, 0, 0.3, 39.32513, 46.827694, -161.39017)
 mesh = SubResource("PlaneMesh_water")
 surface_material_override/0 = SubResource("ShaderMaterial_water")
@@ -1026,165 +1026,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.818878, 25.000011, 233.78
 [node name="CrashsiteOutpostV2" parent="Enviroment/South_plane_crash" unique_id=181033479 instance=ExtResource("22_3e4fi")]
 transform = Transform3D(-0.9182307, 0, -0.3960441, 0, 1, 0, 0.3960441, 0, -0.9182307, -16.07093, 24.790638, 232.76624)
 
-[node name="Fuselage_Continuous_000" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="0" unique_id=2055450498]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.027877808, 0.19272995, -0.14569092)
+[node name="Cargo_Box_034" type="Marker3D" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2"]
+transform = Transform3D(0.995004, 0, -0.0998334, 0, 1, 0, 0.0998334, 0, 0.995004, 5, 1.12, -1.2)
 
-[node name="Engine_Nacelle_Broken_027" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="27" unique_id=1815525121]
-transform = Transform3D(0.93937314, 0, 0.34289798, 0, 1, 0, -0.34289798, 0, 0.93937314, -8.869308, 0, 8.857666)
+[node name="Cargo_Box_038" type="Marker3D" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2"]
+transform = Transform3D(0.995004, 0, 0.0998334, 0, 1, 0, -0.0998334, 0, 0.995004, -5.9, 1.12, -0.8)
 
-[node name="Engine_Turbine_028" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="28" unique_id=1704565406]
-transform = Transform3D(0.93937314, 0, 0.34289798, 0, 1, 0, -0.34289798, 0, 0.93937314, -10.184433, 1.4500008, 8.377609)
-
-[node name="Engine_Mount_029" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="29" unique_id=661651632]
-transform = Transform3D(0.9101701, -0.247404, 0.332238, 0.204259, 0.965814, 0.159633, -0.36037403, -0.0774303, 0.92958903, -8.569313, 2.75, 8.757675)
-
-[node name="CrashsiteDeliveryTablet" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2/Cargo_Box_034" parent_id_path=PackedInt32Array(181033479, 738016966) index="2" unique_id=1777589251 instance=ExtResource("ReadableTabletScene")]
+[node name="CrashsiteDeliveryTablet" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2/Cargo_Box_034" unique_id=1777589251 instance=ExtResource("ReadableTabletScene")]
 transform = Transform3D(0.9915619, 0, -0.12963414, 0, 1, 0, 0.12963414, 0, 0.9915619, -0.08, 0.965, 0.02)
 read_event = &"cabin_delivery_read"
 content = ExtResource("CrashsiteDeliveryContent")
 
-[node name="CrashsiteCrewTablet" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2/Cargo_Box_038" parent_id_path=PackedInt32Array(181033479, 1442820341) index="2" unique_id=1526488101 instance=ExtResource("ReadableTabletScene")]
+[node name="CrashsiteCrewTablet" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2/Cargo_Box_038" unique_id=1526488101 instance=ExtResource("ReadableTabletScene")]
 transform = Transform3D(0.9887711, 0, -0.14943814, 0, 1, 0, 0.14943814, 0, 0.9887711, 0, 0.965, 0)
 read_event = &"cabin_crew_read"
 content = ExtResource("CrashsiteCrewContent")
-
-[node name="Concrete_Barrier_045" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="45" unique_id=573222922]
-transform = Transform3D(0.9580493, 0, 0.28660512, 0, 1, 0, -0.28660512, 0, 0.9580493, -4.4874573, 0.047948837, 19.414581)
-
-[node name="Concrete_Barrier_046" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="46" unique_id=252842239]
-transform = Transform3D(0.9580493, 0, 0.28660512, 0, 1, 0, -0.28660512, 0, 0.9580493, -1.7091141, 0.047948837, 18.583435)
-
-[node name="Concrete_Barrier_047" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="47" unique_id=1636936466]
-transform = Transform3D(0.97117615, 0, 0.23836416, 0, 1, 0, -0.23836416, 0, 0.97117615, 5.236328, 0.047948837, 17.027542)
-
-[node name="Concrete_Barrier_048" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="48" unique_id=1787111396]
-transform = Transform3D(0.98187554, 0, 0.18952787, 0, 1, 0, -0.18952787, 0, 0.98187554, 8.253784, 0.047948837, 16.646805)
-
-[node name="Concrete_Barrier_049" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="49" unique_id=1054158853]
-transform = Transform3D(0.882013, 0, 0.4712268, 0, 1, 0, -0.4712268, 0, 0.882013, 10.841354, 0.047948837, 14.828903)
-
-[node name="Fence_3m_050" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="50" unique_id=784836432]
-transform = Transform3D(0.9995501, 0, -0.029995471, 0, 1, 0, 0.029995471, 0, 0.9995501, -17.930267, 0, -16.383453)
-
-[node name="Fence_3m_051" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="51" unique_id=926903878]
-transform = Transform3D(0.9995501, 0, -0.029995471, 0, 1, 0, 0.029995471, 0, 0.9995501, -14.930267, 0, -16.383438)
-
-[node name="Fence_3m_052" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="52" unique_id=1324747941]
-transform = Transform3D(0.9995501, 0, -0.029995471, 0, 1, 0, 0.029995471, 0, 0.9995501, -11.930267, 0, -16.383453)
-
-[node name="Fence_3m_053" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="53" unique_id=985688880]
-transform = Transform3D(0.8445497, 0, -0.53547776, 0, 1, 0, 0.53547776, 0, 0.8445497, 18.218887, -0.06204605, -10.754471)
-
-[node name="Fence_3m_054" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="54" unique_id=836829844]
-transform = Transform3D(0.8445497, 0, -0.53547776, 0, 1, 0, 0.53547776, 0, 0.8445497, 20.799591, -0.06204605, -9.224777)
-
-[node name="Fence_3m_055" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="55" unique_id=280515032]
-transform = Transform3D(0.8445497, 0, -0.53547776, 0, 1, 0, 0.53547776, 0, 0.8445497, 23.380249, -0.06204605, -7.695053)
-
-[node name="Fence_Bent_056" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="56" unique_id=127505306]
-transform = Transform3D(0.99500406, 0, 0.09983343, 0, 1, 0, -0.09983343, 0, 0.99500406, -2.2342758, 0, -5.8663483)
-
-[node name="Fence_Bent_057" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="57" unique_id=1060790632]
-transform = Transform3D(0.54727507, 0, -0.8369531, 0, 1, 0, 0.8369531, 0, 0.54727507, -21.469986, 0, -0.19692993)
-
-[node name="Fence_Bent_058" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="58" unique_id=618480849]
-transform = Transform3D(2.9802322e-08, 0, -1, 0, 1, 0, 1, 0, 2.9802322e-08, -20.930267, 0, -13.883453)
-
-[node name="Fence_Bent_059" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="59" unique_id=1524339752]
-transform = Transform3D(-0.50990415, 0, -0.8602316, 0, 1, 0, 0.8602316, 0, -0.50990415, 26.916565, -0.06204605, -3.8552094)
-
-[node name="Debris_Cluster_1_060" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="60" unique_id=64383959]
-transform = Transform3D(-0.37785402, 0, -0.9258651, 0, 1, 0, 0.9258651, 0, -0.37785402, -11.869308, 0.07999992, 6.3576813)
-
-[node name="Debris_Cluster_2_061" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="61" unique_id=35321238]
-transform = Transform3D(-0.877501, 0, -0.47957504, 0, 1, 0, 0.47957504, 0, -0.877501, -10.869308, 0.07999992, 10.357681)
-
-[node name="Debris_Cluster_3_062" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="62" unique_id=751077003]
-transform = Transform3D(-0.5328841, 0, 0.84618807, 0, 1, 0, -0.84618807, 0, -0.5328841, -5.869316, 0.07999992, 7.4576874)
-
-[node name="Debris_Cluster_1_063" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="63" unique_id=1830138607]
-transform = Transform3D(-0.75769913, 0, 0.65260506, 0, 1, 0, -0.65260506, 0, -0.75769913, 0.13069153, 0.07999992, 7.957657)
-
-[node name="Debris_Cluster_3_068" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="68" unique_id=63519331]
-transform = Transform3D(0.99070406, 0, -0.13603298, 0, 1, 0, 0.13603298, 0, 0.99070406, -12.106621, 0.07999992, -4.5434875)
-
-[node name="Debris_Cluster_1_069" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="69" unique_id=1131123649]
-transform = Transform3D(0.293528, 0, 0.9559501, 0, 1, 0, -0.9559501, 0, 0.293528, -17.10662, 0.07999992, -4.043503)
-
-[node name="Debris_Cluster_2_070" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="70" unique_id=93299717]
-transform = Transform3D(0.58174706, 0, 0.81337005, 0, 1, 0, -0.81337005, 0, 0.58174706, -3.2342758, 0.07999992, -4.3663483)
-
-[node name="DeadTree_Original_071" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="71" unique_id=1970809544]
-transform = Transform3D(-0.25627303, 0, 0.369897, 0, 0.45, 0, -0.369897, 0, -0.25627303, -18.10662, 0, -5.043503)
-
-[node name="DeadTree_Original_072" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="72" unique_id=1895752382]
-transform = Transform3D(-0.46717906, 0, -0.11019902, 0, 0.48, 0, 0.11019902, 0, -0.46717906, -6.234276, 0, -6.3663483)
-
-[node name="DeadTree_Original_073" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="73" unique_id=195531294]
-transform = Transform3D(-0.28482306, 0, -0.30866808, 0, 0.42, 0, 0.30866808, 0, -0.28482306, 17.627045, 0, 9.134125)
-
-[node name="Rock_Original_075" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="75" unique_id=359322482]
-transform = Transform3D(-0.5488741, 0, 0.035174116, 0, 0.55, 0, -0.035174116, 0, -0.5488741, -15.106621, 0, -6.043503)
-
-[node name="Rock_Original_076" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="76" unique_id=34570436]
-transform = Transform3D(0.52144504, 0, -0.174914, 0, 0.55, 0, 0.174914, 0, 0.52144504, -10.106628, 0, -7.0434875)
-
-[node name="Dry_Grass_081" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="81" unique_id=1219184803]
-transform = Transform3D(-0.59647834, 0, 0.59451604, 0, 0.84216094, 0, -0.59451604, 0, -0.59647834, 5.8758698, 0.067949295, 13.602371)
-
-[node name="Dry_Grass_083" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="83" unique_id=534134020]
-transform = Transform3D(-1.3526201, 0, -0.650846, 0, 1.50106, 0, 0.650846, 0, -1.3526201, -11.942413, 0.020000458, 9.925858)
-
-[node name="Dry_Grass_085" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="85" unique_id=1909870404]
-transform = Transform3D(-0.521887, 0, -0.7100671, 0, 0.881227, 0, 0.7100671, 0, -0.521887, -9.431702, 0.020000458, -4.1938477)
-
-[node name="Dry_Grass_086" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="86" unique_id=1175269688]
-transform = Transform3D(-0.9488292, 0, 1.2372291, 0, 1.55917, 0, -1.2372291, 0, -0.9488292, 18.759277, -0.042045593, -0.81933594)
-
-[node name="Dry_Grass_087" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="87" unique_id=61032795]
-transform = Transform3D(0.442545, 0, 0.7516221, 0, 0.872228, 0, -0.7516221, 0, 0.442545, -6.2863235, 0.020000458, 10.023499)
-
-[node name="Dry_Grass_088" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="88" unique_id=1161051485]
-transform = Transform3D(0.769629, 0, 0.51205504, 0, 0.924408, 0, -0.51205504, 0, 0.769629, -9.595497, 0.020000458, 9.322357)
-
-[node name="Dry_Grass_089" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="89" unique_id=867999372]
-transform = Transform3D(-0.26648432, 0, 1.1108881, 0, 1.1424, 0, -1.1108881, 0, -0.26648432, 5.42231, 0.067949295, 13.364868)
-
-[node name="Dry_Grass_090" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="90" unique_id=145487370]
-transform = Transform3D(0.8763661, 0, -0.548219, 0, 1.03371, 0, 0.548219, 0, 0.8763661, -9.622589, 0.020000458, -3.9519653)
-
-[node name="Dry_Grass_091" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="91" unique_id=1292153920]
-transform = Transform3D(0.47110602, 0, -1.1997601, 0, 1.28894, 0, 1.1997601, 0, 0.47110602, -2.6758347, 0.020000458, -4.266159)
-
-[node name="Dry_Grass_093" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="93" unique_id=34541835]
-transform = Transform3D(-0.06347248, 0, 0.9000561, 0, 0.902292, 0, -0.9000561, 0, -0.06347248, -17.49112, 0.020000458, -6.9481354)
-
-[node name="Dry_Grass_095" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="95" unique_id=1267889408]
-transform = Transform3D(-0.48769102, 0, 0.8082881, 0, 0.944019, 0, -0.8082881, 0, -0.48769102, -12.438309, 0.020000458, 11.459106)
-
-[node name="Dry_Grass_097" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="97" unique_id=1575202584]
-transform = Transform3D(-0.120615914, 0, -0.8857603, 0, 0.89393485, 0, 0.8857603, 0, -0.120615914, 18.57927, -0.042045593, -0.13937378)
-
-[node name="Dry_Grass_098" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="98" unique_id=821734990]
-transform = Transform3D(0.444219, 0, -0.76065105, 0, 0.880864, 0, 0.76065105, 0, 0.444219, -15.473419, 0.020000458, -8.150101)
-
-[node name="Dry_Grass_099" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="99" unique_id=210481418]
-transform = Transform3D(-0.09773719, 0, -0.8484374, 0, 0.854048, 0, 0.8484374, 0, -0.09773719, 5.642433, 0.067949295, 14.1089325)
-
-[node name="Dry_Grass_100" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="100" unique_id=1975223026]
-transform = Transform3D(0.37894875, 0, -0.9940336, 0, 1.0638199, 0, 0.9940336, 0, 0.37894875, 20.714905, -0.042045593, 1.4297485)
-
-[node name="Dry_Grass_101" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="101" unique_id=648305274]
-transform = Transform3D(0.33724874, 0, -1.4804913, 0, 1.5184098, 0, 1.4804913, 0, 0.33724874, 19.09262, -0.042045593, -2.431427)
-
-[node name="Dry_Grass_102" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="102" unique_id=585092866]
-transform = Transform3D(-0.07750082, 0, 1.3953764, 0, 1.39753, 0, -1.3953764, 0, -0.07750082, -1.6833878, 0.067949295, 17.059296)
-
-[node name="Dry_Grass_103" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="103" unique_id=1270430094]
-transform = Transform3D(0.8072051, 0, 1.0594101, 0, 1.33189, 0, -1.0594101, 0, 0.8072051, -1.9203796, 0.020000458, -4.417816)
-
-[node name="Dry_Grass_104" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" index="104" unique_id=528772209]
-transform = Transform3D(-1.3812401, 0, -0.639176, 0, 1.52196, 0, 0.639176, 0, -1.3812401, -11.249161, 0.020000458, -8.055557)
 
 [node name="Overgrowth" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" unique_id=1084810571 instance=ExtResource("PlaneGreenery_20261017")]
 
