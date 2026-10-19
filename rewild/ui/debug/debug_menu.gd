@@ -44,7 +44,7 @@ func _build() -> void:
 	_status.add_theme_color_override(&"font_color", Color(0.7, 0.85, 0.75))
 	column.add_child(_status)
 	for entry in [
-		["终端 + 水枪 + 背包外观", func(): Quests.receive_starter_equipment()],
+		["终端 + 水枪", func(): Quests.receive_starter_equipment()],
 		["喷气背包（可飞行）", func(): Quests.grant(&"jetpack", maxi(1, Quests.ability_level(&"jetpack")))],
 		["水枪射速 +1", _upgrade.bind(WaterGunUpgrades.RATE)],
 		["水箱容量 +1", _upgrade.bind(WaterGunUpgrades.TANK)],
@@ -52,6 +52,7 @@ func _build() -> void:
 		["齿轮 +6", func(): Quests.report(&"factory_gear", 6)],
 		["水泵激活", _start_pump],
 		["获得电池", func(): Quests.grant(BatteryCharge.BATTERY)],
+		["狐狸钥匙", func(): Quests.grant(&"fox_key")],
 	]:
 		column.add_child(_button(entry[0], entry[1]))
 	_refresh()
@@ -87,9 +88,8 @@ func _drag(event: InputEvent) -> void:
 func _refresh() -> void:
 	if not _panel.visible:
 		return
-	_status.text = "水枪 %d  背包 %d%s  射速 %d/3  容量 %d/3\n材料 %d  齿轮 %d  电池 %s" % [
+	_status.text = "水枪 %d  背包 %d  射速 %d/3  容量 %d/3\n材料 %d  齿轮 %d  电池 %s" % [
 		Quests.ability_level(&"water_gun"), Quests.ability_level(&"jetpack"),
-		"（仅外观）" if Quests.has_ability(&"jetpack_equipped") and not Quests.has_ability(&"jetpack") else "",
 		WaterGunUpgrades.level(WaterGunUpgrades.RATE), WaterGunUpgrades.level(WaterGunUpgrades.TANK),
 		WaterGunUpgrades.material(), Quests.event_count(&"factory_gear"),
 		"有" if Quests.has_ability(BatteryCharge.BATTERY) else "无"]

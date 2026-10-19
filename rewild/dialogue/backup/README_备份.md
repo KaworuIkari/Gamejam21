@@ -13,7 +13,7 @@
 
 | 原场景 | 键 | 原触发位置 |
 |---|---|---|
-| 草原清理提交（任务 02） | `CLEAN_DELIVERY_RECEIVED`、`CLEAN_DELIVERY_JETPACK` | 湖心终端 `_submit_meadow_cleanup`，结束后上报 `meadow_cleanup_delivered` |
+| 草原清理提交（任务 02） | `CLEAN_DELIVERY_RECEIVED`（`CLEAN_DELIVERY_JETPACK` 已删除） | 湖心终端 `_submit_meadow_cleanup`，结束后上报 `meadow_cleanup_delivered` |
 | 雷达信息提交（任务 05） | `RADAR_DELIVERY_RECEIVED`、`RADAR_DELIVERY_REWARD`、`FINALE_BRIEFING_DEVICE`、`FINALE_BRIEFING_BOAT` | 湖心终端 `_submit_radar_information`，结束后上报 `radar_delivered` |
 | 补领雷达密钥 | `INTERACT_ROBOT_KEY`、`ROBOT_KEY_RECOVERY` | `factory_story.gd` 的 `_check_key_recovery` |
 | 雷达读取中的密钥/返回提示 | `RADAR_READOUT_KEY`、`RADAR_READOUT_RETURN` | `radar_story.gd` 的 `make_readout_timeline`（现只保留坐标一页） |
@@ -21,6 +21,7 @@
 ## 屏幕提示
 
 - 任务开始/完成提示：`QUEST_TOAST_STARTED`、`QUEST_TOAST_DONE`，原在 `ui/in_game/tasks/terminal_ui.gd` 连接 `Quests.quest_started` / `quest_completed`。
-- 左上角任务追踪与背包未启用提示：`JETPACK_LOCKED_CLEANUP`、`JETPACK_LOCKED_RETURN`。
+- 左上角任务追踪与背包未启用提示（`JETPACK_LOCKED_*` 等“背包能量不足/供能”文本已删除，见 git 历史）。
+- 湖心终端初次接触对话 `first_contact.dtl` 中关于背包交付与供能的台词已删除。
 
 完整旧代码可在 git 历史中查看（此次改动之前的提交）。

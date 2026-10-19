@@ -122,6 +122,19 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 6
 
+[node name="ItemsLine" type="HSeparator" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+layout_mode = 2
+
+[node name="ItemsHeading" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.69, 0.56, 1)
+text = "TERMINAL_ITEMS_TITLE"
+
+[node name="Items" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 2
+
 [node name="Upgrades" type="VBoxContainer" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split"]
 layout_mode = 2
 size_flags_horizontal = 3

@@ -72,11 +72,11 @@ func unlock_terminal() -> void:
 	grant(TERMINAL)
 
 
-## The station hands over both tools; jetpack level remains zero until the factory bot is repaired.
+## The station hands over the action terminal and the water gun. The jetpack is in the
+## factory's power room; the repaired bot fetches it (FactoryStory).
 func receive_starter_equipment() -> void:
 	unlock_terminal()
 	grant(&"water_gun")
-	grant(&"jetpack_equipped")
 
 
 func event_count(event: StringName) -> int:
@@ -192,10 +192,10 @@ func load_from_save() -> void:
 	tracked = StringName(data.get("tracked", ""))
 	_evaluate()
 	# Older first-contact saves may have received the terminal before closing its
-	# page. Give them the starter tools too, without enabling a dormant jetpack.
+	# page. Give them the water gun too.
 	if terminal_unlocked():
 		_abilities[&"water_gun"] = maxi(1, ability_level(&"water_gun"))
-		_abilities[&"jetpack_equipped"] = 1
+	_abilities.erase(&"jetpack_equipped")  # the old unpowered backpack no longer exists
 	for a in _abilities:
 		ability_changed.emit(a, _abilities[a])
 	_changed()

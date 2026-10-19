@@ -40,8 +40,16 @@ const TreeRegrowth := preload("res://systems/world_objects/tree_regrowth.gd")
 const FinaleStory = preload("res://levels/meadow_hand/finale_story.gd")
 @export var finale_disruptor_camera: Camera3D
 @export var finale_boat_camera: Camera3D
+## The jetpack prop in the factory power room; the repaired bot fetches it. Empty = the node
+## named "Jetpack" directly in this level (not LIRA's).
+@export var factory_jetpack: Node3D
+## Optional way into the power room: a Node3D whose child Marker3Ds are points in order,
+## from the ground outside to the jetpack (ground → window sill → floor inside). Empty =
+## the bot finds the window itself.
+@export var factory_jetpack_route: Node3D
 const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
-## What stays switched off at the start of a new game (animals; the bot sleeps in FactoryStory).
+## Permanent green patches at the start of a new game (nothing is kept dormant now: animals
+## are live from the start; the fox lies hurt until rescued, the bot sleeps in FactoryStory).
 const InitialState := preload("res://levels/meadow_hand/initial_state.gd")
 const OpeningSequence := preload("res://levels/meadow_hand/opening_sequence.gd")
 const StartupChecks := preload("res://levels/meadow_hand/startup_checks.gd")
@@ -94,7 +102,6 @@ func _ready() -> void:
 	add_child(awakening)
 	var initial := InitialState.new()
 	initial.name = "InitialState"
-	initial.dormant = [$SubViewportContainer/PixelateSubViewport/Animals]
 	initial.green_spots = {$Enviroment/North_water_source/Ruined_Pump_House_Golden: PUMP_HOUSE_GREEN_RADIUS}
 	add_child(initial)
 	var factory := FactoryStory.new()
@@ -102,6 +109,8 @@ func _ready() -> void:
 	factory.anchor = $Enviroment/East_Robot_factory/DesertRoboticsLaboratory
 	factory.terrain = terrain
 	factory.companion = $SubViewportContainer/PixelateSubViewport/CubeBotCompanion
+	factory.jetpack_prop = factory_jetpack if factory_jetpack else _find_jetpack_prop()
+	factory.route = factory_jetpack_route
 	add_child(factory)
 	var radar := RadarStory.new()
 	radar.name = "RadarStory"
@@ -133,3 +142,11 @@ func _process(delta: float) -> void:
 
 func _exit_tree() -> void:
 	SettingsManager.reset_fmod_mix()
+
+
+## The power-room jetpack when the export is empty: a node named "Jetpack" outside LIRA.
+func _find_jetpack_prop() -> Node3D:
+	for node in find_children("Jetpack", "Node3D", true, false):
+		if not player.is_ancestor_of(node):
+			return node
+	return null

@@ -14,12 +14,17 @@ script = ExtResource("2")
 text = "QUEST_CORE_STEP_ACTIVATE"
 event = &"core_activated"
 
+[sub_resource type="Resource" id="step_jetpack"]
+script = ExtResource("2")
+text = "QUEST_CORE_STEP_JETPACK"
+event = &"jetpack_delivered"
+
 [resource]
 script = ExtResource("1")
 title = "QUEST_CORE_TITLE"
 description = "QUEST_CORE_DESC"
 location = "QUEST_CORE_LOCATION"
-steps = Array[ExtResource("2")]([SubResource("step_gears"), SubResource("step_activate")])
+steps = Array[ExtResource("2")]([SubResource("step_gears"), SubResource("step_activate"), SubResource("step_jetpack")])
 rewards = Dictionary[StringName, int]({
 &"jetpack": 1
 })

@@ -222,7 +222,7 @@ func _apply_abilities() -> void:
 		splash_radius = _per_level(water_gun_splash, water_gun_level, splash_radius)
 		fire_cooldown = _per_level(water_gun_cooldown, quests.ability_level(WaterGunUpgrades.RATE) + 1 if quests else 1, fire_cooldown)
 		tank.capacity = _per_level(water_tank_capacity, quests.ability_level(WaterGunUpgrades.TANK) + 1 if quests else 1, tank.capacity)
-	jetpack.visible = jetpack_level > 0 or (quests != null and quests.has_ability(&"jetpack_equipped"))
+	jetpack.visible = jetpack_level > 0
 	if jetpack_level > 0:
 		max_energy = _per_level(jetpack_energy, jetpack_level, max_energy)
 		energy = max_energy if jetpack_level > previous_jetpack_level else minf(energy, max_energy)

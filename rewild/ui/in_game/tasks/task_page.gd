@@ -1,6 +1,6 @@
 extends Control
 ## Presentation only. Left: the core battery charging with the four regions' recovery
-## (BatteryCharge). Right: water-gun upgrades bought with material from cleared garbage
+## (BatteryCharge), then the items LIRA carries (ITEMS). Right: water-gun upgrades bought with material from cleared garbage
 ## (WaterGunUpgrades). Layout lives in task_page.tscn; rows are filled in here.
 signal close_requested
 
@@ -8,6 +8,8 @@ const UIScaler = preload("res://ui/layout/ui_scaler.gd")
 const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 const BAR_CELLS := 20
 const DIM := Color(0.6, 0.69, 0.56)
+## Items listed under "carried items" once LIRA has them (abilities named ITEM_<NAME>_1).
+const ITEMS: Array[StringName] = [&"fox_key", BatteryCharge.BATTERY]
 ## Per upgrade track: name key and effect key (shown under the name).
 const TRACK_TEXT := {
 	WaterGunUpgrades.RATE: ["UPGRADE_RATE", "UPGRADE_RATE_DESC"],
@@ -62,6 +64,7 @@ func _render_if_open() -> void:
 func _render() -> void:
 	set_return_binding(_return_binding)
 	_render_battery()
+	_render_items()
 	_render_upgrades()
 
 # --- Battery ---------------------------------------------------------------------------
@@ -87,6 +90,13 @@ func _render_battery() -> void:
 			%Regions.add_child(row)
 		row.get_child(0).text = tr(regions[i].title)
 		row.get_child(1).text = _bar(regions[i].value)
+
+func _render_items() -> void:
+	var lines: Array[String] = []
+	for item in ITEMS:
+		if Quests.has_ability(item):
+			lines.append("▪ " + ability_name(item, Quests.ability_level(item)))
+	%Items.text = "\n".join(lines) if not lines.is_empty() else tr("TERMINAL_ITEMS_EMPTY")
 
 ## 0..1 -> whole percent; only shows 100 once the ground is really all green.
 static func percent(value: float) -> int:

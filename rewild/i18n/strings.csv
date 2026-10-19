@@ -165,6 +165,7 @@ BIND_RESERVED_LOOK,右摇杆用于镜头，请选其他按键,Right stick is res
 UI_RETRY_SAVE,保存失败：重试,Save failed: retry
 SETTINGS_SAVE_FAILED,设置未能保存，更改仍可预览或放弃。,Settings could not be saved. Changes can still be previewed or discarded.
 CLEAR_PROMPT,按住 %s 清除,Hold %s to clear
+FOX_RESCUE_PROMPT,按住 %s 救助小狐狸,Hold %s to help the fox
 CLEAR_LOCKED,%s 需要拆除授权,%s Needs demolition authorization
 OBJ_BASIN_LITTER,清理身边的垃圾,Clear the litter around you
 OBJ_REACH_SPRING,前往北方水源（北边的小岛）,Head to the north spring (the island to the north)
@@ -187,7 +188,6 @@ QUEST_WATER_LOCATION,北部泉眼 / 湖心电站,North spring / Lake station
 QUEST_WATER_STEP_STATION,长按 E 激活湖心电站,Hold E to activate the lake power station
 QUEST_WATER_STEP_TERMINAL,在电站终端查看任务,Check the station terminal
 QUEST_CLEAN_TITLE,清理草原,Clean up the meadow
-QUEST_CLEAN_DESC,背包已经装备，但能量不足。长按 E 清理草原上的10堆垃圾，再返回中心岛与湖心终端交互提交任务，恢复背包供能。,Your jetpack is equipped but has insufficient energy. Hold E to clear 10 meadow rubbish piles then return to the lake terminal on the central island to submit the task and restore jetpack power.
 QUEST_CLEAN_LOCATION,草原 / 中心岛湖心终端,Meadow / Central island lake terminal
 QUEST_CLEAN_STEP_GARBAGE,清理垃圾,Clear garbage
 QUEST_REGROW_TITLE,让树木复苏,Bring the trees back
@@ -226,6 +226,9 @@ UPGRADE_TANK_DESC,水箱可装更多水，射击次数更多。,The tank holds m
 UPGRADE_BUY,升级（%d 材料）,Upgrade (%d material)
 UPGRADE_MAX,已满级,Max level
 ITEM_BATTERY_1,核心电池,Core battery
+ITEM_FOX_KEY_1,狐狸给的钥匙,The fox's key
+TERMINAL_ITEMS_TITLE,随身物品,Carried items
+TERMINAL_ITEMS_EMPTY,（暂无）,(none yet)
 REGION_LAKE,湖区,Lake area
 REGION_FOREST,森林,Forest
 REGION_MOUNTAIN,山地,Mountain
@@ -248,6 +251,7 @@ QUEST_CORE_STEP_CLEAN,清理工厂环境,Clear the factory grounds
 QUEST_CORE_STEP_RESTORE,提升工厂区复苏度,Raise the factory area's recovery
 QUEST_CORE_STEP_GEARS,收集工厂周围的齿轮,Collect the gears around the factory
 QUEST_CORE_STEP_ACTIVATE,修复并唤醒小机器人,Repair and wake the bot
+QUEST_CORE_STEP_JETPACK,让小机器人从动力室取出喷气背包,Let the bot fetch the jetpack from the power room
 QUEST_CORE_STEP_DELIVER,返回湖心终端交付储能核心,Return to the lake terminal with the core
 QUEST_RADAR_TITLE,重启山地雷达,Restart the mountain radar
 QUEST_RADAR_DESC,带着升级后的装备和密钥前往雷达站。清理环境使山地区域复苏度达到30%后使用密钥启动雷达，获取坐标信息并返回湖心终端提交，领取混沌能量模块。,Take the upgraded equipment and key to the radar station. Restore the mountain region to 30% then use the key to start the radar. Retrieve the coordinates and deliver the information to the lake terminal to receive a Chaos Energy Module.
@@ -299,12 +303,8 @@ ROBOT_KEY_RECOVERY,小机器人：这是雷达站的密钥，已传输给你。�
 QUEST_OPTIONAL,可选,Optional
 QUEST_RADAR_OPTIONAL_CLEAN,清理雷达周边垃圾,Clear rubbish around the radar station
 QUEST_CLEAN_STEP_DELIVER,返回中心岛向湖心终端提交任务，启用喷气背包,Return to the central island lake terminal to submit the task and enable the jetpack
-ITEM_JETPACK_EQUIPPED_1,喷气背包（能量不足）,Jetpack (insufficient energy)
-JETPACK_LOCKED_CLEANUP,背包能量不足：清理10堆草原垃圾后返回中心岛启用。,Jetpack energy insufficient: clear 10 meadow rubbish piles then return to the central island to enable it.
-JETPACK_LOCKED_RETURN,背包能量不足：草原清理已达标，返回中心岛提交任务后启用。,Jetpack energy insufficient: cleanup target reached. Return to the central island to submit the task and enable it.
 CLEAN_DELIVERY_RECEIVED,湖心终端：草原清理记录已确认，任务提交完成。,Lake terminal: Meadow cleanup verified. Task submitted.
-CLEAN_DELIVERY_JETPACK,湖心终端：正在恢复背包供能……喷气背包已启用。,Lake terminal: Restoring jetpack power... Jetpack enabled.
-QUEST_TOAST_JETPACK_ENABLED,喷气背包已恢复供能，可以使用了。,Jetpack power restored. Ready for use.
+QUEST_TOAST_JETPACK_ENABLED,获得喷气背包，可以飞行了。,Jetpack obtained. You can fly now.
 OPENING_BOOT,环境工程试验机 LIRA，\n系统重启中，\n\n当前电源剩余……80%……,Environmental Engineering Test Unit LIRA\nSystem reboot in progress\n\nRemaining power... 80%...
 OPENING_ACCIDENT,运输事故确认，机组无应答。\n\n当前位置：第七自治试验岛。,Transport accident confirmed. No response from crew.\n\nCurrent location: Autonomous Test Island No. 7.
 OPENING_SCAN,检查受损情况……,Checking for damage...
