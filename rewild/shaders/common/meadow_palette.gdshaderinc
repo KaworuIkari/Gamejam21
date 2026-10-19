@@ -55,7 +55,7 @@ vec3 meadow_color(vec2 wp) {
 // 0 = barren desert, 1 = full meadow. Defaults to white, so shaders without a
 // growth map assigned stay fully green.
 uniform sampler2D growth_map : hint_default_white, filter_linear, repeat_disable;
-uniform vec2 growth_origin = vec2(-512.0); // must match GrowthMap.MAP_ORIGIN
+uniform vec2 growth_origin = vec2(-512.0, -640.0); // must match GrowthMap.MAP_ORIGIN
 uniform float growth_size = 1024.0;        // must match GrowthMap.MAP_SIZE
 // 0 = dry, 1 = soaked (GrowthMap.wet_texture). Black by default: nothing is wet.
 uniform sampler2D wet_map : hint_default_black, filter_linear, repeat_disable;

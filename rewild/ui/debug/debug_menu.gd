@@ -51,7 +51,7 @@ func _build() -> void:
 		["材料 +5（垃圾计数）", func(): Quests.report(WaterGunUpgrades.GARBAGE, 5)],
 		["齿轮 +6", func(): Quests.report(&"factory_gear", 6)],
 		["水泵激活", _start_pump],
-		["获得电池", func(): Quests.grant(BatteryCharge.BATTERY)],
+		["获得电池", func(): BatteryCharge.collect()],
 		["狐狸钥匙", func(): Quests.grant(&"fox_key")],
 	]:
 		column.add_child(_button(entry[0], entry[1]))

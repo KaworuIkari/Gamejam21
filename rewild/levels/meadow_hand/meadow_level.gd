@@ -2,11 +2,13 @@ extends Node3D
 
 const PAUSE_MENU = preload("res://ui/in_game/pause_menu.tscn")
 ## Leaf materials of the stylized_nature trees (set as external materials in their
-## .gltf imports): their leaves grow in with the GrowthMap under each tree.
+## .gltf imports) and the FantasyForest giant tree: their leaves grow in with the
+## GrowthMap under each tree.
 const TREE_LEAVES: Array[ShaderMaterial] = [
 	preload("res://assets/models/stylized_nature/Materials/leaves_normal_tree.tres"),
 	preload("res://assets/models/stylized_nature/Materials/leaves_pine.tres"),
 	preload("res://assets/models/stylized_nature/Materials/leaves_twisted_tree.tres"),
+	preload("res://assets/models/fantasy_forest_sample/textures/mytex/tree_leaves_mat.tres"),
 ]
 ## Petal_*.gltf material: hand-placed or scattered petals only appear on green ground.
 const GROW_IN_FLOWERS := preload("res://assets/models/stylized_nature/Materials/flowers_grow_in.tres")
@@ -23,8 +25,8 @@ const TreeRegrowth := preload("res://systems/world_objects/tree_regrowth.gd")
 const FinaleStory = preload("res://levels/meadow_hand/finale_story.gd")
 @export var finale_disruptor_camera: Camera3D
 @export var finale_boat_camera: Camera3D
-## The jetpack prop in the factory power room; the repaired bot fetches it. Empty = the node
-## named "Jetpack" directly in this level (not LIRA's).
+## The jetpack prop in the factory power room; the repaired bot fetches it (with everything
+## under it). Empty = the node named "Jetpack_root", else "Jetpack", in this level (not LIRA's).
 @export var factory_jetpack: Node3D
 ## Optional way into the power room: a Node3D whose child Marker3Ds are points in order,
 ## from the ground outside to the jetpack (ground → window sill → floor inside). Empty =
@@ -106,13 +108,21 @@ func _ready() -> void:
 	var finale := FinaleStory.new()
 	finale.name = "FinaleStory"
 	finale.radar = $Enviroment/East_Mountain/RadioObservatory
-	finale.harbor = $Enviroment/South_Harbour/IslandHarbor
-	finale.terrain = terrain
+	finale.harbor = get_node_or_null("Enviroment/South_Harbour/IslandHarbor2")
+	if finale.harbor == null:
+		finale.harbor = get_node_or_null("Enviroment/South_Harbour/IslandHarbor")
 	finale.cameras = {&"disruptor":finale_disruptor_camera,&"boat":finale_boat_camera}
 	add_child(finale)
-	var battery := BatteryCharge.new()
-	battery.name = "BatteryCharge"
-	add_child(battery)
+	# Every well can be started and then used to fill the tank; lakes and rivers fill it too.
+	for well in $Enviroment/Global/Wells.get_children():
+		if well is Node3D and well.find_children("*", "WaterWell", false, false).is_empty():
+			var controller := WaterWell.new()
+			controller.name = "WaterWell"
+			well.add_child(controller)
+	$SubViewportContainer/PixelateSubViewport/Water/Sea.drinkable = false
+	var refill := WaterRefill.new()
+	refill.name = "WaterRefill"
+	add_child(refill)
 	var regrowth := TreeRegrowth.new()
 	regrowth.name = "TreeRegrowth"
 	add_child(regrowth)
@@ -127,11 +137,13 @@ func _exit_tree() -> void:
 	SettingsManager.reset_fmod_mix()
 
 
-## The power-room jetpack when the export is empty: a node named "Jetpack" outside LIRA.
+## The power-room jetpack when the export is empty: "Jetpack_root" (the jetpack and its
+## extras), else a node named "Jetpack", outside LIRA.
 func _find_jetpack_prop() -> Node3D:
-	for node in find_children("Jetpack", "Node3D", true, false):
-		if not player.is_ancestor_of(node):
-			return node
+	for prop_name in ["Jetpack_root", "Jetpack"]:
+		for node in find_children(prop_name, "Node3D", true, false):
+			if not player.is_ancestor_of(node):
+				return node
 	return null
 
 

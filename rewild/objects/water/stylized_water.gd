@@ -23,6 +23,8 @@ const SCREEN_SHADER := preload("res://shaders/water/underwater_screen.gdshader")
 @export var basin_resolution := 1.0
 ## Leave empty to use the first Terrain3D in the scene.
 @export var terrain: Terrain3D
+## LIRA can fill her tank at its edge (WaterRefill). Off for the sea.
+@export var drinkable := true
 
 ## Water surface height the basin is traced at. Defaults to the placed height; a
 ## WaterFlowSwitch that lowers this water at start sets it to the full height first.

@@ -155,10 +155,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("use"):
 		try_shoot()
 
-	var filling := in_water and tank.level < 1.0
-	tank.set_filling(filling)
-	if filling:
-		tank.refill(delta)
+	# Refilling is a hold at a water source, see objects/water/water_refill.gd.
 
 	# move camera sideways when aiming
 	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)

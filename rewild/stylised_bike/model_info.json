@@ -1,0 +1,8 @@
+{
+  "triangles": 14488,
+  "mesh_count": 8,
+  "units": "metres",
+  "front": "+X",
+  "up": "+Y (GLB)",
+  "pivot": "ground at centre of bike"
+}

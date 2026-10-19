@@ -70,8 +70,9 @@ func _render() -> void:
 # --- Battery ---------------------------------------------------------------------------
 
 func _render_battery() -> void:
-	var full := Quests.has_ability(BatteryCharge.BATTERY)
-	%BatteryStatus.text = tr("TERMINAL_BATTERY_FULL" if full else "TERMINAL_BATTERY_CHARGING")
+	var status := "TERMINAL_BATTERY_COLLECTED" if BatteryCharge.collected() \
+			else "TERMINAL_BATTERY_FULL" if BatteryCharge.full() else "TERMINAL_BATTERY_CHARGING"
+	%BatteryStatus.text = tr(status)
 	%BatteryBar.text = "%s  %s" % [tr("TERMINAL_BATTERY_CHARGE"), _bar(BatteryCharge.charge())]
 	var regions: Array[Dictionary] = GrowthMap.progress_regions()
 	var rows := %Regions.get_children()
