@@ -3,7 +3,7 @@ class_name AimCorrection extends SkeletonModifier3D
 @export var hand := &"hand.r"
 @export var chain: Array[StringName] = [&"spine_02.x", &"arm_stretch.r"]   # root to tip
 @export var chain_weights_right: Array[float] = [0.0, 1.0]   # aim correction swings right
-@export var chain_weights_left: Array[float] = [1.0, 0.]    # aim correction swings left
+@export var chain_weights_left: Array[float] = [0.2, .8]    # aim correction swings left
 @export var side_blend_angle := deg_to_rad(10.0)             # blend zone around straight ahead
 @export var max_angle := deg_to_rad(120.0)
 
