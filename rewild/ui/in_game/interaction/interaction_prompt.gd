@@ -4,6 +4,9 @@ const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const COMPLETE_DURATION := 0.15
 ## Enabled only by clear_hold_prompt.tscn; tap prompts keep their original layout.
 @export var hold_to_clear := false
+## Long presses (set_hold_progress) hum while filling, chime on play_activation() and wind
+## down when let go early. Off for holds with their own sound (the tank refill).
+var charge_sound := true
 
 @onready var _root: Control = $Root
 @onready var _panel: PanelContainer = $Root/Anchor/Panel
@@ -24,6 +27,9 @@ var _hold_progress := 0.0
 var _key_style: StyleBoxFlat
 @onready var _outline: Control = $Root/Anchor/Panel/Row/Key/FeedbackOverlay/Outline
 var _hold_bar: ProgressBar
+var _charge: AudioStreamPlayer
+var _charge_peak := 0.0
+var _charge_done := false  # completed: silent until the progress drops back to 0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -42,6 +48,10 @@ func _ready() -> void:
 		settings.bindings_changed.connect(_refresh_text)
 	_refresh_text()
 	_root.hide()
+	_charge = AudioStreamPlayer.new()
+	_charge.bus = &"SFX"
+	_charge.stream = UIAudio.CHARGE_LOOP
+	add_child(_charge)
 
 func configure(action: StringName, message_key: String) -> void:
 	_action = action
@@ -64,10 +74,17 @@ func set_hold_progress(progress: float) -> void:
 
 ## Call only when the owner accepts player input, not for scripted activations.
 func play_activation() -> void:
+	var player := get_tree().get_first_node_in_group(&"player")
+	if player and player.has_method("react"):
+		player.react(RobotFace.Mood.CORRECT, 2, 1.2)
 	_complete_remaining = COMPLETE_DURATION
 	_press_amount = 1.0
 	_press_linger = 0.08
 	layer = 15 # Briefly above the dialogue layer, below modal menus.
+	if _charge.playing:
+		_charge.stop()
+		_charge_done = true
+		UIAudio.play_sfx(UIAudio.CHARGE_COMPLETE, 0.0)
 
 func _blocked() -> bool:
 	return get_tree().paused or SceneRouter.is_busy()
@@ -84,7 +101,10 @@ func _process(delta: float) -> void:
 		_press_amount = 0.0
 		_hold_progress = 0.0
 		_root.hide()
+		_charge.stop()
+		_charge_peak = 0.0
 		return
+	_update_charge()
 	var completing := _complete_remaining > 0.0
 	layer = 15 if completing else 5
 	_root.visible = completing or (_available and not _dialogue_active())
@@ -105,6 +125,24 @@ func _process(delta: float) -> void:
 		_update_hold_style(completing)
 	_root.modulate.a = clampf(_complete_remaining/COMPLETE_DURATION,0,1) if completing and (not _available or _dialogue_active()) else 1.0
 	_complete_remaining = maxf(0,_complete_remaining-delta)
+
+## Hum rises in pitch and volume as the hold fills.
+func _update_charge() -> void:
+	if _charge_done:
+		_charge_done = _hold_progress > 0.0
+		return
+	if charge_sound and _hold_progress > 0.0:
+		if not _charge.playing:
+			_charge.play()
+		_charge_peak = maxf(_charge_peak, _hold_progress)
+		var k := _hold_progress
+		_charge.pitch_scale = lerpf(0.7, 1.7, k * k * (3.0 - 2.0 * k))
+		_charge.volume_db = lerpf(-16.0, -5.0, k)
+	elif _charge.playing:
+		_charge.stop()
+		if _charge_peak > 0.15:
+			UIAudio.play_sfx(UIAudio.CHARGE_CANCEL, 0.0)
+		_charge_peak = 0.0
 
 func _input(event: InputEvent) -> void:
 	var kind := _device_kind

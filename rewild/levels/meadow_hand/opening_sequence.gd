@@ -114,7 +114,10 @@ func _on_timeline_ended() -> void:
 	reveal_started.emit()
 	var fade := create_tween()
 	fade.tween_property(_black, "modulate:a", 0.0, fade_duration)
-	await fade.finished
+	if player.has_method(&"face_intro"):
+		await player.face_intro()   # the fade opens on a camera flying in to LIRA's face
+	if fade.is_running():
+		await fade.finished
 	# A held confirmation must not become a jump or a shot on the first playable frame.
 	while Input.is_action_pressed(&"dialogic_default_action") or Input.is_action_pressed(&"use"):
 		await get_tree().process_frame

@@ -142,34 +142,20 @@ FOX_RESCUE_PROMPT,按住 %s 救助小狐狸,Hold %s to help the fox
 WELL_ACTIVATE_PROMPT,按住 %s 启动水井,Hold %s to start the well
 WATER_REFILL_PROMPT,按住 %s 给水箱加水,Hold %s to fill the water tank
 CLEAR_LOCKED,%s 需要拆除授权,%s Needs demolition authorization
-OBJ_BASIN_LITTER,清理身边的垃圾,Clear the litter around you
-OBJ_REACH_SPRING,前往北方水源（北边的小岛）,Head to the north spring (the island to the north)
-OBJ_CLEAR_SPRING,清除堵住水口的残骸,Clear the debris blocking the spring intake
-OBJ_RESCUE_SPRING,打开笼子，救出小动物,Open the cage and free the animal
-OBJ_START_PUMP,启动水泵,Start the pump
-OBJ_ACTIVATE_STATION,游到湖心岛，启动终端,Reach the lake island and activate the station
-OBJ_REVIVE_EAST,东部绿洲：浇灌枯地并救出小动物,East oasis: water the dry ground and free the animal
-OBJ_REVIVE_PEAK,北部山顶：浇灌山顶并救出小动物,North summit: water the summit and free the animal
-OBJ_BEACH_WALL,拆除南岸的垃圾墙,Tear down the garbage wall on the south shore
-OBJ_DONE,大海重新打开了。谢谢游玩！,The sea is open again. Thanks for playing!
-TOAST_STAGE,世界阶段：%s,World stage: %s
-TOAST_DEMOLITION_AUTH,获得拆除授权,Demolition authorization granted
 Wasteland,荒原,Wasteland
 Revival,复苏,Revival
 Golden meadow,金色草原,Golden meadow
 QUEST_WATER_TITLE,恢复水源,Restore the water source
 QUEST_WATER_DESC,供水已恢复。前往中心岛重启湖心电站，接入管理终端。,"The water supply is restored. Head to the central island, restart the lake power station, and connect to its management terminal."
 QUEST_WATER_LOCATION,北部泉眼 / 湖心电站,North spring / Lake station
-QUEST_WATER_STEP_STATION,长按 E 激活湖心电站,Hold E to activate the lake power station
+QUEST_WATER_STEP_STATION,激活湖心电站,Hold E to activate the lake power station
 QUEST_WATER_STEP_TERMINAL,在电站终端查看任务,Check the station terminal
-QUEST_TOAST_STARTED,新任务：%s,New quest: %s
-QUEST_TOAST_DONE,任务完成：%s,Quest complete: %s
 QUEST_TOAST_ABILITY,获得：%s,Unlocked: %s
 ABILITY_WATER_GUN,水枪,Water gun
 ABILITY_JETPACK,喷气背包,Jetpack
 ABILITY_LEVEL,%s Lv%d,%s Lv%d
 TERMINAL_BATTERY_TITLE,混沌能量模块,Chaos Energy Module
-TERMINAL_BATTERY_CHARGING,混沌能量模块充能中……使用水枪，恢复湖泊、森林、山地、工厂四个区域的生态以便提供绿色能源供应，充满后回到湖心电站取出混沌能量模块。,"Chaos Energy Module charging... Use the water gun to restore the ecosystems of the lake, forest, mountain and factory regions to supply green energy. Once it is full, return to the lake station to take the Chaos Energy Module."
+TERMINAL_BATTERY_CHARGING,混沌能量模块充能中……使用水枪，恢复湖泊、森林、山地、工厂四个区域的生态以便提供绿色能源供应，充满后回到湖心电站取出混沌能量模块。\n工厂内部有意识等待被唤醒，它或许可以帮助你获取工厂内制造的装备。\n去雷达站获取坐标，系统显示开启钥匙在森林某处\n一切准备就绪后，前往码头启动小船，带上这座岛的记忆起航吧。,"Chaos Energy Module charging... Use the water gun to restore the ecosystems of the lake, forest, mountain and factory regions to supply green energy. Once it is full, return to the lake station to take the Chaos Energy Module."
 TERMINAL_BATTERY_FULL,混沌能量模块已充满！回到湖心电站，与终端交互取出混沌能量模块。,Chaos Energy Module fully charged! Return to the lake station and use the terminal to take it.
 TERMINAL_BATTERY_COLLECTED,已从湖心电站取出混沌能量模块。,You have taken the Chaos Energy Module from the lake station.
 BATTERY_READY_NOTICE,混沌能量模块已充满，回到湖心电站取出混沌能量模块,Chaos Energy Module full: return to the lake station to take it
@@ -211,30 +197,22 @@ QUEST_RADAR_STEP_START,使用04获得的密钥启动雷达,Start the radar with 
 QUEST_RADAR_STEP_COORDINATES,读取雷达的坐标信息,Read the radar coordinates
 INTERACT_RADAR_START,按 %s 启动雷达,Press %s to bring the radar online
 INTERACT_RADAR_READ,按 %s 读取雷达坐标,Press %s to read the radar coordinates
-RADAR_READOUT_KEY,密钥验证通过。雷达已启动，密钥已保留。,Key verified. Radar online. The key remains available.
 RADAR_READOUT_COORDINATES,已获取航行坐标：%s。前往港口，在控制台输入航行坐标。,Navigation coordinates received: %s. Go to the harbor and enter them at the control console.
-RADAR_READOUT_RETURN,返回湖心终端提交雷达信息。,Return to the lake terminal and submit the radar information.
-RADAR_DELIVERY_RECEIVED,湖心终端：雷达信息已接收，坐标已记录。,Lake terminal: Radar information received. Coordinates recorded.
-RADAR_DELIVERY_REWARD,湖心终端：混沌能量模块已交付。,Lake terminal: Chaos Energy Module issued.
 ITEM_CHAOS_ENERGY_MODULE_1,混沌能量模块,Chaos Energy Module
 QUEST_FINALE_TITLE,最后的选择,The final choice
 QUEST_FINALE_DESC,携带混沌能量模块启动雷达站的同步破坏器，或在港口载入雷达坐标并插入混沌能量模块，为小船供能后出发。确认启动将锁定对应结局。,"Activate the radar disruptor with the Chaos Energy Module, or load the radar coordinates and insert the Chaos Energy Module at the harbor core to power the ship. Confirming departure locks the boat ending."
 QUEST_FINALE_LOCATION,雷达站二层 / 港口,Radar upper platform / Harbor
 QUEST_FINALE_DEVICE,路线一：在雷达站二层启动同步破坏器,Route 1: Activate the Synchronization Disruptor on the radar upper platform
 QUEST_FINALE_BOAT,路线二：载入坐标，插入混沌能量模块并乘船出发,"Route 2: Load coordinates, insert the Chaos Energy Module, and depart"
-FINALE_MODULE_LOCKED,%s 需要混沌能量模块,%s Requires the Chaos Energy Module
+FINALE_MODULE_LOCKED,%s 需要混沌能量模块,%s wwwwwwwwwwwWWWwwwwwWWWWwwRequires the Chaos Energy Module
 FINALE_START_DEVICE,按 %s 启动同步破坏器,Press %s to activate the Synchronization Disruptor
 FINALE_CONFIRM_DEVICE,确认使用混沌能量模块启动同步破坏器？这将进入结局一。,Use the Chaos Energy Module to activate the Synchronization Disruptor? This leads to Ending 1.
-FINALE_CONFIRM_BOAT,坐标已载入，混沌能量模块已安装。确认启动小船并离开岛屿？这将锁定乘船结局。,Coordinates loaded. Chaos Energy Module installed. Power up the ship and leave the island? This locks the boat ending.
+FINALE_CONFIRM_BOAT,坐标已载入，能量模块已安装。现在就启动小船并离开岛屿吗？,Coordinates loaded. Chaos Energy Module installed. Power up the ship and leave the island? This locks the boat ending.
 FINALE_CONFIRM_START,确认启动,Confirm startup
-FINALE_BRIEFING_DEVICE,湖心终端：携带混沌能量模块，[n]前往雷达站二层启动同步破坏器。（剧情占位）,Lake terminal: Take the Chaos Energy Module to the radar upper platform [n]and activate the Synchronization Disruptor. (Story placeholder.)
-FINALE_BRIEFING_BOAT,另一条路线：取得雷达坐标与混沌能量模块，在港口核心基座载入坐标、插入混沌能量模块，再乘船出发。,"Alternative route: Bring the radar coordinates and Chaos Energy Module to the harbor core, load the coordinates, insert the Chaos Energy Module, and depart."
-ENDING_DEVICE_TITLE,结局一 · 岛上的记录,Ending 1 · Island records
-ENDING_BOAT_TITLE,结局二 · 驶向远方,Ending 2 · Beyond the island
+ENDING_DEVICE_TITLE,结局 · 岛上的记录,Ending 1 · Island records
+ENDING_BOAT_TITLE,The　End,The End
 ENDING_SAVE_OK,结局进度已保存。,Ending progress saved.
 ENDING_SAVE_UNAVAILABLE,当前没有可保存的存档位。,No active save slot is available.
-INTERACT_ROBOT_KEY,按 %s 与小机器人交谈获取密钥,Press %s to ask the companion bot for the radar key
-ROBOT_KEY_RECOVERY,小机器人：这是雷达站的密钥，已传输给你。（剧情占位）,Companion bot: The radar key has been transferred to you. (Story placeholder.)
 QUEST_TOAST_JETPACK_ENABLED,获得喷气背包，可以飞行了。,Jetpack obtained. You can fly now.
 OPENING_BOOT,环境工程试验机 LIRA，\n系统重启中，\n\n当前电源剩余……80%……,Environmental Engineering Test Unit LIRA\nSystem reboot in progress\n\nRemaining power... 80%...
 OPENING_ACCIDENT,运输事故确认，机组无应答。\n\n当前位置：第七自治试验岛。,Transport accident confirmed. No response from crew.\n\nCurrent location: Autonomous Test Island No. 7.
@@ -262,7 +240,7 @@ STARTUP_SPRINT_BODY,提高移动速度，检查动力输出。,Increase movement
 STARTUP_HOLD_SPRINT,按住 %s，并使用 %s 奔跑,Hold %s and use %s to sprint
 STARTUP_FEEDBACK_OK,✓ 反馈正常,✓ Feedback normal
 QUEST_CABIN_TITLE,机舱调查,Cabin investigation
-s’s water supply. The two tablet records in the cabin are optional reading.
+QUEST_CABIN_DESC,启动北部水泵，恢复湖心站供水。机舱内的两份平板记录可以选择阅读。,Start the northern pump to restore the lake station’s water supply. The two tablet records in the cabin are optional reading.
 STARTUP_CURRENT_TARGET,当前目标：%s,Current objective: %s
 READ_TABLET_PROMPT,按 %s 阅读平板,Press %s to read tablet
 REREAD_TABLET_PROMPT,按 %s 重读平板,Press %s to reread tablet
@@ -275,10 +253,10 @@ TABLET_DELIVERY_PURPOSE,本岛用于测试无人系统恢复人消失后环境�
 TABLET_DELIVERY_SCOPE,包括供水、植被修复与设施维护。,"including water supply, vegetation recovery, and facility maintenance."
 TABLET_DELIVERY_UNIT,本次投送：工程试验机 LIRA。,Current delivery: engineering test unit LIRA.
 TABLET_DELIVERY_CONNECT,备注：抵达后，接入湖心管理终端领取作业指令。,"Note: Upon arrival, connect to the lake’s central management terminal for work instructions."
-TABLET_DELIVERY_REPORT,该终端负责全岛设备调度，并向军方回传试验数据。,The terminal coordinates equipment across the island and transmits test data to the military.
+TABLET_DELIVERY_REPORT,该终端负责全岛设备调度，并向军方回传数据。,The terminal coordinates equipment across the island and transmits test data to the military.
 TABLET_CREW_TITLE,机组人员离线记录：,Crew Offline Log:
 TABLET_CREW_STAFF,岛上的值守人员早撤了，这次投送仍由旧系统接管。,The island’s duty staff pulled out long ago. The old system is still handling this delivery.
-TABLET_CREW_CONTACT,落地后得先让 LIRA 联系上湖心终端，我们才能回传交接报告。,"Once we land, LIRA needs to contact the lake terminal before we can send back the handover report."
+TABLET_CREW_CONTACT,在落地后得先让 LIRA 联系上湖心终端，我们才能回传交接报告。,"Once we land, LIRA needs to contact the lake terminal before we can send back the handover report."
 TABLET_CREW_SUPPLY,维护图显示，北部泵站断供，,The maintenance map shows a supply failure at the northern pumping station.
 TABLET_CREW_SHUTDOWN,湖心站因此保护停机。,The lake station has shut down as a protective measure.
 TABLET_CREW_PUMP,先启动北边的水泵，等水流回湖里，,"Start the northern pump first. Once water flows back into the lake,"
@@ -331,7 +309,8 @@ ENDING_DEVICE_ISLAND,LIRA 留在了岛上。\n\n这里曾是试验场，\n也是
 ENDING_DEVICE_CONTINUE,环境工程试验机 LIRA，\n继续运行。\n\n下一份记录，尚未写下。,Environmental Engineering Test Unit LIRA\nremains operational.\n\nThe next entry has yet to be written.
 ENDING_BOAT_START,导航坐标：已载入。\n混沌能量模块：已接入。\n\n小船启动。,Navigation coordinates: Loaded.\nLake station Chaos Energy Module: Connected.\n\nBoat startup complete.
 ENDING_BOAT_ISLAND,供水已恢复，植被重新生长。\n\n那座最初只有故障记录的岛，\n如今留下了新的颜色。,Water flows again. Vegetation returns.\n\nThe island first known through fault logs\nnow holds new colors.
-ENDING_BOAT_OBJECTIVE,应急目标：\n恢复通信，报告位置，等待回收。\n\n岛外的回应，仍待确认。,Emergency objective:\nRestore communications. Report location. Await recovery.\n\nA response from beyond the island remains unconfirmed.
-ENDING_BOAT_DEPARTURE,小船驶离岸边。\n\nLIRA 带走了岛上的记录，\n也带走了那些尚未得到回答的问题。,The boat leaves the shore.\n\nLIRA carries the island's records\nand the questions still unanswered.
-ENDING_BOAT_RECORD,环境工程试验机 LIRA。\n\n当前位置：返航途中。\n\n新的记录，从海的另一边开始。,Environmental Engineering Test Unit LIRA.\n\nCurrent location: On the return voyage.\n\nNew records await beyond the sea.
+ENDING_BOAT_OBJECTIVE,小船驶离岸边，被LIRA所整救的机器人选择一起离开岛屿，前往未知的远方；\n而狐狸选择留下来陪伴这座岛屿。\n它坐在岸边，注视着小船消失在海平线,Emergency objective:\nRestore communications. Report location. Await recovery.\n\nA response from beyond the island remains unconfirmed.
+ENDING_BOAT_DEPARTURE,\n\nLIRA 带走了岛上的记录，\n这将成为ta时常回想起的地方。,The boat leaves the shore.\n\nLIRA carries the island's records\nand the questions still unanswered.
+ENDING_BOAT_RECORD,环境工程试验机 LIRA。\n\n当前位置：前往211026途中。\n\n新的故事，将从海的另一边开始。,Environmental Engineering Test Unit LIRA.\n\nCurrent location: On the return voyage.\n\nNew records await beyond the sea.
 OPT_SHOW_FPS,显示帧率,Show FPS
+SPEAKER_LAKE_TERMINAL,湖心终端,Lake Terminal

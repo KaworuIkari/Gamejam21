@@ -15,7 +15,7 @@ prop_land.wav       dull thud (a thrown prop hits the ground)
 prop_splash.wav     splash + bubbles (a thrown prop lands in water)
 plant_pop.wav       soft cartoon pop (a petal / flower grows in)
 leaf_rustle.wav     swelling rustle of leaves (a tree's leaves grow out)
-jump.wav            springy little hop with a puff of air (LIRA jumps)
+robot_wake.wav      rattle, power-up whine, boot chime (the factory bot is repaired and wakes)
 wind_loop.wav       seamless gusty wind (looped while the sand storm / fog blows)
 bird_chirp_1..3.wav distant bird calls (the occasional ambient chirp once the air is clear)
 """
@@ -227,10 +227,20 @@ def leaf_rustle():
     return out
 
 
-def jump():
-    out = silence(0.3)
-    mix(out, tone(220, 0.2, 0.004, 0.06, partials=((1, 1), (2, 0.3), (3, 0.1)), sweep=1.1), 0.0, 0.8)
-    mix(out, noise(0.12, 0.004, 0.035, lowpass=0.35, highpass=0.7), 0.0, 0.5)
+def robot_wake():
+    out = silence(3.0)
+    # Shaking (0-0.65s, FactoryStory._repair): metal rattles growing harder.
+    for k in range(12):
+        mix(out, noise(0.03, 0.0005, 0.007, lowpass=0.8, highpass=0.9), k * 0.055, 0.25 + 0.05 * k)
+        mix(out, tone(random.uniform(900, 1600), 0.05, 0.001, 0.012, partials=((1, 1), (2.7, 0.4))), k * 0.055, 0.15)
+    # Eye lights up (0.65s): a power-up whine sweeping up under an electric hum.
+    mix(out, tone(180, 0.9, 0.05, 0.6, partials=((1, 1), (2, 0.5), (3, 0.3), (4, 0.15)), sweep=3.5), 0.6, 0.45)
+    mix(out, tone(60, 1.6, 0.1, 1.2, partials=((1, 1), (3, 0.3), (5, 0.15))), 0.65, 0.25)
+    mix(out, tone(1400, 0.12, 0.002, 0.04), 0.95, 0.35)  # blip as the eye comes on
+    # Eye turns blue (~1.75s): a friendly two-note boot chime.
+    bell = ((1, 1.0), (2, 0.3), (3, 0.1))
+    mix(out, tone(784.0, 0.6, 0.004, 0.2, partials=bell), 1.8, 0.5)
+    mix(out, tone(1174.7, 0.9, 0.004, 0.35, partials=bell), 1.98, 0.55)
     return out
 
 
@@ -296,7 +306,7 @@ if __name__ == "__main__":
     write("prop_splash.wav", prop_splash(), peak=0.7)
     write("plant_pop.wav", plant_pop(), peak=0.55)
     write("leaf_rustle.wav", leaf_rustle(), peak=0.6)
-    write("jump.wav", jump(), peak=0.55)
+    write("robot_wake.wav", robot_wake(), peak=0.7)
     write("wind_loop.wav", wind_loop(), peak=0.6, loop=True)
     for k in (1, 2, 3):
         write("bird_chirp_%d.wav" % k, bird_chirp(k), peak=0.5)

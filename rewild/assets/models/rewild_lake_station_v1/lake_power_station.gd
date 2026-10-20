@@ -7,9 +7,6 @@ signal state_changed(state: int)
 enum State { DORMANT, READY, ACTIVE }
 const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_prompt.tscn")
 const TAP_PROMPT_SCENE = preload("res://ui/in_game/interaction/interaction_prompt.tscn")
-const SFX_CHARGE: AudioStreamWAV = preload("res://assets/audio/sfx/station_charge_loop.wav")
-const SFX_COMPLETE: AudioStream = preload("res://assets/audio/sfx/station_charge_complete.wav")
-const SFX_CANCEL: AudioStream = preload("res://assets/audio/sfx/station_charge_cancel.wav")
 @export_enum("Dormant", "Ready", "Active") var initial_state := 0
 @export var required_task_ids: Array[StringName] = [&"main_02_spring"]
 @export var player_group: StringName = &"player"
@@ -57,8 +54,6 @@ var _tap_prompt: CanvasLayer      # plain key prompt for the terminal / locked h
 var _prompt: CanvasLayer          # whichever of the two is in use
 var _prompt_key := ""
 var _bar_fill: StyleBoxFlat       # the charging bar's fill, brightened as it charges
-var _charge: AudioStreamPlayer    # hum that rises in pitch while the key is held
-var _sfx: AudioStreamPlayer       # one-shots: complete / cancel
 
 func _ready() -> void:
 	$Prompt.visible = false  # old 3D label, replaced by the shared prompt
@@ -68,13 +63,6 @@ func _ready() -> void:
 	_tap_prompt = TAP_PROMPT_SCENE.instantiate()
 	add_child(_tap_prompt)
 	_prompt = _tap_prompt
-	_charge = AudioStreamPlayer.new()
-	_charge.bus = &"SFX"
-	_charge.stream = SFX_CHARGE
-	add_child(_charge)
-	_sfx = AudioStreamPlayer.new()
-	_sfx.bus = &"SFX"
-	add_child(_sfx)
 	_zone.body_entered.connect(_body_entered)
 	_zone.body_exited.connect(_body_exited)
 	if unlock_when and unlock_when.has_signal(&"finished"):
@@ -141,19 +129,13 @@ func _process(delta: float) -> void:
 		_hold_lock = false
 	if _needs_hold() and held and not _hold_lock and not _nearby.is_empty() and _prompt_shown():
 		_hold += delta
-		_charge_sound(_hold / hold_time)
+		_heat_charge_bar(_hold / hold_time)
 		if _hold >= hold_time:
 			_hold = 0.0
 			_hold_lock = true
-			_charge.stop()
-			_play_sfx(SFX_COMPLETE)
-			_prompt.play_activation()
+			_prompt.play_activation()  # the prompt plays the charge sounds
 			interact()
 	else:
-		if _hold > 0.0 and _charge.playing:
-			_charge.stop()
-			if _hold > hold_time * 0.15:
-				_play_sfx(SFX_CANCEL)  # let go early: the charge winds down
 		_hold = 0.0
 	_refresh_prompt()
 
@@ -177,20 +159,11 @@ func _style_charge_bar(bar: ProgressBar) -> void:
 	bar.add_theme_stylebox_override("fill", _bar_fill)
 
 
-## Hum rises in pitch and volume as the charge fills; the bar heats up to white-cyan.
-func _charge_sound(k: float) -> void:
+## The bar heats up to white-cyan as the charge fills.
+func _heat_charge_bar(k: float) -> void:
 	if _bar_fill:
 		_bar_fill.bg_color = Color(0.15, 0.86, 0.92).lerp(Color(0.75, 1.0, 1.0), k * k)
 		_bar_fill.shadow_size = int(lerpf(3.0, 9.0, k))
-	if not _charge.playing:
-		_charge.play()
-	_charge.pitch_scale = lerpf(0.7, 1.7, k * k * (3.0 - 2.0 * k))
-	_charge.volume_db = lerpf(-16.0, -5.0, k)
-
-
-func _play_sfx(stream: AudioStream) -> void:
-	_sfx.stream = stream
-	_sfx.play()
 
 
 ## Activation is a long press; using it once active is a tap.
@@ -217,6 +190,9 @@ func _open_terminal() -> void:
 func _first_contact(quests: Node) -> void:
 	await _play_timeline(first_contact_timeline)
 	quests.receive_starter_equipment()
+	var player := get_tree().get_first_node_in_group(&"player")
+	if player and player.has_method(&"face_reveal"):
+		await player.face_reveal()
 
 
 func _play_timeline(path: String) -> void:

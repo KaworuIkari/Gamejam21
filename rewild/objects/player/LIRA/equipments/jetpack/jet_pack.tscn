@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bjc6i5o1apw4f"]
 
 [ext_resource type="ArrayMesh" uid="uid://dxfpc1pgftbid" path="res://objects/player/LIRA/equipments/jetpack/Jetpack_Jetpack.res" id="1_qht45"]
-[ext_resource type="Material" uid="uid://ce2i34cfdhpci" path="res://objects/player/LIRA/textures/lira_pink.tres" id="2_j73ex"]
+[ext_resource type="Material" uid="uid://cw7kj47oantb3" path="res://objects/player/LIRA/textures/lira_black.tres" id="2_j73ex"]
 [ext_resource type="Script" uid="uid://b6i8vtvghkxok" path="res://objects/player/LIRA/equipments/jetpack/jet_pack.gd" id="3_c3lyx"]
 [ext_resource type="Material" uid="uid://ddtv5s6u6e5xv" path="res://objects/player/LIRA/equipments/jetpack/jetpack_flame_material.tres" id="3_wqfbq"]
 

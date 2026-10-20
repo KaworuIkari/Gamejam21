@@ -15,13 +15,6 @@ fmod_parameters/track/id = -8097890939306202993
 fmod_parameters/track = 0
 fmod_parameters/track/variant_type = 2
 
-[node name="AchievementBGM" type="FmodEventEmitter2D" parent="." unique_id=1065470563]
-event_name = "event:/BGM/Achievements"
-event_guid = "{32127f3d-7629-4a73-a425-fbeb53ddf6b1}"
-fmod_parameters/Achievement/id = 4660708908227809441
-fmod_parameters/Achievement = 0
-fmod_parameters/Achievement/variant_type = 2
-
 [node name="EndingBGM" type="FmodEventEmitter2D" parent="." unique_id=2114539410]
 event_name = "event:/BGM/Ending"
 event_guid = "{cffb264a-73bb-411f-917a-9cac3e14dc1e}"

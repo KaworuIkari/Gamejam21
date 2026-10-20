@@ -59,6 +59,7 @@ var _indoors := false
 
 
 func _ready() -> void:
+	add_to_group(&"sand_storm")   # LIRA's face reads strength (lira.gd)
 	top_level = true
 	if environment and environment.environment:
 		var env := environment.environment

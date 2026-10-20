@@ -42,7 +42,6 @@ func _ready() -> void:
 	_timer.timeout.connect(_on_timer)
 	add_child(_timer)
 	_wait(_roll(first_delay))
-	Quests.ability_changed.connect(_on_ability_changed)
 
 func _start_track() -> void:
 	var idx := _pick_track()
@@ -101,14 +100,6 @@ func _wait(seconds: float) -> void:
 
 func _roll(range_s: Vector2) -> float:
 	return randf_range(range_s.x, range_s.y) / time_divisor
-
-@onready var _achievement_bgm_emitter: FmodEventEmitter2D = $AchievementBGM
-func _play_achievement_bgm(idx: int) -> void:
-	_achievement_bgm_emitter.set_parameter("Achievement", idx)
-	_achievement_bgm_emitter.play()
-
-func _on_ability_changed(_ability: StringName, level: int) -> void:
-	_play_achievement_bgm(randi_range(0,3))
 
 @onready var _ending_bgm_emitter: FmodEventEmitter2D = $EndingBGM
 const ENDING_INDEX := ["happy", "neutral", "sad"]
