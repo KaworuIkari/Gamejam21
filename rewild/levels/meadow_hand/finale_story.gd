@@ -5,7 +5,7 @@ signal ending_selected(route: StringName, focus: Node3D)
 const QUEST = preload("res://quests/06_final_choice.tres")
 const PREVIOUS = preload("res://quests/05_radar_station.tres")
 const INTERACTION = preload("res://levels/meadow_hand/finale_interaction.gd")
-const ENDING_SCREEN = preload("res://ui/in_game/ending/ending_screen.gd")
+const ENDING_SEQUENCE = preload("res://levels/meadow_hand/ending_sequence.gd")
 const NOTE = preload("res://objects/interactables/readables/readable_note.tscn")
 const MODULE := &"chaos_energy_module"
 const DEVICE := &"disruptor"
@@ -20,7 +20,7 @@ var _refreshing := false
 var _presented := false
 var _triggers: Dictionary = {}
 var _lights: Dictionary = {}
-var _ending_screen: CanvasLayer
+var _ending_sequence: Node
 
 func _ready() -> void:
 	if not is_instance_valid(radar) or not is_instance_valid(harbor):
@@ -178,7 +178,7 @@ func _present_ending() -> void:
 	if is_instance_valid(camera):
 		camera.make_current()
 	ending_selected.emit(route,get_ending_focus(route))
-	_ending_screen = ENDING_SCREEN.new()
-	_ending_screen.route = route
-	get_tree().root.add_child(_ending_screen)
-	tree_exiting.connect(_ending_screen.queue_free)
+	_ending_sequence = ENDING_SEQUENCE.new()
+	_ending_sequence.route = route
+	get_tree().root.add_child(_ending_sequence)
+	tree_exiting.connect(_ending_sequence.queue_free)

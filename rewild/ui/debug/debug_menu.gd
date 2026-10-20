@@ -51,7 +51,7 @@ func _build() -> void:
 		["材料 +5（垃圾计数）", func(): Quests.report(WaterGunUpgrades.GARBAGE, 5)],
 		["齿轮 +6", func(): Quests.report(&"factory_gear", 6)],
 		["水泵激活", _start_pump],
-		["获得电池", func(): BatteryCharge.collect()],
+		["获得混沌能量模块", func(): BatteryCharge.collect()],
 		["狐狸钥匙", func(): Quests.grant(&"fox_key")],
 	]:
 		column.add_child(_button(entry[0], entry[1]))
@@ -88,7 +88,7 @@ func _drag(event: InputEvent) -> void:
 func _refresh() -> void:
 	if not _panel.visible:
 		return
-	_status.text = "水枪 %d  背包 %d  射速 %d/3  容量 %d/3\n材料 %d  齿轮 %d  电池 %s" % [
+	_status.text = "水枪 %d  背包 %d  射速 %d/3  容量 %d/3\n材料 %d  齿轮 %d  混沌能量模块 %s" % [
 		Quests.ability_level(&"water_gun"), Quests.ability_level(&"jetpack"),
 		WaterGunUpgrades.level(WaterGunUpgrades.RATE), WaterGunUpgrades.level(WaterGunUpgrades.TANK),
 		WaterGunUpgrades.material(), Quests.event_count(&"factory_gear"),
