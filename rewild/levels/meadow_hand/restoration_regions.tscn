@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/growth_map/growth_region.gd" id="1_region"]
+
+[node name="RestorationRegions" type="Node3D"]
+
+[node name="Lake" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55, 30, 68)
+script = ExtResource("1_region")
+region_id = &"lake"
+title = "REGION_LAKE"
+radius = 75.0
+
+[node name="Forest" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -170, 30, 70)
+script = ExtResource("1_region")
+region_id = &"forest"
+title = "REGION_FOREST"
+radius = 95.0
+
+[node name="Mountain" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128.01512, 54.404922, 89.50297)
+script = ExtResource("1_region")
+region_id = &"mountain"
+title = "REGION_MOUNTAIN"
+radius = 90.0
+
+[node name="Factory" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 30, 20)
+script = ExtResource("1_region")
+region_id = &"factory"
+title = "REGION_FACTORY"
+radius = 80.0

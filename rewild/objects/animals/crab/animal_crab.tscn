@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dj0sb2onfcp0f"]
+
+[ext_resource type="PackedScene" uid="uid://cjwugge8goded" path="res://objects/animals/crab/crab.glb" id="1_3xoq4"]
+[ext_resource type="PackedScene" uid="uid://hvdafxspbowl" path="res://objects/animals/animal_base.tscn" id="1_4b27h"]
+[ext_resource type="Script" uid="uid://cr3w5664xh082" path="res://objects/animals/crab/animal_crab.gd" id="2_s868m"]
+
+[node name="AnimalCrab" unique_id=1591991278 node_paths=PackedStringArray("animation_player") instance=ExtResource("1_4b27h")]
+script = ExtResource("2_s868m")
+idle_time = Vector2(2, 6)
+wander_radius = 16.0
+animation_player = NodePath("crab/AnimationPlayer")
+walk_speed = 1.0
+turn_speed = 2.0
+waypoint_radius = 1.0
+
+[node name="crab" parent="." index="3" unique_id=2127516367 instance=ExtResource("1_3xoq4")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Skeleton3D" parent="crab/Crab" parent_id_path=PackedInt32Array(2127516367, 1263878832) index="0" unique_id=1490101580]
+bones/1/position = Vector3(2.4829376e-09, -0.009119425, -0.056803)
+bones/4/rotation = Quaternion(-0.116772056, -0.03328601, 0.32885602, 0.9365416)
+bones/6/rotation = Quaternion(-0.12302907, -0.0025575391, 0.31637406, 0.9406194)
+bones/8/rotation = Quaternion(8.881785e-16, 3.5527137e-15, 1.7763567e-15, 1)
+bones/10/rotation = Quaternion(8.881785e-16, 3.5527137e-15, 1.7763567e-15, 1)
+bones/12/position = Vector3(0.08148899, -0.032658096, 0.011057208)
+bones/12/rotation = Quaternion(0.012556364, -0.51786196, -0.25518, 0.81642175)
+bones/14/position = Vector3(0.0919628, -0.007685105, 0.006362074)
+bones/14/rotation = Quaternion(0.007025749, -0.50718415, -0.09410349, 0.8566561)
+bones/16/position = Vector3(0.0944809, 0.023153704, -0.0010732167)
+bones/16/rotation = Quaternion(-0.032956555, -0.48304403, 0.14526494, 0.8628328)
+bones/18/rotation = Quaternion(0.91373944, -0.39277884, 0.055637807, -0.087803416)
+bones/20/rotation = Quaternion(-0.11677184, -0.033285927, 0.32885683, 0.9365413)
+bones/22/rotation = Quaternion(-0.12302879, -0.0025574756, 0.31637448, 0.9406193)
+bones/24/position = Vector3(-0.081489, -0.032658096, 0.011057202)
+bones/24/rotation = Quaternion(0.8164216, 0.25517994, -0.51786226, -0.012556371)
+bones/26/position = Vector3(-0.09196281, -0.0076851062, 0.006362095)
+bones/26/rotation = Quaternion(0.8566568, 0.09410377, -0.5071827, -0.0070254914)
+bones/28/position = Vector3(-0.09448092, 0.023153707, -0.0010732319)
+bones/28/rotation = Quaternion(0.8628324, -0.14526491, -0.4830447, 0.03295679)
+
+[editable path="crab"]

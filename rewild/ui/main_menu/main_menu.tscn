@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://y16lcfbh3np" path="res://ui/main_menu/main_menu.gd" id="1_menu"]
 [ext_resource type="Script" uid="uid://bq8hjgxtqayf0" path="res://ui/save_slots/save_slot_list.gd" id="2_slots"]
 [ext_resource type="PackedScene" path="res://ui/settings/settings_menu.tscn" id="3_settings"]
-[ext_resource type="Texture2D" path="res://ui/main_menu/menu_bg.jpg" id="4_bg"]
-[ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="5_glass"]
+[ext_resource type="Texture2D" uid="uid://c8pfms8ka42x3" path="res://ui/main_menu/menu_bg.jpg" id="4_bg"]
+[ext_resource type="Theme" uid="uid://lfw6rhhegb5m" path="res://ui/theme/light/light_theme.tres" id="light_theme"]
+[ext_resource type="Script" uid="uid://cr8tx2mpxm44m" path="res://ui/main_menu/title/title_art.gd" id="title_art"]
 
 [node name="MainMenu" type="Control" unique_id=1076275347]
 layout_mode = 3
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("light_theme")
 script = ExtResource("1_menu")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1156831566]
@@ -44,12 +46,17 @@ theme_override_constants/margin_bottom = 120
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Content/VBox" unique_id=412284275]
+[node name="Title" type="TextureRect" parent="Content/VBox" unique_id=412284275]
+texture_filter = 2
+custom_minimum_size = Vector2(640, 200)
 layout_mode = 2
-theme_type_variation = &"TitleLabel"
-text = "MENU_TITLE"
+size_flags_horizontal = 0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("title_art")
 
-[node name="TitleGap" type="Control" parent="Content/VBox"]
+[node name="TitleGap" type="Control" parent="Content/VBox" unique_id=1372000356]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
@@ -68,6 +75,13 @@ custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 20
+
+[node name="NewGameButton" type="Button" parent="Content/VBox/Buttons" unique_id=5668880]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MainMenuButton"
+text = "MENU_NEW_GAME"
+alignment = 0
 
 [node name="ContinueButton" type="Button" parent="Content/VBox/Buttons" unique_id=1728757562]
 unique_name_in_owner = true
@@ -144,7 +158,6 @@ grow_vertical = 2
 [node name="Panel" type="PanelContainer" parent="SlotScreen/Center" unique_id=16813654]
 custom_minimum_size = Vector2(1100, 0)
 layout_mode = 2
-material = ExtResource("5_glass")
 
 [node name="VBox" type="VBoxContainer" parent="SlotScreen/Center/Panel" unique_id=728620720]
 layout_mode = 2

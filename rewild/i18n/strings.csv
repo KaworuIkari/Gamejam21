@@ -1,0 +1,311 @@
+keys,zh_CN,en
+MENU_TITLE,自然涌现,Emergence
+MENU_SUBTITLE,一个机器人，一颗星球，慢慢变绿,"One robot, one planet, slowly turning green"
+MENU_CONTINUE,继续游戏,Continue
+MENU_NEW_GAME,新建游戏,New Game
+MENU_LOAD,读取存档,Load Game
+MENU_SETTINGS,设置,Settings
+MENU_QUIT,退出游戏,Quit
+MENU_VERSION,灰盒原型 v0.1,Greybox prototype v0.1
+MENU_QUIT_CONFIRM,确定要退出游戏吗？,Quit the game?
+UI_CONFIRM,确定,Confirm
+UI_CANCEL,取消,Cancel
+UI_BACK,返回,Back
+UI_RESET_PAGE,恢复本页默认,Reset Page
+UI_APPLY,应用,Apply
+UI_DISCARD,放弃更改,Discard
+SETTINGS_DISCARD_CONFIRM,有未应用的设置更改，放弃并返回吗？,You have unapplied changes. Discard them and go back?
+HINT_TABS,点击分页标签切换,Click a tab to switch pages
+HINT_BACK,Esc / B 返回,Esc / B: back
+SETTINGS_TITLE,设置,Settings
+TAB_AUDIO,音频,Audio
+TAB_VIDEO,画面,Video
+TAB_CONTROLS,操作,Controls
+TAB_ACCESSIBILITY,语言与辅助,Language & Access
+HEADER_VOLUME,音量,Volume
+HEADER_DISPLAY,显示,Display
+HEADER_SENSITIVITY,灵敏度与手感,Sensitivity & Feel
+HEADER_KEYBINDS,按键绑定,Key Bindings
+HEADER_LANGUAGE,语言,Language
+HEADER_SAVE_SLOTS,存档位,Save Slots
+OPT_MASTER_VOLUME,主音量,Master Volume
+OPT_MUSIC_VOLUME,音乐,Music
+OPT_SFX_VOLUME,音效,Sound Effects
+OPT_AMBIENT_VOLUME,环境音,Ambience
+OPT_WINDOW_MODE,窗口模式,Window Mode
+WINDOW_WINDOWED,窗口化,Windowed
+WINDOW_BORDERLESS,无边框全屏,Borderless Fullscreen
+WINDOW_EXCLUSIVE,独占全屏,Exclusive Fullscreen
+OPT_RESOLUTION,分辨率（窗口化）,Resolution (Windowed)
+RES_AUTO,自动,Auto
+RES_HINT_FULLSCREEN,全屏：跟随显示器,Fullscreen: native
+RES_HINT_EDITOR,编辑器内运行：窗口由编辑器控制,Running in editor: window controlled by editor
+OPT_VSYNC,垂直同步,V-Sync
+VSYNC_OFF,关闭,Off
+VSYNC_ON,开启,On
+VSYNC_ADAPTIVE,自适应,Adaptive
+OPT_MAX_FPS,帧率上限,Frame Rate Limit
+FPS_UNLIMITED,不限制,Unlimited
+OPT_FOV,视野（FOV）,Field of View
+OPT_MOUSE_SENS,鼠标灵敏度,Mouse Sensitivity
+OPT_PAD_SENS,手柄灵敏度,Controller Sensitivity
+OPT_INVERT_Y,反转 Y 轴,Invert Y Axis
+OPT_VIBRATION,手柄震动,Controller Vibration
+OPT_LANGUAGE,语言,Language
+LANG_ZH,简体中文,简体中文
+LANG_EN,English,English
+OPT_UI_SCALE,界面缩放,UI Scale
+BIND_COL_ACTION,动作,Action
+BIND_COL_KBM,键盘 / 鼠标,Keyboard / Mouse
+BIND_COL_PAD,手柄,Controller
+BIND_WAITING,请按下按键…,Press a key…
+BIND_NONE,未绑定,Unbound
+BIND_MOUSE_LEFT,鼠标左键,Left Mouse
+BIND_MOUSE_RIGHT,鼠标右键,Right Mouse
+BIND_MOUSE_MIDDLE,鼠标中键,Middle Mouse
+BIND_WHEEL_UP,滚轮上,Wheel Up
+BIND_WHEEL_DOWN,滚轮下,Wheel Down
+BIND_MOUSE_N,鼠标按键 %d,Mouse Button %d
+BIND_LSTICK,左摇杆,Left Stick
+BIND_RSTICK,右摇杆,Right Stick
+BIND_RESET_ALL,重置全部按键,Reset All Bindings
+BIND_HINT,Esc 取消（手柄：View 键取消）,Esc to cancel (controller: View)
+ACTION_MOVE_FORWARD,向前移动,Move Forward
+ACTION_MOVE_BACK,向后移动,Move Back
+ACTION_MOVE_LEFT,向左移动,Move Left
+ACTION_MOVE_RIGHT,向右移动,Move Right
+ACTION_JUMP,跳跃,Jump
+ACTION_SPRINT,冲刺,Sprint
+ACTION_INTERACT,交互 / 拾取,Interact / Pick Up
+ACTION_PAUSE,暂停菜单,Pause Menu
+SLOT_TITLE,存档 %d,Slot %d
+SLOT_EMPTY,空存档位,Empty Slot
+SLOT_SAVED_AT,保存于 %s,Saved %s
+SLOT_PLAY_TIME,游玩时长 %s,Play time %s
+SLOT_LOAD,读取,Load
+SLOT_DELETE,删除,Delete
+SLOT_START_HERE,在此开始,Start Here
+SLOT_OVERWRITE,覆盖并开始,Overwrite
+SLOT_SAVE_HERE,保存到此,Save Here
+SLOT_OVERWRITE_SAVE,覆盖存档,Overwrite Save
+SLOT_NO_THUMB,无预览,No preview
+SLOT_SCREEN_NEW,选择存档位开始新游戏,Choose a slot for your new game
+SLOT_SCREEN_LOAD,读取存档,Load Game
+SLOT_SCREEN_BROWSE,存档管理,Save Files
+SLOT_SCREEN_SAVE,选择存档位保存进度,Choose a slot to save progress
+SLOT_SCREEN_IN_GAME_MANAGE,游戏内存档管理,In-Game Save Files
+SLOT_CONFIRM_NEW,确定在存档 %d 中新建游戏吗？,Start a new game in slot %d?
+SLOT_CONFIRM_DELETE,确定删除存档 %d 吗？此操作无法撤销。,Delete slot %d? This cannot be undone.
+SLOT_CONFIRM_OVERWRITE,存档 %d 已有进度，确定覆盖吗？,Slot %d has progress. Overwrite it?
+LOC_CRASH_SITE,坠落地点,Crash Site
+GAME_PLACEHOLDER,游戏世界（占位）\n存档 %d · %s · 游玩时长 %s\n按 %s 保存并返回主菜单,Game world (placeholder)\nSlot %d · %s · Play time %s\nPress %s to save and return to menu
+HEADER_DIALOGUE,对话,Dialogue
+OPT_TEXT_SPEED,文字速度,Text Speed
+SPEED_SLOW,慢,Slow
+SPEED_NORMAL,中,Normal
+SPEED_FAST,快,Fast
+SPEED_INSTANT,瞬间,Instant
+OPT_DIALOGUE_FONT,对话字号,Dialogue Text Size
+SIZE_SMALL,小,Small
+SIZE_MEDIUM,中,Medium
+SIZE_LARGE,大,Large
+OPT_DIALOGUE_OPACITY,对话框不透明度,Dialogue Box Opacity
+DLG_AUTO,自动,Auto
+DLG_SKIP,跳过,Skip
+DLG_HISTORY,历史,Log
+DLG_SKIP_CONFIRM,跳过这段对话吗？（遇到下一个选项时会停下）,Skip this dialogue? (Stops at the next choice)
+DLG_HISTORY_TITLE,对话记录,Dialogue Log
+DLG_HISTORY_EMPTY,还没有对话记录,No dialogue yet
+DLG_TALK_PROMPT,按 %s 交谈,Press %s to talk
+ACTION_USE,浇水（按住）,Water (hold)
+ACTION_USE2,浇水（单次喷洒）,Water (burst)
+ACTION_DIALOGUE_AUTO,对话：自动播放,Dialogue: Auto
+ACTION_DIALOGUE_SKIP,对话：跳过,Dialogue: Skip
+ACTION_DIALOGUE_HISTORY,对话：历史记录,Dialogue: History
+SAVE_FEEDBACK_OK,进度已保存,Progress saved
+SAVE_FEEDBACK_FAIL,保存失败,Save failed
+PAUSE_TITLE,暂停,Paused
+PAUSE_RESUME,继续游戏,Resume
+PAUSE_SAVE,保存进度,Save Progress
+PAUSE_MAIN_MENU,返回主菜单,Return to Main Menu
+TASK_TERMINAL_TITLE,行动终端,Action terminal
+TASK_TERMINAL_CLOSE,关闭,Close
+ACTION_TASK_TERMINAL,行动终端,Action terminal
+INTERACT_PUMP_PROMPT,按 %s 启动水泵,Press %s to start the pump
+HEADER_CAMERA,镜头,Camera
+HEADER_INTERFACE,界面,Interface
+PAUSE_RETURN_CONFIRM,确定返回主菜单吗？未保存的进度可能丢失。,Return to the main menu? Unsaved progress may be lost.
+BIND_RESERVED_LOOK,右摇杆用于镜头，请选其他按键,Right stick is reserved for camera; choose another input
+UI_RETRY_SAVE,保存失败：重试,Save failed: retry
+SETTINGS_SAVE_FAILED,设置未能保存，更改仍可预览或放弃。,Settings could not be saved. Changes can still be previewed or discarded.
+CLEAR_PROMPT,按住 %s 清除,Hold %s to clear
+FOX_RESCUE_PROMPT,按住 %s 救助小狐狸,Hold %s to help the fox
+WELL_ACTIVATE_PROMPT,按住 %s 启动水井,Hold %s to start the well
+WATER_REFILL_PROMPT,按住 %s 给水箱加水,Hold %s to fill the water tank
+CLEAR_LOCKED,%s 需要拆除授权,%s Needs demolition authorization
+OBJ_BASIN_LITTER,清理身边的垃圾,Clear the litter around you
+OBJ_REACH_SPRING,前往北方水源（北边的小岛）,Head to the north spring (the island to the north)
+OBJ_CLEAR_SPRING,清除堵住水口的残骸,Clear the debris blocking the spring intake
+OBJ_RESCUE_SPRING,打开笼子，救出小动物,Open the cage and free the animal
+OBJ_START_PUMP,启动水泵,Start the pump
+OBJ_ACTIVATE_STATION,游到湖心岛，启动终端,Reach the lake island and activate the station
+OBJ_REVIVE_EAST,东部绿洲：浇灌枯地并救出小动物,East oasis: water the dry ground and free the animal
+OBJ_REVIVE_PEAK,北部山顶：浇灌山顶并救出小动物,North summit: water the summit and free the animal
+OBJ_BEACH_WALL,拆除南岸的垃圾墙,Tear down the garbage wall on the south shore
+OBJ_DONE,大海重新打开了。谢谢游玩！,The sea is open again. Thanks for playing!
+TOAST_STAGE,世界阶段：%s,World stage: %s
+TOAST_DEMOLITION_AUTH,获得拆除授权,Demolition authorization granted
+Wasteland,荒原,Wasteland
+Revival,复苏,Revival
+Golden meadow,金色草原,Golden meadow
+QUEST_WATER_TITLE,恢复水源,Restore the water source
+QUEST_WATER_DESC,供水已恢复。前往中心岛重启湖心电站，接入管理终端。,"The water supply is restored. Head to the central island, restart the lake power station, and connect to its management terminal."
+QUEST_WATER_LOCATION,北部泉眼 / 湖心电站,North spring / Lake station
+QUEST_WATER_STEP_STATION,长按 E 激活湖心电站,Hold E to activate the lake power station
+QUEST_WATER_STEP_TERMINAL,在电站终端查看任务,Check the station terminal
+QUEST_TOAST_STARTED,新任务：%s,New quest: %s
+QUEST_TOAST_DONE,任务完成：%s,Quest complete: %s
+QUEST_TOAST_ABILITY,获得：%s,Unlocked: %s
+ABILITY_WATER_GUN,水枪,Water gun
+ABILITY_JETPACK,喷气背包,Jetpack
+ABILITY_LEVEL,%s Lv%d,%s Lv%d
+TERMINAL_BATTERY_TITLE,核心电池,Core battery
+TERMINAL_BATTERY_CHARGING,电池充能中……恢复湖泊、森林、山地、工厂四个区域的绿色能源供应，充满后回到湖心电站取出电池。,"Battery charging... Restore green energy to the lake, forest, mountain and factory. Once it is full, return to the lake station to take the battery."
+TERMINAL_BATTERY_FULL,电池已充满！回到湖心电站，与终端交互取出电池。,Battery fully charged! Return to the lake station and use the terminal to take it.
+TERMINAL_BATTERY_COLLECTED,已从湖心电站取出电池。,You have taken the battery from the lake station.
+BATTERY_READY_NOTICE,电池已充满，回到湖心电站取出电池,Battery full: return to the lake station to take it
+TERMINAL_BATTERY_CHARGE,电池充能,Battery charge
+TERMINAL_REGIONS_TITLE,区域清理度,Region recovery
+TERMINAL_UPGRADES_TITLE,装备升级,Equipment upgrades
+TERMINAL_UPGRADES_HINT,清理的每一堆垃圾都会转化为 1 份材料。,Every rubbish pile you clear becomes 1 material.
+TERMINAL_MATERIAL,可用材料：%d（累计清理垃圾 %d）,Material available: %d (rubbish cleared: %d)
+UPGRADE_RATE,水枪射速,Water gun fire rate
+UPGRADE_RATE_DESC,缩短两次射击之间的间隔。,Shorter wait between shots.
+UPGRADE_TANK,水箱容量,Water tank capacity
+UPGRADE_TANK_DESC,水箱可装更多水，射击次数更多。,The tank holds more water for more shots.
+UPGRADE_BUY,升级（%d 材料）,Upgrade (%d material)
+UPGRADE_MAX,已满级,Max level
+ITEM_BATTERY_1,核心电池,Core battery
+ITEM_FOX_KEY_1,狐狸给的钥匙,The fox's key
+TERMINAL_ITEMS_TITLE,随身物品,Carried items
+TERMINAL_ITEMS_EMPTY,（暂无）,(none yet)
+REGION_LAKE,湖区,Lake area
+REGION_FOREST,森林,Forest
+REGION_MOUNTAIN,山地,Mountain
+REGION_FACTORY,工厂区,Factory area
+THROW_PICKUP_PROMPT,按 %s 拿起,Press %s to pick up
+THROW_THROW_PROMPT,按 %s 扔出,Press %s to throw
+READ_NOTE_PROMPT,按 %s 阅读纸条,Press %s to read note
+INTERACT_ROBOT_REPAIR,按 %s 用齿轮修复小机器人,Press %s to repair the bot with the gears
+ROBOT_REPAIR_GEARS,%s 修复小机器人：齿轮 {count}/{total},%s Repair the bot: gears {count}/{total}
+INTERACT_GEAR_PICKUP,按 %s 拾取齿轮,Press %s to pick up the gear
+QUEST_CORE_TITLE,唤醒储能核心,Wake the energy core
+QUEST_CORE_DESC,废弃工厂里还留着能量的火种。清理工厂，收集散落的齿轮，用储能核心修好沉睡的小机器人，再把核心带回湖心终端。,"The abandoned factory still holds a spark of power. Clear it out, collect the scattered gears and repair the sleeping bot with the energy core, then bring the core back to the lake terminal."
+QUEST_CORE_LOCATION,废弃工厂 / 湖心终端,Abandoned factory / Lake terminal
+QUEST_CORE_STEP_GEARS,收集工厂周围的齿轮,Collect the gears around the factory
+QUEST_CORE_STEP_ACTIVATE,修复并唤醒小机器人,Repair and wake the bot
+QUEST_CORE_STEP_JETPACK,让小机器人从动力室取出喷气背包,Let the bot fetch the jetpack from the power room
+QUEST_RADAR_TITLE,重启山地雷达,Restart the mountain radar
+QUEST_RADAR_DESC,带着升级后的装备和密钥前往雷达站。清理环境使山地区域复苏度达到30%后使用密钥启动雷达，获取坐标信息并返回湖心终端提交，领取混沌能量模块。,Take the upgraded equipment and key to the radar station. Restore the mountain region to 30% then use the key to start the radar. Retrieve the coordinates and deliver the information to the lake terminal to receive a Chaos Energy Module.
+QUEST_RADAR_LOCATION,山地区域 / 雷达站 / 湖心终端,Mountain region / Radar station / Lake terminal
+QUEST_RADAR_STEP_START,使用04获得的密钥启动雷达,Start the radar with the key obtained in mission 04
+QUEST_RADAR_STEP_COORDINATES,读取雷达的坐标信息,Read the radar coordinates
+INTERACT_RADAR_START,按 %s 使用密钥修复并启动雷达,Press %s to use the key and bring the radar online
+INTERACT_RADAR_READ,按 %s 读取雷达坐标,Press %s to read the radar coordinates
+RADAR_READOUT_KEY,密钥验证通过。雷达已启动，密钥已保留。,Key verified. Radar online. The key remains available.
+RADAR_READOUT_COORDINATES,已获取航行坐标：%s。请记下，在港口的小船上输入。,Navigation coordinates received: %s. Note them down and enter them on the boat at the harbour.
+RADAR_READOUT_RETURN,返回湖心终端提交雷达信息。,Return to the lake terminal and submit the radar information.
+RADAR_DELIVERY_RECEIVED,湖心终端：雷达信息已接收，坐标已记录。,Lake terminal: Radar information received. Coordinates recorded.
+RADAR_DELIVERY_REWARD,湖心终端：混沌能量模块已交付。,Lake terminal: Chaos Energy Module issued.
+ITEM_CHAOS_ENERGY_MODULE_1,混沌能量模块,Chaos Energy Module
+QUEST_FINALE_TITLE,最后的选择,The final choice
+QUEST_FINALE_DESC,携带混沌能量模块启动雷达站的同步破坏器，或在港口载入雷达坐标并插入湖心电池，为小船供能后出发。确认启动将锁定对应结局。,"Activate the radar disruptor with the Chaos Energy Module, or load the radar coordinates and insert the lake battery at the harbor core to power the ship. Confirming departure locks the boat ending."
+QUEST_FINALE_LOCATION,雷达站二层 / 港口,Radar upper platform / Harbor
+QUEST_FINALE_DEVICE,路线一：在雷达站二层启动同步破坏器,Route 1: Activate the Synchronization Disruptor on the radar upper platform
+QUEST_FINALE_BOAT,路线二：载入坐标，插入湖心电池并乘船出发,"Route 2: Load coordinates, insert the lake battery, and depart"
+FINALE_MODULE_LOCKED,%s 需要混沌能量模块,%s Requires the Chaos Energy Module
+FINALE_START_DEVICE,按 %s 启动同步破坏器,Press %s to activate the Synchronization Disruptor
+FINALE_CONFIRM_DEVICE,确认使用唯一的混沌能量模块启动同步破坏器？这将进入结局一，小船路线将关闭。,Use the unique Chaos Energy Module to activate the Synchronization Disruptor? This locks Ending 1 and closes the boat route.
+FINALE_CONFIRM_BOAT,坐标已载入，电池已安装。确认启动小船并离开岛屿？这将锁定乘船结局。,Coordinates loaded. Battery installed. Power up the ship and leave the island? This locks the boat ending.
+FINALE_CONFIRM_START,确认启动,Confirm startup
+FINALE_BRIEFING_DEVICE,湖心终端：携带混沌能量模块，[n]前往雷达站二层启动同步破坏器。（剧情占位）,Lake terminal: Take the Chaos Energy Module to the radar upper platform [n]and activate the Synchronization Disruptor. (Story placeholder.)
+FINALE_BRIEFING_BOAT,另一条路线：取得雷达坐标与湖心电池，在港口核心基座载入坐标、插入电池，再乘船出发。,"Alternative route: Bring the radar coordinates and lake battery to the harbor core, load the coordinates, insert the battery, and depart."
+ENDING_DEVICE_TITLE,结局一,Ending 1
+ENDING_DEVICE_BODY,同步破坏器已启动。\n混沌能量模块已使用，小船路线已关闭。\n\n（结局剧情与演出待补充）,The Synchronization Disruptor is active.\nThe Chaos Energy Module has been used and the boat route is closed.\n\n(Ending text and cinematic to be added.)
+ENDING_BOAT_TITLE,结局二,Ending 2
+ENDING_BOAT_BODY,模块已安装，小船已启动。\n混沌能量模块已使用，同步破坏器路线已关闭。\n\n（结局剧情与演出待补充）,The module is installed and the boat is ready.\nThe Chaos Energy Module has been used and the disruptor route is closed.\n\n(Ending text and cinematic to be added.)
+ENDING_SAVE_OK,结局进度已保存。,Ending progress saved.
+ENDING_SAVE_UNAVAILABLE,当前没有可保存的存档位。,No active save slot is available.
+INTERACT_ROBOT_KEY,按 %s 与小机器人交谈获取密钥,Press %s to ask the companion bot for the radar key
+ROBOT_KEY_RECOVERY,小机器人：这是雷达站的密钥，已传输给你。（剧情占位）,Companion bot: The radar key has been transferred to you. (Story placeholder.)
+QUEST_TOAST_JETPACK_ENABLED,获得喷气背包，可以飞行了。,Jetpack obtained. You can fly now.
+OPENING_BOOT,环境工程试验机 LIRA，\n系统重启中，\n\n当前电源剩余……80%……,Environmental Engineering Test Unit LIRA\nSystem reboot in progress\n\nRemaining power... 80%...
+OPENING_ACCIDENT,运输事故确认，机组无应答。\n\n当前位置：第七自治试验岛。,Transport accident confirmed. No response from crew.\n\nCurrent location: Autonomous Test Island No. 7.
+OPENING_SCAN,检查受损情况……,Checking for damage...
+OPENING_MODULES,检查完毕！\n\n行动模块：未受损……\n语言模块：轻微损伤……\n记忆模块：受损严重……\n思维模块：轻微损伤……,Diagnostics complete!\n\nLocomotion module: undamaged...\nLanguage module: minor damage...\nMemory module: severe damage...\nCognition module: minor damage...
+OPENING_STATUS,各模块综合状态：良好。,Overall module status: Good.
+OPENING_REPAIR,尝试修复：失败,Repair attempt: Failed
+OPENING_START,允许启动机体。,Body activation authorized.
+OPENING_OBJECTIVE,应急目标：\n\n恢复通信，报告位置，等待回收。,Emergency objective:\n\nRestore communications.\nReport location. Await recovery.
+STARTUP_HEADER,LIRA // 本机记录,LIRA // LOCAL LOG
+STARTUP_INTRO_TITLE,行动模块复核,Locomotion diagnostics
+STARTUP_INTRO_BODY,机体已启动。开始复核感知与行动反馈。,Body activated. Checking perception and locomotion feedback.
+STARTUP_LOOK_TITLE,视觉反馈,Visual feedback
+STARTUP_LOOK_BODY,调整观察方向，确认周边环境。,Adjust viewing direction. Check the surroundings.
+STARTUP_LOOK_INPUT,移动鼠标，转动视野,Move the mouse to look around
+STARTUP_LOOK_PAD,转动右摇杆，调整视野,Move the right stick to look around
+STARTUP_WALK_TITLE,行动反馈,Locomotion feedback
+STARTUP_WALK_BODY,测试行走，确认步态稳定。,Test walking. Confirm gait stability.
+STARTUP_MOVE_PAD,左摇杆移动,Move with the left stick
+STARTUP_JUMP_TITLE,关节响应,Joint response
+STARTUP_JUMP_BODY,进行离地测试，检查关节响应。,Perform a lift-off test. Check joint response.
+STARTUP_PRESS_JUMP,按 %s 跳跃,Press %s to jump
+STARTUP_SPRINT_TITLE,动力输出,Power output
+STARTUP_SPRINT_BODY,提高移动速度，检查动力输出。,Increase movement speed. Check power output.
+STARTUP_HOLD_SPRINT,按住 %s，并使用 %s 奔跑,Hold %s and use %s to sprint
+STARTUP_FEEDBACK_OK,✓ 反馈正常,✓ Feedback normal
+QUEST_CABIN_TITLE,机舱调查,Cabin investigation
+QUEST_CABIN_DESC,启动北部水泵，恢复湖心站供水。机舱内的两份平板记录可以选择阅读。,Start the northern pump to restore the lake station’s water supply. The two tablet records in the cabin are optional reading.
+STARTUP_CURRENT_TARGET,当前目标：%s,Current objective: %s
+READ_TABLET_PROMPT,按 %s 阅读平板,Press %s to read tablet
+REREAD_TABLET_PROMPT,按 %s 重读平板,Press %s to reread tablet
+QUEST_CABIN_DELIVERY,读完设备投送记录,Read the equipment delivery record
+QUEST_CABIN_CREW,读完机组人员离线记录,Read the crew’s offline log
+QUEST_CABIN_PUMP,前往被植被覆盖的水泵房启动水泵,Go to the overgrown pump house and start the pump
+TABLET_POWER,电源接通。,Power connected.
+TABLET_DELIVERY_TITLE,第七自治试验场｜设备投送记录：,Autonomous Test Site Seven | Equipment Delivery Record:
+TABLET_DELIVERY_PURPOSE,本岛用于测试无人系统恢复人消失后环境的能力，,"This island tests the ability of unmanned systems to restore postwar environments,"
+TABLET_DELIVERY_SCOPE,包括供水、植被修复与设施维护。,"including water supply, vegetation recovery, and facility maintenance."
+TABLET_DELIVERY_UNIT,本次投送：工程试验机 LIRA。,Current delivery: engineering test unit LIRA.
+TABLET_DELIVERY_CONNECT,备注：抵达后，接入湖心管理终端领取作业指令。,"Note: Upon arrival, connect to the lake’s central management terminal for work instructions."
+TABLET_DELIVERY_REPORT,该终端负责全岛设备调度，并向军方回传试验数据。,The terminal coordinates equipment across the island and transmits test data to the military.
+TABLET_CREW_TITLE,机组人员离线记录：,Crew Offline Log:
+TABLET_CREW_STAFF,岛上的值守人员早撤了，这次投送仍由旧系统接管。,The island’s duty staff pulled out long ago. The old system is still handling this delivery.
+TABLET_CREW_CONTACT,落地后得先让 LIRA 联系上湖心终端，我们才能回传交接报告。,"Once we land, LIRA needs to contact the lake terminal before we can send back the handover report."
+TABLET_CREW_SUPPLY,维护图显示，北部泵站断供，,The maintenance map shows a supply failure at the northern pumping station.
+TABLET_CREW_SHUTDOWN,湖心站因此保护停机。,The lake station has shut down as a protective measure.
+TABLET_CREW_PUMP,先启动北边的水泵，等水流回湖里，,"Start the northern pump first. Once water flows back into the lake,"
+TABLET_CREW_RETURN,再去中心岛重启终端，但愿那里还有人能接收报告。,head to the central island and restart the terminal. Hopefully someone there can still receive the report.
+STATION_HOLD_PROMPT,按住 %s 启动电站,Hold %s to activate the station
+STATION_TERMINAL_PROMPT,按 %s 打开终端,Press %s to open the terminal
+STATION_LOCKED,%s 先恢复水源，才能启动电站,%s Restore the water source to unlock the station
+HARBOR_COORDINATES_REQUIRED,%s 先从雷达站取得航行坐标,%s Obtain navigation coordinates from the radar station first
+HARBOR_LOAD_COORDINATES,按 %s 输入航行坐标,Press %s to enter the navigation coordinates
+COORD_PAD_TITLE,输入航行坐标,Enter navigation coordinates
+COORD_PAD_WRONG,坐标错误,Wrong coordinates
+COORD_PAD_CLEAR,清除,Clear
+COORD_PAD_CONFIRM,确认,Confirm
+HARBOR_BATTERY_REQUIRED,%s 需要充满的湖心电池,%s Requires the charged lake battery
+HARBOR_INSERT_BATTERY,按 %s 插入湖心电池并供能,Press %s to insert the lake battery and power the core
+HARBOR_DEPART,按 %s 确认航线并出发,Press %s to confirm the route and depart
+REST_0,按 %s 阅读,Press %s to inspect
+REST_1,蛙奥的座椅,
+REST_2,坐在这里的话，转身就能看到硕大的蛙奥雕像。
+WA_0,按 %s 阅读
+WA_1,蛙蛙湖
+WA_2,湖中居住着神仙，会问你掉的是金蛙还是银蛙。
+BIKE_0,按 %s 检查
+BIKE_1,一台@Decathlong 生产的ROCKRIDER ST100型号自行车，
+BIKE_2,自行车是一种省力不省功的非化石燃料驱动移动工具。
+BIKE_3,在古老的cambridge小镇这或许是最珍贵的东西,
+BIKE_4,因为资料显示直到人类消失前该地几乎所有的犯罪报告都来自于自行车的失窃。

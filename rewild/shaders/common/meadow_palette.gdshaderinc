@@ -12,6 +12,10 @@ float m_hash(vec2 p) {              // random 0..1 from a 2D position
 	return fract(p.x * p.y);
 }
 
+vec2 m_hash2(vec2 p) {              // two independent randoms 0..1
+	return vec2(m_hash(p), m_hash(p + 17.31));
+}
+
 float m_noise(vec2 p) {             // smooth "value noise", 0..1
 	vec2 i = floor(p);
 	vec2 f = fract(p);
@@ -47,11 +51,108 @@ vec3 meadow_color(vec2 wp) {
 	return mix(c, sunny, smoothstep(0.55, 0.78, big + (mid - 0.5) * 0.35));
 }
 
+// --- Growth (see GrowthMap autoload) -----------------------------------------
+// 0 = barren desert, 1 = full meadow. Defaults to white, so shaders without a
+// growth map assigned stay fully green.
+uniform sampler2D growth_map : hint_default_white, filter_linear, repeat_disable;
+uniform vec2 growth_origin = vec2(-512.0, -640.0); // must match GrowthMap.MAP_ORIGIN
+uniform float growth_size = 1024.0;        // must match GrowthMap.MAP_SIZE
+// 0 = dry, 1 = soaked (GrowthMap.wet_texture). Black by default: nothing is wet.
+uniform sampler2D wet_map : hint_default_black, filter_linear, repeat_disable;
+
+// Dried-mud cracks: 1 on the thin lines between irregular plates, 0 inside them.
+float mud_cracks(vec2 p) {
+	vec2 i = floor(p);
+	vec2 f = fract(p);
+	float d1 = 8.0;
+	float d2 = 8.0;
+	for (int y = -1; y <= 1; y++) {
+		for (int x = -1; x <= 1; x++) {
+			vec2 o = vec2(float(x), float(y));
+			float d = length(o + m_hash2(i + o) * 0.8 + 0.1 - f);
+			d2 = d < d1 ? d1 : min(d2, d);
+			d1 = min(d1, d);
+		}
+	}
+	float px = length(fwidth(p));
+	// Fade the lines out once they're thinner than a pixel, so far ground doesn't shimmer.
+	return (1.0 - smoothstep(0.04, 0.04 + px * 1.5, d2 - d1)) * (1.0 - smoothstep(0.08, 0.25, px));
+}
+
+// Dry, worn-out land: dusty ochre with clay patches, straw-coloured scrub patches,
+// cracked mud in the low dark areas and scattered grit, instead of one flat sand.
+vec3 desert_color(vec2 wp) {
+	float big = m_fbm(wp * 0.015 + 7.0);
+	float mid = m_fbm(wp * 0.06 + 23.0);
+	// Wind-streaked drifts: stretch the noise along one axis.
+	float streak = m_fbm(vec2(wp.x * 0.02, wp.y * 0.12) + 19.0);
+	vec3 clay = srgb(vec3(0.62, 0.42, 0.27));  // reddish packed earth
+	vec3 base = srgb(vec3(0.76, 0.61, 0.40));  // dusty ochre
+	vec3 pale = srgb(vec3(0.86, 0.76, 0.56));  // bleached drifts
+	vec3 straw = srgb(vec3(0.72, 0.66, 0.40)); // ground under dead scrub
+	vec3 c = mix(clay, base, smoothstep(0.30, 0.55, big + (mid - 0.5) * 0.3));
+	c = mix(c, straw, smoothstep(0.55, 0.72, m_fbm(wp * 0.03 + 61.0)) * 0.7);
+	c = mix(c, pale, smoothstep(0.58, 0.78, streak) * 0.6);
+	// Cracked mud where the ground is darkest (old puddles).
+	float mud = smoothstep(0.45, 0.30, big + (mid - 0.5) * 0.4);
+	c *= 1.0 - mud_cracks(wp * 0.7) * mud * 0.45;
+	// Grit: small darker and lighter speckles.
+	float g = m_noise(wp * 6.3);
+	c *= 1.0 - smoothstep(0.82, 0.92, g) * 0.08 + smoothstep(0.16, 0.06, g) * 0.05;
+	return c * (0.94 + 0.12 * m_noise(wp * 0.35));
+}
+
+float growth_raw(vec2 wp) {
+	vec2 uv = (wp - growth_origin) / growth_size;
+	if (any(lessThan(uv, vec2(0.0))) || any(greaterThan(uv, vec2(1.0)))) return 1.0;
+	return texture(growth_map, uv).r;
+}
+
+// Growth with a patchy, noise-broken edge so green spreads in clumps, not circles.
+float growth_at(vec2 wp) {
+	float g = growth_raw(wp);
+	float n = m_fbm(wp * 0.15 + 5.0) * 0.7 + m_noise(wp * 0.9) * 0.3;
+	return smoothstep(0.25, 0.75, g + (n - 0.5) * 0.55 * (1.0 - g * g));
+}
+
+// How wet the ground is (0..1), with a soft noisy rim like soaked sand.
+float wet_at(vec2 wp) {
+	vec2 uv = (wp - growth_origin) / growth_size;
+	if (any(lessThan(uv, vec2(0.0))) || any(greaterThan(uv, vec2(1.0)))) return 0.0;
+	float w = texture(wet_map, uv).r;
+	float n = m_fbm(wp * 0.4 + 11.0);
+	return smoothstep(0.05, 0.45, w + (n - 0.5) * 0.25);
+}
+
+// Barren -> damp -> sprouting -> meadow. Each stage has its own noisy threshold,
+// so a watered patch darkens first, then greens in clumps from its wettest middle
+// and an existing meadow's edge, instead of switching texture in one hard step.
+vec3 ground_blend(vec2 wp, vec3 meadow) {
+	float g = growth_raw(wp);
+	float n = m_fbm(wp * 0.15 + 5.0) * 0.7 + m_noise(wp * 0.9) * 0.3;
+	float edge = (n - 0.5) * 0.55 * (1.0 - g * g);
+	vec3 col = desert_color(wp);
+	// Damp sand: darker and a little cooler; stays visible under the first sprouts.
+	vec3 damp = col * srgb(vec3(0.66, 0.60, 0.56));
+	col = mix(col, damp, wet_at(wp) * 0.9);
+	// Sprouts: an olive haze that arrives early and patchy.
+	vec3 sprout = mix(col, srgb(vec3(0.56, 0.60, 0.28)), 0.75);
+	float s = smoothstep(0.08, 0.40, g + edge * 1.4 + (m_noise(wp * 2.3) - 0.5) * 0.2);
+	col = mix(col, sprout, s);
+	// Full meadow, same threshold growth_at() uses so grass blades match.
+	return mix(col, meadow, smoothstep(0.25, 0.75, g + edge));
+}
+
 // Darkens the colour under big drifting cloud shadows.
 vec3 apply_cloud_shadow(vec3 col, vec2 wp, float time) {
 	float n = m_fbm((wp + time * cloud_shadow_wind) * 0.0045);
 	float shadow = smoothstep(0.52, 0.68, n) * cloud_shadow_strength;
 	return col * mix(vec3(1.0), vec3(0.45, 0.55, 0.72), shadow);
+}
+
+// Flower clusters: soft islands of colour scattered through the grass (0..1).
+float flower_cluster(vec2 wp) {
+	return smoothstep(0.52, 0.66, m_fbm(wp * 0.035 + 41.0));
 }
 
 // Five pastel flower colours, picked by a 0..1 random number.

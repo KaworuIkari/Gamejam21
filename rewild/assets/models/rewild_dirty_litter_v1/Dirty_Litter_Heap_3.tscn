@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_dirty_litter_v1/Dirty_Litter_Heap_3.glb" id="1_eyi7u"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2vxkn"]
+radius = 0.7
+
+[node name="Dirty_Litter_Heap_3" type="Node3D" unique_id=402947306]
+metadata/zone = "basin / lake / spring / east / peak"
+metadata/category = "Clearable"
+metadata/description = "Overlapping pile of crushed, torn and stained rubbish; one clearing target. Visual asset only; clearing and persistence require gameplay integration."
+metadata/tags = ["small_garbage"]
+metadata/hold_time = 0.8
+
+[node name="Visual" type="Node3D" parent="." unique_id=1672037426 instance=ExtResource("1_eyi7u")]
+
+[node name="ClearTarget" type="Area3D" parent="." unique_id=2008623272]
+collision_layer = 0
+collision_mask = 0
+
+[node name="@CollisionShape3D@22" type="CollisionShape3D" parent="ClearTarget" unique_id=117183969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18, 0)
+shape = SubResource("SphereShape3D_2vxkn")

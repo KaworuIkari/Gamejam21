@@ -1,0 +1,135 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6wyg"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x3wgs"]
+size = Vector2(32, 32)
+
+[sub_resource type="Environment" id="Environment_i552h"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=1908243873]
+
+[node name="Lakebed_Cracked_Flat_Polluted" type="Node3D" parent="." unique_id=1666653608]
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation."
+metadata/hazard_visual = true
+
+[node name="@Label3D@3" type="Label3D" parent="." unique_id=1079176201]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Lakebed Cracked Flat Polluted"
+font_size = 48
+
+[node name="Lakebed_Cracked_Flat_Cleared" type="Node3D" parent="." unique_id=1727364352]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation."
+metadata/hazard_visual = false
+
+[node name="@Label3D@5" type="Label3D" parent="." unique_id=520107498]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 3.7)
+pixel_size = 0.007
+text = "Lakebed Cracked Flat Cleared"
+font_size = 48
+
+[node name="Lakebed_Drum_Sink_Polluted" type="Node3D" parent="." unique_id=272710105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0)
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation."
+metadata/hazard_visual = true
+
+[node name="@Label3D@7" type="Label3D" parent="." unique_id=619621301]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 18, 0.15, 3.7)
+pixel_size = 0.007
+text = "Lakebed Drum Sink Polluted"
+font_size = 48
+
+[node name="Lakebed_Drum_Sink_Cleared" type="Node3D" parent="." unique_id=538181927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation."
+metadata/hazard_visual = false
+
+[node name="@Label3D@9" type="Label3D" parent="." unique_id=1725130130]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 12.7)
+pixel_size = 0.007
+text = "Lakebed Drum Sink Cleared"
+font_size = 48
+
+[node name="Lakebed_Stranded_Frame_Polluted" type="Node3D" parent="." unique_id=1081913171]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation."
+metadata/hazard_visual = true
+
+[node name="@Label3D@11" type="Label3D" parent="." unique_id=2092726554]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 12.7)
+pixel_size = 0.007
+text = "Lakebed Stranded Frame Polluted"
+font_size = 48
+
+[node name="Lakebed_Stranded_Frame_Cleared" type="Node3D" parent="." unique_id=620958505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 9)
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation."
+metadata/hazard_visual = false
+
+[node name="@Label3D@13" type="Label3D" parent="." unique_id=951457424]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 18, 0.15, 12.7)
+pixel_size = 0.007
+text = "Lakebed Stranded Frame Cleared"
+font_size = 48
+
+[node name="Lakebed_Hazard_Sign" type="Node3D" parent="." unique_id=1661176718]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18)
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "1.7m shoreline hazard sign. Place above high waterline; text-free warning symbol."
+
+[node name="@Label3D@15" type="Label3D" parent="." unique_id=359512248]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 21.7)
+pixel_size = 0.007
+text = "Lakebed Hazard Sign"
+font_size = 48
+
+[node name="Lakebed_Waterline_Gauge" type="Node3D" parent="." unique_id=1641769099]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 18)
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "3.1m gauge prop with unnumbered ticks. Position and scale against actual dry and full lake levels."
+
+[node name="@Label3D@17" type="Label3D" parent="." unique_id=383576914]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 9, 0.15, 21.7)
+pixel_size = 0.007
+text = "Lakebed Waterline Gauge"
+font_size = 48
+
+[node name="@MeshInstance3D@18" type="MeshInstance3D" parent="." unique_id=1034820918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, -0.65, 9)
+material_override = SubResource("StandardMaterial3D_w6wyg")
+mesh = SubResource("PlaneMesh_x3wgs")
+
+[node name="@DirectionalLight3D@19" type="DirectionalLight3D" parent="." unique_id=993579826]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@20" type="WorldEnvironment" parent="." unique_id=537000107]
+environment = SubResource("Environment_i552h")
+
+[node name="@Camera3D@21" type="Camera3D" parent="." unique_id=245902455]
+transform = Transform3D(0.81373346, -0.3668594, 0.4508348, 0, 0.7756455, 0.6311688, -0.5812382, -0.51360315, 0.63116866, 29, 29, 37)
+projection = 1
+current = true
+size = 34.0

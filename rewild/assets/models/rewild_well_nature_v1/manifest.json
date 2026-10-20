@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Woodland_Well_Barren",
+    "category": "Base",
+    "dimensions": [
+      3.45,
+      2.137,
+      2.823
+    ],
+    "patches": 0
+  },
+  {
+    "name": "Woodland_Well_Greenery",
+    "category": "Greenery",
+    "dimensions": [
+      2.491,
+      1.565,
+      2.81
+    ],
+    "patches": 5
+  }
+]

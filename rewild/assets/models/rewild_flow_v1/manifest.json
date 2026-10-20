@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Lake_Island_Dock",
+    "zone": "lake",
+    "category": "Permanent",
+    "description": "Raised island with empty terminal pad; dry bed at 0m, dock at 4m, target waterline 3.7m.",
+    "dimensions": [
+      5.4,
+      5.277,
+      6.73
+    ],
+    "objects": 38
+  },
+  {
+    "name": "Sluice_Gate_Closed",
+    "zone": "lake",
+    "category": "Recoverable",
+    "description": "2.7m channel; swap complete scene to open or close. Open leaf rises above passage.",
+    "dimensions": [
+      4.1,
+      4.45,
+      1.9
+    ],
+    "objects": 39
+  },
+  {
+    "name": "Sluice_Gate_Open",
+    "zone": "lake",
+    "category": "Recoverable",
+    "description": "2.7m channel; swap complete scene to open or close. Open leaf rises above passage.",
+    "dimensions": [
+      4.1,
+      4.45,
+      1.9
+    ],
+    "objects": 39
+  },
+  {
+    "name": "Spring_Intake",
+    "zone": "spring",
+    "category": "Permanent",
+    "description": "Water-source background fixture; place removable rubble in front of its grille.",
+    "dimensions": [
+      4.378,
+      2.451,
+      3.269
+    ],
+    "objects": 29
+  },
+  {
+    "name": "Rescue_Enclosure_Closed",
+    "zone": "spring / east / peak",
+    "category": "Clearable",
+    "description": "Separate empty enclosure; animal and rescue event must be supplied by gameplay.",
+    "dimensions": [
+      1.95,
+      1.74,
+      1.769
+    ],
+    "objects": 36
+  },
+  {
+    "name": "Rescue_Enclosure_Open",
+    "zone": "spring / east / peak",
+    "category": "Clearable",
+    "description": "Separate empty enclosure; animal and rescue event must be supplied by gameplay.",
+    "dimensions": [
+      1.95,
+      3.155,
+      1.769
+    ],
+    "objects": 36
+  },
+  {
+    "name": "Jetpack_Pickup",
+    "zone": "east",
+    "category": "Pickup",
+    "description": "0.8m tall equipment mesh. Attach to character with a local offset; no flight behavior included.",
+    "dimensions": [
+      0.886,
+      0.859,
+      0.465
+    ],
+    "objects": 19
+  },
+  {
+    "name": "Water_Tool_Pickup",
+    "zone": "lake",
+    "category": "Pickup",
+    "description": "Tool points local -Z; mesh only, ready for pickup display or character attachment.",
+    "dimensions": [
+      0.402,
+      0.667,
+      0.851
+    ],
+    "objects": 9
+  },
+  {
+    "name": "Peak_Landing_Platform",
+    "zone": "peak",
+    "category": "Permanent",
+    "description": "3.6m landing surface for staged jetpack ascent; space ledges to your actual flight range.",
+    "dimensions": [
+      4.11,
+      2.254,
+      2.896
+    ],
+    "objects": 18
+  }
+]

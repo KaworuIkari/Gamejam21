@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://ceexiotgoowka"]
+
+[ext_resource type="PackedScene" uid="uid://cp150bxb6cwfr" path="res://assets/models/fantasy_forest_sample/assets/Stair_Step.tscn" id="1_ou5wo"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Stair_Rails.tscn" id="2_rqyqp"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Stair_Stringers.tscn" id="3_l3c6f"]
+[ext_resource type="PackedScene" path="res://assets/models/fantasy_forest_sample/assets/Platform_Wedge30.tscn" id="4_4p0vt"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mrhpl"]
+size = Vector3(1.5735548, 0.26416016, 7.449727)
+
+[node name="Stair" type="Node3D" unique_id=1301673787]
+
+[node name="Stair_Step_046" parent="." unique_id=1781928861 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 10.7216015)
+
+[node name="Stair_Step_047" parent="." unique_id=760453677 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 10.4216)
+
+[node name="Stair_Step_048" parent="." unique_id=1438537528 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 10.121601)
+
+[node name="Stair_Step_049" parent="." unique_id=1260762555 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 9.821602)
+
+[node name="Stair_Step_050" parent="." unique_id=367150652 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9.521601)
+
+[node name="Stair_Step_051" parent="." unique_id=1084556013 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 9.2216015)
+
+[node name="Stair_Step_052" parent="." unique_id=212663973 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 8.9216)
+
+[node name="Stair_Step_053" parent="." unique_id=1027661696 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 8.621601)
+
+[node name="Stair_Step_054" parent="." unique_id=1106680089 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 8.321602)
+
+[node name="Stair_Step_055" parent="." unique_id=201290010 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8.021601)
+
+[node name="Stair_Step_056" parent="." unique_id=324335795 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 7.721601)
+
+[node name="Stair_Step_057" parent="." unique_id=1831415940 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 7.4216013)
+
+[node name="Stair_Step_058" parent="." unique_id=1482741849 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 7.121601)
+
+[node name="Stair_Step_059" parent="." unique_id=901181838 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8, 6.8216014)
+
+[node name="Stair_Step_060" parent="." unique_id=491971912 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 6.521601)
+
+[node name="Stair_Step_061" parent="." unique_id=1254777265 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2, 6.221601)
+
+[node name="Stair_Step_062" parent="." unique_id=816652435 instance=ExtResource("1_ou5wo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4, 5.9216013)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2105628308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2283988)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1318891635]
+transform = Transform3D(1, 0, 0, 0, 0.83480424, -0.5505469, 0, 0.5505469, 0.83480424, -0.0006445646, 1.4450073, 8.984016)
+shape = SubResource("BoxShape3D_mrhpl")
+
+[node name="Stair_Rails_065" parent="." unique_id=1154556276 instance=ExtResource("2_rqyqp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.14378667, -0.2283988)
+
+[node name="Stair_Stringers_064" parent="." unique_id=715043150 instance=ExtResource("3_l3c6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2283988)
+
+[node name="Platform_Wedge30_022" parent="." unique_id=1060693112 instance=ExtResource("4_4p0vt")]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 3.6, 0)

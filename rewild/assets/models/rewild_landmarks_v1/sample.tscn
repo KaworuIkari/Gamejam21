@@ -1,0 +1,141 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4bp1q"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_klt60"]
+size = Vector2(110, 110)
+
+[sub_resource type="Environment" id="Environment_qaowu"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=1692480425]
+
+[node name="Ruined_Concrete_Tower_Wasteland" type="Node3D" parent="." unique_id=177537727]
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Wasteland. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@3" type="Label3D" parent="." unique_id=1734292609]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Ruined Concrete Tower Wasteland"
+font_size = 48
+
+[node name="Ruined_Concrete_Tower_Revival" type="Node3D" parent="." unique_id=1104821521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 0)
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Revival. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@5" type="Label3D" parent="." unique_id=962150874]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 32, 0.15, 3.7)
+pixel_size = 0.007
+text = "Ruined Concrete Tower Revival"
+font_size = 48
+
+[node name="Ruined_Concrete_Tower_Golden" type="Node3D" parent="." unique_id=845147259]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 0)
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 22m tall skeletal four-level industrial building with broken decks, rebar and bent rooftop mast. Stage Golden. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@7" type="Label3D" parent="." unique_id=682365420]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 64, 0.15, 3.7)
+pixel_size = 0.007
+text = "Ruined Concrete Tower Golden"
+font_size = 48
+
+[node name="Twin_Ruptured_Silos_Wasteland" type="Node3D" parent="." unique_id=1384669762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 32)
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Wasteland. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@9" type="Label3D" parent="." unique_id=1479773444]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 35.7)
+pixel_size = 0.007
+text = "Twin Ruptured Silos Wasteland"
+font_size = 48
+
+[node name="Twin_Ruptured_Silos_Revival" type="Node3D" parent="." unique_id=674913329]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 32)
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Revival. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@11" type="Label3D" parent="." unique_id=327584114]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 32, 0.15, 35.7)
+pixel_size = 0.007
+text = "Twin Ruptured Silos Revival"
+font_size = 48
+
+[node name="Twin_Ruptured_Silos_Golden" type="Node3D" parent="." unique_id=145280303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 32)
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "Approx 19m tall twin hollow silos, broken crown rods, access ladders and a high connecting bridge. Stage Golden. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@13" type="Label3D" parent="." unique_id=1904266169]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 64, 0.15, 35.7)
+pixel_size = 0.007
+text = "Twin Ruptured Silos Golden"
+font_size = 48
+
+[node name="Broken_Industrial_Viaduct_Wasteland" type="Node3D" parent="." unique_id=277882645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 64)
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Wasteland. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@15" type="Label3D" parent="." unique_id=1049235889]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 67.7)
+pixel_size = 0.007
+text = "Broken Industrial Viaduct Wasteland"
+font_size = 48
+
+[node name="Broken_Industrial_Viaduct_Revival" type="Node3D" parent="." unique_id=479766344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, 64)
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Revival. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@17" type="Label3D" parent="." unique_id=1771059575]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 32, 0.15, 67.7)
+pixel_size = 0.007
+text = "Broken Industrial Viaduct Revival"
+font_size = 48
+
+[node name="Broken_Industrial_Viaduct_Golden" type="Node3D" parent="." unique_id=1316003032]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 64)
+metadata/zone = "permanent landmark"
+metadata/category = "Permanent"
+metadata/description = "24m long and approx 12m tall ruined elevated span; central gap, exposed rebar, fractured pipes. Decorative landmark, not a complete route. Stage Golden. Same structural footprint and collision in all variants."
+
+[node name="@Label3D@19" type="Label3D" parent="." unique_id=824519020]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 64, 0.15, 67.7)
+pixel_size = 0.007
+text = "Broken Industrial Viaduct Golden"
+font_size = 48
+
+[node name="@MeshInstance3D@20" type="MeshInstance3D" parent="." unique_id=878990049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -0.65, 32)
+material_override = SubResource("StandardMaterial3D_4bp1q")
+mesh = SubResource("PlaneMesh_klt60")
+
+[node name="@DirectionalLight3D@21" type="DirectionalLight3D" parent="." unique_id=500723247]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@22" type="WorldEnvironment" parent="." unique_id=10537211]
+environment = SubResource("Environment_qaowu")
+
+[node name="@Camera3D@23" type="Camera3D" parent="." unique_id=1842662762]
+transform = Transform3D(0.8347727, -0.32151648, 0.44696942, 0, 0.8117939, 0.583944, -0.5505947, -0.48746052, 0.6776634, 94, 88, 126)
+projection = 1
+current = true
+size = 120.0

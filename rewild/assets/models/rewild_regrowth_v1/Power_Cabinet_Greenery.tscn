@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_v1/growing_greenery.gd" id="1_gvlyo"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Power_Cabinet_Greenery.glb" id="2_d6qll"]
+
+[node name="Power_Cabinet_Greenery" type="Node3D" unique_id=1231923284]
+script = ExtResource("1_gvlyo")
+
+[node name="Visual" type="Node3D" parent="." unique_id=728908023 instance=ExtResource("2_d6qll")]

@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_v1/growing_greenery.gd" id="1_cym7y"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Timber_Bench_Greenery.glb" id="2_4d75t"]
+
+[node name="Timber_Bench_Greenery" type="Node3D" unique_id=233375927]
+script = ExtResource("1_cym7y")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1034784949 instance=ExtResource("2_4d75t")]

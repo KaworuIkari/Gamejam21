@@ -1,0 +1,29 @@
+{
+  "approach": "Edit saved existing Blender objects and shared mesh data in place",
+  "existing_object_count": 113,
+  "final_object_count": 113,
+  "layout_transforms_preserved": true,
+  "boat_glbs_byte_identical": true,
+  "protected_modules": [
+    "Boat_Cradle",
+    "Boat_Fittings",
+    "Boat_Gunwale",
+    "Boat_Lifering",
+    "Boat_Rubbing_Strake",
+    "Boat_Wheelhouse",
+    "Robot_2m_Reference",
+    "Workboat_Hull"
+  ],
+  "modules_modified": 24,
+  "collision_modules_updated": [
+    "Boat_Shed_Roof",
+    "Harbor_Office",
+    "Boat_Shed_Walls",
+    "Shed_Sliding_Doors"
+  ],
+  "deliberate_damage_operations": 6,
+  "texture_size": 512,
+  "new_texture_count": 5,
+  "current_instances": 78,
+  "missing_user_removed_instances": []
+}

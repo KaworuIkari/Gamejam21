@@ -1,7 +1,7 @@
 // meadow_flower.gdshader: a round flower head on a camera-facing quad.
 // Used as the mesh material of a second Terrain3DParticles node.
 shader_type spatial;
-render_mode cull_disabled, specular_disabled;
+render_mode cull_disabled, depth_draw_always, specular_disabled;
 
 #include "res://shaders/common/meadow_palette.gdshaderinc"
 
@@ -22,6 +22,8 @@ void vertex() {
 	// Billboard: keep the particle's position and size, but use the camera's rotation.
 	// (This is the same thing Godot's built-in "Billboard" material mode does.)
 	float size = keep ? length(MODEL_MATRIX[0].xyz) : 0.0; // size 0 = invisible
+	size *= smoothstep(0.6, 0.9, growth_at(pos)); // GROWTH: flowers come after the grass
+	size *= 1.0 - wet_at(pos);                    // ...and open once the watered ground has dried
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 			INV_VIEW_MATRIX[0] * size,
 			INV_VIEW_MATRIX[1] * size,
@@ -38,4 +40,5 @@ void fragment() {
 	ALBEDO = col;
 	EMISSION = col * 0.15;               // a little glow so they pop in shade
 	ROUGHNESS = 1.0;
+	ALPHA = 0.999;                       // transparent pass: stays out of the depth/normal buffers, so no outline
 }

@@ -45,3 +45,15 @@ static func settings_metrics(viewport_size: Vector2) -> Dictionary:
 		"section_size": 34,
 		"row_height": 64,
 	}
+
+
+static func settings_panel_metrics(viewport_size: Vector2) -> Dictionary:
+	var compact := viewport_size.x < 1500.0 or viewport_size.x < viewport_size.y
+	var metrics := settings_metrics(Vector2(1000, viewport_size.y) if compact else viewport_size)
+	metrics.compact = compact
+	metrics.label_width = clampf(viewport_size.x * 0.24, 280, 460)
+	metrics.margin_x = 16 if viewport_size.x < 600 else (24 if compact else clampf((viewport_size.x - 1400.0) * 0.5, 40, 220))
+	if viewport_size.x < 600:
+		metrics.tab_size = 16
+		metrics.title_size = 32
+	return metrics

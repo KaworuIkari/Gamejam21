@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://byjt462amg7xt"]
+
+[ext_resource type="PackedScene" uid="uid://b56ubvj4yny7s" path="res://assets/models/desert_robotics_laboratory/assets/Wall_Eroded_Low.glb" id="1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rcf4m"]
+size = Vector3(4.0104, 1.9725941, 0.4725001)
+
+[node name="Wall_Eroded_Low" type="Node3D" unique_id=1626390559]
+
+[node name="Visual" parent="." unique_id=514372521 instance=ExtResource("1")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=863128394]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=651568225]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0018906593, 0.9862971, 0.016250044)
+shape = SubResource("BoxShape3D_rcf4m")
+
+[editable path="Visual"]

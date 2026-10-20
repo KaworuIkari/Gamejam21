@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://dc6btv3rapucg"]
+
+[ext_resource type="Texture2D" uid="uid://8aynvloslqp" path="res://objects/player/LIRA/equipments/water_tank/WaterEquipment_BaseColor.png" id="1_dpgbu"]
+[ext_resource type="Texture2D" uid="uid://nt8gfm118mpy" path="res://objects/player/LIRA/equipments/water_tank/WaterEquipment_Roughness.png" id="2_l0dep"]
+
+[resource]
+transparency = 4
+cull_mode = 2
+albedo_texture = ExtResource("1_dpgbu")
+roughness_texture = ExtResource("2_l0dep")

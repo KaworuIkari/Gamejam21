@@ -1,0 +1,79 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ui/in_game/startup/startup_hint.gd" id="1_hint"]
+[ext_resource type="Theme" path="res://ui/theme/light/light_theme.tres" id="2_theme"]
+
+[node name="StartupHint" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_hint")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_theme")
+
+[node name="SafeMargin" type="MarginContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="Panel" type="PanelContainer" parent="Root/SafeMargin"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Column" type="VBoxContainer" parent="Root/SafeMargin/Panel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="Speaker" type="Label" parent="Root/SafeMargin/Panel/Column"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 18
+text = "STARTUP_HEADER"
+
+[node name="Title" type="Label" parent="Root/SafeMargin/Panel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 30
+autowrap_mode = 3
+
+[node name="Body" type="Label" parent="Root/SafeMargin/Panel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 26
+autowrap_mode = 3
+
+[node name="InputHint" type="Label" parent="Root/SafeMargin/Panel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
+
+[node name="Status" type="Label" parent="Root/SafeMargin/Panel/Column"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.18, 0.38, 0.27, 1)
+theme_override_font_sizes/font_size = 22
+autowrap_mode = 3

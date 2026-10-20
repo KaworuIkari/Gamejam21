@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://dg7htfejywn14"]
 
-[ext_resource type="Shader" path="res://shaders/water/water_surface.gdshader" id="1_surface"]
-[ext_resource type="Script" path="res://objects/water/stylized_water.gd" id="2_script"]
+[ext_resource type="Shader" uid="uid://bauears2xptbm" path="res://shaders/water/water_surface.gdshader" id="1_surface"]
+[ext_resource type="Script" uid="uid://dbw45q6plb6q5" path="res://objects/water/stylized_water.gd" id="2_script"]
+[ext_resource type="Script" uid="uid://brao2v7bh3ju6" path="res://objects/water/water_volume.gd" id="3_scr68"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_water"]
 size = Vector2(40, 40)
@@ -11,9 +12,49 @@ subdivide_depth = 80
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_water"]
 render_priority = 0
 shader = ExtResource("1_surface")
+shader_parameter/shallow_color = Color(0.45, 0.9, 0.93, 1)
+shader_parameter/deep_color = Color(0.06, 0.36, 0.72, 1)
+shader_parameter/sky_tint = Color(0.8, 0.9, 1, 1)
+shader_parameter/color_depth = 2.5
+shader_parameter/murkiness = 0.45
+shader_parameter/refraction = 0.025
+shader_parameter/ripple_scale = 0.5
+shader_parameter/ripple_strength = 0.12
+shader_parameter/wave_height = 0.06
+shader_parameter/wave_speed = 1.0
+shader_parameter/use_local_coords = false
+shader_parameter/local_noise_scale = 1.0
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/foam_width = 0.3
+shader_parameter/flow_direction = Vector3(0, 0, 1)
+shader_parameter/flow_speed = 0.0
+shader_parameter/flow_foam = 0.0
+shader_parameter/caustic_strength = 0.9
+shader_parameter/caustic_scale = 0.6
+shader_parameter/sparkle_strength = 1.2
+shader_parameter/sparkle_threshold = 0.6
+shader_parameter/underwater_fog_color = Color(0.1, 0.42, 0.58, 1)
+shader_parameter/underwater_fog_density = 0.08
+shader_parameter/use_basin_mask = false
+shader_parameter/use_tank = false
+shader_parameter/cap_radius = 0.155
+shader_parameter/cap_edge = 0.18
+shader_parameter/tank_wave_scale = 26.0
+shader_parameter/blob_density = 1.2
+shader_parameter/blob_clarity = 0.25
+shader_parameter/blob_foam = 0.6
+shader_parameter/use_height_field = false
+shader_parameter/half_extent = 11.0
+shader_parameter/cell_size = 0.35
+shader_parameter/puddle_lift = 0.01
+shader_parameter/puddle_edge = 0.006
 
-[node name="StylizedWater" type="MeshInstance3D"]
+[node name="StylizedWater" type="MeshInstance3D" unique_id=323264992]
 cast_shadow = 0
 mesh = SubResource("PlaneMesh_water")
 surface_material_override/0 = SubResource("ShaderMaterial_water")
 script = ExtResource("2_script")
+
+[node name="WaterVolume" type="Node" parent="." unique_id=1527532477 node_paths=PackedStringArray("sea_plane")]
+script = ExtResource("3_scr68")
+sea_plane = NodePath("..")

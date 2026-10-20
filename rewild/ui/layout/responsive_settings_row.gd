@@ -20,6 +20,7 @@ var row_height := 64.0
 func _init() -> void:
 	label = Label.new()
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	add_child(label)
 	controls = HBoxContainer.new()
 	controls.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -31,6 +32,19 @@ func apply_metrics(metrics: Dictionary) -> void:
 	separation = float(metrics.row_gap)
 	row_height = float(metrics.row_height)
 	label.add_theme_font_size_override(&"font_size", int(metrics.body_size))
+	controls.add_theme_constant_override("separation", 12 if compact else 24)
+	for control in controls.get_children():
+		control.add_theme_font_size_override("font_size", int(metrics.control_size))
+		if control is HSlider:
+			control.custom_minimum_size.x = 80
+			control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		elif control is Label:
+			control.custom_minimum_size.x = 70 if controls.get_child_count() == 2 and controls.get_child(0) is HSlider else 80
+			control.size_flags_horizontal = Control.SIZE_FILL if controls.get_child(0) is HSlider else Control.SIZE_EXPAND_FILL
+			control.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		elif control is BaseButton:
+			control.custom_minimum_size.x = 80
+			control.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	queue_sort()
 	update_minimum_size()
 

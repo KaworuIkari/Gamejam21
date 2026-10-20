@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://debmj7w0yms21"]
+
+[ext_resource type="ArrayMesh" uid="uid://dq3733fudr438" path="res://assets/models/leon/leon_Leon.res" id="1_y3mfd"]
+[ext_resource type="Material" uid="uid://bcnktkqer0357" path="res://assets/models/leon/froggo/froggo.tres" id="2_y3mfd"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y3mfd"]
+points = PackedVector3Array(5.2652044, 4.739018, 0.70154774, -1.8798044, 0.22022867, 2.7433233, -3.9204526, 4.738133, -3.2342815, 4.3793693, 0.1073544, 1.0724996, 0.2006276, 6.3101287, -2.334231, 0.4540613, 7.6545086, 2.7433233, -3.4829097, -0.07087803, 0.264162, -3.1734867, 4.4479113, 1.0118715, -3.045367, 1.8244121, -3.8181047, 2.7861001, -0.07176304, 2.1595001, 0.89069057, 0.07423258, -3.6716673, 2.0571666, 8.091611, 0.264162, -1.2186322, 8.782838, 1.0704113, 3.9525762, -0.07176304, -1.0467107, 5.0740337, 4.028718, 1.3498949, 0.067763455, 4.8463964, -3.0010011, -4.0666046, 4.884129, -2.358868, -1.8644255, 0.20568508, -3.2060962, -3.1792517, 3.1890776, 1.4917365, -0.6244014, 7.439352, -1.2845616, 1.3282332, 0.22022867, -3.5252297, -0.37312922, 7.78143, 2.44976, 0.5992999, 8.190285, 2.3042989, 4.5353575, -0.07176304, -0.17322373, 5.118139, 4.884129, 0.5557525, -3.4829097, 2.1155186, -3.380077, -1.3494748, 8.484411, 1.341925, -2.9293432, 0.0729725, 1.6501856, -0.992336, 8.5603285, 0.32459387, 1.5758499, 8.354485, 0.92747515, -2.8576906, 0.16181004, -1.9884983, -0.3604845, 4.31141, -3.2114096)
+
+[node name="Leon" type="Node3D" unique_id=1356049292 groups=["nav_blockers"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=778029803]
+mesh = ExtResource("1_y3mfd")
+surface_material_override/0 = ExtResource("2_y3mfd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1650400801]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1431010063]
+shape = SubResource("ConvexPolygonShape3D_y3mfd")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=701926499]
+height = 8.2
+vertices = PackedVector3Array(-2.0370128, 0, 2.6433382, 2.7917113, 0, 2.2802467, 4.392407, 0, 1.0160921, 4.589575, 0, -0.40294027, 0.9465492, 0, -3.9443693, -2.45114, 0, -2.9625983, -3.6534183, 0, 0.19193077)

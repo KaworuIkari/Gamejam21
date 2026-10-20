@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Woodland_Pump_House_Barren",
+    "category": "Base",
+    "dimensions": [
+      5.195,
+      3.528,
+      4.295
+    ],
+    "patches": 0
+  },
+  {
+    "name": "Woodland_Pump_House_Greenery",
+    "category": "Greenery",
+    "dimensions": [
+      5.116,
+      3.595,
+      3.401
+    ],
+    "patches": 8
+  },
+  {
+    "name": "Woodland_Wooden_Bridge_Barren",
+    "category": "Base",
+    "dimensions": [
+      6.601,
+      1.881,
+      2.4
+    ],
+    "patches": 0
+  },
+  {
+    "name": "Woodland_Wooden_Bridge_Greenery",
+    "category": "Greenery",
+    "dimensions": [
+      6.47,
+      2.112,
+      2.806
+    ],
+    "patches": 9
+  }
+]

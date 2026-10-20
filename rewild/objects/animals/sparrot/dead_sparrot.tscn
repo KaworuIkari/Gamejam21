@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cbx76qnsgmwio"]
+
+[ext_resource type="PackedScene" uid="uid://chb76mn2tr72c" path="res://objects/animals/sparrot/dead_sparrot.glb" id="1_45e6y"]
+
+[node name="DeadSparrot" type="Node3D" unique_id=605564312]
+
+[node name="dead_sparrot" parent="." unique_id=406476769 instance=ExtResource("1_45e6y")]

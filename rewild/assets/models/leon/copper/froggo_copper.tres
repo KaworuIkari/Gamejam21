@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bf5txyrj308up"]
+
+[ext_resource type="Texture2D" uid="uid://bhriilb6ah2mr" path="res://assets/models/leon/copper/leon_mat_BaseColor.png" id="1_wqrpw"]
+[ext_resource type="Texture2D" uid="uid://j14mrva8rhwa" path="res://assets/models/leon/copper/leon_mat_Metallic.png" id="2_v0p7e"]
+[ext_resource type="Texture2D" uid="uid://dfw7s35u76wbu" path="res://assets/models/leon/copper/leon_mat_Normal.png" id="3_1fh8s"]
+[ext_resource type="Texture2D" uid="uid://bkwxwbba4mjcb" path="res://assets/models/leon/copper/leon_mat_Roughness.png" id="4_y5p50"]
+
+[resource]
+albedo_texture = ExtResource("1_wqrpw")
+metallic = 1.0
+metallic_texture = ExtResource("2_v0p7e")
+roughness_texture = ExtResource("4_y5p50")
+normal_enabled = true
+normal_texture = ExtResource("3_1fh8s")

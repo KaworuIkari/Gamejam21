@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://de6c6xi5d4okk"]
+
+[ext_resource type="Script" uid="uid://duc3hutu3bkfv" path="res://systems/quests/quest.gd" id="1"]
+[ext_resource type="Script" uid="uid://bes5e7vhx38hw" path="res://systems/quests/quest_step.gd" id="2"]
+
+[sub_resource type="Resource" id="step_gears"]
+script = ExtResource("2")
+text = "QUEST_CORE_STEP_GEARS"
+event = &"factory_gear"
+count = 6
+
+[sub_resource type="Resource" id="step_activate"]
+script = ExtResource("2")
+text = "QUEST_CORE_STEP_ACTIVATE"
+event = &"core_activated"
+
+[sub_resource type="Resource" id="step_jetpack"]
+script = ExtResource("2")
+text = "QUEST_CORE_STEP_JETPACK"
+event = &"jetpack_delivered"
+
+[resource]
+script = ExtResource("1")
+title = "QUEST_CORE_TITLE"
+description = "QUEST_CORE_DESC"
+location = "QUEST_CORE_LOCATION"
+steps = Array[ExtResource("2")]([SubResource("step_gears"), SubResource("step_activate"), SubResource("step_jetpack")])
+rewards = Dictionary[StringName, int]({
+&"jetpack": 1
+})

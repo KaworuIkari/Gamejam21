@@ -1,0 +1,102 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Timber_Bench_Restorable.tscn" id="1_tob23"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Split_Rail_Fence_Restorable.tscn" id="2_2qygk"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Trail_Sign_Restorable.tscn" id="3_r5vxn"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Wayside_Shelter_Restorable.tscn" id="4_onjfk"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Dry_Stone_Wall_Restorable.tscn" id="5_5x1px"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Broken_Stone_Arch_Restorable.tscn" id="6_kvoci"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Abandoned_Well_Restorable.tscn" id="7_popgq"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Cracked_Planter_Restorable.tscn" id="8_r80ln"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Power_Cabinet_Restorable.tscn" id="9_xa8wa"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Rusted_Water_Tank_Restorable.tscn" id="10_wrdbw"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Broken_Pipe_Restorable.tscn" id="11_fjh4v"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Relay_Mast_Restorable.tscn" id="12_o6jw4"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Abandoned_Handcart_Restorable.tscn" id="13_x54o3"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Cable_Spool_Restorable.tscn" id="14_sxcbe"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Broken_Cargo_Crate_Restorable.tscn" id="15_umlsk"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Collapsed_Solar_Panel_Restorable.tscn" id="16_kd65p"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Hollow_Stump_Restorable.tscn" id="17_djxb6"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Fallen_Log_Restorable.tscn" id="18_ooy4j"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Water_Trough_Restorable.tscn" id="19_jnsiq"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Old_Stone_Steps_Restorable.tscn" id="20_jaudh"]
+
+[sub_resource type="Environment" id="Environment_cxq4c"]
+background_mode = 1
+background_color = Color(0.15, 0.18, 0.16, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.8, 0.85, 0.75, 1)
+ambient_light_energy = 0.7
+
+[node name="RegrowthGallery" type="Node3D" unique_id=409922454]
+
+[node name="Timber_Bench_Barren" type="Node3D" parent="." unique_id=778086705 instance=ExtResource("1_tob23")]
+
+[node name="Split_Rail_Fence_Barren" type="Node3D" parent="." unique_id=91683743 instance=ExtResource("2_2qygk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Trail_Sign_Barren" type="Node3D" parent="." unique_id=943073805 instance=ExtResource("3_r5vxn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="Wayside_Shelter_Barren" type="Node3D" parent="." unique_id=775186751 instance=ExtResource("4_onjfk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+
+[node name="Dry_Stone_Wall_Barren" type="Node3D" parent="." unique_id=1758226201 instance=ExtResource("5_5x1px")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+
+[node name="Broken_Stone_Arch_Barren" type="Node3D" parent="." unique_id=1499297492 instance=ExtResource("6_kvoci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="Abandoned_Well_Barren" type="Node3D" parent="." unique_id=697417518 instance=ExtResource("7_popgq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="Cracked_Planter_Barren" type="Node3D" parent="." unique_id=2048136496 instance=ExtResource("8_r80ln")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 5)
+
+[node name="Power_Cabinet_Barren" type="Node3D" parent="." unique_id=325026422 instance=ExtResource("9_xa8wa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 5)
+
+[node name="Rusted_Water_Tank_Barren" type="Node3D" parent="." unique_id=1810109473 instance=ExtResource("10_wrdbw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 5)
+
+[node name="Broken_Pipe_Barren" type="Node3D" parent="." unique_id=1942683551 instance=ExtResource("11_fjh4v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="Relay_Mast_Barren" type="Node3D" parent="." unique_id=1402966864 instance=ExtResource("12_o6jw4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10)
+
+[node name="Abandoned_Handcart_Barren" type="Node3D" parent="." unique_id=898676074 instance=ExtResource("13_x54o3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10)
+
+[node name="Cable_Spool_Barren" type="Node3D" parent="." unique_id=400984203 instance=ExtResource("14_sxcbe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 10)
+
+[node name="Broken_Cargo_Crate_Barren" type="Node3D" parent="." unique_id=1073741007 instance=ExtResource("15_umlsk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 10)
+
+[node name="Collapsed_Solar_Panel_Barren" type="Node3D" parent="." unique_id=677363139 instance=ExtResource("16_kd65p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+
+[node name="Hollow_Stump_Barren" type="Node3D" parent="." unique_id=1423465659 instance=ExtResource("17_djxb6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 15)
+
+[node name="Fallen_Log_Barren" type="Node3D" parent="." unique_id=1280843290 instance=ExtResource("18_ooy4j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 15)
+
+[node name="Water_Trough_Barren" type="Node3D" parent="." unique_id=1978791382 instance=ExtResource("19_jnsiq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 15)
+
+[node name="Old_Stone_Steps_Barren" type="Node3D" parent="." unique_id=1227692829 instance=ExtResource("20_jaudh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 15)
+
+[node name="@WorldEnvironment@22" type="WorldEnvironment" parent="." unique_id=1825006760]
+environment = SubResource("Environment_cxq4c")
+
+[node name="@DirectionalLight3D@23" type="DirectionalLight3D" parent="." unique_id=1936653767]
+transform = Transform3D(0.8660254, 0.40957603, -0.28678823, 0, 0.57357645, 0.81915206, 0.5, -0.7094065, 0.49673176, 0, 0, 0)
+
+[node name="@Camera3D@24" type="Camera3D" parent="." unique_id=191456135]
+transform = Transform3D(0.8660254, -0.3213938, 0.38302222, 0, 0.76604444, 0.6427876, -0.5, -0.55667037, 0.66341394, 25, 25, 34)
+projection = 1
+current = true
+size = 32.0

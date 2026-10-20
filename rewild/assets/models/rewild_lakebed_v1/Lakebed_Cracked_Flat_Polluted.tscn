@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_lakebed_v1/Lakebed_Cracked_Flat_Polluted.glb" id="1_ewm21"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gtl3b"]
+size = Vector3(5.3, 0.12, 5.3)
+
+[node name="Lakebed_Cracked_Flat_Polluted" type="Node3D" unique_id=1666653608]
+metadata/zone = "lake"
+metadata/category = "Permanent"
+metadata/description = "Approx 6m irregular ground patch. Polluted/cleared visual state; lake water is separate. Flat collision only, not a toxic-repulsion implementation."
+metadata/hazard_visual = true
+
+[node name="Visual" type="Node3D" parent="." unique_id=358339139 instance=ExtResource("1_ewm21")]
+
+[node name="FlatGroundCollision" type="StaticBody3D" parent="." unique_id=850418310]
+
+[node name="@CollisionShape3D@2" type="CollisionShape3D" parent="FlatGroundCollision" unique_id=927059152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+shape = SubResource("BoxShape3D_gtl3b")

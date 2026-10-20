@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_regrowth_v1/growing_greenery.gd" id="1_bvam2"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Abandoned_Well_Greenery.glb" id="2_om4nr"]
+
+[node name="Abandoned_Well_Greenery" type="Node3D" unique_id=594344208]
+script = ExtResource("1_bvam2")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1638120669 instance=ExtResource("2_om4nr")]

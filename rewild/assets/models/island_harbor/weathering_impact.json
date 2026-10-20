@@ -1,0 +1,21 @@
+{
+  "visual_triangles": {
+    "before": 178286,
+    "after": 181132,
+    "change": 2846,
+    "percent": 1.6
+  },
+  "collision_triangles": {
+    "before": 1524,
+    "after": 2006,
+    "change": 482,
+    "percent": 31.63
+  },
+  "new_texture_count": 5,
+  "texture_dimensions": [
+    512,
+    512
+  ],
+  "fps_benchmarked": false,
+  "scene_instances": 78
+}

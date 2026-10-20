@@ -32,10 +32,9 @@ func _on_node_added(n: Node) -> void:
 		return
 	var cls := n.get_class()
 	if cls in BUTTON_CLASSES:
-		_decorate.call_deferred(n, &"normal", BUTTON_BACKDROP_MAT, false)
+		_decorate.call_deferred(n.get_instance_id(), &"normal", BUTTON_BACKDROP_MAT, false)
 	elif cls == "Panel" or cls == "PanelContainer":
-		_decorate.call_deferred(n, &"panel", PANEL_BACKDROP_MAT, true)
-
+		_decorate.call_deferred(n.get_instance_id(), &"panel", PANEL_BACKDROP_MAT, true)
 
 func _glass_texture_name(sb: StyleBox) -> String:
 	if sb is StyleBoxTexture and sb.texture != null and sb.texture.resource_path.begins_with(GLASS_DIR):
@@ -52,8 +51,9 @@ func _has_backdrop_ancestor(c: Control) -> bool:
 	return false
 
 
-func _decorate(c: Control, style_name: StringName, mat: Material, follow_alpha: bool) -> void:
-	if not is_instance_valid(c) or c.has_node(BACKDROP_NAME) or c.use_parent_material:
+func _decorate(id: int, style_name: StringName, mat: Material, follow_alpha: bool) -> void:
+	var c := instance_from_id(id) as Control
+	if c == null or not c.is_inside_tree() or c.has_node(BACKDROP_NAME) or c.use_parent_material:
 		return
 	var tex_name := _glass_texture_name(c.get_theme_stylebox(style_name))
 	if tex_name == "":

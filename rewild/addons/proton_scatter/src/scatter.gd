@@ -610,12 +610,19 @@ func _create_collision(body: StaticBody3D, t: Transform3D) -> void:
 	if not keep_static_colliders or render_mode == 1:
 		return
 
+	# Deferred scatter results may arrive after this node leaves its viewport.
+	if not is_inside_tree() or is_queued_for_deletion() or not is_instance_valid(body):
+		return
+	var world := get_world_3d()
+	if world == null:
+		return
+
 	# Create a static body
 	if not _body_rid.is_valid():
 		_body_rid = PhysicsServer3D.body_create()
 		PhysicsServer3D.body_set_mode(_body_rid, PhysicsServer3D.BODY_MODE_STATIC)
 		PhysicsServer3D.body_set_state(_body_rid, PhysicsServer3D.BODY_STATE_TRANSFORM, global_transform)
-		PhysicsServer3D.body_set_space(_body_rid, get_world_3d().space)
+		PhysicsServer3D.body_set_space(_body_rid, world.space)
 
 	for c in body.get_children():
 		if c is CollisionShape3D:
@@ -739,6 +746,13 @@ func _on_transforms_ready(new_transforms: ProtonScatterTransformList) -> void:
 	if is_thread_running():
 		await _thread.wait_to_finish()
 		_thread = null
+
+	# Ignore completed work belonging to a scene that has already exited.
+	if not is_inside_tree() or is_queued_for_deletion():
+		_rebuild_queued = false
+		return
+	if get_world_3d() == null:
+		return
 
 	_clear_collision_data()
 

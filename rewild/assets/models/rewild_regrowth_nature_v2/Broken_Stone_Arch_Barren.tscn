@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://d4f6wyvgpfqfu"]
+
+[ext_resource type="PackedScene" uid="uid://co4laqbw0dik7" path="res://assets/models/rewild_regrowth_nature_v2/Broken_Stone_Arch_Barren.glb" id="1_v74w0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0yw1p"]
+size = Vector3(0.52, 2, 0.475)
+
+[node name="Broken_Stone_Arch_Barren" type="Node3D" unique_id=1499297492]
+
+[node name="Visual" parent="." unique_id=900361443 instance=ExtResource("1_v74w0")]
+
+[node name="Collision" type="StaticBody3D" parent="." unique_id=526980103]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collision" unique_id=568318198]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2657708, 1.0103478, -0.03450179)
+shape = SubResource("BoxShape3D_0yw1p")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Collision" unique_id=1997907438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.249477, 1.0103478, -0.03450179)
+shape = SubResource("BoxShape3D_0yw1p")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Collision" unique_id=1310127905]
+transform = Transform3D(0.6965133, 0.7175439, 0, -0.7175439, 0.6965133, 0, 0, 0, 1, -0.691145, 2.2452893, -0.03450179)
+shape = SubResource("BoxShape3D_0yw1p")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Collision" unique_id=1461856982]
+transform = Transform3D(0.72742563, -0.68618655, 0, 0.68618655, 0.72742563, 0, 0, 0, 1, 0.7706224, 2.2100053, -0.03450179)
+shape = SubResource("BoxShape3D_0yw1p")

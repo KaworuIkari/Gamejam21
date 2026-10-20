@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://d34ecpcbknq2e"]
+
+[ext_resource type="PackedScene" uid="uid://hvdafxspbowl" path="res://objects/animals/animal_base.tscn" id="1_auv3j"]
+[ext_resource type="Script" uid="uid://blpgqjwuatfg3" path="res://objects/animals/fox/animal_fox.gd" id="2_u6hmh"]
+[ext_resource type="PackedScene" uid="uid://x8jq4bqqp1ux" path="res://objects/animals/fox/fox_rigged.glb" id="2_y0crv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_82kr3"]
+radius = 0.7
+
+[node name="AnimalFox" unique_id=1591991278 node_paths=PackedStringArray("animation_player") instance=ExtResource("1_auv3j")]
+script = ExtResource("2_u6hmh")
+wander_radius = 60.0
+run_anim = "running_rig"
+bark_anim = "bark_rig"
+animation_player = NodePath("fox_rigged/AnimationPlayer")
+path_advance_distance = 2.0
+waypoint_radius = 2.0
+idle_anim = "idle_rig"
+walk_anim = "walking_rig"
+
+[node name="CollisionShape3D" parent="." index="0" unique_id=256457580]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("SphereShape3D_82kr3")
+
+[node name="DebugLabel3D" parent="." index="2" unique_id=1114967018]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.753709, 0)
+text = "Animal Fox"
+
+[node name="fox_rigged" parent="." index="3" unique_id=1016746439 instance=ExtResource("2_y0crv")]
+
+[node name="Skeleton3D" parent="fox_rigged/root" parent_id_path=PackedInt32Array(1016746439, 456398432) index="0" unique_id=884494477]
+bones/0/position = Vector3(-6.160443e-10, 1.0123951, -0.33078575)
+bones/0/rotation = Quaternion(0.68181336, -3.0167648e-06, -2.8183701e-06, 0.7315262)
+bones/1/position = Vector3(-3.242063e-10, 0.28557965, 6.972153e-08)
+bones/1/rotation = Quaternion(0.068795405, -0.0032898756, -0.00022743459, 0.99762535)
+bones/2/position = Vector3(-1.0886728e-09, 0.32428464, 8.974544e-08)
+bones/2/rotation = Quaternion(-0.05756025, 0.0032980188, 0.00018996013, 0.9983366)
+bones/3/position = Vector3(4.5216906e-13, 0.31448904, 4.1262656e-08)
+bones/3/rotation = Quaternion(-0.068562746, -9.3689715e-07, 6.151156e-08, 0.9976468)
+bones/4/position = Vector3(-3.3599882e-08, 0.15131097, -0.009250117)
+bones/4/rotation = Quaternion(-0.28436473, 0.0064542172, -0.0019143864, 0.95869255)
+bones/5/position = Vector3(-2.2679767e-09, 0.30374488, 2.2515754e-07)
+bones/5/rotation = Quaternion(0.4855184, -0.0059154527, 0.0032521833, 0.8742004)
+bones/6/rotation = Quaternion(0.70713043, -3.78229e-09, 0.7070831, -3.3103433e-08)
+bones/8/rotation = Quaternion(0.025575047, 0.73099166, -0.6306242, -0.25944242)
+bones/9/rotation = Quaternion(0.056648806, 0.9877395, 0.059139878, -0.1329064)
+bones/11/rotation = Quaternion(-0.056648735, 0.9877395, 0.059139572, 0.1329064)
+bones/13/rotation = Quaternion(0.698019, 0.32178196, 0.56710505, 0.29600307)
+bones/14/rotation = Quaternion(0.21552189, 0.6663169, -0.2892869, 0.65259886)
+bones/15/rotation = Quaternion(-2.5064202e-07, 7.053643e-08, 0.0701184, 0.99753875)
+bones/16/rotation = Quaternion(0.37981117, -0.017203642, -0.083548136, 0.9211228)
+bones/17/rotation = Quaternion(0.02735199, 0.9976195, 0.061091315, 0.016589373)
+bones/18/rotation = Quaternion(0.69804823, -0.32174447, -0.5670694, 0.29604298)
+bones/19/rotation = Quaternion(0.21545573, -0.6661457, 0.28934497, 0.6527697)
+bones/20/rotation = Quaternion(-2.9606461e-08, 2.456995e-07, -0.07010564, 0.9975396)
+bones/21/rotation = Quaternion(0.37981504, 0.016905412, 0.08368562, 0.92111427)
+bones/22/rotation = Quaternion(-0.027349338, 0.9976196, 0.06108933, -0.016589299)
+bones/23/rotation = Quaternion(0.62184274, -0.444472, -0.477011, 0.43383983)
+bones/24/rotation = Quaternion(0.33466884, 0.93197376, -0.023001257, 0.13745083)
+bones/25/rotation = Quaternion(-2.3336659e-07, -6.766178e-08, -0.48574796, 0.87409896)
+bones/26/rotation = Quaternion(0.18128535, 0.70275724, -0.24100147, 0.6443496)
+bones/27/rotation = Quaternion(-0.0031697794, 0.99175984, 0.12800393, -0.0041708434)
+bones/28/rotation = Quaternion(0.6218467, 0.4444756, 0.47700575, 0.43383622)
+bones/29/rotation = Quaternion(-0.3346688, 0.93197376, -0.023000555, -0.13745128)
+bones/30/rotation = Quaternion(4.798601e-07, -1.2083238e-07, 0.48574784, 0.874099)
+bones/31/rotation = Quaternion(0.18128793, -0.70275646, 0.24100125, 0.6443497)
+bones/32/rotation = Quaternion(0.0031673738, 0.9917601, 0.1280024, 0.004170458)
+bones/33/rotation = Quaternion(0.9017626, 1.7372374e-06, -3.8283165e-06, 0.43223155)
+bones/34/rotation = Quaternion(-0.09489991, 1.7125521e-11, 2.2628974e-08, 0.99548686)
+bones/35/rotation = Quaternion(0.04691576, -1.7641447e-13, -1.1183602e-08, 0.9988989)
+bones/36/rotation = Quaternion(0.18316063, -4.0834003e-13, -4.3666418e-08, 0.98308307)
+
+[node name="FmodEventEmitter3DBark" type="FmodEventEmitter3D" parent="fox_rigged/root/Skeleton3D/Retopo_fox_002" parent_id_path=PackedInt32Array(1016746439, 566234563) index="0" unique_id=680458011]
+event_name = "event:/Fox/Say"
+event_guid = "{9306dfc8-9df7-4184-ad7a-1239cf49d379}"
+
+[editable path="fox_rigged"]

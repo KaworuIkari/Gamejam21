@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8ndk"]
+albedo_color = Color(0.18, 0.23, 0.21, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7nvfw"]
+size = Vector2(110, 110)
+
+[sub_resource type="Environment" id="Environment_4k81y"]
+background_mode = 1
+background_color = Color(0.12, 0.16, 0.17, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.75, 0.8, 0.85, 1)
+ambient_light_energy = 0.65
+
+[node name="RewildFlowAssets" type="Node3D" unique_id=832690043]
+
+[node name="Ruined_Pump_House_Wasteland" type="Node3D" parent="." unique_id=1174084279]
+metadata/zone = "spring"
+metadata/category = "Permanent"
+metadata/description = "16x12m foundation; 14m ruined roof trusses. Permanent giant pump, gantry and broken walls. Use existing spring intake as a separate fixture."
+
+[node name="@Label3D@47" type="Label3D" parent="." unique_id=2129423483]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 0, 0.15, 3.7)
+pixel_size = 0.007
+text = "Ruined Pump House Wasteland"
+font_size = 48
+
+[node name="Ruined_Pump_House_Revival" type="Node3D" parent="." unique_id=1621771849]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 0, 0)
+metadata/zone = "spring"
+metadata/category = "Permanent"
+metadata/description = "16x12m foundation; 14m ruined roof trusses. Permanent giant pump, gantry and broken walls. Use existing spring intake as a separate fixture."
+
+[node name="@Label3D@49" type="Label3D" parent="." unique_id=960024331]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 24, 0.15, 3.7)
+pixel_size = 0.007
+text = "Ruined Pump House Revival"
+font_size = 48
+
+[node name="Ruined_Pump_House_Golden" type="Node3D" parent="." unique_id=84207151]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 0)
+metadata/zone = "spring"
+metadata/category = "Permanent"
+metadata/description = "16x12m foundation; 14m ruined roof trusses. Permanent giant pump, gantry and broken walls. Use existing spring intake as a separate fixture."
+
+[node name="@Label3D@51" type="Label3D" parent="." unique_id=2127464167]
+transform = Transform3D(1, 0, 0, 0, 0.49999997, 0.86602545, 0, -0.86602545, 0.49999997, 48, 0.15, 3.7)
+pixel_size = 0.007
+text = "Ruined Pump House Golden"
+font_size = 48
+
+[node name="@MeshInstance3D@52" type="MeshInstance3D" parent="." unique_id=1794964043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -0.65, 32)
+material_override = SubResource("StandardMaterial3D_m8ndk")
+mesh = SubResource("PlaneMesh_7nvfw")
+
+[node name="@DirectionalLight3D@53" type="DirectionalLight3D" parent="." unique_id=26467689]
+transform = Transform3D(0.81915206, 0.46984634, -0.32898995, 0, 0.57357645, 0.81915206, 0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
+light_energy = 1.4
+
+[node name="@WorldEnvironment@54" type="WorldEnvironment" parent="." unique_id=604621459]
+environment = SubResource("Environment_4k81y")
+
+[node name="@Camera3D@55" type="Camera3D" parent="." unique_id=1979457260]
+transform = Transform3D(0.80800754, -0.34281024, 0.47917116, 0, 0.8132956, 0.5818507, -0.5891722, -0.47013977, 0.65714896, 94, 88, 126)
+projection = 1
+current = true
+size = 120.0

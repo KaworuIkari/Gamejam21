@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="Quest" format=3 uid="uid://0xv4ka5p50r4"]
+
+[ext_resource type="Script" uid="uid://duc3hutu3bkfv" path="res://systems/quests/quest.gd" id="1_quest"]
+[ext_resource type="Script" uid="uid://bes5e7vhx38hw" path="res://systems/quests/quest_step.gd" id="2_step"]
+
+[sub_resource type="Resource" id="Delivery"]
+script = ExtResource("2_step")
+text = "QUEST_CABIN_DELIVERY"
+event = &"cabin_delivery_read"
+
+[sub_resource type="Resource" id="Crew"]
+script = ExtResource("2_step")
+text = "QUEST_CABIN_CREW"
+event = &"cabin_crew_read"
+
+[sub_resource type="Resource" id="Pump"]
+script = ExtResource("2_step")
+text = "QUEST_CABIN_PUMP"
+event = &"pump_started"
+
+[resource]
+script = ExtResource("1_quest")
+title = "QUEST_CABIN_TITLE"
+description = "QUEST_CABIN_DESC"
+location = "LOC_CRASH_SITE"
+steps = Array[ExtResource("2_step")]([SubResource("Pump")])
+optional_steps = Array[ExtResource("2_step")]([SubResource("Delivery"), SubResource("Crew")])

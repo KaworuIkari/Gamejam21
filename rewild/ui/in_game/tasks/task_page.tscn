@@ -1,0 +1,164 @@
+[gd_scene load_steps=4 format=3]
+[ext_resource type="Script" path="res://ui/in_game/tasks/task_page.gd" id="1"]
+[ext_resource type="Theme" path="res://ui/theme/terminal/terminal_theme.tres" id="2"]
+
+[ext_resource type="Script" path="res://ui/theme/terminal/digital_rain.gd" id="3_rain"]
+
+[node name="TaskPage" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2")
+script = ExtResource("1")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.025, 0.055, 0.04, 0.3)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="TerminalPanel" type="PanelContainer" parent="Center"]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/no_glass = true
+custom_minimum_size = Vector2(1100, 620)
+theme_type_variation = &"TerminalWindow"
+
+[node name="DigitalRain" type="Control" parent="Center/TerminalPanel"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_rain")
+
+[node name="Window" type="VBoxContainer" parent="Center/TerminalPanel"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TitleBar" type="PanelContainer" parent="Center/TerminalPanel/Window"]
+layout_mode = 2
+theme_type_variation = &"TerminalTitle"
+metadata/no_glass = true
+
+[node name="Header" type="HBoxContainer" parent="Center/TerminalPanel/Window/TitleBar"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Title" type="Label" parent="Center/TerminalPanel/Window/TitleBar/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "TASK_TERMINAL_TITLE"
+
+[node name="CloseButton" type="Button" parent="Center/TerminalPanel/Window/TitleBar/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TASK_TERMINAL_CLOSE"
+metadata/no_glass = true
+
+[node name="Scroll" type="ScrollContainer" parent="Center/TerminalPanel/Window"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Center/TerminalPanel/Window/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 24
+
+[node name="Content" type="VBoxContainer" parent="Center/TerminalPanel/Window/Scroll/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="Split" type="BoxContainer" parent="Center/TerminalPanel/Window/Scroll/Margin/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 56
+
+[node name="Battery" type="VBoxContainer" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "TERMINAL_BATTERY_TITLE"
+
+[node name="BatteryStatus" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="BatteryBar" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Line" type="HSeparator" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+layout_mode = 2
+
+[node name="RegionsHeading" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.69, 0.56, 1)
+text = "TERMINAL_REGIONS_TITLE"
+
+[node name="Regions" type="VBoxContainer" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ItemsLine" type="HSeparator" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+layout_mode = 2
+
+[node name="ItemsHeading" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.69, 0.56, 1)
+text = "TERMINAL_ITEMS_TITLE"
+
+[node name="Items" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Battery"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="Upgrades" type="VBoxContainer" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Upgrades"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "TERMINAL_UPGRADES_TITLE"
+
+[node name="Material" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Upgrades"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MaterialHint" type="Label" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Upgrades"]
+layout_mode = 2
+autowrap_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.69, 0.56, 1)
+text = "TERMINAL_UPGRADES_HINT"
+
+[node name="Line" type="HSeparator" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Upgrades"]
+layout_mode = 2
+
+[node name="UpgradeRows" type="VBoxContainer" parent="Center/TerminalPanel/Window/Scroll/Margin/Content/Split/Upgrades"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 20

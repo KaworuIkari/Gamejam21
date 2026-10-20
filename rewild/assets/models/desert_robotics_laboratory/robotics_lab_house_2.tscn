@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://chihor0vutbjg"]
+
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Test_Pad.tscn" id="1_3lhhm"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Test_Markings.tscn" id="2_enr2f"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Test_Gantry.tscn" id="3_i5fx7"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Test_Obstacle.tscn" id="4_hckxs"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Mechanical_Arm.tscn" id="5_kba1u"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Test_Bollard.tscn" id="6_nk6wi"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Control_Console.tscn" id="7_wevh0"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Fence_4m.tscn" id="8_k2hjq"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Dry_Grass.tscn" id="9_rlxfc"]
+[ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Floor_Crack.tscn" id="10_7hevb"]
+
+[node name="RoboticsLabHouse2" type="Node3D" unique_id=326608886]
+
+[node name="Test_Pad_004" parent="." unique_id=886897574 instance=ExtResource("1_3lhhm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.06, 10)
+
+[node name="Test_Markings_005" parent="." unique_id=26841375 instance=ExtResource("2_enr2f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.06, 10)
+
+[node name="Test_Gantry_172" parent="." unique_id=1245439992 instance=ExtResource("3_i5fx7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0.06, 7)
+
+[node name="Test_Obstacle_173" parent="." unique_id=995661739 instance=ExtResource("4_hckxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0.06, 12)
+
+[node name="Test_Obstacle_174" parent="." unique_id=1745443364 instance=ExtResource("4_hckxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.06, 14)
+
+[node name="Mechanical_Arm_175" parent="." unique_id=1781566078 instance=ExtResource("5_kba1u")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 15, 0.06, 6)
+
+[node name="Test_Bollard_176" parent="." unique_id=975283230 instance=ExtResource("6_nk6wi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.06, 15.5)
+
+[node name="Test_Bollard_177" parent="." unique_id=499943956 instance=ExtResource("6_nk6wi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.06, 4.5)
+
+[node name="Test_Bollard_178" parent="." unique_id=1542672332 instance=ExtResource("6_nk6wi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0.06, 15.5)
+
+[node name="Test_Bollard_179" parent="." unique_id=630322914 instance=ExtResource("6_nk6wi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0.06, 4.5)
+
+[node name="Control_Console_180" parent="." unique_id=1418040701 instance=ExtResource("7_wevh0")]
+transform = Transform3D(0.968912, 0, -0.247404, 0, 1, 0, 0.247404, 0, 0.968912, 20, 0.02, 7)
+
+[node name="Fence_4m_181" parent="." unique_id=2144623988 instance=ExtResource("8_k2hjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.40309042, 19)
+
+[node name="Fence_4m_182" parent="." unique_id=1745813544 instance=ExtResource("8_k2hjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -0.40309042, 19)
+
+[node name="Fence_4m_183" parent="." unique_id=976254840 instance=ExtResource("8_k2hjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -0.40309042, 19)
+
+[node name="Fence_4m_184" parent="." unique_id=817470750 instance=ExtResource("8_k2hjq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -0.40309042, 19)
+
+[node name="Fence_4m_185" parent="." unique_id=1470313379 instance=ExtResource("8_k2hjq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25, -0.40309042, 13)
+
+[node name="Fence_4m_186" parent="." unique_id=1812670893 instance=ExtResource("8_k2hjq")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25, -0.40309042, 9)
+
+[node name="Dry_Grass_240" parent="." unique_id=1669278812 instance=ExtResource("9_rlxfc")]
+transform = Transform3D(0.891715, 0, 0.452597, 0, 1, 0, -0.452597, 0, 0.891715, 23, -0.40309042, 20)
+
+[node name="Dry_Grass_241" parent="." unique_id=842349504 instance=ExtResource("9_rlxfc")]
+transform = Transform3D(-0.598778, 0, -0.800915, 0, 1, 0, 0.800915, 0, -0.598778, 28, -0.40309042, 10)
+
+[node name="Floor_Crack_249" parent="." unique_id=1500173361 instance=ExtResource("10_7hevb")]
+transform = Transform3D(0.62161, 0, 0.783327, 0, 1, 0, -0.783327, 0, 0.62161, 10, 0.06, 8)

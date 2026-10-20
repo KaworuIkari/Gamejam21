@@ -16,12 +16,13 @@ func player_sleep() -> void:
 	await GrowthMap.spread(4)
 	
 func _unhandled_input(event: InputEvent) -> void:
-	# used for debugging
-	if event is InputEventKey:
-		if event.physical_keycode == KEY_O:
-			lake_mission_complete()
-		elif event.physical_keycode == KEY_P:
-			player_sleep()
+	pass
+	# # used for debugging
+	# if event is InputEventKey:
+	# 	if event.physical_keycode == KEY_O:
+	# 		lake_mission_complete()
+	# 	elif event.physical_keycode == KEY_P:
+	# 		player_sleep()
 
 func debug_func():
 	for i in 3:

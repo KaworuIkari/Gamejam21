@@ -1,0 +1,61 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Container_Stack.tscn" id="1_g7ha0"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Vehicle_Carcass.tscn" id="2_7rxbs"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Final_Locked_Section.tscn" id="3_x8tpj"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Compacted_Scrap.tscn" id="4_sd25g"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Rebar_Seawall.tscn" id="5_mqg2a"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_coastal_wall_v1/Wall_Engine_Pile.tscn" id="6_djwrp"]
+
+[node name="Coastal_Wall_Intact" type="Node3D" unique_id=276325993]
+metadata/description = "Example composition. Modules are individually removable; wire task and save state separately."
+
+[node name="Wall_Container_Stack" type="Node3D" parent="." unique_id=121750237 instance=ExtResource("1_g7ha0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.125, 0, 0)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall_Vehicle_Carcass" type="Node3D" parent="." unique_id=1151549557 instance=ExtResource("2_7rxbs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.275, 0, 0)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall_Final_Locked_Section" type="Node3D" parent="." unique_id=1199180393 instance=ExtResource("3_x8tpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.425, 0, 0)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall_Compacted_Scrap" type="Node3D" parent="." unique_id=1455965868 instance=ExtResource("4_sd25g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.425, 0, 0)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall_Rebar_Seawall" type="Node3D" parent="." unique_id=1553212900 instance=ExtResource("5_mqg2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.275, 0, 0)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="Wall_Engine_Pile" type="Node3D" parent="." unique_id=1578878461 instance=ExtResource("6_djwrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.125, 0, 0)
+metadata/tags = ["beach_wall"]
+metadata/required_ability = "demolition_auth"
+metadata/zone = "basin"
+metadata/category = "Clearable"
+metadata/description = "Approx 5m modular section, 5–7m tall. Tag beach_wall and require demolition_auth in gameplay. Independent removable module."
+
+[node name="PassageCenter" type="Marker3D" parent="." unique_id=264398997]

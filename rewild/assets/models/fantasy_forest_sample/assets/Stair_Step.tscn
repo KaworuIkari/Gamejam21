@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cp150bxb6cwfr"]
+
+[ext_resource type="PackedScene" uid="uid://dpdit5e2ywkkl" path="res://assets/models/fantasy_forest_sample/assets/Stair_Step.glb" id="1"]
+
+[node name="Stair_Step" type="Node3D" unique_id=1781928861]
+
+[node name="Visual" parent="." unique_id=109155396 instance=ExtResource("1")]

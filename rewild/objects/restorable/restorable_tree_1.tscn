@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://systems/world_objects/restorable.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/DeadTree/DeadTree_1.gltf" id="2"]
+[ext_resource type="PackedScene" path="res://assets/models/stylized_nature/CommonTree/CommonTree_1.gltf" id="3"]
+
+[node name="RestorableTree1" type="Node3D"]
+script = ExtResource("1")
+stages = Array[PackedScene]([ExtResource("2"), ExtResource("3")])
+thresholds = PackedFloat32Array(0.15)
+quest_event = &"tree_restored"
+quest_threshold = 0.6

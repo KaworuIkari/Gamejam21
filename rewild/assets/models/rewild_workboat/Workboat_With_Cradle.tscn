@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Workboat_Hull.tscn" id="1_etjdr"]
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Boat_Gunwale.tscn" id="2_fcmui"]
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Boat_Rubbing_Strake.tscn" id="3_3vlmn"]
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Boat_Wheelhouse.tscn" id="4_gcvk4"]
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Boat_Fittings.tscn" id="5_7jyly"]
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Boat_Lifering.tscn" id="6_y08oh"]
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Boat_Cradle.tscn" id="7_o6jue"]
+
+[node name="WorkboatWithCradle" type="Node3D" unique_id=1343638037]
+
+[node name="Workboat" type="Node3D" parent="." unique_id=2130339609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Workboat_Hull" type="Node3D" parent="Workboat" unique_id=39255106 instance=ExtResource("1_etjdr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Boat_Gunwale" type="Node3D" parent="Workboat" unique_id=972815488 instance=ExtResource("2_fcmui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Boat_Rubbing_Strake" type="Node3D" parent="Workboat" unique_id=1453259651 instance=ExtResource("3_3vlmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Boat_Wheelhouse" type="Node3D" parent="Workboat" unique_id=468006863 instance=ExtResource("4_gcvk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Boat_Fittings" type="Node3D" parent="Workboat" unique_id=515251298 instance=ExtResource("5_7jyly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Boat_Lifering" type="Node3D" parent="Workboat" unique_id=1904124023 instance=ExtResource("6_y08oh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Cradle" type="Node3D" parent="." unique_id=1480666607 instance=ExtResource("7_o6jue")]

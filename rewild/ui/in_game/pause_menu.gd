@@ -4,6 +4,7 @@ extends CanvasLayer
 ## 职责：暂停键（Esc）的唯一处理者；打开时暂停场景树并显示鼠标，
 ## 关闭时按 restore_gameplay_mouse() 的规则恢复鼠标。
 const UIScaler = preload("res://ui/layout/ui_scaler.gd")
+const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 
 @onready var _resume_button: Button = %ResumeButton
@@ -19,10 +20,17 @@ const UILayoutRules = preload("res://ui/layout/ui_layout.gd")
 @onready var _pause_panel: PanelContainer = $Overlay/Center/Panel
 @onready var _save_panel: PanelContainer = $SaveScreen/Center/Panel
 
+const TERMINAL_UI = preload("res://ui/in_game/tasks/terminal_ui.tscn")
+var _terminal
+var _return_confirming := false
 var _feedback_version := 0
 
 
 func _ready() -> void:
+	add_to_group(&"pause_menu") # so world props (e.g. the lake station) can open the terminal
+	LightUI.apply(_save_screen)
+	LightUI.frost(_save_panel)
+	LightUI.soften_dim($SaveScreen/Dim)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_resume_button.pressed.connect(close)
 	_save_button.pressed.connect(_open_save_browser)
@@ -35,10 +43,14 @@ func _ready() -> void:
 	_update_responsive_layout()
 	_feedback.hide()
 	hide()
+	_terminal = TERMINAL_UI.instantiate()
+	_terminal.configure(self)
+	get_parent().add_child(_terminal)
+	tree_exiting.connect(_terminal.queue_free)
 
 
 func open() -> void:
-	if visible:
+	if visible or _terminal.is_open():
 		return
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	show()
@@ -66,7 +78,7 @@ func _restore_mouse_after_key_release() -> void:
 	while Input.is_action_pressed(&"pause"):
 		await get_tree().process_frame
 	await get_tree().process_frame
-	if not visible:
+	if not visible and not _terminal.is_open():
 		restore_gameplay_mouse()
 
 
@@ -76,6 +88,7 @@ func _restore_mouse_after_key_release() -> void:
 static func restore_gameplay_mouse() -> void:
 	var dialogic = Engine.get_main_loop().root.get_node_or_null(^"Dialogic")
 	var in_dialogue: bool = dialogic != null and dialogic.current_timeline != null
+	in_dialogue = in_dialogue or Engine.get_main_loop().get_first_node_in_group(&"opening_sequence") != null
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if in_dialogue else Input.MOUSE_MODE_CAPTURED
 
 
@@ -83,8 +96,21 @@ func is_open() -> bool:
 	return visible
 
 
+## Allows the pre-terminal hint to appear above the pause overview, not its submenus.
+func is_showing_overview() -> bool:
+	return visible and _overlay.visible
+
+
 func _unhandled_input(event: InputEvent) -> void:
+	if _return_confirming:
+		return
 	if not event.is_action_pressed(&"pause"):
+		return
+	if event.is_echo():
+		return
+	if _terminal.is_open():
+		get_viewport().set_input_as_handled()
+		close_terminal()
 		return
 	if _settings.visible:
 		return # 设置页自己处理 Esc（返回上一级）
@@ -131,6 +157,13 @@ func _on_settings_closed() -> void:
 
 
 func _return_to_main_menu() -> void:
+	if _return_confirming:
+		return
+	_return_confirming = true
+	var accepted: bool = await ConfirmPopup.ask(self, tr("PAUSE_RETURN_CONFIRM"), "PAUSE_MAIN_MENU", true)
+	_return_confirming = false
+	if not accepted or not is_inside_tree() or not visible:
+		return
 	hide()
 	SceneRouter.goto_main_menu() # SceneRouter 负责解除暂停和切场景
 
@@ -151,3 +184,19 @@ func _update_responsive_layout() -> void:
 	var horizontal_padding := 32.0 if compact else 96.0
 	_pause_panel.custom_minimum_size.x = minf(500.0, maxf(280.0, viewport_size.x - horizontal_padding))
 	_save_panel.custom_minimum_size.x = minf(1100.0, maxf(0.0, viewport_size.x - horizontal_padding))
+
+
+## Shared modal ownership: the terminal never changes pause or mouse state itself.
+func open_terminal() -> void:
+	if visible or get_tree().paused or _terminal.is_open():
+		return
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().paused = true
+	_terminal.open_page()
+
+func close_terminal() -> void:
+	if not _terminal.is_open():
+		return
+	_terminal.close_page()
+	get_tree().paused = false
+	_restore_mouse_after_key_release()

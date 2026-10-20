@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://assets/models/rewild_waterworks_nature_v1/growing_greenery.gd" id="1_wnj8i"]
+[ext_resource type="PackedScene" path="res://assets/models/rewild_waterworks_nature_v1/Woodland_Wooden_Bridge_Greenery.glb" id="2_2ccnd"]
+
+[node name="Woodland_Wooden_Bridge_Greenery" type="Node3D" unique_id=921643651]
+script = ExtResource("1_wnj8i")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1396404571 instance=ExtResource("2_2ccnd")]

@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Small_Bridge_Barren",
+    "zone": "lake and waterways",
+    "category": "Permanent bridge",
+    "description": "Six metre footbridge; deck at origin, identical structure and collision across stages.",
+    "dimensions": [
+      6.03,
+      2.245,
+      2.5
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Small_Bridge_Greened",
+    "zone": "lake and waterways",
+    "category": "Permanent bridge",
+    "description": "Six metre footbridge; deck at origin, identical structure and collision across stages.",
+    "dimensions": [
+      6.076,
+      2.245,
+      2.745
+    ],
+    "objects": 2
+  }
+]

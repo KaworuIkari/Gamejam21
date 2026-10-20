@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://csnleoy151fxh"]
+
+[ext_resource type="PackedScene" uid="uid://tx3ney2ntgvd" path="res://assets/models/stylized_nature/CommonTree/CommonTreeBase.tscn" id="1_160d6"]
+[ext_resource type="PackedScene" uid="uid://d1nl5hvoo4ctu" path="res://assets/models/stylized_nature/CommonTree/CommonTree_1.gltf" id="1_nati3"]
+
+[node name="CommonTree1" unique_id=2099265172 instance=ExtResource("1_160d6")]
+
+[node name="CommonTree_12" parent="." index="2" unique_id=367029416 instance=ExtResource("1_nati3")]

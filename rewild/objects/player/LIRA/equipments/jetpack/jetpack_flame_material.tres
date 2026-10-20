@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ddtv5s6u6e5xv"]
+
+[ext_resource type="Shader" uid="uid://nnh6o1e1eujc" path="res://objects/player/LIRA/equipments/jetpack/jetpack_flame_shader.gdshader" id="1_ymah1"]
+[ext_resource type="Texture2D" uid="uid://crnsryd0jkvtn" path="res://objects/player/LIRA/equipments/jetpack/jetpack_flame.png" id="2_b8hj3"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vawk1"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_x713q"]
+noise = SubResource("FastNoiseLite_vawk1")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ymah1")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("2_b8hj3")
+shader_parameter/flip_v = false
+shader_parameter/emission_boost = 3.0
+shader_parameter/opacity = 1.0
+shader_parameter/additive = 0.7
+shader_parameter/core_boost = 2.0
+shader_parameter/core_power = 3.0
+shader_parameter/dim_at_low_intensity = 0.4
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_x713q")
+shader_parameter/noise_scale = Vector2(0.5, 0.5)
+shader_parameter/noise_flow_speed = 1.0
+shader_parameter/noise_strength = 0.6
+shader_parameter/noise_contrast = 1.5
+shader_parameter/tip_breakup = 0.5
+shader_parameter/flicker_speed = 0.8
+shader_parameter/flicker_amount = 0.15
+shader_parameter/debug_force_visible = false

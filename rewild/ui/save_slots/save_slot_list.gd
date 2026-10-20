@@ -41,6 +41,7 @@ func _notification(what: int) -> void:
 
 
 var _refresh_queued := false
+var _new_confirming := false
 
 ## 合并同一帧内的多次刷新请求（也避免在节点树通知传播期间增删子节点）
 func queue_refresh() -> void:
@@ -104,9 +105,8 @@ func _build_card(info: Dictionary) -> Control:
 	# 缩略图
 	var thumb_frame := PanelContainer.new()
 	thumb_frame.custom_minimum_size = Vector2(SaveManager.THUMB_SIZE) * 0.75
-	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color("1b1f23")
-	thumb_frame.add_theme_stylebox_override("panel", sb)
+	thumb_frame.theme_type_variation = &"LightSaveThumbnail"
+	thumb_frame.set_meta(&"no_glass", true)
 	row.add_child(thumb_frame)
 	if info.thumbnail:
 		var tex := TextureRect.new()
@@ -224,7 +224,13 @@ func _make_button(key: String, parent: Control) -> Button:
 
 
 func _on_new_pressed(slot: int, exists: bool) -> void:
-	if exists and not await ConfirmPopup.ask(self, tr("SLOT_CONFIRM_OVERWRITE") % (slot + 1), "SLOT_OVERWRITE", true):
+	if _new_confirming or SceneRouter.is_busy():
+		return
+	_new_confirming = true
+	var message := tr("SLOT_CONFIRM_OVERWRITE" if exists else "SLOT_CONFIRM_NEW") % (slot + 1)
+	var accepted := await ConfirmPopup.ask(self, message, "SLOT_OVERWRITE" if exists else "MENU_NEW_GAME", exists)
+	_new_confirming = false
+	if not accepted:
 		return
 	SaveManager.start_new_game(slot)
 	game_starting.emit(slot)

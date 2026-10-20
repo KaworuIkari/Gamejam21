@@ -1,0 +1,4 @@
+[gd_scene load_steps=2 format=3]
+[ext_resource type="PackedScene" path="res://assets/models/island_harbor/assets/Harbor_Sign.glb" id="1"]
+[node name="Harbor_Sign" type="Node3D"]
+[node name="Visual" parent="." instance=ExtResource("1")]

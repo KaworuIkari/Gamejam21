@@ -1,6 +1,7 @@
 ## A first-person character controller with camera controls, movement, sprinting, and jumping.
 ## Requires a CameraPivot (Node3D) and Camera3D as children, and a character mesh as a child node.
 extends CharacterBody3D
+class_name RealController
 
 enum CameraMode {
 	FIRST_PERSON,
@@ -14,7 +15,7 @@ enum CameraMode {
 @onready var camera_pivot: Node3D = %CameraPivot
 @onready var camera_3d: Camera3D = %Camera3D
 @onready var spring_arm: SpringArm3D = camera_pivot.get_node("SpringArm3D")
-@onready var character: Node3D = $character
+@onready var character: Node3D
 
 ## Movement Settings
 ## -----------------------------------------------------------------------------
@@ -27,7 +28,7 @@ enum CameraMode {
 ## Speed multiplier when sprinting. Should be higher than normal speed.
 @export_range(0.1, 30.0, 0.1, "or_greater") var sprint_speed: float = 8.0 * scale.x
 ## Vertical velocity applied when jumping.
-@export_range(1.0, 20.0, 0.1) var jump_velocity: float = 4.5
+@export_range(1.0, 20.0, 0.1, "or_greater") var jump_velocity: float = 4.5
 @export var can_walk: bool = true
 
 ## Camera Settings
@@ -50,9 +51,9 @@ enum CameraMode {
 	set(value):
 		camera_mode = value
 		if is_node_ready():
-			_update_camera_mode()
+			_update_camera_distance(default_camera_distance)
 ## Camera distance (SpringArm length) for third-person mode.
-@export_range(0.0, 10.0, 0.1) var camera_distance: float = 3.5
+@export_range(0.0, 10.0, 0.1) var default_camera_distance: float = 3.5
 ## Speed at which the camera transitions between modes.
 @export_range(1.0, 20.0, 0.1) var camera_transition_speed: float = 8.0
 ## Allow switching between camera modes with V key.
@@ -68,6 +69,8 @@ var is_using: bool = false
 
 # Freeze the character. It may be useful when you want to pause the character.
 var frozen: bool = false
+## Hook used by project controllers without copying camera handling.
+var camera_invert_y := false
 
 var target_camera_distance: float = 3.5
 var is_transitioning_camera: bool = false
@@ -75,10 +78,13 @@ var is_transitioning_camera: bool = false
 func _ready() -> void:
 	## Captures the mouse cursor for first-person camera control.
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	target_camera_distance = 0.0 if camera_mode == CameraMode.FIRST_PERSON else camera_distance
+	target_camera_distance = 0.0 if camera_mode == CameraMode.FIRST_PERSON else default_camera_distance
 	spring_arm.spring_length = target_camera_distance
 	if character:
 		character.visible = camera_mode == CameraMode.THIRD_PERSON
+	if get_script().resource_path == "res://addons/real-controller/character.gd":
+		# base class fallback
+		character = $character
 
 func _physics_process(delta: float) -> void:
 	_handle_gravity_and_jump(delta)
@@ -90,12 +96,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 		
-	_handle_use_item(delta)
-
 	_handle_movement_input()
 	if camera_mode == CameraMode.THIRD_PERSON:
 		_handle_character_rotation(delta)
-	_apply_movement()
+	_apply_movement(delta)
 	move_and_slide()
 
 func handle_frozen_movement() -> void:
@@ -121,8 +125,9 @@ func _handle_gravity_and_jump(delta: float) -> void:
 func _handle_movement_input() -> void:
 	input_dir = Input.get_vector("left", "right", "forward", "backward")
 	input_strength = minf(input_dir.length(), 1.0)
-	
-	var camera_basis = Transform3D(Basis(Vector3.UP, camera_pivot.rotation.y), Vector3.ZERO).basis
+	var global_forward: Vector3 = -camera_pivot.global_transform.basis.z
+	var global_yaw: float = atan2(-global_forward.x, -global_forward.z)
+	var camera_basis = Transform3D(Basis(Vector3.UP, global_yaw), Vector3.ZERO).basis
 	direction = (camera_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 ## Rotates the character mesh to face the movement direction smoothly.
@@ -140,39 +145,29 @@ func _handle_controller_camera(delta: float) -> void:
 	var look_dir = Input.get_vector("look_left", "look_right", "look_up", "look_down")
 	if look_dir != Vector2.ZERO:
 		camera_pivot.rotation.y -= look_dir.x * controller_sensitivity * delta
-		camera_pivot.rotation.x += look_dir.y * controller_sensitivity * delta
+		camera_pivot.rotation.x += look_dir.y * controller_sensitivity * delta * (-1.0 if camera_invert_y else 1.0)
 		camera_pivot.rotation.x = clampf(camera_pivot.rotation.x, -tilt_limit, tilt_limit)
 
 ## Handles smooth camera transition between modes.
 func _handle_camera_transition(delta: float) -> void:
 	spring_arm.spring_length = lerp(spring_arm.spring_length, target_camera_distance, camera_transition_speed * delta)
 	
-	if character and camera_distance > 0.0:
-		var transition_progress = spring_arm.spring_length / camera_distance
+	if character and default_camera_distance > 0.0:
+		var transition_progress = spring_arm.spring_length / default_camera_distance
 		var visibility_threshold = 0.3
 		character.visible = transition_progress > visibility_threshold
 	elif character:
 		character.visible = camera_mode == CameraMode.THIRD_PERSON
 
-func _handle_use_item(delta: float) -> void:
-	is_using = Input.is_action_pressed("use")
-	if Input.is_action_just_pressed("use2"):
-		# TODO add water dispenser position logic
-		var dispenser_pos = position
-		GrowthMap.paint(dispenser_pos, 6.0, 1.0)         # one burst
-	if is_using:
-		var dispenser_pos = position
-		GrowthMap.paint(dispenser_pos, 3.0, 2.0 * delta)  # continuous, while watering
-
 ## Updates camera mode (sets target for smooth transition).
-func _update_camera_mode() -> void:
+func _update_camera_distance(new_camera_distance : float) -> void:
 	if camera_mode == CameraMode.FIRST_PERSON:
 		target_camera_distance = 0.0
 	else:
-		target_camera_distance = camera_distance
+		target_camera_distance = new_camera_distance
 
 ## Applies horizontal movement velocity based on input and sprint/walk state.
-func _apply_movement() -> void:
+func _apply_movement(_delta : float) -> void:
 	var is_moving = input_dir != Vector2.ZERO and is_on_floor()
 	if not is_on_floor():
 		return  # no air control: keep the velocity from take-off
@@ -196,7 +191,6 @@ func _apply_movement() -> void:
 
 ## Handles mouse input for camera rotation with tilt limits.
 func _unhandled_input(event: InputEvent) -> void:
-
 	if frozen:
 		return
 
@@ -215,4 +209,4 @@ func _unhandled_input(event: InputEvent) -> void:
 func _input(event: InputEvent) -> void:
 	if InputMap.has_action("camera_mode_switch") and event.is_action_pressed("camera_mode_switch") and allow_camera_mode_switch:
 		camera_mode = CameraMode.THIRD_PERSON if camera_mode == CameraMode.FIRST_PERSON else CameraMode.FIRST_PERSON
-		_update_camera_mode()
+		_update_camera_distance(default_camera_distance)

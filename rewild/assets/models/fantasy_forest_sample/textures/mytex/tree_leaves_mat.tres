@@ -1,0 +1,23 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://1qktdddnidjr"]
+
+[ext_resource type="Shader" uid="uid://baepmj0ij81en" path="res://systems/growth_map/tree_leaves.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://ckeanjp11bqtn" path="res://assets/models/fantasy_forest_sample/textures/GiantTree_18m_Leaves_TwistedTree_C.png" id="1_hsr1c"]
+
+[resource]
+resource_name = "Leaves_TwistedTree"
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/albedo_texture = ExtResource("1_hsr1c")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor = 0.2
+shader_parameter/map_origin = Vector2(-512, -512)
+shader_parameter/map_size = 1024.0
+shader_parameter/leaf_start = 0.3
+shader_parameter/leaf_full = 0.85
+shader_parameter/tree_jitter = 0.12
+shader_parameter/clump_size = 1.2
+shader_parameter/sparse_tint = Color(0.72, 0.68, 0.38, 1)
+shader_parameter/fresh_glow = 0.25
+shader_parameter/tree_height = 18.0
+shader_parameter/canopy_radius = 6.0
+metadata/_gltf_primary_texture_coord = 0

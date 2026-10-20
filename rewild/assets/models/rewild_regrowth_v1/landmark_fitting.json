@@ -1,0 +1,75 @@
+{
+  "Harbour": {
+    "patches": 43,
+    "support_surfaces": {
+      "Boat_Shed_Roof": 30,
+      "Harbor_Office": 9,
+      "_MeshInstance3D_283": 1,
+      "Bollard": 1,
+      "_MeshInstance3D_254": 1
+    }
+  },
+  "Plane": {
+    "patches": 43,
+    "support_surfaces": {
+      "Fuselage_Continuous": 29,
+      "Tail_Fin_Detached": 2,
+      "_MeshInstance3D_303": 1,
+      "_MeshInstance3D_300": 1,
+      "Wing_Attached_Broken": 3,
+      "Wing_Detached": 4,
+      "_MeshInstance3D_316": 1,
+      "_MeshInstance3D_317": 1
+    }
+  },
+  "Factory": {
+    "patches": 104,
+    "support_surfaces": {
+      "_MeshInstance3D_372": 1,
+      "_MeshInstance3D_487": 1,
+      "_MeshInstance3D_470": 1,
+      "_MeshInstance3D_419": 4,
+      "_MeshInstance3D_469": 2,
+      "Wall_Window_4m": 2,
+      "_MeshInstance3D_420": 2,
+      "_MeshInstance3D_452": 3,
+      "_MeshInstance3D_484": 3,
+      "_MeshInstance3D_473": 3,
+      "_MeshInstance3D_416": 3,
+      "_MeshInstance3D_384": 2,
+      "_MeshInstance3D_471": 3,
+      "_MeshInstance3D_373": 2,
+      "_MeshInstance3D_413": 3,
+      "_MeshInstance3D_472": 3,
+      "_MeshInstance3D_497": 3,
+      "_MeshInstance3D_495": 3,
+      "_MeshInstance3D_477": 1,
+      "Roof_Fractured_4m": 1,
+      "_MeshInstance3D_387": 1,
+      "_MeshInstance3D_485": 2,
+      "_MeshInstance3D_415": 3,
+      "_MeshInstance3D_450": 1,
+      "_MeshInstance3D_456": 1,
+      "_MeshInstance3D_374": 2,
+      "_MeshInstance3D_418": 2,
+      "Wall_Eroded_Low": 1,
+      "_MeshInstance3D_376": 3,
+      "_MeshInstance3D_380": 2,
+      "_MeshInstance3D_421": 2,
+      "_MeshInstance3D_414": 3,
+      "_MeshInstance3D_449": 1,
+      "_MeshInstance3D_455": 2,
+      "_MeshInstance3D_412": 1,
+      "_MeshInstance3D_486": 2,
+      "_MeshInstance3D_417": 2,
+      "_MeshInstance3D_385": 1,
+      "_MeshInstance3D_454": 1,
+      "_MeshInstance3D_377": 1,
+      "Roof_Panel_4m": 1,
+      "_MeshInstance3D_474": 1,
+      "_MeshInstance3D_461": 1,
+      "_MeshInstance3D_479": 1,
+      "_MeshInstance3D_398": 1
+    }
+  }
+}

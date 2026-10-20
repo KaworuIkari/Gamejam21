@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Wooden_Bridge_Barren",
+    "zone": "waterways",
+    "category": "Permanent wooden bridge",
+    "description": "Single wooden base with flat deck; origin at deck centre.",
+    "dimensions": [
+      6.0,
+      2.21,
+      2.5
+    ],
+    "objects": 1
+  },
+  {
+    "name": "Wooden_Bridge_Greenery",
+    "zone": "waterways",
+    "category": "Optional greenery overlay",
+    "description": "Vegetation only. Same origin as barren base, no structure or collision.",
+    "dimensions": [
+      6.055,
+      1.738,
+      2.748
+    ],
+    "objects": 1
+  }
+]

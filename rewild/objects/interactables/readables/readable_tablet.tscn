@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="PackedScene" path="res://objects/interactables/readables/readable_note.tscn" id="1_base"]
+[ext_resource type="Script" path="res://objects/interactables/readables/readable_tablet.gd" id="2_script"]
+
+[sub_resource type="StandardMaterial3D" id="FrameMaterial"]
+albedo_color = Color(0.14, 0.19, 0.19, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="FrameMesh"]
+material = SubResource("FrameMaterial")
+size = Vector3(0.42, 0.028, 0.3)
+
+[sub_resource type="StandardMaterial3D" id="ScreenMaterial"]
+albedo_color = Color(0.16, 0.32, 0.29, 1)
+emission_enabled = true
+emission = Color(0.13, 0.3, 0.25, 1)
+emission_energy_multiplier = 0.6
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="ScreenMesh"]
+material = SubResource("ScreenMaterial")
+size = Vector3(0.35, 0.002, 0.23)
+
+[sub_resource type="StandardMaterial3D" id="TextMaterial"]
+shading_mode = 0
+albedo_color = Color(0.65, 0.87, 0.76, 1)
+
+[sub_resource type="BoxMesh" id="TextLineMesh"]
+material = SubResource("TextMaterial")
+size = Vector3(0.24, 0.001, 0.007)
+
+[sub_resource type="BoxMesh" id="StatusMesh"]
+material = SubResource("TextMaterial")
+size = Vector3(0.016, 0.002, 0.006)
+
+[node name="ReadableTablet" instance=ExtResource("1_base")]
+script = ExtResource("2_script")
+
+[node name="Paper" parent="." index="1"]
+visible = false
+
+[node name="Frame" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.014, 0)
+mesh = SubResource("FrameMesh")
+
+[node name="Screen" type="MeshInstance3D" parent="Frame"]
+position = Vector3(0, 0.015, 0)
+mesh = SubResource("ScreenMesh")
+
+[node name="Line1" type="MeshInstance3D" parent="Frame/Screen"]
+position = Vector3(-0.025, 0.002, -0.065)
+mesh = SubResource("TextLineMesh")
+
+[node name="Line2" type="MeshInstance3D" parent="Frame/Screen"]
+position = Vector3(-0.025, 0.002, -0.035)
+mesh = SubResource("TextLineMesh")
+
+[node name="Line3" type="MeshInstance3D" parent="Frame/Screen"]
+position = Vector3(-0.055, 0.002, -0.005)
+scale = Vector3(0.75, 1, 1)
+mesh = SubResource("TextLineMesh")
+
+[node name="Status" type="MeshInstance3D" parent="Frame"]
+position = Vector3(0.16, 0.015, 0.132)
+mesh = SubResource("StatusMesh")
