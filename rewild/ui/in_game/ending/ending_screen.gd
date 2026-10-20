@@ -7,7 +7,7 @@ var _returning := false
 func show_result() -> void:
 	%Title.text = "ENDING_DEVICE_TITLE" if route == &"disruptor" else "ENDING_BOAT_TITLE"
 	%Result.show()
-	%SaveButton.grab_focus.call_deferred()
+	%MenuButton.grab_focus.call_deferred()
 
 
 func _input(event: InputEvent) -> void:
@@ -15,10 +15,6 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed(&"pause") or event.is_action_pressed(&"task_terminal"):
 		get_viewport().set_input_as_handled()
-
-
-func _save_progress() -> void:
-	%Feedback.text = "ENDING_SAVE_OK" if SaveManager.save_current() else "ENDING_SAVE_UNAVAILABLE"
 
 
 func _return_to_menu() -> void:

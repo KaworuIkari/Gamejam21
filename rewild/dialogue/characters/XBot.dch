@@ -1,5 +1,5 @@
 {
-"@path": "res://addons/dialogic/Resources/character.gd",
+"@path": "res://dialogue/characters/named_speaker.gd",
 "@subpath": NodePath(""),
 &"_translation_id": "",
 &"color": Color(0.921875, 0.48734543, 0.48734543, 1),
@@ -12,7 +12,7 @@
 },
 &"default_portrait": "default",
 &"description": "Mixamo Mannequin",
-&"display_name": "X Bot",
+&"display_name": "SPEAKER_XBOT",
 &"mirror": false,
 &"nicknames": [""],
 &"offset": Vector2(0, 0),

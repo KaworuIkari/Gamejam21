@@ -1,9 +1,7 @@
 keys,zh_CN,en
 MENU_TITLE,自然涌现,Emergence
 MENU_SUBTITLE,一个机器人，一颗星球，慢慢变绿,"One robot, one planet, slowly turning green"
-MENU_CONTINUE,继续游戏,Continue
-MENU_NEW_GAME,新建游戏,New Game
-MENU_LOAD,读取存档,Load Game
+MENU_NEW_GAME,开始游戏,Start Game
 MENU_SETTINGS,设置,Settings
 MENU_QUIT,退出游戏,Quit
 MENU_VERSION,灰盒原型 v0.1,Greybox prototype v0.1
@@ -27,7 +25,6 @@ HEADER_DISPLAY,显示,Display
 HEADER_SENSITIVITY,灵敏度与手感,Sensitivity & Feel
 HEADER_KEYBINDS,按键绑定,Key Bindings
 HEADER_LANGUAGE,语言,Language
-HEADER_SAVE_SLOTS,存档位,Save Slots
 OPT_MASTER_VOLUME,主音量,Master Volume
 OPT_MUSIC_VOLUME,音乐,Music
 OPT_SFX_VOLUME,音效,Sound Effects
@@ -77,25 +74,6 @@ ACTION_JUMP,跳跃,Jump
 ACTION_SPRINT,冲刺,Sprint
 ACTION_INTERACT,交互 / 拾取,Interact / Pick Up
 ACTION_PAUSE,暂停菜单,Pause Menu
-SLOT_TITLE,存档 %d,Slot %d
-SLOT_EMPTY,空存档位,Empty Slot
-SLOT_SAVED_AT,保存于 %s,Saved %s
-SLOT_PLAY_TIME,游玩时长 %s,Play time %s
-SLOT_LOAD,读取,Load
-SLOT_DELETE,删除,Delete
-SLOT_START_HERE,在此开始,Start Here
-SLOT_OVERWRITE,覆盖并开始,Overwrite
-SLOT_SAVE_HERE,保存到此,Save Here
-SLOT_OVERWRITE_SAVE,覆盖存档,Overwrite Save
-SLOT_NO_THUMB,无预览,No preview
-SLOT_SCREEN_NEW,选择存档位开始新游戏,Choose a slot for your new game
-SLOT_SCREEN_LOAD,读取存档,Load Game
-SLOT_SCREEN_BROWSE,存档管理,Save Files
-SLOT_SCREEN_SAVE,选择存档位保存进度,Choose a slot to save progress
-SLOT_SCREEN_IN_GAME_MANAGE,游戏内存档管理,In-Game Save Files
-SLOT_CONFIRM_NEW,确定在存档 %d 中新建游戏吗？,Start a new game in slot %d?
-SLOT_CONFIRM_DELETE,确定删除存档 %d 吗？此操作无法撤销。,Delete slot %d? This cannot be undone.
-SLOT_CONFIRM_OVERWRITE,存档 %d 已有进度，确定覆盖吗？,Slot %d has progress. Overwrite it?
 LOC_CRASH_SITE,坠落地点,Crash Site
 GAME_PLACEHOLDER,游戏世界（占位）\n存档 %d · %s · 游玩时长 %s\n按 %s 保存并返回主菜单,Game world (placeholder)\nSlot %d · %s · Play time %s\nPress %s to save and return to menu
 HEADER_DIALOGUE,对话,Dialogue
@@ -121,11 +99,8 @@ ACTION_USE2,浇水（单次喷洒）,Water (burst)
 ACTION_DIALOGUE_AUTO,对话：自动播放,Dialogue: Auto
 ACTION_DIALOGUE_SKIP,对话：跳过,Dialogue: Skip
 ACTION_DIALOGUE_HISTORY,对话：历史记录,Dialogue: History
-SAVE_FEEDBACK_OK,进度已保存,Progress saved
-SAVE_FEEDBACK_FAIL,保存失败,Save failed
 PAUSE_TITLE,暂停,Paused
 PAUSE_RESUME,继续游戏,Resume
-PAUSE_SAVE,保存进度,Save Progress
 PAUSE_MAIN_MENU,返回主菜单,Return to Main Menu
 TASK_TERMINAL_TITLE,行动终端,Action terminal
 TASK_TERMINAL_CLOSE,关闭,Close
@@ -133,7 +108,7 @@ ACTION_TASK_TERMINAL,行动终端,Action terminal
 INTERACT_PUMP_PROMPT,按 %s 启动水泵,Press %s to start the pump
 HEADER_CAMERA,镜头,Camera
 HEADER_INTERFACE,界面,Interface
-PAUSE_RETURN_CONFIRM,确定返回主菜单吗？未保存的进度可能丢失。,Return to the main menu? Unsaved progress may be lost.
+PAUSE_RETURN_CONFIRM,返回主菜单将结束本次游戏，确定返回？,Return to the main menu and end this playthrough?
 BIND_RESERVED_LOOK,右摇杆用于镜头，请选其他按键,Right stick is reserved for camera; choose another input
 UI_RETRY_SAVE,保存失败：重试,Save failed: retry
 SETTINGS_SAVE_FAILED,设置未能保存，更改仍可预览或放弃。,Settings could not be saved. Changes can still be previewed or discarded.
@@ -231,8 +206,6 @@ FINALE_BRIEFING_DEVICE,湖心终端：携带混沌能量模块，[n]前往雷达
 FINALE_BRIEFING_BOAT,另一条路线：取得雷达坐标与混沌能量模块，在港口核心基座载入坐标、插入混沌能量模块，再乘船出发。,"Alternative route: Bring the radar coordinates and Chaos Energy Module to the harbor core, load the coordinates, insert the Chaos Energy Module, and depart."
 ENDING_DEVICE_TITLE,结局一 · 岛上的记录,Ending 1 · Island records
 ENDING_BOAT_TITLE,结局二 · 驶向远方,Ending 2 · Beyond the island
-ENDING_SAVE_OK,结局进度已保存。,Ending progress saved.
-ENDING_SAVE_UNAVAILABLE,当前没有可保存的存档位。,No active save slot is available.
 INTERACT_ROBOT_KEY,按 %s 与小机器人交谈获取密钥,Press %s to ask the companion bot for the radar key
 ROBOT_KEY_RECOVERY,小机器人：这是雷达站的密钥，已传输给你。（剧情占位）,Companion bot: The radar key has been transferred to you. (Story placeholder.)
 QUEST_TOAST_JETPACK_ENABLED,获得喷气背包，可以飞行了。,Jetpack obtained. You can fly now.
@@ -335,3 +308,10 @@ ENDING_BOAT_OBJECTIVE,应急目标：\n恢复通信，报告位置，等待回�
 ENDING_BOAT_DEPARTURE,小船驶离岸边。\n\nLIRA 带走了岛上的记录，\n也带走了那些尚未得到回答的问题。,The boat leaves the shore.\n\nLIRA carries the island's records\nand the questions still unanswered.
 ENDING_BOAT_RECORD,环境工程试验机 LIRA。\n\n当前位置：返航途中。\n\n新的记录，从海的另一边开始。,Environmental Engineering Test Unit LIRA.\n\nCurrent location: On the return voyage.\n\nNew records await beyond the sea.
 OPT_SHOW_FPS,显示帧率,Show FPS
+MENU_START_CONFIRM,开始新的游戏？本次将从开场重新开始。,Start a new game from the opening sequence?
+SPEAKER_DELIVERY_RECORD,设备投送记录,Equipment delivery record
+SPEAKER_CREW_LOG,机组离线记录,Crew offline log
+SPEAKER_LAKE_TERMINAL,湖心管理终端,Lake management terminal
+SPEAKER_COMPANION_BOT,维修机器人,Maintenance robot
+SPEAKER_RADAR_SYSTEM,雷达站系统,Radar system
+SPEAKER_XBOT,X 型机器人,X-series robot

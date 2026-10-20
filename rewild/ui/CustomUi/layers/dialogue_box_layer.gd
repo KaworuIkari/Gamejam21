@@ -8,7 +8,7 @@ extends DialogicLayoutLayer
 ## 设置里“小 / 中 / 大”对应的字号（运行时吸附到 UIType.GRID_PX 的整数倍）
 @export var font_sizes: PackedInt32Array = [24, 36, 48]
 ## 名牌字号
-@export var name_font_size: int = 36
+@export var name_font_size: int = 24
 ## 角落按钮字号
 @export var button_font_size: int = 24
 ## Full-screen system readout; only enabled by opening_ui.tscn.
