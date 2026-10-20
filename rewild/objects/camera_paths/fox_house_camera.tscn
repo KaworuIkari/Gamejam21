@@ -1,6 +1,6 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cv2ovi870kas2"]
 
-[ext_resource type="Script" path="res://objects/camera_paths/proximity_camera_shot.gd" id="1_shot"]
+[ext_resource type="Script" uid="uid://bn4sjmoo6xj2" path="res://objects/camera_paths/area_trigger_camera_path.gd" id="1_rp36w"]
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="2_pcam"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_tween"]
 [ext_resource type="Script" uid="uid://rmux0r4m7vby" path="res://systems/cameras/camera_view.gd" id="4_view"]
@@ -19,29 +19,28 @@ duration = 1.5
 [sub_resource type="SphereShape3D" id="SphereShape3D_trigger"]
 radius = 4.0
 
-[node name="FoxHouseCamera" type="Path3D"]
+[node name="FoxHouseCamera" type="Path3D" unique_id=875705514]
 curve = SubResource("Curve3D_fox")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="." node_paths=PackedStringArray("trigger")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.442, 6, 1.84)
+[node name="PathFollow3D" type="PathFollow3D" parent="." unique_id=1325082292]
+transform = Transform3D(0.10323157, -0.45141584, 0.8863222, 0, 0.89108294, 0.45384055, -0.99465734, -0.046850674, 0.09198789, 14.442, 6, 1.84)
 rotation_mode = 4
-script = ExtResource("1_shot")
-trigger = NodePath("../Trigger")
-travel_time = 6.0
-step_event_name = &"fox_house"
+script = ExtResource("1_rp36w")
 
-[node name="PhantomCamera3D" type="Node3D" parent="PathFollow3D"]
+[node name="PhantomCamera3D" type="Node3D" parent="PathFollow3D" unique_id=907645702]
 script = ExtResource("2_pcam")
 tween_resource = SubResource("Resource_tween")
 metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
-[node name="CameraView" type="Node" parent="PathFollow3D/PhantomCamera3D"]
+[node name="CameraView" type="Node" parent="PathFollow3D/PhantomCamera3D" unique_id=1969530022]
 script = ExtResource("4_view")
 view_name = &"fox_house"
 metadata/_custom_type_script = "uid://rmux0r4m7vby"
 
-[node name="Trigger" type="Area3D" parent="."]
+[node name="Trigger" type="Area3D" parent="." unique_id=508011892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.757, -0.5, 1.182)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger" unique_id=1551547536]
 shape = SubResource("SphereShape3D_trigger")
+
+[connection signal="body_entered" from="Trigger" to="PathFollow3D" method="_on_trigger_body_entered"]
