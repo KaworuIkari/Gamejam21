@@ -17,7 +17,7 @@ script = ExtResource("4_x6jnr")
 duration = 1.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0yw1p"]
-size = Vector3(30, 30, 30)
+size = Vector3(60, 60, 60)
 
 [node name="ForestFoxCamera" type="Path3D" unique_id=62686932]
 curve = SubResource("Curve3D_n2xf4")
