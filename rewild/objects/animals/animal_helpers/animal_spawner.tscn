@@ -1,6 +1,41 @@
 [gd_scene format=3 uid="uid://dluvtf1jvdc4k"]
 
 [ext_resource type="Script" uid="uid://b5plrqlg10uaw" path="res://objects/animals/animal_helpers/animal_spawner.gd" id="1_82x7t"]
+[ext_resource type="Script" uid="uid://hvtxarsxkbi8" path="res://objects/animals/animal_helpers/animal_circle.gd" id="2_5m5pl"]
 
 [node name="AnimalSpawner" type="Node3D" unique_id=503472948]
 script = ExtResource("1_82x7t")
+
+[node name="AnimalCircle5" type="Node3D" parent="." unique_id=1891373905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.448616, -28.53687, 120.21575)
+script = ExtResource("2_5m5pl")
+kind = 4
+radius = 1.0
+metadata/_custom_type_script = "uid://hvtxarsxkbi8"
+
+[node name="AnimalCircle" type="Node3D" parent="." unique_id=1210621541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.61839, 10.807518, 84.356995)
+script = ExtResource("2_5m5pl")
+kind = 3
+radius = 50.0
+metadata/_custom_type_script = "uid://hvtxarsxkbi8"
+
+[node name="AnimalCircle2" type="Node3D" parent="." unique_id=508783379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.921326, -2.175808, 326.67252)
+script = ExtResource("2_5m5pl")
+radius = 40.0
+metadata/_custom_type_script = "uid://hvtxarsxkbi8"
+
+[node name="AnimalCircle3" type="Node3D" parent="." unique_id=1643982213]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.180684, 14.850719, 9.3881)
+script = ExtResource("2_5m5pl")
+kind = 1
+radius = 100.0
+metadata/_custom_type_script = "uid://hvtxarsxkbi8"
+
+[node name="AnimalCircle6" type="Node3D" parent="." unique_id=1911588067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.448616, -28.53687, 120.21575)
+script = ExtResource("2_5m5pl")
+kind = 5
+radius = 10.0
+metadata/_custom_type_script = "uid://hvtxarsxkbi8"

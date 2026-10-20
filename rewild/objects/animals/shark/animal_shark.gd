@@ -5,6 +5,7 @@ class_name AnimalShark
 ## fed → DESCEND to a flat seabed spot → SLEEP lying on it → PATROL
 ## Never dies: with no food it stays hungry and keeps patrolling.
 ## Body size comes from the CollisionShape3D capsule (lying along the swim direction).
+## The water (surface, bounds, seabed) comes from the closest StylizedWater, found at spawn.
 
 enum State { PATROL, HUNT, DESCEND, SLEEP }
 
@@ -13,9 +14,6 @@ enum State { PATROL, HUNT, DESCEND, SLEEP }
 @onready var debug_label: Label3D = get_node_or_null("DebugLabel3D")
 
 @export_group("Sea")
-@export var sea_plane: StylizedWater  # water surface; its mesh bounds the sea horizontally
-@export var terrain: Node3D  # the Terrain3D node
-@export_flags_3d_physics var seabed_mask := 1  # raycast fallback if the Terrain3D API is missing
 @export var clearance := 0.75  # extra space kept between the body and surface / terrain
 @export var climb_speed := 4.0  # vertical escape speed over rising seabed
 
@@ -61,12 +59,16 @@ enum State { PATROL, HUNT, DESCEND, SLEEP }
 @export var head_playback_param := "parameters/Head/playback"
 
 @export_group("Debug")
-@export var debug := true
+@export var debug := false
 @export var debug_print := false
 @export var debug_history := 8  # past patrol points to draw
 
+const SAFETY_EVERY := 1.0
+
 var is_moving := true  # Body state machine: swim ⇄ sleep
 var state := State.PATROL
+
+var water: StylizedWater
 
 var _radius := 1.0  # from the capsule
 var _half_len := 2.0  # from the capsule
@@ -91,10 +93,8 @@ var _bite_hit_done := false
 var _bite_cd := 0.0
 var _head_pb: AnimationNodeStateMachinePlayback
 
-var _surface_y := 0.0
-var _sea_min := Vector2.ZERO
-var _sea_max := Vector2.ZERO
-var _terrain_data: Object
+var _surface_y := 0.0  # refreshed every physics frame: follows a rising lake
+var _safety_t := 0.0
 
 var _debug_mesh: MeshInstance3D
 var _waypoint_history := PackedVector3Array()
@@ -108,17 +108,23 @@ func _ready() -> void:
 		set_physics_process(false)
 		return
 	_read_body_size()
+	_setup_sea()
+	if water == null:
+		set_physics_process(false)
+		return
 	_head_pb = animation_tree.get(head_playback_param)
 	_detect_bite_length()
-	_setup_sea()
 	mouth_area.body_entered.connect(_on_mouth_entered)
 	mouth_area.body_exited.connect(_on_mouth_exited)
 	mouth_area.area_entered.connect(_on_mouth_entered)
 	mouth_area.area_exited.connect(_on_mouth_exited)
 	_setup_debug()
+	_safety_t = randf() * SAFETY_EVERY
+	global_position = water.clamp_to_water(global_position, _room)  # the one intended snap at spawn
 	_enter_patrol()
 
 func _physics_process(delta: float) -> void:
+	_surface_y = water.get_plane_surface_y()
 	var rate := sleep_hunger_rate if state == State.SLEEP else hunger_rate
 	hunger = minf(hunger + rate * delta, 1.0)
 	match state:
@@ -130,6 +136,10 @@ func _physics_process(delta: float) -> void:
 	_update_debug()
 	if state == State.SLEEP:
 		return  # lying still: no physics motion, no re-facing
+	_safety_t -= delta
+	if _safety_t <= 0.0:
+		_safety_t = SAFETY_EVERY
+		_safety_check()
 	_depth_guards()
 	move_and_slide()
 	_face_motion(delta)
@@ -141,6 +151,17 @@ func _read_body_size() -> void:
 			_half_len = c.shape.height * 0.5
 			break
 	_room = _radius + clearance
+
+## Should never fire. If the shark ever ends up outside valid water, snap it back
+## and start a new patrol instead of letting it fall out of the world.
+func _safety_check() -> void:
+	var p := global_position
+	var band := _safe_band(Vector2(p.x, p.z))
+	if band.x > band.y or p.y < band.x - 2.0 or p.y > _surface_y + 1.0 or not water.holds_point(p):
+		push_warning("%s left the water at %v, snapped back" % [name, p])
+		global_position = water.clamp_to_water(p, _room)
+		velocity = Vector3.ZERO
+		_enter_patrol()
 
 # === States ===
 
@@ -317,7 +338,8 @@ func _update_bite(delta: float) -> void:
 		_bite_t = 0.0
 		_bite_hit_done = false
 		if _head_pb:
-			print("playing eating animation")
+			if debug_print:
+				print("[Shark] bite")
 			_head_pb.start(head_state_name, true)  # restart the one-shot from frame 0
 
 func _eat(e: Edible) -> void:
@@ -344,48 +366,29 @@ func _detect_bite_length() -> void:
 	bite_length = 0.8
 	push_warning("AnimalShark: '%s' not found, using bite_length 0.8s" % bite_anim_name)
 
-# === Sea queries ===
+# === Sea queries (all delegated to the water) ===
 
 func _setup_sea() -> void:
-	if sea_plane == null:
-		push_error("AnimalShark: assign sea_plane")
+	water = StylizedWater.find_closest(global_position)
+	if water == null:
+		push_error("AnimalShark: no StylizedWater found")
 		return
-	var aabb := sea_plane.global_transform * sea_plane.get_aabb()
-	_surface_y = sea_plane.global_position.y
-	_sea_min = Vector2(aabb.position.x, aabb.position.z)
-	_sea_max = _sea_min + Vector2(aabb.size.x, aabb.size.z)
-	if terrain:
-		_terrain_data = terrain.get("data")  # Terrain3D 1.x
-		if _terrain_data == null:
-			_terrain_data = terrain.get("storage")  # Terrain3D 0.9.x
+	_surface_y = water.get_plane_surface_y()
 
 ## Seabed height at xz; NAN in holes / outside terrain regions.
 func _seabed_height(xz: Vector2) -> float:
-	if _terrain_data and _terrain_data.has_method("get_height"):
-		return _terrain_data.get_height(Vector3(xz.x, 0.0, xz.y))
-	var from := Vector3(xz.x, _surface_y, xz.y)
-	var q := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * 1000.0, seabed_mask, [get_rid()])
-	var r := get_world_3d().direct_space_state.intersect_ray(q)
-	return NAN if r.is_empty() else r.position.y
+	return water.get_seabed_height(xz)
 
 func _seabed_normal(xz: Vector2, e: float) -> Vector3:
-	var hx := _seabed_height(xz + Vector2(e, 0)) - _seabed_height(xz - Vector2(e, 0))
-	var hz := _seabed_height(xz + Vector2(0, e)) - _seabed_height(xz - Vector2(0, e))
-	if is_nan(hx) or is_nan(hz):
-		return Vector3.UP
-	return Vector3(-hx / (2.0 * e), 1.0, -hz / (2.0 * e)).normalized()
+	return water.get_seabed_normal(xz, e)
 
 ## Heights at xz where the shark's centre fits: _room below the surface and _room above the
 ## highest seabed within half a body length (the body may point any way). x > y means no room.
 func _safe_band(xz: Vector2) -> Vector2:
-	var floor_y := -INF
-	for i in 9:
-		var off := Vector2.ZERO if i == 0 else Vector2.from_angle(TAU * i / 8.0) * _half_len
-		var h := _seabed_height(xz + off)
-		if is_nan(h):
-			return Vector2(1.0, -1.0)  # hole / outside terrain: not usable water
-		floor_y = maxf(floor_y, h)
-	return Vector2(floor_y + _room, _surface_y - _room)
+	return water.get_safe_band(xz, _room, _half_len)
+
+func _clamp_xz(xz: Vector2) -> Vector2:
+	return water.clamp_xz(xz, _half_len + clearance)  # keep the whole body inside the water
 
 ## True if the water is deep enough for the body all along the straight line a → b.
 func _path_clear(a: Vector3, b: Vector3) -> bool:
@@ -423,10 +426,6 @@ func _clamp_to_water(p: Vector3) -> Vector3:
 	var band := _safe_band(xz)
 	var y := minf(p.y, _surface_y - _room) if band.x > band.y else clampf(p.y, band.x, band.y)
 	return Vector3(xz.x, y, xz.y)
-
-func _clamp_xz(xz: Vector2) -> Vector2:
-	var m := _half_len + clearance  # keep the whole body inside the sea plane
-	return Vector2(clampf(xz.x, _sea_min.x + m, _sea_max.x - m), clampf(xz.y, _sea_min.y + m, _sea_max.y - m))
 
 func _random_xz(center: Vector3, radius: float) -> Vector2:
 	var a := randf() * TAU

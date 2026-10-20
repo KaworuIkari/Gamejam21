@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://crqjiok8rjjjk" path="res://objects/animals/shark/shark_anim1.glb" id="2_4uv4k"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0yw1p"]
-radius = 1.5
-height = 6.0
+radius = 1.0
+height = 4.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0yw1p"]
 
@@ -63,35 +63,34 @@ node_connections = [&"output", 0, &"HeadBlend", &"HeadBlend", 0, &"Body", &"Head
 
 [node name="AnimalShark" type="CharacterBody3D" unique_id=896278617]
 script = ExtResource("1_o3dam")
-debug_print = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1328344668]
 transform = Transform3D(1.9106855e-15, 4.371139e-08, -1, 1, -4.371139e-08, 0, -4.371139e-08, -1, -4.371139e-08, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_0yw1p")
 
 [node name="shark_anim1" parent="." unique_id=1397621798 instance=ExtResource("2_4uv4k")]
-transform = Transform3D(-1.3113416e-07, 0, -3, 0, 3, 0, 3, 0, -1.3113416e-07, 0, 0, 0)
+transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0, 0)
 
-[node name="Skeleton3D" parent="shark_anim1/Shark" parent_id_path=PackedInt32Array(1397621798, 1898171099) index="0" unique_id=486239068]
-bones/0/rotation = Quaternion(-0.0038153639, -0.0030168323, -0.7159709, 0.6981133)
+[node name="Skeleton3D" parent="shark_anim1/Shark" parent_id_path=PackedInt32Array(1397621798, 1285595336) index="0" unique_id=202660444]
+bones/0/rotation = Quaternion(-0.00062051247, -0.00049066456, -0.70855725, 0.70565295)
 bones/2/position = Vector3(-4.656615e-10, 0.20416911, 0.034030892)
 bones/2/rotation = Quaternion(4.681588e-09, 2.42413e-09, 0.053813826, 0.9985511)
 bones/5/position = Vector3(-2.4243128e-09, -0.056346737, 0.10606403)
 bones/5/rotation = Quaternion(1.4551915e-11, 1.09139364e-10, -7.450581e-09, 1)
 bones/7/position = Vector3(-2.491026e-09, 0.08138667, -0.044216305)
 bones/7/rotation = Quaternion(-2.7141864e-23, 1.0914292e-10, -7.451035e-09, 1)
-bones/9/rotation = Quaternion(-8.4791605e-09, 1.3659016e-09, 0.14171079, 0.98990816)
+bones/9/rotation = Quaternion(-8.602366e-09, 1.8275554e-09, -0.016589353, 0.9998625)
 bones/10/position = Vector3(1.2607109e-08, -0.6532428, -0.0144329)
-bones/10/rotation = Quaternion(3.7094976e-09, -7.285718e-10, 0.109958574, 0.9939362)
-bones/11/rotation = Quaternion(7.761429e-09, -1.0229635e-09, 0.03930777, 0.9992272)
+bones/10/rotation = Quaternion(3.7247703e-09, -7.882798e-10, -0.0010556227, 0.9999995)
+bones/11/rotation = Quaternion(7.80107e-09, -1.5900233e-09, -0.015660306, 0.9998774)
 bones/12/position = Vector3(-4.6753662e-08, -0.36523008, 0.010282602)
 bones/12/rotation = Quaternion(2.9103834e-11, 5.0931703e-11, -7.451035e-09, 1)
-bones/14/rotation = Quaternion(0.044004608, -0.04264299, -0.0066421325, 0.99809873)
-bones/16/rotation = Quaternion(-0.39745852, 0.043348767, 0.019321943, 0.9163921)
-bones/17/rotation = Quaternion(0.013952913, -0.026437024, 0.00030418023, 0.99955314)
-bones/19/rotation = Quaternion(-3.109381e-09, 0.029452087, 6.05584e-10, 0.9995662)
-bones/21/rotation = Quaternion(0.11496077, -0.3103715, -0.19110951, 0.9240837)
-bones/24/rotation = Quaternion(0.117123276, 0.2034465, 0.19393209, 0.9525135)
+bones/14/rotation = Quaternion(0.044045158, 0.0047726724, -0.00075532065, 0.9990179)
+bones/16/rotation = Quaternion(-0.39758405, -0.03847986, 0.011880809, 0.9166815)
+bones/17/rotation = Quaternion(0.013909548, 0.015801786, 0.08154167, 0.9964476)
+bones/19/rotation = Quaternion(-3.1139344e-09, -0.0038566506, -4.8719584e-10, 0.9999926)
+bones/21/rotation = Quaternion(0.11919553, -0.2916682, -0.1900708, 0.9298361)
+bones/24/rotation = Quaternion(0.094772644, 0.29356724, 0.21508522, 0.9265932)
 
 [node name="MouthArea3D" type="Area3D" parent="shark_anim1" unique_id=1254110704]
 

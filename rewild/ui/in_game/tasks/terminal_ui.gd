@@ -67,7 +67,9 @@ func _refresh_restoration() -> void:
 		_battery_notified = true
 		_notify(tr("BATTERY_READY_NOTICE"))
 	var growth := get_node_or_null(^"/root/GrowthMap")
-	var regions: Array[Dictionary] = growth.progress_regions() if growth else []
+	var regions: Array[Dictionary] = []
+	if growth:
+		regions = growth.progress_regions()
 	_restore.visible = not regions.is_empty()
 	if regions.is_empty():
 		return

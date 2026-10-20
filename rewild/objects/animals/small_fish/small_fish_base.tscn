@@ -11,10 +11,6 @@ script = ExtResource("1_snpxf")
 [node name="Edible" type="Node" parent="." unique_id=1734452845]
 script = ExtResource("1_ukkmt")
 
-[node name="DebugLabel3D" type="Label3D" parent="." unique_id=879025316]
-billboard = 1
-text = "Small Fish"
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1260081375]
 shape = SubResource("SphereShape3D_30rud")
 
