@@ -99,15 +99,25 @@ func activate_radar() -> void:
 	# A scene transition cancels reading. Startup is saved, so a later visit can
 	# read the coordinates again instead of leaving the mission stuck.
 	if is_inside_tree() and get_tree().current_scene == scene and not SceneRouter.is_busy():
-		if not finished_reading():
-			Quests.report(INFO_EVENT)
+		record_coordinates()
 	busy = false
 	_refresh()
 
 func make_readout_timeline() -> DialogicTimeline:
 	var timeline := DialogicTimeline.new()
 	var event := DialogicTextEvent.new()
-	event.text = tr("RADAR_READOUT_COORDINATES") % FinaleStory.COORDINATES
+	event.text = coordinates_text()
 	timeline.events.append(event)
 	timeline.events_processed = true
 	return timeline
+
+## Both placed and story radar consoles record the same saved progression.
+static func record_coordinates() -> void:
+	if Quests.event_count(START_EVENT) == 0:
+		Quests.report(START_EVENT)
+	if Quests.event_count(INFO_EVENT) == 0:
+		Quests.report(INFO_EVENT)
+
+
+static func coordinates_text() -> String:
+	return TranslationServer.translate("RADAR_READOUT_COORDINATES") % FinaleStory.COORDINATES

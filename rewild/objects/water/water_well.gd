@@ -26,9 +26,12 @@ var is_source := false
 var _prompt: CanvasLayer
 var _player: Node3D
 var _hold := 0.0
+## A well accepts only a new press while it owns the interaction.
+var _hold_started := false
 
 
 func _ready() -> void:
+	add_to_group(&"water_wells")
 	if saved_event == &"":
 		var scene := get_tree().current_scene
 		var path := String(scene.get_path_to(get_parent()) if scene else get_parent().name)
@@ -64,11 +67,13 @@ func player_near() -> bool:
 func _process(delta: float) -> void:
 	if is_source or _prompt == null:
 		return
-	var dialogic := get_node_or_null(^"/root/Dialogic")
-	var can := _player != null and not get_tree().paused \
-			and (dialogic == null or dialogic.current_timeline == null)
+	var can := can_activate()
+	var pressed := Input.is_action_pressed(&"interact")
+	if not can or not pressed:
+		_hold_started = false
 	_prompt.set_available(can)
-	if can and Input.is_action_pressed(&"interact"):
+	_prompt.set_interactable(_hold_started or not pressed)
+	if can and pressed and _hold_started:
 		_hold += delta
 		if _hold >= hold_time:
 			_prompt.play_activation()
@@ -76,6 +81,33 @@ func _process(delta: float) -> void:
 	else:
 		_hold = 0.0
 	_prompt.set_hold_progress(_hold / hold_time)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_echo() and event.is_action_pressed(&"interact"):
+		_hold_started = can_activate()
+
+
+## Reading > available clearing > the nearest inactive well. Locked litter does not block.
+func can_activate() -> bool:
+	if is_source or not is_instance_valid(_player) or get_tree().paused:
+		return false
+	var dialogic := get_node_or_null(^"/root/Dialogic")
+	if dialogic != null and dialogic.current_timeline != null:
+		return false
+	for candidate in get_tree().get_nodes_in_group(&"dialogue_interaction_candidates"):
+		if candidate is DialogueTrigger and candidate._is_active_target():
+			return false
+	if Clearable.has_active_target(get_tree()):
+		return false
+	var distance := global_position.distance_squared_to(_player.global_position)
+	for well in get_tree().get_nodes_in_group(&"water_wells"):
+		if well == self or well.is_source or not is_instance_valid(well._player):
+			continue
+		var other_distance: float = well.global_position.distance_squared_to(_player.global_position)
+		if other_distance < distance or (is_equal_approx(other_distance, distance) and well.get_instance_id() < get_instance_id()):
+			return false
+	return true
 
 
 ## Also callable from code (cutscenes, debug).

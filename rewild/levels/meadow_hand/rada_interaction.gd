@@ -1,13 +1,12 @@
 extends "res://objects/interactables/interact_trigger.gd"
 
+const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
 const HOLD_PROMPT = preload("res://ui/in_game/interaction/clear_hold_prompt.tscn")
 const UI_THEME = preload("res://ui/theme/light/light_theme.tres")
 const SFX_CHARGE: AudioStreamWAV = preload("res://assets/audio/sfx/station_charge_loop.wav")
 const SFX_COMPLETE: AudioStream = preload("res://assets/audio/sfx/station_charge_complete.wav")
 const SFX_CANCEL: AudioStream = preload("res://assets/audio/sfx/station_charge_cancel.wav")
 
-@export var coordinate_target: Node3D
-@export var destination_coordinates := Vector3(21, 10, 26)
 @export_range(0.1, 10.0, 0.1) var hold_time := 1.0
 
 var _hold := 0.0
@@ -21,7 +20,7 @@ func _ready() -> void:
 	collision_layer = 0
 	collision_mask = 1
 	one_shot = true
-	message_key = "长按 %s 插入钥匙启动雷达站"
+	message_key = "RADAR_HOLD_START"
 	can_interact = _has_fox_key
 	locked_text = _get_locked_text
 	super._ready()
@@ -44,6 +43,8 @@ func _ready() -> void:
 
 	_create_coordinate_display()
 	interacted.connect(_show_coordinates)
+	Quests.changed.connect(_refresh_read_state)
+	_refresh_read_state()
 
 
 func _has_fox_key() -> bool:
@@ -51,7 +52,7 @@ func _has_fox_key() -> bool:
 
 
 func _get_locked_text() -> String:
-	return "需要钥匙启动雷达站"
+	return "RADAR_KEY_REQUIRED"
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -89,6 +90,8 @@ func _process(delta: float) -> void:
 
 
 func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_instance_valid(_coordinate_label) and _coordinate_label.visible:
+		_refresh_read_state()
 	if what == NOTIFICATION_PAUSED:
 		_hold = 0.0
 		if is_instance_valid(_charge):
@@ -159,11 +162,11 @@ func _create_coordinate_display() -> void:
 
 
 func _show_coordinates() -> void:
-	var destination := destination_coordinates
-	if is_instance_valid(coordinate_target):
-		destination = coordinate_target.global_position
+	RadarStory.record_coordinates()
 
-	_coordinate_label.text = "雷达站已启动，返航坐标已获取\n坐标: X %.1f   Y %.1f   Z %.1f" % [
-		destination.x, destination.y, destination.z,
-	]
-	_coordinate_label.show()
+
+func _refresh_read_state() -> void:
+	if Quests.event_count(RadarStory.INFO_EVENT) > 0:
+		_used = true
+		_coordinate_label.text = tr("RADAR_ONLINE") + "\n" + RadarStory.coordinates_text()
+		_coordinate_label.show()

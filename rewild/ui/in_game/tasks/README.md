@@ -11,3 +11,5 @@
 
 ## 终端窗口与数字雨
 外框使用 TerminalWindow 局部主题（6px 直角边框、8px 内沿），标题栏独立固定，内容区滚动条保留槽位。数字雨在 `ui/theme/terminal/digital_rain.gd`：纯绘制层、不接收输入，30fps 重绘上限，页面隐藏时停止处理，暂停期间仍可运行。可通过节点的 intensity / fall_speed 调整强度与速度；fall_speed=0 可静止显示。
+
+取出电池后，`task_page.gd` 复用场景内的 BatteryStatus 标签显示“当前目标”，随 `radar_coordinates`、`boat_coordinates_loaded`、`boat_battery_installed` 更新为前往雷达站／前往港口／安装电池／确认出发。提前取得坐标时直接提示港口；无需返回雷达重复操作。文字使用 `i18n/strings.csv` 的 `TERMINAL_NEXT_*`，布局仍在 task_page.tscn 中维护。

@@ -99,7 +99,7 @@ func _page_text(index: int) -> String:
 func _on_page_started(_event: DialogicEvent, index: int) -> void:
 	_page = index
 	if index == 0:
-		_history_start = Dialogic.History.simple_history_content.size()
+		_history_start = Dialogic.History.simple_history_offset + Dialogic.History.simple_history_content.size()
 
 
 ## Language switch mid-read: update the visible page and this read's history, like the tablets.
@@ -113,6 +113,7 @@ func _notification(what: int) -> void:
 	DialogueUtils.refresh_current_text(_page_text(_page))
 	var history: Array = Dialogic.History.simple_history_content
 	for index in range(_page + 1):
-		if _history_start + index < history.size():
-			history[_history_start + index]["text"] = _page_text(index)
+		var history_index := _history_start + index - Dialogic.History.simple_history_offset
+		if history_index >= 0 and history_index < history.size():
+			history[history_index]["text"] = _page_text(index)
 	Dialogic.History.simple_history_changed.emit()

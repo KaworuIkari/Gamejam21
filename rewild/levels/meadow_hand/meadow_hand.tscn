@@ -109,7 +109,6 @@
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Abandoned_Handcart_Barren.tscn" id="120_cg78a"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Broken_Cargo_Crate_Barren.tscn" id="121_fts7k"]
 [ext_resource type="PackedScene" uid="uid://d4f6wyvgpfqfu" path="res://assets/models/rewild_regrowth_nature_v2/Broken_Stone_Arch_Barren.tscn" id="122_6x0ex"]
-[ext_resource type="PackedScene" uid="uid://co4laqbw0dik7" path="res://assets/models/rewild_regrowth_nature_v2/Broken_Stone_Arch_Barren.glb" id="123_8vpnn"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Dry_Stone_Wall_Barren.tscn" id="127_7s25r"]
 [ext_resource type="PackedScene" path="res://assets/models/desert_robotics_laboratory/assets/Column_Intact.tscn" id="128_fts7k"]
 [ext_resource type="ArrayMesh" uid="uid://dxfpc1pgftbid" path="res://objects/player/LIRA/equipments/jetpack/Jetpack_Jetpack.res" id="130_2mg1v"]
@@ -128,13 +127,14 @@
 [ext_resource type="PackedScene" uid="uid://b77jtl8s4ux2v" path="res://assets/models/stylized_nature/Rock/Rock_Medium_2.gltf" id="140_reod5"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Timber_Bench_Restorable.tscn" id="141_kxspd"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_nature_v2/Trail_Sign_Restorable.tscn" id="142_j5ytj"]
+[ext_resource type="PackedScene" uid="uid://dr2wg6xqff2gw" path="res://objects/cameras/pump_started_camera.tscn" id="142_kxspd"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_well_nature_v1/Woodland_Well_Barren.tscn" id="142_yl857"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_well_nature_v1/Woodland_Well_Greenery.tscn" id="143_i7iop"]
 [ext_resource type="PackedScene" path="res://objects/restorable/overgrown/industrial/restorable_collapsed_solar_panel.tscn" id="143_reod5"]
 [ext_resource type="PackedScene" path="res://assets/models/industrial_relay/Console_Broken.tscn" id="144_02g4g"]
 [ext_resource type="Script" uid="uid://c0mv1etli8tjp" path="res://levels/meadow_hand/rada_interaction.gd" id="145_reod5"]
 [ext_resource type="PackedScene" uid="uid://smqi2rxytjio" path="res://assets/models/rewild_well_nature_v1/Woodland_Well_Greenery.glb" id="145_y33et"]
-[ext_resource type="PackedScene" uid="uid://bf6sp61v3pdiy" path="res://stylised_bike/stylised_bike.glb" id="146_i7iop"]
+[ext_resource type="PackedScene" path="res://stylised_bike/bike.tscn" id="146_i7iop"]
 [ext_resource type="PackedScene" uid="uid://dr2wg6xqff2gw" path="res://objects/camera_paths/pump_flow_switch_camera.tscn" id="148_en4um"]
 [ext_resource type="PackedScene" uid="uid://doih7jl0e65g4" path="res://objects/camera_paths/cabin_read_camera.tscn" id="149_en4um"]
 [ext_resource type="Curve3D" uid="uid://qfp0dlulsnbn" path="res://objects/camera_paths/paths/cabin_crew_read.tres" id="149_ogclk"]
@@ -143,9 +143,11 @@
 [ext_resource type="Resource" path="res://dialogue/readables/crashsite_cargo_note.tres" id="CrashsiteDeliveryContent"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Factory_Greenery.tscn" id="FactoryGreenery_20261017"]
 [ext_resource type="PackedScene" uid="uid://c7dqts37j7vc" path="res://assets/models/island_harbor/harbor.tscn" id="Harbor_20261015"]
+[ext_resource type="PackedScene" path="res://levels/meadow_hand/island_boundary.tscn" id="IslandBoundary"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_regrowth_v1/Plane_Greenery.tscn" id="PlaneGreenery_20261017"]
 [ext_resource type="PackedScene" path="res://objects/interactables/readables/readable_tablet.tscn" id="ReadableTabletScene"]
 [ext_resource type="PackedScene" path="res://levels/meadow_hand/rock_road.tscn" id="RockRoad_20261017"]
+[ext_resource type="Script" uid="uid://6mvg0gb77knh" path="res://addons/proton_scatter/src/cache/scatter_cache.gd" id="ScatterCache"]
 
 [sub_resource type="Gradient" id="Gradient_jk6td"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -1204,6 +1206,12 @@ metadata/_custom_type_script = "uid://ba7ljvtfgk4cp"
 [node name="Node3D" type="Node3D" unique_id=79305071]
 script = ExtResource("1_qn42n")
 
+[node name="ScatterCache" type="Node" parent="." unique_id=2146640919]
+script = ExtResource("ScatterCache")
+cache_file = "res://levels/meadow_hand/meadow_scatter_cache.res"
+
+[node name="IslandBoundary" parent="." unique_id=65226813 instance=ExtResource("IslandBoundary")]
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=795755373]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -232.94987, -1.5471649, -450.6804)
 navigation_mesh = ExtResource("2_f26gw")
@@ -1284,7 +1292,6 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -79.78649, 
 
 [node name="Pond" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=323264992 instance=ExtResource("14_i4ovm")]
 transform = Transform3D(-1.0003864, 0, -0.37306494, 0, 1, 0, 0.68793803, 0, -0.54250413, 105.34386, 26.807768, -97.29939)
-visible = false
 mesh = SubResource("PlaneMesh_water")
 surface_material_override/0 = SubResource("ShaderMaterial_water")
 fit_to_basin = true
@@ -1302,7 +1309,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_water")
 fit_to_basin = true
 
 [node name="Sea" parent="SubViewportContainer/PixelateSubViewport/Water" unique_id=767396377 node_paths=PackedStringArray("cutouts") instance=ExtResource("14_i4ovm")]
-transform = Transform3D(99.99998, 0, 0, 0, 0.1, 0, 0, 0, 99.99998, 19.442352, 25.74011, 109.58837)
+transform = Transform3D(99.99997, 0, 0, 0, 0.1, 0, 0, 0, 99.99997, 19.442352, 25.74011, 109.58837)
 mesh = SubResource("PlaneMesh_water")
 surface_material_override/0 = SubResource("ShaderMaterial_water")
 cutouts = [NodePath("../Lake"), NodePath("../River"), NodePath("../Froglake"), NodePath("../Pond")]
@@ -1397,7 +1404,7 @@ transform = Transform3D(-0.9182307, 0, -0.3960441, 0, 1, 0, 0.3960441, 0, -0.918
 [node name="Cargo_Box_034" type="Marker3D" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2" unique_id=759513670]
 transform = Transform3D(0.995004, 0, -0.0998334, 0, 1, 0, 0.0998334, 0, 0.995004, 5, 1.12, -1.2)
 
-[node name="CrashsiteDeliveryTablet" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2/Cargo_Box_034" unique_id=1777589251 instance=ExtResource("ReadableTabletScene")]
+[node name="CrashsiteDeliveryTablet" parent="Enviroment/South_plane_crash/CrashsiteOutpostV2/Cargo_Box_034" unique_id=1397549548 instance=ExtResource("ReadableTabletScene")]
 transform = Transform3D(0.9915619, 0, -0.12963414, 0, 1, 0, 0.12963414, 0, 0.9915619, -0.08, 0.965, 0.02)
 read_event = &"cabin_delivery_read"
 content = ExtResource("CrashsiteDeliveryContent")
@@ -1478,9 +1485,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.297157, 34.176876, 73.382
 
 [node name="Broken_Stone_Arch_Barren" parent="Enviroment/Central_lake" unique_id=1499297492 instance=ExtResource("122_6x0ex")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 34.42637, 29.892208, 81.66138)
-
-[node name="Broken_Stone_Arch_Barren2" parent="Enviroment/Central_lake" unique_id=115335691 instance=ExtResource("123_8vpnn")]
-transform = Transform3D(1.477248, 0, -0.26026666, 0, 1.5, 0, 0.26026666, 0, 1.477248, 33.760933, 29.890862, 75.126854)
 
 [node name="Broken_Stone_Arch_Barren3" parent="Enviroment/Central_lake" unique_id=1449612083 instance=ExtResource("122_6x0ex")]
 transform = Transform3D(1.6660041, 0, 0.338277, 0, 1.7000003, 0, -0.338277, 0, 1.6660041, 25.603374, 29.727308, 70.11313)
@@ -1805,9 +1809,6 @@ metadata/_custom_type_script = "uid://c85i0481q4uog"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.95565, 29.127502, 2.5628805)
 
 [node name="Overgrowth" parent="Enviroment/East_Robot_factory/DesertRoboticsLaboratory" unique_id=593217028 instance=ExtResource("FactoryGreenery_20261017")]
-
-[node name="Rock_Medium_32" parent="Enviroment/East_Robot_factory/DesertRoboticsLaboratory" unique_id=602143426 instance=ExtResource("90_on75r")]
-transform = Transform3D(0.20122111, 0, -0.97954583, 0, 1, 0, 0.97954583, 0, 0.20122111, 94.75349, 29.563148, -5.270198)
 
 [node name="Column_Intact" parent="Enviroment/East_Robot_factory" unique_id=1827931342 instance=ExtResource("128_fts7k")]
 transform = Transform3D(0.9990993, 0.041603792, -0.008366258, -0.04154794, 0.91884285, -0.39243034, -0.008639296, 0.39242446, 0.9197438, 101.010056, 29.605131, -5.6682124)
@@ -2173,34 +2174,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -101.38026, 30.085752, 112.26
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -108, 30.000008, 75)
 
 [node name="Wreck_Tank_Ripped_Open2" parent="Enviroment/Global/Garbages" unique_id=1779065806 instance=ExtResource("81_kmeai")]
-transform = Transform3D(0.59452903, 0, 0.80407417, 0, 1, 0, -0.80407417, 0, 0.59452903, -99.0762, 30.067394, 32.90222)
+transform = Transform3D(0.59452903, 0, 0.80407417, 0, 1, 0, -0.80407417, 0, 0.59452903, -99.0762, 29.942802, 32.90222)
 
 [node name="Garbage_Litter_Cluster_1" parent="Enviroment/Global/Garbages" unique_id=602815163 instance=ExtResource("87_iw3tx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.68244, 30.000008, 26.108612)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.68244, 29.99423, 26.108612)
 
 [node name="Garbage_Dirty_Litter_Heap_2" parent="Enviroment/Global/Garbages" unique_id=67353048 instance=ExtResource("88_fgwd8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.639595, 30.682808, 19.390945)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.639595, 29.990877, 19.390945)
 
 [node name="Garbage_Dirty_Litter_Heap_3" parent="Enviroment/Global/Garbages" unique_id=1494039903 instance=ExtResource("89_q5qyh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.79752, 30.775202, 16.085312)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.79752, 30.025055, 16.085312)
 
 [node name="Garbage_Litter_Cluster_2" parent="Enviroment/Global/Garbages" unique_id=1625878530 instance=ExtResource("90_ve4se")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -101.297264, 30.000008, 3.8271866)
 
 [node name="Garbage_Litter_Cluster_4" parent="Enviroment/Global/Garbages" unique_id=1126352173 instance=ExtResource("87_iw3tx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.20773, 29.548424, -11.712692)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.20773, 29.521555, -11.712692)
 
 [node name="Garbage_Dirty_Litter_Heap_4" parent="Enviroment/Global/Garbages" unique_id=1141255551 instance=ExtResource("89_q5qyh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.49779, 30.584766, -16.94873)
 
 [node name="Garbage_Dirty_Litter_Heap_5" parent="Enviroment/Global/Garbages" unique_id=2127634120 instance=ExtResource("50_55e5i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.482315, 30.019403, -4.496155)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.482315, 29.327744, -4.496155)
 
 [node name="Garbage_Litter_Cluster_5" parent="Enviroment/Global/Garbages" unique_id=1859501287 instance=ExtResource("90_ve4se")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.221664, 30.000008, 5.467476)
 
 [node name="Garbage_Litter_Cluster_6" parent="Enviroment/Global/Garbages" unique_id=1545170947 instance=ExtResource("84_go4rp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.82759, 29.520674, -12.588165)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.82759, 29.490768, -12.588165)
 
 [node name="Wreck_Garbage_Mixed_Scrap" parent="Enviroment/Global/Garbages" unique_id=140415416 instance=ExtResource("91_4hg0i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.82759, 28.728859, -30.747086)

@@ -160,10 +160,40 @@ PROCESS_MODE_ALWAYS or take over presentation before opening that screen.
 
 New saves have `startup_checks: {step: -1, confirmed: false}`. `levels/meadow_hand/startup_checks.gd` waits for the opening fade to finish, then runs perception, walking, jumping and sprinting checks in order. It samples actual camera/player feedback; pauses, dialogue and transitions suspend checks and the 2.5-second feedback hold. Sprinting accumulates 0.8 seconds of actual movement while sprint is held; a brief floor-contact loss or collision pauses progress rather than clearing it. Holding sprint while stationary cannot complete it. Only completed checks are persisted; partial motion is sampled afresh after loading.
 
-Presentation lives in `ui/in_game/startup/startup_hint.tscn` and its script: one non-modal upper-right card for both self-checks and the pre-terminal objective. Each new prompt slides down from above the screen while fading in, and slides up while fading out after at most 10 seconds. Expiry only hides the card; checks continue. Completed checks still advance after their 2.5-second feedback hold. The pause overview reviews the current card without consuming its timeout; settings/save submenus hide it. Obtaining the terminal retires this entire card. Wording is in `i18n/strings.csv` (`STARTUP_*`, `QUEST_CABIN_*`); key labels follow SettingsManager bindings and language changes.
+Presentation lives in `ui/in_game/startup/startup_hint.tscn` and its script: one non-modal upper-right card for both self-checks and the pre-terminal objective. Each new prompt slides down from above the screen while fading in, and slides up while fading out after at most 10 seconds. Expiry only hides the card; checks continue. Completed checks still advance after their 2.5-second feedback hold. The pause overview reviews the current card without consuming its timeout; settings/save submenus hide it. Obtaining the terminal retires the pre-terminal objective. The same card is reused for water-gun and jetpack checks; their progress is stored in equipment_checks (1 = confirmed, 2 = complete). See ui/CustomUi/README_对话UI.md for the equipment checks and bindings. Wording is in `i18n/strings.csv` (`STARTUP_*`, `QUEST_CABIN_*`); key labels follow SettingsManager bindings and language changes.
 
-`00_investigate_cabin.tres` has one required step, `pump_started`. The two cabin tablets are optional reading (`optional_steps`: `cabin_delivery_read`, `cabin_crew_read`): they are counted only when read to the last confirmation and keep their glimmer until read, but the pump works without them. The shared upper-right card shows `QUEST_CABIN_PUMP` as the objective. All existing 10-second, pause-review and terminal-retirement rules apply.
+`00_investigate_cabin.tres` first requires both `cabin_delivery_read` and `cabin_crew_read` (with_previous, either order), then `pump_started`. The shared upper-right tutorial card shows the cabin objective with 0/2, 1/2, then the pump objective. Reading counts only at the final confirmation. CabinStory gates player pump interaction until both records are complete; existing 10-second, pause-review and terminal-retirement rules apply.
 
 WaterFlowSwitch reports completion after the existing flow/rise animation, ending 00 and starting 01 at the lake station activation step. (The “第一幕 / Act I” card was removed.)
 
 The level runs CabinStory.migrate_save before loading quests: old 01 indices shift past the removed pump step, prior progress/equipment are retained, and older saves without startup checks retain access to the pump. Completed pumps restore flowing water before child nodes become ready. `cabin_story_version` prevents repeat migration; `act_one_entered` prevents replaying the chapter card. These flags and reading event counters use normal SaveManager persistence; no extra save files are created. F6 without a fresh-save marker follows the legacy compatibility path. New games retain the opening and self-check sequence.
+
+## 开局装备与水池检测维护
+
+主关卡 LIRA 不覆盖 `start_water_gun_level`，沿用角色默认 0。水枪和水箱在首次湖心终端交谈后由 `receive_starter_equipment()` 解锁；01 的奖励是兼容性兜底。未获取时不能持枪、瞄准或发射，已保存的装备等级照常恢复。喷气背包按 main 的工厂任务流程解锁：收集齿轮、修复机器人，由机器人取回并交付背包。
+
+`objects/player/LIRA/lira.gd` 在场景初始化结束后延迟调用 `_refresh_water_list()`，收集全部 `water_surfaces`（包括水泵后续显示的水面）；实际查询时忽略隐藏水面和已移除节点。重叠水面每帧选择最高的有效局部水面，避免北部水池被低处海面抢先匹配。保留现有 `in_water`、游泳动画、浮力和空格出水跳跃，不需要喷气背包或新增动画。调整水面位置时同步核对水池边缘的出水路径。
+
+工厂与水泵房之间的小坑使用主关卡 SubViewportContainer/PixelateSubViewport/Water/Pond，保持 Visible 开启，沿用场景内水位与 Fit To Basin。它是常驻积水，不加入 WaterFlowSwitch 的 Water 或 Rise 列表；水泵启动前后都可游泳，并沿用无喷气背包时的空格出水跳跃。位置、尺寸和水位仍在场景中调整，无运行时代码补水。
+
+## Cabin and harbor flow maintenance
+
+`CabinStory.migrate_save()` now uses version 2: it rebuilds only quest 00 from its counters. Existing pump/terminal progress credits prior cabin reading so later saves are not relocked; partially read early saves keep each read flag. The old 01 step shift runs only for version 0, never again for version 1/2 saves.
+
+The placed keyed radar (`rada_interaction.gd`) and story radar (`radar_story.gd`) both call `RadarStory.record_coordinates()` to record `radar_started` and `radar_coordinates` once. Both display `FinaleStory.COORDINATES` through `coordinates_text()`; world XYZ coordinates are not the harbor entry code. The placed console restores its completed display from quest events after loading. Saves from before this fix that only displayed coordinates have no stored completion flag: use that radar once again, without starting a new save.
+
+After collecting the lake battery, the existing terminal status label shows the next objective: radar -> harbor coordinates -> battery installation -> departure. The boat still validates the recorded radar event and the correct navigation code; cancel/wrong-code paths do not advance progress. A powered legacy boat without recorded code entry still opens the coordinate pad before departure. Scene placements, interaction points and UI layouts stay in their existing scene files.
+
+## 岛屿边界
+
+`levels/meadow_hand/island_boundary.tscn` 直接实例化在主关卡根节点下，与地形和玩家共用物理世界。23 个简单 BoxShape3D 首尾重叠，围住主岛外海，不创建可见网格；高度覆盖游泳深度和喷气背包活动范围。打开该场景调整 Wall01..Wall23 的位置、Y 旋转与 Shape Size；不要运行时生成或修改碰撞体。北侧远海的小块地形位于作业范围之外，主岛与港口保留在圈内。
+
+`island_boundary.gd` 仅读取这些碰撞箱判断距离：Warning Distance 默认 12 米，Release Distance 默认 18 米，避免边缘反复闪烁。StartupChecks 将警告交给原 `ui/in_game/startup/startup_hint.tscn` 右上卡片，复用顶部滑动淡入淡出，文字在 `i18n/strings.csv` 的 `BOUNDARY_WARNING_*`。边界提示优先于教学，停留期间持续显示、不计入 10 秒；远离后恢复原提示及其剩余显示时间。暂停总览可见，设置、对话与转场期间遵循原卡片显隐规则；取得终端后边界提示仍有效。碰撞与警告无额外存档状态。
+
+## 主场景散布缓存与编辑器加载
+
+`levels/meadow_hand/meadow_hand.tscn` 的 19 个 ProtonScatter 节点（包括三个花草实例的关卡覆盖）均关闭 Performance → Force Rebuild On Load，避免打开、切换场景时同时重建并等待物理查询。保留原种子、修改器、散布范围、复制模式和碰撞设置，不修改插件默认值，也不禁用插件。
+
+根节点下的 ScatterCache 使用插件原生 `ProtonScatterCache`，读取同目录唯一缓存 `meadow_scatter_cache.res`（初始 19 组、573 个变换）。请把场景与缓存一起提交给队友，否则关闭自动重建后会缺少散布物。该缓存是场景资源，不是 `.godot` 导入缓存；清理导入缓存不会替代它。
+
+编辑散布范围或修改器后，等待对应节点生成完成再保存主场景，ScatterCache 默认会在保存时更新缓存；也可选中 ScatterCache，在检查器使用 Update Cache，再保存。仅改普通场景物件无需重建散布。继续保持上述加载重建开关关闭；不要勾选 Enabled=false 来解决卡顿，那会移除散布物。旧的 meadow_hand_debug.tscn 是独立调试场景，本次不改变其散布设置。

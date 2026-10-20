@@ -1,0 +1,191 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://levels/meadow_hand/island_boundary.gd" id="1_boundary"]
+
+[sub_resource type="BoxShape3D" id="Box_0"]
+size = Vector3(59.000000, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_1"]
+size = Vector3(69.000000, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_2"]
+size = Vector3(69.192024, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_3"]
+size = Vector3(78.330344, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_4"]
+size = Vector3(69.795137, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_5"]
+size = Vector3(74.064256, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_6"]
+size = Vector3(61.008771, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_7"]
+size = Vector3(55.478151, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_8"]
+size = Vector3(61.008771, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_9"]
+size = Vector3(65.032778, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_10"]
+size = Vector3(65.846584, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_11"]
+size = Vector3(74.178344, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_12"]
+size = Vector3(71.082039, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_13"]
+size = Vector3(76.111026, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_14"]
+size = Vector3(71.268120, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_15"]
+size = Vector3(68.257295, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_16"]
+size = Vector3(69.030762, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_17"]
+size = Vector3(74.178344, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_18"]
+size = Vector3(67.245553, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_19"]
+size = Vector3(53.497475, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_20"]
+size = Vector3(56.201533, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_21"]
+size = Vector3(50.097722, 2048, 4)
+
+[sub_resource type="BoxShape3D" id="Box_22"]
+size = Vector3(44.000000, 2048, 4)
+
+[node name="IslandBoundary" type="StaticBody3D" groups=["island_boundary"]]
+collision_mask = 0
+script = ExtResource("1_boundary")
+
+[node name="Wall01" type="CollisionShape3D" parent="."]
+position = Vector3(-47.500, 0, -155.000)
+rotation = Vector3(0, 0.00000000, 0)
+shape = SubResource("Box_0")
+
+[node name="Wall02" type="CollisionShape3D" parent="."]
+position = Vector3(10.000, 0, -142.500)
+rotation = Vector3(0, -0.39479112, 0)
+shape = SubResource("Box_1")
+
+[node name="Wall03" type="CollisionShape3D" parent="."]
+position = Vector3(67.500, 0, -112.500)
+rotation = Vector3(0, -0.56672922, 0)
+shape = SubResource("Box_2")
+
+[node name="Wall04" type="CollisionShape3D" parent="."]
+position = Vector3(120.000, 0, -67.500)
+rotation = Vector3(0, -0.83298127, 0)
+shape = SubResource("Box_3")
+
+[node name="Wall05" type="CollisionShape3D" parent="."]
+position = Vector3(158.500, 0, -10.000)
+rotation = Vector3(0, -1.14794240, 0)
+shape = SubResource("Box_4")
+
+[node name="Wall06" type="CollisionShape3D" parent="."]
+position = Vector3(173.500, 0, 55.000)
+rotation = Vector3(0, -1.52796539, 0)
+shape = SubResource("Box_5")
+
+[node name="Wall07" type="CollisionShape3D" parent="."]
+position = Vector3(167.500, 0, 117.500)
+rotation = Vector3(0, -1.83704838, 0)
+shape = SubResource("Box_6")
+
+[node name="Wall08" type="CollisionShape3D" parent="."]
+position = Vector3(147.500, 0, 167.500)
+rotation = Vector3(0, -2.07789483, 0)
+shape = SubResource("Box_7")
+
+[node name="Wall09" type="CollisionShape3D" parent="."]
+position = Vector3(117.500, 0, 212.500)
+rotation = Vector3(0, -2.23183950, 0)
+shape = SubResource("Box_8")
+
+[node name="Wall10" type="CollisionShape3D" parent="."]
+position = Vector3(75.000, 0, 252.500)
+rotation = Vector3(0, -2.53086669, 0)
+shape = SubResource("Box_9")
+
+[node name="Wall11" type="CollisionShape3D" parent="."]
+position = Vector3(20.000, 0, 277.500)
+rotation = Vector3(0, -2.89661399, 0)
+shape = SubResource("Box_10")
+
+[node name="Wall12" type="CollisionShape3D" parent="."]
+position = Vector3(-45.000, 0, 282.500)
+rotation = Vector3(0, 3.07028519, 0)
+shape = SubResource("Box_11")
+
+[node name="Wall13" type="CollisionShape3D" parent="."]
+position = Vector3(-110.000, 0, 265.000)
+rotation = Vector3(0, 2.67794504, 0)
+shape = SubResource("Box_12")
+
+[node name="Wall14" type="CollisionShape3D" parent="."]
+position = Vector3(-170.000, 0, 230.000)
+rotation = Vector3(0, 2.55359005, 0)
+shape = SubResource("Box_13")
+
+[node name="Wall15" type="CollisionShape3D" parent="."]
+position = Vector3(-222.500, 0, 185.000)
+rotation = Vector3(0, 2.30361143, 0)
+shape = SubResource("Box_14")
+
+[node name="Wall16" type="CollisionShape3D" parent="."]
+position = Vector3(-256.500, 0, 130.000)
+rotation = Vector3(0, 1.93685284, 0)
+shape = SubResource("Box_15")
+
+[node name="Wall17" type="CollisionShape3D" parent="."]
+position = Vector3(-269.000, 0, 67.500)
+rotation = Vector3(0, 1.60155585, 0)
+shape = SubResource("Box_16")
+
+[node name="Wall18" type="CollisionShape3D" parent="."]
+position = Vector3(-267.500, 0, 0.000)
+rotation = Vector3(0, 1.49948886, 0)
+shape = SubResource("Box_17")
+
+[node name="Wall19" type="CollisionShape3D" parent="."]
+position = Vector3(-255.000, 0, -65.000)
+rotation = Vector3(0, 1.24904577, 0)
+shape = SubResource("Box_18")
+
+[node name="Wall20" type="CollisionShape3D" parent="."]
+position = Vector3(-227.500, 0, -112.500)
+rotation = Vector3(0, 0.78539816, 0)
+shape = SubResource("Box_19")
+
+[node name="Wall21" type="CollisionShape3D" parent="."]
+position = Vector3(-185.000, 0, -137.500)
+rotation = Vector3(0, 0.29145679, 0)
+shape = SubResource("Box_20")
+
+[node name="Wall22" type="CollisionShape3D" parent="."]
+position = Vector3(-137.500, 0, -150.000)
+rotation = Vector3(0, 0.21866895, 0)
+shape = SubResource("Box_21")
+
+[node name="Wall23" type="CollisionShape3D" parent="."]
+position = Vector3(-95.000, 0, -155.000)
+rotation = Vector3(0, 0.00000000, 0)
+shape = SubResource("Box_22")

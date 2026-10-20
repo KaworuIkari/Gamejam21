@@ -136,7 +136,7 @@ func request_ending(route: StringName) -> void:
 	var dialogic := get_node_or_null(^"/root/Dialogic")
 	if dialogic and dialogic.current_timeline != null:
 		return
-	if route == BOAT and not boat_powered():
+	if route == BOAT and (Quests.event_count(&"boat_coordinates_loaded") == 0 or not boat_powered()):
 		advance_boat_setup()
 		return
 	busy = true

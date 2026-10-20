@@ -1,0 +1,6 @@
+{
+"@path": "res://dialogue/characters/named_speaker.gd",
+"@subpath": NodePath(""),
+&"display_name": "SPEAKER_DELIVERY_RECORD",
+&"color": Color(0.22, 0.29, 0.28, 1)
+}
