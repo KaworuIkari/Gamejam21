@@ -6,8 +6,16 @@ class_name SandStorm extends Node3D
 ## too, and so does a roof overhead (indoors). Changes blend in over a few seconds, so a region being cleaned settles the storm.
 ## It also turns the environment's fog thick and sandy while it blows (nothing else in the
 ## level drives the fog; the scene's own values are what it returns to).
+## Ambience follows it too: wind howls as loud as the storm blows, and once the air is clear
+## (outdoors) a distant bird chirps now and then.
 
 const HAZE_SHADER := preload("res://shaders/common/region_haze.gdshader")
+const WIND_LOOP := preload("res://assets/audio/sfx/wind_loop.wav")
+const BIRD_CHIRPS: Array[AudioStream] = [
+	preload("res://assets/audio/sfx/bird_chirp_1.wav"),
+	preload("res://assets/audio/sfx/bird_chirp_2.wav"),
+	preload("res://assets/audio/sfx/bird_chirp_3.wav"),
+]
 
 ## Any camera in the world the storm should follow; the active camera of its viewport is used.
 @export var camera: Camera3D
@@ -25,6 +33,12 @@ const HAZE_SHADER := preload("res://shaders/common/region_haze.gdshader")
 @export var fog_color := Color(0.86, 0.71, 0.52)
 @export var fog_density := 0.008
 @export var fog_sky_affect := 0.35
+@export_group("Ambience")
+## Wind volume at full storm.
+@export var wind_volume_db := -8.0
+@export var bird_volume_db := -22.0
+## Seconds between bird chirps (random within this range) while the air is clear.
+@export var bird_gap := Vector2(8.0, 20.0)
 
 const CHECK_INTERVAL := 0.3
 const BLEND_SPEED := 0.3  # strength per second
@@ -38,6 +52,10 @@ var _dust: GPUParticles3D
 var _sand_mat: ShaderMaterial
 var _dust_mat: ShaderMaterial
 var _fog_base := {}
+var _wind: AudioStreamPlayer
+var _birds: AudioStreamPlayer
+var _bird_timer := 0.0
+var _indoors := false
 
 
 func _ready() -> void:
@@ -83,6 +101,15 @@ func _ready() -> void:
 	var quad := QuadMesh.new()
 	quad.material = _dust_mat
 	_dust.draw_pass_1 = quad
+
+	_wind = AudioStreamPlayer.new()
+	_wind.bus = &"SFX"
+	_wind.stream = WIND_LOOP
+	add_child(_wind)
+	_birds = AudioStreamPlayer.new()
+	_birds.bus = &"SFX"
+	add_child(_birds)
+	_bird_timer = randf_range(bird_gap.x, bird_gap.y)
 	_apply()
 
 
@@ -121,7 +148,8 @@ func _process(delta: float) -> void:
 	_timer += delta
 	if _timer >= CHECK_INTERVAL:
 		_timer = 0.0
-		_target = 0.0 if _under_roof(cam.global_position) else _barren(cam.global_position)
+		_indoors = _under_roof(cam.global_position)
+		_target = 0.0 if _indoors else _barren(cam.global_position)
 		if not _settled:
 			_settled = true
 			strength = _target
@@ -129,6 +157,14 @@ func _process(delta: float) -> void:
 	if not is_equal_approx(strength, _target):
 		strength = move_toward(strength, _target, BLEND_SPEED * delta)
 		_apply()
+	_bird_timer -= delta
+	if _bird_timer <= 0.0:
+		_bird_timer = randf_range(bird_gap.x, bird_gap.y)
+		if strength < 0.05 and not _indoors and not _birds.playing:
+			_birds.stream = BIRD_CHIRPS.pick_random()
+			_birds.pitch_scale = randf_range(0.9, 1.1)
+			_birds.volume_db = bird_volume_db + randf_range(-4.0, 0.0)  # some nearer, some further
+			_birds.play()
 
 
 func _under_roof(p: Vector3) -> bool:
@@ -155,6 +191,9 @@ func _apply() -> void:
 	_sand.emitting = strength > 0.01
 	_dust.emitting = strength > 0.01
 	_sand.amount_ratio = strength
+	_wind.volume_db = wind_volume_db + linear_to_db(maxf(strength, 0.001))
+	if _wind.playing != (strength > 0.01):
+		_wind.playing = strength > 0.01
 	_dust.amount_ratio = strength
 	_sand_mat.set_shader_parameter(&"strength", strength)
 	var c := dust_color

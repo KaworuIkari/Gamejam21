@@ -116,6 +116,7 @@ func activate() -> void:
 	if is_source:
 		return
 	Quests.report(saved_event)
+	UIAudio.play_sfx_at(UIAudio.WELL_START, global_position)
 	for water in rise:
 		create_tween().tween_property(water, ^"position:y", water.position.y + rise_height, rise_time) \
 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

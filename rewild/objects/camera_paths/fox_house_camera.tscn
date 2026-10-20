@@ -1,0 +1,47 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://objects/camera_paths/proximity_camera_shot.gd" id="1_shot"]
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="2_pcam"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_tween"]
+[ext_resource type="Script" uid="uid://rmux0r4m7vby" path="res://systems/cameras/camera_view.gd" id="4_view"]
+
+[sub_resource type="Curve3D" id="Curve3D_fox"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, -3.1247, -1.6, -0.3243, 14.442, 6, 1.84, 2.2232, 0.975, 0.2278, -2.2232, -0.975, -0.2278, 5.068, 1.2, 0.867, 0.9365, 0.1833, 0.1838, -0.9365, -0.1833, -0.1838, 1.103, 0.15, 0.473, 0.5513, 0.0167, 0.2363, 0, 0, 0, -0.551, 0.1, -0.236),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[sub_resource type="Resource" id="Resource_tween"]
+script = ExtResource("3_tween")
+duration = 1.5
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_trigger"]
+radius = 4.0
+
+[node name="FoxHouseCamera" type="Path3D"]
+curve = SubResource("Curve3D_fox")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="." node_paths=PackedStringArray("trigger")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.442, 6, 1.84)
+rotation_mode = 4
+script = ExtResource("1_shot")
+trigger = NodePath("../Trigger")
+travel_time = 6.0
+step_event_name = &"fox_house"
+
+[node name="PhantomCamera3D" type="Node3D" parent="PathFollow3D"]
+script = ExtResource("2_pcam")
+tween_resource = SubResource("Resource_tween")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="CameraView" type="Node" parent="PathFollow3D/PhantomCamera3D"]
+script = ExtResource("4_view")
+view_name = &"fox_house"
+metadata/_custom_type_script = "uid://rmux0r4m7vby"
+
+[node name="Trigger" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.757, -0.5, 1.182)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger"]
+shape = SubResource("SphereShape3D_trigger")

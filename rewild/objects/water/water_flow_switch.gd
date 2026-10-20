@@ -84,6 +84,7 @@ func turn_on() -> void:
 		return
 	is_on = true
 	started.emit()
+	UIAudio.play_sfx_at(UIAudio.WATER_RUSH, global_position, 0.0, 3.0)
 	_apply_swaps()
 	var tween := create_tween()
 	var from := global_position # the first piece is fed from the switch (the pump)
