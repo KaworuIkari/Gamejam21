@@ -154,6 +154,7 @@ func _request_skip() -> void:
 		return
 	_skip_confirming = true
 	var dialogic := DialogicUtil.autoload()
+	var timeline: DialogicTimeline = dialogic.current_timeline
 	DialogueUtils.push_pause(&"skip_confirm")
 	var ok := true
 	var popup_script: Script = load("res://ui/common/confirm_popup.gd")
@@ -161,7 +162,7 @@ func _request_skip() -> void:
 		ok = await popup_script.ask(self, tr("DLG_SKIP_CONFIRM"), "DLG_SKIP")
 	DialogueUtils.pop_pause(&"skip_confirm")
 	_skip_confirming = false
-	if ok:
+	if ok and timeline != null and dialogic.current_timeline == timeline:
 		# 快速跳过所有文本，直到下一个选项或对话结束（遇到选项会自动停下）
 		dialogic.Inputs.auto_skip.enabled = true
 

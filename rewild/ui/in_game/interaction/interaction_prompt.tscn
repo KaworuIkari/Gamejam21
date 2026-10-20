@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://ui/in_game/interaction/interaction_prompt.gd" id="1"]
+
+[ext_resource type="Script" path="res://ui/in_game/interaction/interaction_progress.gd" id="2_outline"]
 
 [node name="InteractionPrompt" type="CanvasLayer"]
 layer = 5
@@ -62,3 +64,10 @@ theme_override_font_sizes/font_size = 26
 text = "交谈"
 vertical_alignment = 1
 mouse_filter = 2
+
+[node name="FeedbackOverlay" type="Node2D" parent="Root/Anchor/Panel/Row/Key"]
+
+[node name="Outline" type="Control" parent="Root/Anchor/Panel/Row/Key/FeedbackOverlay"]
+layout_mode = 0
+mouse_filter = 2
+script = ExtResource("2_outline")
