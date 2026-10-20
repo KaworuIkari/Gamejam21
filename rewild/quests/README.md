@@ -150,7 +150,7 @@ consumes chaos_energy_module only for the disruptor and commits exactly one bran
 ending_disruptor/ending_boat lock the other route, persist in normal quest save
 data, and reopen the corresponding black-screen ending on subsequent loading.
 The ending reuses the opening Dialogic style, then pauses gameplay and
-offers manual Save Progress and Return to Main Menu; it never saves automatically.
+offers Return to Main Menu only; this build has no save/load UI.
 F9 cannot bypass the final world interaction and confirmation.
 
 ### Camera and later cinematic hooks

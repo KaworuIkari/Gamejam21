@@ -1462,12 +1462,13 @@ transform = Transform3D(0.10323099, -0.451416, 0.8863222, 0, 0.89108324, 0.45384
 [node name="Animals" type="Node3D" parent="SubViewportContainer/PixelateSubViewport" unique_id=29639103]
 
 [node name="AnimalFox" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=1591991278 instance=ExtResource("33_en4um")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -180.5782, 34.323215, 105.82273)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -181.33228, 34.323215, 105.0361)
 friendly_radius = 10.0
 calm_radius = 30.0
 run_speed = 7.0
 tick_interval = 2.0
 idle_time = Vector2(3, 9)
+wander_run_chance = 0.25
 follow_distance = 3.0
 follow_slack = 1.5
 happy_chance = 0.35
@@ -1479,10 +1480,9 @@ reward_item = &"fox_key"
 rescue_hold = 1.5
 rescue_radius = 2.5
 rescue_prompt = "FOX_RESCUE_PROMPT"
-down_roll_deg = 90.0
-down_height = 0.15
 curiosity_threshold = 0.6
 investigate_time = 3.0
+hurt_anim = "hurt_rig"
 
 [node name="AnimalSpawner" parent="SubViewportContainer/PixelateSubViewport/Animals" unique_id=503472948 instance=ExtResource("31_lvj5s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, -62.703)
@@ -2952,7 +2952,7 @@ visible = false
 curve = ExtResource("150_ogclk")
 
 [node name="PathFollow3D" parent="CameraPaths/PumpStartedCameraPath3D" index="0" unique_id=277011382 node_paths=PackedStringArray("pump")]
-transform = Transform3D(-0.99116486, 0.022543164, -0.13068026, 0, 0.9854464, 0.16999514, 0.13260998, 0.16849405, -0.9767417, -14.625114, 3.3472786, -23.21518)
+transform = Transform3D(-0.9911662, 0.022543171, -0.13068026, 0, 0.98544675, 0.16999514, 0.13261016, 0.1684941, -0.9767417, -15.344887, 3.3472786, -31.306778)
 pump = NodePath("../../../Enviroment/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch")
 
 [node name="PhantomCamera3D" parent="CameraPaths/PumpStartedCameraPath3D/PathFollow3D" index="0" unique_id=561417519]

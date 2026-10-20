@@ -15,7 +15,7 @@ point_count = 3
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqtik"]
 albedo_color = Color(0, 0, 0, 1)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_0g07r"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_bi8wa"]
 top_radius = 0.145
 bottom_radius = 0.155
 height = 0.4510742
@@ -88,7 +88,7 @@ material = SubResource("StandardMaterial3D_vqtik")
 
 [node name="TankWater" type="MeshInstance3D" parent="." unique_id=964947035]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1714737, -0.264)
-mesh = SubResource("CylinderMesh_0g07r")
+mesh = SubResource("CylinderMesh_bi8wa")
 surface_material_override/0 = SubResource("ShaderMaterial_c82li")
 
 [node name="TubeStart" type="Node3D" parent="." unique_id=2059603440]

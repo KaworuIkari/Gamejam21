@@ -32,9 +32,6 @@ func _ready() -> void:
 	for child in column.get_children():
 		if child is Button:
 			_style_button(child)
-	var feedback: Label = $Margin/VBox/SaveFeedback
-	feedback.add_theme_color_override(&"font_color", INK)
-	feedback.add_theme_color_override(&"font_shadow_color", Color.TRANSPARENT)
 	var dim: ColorRect = get_node("../../Dim")
 	dim.color = Color(0.12, 0.19, 0.20, 0.08)
 

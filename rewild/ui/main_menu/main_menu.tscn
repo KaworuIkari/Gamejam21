@@ -1,11 +1,60 @@
 [gd_scene format=3 uid="uid://btf7l77hja0cc"]
 
 [ext_resource type="Script" uid="uid://y16lcfbh3np" path="res://ui/main_menu/main_menu.gd" id="1_menu"]
-[ext_resource type="Script" uid="uid://bq8hjgxtqayf0" path="res://ui/save_slots/save_slot_list.gd" id="2_slots"]
 [ext_resource type="PackedScene" path="res://ui/settings/settings_menu.tscn" id="3_settings"]
-[ext_resource type="Texture2D" uid="uid://c8pfms8ka42x3" path="res://ui/main_menu/menu_bg.jpg" id="4_bg"]
+[ext_resource type="VideoStream" uid="uid://b51pbyel5or8r" path="res://assets/ui/main_menu/autumn_background.ogv" id="4_bg"]
 [ext_resource type="Theme" uid="uid://lfw6rhhegb5m" path="res://ui/theme/light/light_theme.tres" id="light_theme"]
+[ext_resource type="Texture2D" uid="uid://c6jwvnjxwimm6" path="res://assets/ui/main_menu/menu_labels.png" id="menu_labels"]
+[ext_resource type="Script" uid="uid://dsm2bllis3j0p" path="res://ui/main_menu/menu_option_art.gd" id="option_art"]
 [ext_resource type="Script" uid="uid://cr8tx2mpxm44m" path="res://ui/main_menu/title/title_art.gd" id="title_art"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBox_menu_text"]
+
+[sub_resource type="Theme" id="Theme_menu_text"]
+Button/colors/font_color = Color(1, 1, 1, 0)
+Button/colors/font_disabled_color = Color(1, 1, 1, 0)
+Button/colors/font_focus_color = Color(1, 1, 1, 0)
+Button/colors/font_hover_color = Color(1, 1, 1, 0)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 0)
+Button/colors/font_outline_color = Color(0, 0, 0, 0)
+Button/colors/font_pressed_color = Color(1, 1, 1, 0)
+Button/colors/font_shadow_color = Color(0, 0, 0, 0)
+Button/styles/disabled = SubResource("StyleBox_menu_text")
+Button/styles/focus = SubResource("StyleBox_menu_text")
+Button/styles/hover = SubResource("StyleBox_menu_text")
+Button/styles/hover_pressed = SubResource("StyleBox_menu_text")
+Button/styles/normal = SubResource("StyleBox_menu_text")
+Button/styles/pressed = SubResource("StyleBox_menu_text")
+
+[sub_resource type="AtlasTexture" id="Atlas_start_zh"]
+atlas = ExtResource("menu_labels")
+region = Rect2(39, 111, 702, 218)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Atlas_start_en"]
+atlas = ExtResource("menu_labels")
+region = Rect2(785, 133, 735, 180)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Atlas_settings_zh"]
+atlas = ExtResource("menu_labels")
+region = Rect2(189, 404, 403, 225)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Atlas_settings_en"]
+atlas = ExtResource("menu_labels")
+region = Rect2(840, 421, 634, 221)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Atlas_quit_zh"]
+atlas = ExtResource("menu_labels")
+region = Rect2(39, 705, 713, 221)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="Atlas_quit_en"]
+atlas = ExtResource("menu_labels")
+region = Rect2(947, 715, 402, 205)
+filter_clip = true
 
 [node name="MainMenu" type="Control" unique_id=1076275347]
 layout_mode = 3
@@ -17,17 +66,25 @@ grow_vertical = 2
 theme = ExtResource("light_theme")
 script = ExtResource("1_menu")
 
-[node name="Background" type="TextureRect" parent="." unique_id=1156831566]
-texture_filter = 2
+[node name="Background" type="AspectRatioContainer" parent="." unique_id=1156831566]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("4_bg")
-expand_mode = 1
-stretch_mode = 6
+mouse_filter = 2
+ratio = 1.774947
+stretch_mode = 3
+
+[node name="Video" type="VideoStreamPlayer" parent="Background" unique_id=1107262092]
+layout_mode = 2
+mouse_filter = 2
+stream = ExtResource("4_bg")
+volume_db = -80.0
+autoplay = true
+expand = true
+loop = true
 
 [node name="Content" type="MarginContainer" parent="." unique_id=304471519]
 unique_name_in_owner = true
@@ -48,13 +105,14 @@ theme_override_constants/separation = 8
 
 [node name="Title" type="TextureRect" parent="Content/VBox" unique_id=412284275]
 texture_filter = 2
-custom_minimum_size = Vector2(640, 200)
+custom_minimum_size = Vector2(640, 220)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
 mouse_filter = 2
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 4
 script = ExtResource("title_art")
+art_bounds = Vector2(640, 220)
 
 [node name="TitleGap" type="Control" parent="Content/VBox" unique_id=1372000356]
 custom_minimum_size = Vector2(0, 12)
@@ -68,110 +126,84 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 0)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
+theme = SubResource("Theme_menu_text")
 theme_override_constants/separation = 20
 
 [node name="NewGameButton" type="Button" parent="Content/VBox/Buttons" unique_id=5668880]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-theme_type_variation = &"MainMenuButton"
 text = "MENU_NEW_GAME"
 alignment = 0
+metadata/no_glass = true
 
-[node name="ContinueButton" type="Button" parent="Content/VBox/Buttons" unique_id=1728757562]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"MainMenuButton"
-text = "MENU_CONTINUE"
-alignment = 0
-
-[node name="LoadButton" type="Button" parent="Content/VBox/Buttons" unique_id=2091204834]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"MainMenuButton"
-text = "MENU_LOAD"
-alignment = 0
+[node name="Lettering" type="TextureRect" parent="Content/VBox/Buttons/NewGameButton" unique_id=59533747]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 15.0
+offset_right = -12.0
+offset_bottom = 75.0
+mouse_filter = 2
+texture = SubResource("Atlas_start_zh")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("option_art")
+chinese = SubResource("Atlas_start_zh")
+english = SubResource("Atlas_start_en")
 
 [node name="SettingsButton" type="Button" parent="Content/VBox/Buttons" unique_id=1031215815]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-theme_type_variation = &"MainMenuButton"
 text = "MENU_SETTINGS"
 alignment = 0
+metadata/no_glass = true
+
+[node name="Lettering" type="TextureRect" parent="Content/VBox/Buttons/SettingsButton" unique_id=1226433525]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 15.0
+offset_right = -12.0
+offset_bottom = 75.0
+mouse_filter = 2
+texture = SubResource("Atlas_settings_zh")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("option_art")
+chinese = SubResource("Atlas_settings_zh")
+english = SubResource("Atlas_settings_en")
 
 [node name="QuitButton" type="Button" parent="Content/VBox/Buttons" unique_id=410120321]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 90)
 layout_mode = 2
-theme_type_variation = &"MainMenuButton"
 text = "MENU_QUIT"
 alignment = 0
+metadata/no_glass = true
 
-[node name="SlotScreen" type="Control" parent="." unique_id=1351271094]
-unique_name_in_owner = true
-visible = false
+[node name="Lettering" type="TextureRect" parent="Content/VBox/Buttons/QuitButton" unique_id=2000971051]
+texture_filter = 2
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Dim" type="ColorRect" parent="SlotScreen" unique_id=495779827]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.05, 0.06, 0.07, 0.35)
-
-[node name="Center" type="CenterContainer" parent="SlotScreen" unique_id=428618299]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="PanelContainer" parent="SlotScreen/Center" unique_id=16813654]
-custom_minimum_size = Vector2(1100, 0)
-layout_mode = 2
-
-[node name="VBox" type="VBoxContainer" parent="SlotScreen/Center/Panel" unique_id=728620720]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="SlotScreenTitle" type="Label" parent="SlotScreen/Center/Panel/VBox" unique_id=356848679]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"HeaderLabel"
-theme_override_font_sizes/font_size = 48
-text = "SLOT_SCREEN_LOAD"
-
-[node name="SlotList" type="VBoxContainer" parent="SlotScreen/Center/Panel/VBox" unique_id=1656174950]
-unique_name_in_owner = true
-layout_mode = 2
-script = ExtResource("2_slots")
-mode = 3
-
-[node name="Footer" type="HBoxContainer" parent="SlotScreen/Center/Panel/VBox" unique_id=373372649]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="Spacer" type="Control" parent="SlotScreen/Center/Panel/VBox/Footer" unique_id=938084139]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="BackHint" type="Label" parent="SlotScreen/Center/Panel/VBox/Footer" unique_id=1448046549]
-layout_mode = 2
-theme_type_variation = &"HintLabel"
-text = "HINT_BACK"
-
-[node name="SlotBackButton" type="Button" parent="SlotScreen/Center/Panel/VBox/Footer" unique_id=1182049573]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-text = "UI_BACK"
+offset_left = 16.0
+offset_top = 15.0
+offset_right = -12.0
+offset_bottom = 75.0
+mouse_filter = 2
+texture = SubResource("Atlas_quit_zh")
+expand_mode = 1
+stretch_mode = 4
+script = ExtResource("option_art")
+chinese = SubResource("Atlas_quit_zh")
+english = SubResource("Atlas_quit_en")
 
 [node name="SettingsMenu" parent="." unique_id=1206478297 instance=ExtResource("3_settings")]
 unique_name_in_owner = true

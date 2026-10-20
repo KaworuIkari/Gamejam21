@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://ui/in_game/pause_menu.gd" id="1_pause"]
 [ext_resource type="PackedScene" path="res://ui/settings/settings_menu.tscn" id="2_settings"]
-[ext_resource type="Script" path="res://ui/save_slots/save_slot_list.gd" id="3_slots"]
 
 [ext_resource type="Script" path="res://ui/theme/light/pause_light_style.gd" id="5_light"]
 
@@ -70,13 +69,6 @@ layout_mode = 2
 theme_type_variation = &"MainMenuButton"
 text = "PAUSE_RESUME"
 
-[node name="SaveButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 56)
-layout_mode = 2
-theme_type_variation = &"MainMenuButton"
-text = "PAUSE_SAVE"
-
 [node name="SettingsButton" type="Button" parent="Overlay/Center/Panel/Margin/VBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 56)
@@ -91,75 +83,6 @@ layout_mode = 2
 theme_type_variation = &"MainMenuButton"
 text = "PAUSE_MAIN_MENU"
 
-[node name="SaveFeedback" type="Label" parent="Overlay/Center/Panel/Margin/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_type_variation = &"HintLabel"
-text = "SAVE_FEEDBACK_OK"
-horizontal_alignment = 1
-
 [node name="SettingsMenu" parent="." instance=ExtResource("2_settings")]
 unique_name_in_owner = true
 visible = false
-
-[node name="SaveScreen" type="Control" parent="." unique_id=101]
-theme = ExtResource("light_theme")
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Dim" type="ColorRect" parent="SaveScreen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.05, 0.06, 0.07, 0.35)
-
-[node name="Center" type="CenterContainer" parent="SaveScreen"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Panel" type="PanelContainer" parent="SaveScreen/Center"]
-custom_minimum_size = Vector2(1100, 0)
-layout_mode = 2
-
-[node name="VBox" type="VBoxContainer" parent="SaveScreen/Center/Panel"]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="Title" type="Label" parent="SaveScreen/Center/Panel/VBox"]
-layout_mode = 2
-theme_type_variation = &"HeaderLabel"
-theme_override_font_sizes/font_size = 48
-text = "SLOT_SCREEN_IN_GAME_MANAGE"
-
-[node name="SaveSlotList" type="VBoxContainer" parent="SaveScreen/Center/Panel/VBox"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("3_slots")
-mode = 5
-
-[node name="Footer" type="HBoxContainer" parent="SaveScreen/Center/Panel/VBox"]
-layout_mode = 2
-theme_override_constants/separation = 24
-
-[node name="Spacer" type="Control" parent="SaveScreen/Center/Panel/VBox/Footer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="BackButton" type="Button" parent="SaveScreen/Center/Panel/VBox/Footer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-text = "UI_BACK"

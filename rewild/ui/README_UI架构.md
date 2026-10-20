@@ -8,13 +8,13 @@
 |---|---|---|
 | SettingsManager | `autoload/ui/settings_manager.gd` | 设置预览、应用、撤回与按键重绑定，读写 `user://settings.cfg` |
 | DisplayResolutions | `autoload/ui/display_resolutions.gd` | 分辨率候选、显示器尺寸及自动档 |
-| SaveManager | `autoload/ui/save_manager.gd` | 存档槽位与元数据；尚未保存完整游戏状态 |
+| SaveManager | `autoload/ui/save_manager.gd` | 本局进度状态；保留原接口供开发兼容，不提供存读档 UI |
 | SceneRouter | `autoload/ui/scene_router.gd` | 淡入淡出和场景切换；当前游戏入口为 `levels/meadow_hand/meadow_hand.tscn` |
 | PlayerSettingsBridge | `ui/common/player_settings_bridge.gd` | 向符合接口的角色应用灵敏度和视野 |
 | UIScaler / UILayout | `ui/layout/ui_scaler.gd`、`ui/layout/ui_layout.gd` | 界面缩放与响应式布局 |
 | UIType | `ui/theme/ui_type.gd` | 字号档位、字号吸附及字体覆盖辅助 |
-| 主菜单 / 设置 / 存档列表 | `ui/main_menu/`、`ui/settings/`、`ui/save_slots/` | 各自页面与交互 |
-| 暂停菜单 | `ui/in_game/pause_menu.gd` | 由关卡创建，管理游戏暂停和游戏内存档页面 |
+| 主菜单 / 设置 | `ui/main_menu/`、`ui/settings/` | 各自页面与交互 |
+| 暂停菜单 | `ui/in_game/pause_menu.gd` | 由关卡创建，管理游戏暂停和设置页面 |
 | ConfirmPopup | `ui/common/confirm_popup.gd` | 覆盖、删除等确认；默认聚焦取消 |
 | 对话布局 | `ui/CustomUi/` | 文本、右上说话者名牌、选项、输入、历史与对话期间的玩家冻结 |
 | 对话样式 | `dialogue/styles/UI.tres` | 注册 `ui/CustomUi/custom_ui_.tscn` |
@@ -73,3 +73,27 @@
 “显示帧率”沿用即时预览、应用保存、放弃撤回。`ui/common/fps_display.tscn/.gd` 以 FpsDisplay 场景 Autoload 常驻，暂停、主页、转场均可显示；默认关闭。左上角标签为 12 号字，每 0.25 秒更新一次，不接收鼠标。位置和字体直接在场景中编辑。
 
 行动终端的原左上充能／区域 HUD 和解锁通知现统一在 `ui/in_game/tasks/terminal_ui.tscn` 编辑；Restoration 的上边距为 48，给 FPS 留出独立空间。脚本只读取进度、更新文字与显隐，不再生成这部分布局。
+
+## 当前版本：无存读档入口
+
+主页只保留开始游戏、设置与退出；暂停菜单保留继续、设置、返回主页；结局只保留返回主页。存档位、读取、继续旧游戏、保存进度及对应提示与独立列表脚本已移除。开始游戏仍需确认，随后调用 SaveManager.start_new_game() 初始化本局；默认 current_slot = -1，不删除或覆盖已有存档文件。
+
+SaveManager.current_data 继续承载任务、装备和生态等本局状态，避免为移除 UI 改写玩法。原存档后端暂留但没有游戏 UI 入口；设置文件仍正常应用和保存。返回主页将结束本次游戏，再开始会从开场重新开始。
+
+## 主菜单图片字
+
+主菜单三个文字入口沿用标题的米白圆润立体风格，不显示按钮底板、边框或焦点框。中英文共用 `assets/ui/main_menu/menu_labels.png` 透明图集；裁切区域、位置、尺寸和空样式均在 `ui/main_menu/main_menu.tscn` 编辑。原 Button 节点和翻译键保留，鼠标、键盘、手柄及原确认流程继续使用现有逻辑。
+
+`ui/main_menu/menu_option_art.gd` 仅负责随语言选择图片，以及悬停、焦点和按下的文字颜色反馈；颜色可在检查器编辑。文字显示高度为 60（由原 72 缩小约 17%），图集使用较细的笔画和更浅的立体效果。高亮按最后使用的输入方式切换：鼠标只高亮悬停项，移开即恢复；键盘／手柄只高亮焦点项，初始焦点不自动染黄。设置页、暂停页和确认弹窗继续使用原主题。图集通过内置 imagegen 生成，提示为：参照现有标题制作透明的双列三行图片字图集，中文“开始游戏／设置／退出游戏”，英文“Start Game／Settings／Quit”，米白圆润中等字重、较细笔画与浅浮雕，透明背景，无图标和按钮框体。
+
+## 主菜单秋日动态背景
+
+资源为 `assets/ui/main_menu/autumn_background.ogv`，由用户的 24 秒“秋日草动加强版.mp4”处理而来。取原片 2～22 秒为主体，将末尾 22～24 秒与开头 0～2 秒交叉淡化后接回主体，形成约 22 秒的平滑循环；这是视频衔接处理，不改写原 HTML 动画。视频无音轨，不影响菜单音乐和 UI 音效。
+
+所有展示配置直接在 `ui/main_menu/main_menu.tscn` 的 `Background/Video` 编辑：VideoStreamPlayer 开启 Autoplay 与 Loop，Background 使用 AspectRatioContainer 的 Cover 保持画面比例并填满窗口。背景不接收鼠标；标题、双语菜单、设置和确认逻辑沿用现有节点与脚本，未新增运行时布局代码。
+
+## 中文主页标题：归野
+
+`ui/main_menu/title/title_zh.png` 已替换为“归野”，英文继续使用原 `title_en.png`（REWILD）。中文艺术字通过内置 imagegen 参照原标题生成：米白圆润立体笔画、暖灰短阴影，“野”字上方保留一株黄绿色双叶嫩芽，透明背景。
+
+位置沿用主页 Title 节点所在的左上区域；Title 使用 Keep Aspect 与 `art_bounds = Vector2(640, 220)` 限定展示区域，保持两字自然比例和原有字高，避免按原四字宽度放大或挤压下方菜单。展示范围可在场景的 Title 检查器中编辑；脚本仅沿用已有语言切换和尺寸适配。
