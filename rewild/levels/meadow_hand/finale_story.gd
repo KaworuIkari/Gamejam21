@@ -10,8 +10,8 @@ const NOTE = preload("res://objects/interactables/readables/readable_note.tscn")
 const MODULE := &"chaos_energy_module"
 const DEVICE := &"disruptor"
 const BOAT := &"boat"
-## Navigation coordinates read at the radar and typed on the boat's pad (digits 1–9 only).
-const COORDINATES := "3729"
+## Navigation coordinates read at the radar and typed on the boat's pad (digits 0–9).
+const COORDINATES := "211026"
 var radar: Node3D
 var harbor: Node3D
 var cameras: Dictionary = {}

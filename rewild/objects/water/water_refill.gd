@@ -45,6 +45,7 @@ func _process(delta: float) -> void:
 			lira.tank.set_filling(filling)  # the fill sound
 		if not filling and lira and lira.tank.level >= 1.0:
 			_prompt.play_activation()
+			UIAudio.play_sfx(UIAudio.TANK_FULL)
 	_prompt.set_hold_progress(lira.tank.level if filling else 0.0)
 
 
