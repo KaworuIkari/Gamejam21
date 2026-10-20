@@ -23,6 +23,7 @@ curve = SubResource("Curve3D_n2xf4")
 transform = Transform3D(-0.9644982, 0.0017325586, -0.26407957, 0, 0.9999826, 0.0065605766, 0.26408494, 0.0063276975, -0.9644786, -37.735237, -8.842907, -11.753204)
 rotation_mode = 4
 script = ExtResource("1_o3ame")
+step_event_name = &"pump_flow_switch"
 
 [node name="PhantomCamera3D" type="Node3D" parent="PathFollow3D" unique_id=561417519]
 script = ExtResource("1_7yuhd")

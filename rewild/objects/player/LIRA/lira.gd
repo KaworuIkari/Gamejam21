@@ -36,7 +36,7 @@ var _fire_cd := 0.0
 ## Per fire-rate upgrade bought at the terminal (first entry = none): seconds between shots.
 @export var water_gun_cooldown := PackedFloat32Array([0.6, 0.48, 0.38, 0.3])
 ## Per tank upgrade bought at the terminal (first entry = none): water the tank holds.
-@export var water_tank_capacity := PackedFloat32Array([15, 20, 25, 30])
+@export var water_tank_capacity := PackedFloat32Array([15, 25, 40, 60])
 ## Per level: jetpack energy (fuel).
 @export var jetpack_energy := PackedFloat32Array([100.0, 200.0, 240.0])
 var water_gun_level := 0

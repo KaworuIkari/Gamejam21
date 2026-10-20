@@ -5,6 +5,9 @@
 [node name="BGM_Player" type="Node" unique_id=173992223]
 script = ExtResource("1_pw76s")
 
+[node name="FmodBankLoader" type="FmodBankLoader" parent="." unique_id=1138102930]
+bank_paths = ["res://assets/audio/fmod_bank/Desktop/Master.strings.bank", "res://assets/audio/fmod_bank/Desktop/Master.bank"]
+
 [node name="WorldBGM" type="FmodEventEmitter2D" parent="." unique_id=931620375]
 event_name = "event:/BGM/Game"
 event_guid = "{852d9e94-6107-42e3-8d62-5b6878fc6c7c}"

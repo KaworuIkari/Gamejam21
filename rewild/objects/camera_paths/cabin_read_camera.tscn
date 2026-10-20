@@ -8,7 +8,7 @@
 
 [sub_resource type="Curve3D" id="Curve3D_n2xf4"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -37.735237, -8.842907, -11.753204, -17.65, 0, 0, 8.045, 0, 0, -5.69919, -9.200302, 40.787903, 0, 0, -21.64, 0, 0, 18.875, 37.93455, -17.565086, 76.71097, 0, 0, 0, 0, 0, 0, -1.3735218, -4.7635345, 121.822556),
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -37.735237, -8.842907, -11.753204, -17.65, 0, 0, 8.045, 0, 0, -23.78294, -12.469986, 64.49774, 0, 0, -21.64, 0, 0, 18.875, 48.872158, -26.823452, 131.42435, 0, 0, 0, 0, 0, 0, 44.712772, -26.212952, 244.43317),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
@@ -24,8 +24,9 @@ curve = SubResource("Curve3D_n2xf4")
 transform = Transform3D(-0.9644982, 0.0017325586, -0.26407957, 0, 0.9999826, 0.0065605766, 0.26408494, 0.0063276975, -0.9644786, -37.735237, -8.842907, -11.753204)
 rotation_mode = 4
 script = ExtResource("1_l5fh6")
+step_event_name = &"cabin_crew_read"
 quest = ExtResource("2_tw8lt")
-step_name = &"cabin_crew_read"
+optional = true
 
 [node name="PhantomCamera3D" type="Node3D" parent="PathFollow3D" unique_id=561417519]
 script = ExtResource("2_l5fh6")
@@ -34,5 +35,5 @@ metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="CameraView" type="Node" parent="PathFollow3D/PhantomCamera3D" unique_id=114001530]
 script = ExtResource("4_umue7")
-view_name = &"cabin_read"
+view_name = &"cabin_crew_read"
 metadata/_custom_type_script = "uid://rmux0r4m7vby"

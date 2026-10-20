@@ -287,6 +287,15 @@ func _evaluate() -> void:
 		again = false
 		for q in quests:
 			var s := _state(q)
+			# 1. start the quest if its requirements are met
+			if s.status == Status.LOCKED and q.requires.all(func(r: Quest) -> bool: return r != null and status(r) == Status.DONE):
+				s.status = Status.ACTIVE
+				s.step = 0
+				s.done = []
+				_start_quest(q)
+				quest_started.emit(q)
+				again = true
+			# 2. optional steps (also after the quest is DONE)
 			if s.status != Status.LOCKED:
 				if not s.has("opt_done"):
 					s.opt_done = []
@@ -294,6 +303,7 @@ func _evaluate() -> void:
 					if not i in s.opt_done and _optional_count(q, s, i) >= q.optional_steps[i].count:
 						s.opt_done.append(i)
 						_emit_step(q, i, true)
+			# 3. main steps
 			if s.status != Status.ACTIVE:
 				continue
 			if q.parallel:

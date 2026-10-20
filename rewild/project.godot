@@ -35,6 +35,7 @@ WorldEvents="*uid://x8dnsf2xkr0k"
 Puddles="*res://systems/puddles/puddles.gd"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 CameraDirector="*uid://d3xayjc8aiaps"
+BgmPlayer="*uid://0rxlainf8pjy"
 
 [debug]
 

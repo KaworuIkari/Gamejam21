@@ -56,10 +56,6 @@ signal finished
 var is_on := false
 var _rest_y := {}
 
-const GROUP := &"pump_switch"
-func _enter_tree() -> void:
-	add_to_group(GROUP)
-
 func _ready() -> void:
 	if trigger and not trigger.interacted.is_connected(turn_on):
 		trigger.interacted.connect(turn_on)
@@ -88,7 +84,6 @@ func turn_on() -> void:
 		return
 	is_on = true
 	started.emit()
-	print("emit!")
 	_apply_swaps()
 	var tween := create_tween()
 	var from := global_position # the first piece is fed from the switch (the pump)
