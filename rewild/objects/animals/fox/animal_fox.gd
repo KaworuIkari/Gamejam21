@@ -27,6 +27,8 @@ const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_promp
 @export_group("Idle & Wander")
 @export var idle_time := Vector2(3.0, 9.0)
 @export var wander_radius := 15.0
+## Chance that a wander leg is a run (a burst of energy) instead of a walk.
+@export_range(0.0, 1.0) var wander_run_chance := 0.25
 
 @export_group("Friendly")
 @export var follow_distance := 3.0
@@ -45,8 +47,6 @@ const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_promp
 @export var rescue_hold := 1.5  # seconds interact must be held
 @export var rescue_radius := 2.5
 @export var rescue_prompt := "FOX_RESCUE_PROMPT"
-@export var down_roll_deg := 90.0  # lying on its side
-@export var down_height := 0.15  # lifts the side-lying body out of the ground
 
 @export_group("Events")
 @export var curiosity_threshold := 0.6
@@ -55,6 +55,7 @@ const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_promp
 @export_group("Animation Clips")
 @export var run_anim := "running_rig"
 @export var bark_anim := "bark_rig"
+@export var hurt_anim := "hurt_rig"
 
 var state := State.IDLE
 
@@ -124,7 +125,6 @@ func _tick_state(delta: float) -> void:
 		State.FRIENDLY: _tick_friendly(delta)
 		State.INVESTIGATE: _tick_investigate(delta)
 
-
 # === Decisions (every tick_interval seconds) ===
 
 func _decide() -> void:
@@ -148,12 +148,8 @@ func _decide() -> void:
 
 func _lie_down() -> void:
 	state = State.DOWN
-	animation_locked = true
-	animation_player.play(idle_anim)
-	animation_player.seek(0.0, true)
-	animation_player.pause()
-	_model.rotation.z = deg_to_rad(down_roll_deg)
-	_model.position.y = down_height
+	animation_locked = true  # keeps the base class from swapping clips
+	animation_player.play(hurt_anim)
 	var area := Area3D.new()
 	area.name = "RescueRange"
 	area.collision_layer = 0
@@ -198,12 +194,9 @@ func _rescue() -> void:
 	_hold = 0.0
 	_prompt.set_available(false)
 	Quests.report(rescue_event)
-	animation_player.play(idle_anim)
-	var up := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	up.tween_property(_model, ^"rotation:z", 0.0, 0.7)
-	up.parallel().tween_property(_model, ^"position:y", 0.0, 0.7)
-	await up.finished
 	animation_locked = false
+	animation_player.play(idle_anim, 0.4)  # custom blend out of the hurt pose
+	await get_tree().create_timer(0.5).timeout
 	await _hop(2)
 	await _howl()
 	if is_inside_tree():
@@ -228,11 +221,12 @@ func _tick_idle(delta: float) -> void:
 	_idle_timer -= delta
 	if _idle_timer <= 0.0:
 		_set_target(_random_nav_point(global_position, wander_radius))
+		_running = randf() < wander_run_chance
 		state = State.WANDER
 
 
 func _tick_wander(delta: float) -> void:
-	if _follow_target(delta, walk_speed):
+	if _follow_target(delta, run_speed if _running else walk_speed):
 		_enter_idle()
 
 
@@ -247,12 +241,18 @@ func _decide_friendly(dist: float) -> void:
 	var out := global_position - lira.global_position
 	out.y = 0.0
 	out = out.normalized() if out.length() > 0.01 else Vector3.BACK
-	_running = dist > follow_distance * 3.0
+	if dist > follow_distance * 3.0:
+		_running = true
+	elif dist < follow_distance * 2.0:
+		_running = false
+	# in between: keep the current gait
 	_set_target(_closest_nav_point(lira.global_position + out * follow_distance), follow_slack * 0.5)
 
 
 func _tick_friendly(delta: float) -> void:
 	if _has_target:
+		if _running and _player_distance() < follow_distance * 1.8:
+			_running = false  # slow to a trot on the final approach
 		_follow_target(delta, run_speed if _running else walk_speed)
 	else:
 		_face_dir = lira.global_position - global_position

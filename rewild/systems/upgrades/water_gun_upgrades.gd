@@ -36,4 +36,6 @@ static func buy(track: StringName) -> bool:
 	var next := level(track) + 1
 	_quests().report(SPENT, COST)
 	_quests().grant(track, next)
+	var audio := (Engine.get_main_loop() as SceneTree).root.get_node(^"UIAudio")
+	audio.play_sfx(audio.UPGRADE, 0.0)
 	return true

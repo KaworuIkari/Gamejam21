@@ -14,7 +14,8 @@ const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_promp
 ## well's own metres (a well scaled ×2 reaches twice as far).
 @export var radius := 2.5
 @export var prompt_key := "WELL_ACTIVATE_PROMPT"
-## Water meshes inside the well: they start rise_height lower and move up when activated.
+## Water meshes inside the well: placed at the surface, they start rise_height lower and
+## move up to it when activated (the level fills this, see meadow_level._set_up_wells).
 @export var rise: Array[Node3D] = []
 @export var rise_height := 1.5
 @export var rise_time := 3.0
@@ -115,6 +116,7 @@ func activate() -> void:
 	if is_source:
 		return
 	Quests.report(saved_event)
+	UIAudio.play_sfx_at(UIAudio.WELL_START, global_position)
 	for water in rise:
 		create_tween().tween_property(water, ^"position:y", water.position.y + rise_height, rise_time) \
 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

@@ -127,6 +127,7 @@ func pick_up() -> void:
 	# Shrink into the hand instead of popping.
 	var t := create_tween()
 	t.tween_method(_set_size, prop.scale.x, _scale, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	UIAudio.play_sfx(UIAudio.PROP_GRAB)
 	picked_up.emit()
 
 
@@ -137,6 +138,7 @@ func throw() -> void:
 	_set_size(_scale)
 	_throw_y = (prop.global_transform * _center).y
 	state = State.FLYING
+	UIAudio.play_sfx(UIAudio.THROW_WHOOSH, 0.1)
 	thrown.emit()
 
 
@@ -149,6 +151,7 @@ func _land(point: Vector3, in_water: bool) -> void:
 	_prompt.configure(&"interact", pickup_key)
 	if not in_water:
 		_set_bodies_enabled(true)
+	UIAudio.play_sfx_at(UIAudio.PROP_SPLASH if in_water else UIAudio.PROP_LAND, point)
 	landed.emit(in_water)
 
 

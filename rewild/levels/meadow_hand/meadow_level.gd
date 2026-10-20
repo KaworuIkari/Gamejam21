@@ -71,12 +71,14 @@ func _ready() -> void:
 	GrowthMap.attach_material($Plants/Flowers.mesh_material_override)
 	for mat in TREE_LEAVES:
 		GrowthMap.attach_material(mat)
+	add_child(LeafRustle.new())
 	GrowthMap.attach_material(GROW_IN_FLOWERS)
 
 	var restoration_regions := RESTORATION_REGIONS.instantiate()
 	add_child(restoration_regions)
 	# The playable mountain is the radar hill. Follow its placed anchor each load.
 	restoration_regions.get_node("Mountain").global_position = $Enviroment/East_Mountain/RadioObservatory.global_position
+	_add_region_haze(restoration_regions)
 	var awakening := LeonAwakening.new()
 	awakening.name = "LeonAwakening"
 	awakening.statue = $Enviroment/North_frog_lake/Leon2
@@ -113,11 +115,7 @@ func _ready() -> void:
 	finale.cameras = {&"disruptor":finale_disruptor_camera,&"boat":finale_boat_camera}
 	add_child(finale)
 	# Every well can be started and then used to fill the tank; lakes and rivers fill it too.
-	for well in $Enviroment/Global/Wells.get_children():
-		if well is Node3D and well.find_children("*", "WaterWell", false, false).is_empty():
-			var controller := WaterWell.new()
-			controller.name = "WaterWell"
-			well.add_child(controller)
+	_set_up_wells($Enviroment/Global/Wells)
 	$SubViewportContainer/PixelateSubViewport/Water/Sea.drinkable = false
 	var refill := WaterRefill.new()
 	refill.name = "WaterRefill"
@@ -136,6 +134,29 @@ func _exit_tree() -> void:
 	SettingsManager.reset_fmod_mix()
 
 
+## Dust haze over every restoration region until it is cleaned (the lake's clears when the
+## pump fills it, sweeping out from the lake station), and a sandstorm around the camera
+## that blows wherever the ground is still barren.
+func _add_region_haze(regions: Node) -> void:
+	var storm := SandStorm.new()
+	storm.name = "SandStorm"
+	storm.camera = player_camera
+	storm.environment = $WorldEnvironment
+	for region in regions.get_children():
+		var haze := RegionHaze.new()
+		haze.name = "Haze_%s" % region.name
+		haze.region = region
+		haze.terrain = terrain
+		haze.floor_y = $SubViewportContainer/PixelateSubViewport/Water/Sea.global_position.y
+		if region.region_id == &"lake":
+			haze.clear_when = get_node(PUMP_PATH)
+			haze.clear_from = $Enviroment/Central_lake/LakePowerStation
+		haze.wind = storm.wind
+		storm.hazes[region] = haze
+		add_child(haze)
+	add_child(storm)
+
+
 ## The power-room jetpack when the export is empty: "Jetpack_root" (the jetpack and its
 ## extras), else a node named "Jetpack", outside LIRA.
 func _find_jetpack_prop() -> Node3D:
@@ -151,3 +172,48 @@ func _on_leon_awakening_started() -> void:
 
 func _on_leon_awakening_finished() -> void:
 	BgmPlayer.release(5.0)  # optional: bring world music back after a long silence
+
+
+## A WaterWell on every well, with the water that rises when it starts: each MeshInstance3D
+## placed directly under any well goes to the well it actually sits in (nearest); wells
+## without one get a copy of the first, at the same spot relative to the well.
+func _set_up_wells(wells_root: Node3D) -> void:
+	var wells: Array[Node3D] = []
+	var waters: Array[MeshInstance3D] = []
+	var controllers := {}
+	for well in wells_root.get_children():
+		if not well is Node3D:
+			continue
+		wells.append(well)
+		var existing := well.find_children("*", "WaterWell", false, false)
+		var controller: WaterWell = existing[0] if not existing.is_empty() else WaterWell.new()
+		controller.name = "WaterWell"
+		controllers[well] = controller
+		for child in well.get_children():
+			if child is MeshInstance3D:
+				waters.append(child)
+	var template: MeshInstance3D = null
+	var template_offset := Transform3D()
+	for water in waters:
+		var nearest: Node3D = wells[0]
+		for well in wells:
+			if _flat_distance(well, water) < _flat_distance(nearest, water):
+				nearest = well
+		controllers[nearest].rise.append(water)
+		if template == null:
+			template = water
+			template_offset = nearest.global_transform.affine_inverse() * water.global_transform
+	for well in wells:
+		var controller: WaterWell = controllers[well]
+		if controller.rise.is_empty() and template:
+			var copy := template.duplicate() as MeshInstance3D
+			copy.name = "WellWater"
+			well.add_child(copy)
+			copy.global_transform = well.global_transform * template_offset
+			controller.rise.append(copy)
+		if not controller.is_inside_tree():
+			well.add_child(controller)
+
+
+func _flat_distance(a: Node3D, b: Node3D) -> float:
+	return Vector2(a.global_position.x - b.global_position.x, a.global_position.z - b.global_position.z).length()

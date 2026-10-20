@@ -1,10 +1,7 @@
-[gd_resource type="Resource" script_class="ReadableNoteContent" format=3]
+[gd_resource type="Resource" script_class="ReadableNoteContent" format=3 uid="uid://bm28csw4b5yll"]
 
-[ext_resource type="Script" path="res://objects/interactables/readables/readable_note_content.gd" id="1_content"]
-
-[ext_resource type="Resource" path="res://dialogue/characters/CrewLog.dch" id="2_speaker"]
+[ext_resource type="Script" uid="uid://cxdg8wnq4axwb" path="res://objects/interactables/readables/readable_note_content.gd" id="1_content"]
 
 [resource]
 script = ExtResource("1_content")
-speaker = ExtResource("2_speaker")
 page_keys = Array[String](["TABLET_POWER", "TABLET_CREW_TITLE", "TABLET_CREW_STAFF", "TABLET_CREW_CONTACT", "TABLET_CREW_SUPPLY", "TABLET_CREW_SHUTDOWN", "TABLET_CREW_PUMP", "TABLET_CREW_RETURN"])

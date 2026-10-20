@@ -103,13 +103,12 @@ func _roll(range_s: Vector2) -> float:
 	return randf_range(range_s.x, range_s.y) / time_divisor
 
 @onready var _achievement_bgm_emitter: FmodEventEmitter2D = $AchievementBGM
-const ACHIEVEMENT_FOR_LEVEL := {1: 0, 2: 1, 3: 2}  # sound idx per upgrade level; 3 left for other events
 func _play_achievement_bgm(idx: int) -> void:
 	_achievement_bgm_emitter.set_parameter("Achievement", idx)
 	_achievement_bgm_emitter.play()
 
 func _on_ability_changed(_ability: StringName, level: int) -> void:
-	_play_achievement_bgm(ACHIEVEMENT_FOR_LEVEL.get(level, 0))
+	_play_achievement_bgm(randi_range(0,3))
 
 @onready var _ending_bgm_emitter: FmodEventEmitter2D = $EndingBGM
 const ENDING_INDEX := ["happy", "neutral", "sad"]
@@ -124,7 +123,7 @@ func _play_epic_bgm() -> void:
 	_epic_bgm_emitter.play()
 
 @onready var _quests_bgm_emitter: FmodEventEmitter2D = $QuestsBGM
-const QUEST_BGM_VAR = ["cabin_crew", "water_switch"]
+const QUEST_BGM_VAR = ["cabin_crew", "water_switch", "forest_fox", "radio_station"]
 func _play_quests_bgm(quest_bgm_var_index: int) -> void:
 	_quests_bgm_emitter.set_parameter("Quest", QUEST_BGM_VAR[quest_bgm_var_index])
 	_quests_bgm_emitter.play()

@@ -279,14 +279,15 @@ BIKE_1,一台@Decathlong 生产的ROCKRIDER ST100型号自行车，
 BIKE_2,自行车是一种省力不省功的非化石燃料驱动移动工具。
 BIKE_3,在古老的cambridge小镇这或许是最珍贵的东西,
 BIKE_4,因为资料显示直到人类消失前该地几乎所有的犯罪报告都来自于自行车的失窃。
+FOX_0,按 %s 阅读
+FOX_1,狐狸的家
+FOX_2,wooooooooo！wooo！
 STARTUP_WATER_GUN_TITLE,生态修复模块校验,Ecosystem restoration check
 STARTUP_WATER_GUN_BODY,水枪已接入。向枯地发射水团，确认生态修复反馈。,Water gun connected. Fire a water blob at barren ground to check the restoration system.
 STARTUP_WATER_GUN_INPUT,按住 %s 瞄准，按 %s 发射,Hold %s to aim and press %s to fire
 STARTUP_JETPACK_TITLE,推进模块校验,Propulsion check
 STARTUP_JETPACK_BODY,喷气背包已接入。先跳跃，在空中再次按住跳跃键，测试持续升空。松开停止喷射，停用后能量逐渐恢复。,Jetpack connected. Jump then press and hold jump again in midair to test sustained flight. Release to stop thrust; energy recovers while not in use.
 STARTUP_JETPACK_INPUT,按 %s 跳跃，空中再次按住 %s 喷射,Press %s to jump then press and hold %s again in midair to thrust
-QUEST_CABIN_INVESTIGATE,调查机舱内部，读完两份平板记录（%d/2）,Inspect the cabin and read both tablet records (%d/2)
-PUMP_REQUIRES_CABIN,%s 先读完机舱内的两份记录,%s Read both cabin records first
 TERMINAL_NEXT_RADAR,前往山地雷达站，启动雷达并获取航行坐标。,Go to the mountain radar station and obtain the navigation coordinates.
 TERMINAL_NEXT_HARBOR,前往港口，在控制台输入航行坐标并安装混沌能量模块。,Go to the harbor and enter the navigation coordinates at the control console. Then install the Chaos Energy Module.
 TERMINAL_NEXT_BATTERY,在港口控制台安装混沌能量模块，为小船供能。,Install the Chaos Energy Module at the harbor control console to power the boat.

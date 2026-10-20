@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bttk28j4lvvja"]
+
+[ext_resource type="PackedScene" uid="uid://bd3xu2yw87eul" path="res://objects/camera_paths/forest_fox_camera.tscn" id="1_7xv26"]
+
+[node name="RadioStationCamera" unique_id=62686932 instance=ExtResource("1_7xv26")]
+
+[node name="PathFollow3D" parent="." index="0" unique_id=277011382]
+bgm_idx = 3
+step_event_name = &"radio_station_camera"
+
+[node name="CameraView" parent="PathFollow3D/PhantomCamera3D" parent_id_path=PackedInt32Array(561417519) index="0" unique_id=114001530]
+view_name = &"radio_station_camera"

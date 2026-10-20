@@ -60,6 +60,7 @@ enum State { FLOCK, DIVE, RECOVER }
 @export var dive_turn_rate := 4.0
 @export var dive_max_time := 3.0
 @export var recover_time := 2.5
+@export var dive_sound_radius := 6.0  ## dive counts as a successful pass if this close to the player when it ends
 
 @export_group("Wings")
 @export var wings_blend_param := "parameters/WingsBlend/blend_amount"
@@ -71,6 +72,8 @@ enum State { FLOCK, DIVE, RECOVER }
 var _flap_timer := 0.0
 var _flapping := false
 var _wings_blend := 0.0
+
+@onready var _sound_emitter: FmodEventEmitter3D = $FmodEventEmitter3D
 
 @onready var terrain: Terrain3D = get_tree().root.find_child("Terrain3D", true, false)
 @onready var _player: LIRA_Character = get_tree().get_first_node_in_group("player")
@@ -167,7 +170,12 @@ func _update_dive(delta: float) -> void:
 	var to_target := target - global_position
 	var flat_to_player := Vector3(_player.global_position.x - global_position.x, 0.0, _player.global_position.z - global_position.z)
 	var flat_vel := Vector3(velocity.x, 0.0, velocity.z)
-	if to_target.length() < 2.0 or flat_to_player.dot(flat_vel) < 0.0 or _state_timer <= 0.0:
+	var reached := to_target.length() < 2.0
+	var passed := flat_to_player.dot(flat_vel) < 0.0
+	if reached or passed or _state_timer <= 0.0:
+		# Success = it got to the player (or flew past while still close), not a timeout far away.
+		if reached or global_position.distance_to(_player.global_position) <= dive_sound_radius:
+			_sound_emitter.play()
 		_start_recover()
 		return
 	var top := max_speed * dive_speed_mult

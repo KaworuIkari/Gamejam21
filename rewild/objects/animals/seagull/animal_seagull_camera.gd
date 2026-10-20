@@ -11,7 +11,6 @@ func _physics_process(delta: float) -> void:
 @export_group("Camera")
 @export var sing_delay := 1.0
 var _sing_timer := -1.0
-@onready var _sound_emitter: FmodEventEmitter3D = $FmodEventEmitter3D
 @onready var _camera_view: CameraView = $PCam_Seagull/CameraView
 
 func _on_camera_view_changed(previous: StringName, current: StringName) -> void:

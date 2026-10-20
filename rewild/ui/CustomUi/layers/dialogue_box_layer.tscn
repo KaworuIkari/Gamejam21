@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" path="res://ui/theme/glass/nameplate.png" id="9_plate"]
 [ext_resource type="Script" path="res://dialogue/styles/text_effect_shake.gd" id="10_shake"]
 [ext_resource type="Material" path="res://ui/theme/glass/glass_panel_material.tres" id="11_glass"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/type_blip_1.wav" id="13_blip1"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/type_blip_2.wav" id="13_blip2"]
+[ext_resource type="AudioStream" path="res://assets/audio/sfx/type_blip_3.wav" id="13_blip3"]
 
 [sub_resource type="StyleBoxFlat" id="Plate"]
 bg_color = Color(1, 0.99, 0.95, 0.20)
@@ -87,8 +90,14 @@ script = ExtResource("5_text")
 textbox_root = NodePath("../../..")
 
 [node name="DialogicNode_TypeSounds" type="AudioStreamPlayer" parent="Box/Panel/TextColumn/DialogicNode_DialogText"]
+volume_db = -12.0
 bus = &"SFX"
 script = ExtResource("6_sound")
+sounds = Array[AudioStream]([ExtResource("13_blip1"), ExtResource("13_blip2"), ExtResource("13_blip3")])
+play_every_character = 2
+pitch_variance = 0.06
+volume_variance = 1.5
+ignore_characters = " .,!?…，。！？、；：“”‘’—（）·"
 
 [node name="BottomSpacer" type="Control" parent="Box/Panel/TextColumn"]
 custom_minimum_size = Vector2(0, 46)
