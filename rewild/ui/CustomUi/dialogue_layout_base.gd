@@ -44,6 +44,10 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	if not Engine.is_editor_hint():
+		var dialogic := DialogicUtil.autoload()
+		dialogic.timeline_started.disconnect(_on_timeline_started)
+		dialogic.timeline_ended.disconnect(_release_player)
+		get_tree().scene_changed.disconnect(_on_scene_changed)
 		_release_player()
 		DialogueUtils.clear_pauses()
 
@@ -51,6 +55,7 @@ func _exit_tree() -> void:
 # ------------------------------------------------------------------ 冻结玩家
 
 func _on_timeline_started() -> void:
+	DialogicUtil.autoload().Inputs.auto_skip.enabled = false
 	_dialogue_scene = get_tree().current_scene
 	# 新对话开始时清掉上一段对话可能残留的暂停原因（游戏暂停除外，由 _process 维护）
 	var game_paused := DialogueUtils.is_pause_reason_active(&"game_paused")
@@ -68,6 +73,7 @@ func _on_timeline_started() -> void:
 
 
 func _release_player() -> void:
+	DialogicUtil.autoload().Inputs.auto_skip.enabled = false
 	for body in _frozen_players:
 		if is_instance_valid(body):
 			body.set(&"frozen", false)

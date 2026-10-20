@@ -27,7 +27,7 @@ const SAVE_PATH := "user://settings.cfg"
 enum WindowMode { WINDOWED, BORDERLESS_FULLSCREEN, EXCLUSIVE_FULLSCREEN }
 enum VSync { OFF, ON, ADAPTIVE }
 
-const FPS_LIMITS: Array[int] = [30, 60, 120, 144, 0] # 0 = 不限制
+const FPS_LIMITS: Array[int] = [30, 60]
 const LOCALES: Array[String] = ["zh_CN", "en"]
 
 ## 设置项 key -> AudioBus 名称
@@ -69,7 +69,8 @@ const DEFAULTS := {
 		"window_mode": WindowMode.WINDOWED,
 		"resolution": DisplayResolutions.AUTO, # 窗口尺寸；(0, 0) = 自动适配显示器（规则见 DisplayResolutions）
 		"vsync": VSync.ON,
-		"max_fps": 4, # FPS_LIMITS 下标，默认不限制
+		"max_fps": 1, # FPS_LIMITS 下标，默认 60 帧
+		"show_fps": false,
 		"fov": 75,
 	},
 	"controls": {
@@ -185,6 +186,8 @@ func get_default(section: String, key: String) -> Variant:
 func set_value(section: String, key: String, value: Variant) -> void:
 	if not DEFAULTS.has(section) or not DEFAULTS[section].has(key):
 		return
+	if section == "video" and key == "max_fps":
+		value = clampi(int(value), 0, FPS_LIMITS.size() - 1)
 	if not _values.has(section):
 		_values[section] = {}
 	if _values[section].get(key) == value:
@@ -261,6 +264,8 @@ func _load() -> void:
 				var v: Variant = _config.get_value(section, key)
 				if typeof(v) == typeof(DEFAULTS[section][key]) or _is_number(v) and _is_number(DEFAULTS[section][key]):
 					_values[section][key] = v
+	# Old 120 / 144 / unlimited indices become 60; 30 / 60 keep their indices.
+	_values.video.max_fps = clampi(int(_values.video.max_fps), 0, FPS_LIMITS.size() - 1)
 	if _config.has_section("input"):
 		for cfg_key in _config.get_section_keys("input"):
 			var parts: PackedStringArray = cfg_key.split("__")

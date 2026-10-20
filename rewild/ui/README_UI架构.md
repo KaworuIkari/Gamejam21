@@ -65,3 +65,11 @@
 设置分页音效：TabBar.tab_clicked 连接 UIAudio.play_settings_tab_sound，使用 assets/audio/ui/switch20.ogg，经 SFX 总线播放。重复点击当前分页也有声音；初始化与程序刷新不触发。音效播放器继承 UIAudio 的常驻处理模式，暂停时正常播放，播放结束自动清理。
 
 主菜单不显示副标题和右下角原型版本文案；对应节点、脚本引用及中英文键均已移除。菜单标题和按钮仍由 `ui/main_menu/` 维护。
+
+## 帧率与全局 FPS 显示
+
+设置页“显示”保留 30 / 60 帧上限，默认 60；旧配置中 120 / 144 / 不限制迁移到 60，原有 30 / 60 不变。上限由 SettingsManager 写入 Engine.max_fps；它限制最高帧率，不保证复杂场景达到该帧率，垂直同步仍独立生效。
+
+“显示帧率”沿用即时预览、应用保存、放弃撤回。`ui/common/fps_display.tscn/.gd` 以 FpsDisplay 场景 Autoload 常驻，暂停、主页、转场均可显示；默认关闭。左上角标签为 12 号字，每 0.25 秒更新一次，不接收鼠标。位置和字体直接在场景中编辑。
+
+行动终端的原左上充能／区域 HUD 和解锁通知现统一在 `ui/in_game/tasks/terminal_ui.tscn` 编辑；Restoration 的上边距为 48，给 FPS 留出独立空间。脚本只读取进度、更新文字与显隐，不再生成这部分布局。
