@@ -17,7 +17,7 @@ point_count = 4
 script = ExtResource("3_tw8lt")
 duration = 1.5
 
-[node name="PumpStartedCameraPath3D" type="Path3D" unique_id=62686932]
+[node name="CabinReadCamera" type="Path3D" unique_id=62686932]
 curve = SubResource("Curve3D_n2xf4")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="." unique_id=277011382]
@@ -34,5 +34,5 @@ metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="CameraView" type="Node" parent="PathFollow3D/PhantomCamera3D" unique_id=114001530]
 script = ExtResource("4_umue7")
-view_name = &"pump_shot"
+view_name = &"cabin_read"
 metadata/_custom_type_script = "uid://rmux0r4m7vby"

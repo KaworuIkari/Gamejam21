@@ -11,7 +11,6 @@ var _views := {}  # StringName -> PhantomCamera3D
 var _stack: Array[StringName] = []
 var _current: StringName = &""
 
-
 func register(view: StringName, pcam: PhantomCamera3D) -> void:
 	var existing = _views.get(view)
 	if existing != null and existing != pcam:

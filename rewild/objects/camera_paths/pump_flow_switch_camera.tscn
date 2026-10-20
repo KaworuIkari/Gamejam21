@@ -31,5 +31,5 @@ metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="CameraView" type="Node" parent="PathFollow3D/PhantomCamera3D" unique_id=114001530]
 script = ExtResource("3_cj6sg")
-view_name = &"pump_shot"
+view_name = &"pump_flow_switch"
 metadata/_custom_type_script = "uid://rmux0r4m7vby"

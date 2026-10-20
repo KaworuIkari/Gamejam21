@@ -5,18 +5,20 @@ class_name CameraPathShot
 @export_group("if use quest step")
 @export var quest: Quest
 @export var step_index := 0
-@export var step_name: StringName = &"pump_shot"
-
+## The index refers to Quest.optional_steps instead of Quest.steps.
+@export var optional := false
+@export var step_name: StringName = &""
 
 signal finished
 
 var _playing := false
 
 func _ready() -> void:
-	Quests.step_completed.connect(_on_step_completed)
+	if quest:
+		Quests.step_completed.connect(_on_step_completed)
 
-func _on_step_completed(q: Quest, index: int) -> void:
-	if q.get_id() == quest.get_id() and index == step_index:
+func _on_step_completed(q: Quest, index: int, is_optional: bool) -> void:
+	if is_optional == optional and index == step_index and q.get_id() == quest.get_id():
 		play()
 
 func play() -> void:

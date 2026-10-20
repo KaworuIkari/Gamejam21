@@ -9,8 +9,10 @@ extends Node
 signal changed
 signal quest_started(quest: Quest)
 signal quest_completed(quest: Quest)
-signal step_completed(quest: Quest, index: int)
+signal step_completed(quest: Quest, index: int, optional: bool)
 signal ability_changed(ability: StringName, level: int)
+
+var _silent := false  # no step_completed while a save is being restored
 
 enum Status { LOCKED, ACTIVE, DONE }
 
@@ -182,7 +184,9 @@ func load_from_save() -> void:
 		var s: Dictionary = data.quests[k]
 		_states[StringName(k)] = {"status": int(s.get("status", 0)), "step": int(s.get("step", 0)),
 				"baselines": Array(s.get("baselines", [])).map(func(v): return int(v)),
-				"done": Array(s.get("done", [])).map(func(v): return int(v))}
+				"done": Array(s.get("done", [])).map(func(v): return int(v)),
+				"opt_baselines": Array(s.get("opt_baselines", [])).map(func(v): return int(v)),
+				"opt_done": Array(s.get("opt_done", [])).map(func(v): return int(v))}
 	# Sequential quests can gain new trailing story steps. A save completed against
 	# the older resource must continue from those new steps (05 formerly ended at 40%).
 	for quest in quests:
@@ -191,7 +195,9 @@ func load_from_save() -> void:
 			restored.status = Status.ACTIVE
 			_begin_step(quest)
 	tracked = StringName(data.get("tracked", ""))
+	_silent = true
 	_evaluate()
+	_silent = false
 	# Older first-contact saves may have received the terminal before closing its
 	# page. Give them the water gun too.
 	if terminal_unlocked():
@@ -281,20 +287,20 @@ func _evaluate() -> void:
 		again = false
 		for q in quests:
 			var s := _state(q)
-			if s.status == Status.LOCKED and q.requires.all(func(r: Quest) -> bool: return r != null and status(r) == Status.DONE):
-				s.status = Status.ACTIVE
-				s.step = 0
-				s.done = []
-				_start_quest(q)
-				quest_started.emit(q)
-				again = true
+			if s.status != Status.LOCKED:
+				if not s.has("opt_done"):
+					s.opt_done = []
+				for i in q.optional_steps.size():
+					if not i in s.opt_done and _optional_count(q, s, i) >= q.optional_steps[i].count:
+						s.opt_done.append(i)
+						_emit_step(q, i, true)
 			if s.status != Status.ACTIVE:
 				continue
 			if q.parallel:
 				for i in q.steps.size():
 					if not i in s.done and _step_count(q, i) >= q.steps[i].count:
 						s.done.append(i)
-						step_completed.emit(q, i)
+						_emit_step(q, i, false)
 			else:
 				while s.step < q.steps.size():
 					var first: int = s.step
@@ -307,7 +313,7 @@ func _evaluate() -> void:
 					s.step = last + 1
 					_begin_step(q)
 					for i in range(first, last + 1):
-						step_completed.emit(q, i)
+						_emit_step(q, i, false)
 			if (q.parallel and q.complete_any and not s.done.is_empty()) or (s.done.size() if q.parallel else s.step) >= q.steps.size():
 				s.status = Status.DONE
 				for a in q.rewards:
@@ -322,7 +328,24 @@ func _start_quest(q: Quest) -> void:
 	s.baselines = []
 	for st in q.steps:
 		s.baselines.append(event_count(st.event))
+	s.opt_baselines = []
+	for st in q.optional_steps:
+		s.opt_baselines.append(event_count(st.event))
 
+func _emit_step(q: Quest, index: int, optional: bool) -> void:
+	if not _silent:
+		step_completed.emit(q, index, optional)
+
+func _optional_count(q: Quest, s: Dictionary, index: int) -> int:
+	var st := q.optional_steps[index]
+	var n := event_count(st.event)
+	if st.count_earlier:
+		return n
+	var b: Array = s.get("opt_baselines", [])
+	return n - (int(b[index]) if index < b.size() else 0)
+
+func is_optional_done(q: Quest, index: int) -> bool:
+	return index in _state(q).get("opt_done", [])
 
 ## One-after-another quests: the next step starts counting now.
 func _begin_step(q: Quest) -> void:
