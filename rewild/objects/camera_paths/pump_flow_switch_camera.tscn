@@ -1,11 +1,16 @@
 [gd_scene format=3 uid="uid://dr2wg6xqff2gw"]
 
 [ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="1_7yuhd"]
-[ext_resource type="Script" uid="uid://cdpuvw7hdh7yt" path="res://objects/cameras/camera_shot.gd" id="1_fvim8"]
+[ext_resource type="Script" uid="uid://bwkx533x3j77m" path="res://objects/camera_paths/pump_flow_switch_camera_shot.gd" id="1_o3ame"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_fvim8"]
 [ext_resource type="Script" uid="uid://rmux0r4m7vby" path="res://systems/cameras/camera_view.gd" id="3_cj6sg"]
 
 [sub_resource type="Curve3D" id="Curve3D_n2xf4"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -37.735237, -8.842907, -11.753204, -17.65, 0, 0, 8.045, 0, 0, -5.69919, -9.200302, 40.787903, 0, 0, -21.64, 0, 0, 18.875, 37.93455, -17.565086, 76.71097, 0, 0, 0, 0, 0, 0, -1.3735218, -4.7635345, 121.822556),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
 
 [sub_resource type="Resource" id="Resource_7xu28"]
 script = ExtResource("2_fvim8")
@@ -15,8 +20,10 @@ duration = 1.5
 curve = SubResource("Curve3D_n2xf4")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="." unique_id=277011382]
+transform = Transform3D(-0.9644982, 0.0017325586, -0.26407957, 0, 0.9999826, 0.0065605766, 0.26408494, 0.0063276975, -0.9644786, -37.735237, -8.842907, -11.753204)
 rotation_mode = 4
-script = ExtResource("1_fvim8")
+script = ExtResource("1_o3ame")
+step_event_name = &"pump_flow_switch"
 
 [node name="PhantomCamera3D" type="Node3D" parent="PathFollow3D" unique_id=561417519]
 script = ExtResource("1_7yuhd")
@@ -25,5 +32,5 @@ metadata/_custom_type_script = "uid://csjccrhj5wnx7"
 
 [node name="CameraView" type="Node" parent="PathFollow3D/PhantomCamera3D" unique_id=114001530]
 script = ExtResource("3_cj6sg")
-view_name = &"pump_shot"
+view_name = &"pump_flow_switch"
 metadata/_custom_type_script = "uid://rmux0r4m7vby"

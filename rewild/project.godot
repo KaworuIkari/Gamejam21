@@ -35,6 +35,7 @@ WorldEvents="*uid://x8dnsf2xkr0k"
 Puddles="*res://systems/puddles/puddles.gd"
 PhantomCameraManager="*uid://duq6jhf6unyis"
 CameraDirector="*uid://d3xayjc8aiaps"
+BgmPlayer="*uid://0rxlainf8pjy"
 
 [debug]
 
@@ -53,8 +54,8 @@ directories/dch_directory={
 }
 directories/dtl_directory={
 "XBot_timeline": "res://dialogue/timelines/Mannequin/XBot_timeline.dtl",
-"backup/core_activated": "res://dialogue/backup/core_activated.dtl",
-"backup/core_delivery": "res://dialogue/backup/core_delivery.dtl",
+"core_activated": "res://dialogue/backup/core_activated.dtl",
+"core_delivery": "res://dialogue/backup/core_delivery.dtl",
 "first_contact": "res://dialogue/timelines/LakeTerminal/first_contact.dtl"
 }
 layout/style_directory={

@@ -43,7 +43,6 @@ func _ready() -> void:
 	add_child(_timer)
 	_wait(_roll(first_delay))
 	Quests.ability_changed.connect(_on_ability_changed)
-	Quests.quest_completed.connect(_on_quest_completed)
 
 func _start_track() -> void:
 	var idx := _pick_track()
@@ -112,14 +111,6 @@ func _play_achievement_bgm(idx: int) -> void:
 func _on_ability_changed(_ability: StringName, level: int) -> void:
 	_play_achievement_bgm(ACHIEVEMENT_FOR_LEVEL.get(level, 0))
 
-func _on_quest_completed(quest: Quest) -> void:
-	match quest.title:
-		"jetpack_delivered":
-			_play_achievement_bgm(3)
-		"pump_started":
-			_play_quests_bgm(quest.title)
-
-
 @onready var _ending_bgm_emitter: FmodEventEmitter2D = $EndingBGM
 const ENDING_INDEX := ["happy", "neutral", "sad"]
 func _play_ending_bgm(ending_type: int) -> void:
@@ -133,6 +124,7 @@ func _play_epic_bgm() -> void:
 	_epic_bgm_emitter.play()
 
 @onready var _quests_bgm_emitter: FmodEventEmitter2D = $QuestsBGM
-func _play_quests_bgm(quest_bgm_var: String) -> void:
-	_quests_bgm_emitter.set_parameter("Quest", quest_bgm_var)
+const QUEST_BGM_VAR = ["cabin_crew", "water_switch"]
+func _play_quests_bgm(quest_bgm_var_index: int) -> void:
+	_quests_bgm_emitter.set_parameter("Quest", QUEST_BGM_VAR[quest_bgm_var_index])
 	_quests_bgm_emitter.play()

@@ -9,6 +9,7 @@ extends Node3D
 ## With `irrigate` on, the ground along each piece is watered through GrowthMap as it
 ## comes on, spreading out from where the water enters, so the banks green up by themselves.
 
+signal started   # water begins to flow
 signal finished
 
 ## Using this trigger turns the water on (no signal wiring needed).
@@ -55,7 +56,6 @@ signal finished
 var is_on := false
 var _rest_y := {}
 
-
 func _ready() -> void:
 	if trigger and not trigger.interacted.is_connected(turn_on):
 		trigger.interacted.connect(turn_on)
@@ -83,6 +83,7 @@ func turn_on() -> void:
 	if is_on:
 		return
 	is_on = true
+	started.emit()
 	_apply_swaps()
 	var tween := create_tween()
 	var from := global_position # the first piece is fed from the switch (the pump)

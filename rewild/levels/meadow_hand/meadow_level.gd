@@ -40,7 +40,6 @@ const OpeningSequence := preload("res://levels/meadow_hand/opening_sequence.gd")
 const StartupChecks := preload("res://levels/meadow_hand/startup_checks.gd")
 const CabinStory := preload("res://levels/meadow_hand/cabin_story.gd")
 const PUMP_PATH := ^"Enviroment/North_water_source/Ruined_Pump_House_Golden/WaterFlowSwitch"
-@onready var bgm_player: BGM_Player = $BGM_Player
 @onready var terrain: Terrain3D = $NavigationRegion3D/Terrain3D
 @onready var player_camera: Camera3D = $SubViewportContainer/PixelateSubViewport/LIRA/Camera3D
 @onready var player: Node3D = $SubViewportContainer/PixelateSubViewport/LIRA
@@ -148,7 +147,7 @@ func _find_jetpack_prop() -> Node3D:
 
 
 func _on_leon_awakening_started() -> void:
-	bgm_player._play_epic_bgm()
+	BgmPlayer._play_epic_bgm()
 
 func _on_leon_awakening_finished() -> void:
-	bgm_player.release(5.0)  # optional: bring world music back after a long silence
+	BgmPlayer.release(5.0)  # optional: bring world music back after a long silence
