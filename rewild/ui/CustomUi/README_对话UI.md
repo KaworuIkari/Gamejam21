@@ -31,7 +31,7 @@ UI 文案在 `i18n/strings.csv`，现有 XBot 台词译文在 `i18n/dialogue_xbo
 
 - 流程位于 `levels/meadow_hand/opening_sequence.gd`，由 `meadow_level.gd` 创建；`PAGE_KEYS` 决定分页顺序，文字及中英译文维护在 `i18n/strings.csv` 的 `OPENING_*` 行，`\n` 表示换行。
 - `opening_ui.tscn` 继承现有对话布局，`dialogue/styles/Opening.tres` 只负责选择该布局；正文居中，右下角复用自动／跳过／历史。字号、语言及暂停沿用现有系统；开场文字间隔通过 `text_delay_multiplier` 设为当前对话速度的 3 倍，其他对话保持原速。文字显示中点击仅补全当前页，再次点击才翻页。
-- `SaveManager.start_new_game()` 初始化 `opening_page = 0`；页码随确认推进，暂停菜单保存后可继续当前页，完成后自动保存。没有该字段的旧存档与直接运行关卡不补播。
+- `SaveManager.start_new_game()` 初始化 `opening_page = 0`；页码随确认推进，仅记录本局页码；当前版本不提供存读档入口。直接运行关卡不补播开场。
 - 镜头与动画可连接 OpeningSequence 的 `started`、`page_started(index)`、`reveal_started`、`finished` 信号，分别对应黑屏开始、切页、淡出开始、交还操作；`fade_duration` 控制淡出时长。淡出期间仍冻结玩家，Esc 暂停也暂停淡出。
 
 ## 统一布局与分页
@@ -66,7 +66,9 @@ UI 文案在 `i18n/strings.csv`，现有 XBot 台词译文在 `i18n/dialogue_xbo
 
 - 保留任务 06 的两条实际路线：雷达站二层同步破坏器、港口乘船离岛；交互和互斥判定仍由 `levels/meadow_hand/finale_story.gd` 负责。
 - 分页与播放在 `levels/meadow_hand/ending_sequence.gd`，`PAGES` 决定顺序；中英文在 `i18n/strings.csv` 的 `ENDING_DEVICE_*` / `ENDING_BOAT_*`。复用开场 `dialogue/styles/Opening.tres`，同样的居中文字、三倍文字间隔、点击补全文字／再次点击翻页、自动／跳过／历史与 Esc 暂停。
-- 黑幕和播放结束后的保存／返回菜单在 `ui/in_game/ending/ending_screen.tscn` 中编辑；其脚本只处理菜单行为，不运行时搭建布局。文本播完后保留黑幕并暂停游戏，不自动跳回主页，也不自动保存。
-- `ending_page` 随正常存档保存；阅读期间暂停保存可继续当前页，播完保存则重开结束菜单。旧结局存档没有该字段，会从第一页开始播放。未来演出仍可连接 `FinaleStory.ending_selected` 和 `EndingSequence.page_started(index)`。
+- 黑幕和播放结束后的返回菜单在 `ui/in_game/ending/ending_screen.tscn` 中编辑；其脚本只处理菜单行为，不运行时搭建布局。文本播完后保留黑幕并暂停游戏，不自动跳回主页，也不自动保存。
+- `ending_page` 记录本局结局页码；当前版本不提供保存或读取入口。未来演出仍可连接 `FinaleStory.ending_selected` 和 `EndingSequence.page_started(index)`。
 
 跳过仅对当前时间线生效：统一布局在开始、结束和退出时关闭 auto_skip；跳过确认框还会核对原时间线，避免过期弹窗影响新对话。选项出现时仍沿用原逻辑停止跳过。
+
+姓名固定为 24 号字，使用与正文一致的深灰绿色；在 layers/dialogue_box_layer.tscn 中覆盖颜色，在对应脚本的 name_font_size 调整字号。各角色及平板来源均使用 i18n/strings.csv 的 SPEAKER_* 名称，中英切换不再显示原始翻译键。

@@ -79,13 +79,15 @@ func get_slot_info(slot: int) -> Dictionary:
 	return info
 
 
-func start_new_game(slot: int) -> void:
-	delete_slot(slot, false)
+func start_new_game(slot: int = -1) -> void:
+	if slot >= 0:
+		delete_slot(slot, false)
 	current_slot = slot
 	play_time = 0.0
 	current_data = {"location": "LOC_CRASH_SITE", "opening_page": 0,
 			"startup_checks": {"step": -1, "confirmed": false}}
-	save_current()
+	if slot >= 0:
+		save_current()
 
 
 func load_slot(slot: int) -> bool:
