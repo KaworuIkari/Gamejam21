@@ -11,3 +11,5 @@
 任务顺序与旧存档迁移入口见 `quests/README.md`，流程在 `levels/meadow_hand/cabin_story.gd`，不在阅读物内硬编码任务顺序。
 
 平板、终端与其他对话统一使用 `dialogue/styles/UI.tres` → `ui/CustomUi/custom_ui_.tscn`，不显示人物头像。底部对话框保持原高度，较长内容通过 Page Keys 分页，最大字号下也不拉高面板；统一的尺寸和按钮入口见 `ui/CustomUi/README_对话UI.md`。
+
+正文资源的 Speaker 可指定 `dialogue/characters/` 下的角色或记录来源，所有页面与阅读历史共用该名称；显示位置统一为对话框右上角。设备投送记录用 DeliveryRecord，机组离线记录用 CrewLog。新记录无需修改阅读 UI。

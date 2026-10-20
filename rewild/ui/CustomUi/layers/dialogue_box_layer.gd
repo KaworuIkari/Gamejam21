@@ -45,11 +45,9 @@ func _ready() -> void:
 	_history_button.pressed.connect(_open_history)
 	var dialogic := DialogicUtil.autoload()
 	dialogic.Inputs.auto_advance.toggled.connect(_sync_auto_button)
-	_text.resized.connect(_place_name_plate)
 	_next_indicator.visibility_changed.connect(func():
 		if not _next_indicator.visible:
 			_next_hidden_msec = Time.get_ticks_msec())
-	_place_name_plate.call_deferred()
 	# “跳过”只跳到下一个选项：出现选项时关闭快速跳过
 	dialogic.Choices.question_shown.connect(func(_info): dialogic.Inputs.auto_skip.enabled = false)
 	if has_node("/root/SettingsManager"):
@@ -65,6 +63,8 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready() and not Engine.is_editor_hint():
 		_update_button_texts()
+		var dialogic := DialogicUtil.autoload()
+		dialogic.Text.update_name_label(dialogic.Text.get_current_speaker(), true)
 
 
 func _apply_export_overrides() -> void:
@@ -112,22 +112,6 @@ func _apply_opacity() -> void:
 func _on_setting_changed(section: String, key: String, _value: Variant) -> void:
 	if section == SETTINGS_SECTION and key.begins_with("dialogue_"):
 		_apply_export_overrides()
-
-
-# ------------------------------------------------------------------ 名牌
-
-## 名牌骑在对话框上边缘，与正文左侧对齐。
-func _place_name_plate() -> void:
-	if system_boot:
-		return
-	if not is_instance_valid(_name_plate) or not is_instance_valid(_text) or not is_instance_valid(_box):
-		return
-	var s := _box.get_global_transform().get_scale().x
-	if is_zero_approx(s):
-		return
-	var x := (_text.global_position.x - _box.global_position.x) / s
-	_name_plate.offset_left = x
-	_name_plate.offset_right = x + 1.0
 
 
 # ------------------------------------------------------------------ 角落按钮

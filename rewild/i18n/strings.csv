@@ -170,7 +170,7 @@ ABILITY_WATER_GUN,水枪,Water gun
 ABILITY_JETPACK,喷气背包,Jetpack
 ABILITY_LEVEL,%s Lv%d,%s Lv%d
 TERMINAL_BATTERY_TITLE,核心电池,Core battery
-TERMINAL_BATTERY_CHARGING,电池充能中……恢复湖泊、森林、山地、工厂四个区域的绿色能源供应，充满后回到湖心电站取出电池。,"Battery charging... Restore green energy to the lake, forest, mountain and factory. Once it is full, return to the lake station to take the battery."
+TERMINAL_BATTERY_CHARGING,电池充能中……使用水枪，恢复湖泊、森林、山地、工厂四个区域的生态以便提供绿色能源供应，充满后回到湖心电站取出电池。,"Battery charging... Use the water gun to restore the ecosystems of the lake, forest, mountain and factory regions to supply green energy. Once it is full, return to the lake station to take the battery."
 TERMINAL_BATTERY_FULL,电池已充满！回到湖心电站，与终端交互取出电池。,Battery fully charged! Return to the lake station and use the terminal to take it.
 TERMINAL_BATTERY_COLLECTED,已从湖心电站取出电池。,You have taken the battery from the lake station.
 BATTERY_READY_NOTICE,电池已充满，回到湖心电站取出电池,Battery full: return to the lake station to take it
@@ -210,10 +210,10 @@ QUEST_RADAR_DESC,带着升级后的装备和密钥前往雷达站。清理环境
 QUEST_RADAR_LOCATION,山地区域 / 雷达站 / 湖心终端,Mountain region / Radar station / Lake terminal
 QUEST_RADAR_STEP_START,使用04获得的密钥启动雷达,Start the radar with the key obtained in mission 04
 QUEST_RADAR_STEP_COORDINATES,读取雷达的坐标信息,Read the radar coordinates
-INTERACT_RADAR_START,按 %s 使用密钥修复并启动雷达,Press %s to use the key and bring the radar online
+INTERACT_RADAR_START,按 %s 启动雷达,Press %s to bring the radar online
 INTERACT_RADAR_READ,按 %s 读取雷达坐标,Press %s to read the radar coordinates
 RADAR_READOUT_KEY,密钥验证通过。雷达已启动，密钥已保留。,Key verified. Radar online. The key remains available.
-RADAR_READOUT_COORDINATES,已获取航行坐标：%s。请记下，在港口的小船上输入。,Navigation coordinates received: %s. Note them down and enter them on the boat at the harbour.
+RADAR_READOUT_COORDINATES,已获取航行坐标：%s。前往港口，在控制台输入航行坐标。,Navigation coordinates received: %s. Go to the harbor and enter them at the control console.
 RADAR_READOUT_RETURN,返回湖心终端提交雷达信息。,Return to the lake terminal and submit the radar information.
 RADAR_DELIVERY_RECEIVED,湖心终端：雷达信息已接收，坐标已记录。,Lake terminal: Radar information received. Coordinates recorded.
 RADAR_DELIVERY_REWARD,湖心终端：混沌能量模块已交付。,Lake terminal: Chaos Energy Module issued.
@@ -265,7 +265,7 @@ STARTUP_SPRINT_BODY,提高移动速度，检查动力输出。,Increase movement
 STARTUP_HOLD_SPRINT,按住 %s，并使用 %s 奔跑,Hold %s and use %s to sprint
 STARTUP_FEEDBACK_OK,✓ 反馈正常,✓ Feedback normal
 QUEST_CABIN_TITLE,机舱调查,Cabin investigation
-QUEST_CABIN_DESC,启动北部水泵，恢复湖心站供水。机舱内的两份平板记录可以选择阅读。,Start the northern pump to restore the lake station’s water supply. The two tablet records in the cabin are optional reading.
+s’s water supply. The two tablet records in the cabin are optional reading.
 STARTUP_CURRENT_TARGET,当前目标：%s,Current objective: %s
 READ_TABLET_PROMPT,按 %s 阅读平板,Press %s to read tablet
 REREAD_TABLET_PROMPT,按 %s 重读平板,Press %s to reread tablet
@@ -309,3 +309,20 @@ BIKE_1,一台@Decathlong 生产的ROCKRIDER ST100型号自行车，
 BIKE_2,自行车是一种省力不省功的非化石燃料驱动移动工具。
 BIKE_3,在古老的cambridge小镇这或许是最珍贵的东西,
 BIKE_4,因为资料显示直到人类消失前该地几乎所有的犯罪报告都来自于自行车的失窃。
+STARTUP_WATER_GUN_TITLE,生态修复模块校验,Ecosystem restoration check
+STARTUP_WATER_GUN_BODY,水枪已接入。向枯地发射水团，确认生态修复反馈。,Water gun connected. Fire a water blob at barren ground to check the restoration system.
+STARTUP_WATER_GUN_INPUT,按住 %s 瞄准，按 %s 发射,Hold %s to aim and press %s to fire
+STARTUP_JETPACK_TITLE,推进模块校验,Propulsion check
+STARTUP_JETPACK_BODY,喷气背包已接入。先跳跃，在空中再次按住跳跃键，测试持续升空。松开停止喷射，停用后能量逐渐恢复。,Jetpack connected. Jump then press and hold jump again in midair to test sustained flight. Release to stop thrust; energy recovers while not in use.
+STARTUP_JETPACK_INPUT,按 %s 跳跃，空中再次按住 %s 喷射,Press %s to jump then press and hold %s again in midair to thrust
+QUEST_CABIN_INVESTIGATE,调查机舱内部，读完两份平板记录（%d/2）,Inspect the cabin and read both tablet records (%d/2)
+PUMP_REQUIRES_CABIN,%s 先读完机舱内的两份记录,%s Read both cabin records first
+TERMINAL_NEXT_RADAR,前往山地雷达站，启动雷达并获取航行坐标。,Go to the mountain radar station and obtain the navigation coordinates.
+TERMINAL_NEXT_HARBOR,前往港口，在控制台输入航行坐标并安装核心电池。,Go to the harbor and enter the navigation coordinates at the control console. Then install the core battery.
+TERMINAL_NEXT_BATTERY,在港口控制台安装核心电池，为小船供能。,Install the core battery at the harbor control console to power the boat.
+TERMINAL_NEXT_DEPART,在港口控制台确认航线并出发。,Confirm the route at the harbor control console and depart.
+RADAR_HOLD_START,按住 %s 插入钥匙启动雷达站,Hold %s to insert the key and start the radar station
+RADAR_KEY_REQUIRED,需要钥匙启动雷达站,A key is required to start the radar station
+RADAR_ONLINE,雷达站已启动。,Radar station online.
+BOUNDARY_WARNING_TITLE,作业范围警告,Operating area warning
+BOUNDARY_WARNING_BODY,已接近试验岛边界。请返回岛内，继续当前作业。,You are approaching the island boundary. Return to the island to continue your assignment.

@@ -73,6 +73,13 @@ func _render_battery() -> void:
 	var status := "TERMINAL_BATTERY_COLLECTED" if BatteryCharge.collected() \
 			else "TERMINAL_BATTERY_FULL" if BatteryCharge.full() else "TERMINAL_BATTERY_CHARGING"
 	%BatteryStatus.text = tr(status)
+	if BatteryCharge.collected() and Quests.event_count(&"ending_boat") == 0 and Quests.event_count(&"ending_disruptor") == 0:
+		var objective := "TERMINAL_NEXT_RADAR"
+		if Quests.event_count(&"radar_coordinates") > 0:
+			objective = "TERMINAL_NEXT_HARBOR"
+			if Quests.event_count(&"boat_coordinates_loaded") > 0:
+				objective = "TERMINAL_NEXT_BATTERY" if Quests.event_count(&"boat_battery_installed") == 0 else "TERMINAL_NEXT_DEPART"
+		%BatteryStatus.text += "\n\n" + tr("STARTUP_CURRENT_TARGET") % tr(objective)
 	%BatteryBar.text = "%s  %s" % [tr("TERMINAL_BATTERY_CHARGE"), _bar(BatteryCharge.charge())]
 	var regions: Array[Dictionary] = GrowthMap.progress_regions()
 	var rows := %Regions.get_children()

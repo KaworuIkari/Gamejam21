@@ -22,8 +22,6 @@ var _return_focus: Control
 
 func _ready() -> void:
 	LightUI.apply(self)
-	$Version.add_theme_color_override(&"font_color", Color(0.93, 0.95, 0.90, 0.85))
-	$Version.add_theme_color_override(&"font_shadow_color", Color(0.12, 0.18, 0.20, 0.65))
 	LightUI.frost(_slot_panel)
 	LightUI.soften_dim($SlotScreen/Dim)
 	_continue.theme_type_variation = &"LightPrimaryButton"

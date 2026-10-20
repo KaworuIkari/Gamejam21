@@ -86,7 +86,13 @@ func _process(delta: float) -> void:
 		if locked != _prompt_locked:
 			_prompt_locked = locked
 			_prompt.configure(&"interact", locked_key if locked else message_key)
-		_prompt.set_available(focused and _can_act())
+		var available := focused and _can_act()
+		if available and locked:
+			for well in get_tree().get_nodes_in_group(&"water_wells"):
+				if well.can_activate():
+					available = false
+					break
+		_prompt.set_available(available)
 		_prompt.set_interactable(not locked)
 
 	if focused and _can_act() and not is_locked() and Input.is_action_pressed(&"interact"):
@@ -144,16 +150,36 @@ func _update_focus() -> void:
 			_focus = null
 		return
 	var d := global_position.distance_squared_to(_player.global_position)
-	if _focus == null or not is_instance_valid(_focus) or _focus.is_cleared or _focus._player == null \
-			or d < _focus.global_position.distance_squared_to(_player.global_position) - 0.01:
+	if _focus == null or not is_instance_valid(_focus) or _focus.is_cleared or _focus._player == null:
 		_focus = self
+		return
+	var locked := is_locked()
+	var focus_locked := _focus.is_locked()
+	if (focus_locked and not locked) or (locked == focus_locked \
+			and d < _focus.global_position.distance_squared_to(_player.global_position) - 0.01):
+		_focus = self
+
+
+## Available clearing takes priority over wells, including its brief removal animation.
+static func has_active_target(tree: SceneTree) -> bool:
+	for candidate in tree.get_nodes_in_group(&"clearable"):
+		if not candidate.is_queued_for_deletion() and is_instance_valid(candidate._player) \
+				and not candidate.is_locked() and candidate._can_act():
+			return true
+	return false
 
 
 func _can_act() -> bool:
 	if get_tree().paused:
 		return false
 	var dialogic := get_node_or_null(^"/root/Dialogic")
-	return dialogic == null or dialogic.current_timeline == null
+	if dialogic != null and dialogic.current_timeline != null:
+		return false
+	# Reading/talking takes priority when its prompt is active in the same area.
+	for candidate in get_tree().get_nodes_in_group(&"dialogue_interaction_candidates"):
+		if candidate is DialogueTrigger and candidate._is_active_target():
+			return false
+	return true
 
 
 func _is_player(body: Node) -> bool:

@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3]
-[ext_resource type="PackedScene" path="res://assets/models/stylised_bike/stylised_bike.glb" id="1"]
-[ext_resource type="PackedScene" path="res://components/text_interaction/text_interaction.tscn" id="2"]
+[gd_scene load_steps=5 format=3]
+[ext_resource type="PackedScene" path="res://stylised_bike/stylised_bike.glb" id="1"]
 [sub_resource type="BoxShape3D" id="frame"]
 size = Vector3(1.9, 0.78, 0.18)
 [sub_resource type="BoxShape3D" id="bar"]
@@ -19,7 +18,3 @@ shape = SubResource("bar")
 [node name="SaddleCollision" type="CollisionShape3D" parent="Body"]
 position = Vector3(-0.37, 1.12, 0)
 shape = SubResource("seat")
-[node name="TextInteraction" parent="." instance=ExtResource("2")]
-object_title = "Trail bike"
-display_text = "A sturdy mountain bike, with faded turquoise paint.\nThere is still air in the tyres. Someone must have been here recently."
-prompt_text = "Inspect bike"

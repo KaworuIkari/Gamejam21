@@ -1,12 +1,14 @@
 extends CanvasLayer
-## Shared timed card; the same content can be reviewed on the pause overview.
+## Shared card; boundary warnings persist, while checks/objectives use a timeout.
 const LightUI = preload("res://ui/theme/light/light_ui.gd")
-const ROWS := [
-	["STARTUP_LOOK_TITLE", "STARTUP_LOOK_BODY"],
-	["STARTUP_WALK_TITLE", "STARTUP_WALK_BODY"],
-	["STARTUP_JUMP_TITLE", "STARTUP_JUMP_BODY"],
-	["STARTUP_SPRINT_TITLE", "STARTUP_SPRINT_BODY"],
-]
+const ROWS := {
+	0: ["STARTUP_LOOK_TITLE", "STARTUP_LOOK_BODY"],
+	1: ["STARTUP_WALK_TITLE", "STARTUP_WALK_BODY"],
+	2: ["STARTUP_JUMP_TITLE", "STARTUP_JUMP_BODY"],
+	3: ["STARTUP_SPRINT_TITLE", "STARTUP_SPRINT_BODY"],
+	5: ["STARTUP_WATER_GUN_TITLE", "STARTUP_WATER_GUN_BODY"],
+	6: ["STARTUP_JETPACK_TITLE", "STARTUP_JETPACK_BODY"],
+}
 @export var display_seconds := 10.0
 @export var animation_seconds := 0.35
 
@@ -24,6 +26,7 @@ var _allowed := false
 var _review := false
 var _shown := false
 var _switching := false
+var _boundary_warning := false
 var _motion: Tween
 
 
@@ -44,13 +47,20 @@ func show_step(step: int, confirmed: bool, restart := false) -> void:
 	_confirmed = confirmed
 	if changed:
 		_age = 0.0
-	if not is_node_ready() or _switching:
+	if not is_node_ready() or _switching or _boundary_warning:
 		return
 	if changed and _shown:
 		_switching = true
 		_animate(false)
 		await _motion.finished
 		_switching = false
+	_refresh()
+
+
+func set_boundary_warning(active: bool) -> void:
+	if active == _boundary_warning:
+		return
+	_boundary_warning = active
 	_refresh()
 
 
@@ -62,9 +72,9 @@ func set_context(allowed: bool, review: bool) -> void:
 func _process(delta: float) -> void:
 	if _switching:
 		return
-	var shown := _allowed and (_review or _age < display_seconds)
+	var shown := _allowed and (_boundary_warning or _review or _age < display_seconds)
 	_animate(shown)
-	if shown and not _review and not get_tree().paused:
+	if shown and not _boundary_warning and not _review and not get_tree().paused:
 		_age += delta
 
 
@@ -84,7 +94,7 @@ func _animate(shown: bool) -> void:
 
 
 func _on_quest_changed() -> void:
-	if _step == 4 and _body.text != _objective_text():
+	if _step == 4 and not _boundary_warning and _body.text != _objective_text():
 		show_step(4, false, true)
 
 
@@ -93,6 +103,9 @@ func _objective_text() -> String:
 	if quest == null:
 		return ""
 	var objective := Quests.step_label(quest, Quests.current_step(quest))
+	if quest.get_id() == &"00_investigate_cabin" and Quests.current_step(quest) < 2:
+		var read := int(Quests.event_count(&"cabin_delivery_read") > 0) + int(Quests.event_count(&"cabin_crew_read") > 0)
+		objective = tr("QUEST_CABIN_INVESTIGATE") % read
 	return tr("STARTUP_CURRENT_TARGET") % objective
 
 
@@ -113,14 +126,21 @@ func _input(event: InputEvent) -> void:
 
 
 func _refresh() -> void:
-	if _step < 4:
-		_title.text = tr(ROWS[_step][0]) if _step >= 0 else tr("STARTUP_INTRO_TITLE")
-	_body.text = tr(ROWS[_step][1]) if _step >= 0 and _step < 4 else (tr("STARTUP_INTRO_BODY") if _step < 0 else _objective_text())
+	if _boundary_warning:
+		_title.text = tr("BOUNDARY_WARNING_TITLE")
+		_body.text = tr("BOUNDARY_WARNING_BODY")
+		_title.show()
+		_input_label.hide()
+		_status.hide()
+		return
+	var row: Array = ROWS.get(_step, ["STARTUP_INTRO_TITLE", "STARTUP_INTRO_BODY"])
+	_title.text = tr(row[0])
+	_body.text = _objective_text() if _step == 4 else tr(row[1])
 	_body.text = _body.text.replace("\\n", "\n")
-	_title.visible = _step < 4
+	_title.visible = _step != 4
 	_status.text = tr("STARTUP_FEEDBACK_OK")
 	_status.visible = _confirmed
-	_input_label.visible = _step >= 0 and _step < 4
+	_input_label.visible = ROWS.has(_step)
 	match _step:
 		0:
 			_input_label.text = tr("STARTUP_LOOK_PAD" if _device == "joy" else "STARTUP_LOOK_INPUT")
@@ -130,6 +150,10 @@ func _refresh() -> void:
 			_input_label.text = tr("STARTUP_PRESS_JUMP") % _key(&"jump")
 		3:
 			_input_label.text = tr("STARTUP_HOLD_SPRINT") % [_key(&"sprint"), _movement_keys()]
+		5:
+			_input_label.text = tr("STARTUP_WATER_GUN_INPUT") % [_key(&"use2"), _key(&"use")]
+		6:
+			_input_label.text = tr("STARTUP_JETPACK_INPUT") % [_key(&"jump"), _key(&"jump")]
 
 
 func _key(action: StringName) -> String:
