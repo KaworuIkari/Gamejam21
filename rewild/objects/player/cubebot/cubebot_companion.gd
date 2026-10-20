@@ -93,6 +93,9 @@ var _stuck_t := 0.0
 var _progress_from := Vector3.ZERO
 var _catching := false      # mid catch-up hop
 
+# teleportation for separate nav mesh
+@export var teleport_cooldown := 1.5
+var _teleport_cd := 0.0
 
 func _ready() -> void:
 	_yaw_goal = rotation.y
@@ -150,6 +153,8 @@ func _think() -> void:
 	_think_t = _think_dt
 	_mode_t -= dt
 
+	_teleport_cd -= dt
+
 	if _gait == Gait.RUN:
 		_stamina -= stamina_drain * dt
 		if _stamina <= 0.0:
@@ -175,6 +180,17 @@ func _think() -> void:
 	var off := lp - global_position
 	off.y = 0.0
 	var d2 := off.length_squared()
+
+	if not _can_reach(lp):
+		if _mode != Mode.FOLLOW:
+			_enter(Mode.FOLLOW)
+		var close := follow_distance + 0.8
+		if (d2 > close * close or absf(lp.y - global_position.y) > 1.5) and _teleport_cd <= 0.0:
+			_teleport_to_lira()
+		else:
+			_set_gait(Gait.IDLE)  # speed 0, so the agent is never polled for a dead path
+			_yaw_goal = _yaw_to(lp)
+		return
 
 	if d2 > leash * leash and _mode != Mode.FOLLOW:
 		_enter(Mode.FOLLOW)
@@ -463,3 +479,33 @@ func _pick_look() -> void:
 
 func _yaw_to(p: Vector3) -> float:
 	return atan2(p.x - global_position.x, p.z - global_position.z)
+
+## True if a path from here ends at LIRA's spot on the mesh. A flying LIRA above a
+## connected mesh counts as reachable (we project her onto the mesh), so the bot only
+## teleports when the mesh is genuinely disconnected.
+func _can_reach(p: Vector3) -> bool:
+	var map := _nav.get_navigation_map()
+	if NavigationServer3D.map_get_iteration_id(map) == 0:
+		return true  # map not synced yet, don't judge
+	var end := NavigationServer3D.map_get_closest_point(map, p)
+	var path := NavigationServer3D.map_get_path(map, global_position, end, true)
+	return not path.is_empty() and path[path.size() - 1].distance_to(end) < 0.5
+
+
+func _teleport_to_lira() -> void:
+	_teleport_cd = teleport_cooldown
+	var away := global_position - lira.global_position
+	away.y = 0.0
+	away = away.normalized() if away.length() > 0.01 else Vector3.BACK
+	var map := _nav.get_navigation_map()
+	var to := NavigationServer3D.map_get_closest_point(
+			map, lira.global_position + away * follow_distance)
+	if global_position.distance_to(to) < 1.0:
+		return  # already as close as the mesh allows (LIRA is flying over a gap)
+	global_position = to + Vector3.UP * 0.1
+	velocity = Vector3.ZERO
+	_air_t = 0.0
+	_stuck_t = 0.0
+	_progress_from = global_position
+	_yaw_goal = _yaw_to(lira.global_position)
+	rotation.y = _yaw_goal
