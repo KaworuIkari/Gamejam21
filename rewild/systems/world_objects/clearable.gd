@@ -132,6 +132,8 @@ func clear(instant := false) -> void:
 		get_parent().add_child(a)
 		a.global_position = global_transform * release_offset
 	cleared.emit(self)
+	if not instant and has_tag(&"garbage"):
+		UIAudio.play_sfx(UIAudio.GARBAGE_PICKUP)
 	var quests := get_node_or_null(^"/root/Quests")
 	if quests and not instant:
 		for t in tags:

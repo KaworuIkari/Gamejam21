@@ -1,9 +1,9 @@
 class_name CoordinatePad
 extends CanvasLayer
-## Nine-key (1–9) pad for typing the boat's navigation coordinates.
-## Usage:  if await CoordinatePad.ask(self, "3729"): ...
+## Phone-style keypad (1–9, then Clear · 0 · Confirm) for typing the boat's coordinates.
+## Usage:  if await CoordinatePad.ask(self, "211026"): ...
 ## A wrong code shows COORD_PAD_WRONG and clears the entry; Cancel / Esc returns false.
-## Keyboard: 1–9, Backspace, Enter, Esc. The game is paused while it is open.
+## Keyboard: 0–9, Backspace, Enter, Esc. The game is paused while it is open.
 
 const LightUI = preload("res://ui/theme/light/light_ui.gd")
 const WRONG_COLOR := Color(0.85, 0.22, 0.2)
@@ -72,26 +72,27 @@ func _ready() -> void:
 	var grid_center := CenterContainer.new()
 	grid_center.add_child(grid)
 	column.add_child(grid_center)
+	var keys: Array = []
 	for digit in range(1, 10):
+		keys.append([str(digit), _type.bind(str(digit))])
+	keys.append_array([["COORD_PAD_CLEAR", _clear], ["0", _type.bind("0")], ["COORD_PAD_CONFIRM", _confirm]])
+	for entry in keys:
 		var key := Button.new()
-		key.text = str(digit)
-		key.custom_minimum_size = Vector2(96, 80)
-		key.add_theme_font_size_override(&"font_size", 36)
-		key.pressed.connect(_type.bind(str(digit)))
+		key.text = entry[0]
+		key.custom_minimum_size = Vector2(110, 80)
+		if entry[0].length() == 1:
+			key.add_theme_font_size_override(&"font_size", 36)
+		key.pressed.connect(entry[1])
 		grid.add_child(key)
-		if digit == 1:
+		if _first == null:
 			_first = key
 
-	var actions := HBoxContainer.new()
-	actions.alignment = BoxContainer.ALIGNMENT_CENTER
-	actions.add_theme_constant_override(&"separation", 12)
-	column.add_child(actions)
-	for entry in [["COORD_PAD_CLEAR", _clear], ["COORD_PAD_CONFIRM", _confirm], ["UI_CANCEL", decided.emit.bind(false)]]:
-		var button := Button.new()
-		button.text = entry[0]
-		button.custom_minimum_size.x = 140
-		button.pressed.connect(entry[1])
-		actions.add_child(button)
+	var cancel := Button.new()
+	cancel.text = "UI_CANCEL"
+	cancel.custom_minimum_size.x = 140
+	cancel.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	cancel.pressed.connect(decided.emit.bind(false))
+	column.add_child(cancel)
 
 	LightUI.apply(root)
 	LightUI.frost(panel)
@@ -140,9 +141,9 @@ func _input(event: InputEvent) -> void:
 	if not (event is InputEventKey and event.pressed and not event.echo):
 		return
 	var code: int = event.keycode
-	if code >= KEY_1 and code <= KEY_9:
+	if code >= KEY_0 and code <= KEY_9:
 		_type(str(code - KEY_0))
-	elif code >= KEY_KP_1 and code <= KEY_KP_9:
+	elif code >= KEY_KP_0 and code <= KEY_KP_9:
 		_type(str(code - KEY_KP_0))
 	elif code == KEY_BACKSPACE:
 		_entry = _entry.left(-1)

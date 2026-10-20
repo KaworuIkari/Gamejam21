@@ -5,22 +5,21 @@ var pump: WaterFlowSwitch
 
 func _ready() -> void:
 	pump.trigger._used = pump.is_on
-	pump.trigger.can_interact = _can_start_pump
-	pump.trigger.locked_text = func(): return "PUMP_REQUIRES_CABIN"
 
 
-func _can_start_pump() -> bool:
-	return Quests.event_count(&"cabin_delivery_read") > 0 and Quests.event_count(&"cabin_crew_read") > 0
-
-
-## Version 1 moved the pump from 01 into 00; version 2 restores required cabin reading.
-## Rebuild only 00 from its one-off counters, preserving later progress and equipment.
+## Version 1 moved the pump from 01 into 00; version 2 made cabin reading required;
+## version 3 makes it optional again (00 = start the pump). Rebuild only 00 from its one-off
+## counters, preserving later progress and equipment.
 static func migrate_save(data: Dictionary) -> void:
 	var version := int(data.get("cabin_story_version", 0))
-	if version >= 2:
+	if version >= 3:
 		return
-	data["cabin_story_version"] = 2
+	data["cabin_story_version"] = 3
 	var saved: Dictionary = data.get("quests", {})
+	if version == 2:
+		# 00's step indices changed; it is rebuilt from pump_started on load.
+		saved.get("quests", {}).erase("00_investigate_cabin")
+		return
 	var counters: Dictionary = saved.get("counters", {})
 	var states: Dictionary = saved.get("quests", {})
 	var cabin: Dictionary = states.get("00_investigate_cabin", {})
