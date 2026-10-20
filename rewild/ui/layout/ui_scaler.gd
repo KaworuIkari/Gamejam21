@@ -19,9 +19,13 @@ const META := &"_ui_scaler_root"
 static var _factor := 1.0
 
 ## 设置里的“界面缩放”（1.0 = 100%）
-var user_scale := 1.0:
+var _user_scale := 1.0
+var user_scale:
+	get():
+		return _user_scale
 	set(value):
-		user_scale = value
+		_user_scale = value
+		_update_factor()
 		_refresh_all()
 
 var _roots: Array[Control] = []
@@ -49,7 +53,7 @@ func _ready() -> void:
 
 func _scan_existing() -> void:
 	for n in get_tree().root.find_children("*", "Control", true, false):
-		_try_register(n)
+		_try_register(n.get_instance_id())
 
 
 func _update_factor() -> void:
@@ -59,11 +63,12 @@ func _update_factor() -> void:
 
 func _on_node_added(node: Node) -> void:
 	if node is Control:
-		_try_register.call_deferred(node)
+		_try_register.call_deferred(node.get_instance_id())
 
 
-func _try_register(node: Node) -> void:
-	if not is_instance_valid(node) or not node.is_inside_tree() or not _is_ours(node):
+func _try_register(id: int) -> void:
+	var node := instance_from_id(id) as Node
+	if node == null or not is_instance_valid(node) or not node.is_inside_tree() or not _is_ours(node):
 		return
 	var c := node as Control
 	if c.get_parent() is Control or c.has_meta(META):

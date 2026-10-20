@@ -9,6 +9,7 @@ extends Node
 signal changed
 signal quest_started(quest: Quest)
 signal quest_completed(quest: Quest)
+signal step_completed(quest: Quest, index: int)
 signal ability_changed(ability: StringName, level: int)
 
 enum Status { LOCKED, ACTIVE, DONE }
@@ -293,16 +294,20 @@ func _evaluate() -> void:
 				for i in q.steps.size():
 					if not i in s.done and _step_count(q, i) >= q.steps[i].count:
 						s.done.append(i)
+						step_completed.emit(q, i)
 			else:
 				while s.step < q.steps.size():
-					var last := _group_end(q, s.step)
+					var first: int = s.step
+					var last := _group_end(q, first)
 					var open := false
-					for i in range(s.step, last + 1):
+					for i in range(first, last + 1):
 						open = open or _step_count(q, i) < q.steps[i].count
 					if open:
 						break
 					s.step = last + 1
 					_begin_step(q)
+					for i in range(first, last + 1):
+						step_completed.emit(q, i)
 			if (q.parallel and q.complete_any and not s.done.is_empty()) or (s.done.size() if q.parallel else s.step) >= q.steps.size():
 				s.status = Status.DONE
 				for a in q.rewards:
