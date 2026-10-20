@@ -73,8 +73,16 @@ func _sync_preview_children(count: int, is_brush: bool) -> void:
 
 				if not is_brush:
 					var orig_transform = new_child.transform
+					var random_transform = AssetTransformations.transform_rotation(
+						Transform3D(), options, rng
+					)
+					random_transform = AssetTransformations.transform_scale(
+						random_transform, options, rng
+					)
+
 					var new_basis = _manual_rotation * orig_transform.basis
 					new_basis = new_basis.scaled(_manual_scale)
+					new_basis = random_transform.basis * new_basis
 					new_child.transform = Transform3D(new_basis, orig_transform.origin)
 				else:
 					var radius = options.brush_radius

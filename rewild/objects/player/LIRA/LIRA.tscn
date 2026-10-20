@@ -10,6 +10,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dwt42pd6wpfwo" path="res://objects/player/LIRA/Robot_Robot.res" id="7_n661r"]
 [ext_resource type="PackedScene" uid="uid://bm4kbp1plk4ob" path="res://objects/player/LIRA/equipments/water_tank/water_tank.tscn" id="7_vqtik"]
 [ext_resource type="Material" uid="uid://dc6btv3rapucg" path="res://objects/player/LIRA/equipments/water_tank/water_tank_mat.tres" id="8_8rgye"]
+[ext_resource type="Material" uid="uid://cw7kj47oantb3" path="res://objects/player/LIRA/textures/lira_black.tres" id="8_yellow_body"]
 [ext_resource type="Animation" uid="uid://d1305kj8k86av" path="res://objects/player/LIRA/animations/anim1/dance_rig.res" id="9_m66hb"]
 [ext_resource type="AnimationLibrary" uid="uid://7qhlb2jw3hkc" path="res://objects/player/LIRA/animations/anim2/Robot_anim2.glb" id="9_mjkbt"]
 [ext_resource type="Animation" uid="uid://donn4tolgu8oc" path="res://objects/player/LIRA/animations/anim1/idle1_rig.res" id="10_7vhap"]
@@ -284,6 +285,7 @@ sprint_speed = 7.0
 jump_velocity = 10.0
 
 [node name="Robot" type="Node3D" parent="." unique_id=752573167]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
 [node name="root" type="Node3D" parent="Robot" unique_id=971101118]
 metadata/extras = {
@@ -1087,6 +1089,7 @@ metadata/_custom_type_script = "uid://fajd8cqak6cg"
 mesh = ExtResource("7_n661r")
 skin = SubResource("Skin_ci5bl")
 skeleton = NodePath("..")
+surface_material_override/5 = ExtResource("8_yellow_body")
 
 [node name="spine_02_x" type="BoneAttachment3D" parent="Robot/root/Skeleton3D" unique_id=1064549217]
 transform = Transform3D(0.99286085, -0.05696269, -0.104798384, 0.073775426, 0.9836492, 0.16429096, 0.09372637, -0.17084959, 0.9808291, -0.111011006, 1.4434853, -0.01114795)

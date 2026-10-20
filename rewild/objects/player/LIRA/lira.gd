@@ -3,6 +3,10 @@ class_name LIRA_Character
 const SafeCameraArm = preload("res://objects/player/LIRA/scripts/safe_camera_arm.gd")
 const JetpackHUD = preload("res://ui/in_game/jetpack/jetpack_hud.gd")
 const FaceHUD = preload("res://ui/in_game/face/face_hud.gd")
+## LIRA is yellow until she takes the fully charged battery at the lake station, then pink.
+const YELLOW_SKIN = preload("res://objects/player/LIRA/textures/lira_black.tres")
+const PINK_SKIN = preload("res://objects/player/LIRA/textures/lira_pink.tres")
+const BODY_SURFACE := 5   # the body surface of Robot_Robot.res (4 is the face screen)
 var settings_invert_y: bool:
 	get:
 		return camera_invert_y
@@ -19,7 +23,6 @@ var anim_dir := Vector2.ZERO   # character rotation for diagonal walks
 
 # emoji
 @onready var face: RobotFace = $RobotFace
-var _idle_time := 0.0
 
 # trajectory and shooting
 @onready var aim_trajectory: AimTrajectory = $AimTrajectory
@@ -124,7 +127,10 @@ func _ready() -> void:
 	var quests := get_node_or_null(^"/root/Quests")
 	if quests:
 		quests.ability_changed.connect(func(_a: StringName, _l: int) -> void: _apply_abilities())
+		quests.changed.connect(_apply_skin)
 	_apply_abilities()
+	_apply_skin()
+	GrowthMap.watered.connect(_on_greening)
 
 	spring_arm_3d.add_excluded_object(get_rid())
 
@@ -151,7 +157,6 @@ func _physics_process(delta: float) -> void:
 	_swim_sound(in_water and velocity.length_squared() > 0.25)   # loop plays while moving in water
 	
 	# udpate face
-	_idle_time = _idle_time + delta if velocity.length() < 0.1 else 0.0
 	face.base = _pick_base_mood()
 	_announce(face.base)
 	face.stress = 0.0             # e.g. 1.0 - health / max_health
@@ -251,7 +256,6 @@ func try_shoot() -> void:                   # call this from the input code that
 	if not animation_script.is_aiming or _fire_cd > 0.0:
 		return
 	if not tank.consume_shot():
-		react(RobotFace.Mood.QUESTION, 1, 0.8)   # dry: LIRA notices
 		_fire_cd = 0.4                           # stop re-checking every frame while held
 		return
 	_fire_cd = fire_cooldown
@@ -294,8 +298,6 @@ func _handle_gravity_and_jump(delta: float) -> void:
 		_consume_anim_triggers()
 		jetpack.set_thrust(_thrusting, _spool)
 		return
-	if not frozen and is_on_floor() and Input.is_action_just_pressed("jump"):
-		UIAudio.play_sfx(UIAudio.JUMP, 0.08)
 	super(delta)  # gravity + ground jump
 	if is_on_floor():
 		_end_thrust()
@@ -316,7 +318,6 @@ func _try_burst_jetpack() -> void:
 		_regen_timer = regen_delay
 		animation_script.is_using_double_jump = true
 		jetpack.burst()
-		react(RobotFace.Mood.CORRECT, 1, 0.6)
 		SettingsManager.play_feedback(0.35, 0.55, 0.16)
 
 func _handle_jetpack(delta: float) -> void:
@@ -374,11 +375,39 @@ func _consume_anim_triggers() -> void:
 	if animation_script.torso_pb.get_current_node() == "JumpStart":
 		animation_script.is_using_double_jump = false
 
+## The jetpack shares the body's texture, so it changes colour with her.
+func _apply_skin() -> void:
+	var skin := PINK_SKIN if BatteryCharge.collected() else YELLOW_SKIN
+	if robot.get_surface_override_material(BODY_SURFACE) != skin:
+		robot.set_surface_override_material(BODY_SURFACE, skin)
+		jetpack.set_surface_override_material(0, skin)
+
 ###### Mood ######
 signal mood_changed_signal(mood: RobotFace.Mood)
-var current_mood: RobotFace.Mood = RobotFace.Mood.SMILE
+var current_mood: RobotFace.Mood = RobotFace.Mood.OFF
+
+const CAT_SWAP := 6.0              # seconds between cat and smile once the bot and fox are saved
+const STORM_DISGUST := 0.5         # sandstorm strength at which LIRA looks disgusted
+const GREEN_SEEN_RANGE := 40.0     # watering (so greening) farther away than this goes unnoticed
+const FACE_VIEW := &"lira_face"
+@export_group("Face close-up")
+## Seconds the camera takes to push in on the face, then to hold on it before and after the smile.
+@export var face_zoom_time := 2.5
+@export var face_hold_blank := 1.0
+@export var face_hold_smile := 1.5
+## Camera distance from the face at the start and end of the push-in, in metres.
+@export var face_zoom_from := 2.2
+@export var face_zoom_to := 0.75
+## New-game intro: farthest starting distance, flight time and the hold on the face (showing the
+## correct face) before play starts.
+@export var face_intro_from := 30.0
+@export var face_intro_time := 4.5
+@export var face_intro_hold := 1.5
+@export_group("")
+var _face_reveal := false          # true while face_reveal() holds the blank screen
 
 ## Dialogue, quests, anything: LIRA reacts and the UI hears about it.
+## Every accepted interaction calls react(CORRECT) (ui/in_game/interaction/interaction_prompt.gd).
 func react(mood: RobotFace.Mood, priority := 1, time := 1.0) -> void:
 	face.react(mood, priority, time)
 	_announce(mood)
@@ -389,12 +418,98 @@ func _announce(m: RobotFace.Mood) -> void:
 	current_mood = m
 	mood_changed_signal.emit(m)
 
+## Blank until the action terminal is activated, then smiling, disgusted in the sandstorm,
+## and once the bot (FactoryStory) and the fox are saved, cat and smile take turns.
 func _pick_base_mood() -> RobotFace.Mood:
-	if animation_script.is_aiming:                 # use whichever script owns this flag
-		return RobotFace.Mood.WATCHING
-	if _idle_time > 20.0:
+	if _face_reveal or not Quests.terminal_unlocked():
+		return RobotFace.Mood.OFF
+	var storm := get_tree().get_first_node_in_group(&"sand_storm") as SandStorm
+	if storm and storm.strength > STORM_DISGUST:
+		return RobotFace.Mood.DISGUST
+	if Quests.event_count(FactoryStory.ACTIVATED_EVENT) > 0 and Quests.event_count(&"fox_rescued") > 0 \
+			and fmod(Time.get_ticks_msec() / 1000.0, CAT_SWAP * 2.0) < CAT_SWAP:
 		return RobotFace.Mood.CAT
 	return RobotFace.Mood.SMILE
+
+## The terminal is activated (lake_power_station.gd): the camera pushes in on the blank face
+## with the tablet shot's sting, holds a moment, and the face lights up into a smile.
+func face_reveal() -> void:
+	_face_reveal = true
+	BgmPlayer._play_quests_bgm(0)   # same sting as the tablet-reading shot (cabin_read_camera.tscn)
+	var pcam := await _face_shot(face_zoom_from, face_zoom_time, 0.8)
+	await get_tree().create_timer(face_hold_blank).timeout
+	_face_reveal = false
+	face.react(RobotFace.Mood.SMILE, 3, face_hold_smile)
+	await get_tree().create_timer(face_hold_smile).timeout
+	await _end_face_shot(pcam)
+
+## New game (opening_sequence.gd): the fade from black opens far out on LIRA's most open side
+## and the camera flies in, swinging round to end in front of her face.
+func face_intro() -> void:
+	var pcam := await _face_shot(face_intro_from, face_intro_time, 0.0, true)
+	react(RobotFace.Mood.CORRECT, 2, face_intro_hold + 0.5)   # LIRA boots up: check mark on arrival
+	await get_tree().create_timer(face_intro_hold).timeout
+	await _end_face_shot(pcam)
+
+## Pushes a camera in on the face from `from_dist` metres out, ending face_zoom_to in front of
+## it. `blend`: seconds to cut over from the current camera. `search`: start from the direction
+## with the most open space (walls cut the distance short) instead of straight in front.
+func _face_shot(from_dist: float, zoom_time: float, blend: float, search := false) -> PhantomCamera3D:
+	frozen = true
+	var head := $Robot/root/Skeleton3D as Skeleton3D
+	var head_pos := head.to_global(head.get_bone_global_pose(head.find_bone("head.x")).origin) + Vector3.UP * 0.22
+	var front := character.global_basis.z.normalized()
+	var far_dir := front
+	if search:
+		var best := -INF
+		for yaw in range(0, 360, 30):
+			for pitch in [10, 25, 45]:
+				var dir := front.rotated(Vector3.UP, deg_to_rad(yaw))
+				dir = dir.rotated(dir.cross(Vector3.UP).normalized(), deg_to_rad(pitch))
+				var clear := _clear_distance(head_pos, dir, from_dist)
+				var score := clear - absf(wrapf(yaw, -180, 180)) * 0.02   # ties go to the front
+				if score > best:
+					best = score
+					far_dir = dir
+	from_dist = _clear_distance(head_pos, far_dir, from_dist)
+	var pcam := PhantomCamera3D.new()
+	pcam.tween_resource = PhantomCameraTween.new()
+	pcam.tween_resource.duration = blend
+	var view := CameraView.new()
+	view.view_name = FACE_VIEW
+	pcam.add_child(view)
+	get_parent().add_child(pcam)
+	# k: 0 = far start, 1 = at the face. Flies in along the checked line and only swings
+	# round to the front over the last couple of metres, so it does not cut through walls.
+	var place := func(k: float) -> void:
+		var dist := lerpf(face_zoom_to, from_dist, (1.0 - k) * (1.0 - k))
+		pcam.global_position = head_pos + far_dir.slerp(front, smoothstep(0.75, 1.0, k)) * dist
+		pcam.look_at(head_pos)
+	place.call(0.0)
+	CameraDirector.push(FACE_VIEW)
+	var t := create_tween()
+	t.tween_method(place, 0.0, 1.0, zoom_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await t.finished
+	return pcam
+
+## How far the camera can back away from the face along `dir`, up to `limit` metres.
+func _clear_distance(from: Vector3, dir: Vector3, limit: float) -> float:
+	var ray := PhysicsRayQueryParameters3D.create(from + dir * face_zoom_to, from + dir * limit)
+	ray.exclude = [get_rid()]
+	var hit := get_world_3d().direct_space_state.intersect_ray(ray)
+	return maxf(face_zoom_to, from.distance_to(hit.position) - 0.5) if hit else limit
+
+func _end_face_shot(pcam: PhantomCamera3D) -> void:
+	CameraDirector.pop()
+	await get_tree().create_timer(1.0).timeout   # let the blend back to the player camera finish
+	pcam.queue_free()
+	frozen = false
+
+## Before the terminal, LIRA does not understand the greening yet: a question mark whenever
+## ground near her is watered (it turns green over the next seconds).
+func _on_greening(world_pos: Vector3, _radius: float) -> void:
+	if not Quests.terminal_unlocked() and world_pos.distance_to(global_position) < GREEN_SEEN_RANGE:
+		react(RobotFace.Mood.QUESTION, 1, 2.0)
 
 ####### Footsteps ##########
 @onready var sound_emitter_footstep : FmodEventEmitter3D = $Robot/root/Skeleton3D/FootstepEmitter
@@ -520,7 +635,6 @@ func _end_dive() -> void:
 	_sound_emitter_water.play()
 
 func _enter_water() -> void:
-	react(RobotFace.Mood.QUESTION, 1, 1.0)
 	in_water = true
 	is_floating = true
 	is_diving = false
@@ -579,7 +693,6 @@ func _water_vertical(delta: float) -> void:
 		if jetpack_level <= 0:
 			_swim_hopping = true
 			velocity.y = swim_hop_speed
-			UIAudio.play_sfx(UIAudio.JUMP, 0.08)
 			return
 		else:
 			_try_burst_jetpack()
@@ -631,7 +744,6 @@ func _swim_sound_idle() -> void:
 var _air_peak_y := -INF                # highest feet height since last landing or entering water
 func _play_sound_water_big_splash() -> void:
 	_sound_emitter_big_splash.play()
-	react(RobotFace.Mood.DISGUST, 2, 1.2)
 
 # Records the highest feet height since the last landing. Resets on land or in water.
 func _track_air_height() -> void:

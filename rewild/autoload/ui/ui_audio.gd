@@ -17,7 +17,12 @@ const PROP_LAND: AudioStream = preload("res://assets/audio/sfx/prop_land.wav")
 const PROP_SPLASH: AudioStream = preload("res://assets/audio/sfx/prop_splash.wav")
 const PLANT_POP: AudioStream = preload("res://assets/audio/sfx/plant_pop.wav")
 const LEAF_RUSTLE: AudioStream = preload("res://assets/audio/sfx/leaf_rustle.wav")
-const JUMP: AudioStream = preload("res://assets/audio/sfx/jump.wav")
+const ROBOT_WAKE: AudioStream = preload("res://assets/audio/sfx/robot_wake.wav")
+## Every long press (the interaction prompt plays them): hum while held, chime when done,
+## wind-down when let go early.
+const CHARGE_LOOP: AudioStream = preload("res://assets/audio/sfx/station_charge_loop.wav")
+const CHARGE_COMPLETE: AudioStream = preload("res://assets/audio/sfx/station_charge_complete.wav")
+const CHARGE_CANCEL: AudioStream = preload("res://assets/audio/sfx/station_charge_cancel.wav")
 const TERMINAL_THEME_PATH := "res://ui/theme/terminal/terminal_theme.tres"
 
 func _ready() -> void:

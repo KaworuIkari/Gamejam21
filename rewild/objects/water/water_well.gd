@@ -56,6 +56,7 @@ func _ready() -> void:
 	for water in rise:
 		water.position.y -= rise_height
 	_prompt = HOLD_PROMPT_SCENE.instantiate()
+	_prompt.charge_sound = false  # only the water rising is heard
 	add_child(_prompt)
 	_prompt.configure(&"interact", prompt_key)
 
@@ -116,7 +117,7 @@ func activate() -> void:
 	if is_source:
 		return
 	Quests.report(saved_event)
-	UIAudio.play_sfx_at(UIAudio.WELL_START, global_position)
+	UIAudio.play_sfx_at(UIAudio.WELL_START, global_position, 0.05, -8.0)
 	for water in rise:
 		create_tween().tween_property(water, ^"position:y", water.position.y + rise_height, rise_time) \
 				.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

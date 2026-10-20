@@ -234,6 +234,7 @@ func _make_sparkles() -> CPUParticles3D:
 func _repair() -> void:
 	_sparkles.emitting = false
 	var bot := _bot()
+	UIAudio.play_sfx_at(UIAudio.ROBOT_WAKE, bot.global_position, 0.0)
 	var base := bot.position
 	var shake := create_tween()
 	for i in 12:

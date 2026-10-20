@@ -55,6 +55,14 @@ Level / Start Jetpack Level** there are the levels LIRA has before any quest (0 
 A Clearable with **Required Ability** set (e.g. `jetpack`) can only be cleared once that
 ability is unlocked.
 
+## LIRA's face
+
+LIRA's face screen follows the story: blank until the action terminal is activated (a
+question mark whenever ground near her is watered before that), then smiling, disgusted
+inside the sandstorm, and taking turns between cat and smile once the bot (`core_activated`) and the
+fox (`fox_rescued`) are saved. Every accepted interaction flashes the correct face.
+All of it is `_pick_base_mood()` and the `react()` calls in `objects/player/LIRA/lira.gd`.
+
 ## Testing
 
 Debug builds: **F9** completes the current step of the tracked quest.

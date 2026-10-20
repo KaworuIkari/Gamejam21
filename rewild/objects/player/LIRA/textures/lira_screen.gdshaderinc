@@ -1,6 +1,5 @@
 // Shared by lira_screen.gdshader (the 3D screen) and lira_screen_hud.gdshader (the HUD copy).
 uniform sampler2DArray faces : source_color, filter_nearest, repeat_disable;
-uniform int face_count = 6;
 uniform int from_layer = 0;
 uniform int to_layer = 0;
 uniform float transition : hint_range(0.0, 1.0) = 1.0;   // 0 = swap starts, 1 = finished; the script tweens it
@@ -58,11 +57,12 @@ vec3 screen_color(vec2 screen_uv) {
 	float torn = step(1.0 - G * 0.45, n);
 	uv.x += (h21(vec2(row, step_t + 17.0)) - 0.5) * 0.35 * G * torn;
 
-	// which face: old, then new, with quick flashes through the other faces in between
+	// which face: old, then new, flickering between old, new and blank (layer 0) in between
 	int layer = transition < 0.5 ? from_layer : to_layer;
 	float window = smoothstep(0.2, 0.35, transition) * (1.0 - smoothstep(0.65, 0.8, transition));
 	if (h21(vec2(step_t, 3.0)) < window * 0.85) {
-		layer = int(floor(h21(vec2(step_t, 11.0)) * float(face_count))) % face_count;
+		float pick = h21(vec2(step_t, 11.0));
+		layer = pick < 0.33 ? from_layer : (pick < 0.66 ? to_layer : 0);
 	}
 
 	// colour channels split sideways

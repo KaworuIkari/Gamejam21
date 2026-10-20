@@ -1,10 +1,11 @@
 class_name RobotFace extends Node
 
-enum Mood { SMILE, CORRECT, DISGUST, QUESTION, WATCHING, CAT }   # order = layer index
+enum Mood { OFF, SMILE, CORRECT, DISGUST, QUESTION, WATCHING, CAT }   # order = layer index
 const DIR := "res://objects/player/LIRA/textures/screen/"
 const HUD_SHADER := preload("res://objects/player/LIRA/textures/lira_screen_hud.gdshader")
-const FILES := ["smile", "correct", "disgust", "question_mark", "watching", "cat"]
+const FILES := ["", "smile", "correct", "disgust", "question_mark", "watching", "cat"]
 const STYLE := {                       # per-mood character of the screen
+	Mood.OFF:      {"pulse": 0.2, "glitch": 0.0},
 	Mood.SMILE:    {"pulse": 0.5, "glitch": 0.0},
 	Mood.CORRECT:  {"pulse": 0.8, "glitch": 0.0},
 	Mood.DISGUST:  {"pulse": 1.4, "glitch": 0.18},
@@ -12,20 +13,21 @@ const STYLE := {                       # per-mood character of the screen
 	Mood.WATCHING: {"pulse": 0.3, "glitch": 0.0},
 	Mood.CAT:      {"pulse": 0.4, "glitch": 0.0},
 }
+# Which face shows when is decided in lira.gd (_pick_base_mood and the react() calls).
 
 @export var screen_shader: Shader
 @export var transition_time := 0.45
 @export var min_hold := 0.8            # shortest time a face stays up; reaction durations should be longer
 
-var base: Mood = Mood.SMILE            # sustained mood, set every frame from game state
+var base: Mood = Mood.OFF              # sustained mood, set every frame from game state
 var stress := 0.0                      # 0..1, extra constant glitching (low health, etc.)
 
 var _mat: ShaderMaterial
 var _mats: Array[ShaderMaterial] = []   # the 3D screen plus any HUD copies; all get the same parameters
 var _tween: Tween
-var _shown: Mood = Mood.SMILE
+var _shown: Mood = Mood.OFF
 var _style_glitch := 0.0
-var _react: Mood = Mood.SMILE
+var _react: Mood = Mood.OFF
 var _react_prio := 0
 var _react_left := 0.0
 var _hold := 0.0
@@ -34,6 +36,9 @@ func setup(mesh_instance: MeshInstance3D, surface: int) -> void:
 	var images: Array[Image] = []
 	var size := Vector2i.ZERO
 	for f in FILES:
+		if f == "":
+			images.append(Image.create_empty(16, 16, false, Image.FORMAT_RGBA8))   # blank screen
+			continue
 		var img: Image = (load(DIR + f + ".png") as Texture2D).get_image()
 		if img.is_compressed():
 			img.decompress()
@@ -49,7 +54,6 @@ func setup(mesh_instance: MeshInstance3D, surface: int) -> void:
 	_mat = ShaderMaterial.new()
 	_mat.shader = screen_shader
 	_mat.set_shader_parameter("faces", arr)
-	_mat.set_shader_parameter("face_count", FILES.size())
 	_mat.set_shader_parameter("from_layer", 0)
 	_mat.set_shader_parameter("to_layer", 0)
 	_mat.set_shader_parameter("transition", 1.0)
@@ -61,7 +65,7 @@ func setup(mesh_instance: MeshInstance3D, surface: int) -> void:
 func make_hud_material() -> ShaderMaterial:
 	var m := ShaderMaterial.new()
 	m.shader = HUD_SHADER
-	for p in ["faces", "face_count", "from_layer", "to_layer", "transition", "scanline_count", "pulse_speed", "idle_glitch"]:
+	for p in ["faces", "from_layer", "to_layer", "transition", "scanline_count", "pulse_speed", "idle_glitch"]:
 		m.set_shader_parameter(p, _mat.get_shader_parameter(p))
 	_mats.append(m)
 	return m

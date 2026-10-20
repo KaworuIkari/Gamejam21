@@ -9,9 +9,10 @@ const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_promp
 
 @export var prompt_key := "WATER_REFILL_PROMPT"
 ## Standing this close to the water's edge counts as beside it, in metres.
-@export var shore_reach := 1.5
-## Feet at most this far above the water surface (and up to `depth` below it).
-@export var shore_height := 1.5
+@export var shore_reach := 2.5
+## Feet at most this far above the water surface (and up to `depth` below it). The river
+## sits between banks 1.5-3 m high, so this has to reach the top of them.
+@export var shore_height := 3.0
 @export var depth := 4.0
 
 var _prompt: CanvasLayer
@@ -22,6 +23,7 @@ var _armed := false
 
 func _ready() -> void:
 	_prompt = HOLD_PROMPT_SCENE.instantiate()
+	_prompt.charge_sound = false  # the tank has its own fill sound
 	add_child(_prompt)
 	_prompt.configure(&"interact", prompt_key)
 
@@ -66,8 +68,9 @@ func _at_edge(water: StylizedWater, at: Vector3) -> bool:
 		return false
 	if water.holds_point(at):
 		return true
-	for i in 8:
-		var offset := Vector3.FORWARD.rotated(Vector3.UP, TAU * i / 8.0) * shore_reach
-		if water.holds_point(at + offset):
-			return true
+	for reach: float in [shore_reach * 0.5, shore_reach]: # the inner ring catches narrow water
+		for i in 8:
+			var offset := Vector3.FORWARD.rotated(Vector3.UP, TAU * i / 8.0) * reach
+			if water.holds_point(at + offset):
+				return true
 	return false

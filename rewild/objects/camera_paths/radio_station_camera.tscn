@@ -5,7 +5,7 @@
 [node name="RadioStationCamera" unique_id=62686932 instance=ExtResource("1_7xv26")]
 
 [node name="PathFollow3D" parent="." index="0" unique_id=277011382]
-bgm_idx = 3
+bgm_idx = -1
 step_event_name = &"radio_station_camera"
 
 [node name="CameraView" parent="PathFollow3D/PhantomCamera3D" parent_id_path=PackedInt32Array(561417519) index="0" unique_id=114001530]

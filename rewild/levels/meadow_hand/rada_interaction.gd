@@ -3,17 +3,12 @@ extends "res://objects/interactables/interact_trigger.gd"
 const RadarStory = preload("res://levels/meadow_hand/radar_story.gd")
 const HOLD_PROMPT = preload("res://ui/in_game/interaction/clear_hold_prompt.tscn")
 const UI_THEME = preload("res://ui/theme/light/light_theme.tres")
-const SFX_CHARGE: AudioStreamWAV = preload("res://assets/audio/sfx/station_charge_loop.wav")
-const SFX_COMPLETE: AudioStream = preload("res://assets/audio/sfx/station_charge_complete.wav")
-const SFX_CANCEL: AudioStream = preload("res://assets/audio/sfx/station_charge_cancel.wav")
 
 @export_range(0.1, 10.0, 0.1) var hold_time := 1.0
 
 var _hold := 0.0
 var _bar_fill: StyleBoxFlat
 var _coordinate_label: Label
-var _charge: AudioStreamPlayer
-var _sfx: AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -32,14 +27,6 @@ func _ready() -> void:
 	add_child(_prompt)
 	_prompt.configure(&"interact", message_key)
 	_style_charge_bar()
-
-	_charge = AudioStreamPlayer.new()
-	_charge.bus = &"SFX"
-	_charge.stream = SFX_CHARGE
-	add_child(_charge)
-	_sfx = AudioStreamPlayer.new()
-	_sfx.bus = &"SFX"
-	add_child(_sfx)
 
 	_create_coordinate_display()
 	interacted.connect(_show_coordinates)
@@ -65,12 +52,7 @@ func _process(delta: float) -> void:
 	var usable := _can_use() and not SceneRouter.is_busy()
 	if usable and Input.is_action_pressed(&"interact"):
 		_hold = minf(_hold + delta, hold_time)
-		_charge_sound(_hold / hold_time)
 	else:
-		if _hold > 0.0:
-			_charge.stop()
-			if _hold > hold_time * 0.15:
-				_play_sfx(SFX_CANCEL)
 		_hold = 0.0
 
 	var progress := clampf(_hold / hold_time, 0.0, 1.0)
@@ -82,8 +64,6 @@ func _process(delta: float) -> void:
 
 	if usable and _hold >= hold_time:
 		_hold = 0.0
-		_charge.stop()
-		_play_sfx(SFX_COMPLETE)
 		_prompt.play_activation()
 		use()
 		_prompt.set_available(false)
@@ -94,22 +74,6 @@ func _notification(what: int) -> void:
 		_refresh_read_state()
 	if what == NOTIFICATION_PAUSED:
 		_hold = 0.0
-		if is_instance_valid(_charge):
-			_charge.stop()
-
-
-func _charge_sound(progress: float) -> void:
-	if not _charge.playing:
-		_charge.play()
-	_charge.pitch_scale = lerpf(
-		0.7, 1.7, progress * progress * (3.0 - 2.0 * progress)
-	)
-	_charge.volume_db = lerpf(-16.0, -5.0, progress)
-
-
-func _play_sfx(stream: AudioStream) -> void:
-	_sfx.stream = stream
-	_sfx.play()
 
 
 func _style_charge_bar() -> void:
