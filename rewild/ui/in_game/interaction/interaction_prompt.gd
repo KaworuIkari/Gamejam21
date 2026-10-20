@@ -1,7 +1,6 @@
 extends CanvasLayer
 ## Shared presentation; owners control availability, progress and accepted activation.
 const LightUI = preload("res://ui/theme/light/light_ui.gd")
-const ProgressOutline = preload("res://ui/in_game/interaction/interaction_progress.gd")
 const COMPLETE_DURATION := 0.15
 ## Enabled only by clear_hold_prompt.tscn; tap prompts keep their original layout.
 @export var hold_to_clear := false
@@ -23,7 +22,7 @@ var _press_linger := 0.0
 var _complete_remaining := 0.0
 var _hold_progress := 0.0
 var _key_style: StyleBoxFlat
-var _outline: Control
+@onready var _outline: Control = $Root/Anchor/Panel/Row/Key/FeedbackOverlay/Outline
 var _hold_bar: ProgressBar
 
 func _ready() -> void:
@@ -34,13 +33,6 @@ func _ready() -> void:
 	LightUI.frost(_panel)
 	_key_style = LightUI.surface(Color(1,0.88,0.59,0.38),Color(0.94,0.77,0.39,0.65),10,12,4)
 	_key_box.add_theme_stylebox_override("panel", _key_style)
-	# A plain Node wrapper prevents PanelContainer from treating the outline as content.
-	var wrapper := Node.new()
-	wrapper.name = "FeedbackOverlay"
-	_key_box.add_child(wrapper)
-	_outline = ProgressOutline.new()
-	_outline.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	wrapper.add_child(_outline)
 	_key_box.resized.connect(_resize_outline)
 	_resize_outline()
 	if hold_to_clear:

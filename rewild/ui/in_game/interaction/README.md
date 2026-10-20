@@ -19,3 +19,5 @@
 水井与清理使用同一优先顺序：可用的阅读／对话 > 可清理对象 > 未启动的水井 > 锁定清理提示。Clearable 优先选择范围内未锁定的清理目标；`Clearable.has_active_target()` 在对象消失动画结束前继续占用交互，避免完成反馈与水井提示重叠。WaterWell 的 `can_activate()` 同时决定显示提示和接受操作；多个水井重叠时只选最近的一个。
 
 水井只接受其可用时新按下的 `interact`：清理完成、离开阅读范围或按住键进入水井范围时，必须先松开，再次按住才能启动。等待松开时水井提示不可操作，原有长按时长、范围、升水动画、存档事件和场景布局不变。相关逻辑仅在 `systems/world_objects/clearable.gd` 与 `objects/water/water_well.gd`；摆放、范围和 UI 布局仍沿用现有编辑器配置。
+
+按键描边在 `interaction_prompt.tscn` 的 Key/FeedbackOverlay/Outline 中维护；FeedbackOverlay 使用 Node2D，既避开 PanelContainer 内容布局，又保持描边继承按键的变换和显隐。不要改成普通 Node，否则反馈可能脱离按键并残留在屏幕原点。

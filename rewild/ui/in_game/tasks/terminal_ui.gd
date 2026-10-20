@@ -5,10 +5,10 @@ extends CanvasLayer
 const ACTION := &"task_terminal"
 const TaskPage = preload("res://ui/in_game/tasks/task_page.gd")
 var _pause_menu: CanvasLayer
-var _restore: VBoxContainer
-var _restore_total: Label
-var _restore_regions: Label
-var _toast: Label
+@onready var _restore: VBoxContainer = %Restoration
+@onready var _restore_total: Label = %RestoreTotal
+@onready var _restore_regions: Label = %RestoreRegions
+@onready var _toast: Label = %UnlockNotice
 var _battery_notified := false
 var _toast_queue: Array[String] = []
 var _toast_tween: Tween
@@ -25,7 +25,7 @@ func _ready() -> void:
 	_page.close_requested.connect(_request_close)
 	SettingsManager.bindings_changed.connect(_refresh_binding)
 	_refresh_binding()
-	_build_hud()
+	_connect_hud()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready():
@@ -47,19 +47,11 @@ func _input(event: InputEvent) -> void:
 
 # --- HUD ------------------------------------------------------------------------------
 
-func _build_hud() -> void:
-	var column := VBoxContainer.new()
-	column.position = Vector2(32, 32)
-	column.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_hud.add_child(column)
-	_build_restoration_hud(column)
-	_toast = _hud_label(32)
-	_toast.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
-	_toast.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_toast.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_toast.position.y = 96
-	_toast.modulate.a = 0.0
-	_hud.add_child(_toast)
+func _connect_hud() -> void:
+	var growth := get_node_or_null(^"/root/GrowthMap")
+	if growth:
+		growth.progress_changed.connect(_refresh_restoration)
+	_refresh_restoration()
 	# Unlock notices only; upgrades bought at the terminal show there instead.
 	Quests.ability_changed.connect(func(a: StringName, level: int) -> void:
 		if level <= 0 or a == Quests.TERMINAL or a in WaterGunUpgrades.TRACKS:
@@ -69,40 +61,15 @@ func _build_hud() -> void:
 		else:
 			_notify(tr("QUEST_TOAST_ABILITY") % TaskPage.ability_name(a, level)))
 
-func _hud_label(size: int) -> Label:
-	var l := Label.new()
-	l.add_theme_font_size_override(&"font_size", size)
-	l.add_theme_color_override(&"font_color", Color(1, 0.98, 0.92))
-	l.add_theme_color_override(&"font_outline_color", Color(0.08, 0.12, 0.1, 0.9))
-	l.add_theme_constant_override(&"outline_size", 8)
-	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	return l
-
-# --- Restoration HUD ------------------------------------------------------------------
-
-func _build_restoration_hud(column: Control) -> void:
-	_restore = VBoxContainer.new()
-	_restore.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_restore.add_theme_constant_override(&"separation", 2)
-	_restore_total = _hud_label(22)
-	_restore_regions = _hud_label(18)
-	_restore.add_child(_restore_total)
-	_restore.add_child(_restore_regions)
-	column.add_child(_restore)
-	var growth := get_node_or_null(^"/root/GrowthMap")
-	if growth == null:
-		_restore.hide()
-		return
-	growth.progress_changed.connect(_refresh_restoration)
-	_refresh_restoration()
-
 func _refresh_restoration() -> void:
 	# Once, when the battery reaches 100%: it waits at the lake station.
 	if not _battery_notified and BatteryCharge.ready_to_collect():
 		_battery_notified = true
 		_notify(tr("BATTERY_READY_NOTICE"))
 	var growth := get_node_or_null(^"/root/GrowthMap")
-	var regions: Array[Dictionary] = growth.progress_regions() if growth else []
+	var regions: Array[Dictionary] = []
+	if growth:
+		regions = growth.progress_regions()
 	_restore.visible = not regions.is_empty()
 	if regions.is_empty():
 		return
