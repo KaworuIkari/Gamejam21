@@ -47,3 +47,17 @@ UI 文案在 `i18n/strings.csv`，现有 XBot 台词译文在 `i18n/dialogue_xbo
 角色在 `dialogue/characters/`。`named_speaker.gd` 让 Display Name 支持 `i18n/strings.csv` 的 `SPEAKER_*` 名称键，姓名及本次平板历史随语言切换。湖心终端、机器人和雷达对白已配置对应 Character。新角色可沿用该资源脚本与标准 Dialogic 角色字段，无需改 UI。文件时间线用 `LakeTerminal: 台词` 等角色标识，动态时间线给事件的 Character 指定同一资源。
 
 平板与纸条的名称从正文资源 `dialogue/readables/*.tres` 的 Speaker 指定；设备投送记录与机组离线记录各用独立来源，所有分页共用，不把离线记录误标成 LIRA 自言自语。原 XBot 角色继续走同一右上名牌。
+
+## 对话历史上限
+
+历史保留最近 50 条事件记录，重复交互仍按时间顺序记录，超过上限时删除最早记录；换行不另计一条。限制位于 `addons/Dialogic/Modules/History/subsystem_history.gd` 的 `SIMPLE_HISTORY_LIMIT`，在写入和恢复历史时执行，不只是隐藏旧条目。完整事件历史默认关闭，本次不启用。
+
+`simple_history_offset` 表示已删除的前段记录数；ObjectText 与平板用它换算本次阅读的历史位置，语言切换时只更新仍保留的条目。界面布局仍在现有场景中维护。
+
+## 装备校验提示
+
+水枪和喷气背包沿用 `levels/meadow_hand/startup_checks.gd` → `ui/in_game/startup/startup_hint.tscn/.gd`，不新增布局。获得装备后、对话或终端关闭并恢复操作时，在原右上卡片显示校验提示；仍使用 10 秒显示、顶部滑动淡入淡出、成功后 2.5 秒反馈，暂停总览可回看尚未完成的校验。
+
+水枪校验读取瞄准时实际消耗的水量，空枪或只按键不算完成。喷气背包需空中实际持续喷射累计 0.35 秒；普通跳跃、交付背包的展示特效不算。文本在 `i18n/strings.csv` 的 `STARTUP_WATER_GUN_*` / `STARTUP_JETPACK_*`，按键沿用 SettingsManager 的实际绑定和输入设备；卡片位置、尺寸、显示／动画时长仍在原场景配置。
+
+装备校验随存档保存为 `equipment_checks`（装备名 → 1 已确认／2 已完成）；读档接续未完成校验，完成后不再重复，已有装备的旧存档补一次校验。开局移动校验仍只对带 `startup_checks` 的新存档启用；获得终端后停用原任务提示，仅装备校验继续按需出现。

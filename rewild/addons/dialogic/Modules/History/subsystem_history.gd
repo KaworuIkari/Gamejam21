@@ -8,6 +8,9 @@ signal close_requested
 
 ## Simple history that stores limited information
 ## Used for the history display
+const SIMPLE_HISTORY_LIMIT := 50
+## Absolute position of the oldest retained entry, for readers that refresh translations.
+var simple_history_offset := 0
 var simple_history_enabled := false
 var simple_history_save := false
 @export var simple_history_content : Array[Dictionary] = []
@@ -108,11 +111,13 @@ func _clear_state(clear_flag := DialogicGameHandler.ClearFlags.FULL_CLEAR) -> vo
 		return
 
 	simple_history_content = []
+	simple_history_offset = 0
 	full_event_history_content = []
 
 
 func _load_state(_load_flag := LoadFlags.FULL_LOAD) -> void:
-	pass
+	simple_history_offset = 0
+	_trim_simple_history()
 
 
 func open_history() -> void:
@@ -133,7 +138,15 @@ func store_simple_history_entry(text:String, event_type:String, extra_info := {}
 	extra_info["text"] = text
 	extra_info["event_type"] = event_type
 	simple_history_content.append(extra_info)
+	_trim_simple_history()
 	simple_history_changed.emit()
+
+
+func _trim_simple_history() -> void:
+	var overflow := simple_history_content.size() - SIMPLE_HISTORY_LIMIT
+	if overflow > 0:
+		simple_history_content.assign(simple_history_content.slice(overflow))
+		simple_history_offset += overflow
 
 
 func get_simple_history() -> Array:
