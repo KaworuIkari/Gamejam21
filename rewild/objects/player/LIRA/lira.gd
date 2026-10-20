@@ -2,6 +2,7 @@ extends RealController
 class_name LIRA_Character
 const SafeCameraArm = preload("res://objects/player/LIRA/scripts/safe_camera_arm.gd")
 const JetpackHUD = preload("res://ui/in_game/jetpack/jetpack_hud.gd")
+const FaceHUD = preload("res://ui/in_game/face/face_hud.gd")
 var settings_invert_y: bool:
 	get:
 		return camera_invert_y
@@ -133,6 +134,11 @@ func _ready() -> void:
 	energy_hud.configure(self)
 	get_tree().root.add_child.call_deferred(energy_hud)
 	tree_exiting.connect(energy_hud.queue_free)
+	var face_hud := FaceHUD.new()
+	face_hud.name = "FaceHUD"
+	face_hud.configure(self)
+	get_tree().root.add_child.call_deferred(face_hud)
+	tree_exiting.connect(face_hud.queue_free)
 	_refresh_water_list()
 	_setup_swim_idle_pool()
 
@@ -288,6 +294,8 @@ func _handle_gravity_and_jump(delta: float) -> void:
 		_consume_anim_triggers()
 		jetpack.set_thrust(_thrusting, _spool)
 		return
+	if not frozen and is_on_floor() and Input.is_action_just_pressed("jump"):
+		UIAudio.play_sfx(UIAudio.JUMP, 0.08)
 	super(delta)  # gravity + ground jump
 	if is_on_floor():
 		_end_thrust()
@@ -571,6 +579,7 @@ func _water_vertical(delta: float) -> void:
 		if jetpack_level <= 0:
 			_swim_hopping = true
 			velocity.y = swim_hop_speed
+			UIAudio.play_sfx(UIAudio.JUMP, 0.08)
 			return
 		else:
 			_try_burst_jetpack()

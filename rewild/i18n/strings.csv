@@ -306,9 +306,9 @@ BIKE_1,一台@Decathlong 生产的ROCKRIDER ST100型号自行车，
 BIKE_2,自行车是一种省力不省功的非化石燃料驱动移动工具。
 BIKE_3,在古老的cambridge小镇这或许是最珍贵的东西,
 BIKE_4,因为资料显示直到人类消失前该地几乎所有的犯罪报告都来自于自行车的失窃。
-FOX_0, 按 %s 阅读
-FOX_1, 狐狸的家
-FOX_2, wooooooooo！wooo！
+FOX_0,按 %s 阅读
+FOX_1,狐狸的家
+FOX_2,wooooooooo！wooo！
 STARTUP_WATER_GUN_TITLE,生态修复模块校验,Ecosystem restoration check
 STARTUP_WATER_GUN_BODY,水枪已接入。向枯地发射水团，确认生态修复反馈。,Water gun connected. Fire a water blob at barren ground to check the restoration system.
 STARTUP_WATER_GUN_INPUT,按住 %s 瞄准，按 %s 发射,Hold %s to aim and press %s to fire

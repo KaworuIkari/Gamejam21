@@ -71,6 +71,7 @@ func _ready() -> void:
 	GrowthMap.attach_material($Plants/Flowers.mesh_material_override)
 	for mat in TREE_LEAVES:
 		GrowthMap.attach_material(mat)
+	add_child(LeafRustle.new())
 	GrowthMap.attach_material(GROW_IN_FLOWERS)
 
 	var restoration_regions := RESTORATION_REGIONS.instantiate()

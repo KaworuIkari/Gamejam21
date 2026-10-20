@@ -32,6 +32,14 @@ class_name Restorable extends Node3D
 
 var stage := -1
 
+## Only petals and flowers pop as they grow in (folders of their models).
+const POP_FOLDERS: Array[String] = [
+	"res://assets/models/stylized_nature/Petal/",
+	"res://assets/models/stylized_nature/Flower/",
+]
+## Watering a patch grows many at once; this keeps their pops to a light patter.
+static var _last_pop_msec := 0
+
 var _variants: Array = []   # Node3D or null per stage
 var _scales: Array[Vector3] = []
 var _growth: Node
@@ -109,9 +117,19 @@ func _show(index: int, instant: bool) -> void:
 			v.scale = full * (0.05 if index == 0 or _variants[index - 1] == null else 0.6)
 			var t := create_tween()
 			t.tween_interval(randf() * max_delay)
+			if POP_FOLDERS.any(func(folder: String) -> bool: return v.scene_file_path.begins_with(folder)):
+				t.tween_callback(_play_pop)
 			t.tween_property(v, "scale", full, pop_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	if first_time and not instant and quest_threshold < 0.0:
 		_report()
+
+
+func _play_pop() -> void:
+	var audio := get_node_or_null(^"/root/UIAudio")
+	if audio == null or Time.get_ticks_msec() - _last_pop_msec < 70:
+		return
+	_last_pop_msec = Time.get_ticks_msec()
+	audio.play_sfx_at(audio.PLANT_POP, global_position, 0.15)
 
 
 func _report() -> void:

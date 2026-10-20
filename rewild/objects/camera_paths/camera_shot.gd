@@ -34,7 +34,8 @@ func play(bgm_index: int = 0) -> void:
 		return
 	_playing = true
 	progress_ratio = 0.0
-	BgmPlayer._play_quests_bgm(bgm_index)
+	if bgm_index >= 0:  # -1 = keep the current music
+		BgmPlayer._play_quests_bgm(bgm_index)
 	CameraDirector.push(step_event_name)
 	var t := create_tween()
 	t.tween_property(self, "progress_ratio", 1.0, travel_time) \
