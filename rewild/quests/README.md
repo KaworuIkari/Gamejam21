@@ -132,16 +132,16 @@ the step's progress event) before `ending_boat`.
 FinaleStory is created by meadow_level.gd and uses the placed RadioObservatory
 and IslandHarbor. The disruptor is only soft particles and an interaction sphere
 parented to Model/Service_Platform (the second-floor deck). The boat point is
-parented to Workboat_Hull_014/Visual/Workboat_Hull beside the existing hull.
+parented to DepartureCore/InteractionPoint at the harbor departure core.
 Moving those models carries their lights and interaction spheres with them.
 
 Startup always uses ConfirmPopup with cancel selected by default. The boat
 departs in one confirmed action once the coordinates and battery are loaded.
 Before confirmation, both choices remain open. Quests.complete_choice
-consumes chaos_energy_module and commits exactly one branch synchronously.
+consumes chaos_energy_module only for the disruptor and commits exactly one branch synchronously.
 ending_disruptor/ending_boat lock the other route, persist in normal quest save
-data, and reopen the corresponding ending placeholder on subsequent loading.
-The ending screen uses the existing bright UI theme. It pauses gameplay and
+data, and reopen the corresponding black-screen ending on subsequent loading.
+The ending reuses the opening Dialogic style, then pauses gameplay and
 offers manual Save Progress and Return to Main Menu; it never saves automatically.
 F9 cannot bypass the final world interaction and confirmation.
 
@@ -153,7 +153,7 @@ Use a camera in the player's viewport when using the existing pixel presentation
 FinaleStory emits `ending_selected(route, focus)` when presenting the chosen
 ending. `get_ending_focus(route)` returns its world interaction anchor. Cinematics
 can use those hooks; no authored camera motion or boat movement is added yet.
-The ending placeholder pauses gameplay, so a future sequence should run with
+The ending result menu pauses gameplay, so a future sequence should run with
 PROCESS_MODE_ALWAYS or take over presentation before opening that screen.
 
 ## Quest 00 — startup checks and cabin investigation
@@ -162,7 +162,7 @@ New saves have `startup_checks: {step: -1, confirmed: false}`. `levels/meadow_ha
 
 Presentation lives in `ui/in_game/startup/startup_hint.tscn` and its script: one non-modal upper-right card for both self-checks and the pre-terminal objective. Each new prompt slides down from above the screen while fading in, and slides up while fading out after at most 10 seconds. Expiry only hides the card; checks continue. Completed checks still advance after their 2.5-second feedback hold. The pause overview reviews the current card without consuming its timeout; settings/save submenus hide it. Obtaining the terminal retires the pre-terminal objective. The same card is reused for water-gun and jetpack checks; their progress is stored in equipment_checks (1 = confirmed, 2 = complete). See ui/CustomUi/README_对话UI.md for the equipment checks and bindings. Wording is in `i18n/strings.csv` (`STARTUP_*`, `QUEST_CABIN_*`); key labels follow SettingsManager bindings and language changes.
 
-`00_investigate_cabin.tres` first requires both `cabin_delivery_read` and `cabin_crew_read` (with_previous, either order), then `pump_started`. The shared upper-right tutorial card shows the cabin objective with 0/2, 1/2, then the pump objective. Reading counts only at the final confirmation. CabinStory gates player pump interaction until both records are complete; existing 10-second, pause-review and terminal-retirement rules apply.
+`00_investigate_cabin.tres` has one required step, `pump_started`. The two cabin tablets are optional reading (`optional_steps`: `cabin_delivery_read`, `cabin_crew_read`, counted only at the final confirmation); the pump works without them. The shared upper-right card shows the pump objective. Saves from the required-reading version are rebuilt by CabinStory.migrate_save (version 3). Existing 10-second, pause-review and terminal-retirement rules apply.
 
 WaterFlowSwitch reports completion after the existing flow/rise animation, ending 00 and starting 01 at the lake station activation step. (The “第一幕 / Act I” card was removed.)
 
@@ -197,3 +197,5 @@ After collecting the lake battery, the existing terminal status label shows the 
 根节点下的 ScatterCache 使用插件原生 `ProtonScatterCache`，读取同目录唯一缓存 `meadow_scatter_cache.res`（初始 19 组、573 个变换）。请把场景与缓存一起提交给队友，否则关闭自动重建后会缺少散布物。该缓存是场景资源，不是 `.godot` 导入缓存；清理导入缓存不会替代它。
 
 编辑散布范围或修改器后，等待对应节点生成完成再保存主场景，ScatterCache 默认会在保存时更新缓存；也可选中 ScatterCache，在检查器使用 Update Cache，再保存。仅改普通场景物件无需重建散布。继续保持上述加载重建开关关闭；不要勾选 Enabled=false 来解决卡顿，那会移除散布物。旧的 meadow_hand_debug.tscn 是独立调试场景，本次不改变其散布设置。
+
+湖心站充能物品的显示名称统一为“混沌能量模块”（Chaos Energy Module），终端、充能 HUD、获取提示、港口与结局文案共用翻译表。内部 `battery`、`battery_collected`、`boat_battery_installed` 标识保留，以兼容现有存档和任务条件；本次仅改名，不合并它与雷达任务奖励的 `chaos_energy_module`。同步破坏器确认文案不再显示“小船路线将关闭”，结局互斥规则照旧。

@@ -202,8 +202,9 @@ func _build_video(p: Control) -> void:
 	_set_desktop_only(window_mode)
 	_set_desktop_only(res)
 	_option(p, "OPT_VSYNC", "video", "vsync", ["VSYNC_OFF", "VSYNC_ON", "VSYNC_ADAPTIVE"])
-	var fps_items: Array = SettingsManager.FPS_LIMITS.map(func(f: int): return "FPS_UNLIMITED" if f == 0 else str(f))
+	var fps_items: Array = SettingsManager.FPS_LIMITS.map(func(f: int): return str(f))
 	_option(p, "OPT_MAX_FPS", "video", "max_fps", fps_items)
+	_toggle(p, "OPT_SHOW_FPS", "video", "show_fps")
 
 	_header(p, "HEADER_CAMERA")
 	_slider(p, "OPT_FOV", "video", "fov", 60, 110, 1, "%d°")

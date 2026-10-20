@@ -45,7 +45,6 @@ VSYNC_OFF,关闭,Off
 VSYNC_ON,开启,On
 VSYNC_ADAPTIVE,自适应,Adaptive
 OPT_MAX_FPS,帧率上限,Frame Rate Limit
-FPS_UNLIMITED,不限制,Unlimited
 OPT_FOV,视野（FOV）,Field of View
 OPT_MOUSE_SENS,鼠标灵敏度,Mouse Sensitivity
 OPT_PAD_SENS,手柄灵敏度,Controller Sensitivity
@@ -169,12 +168,12 @@ QUEST_TOAST_ABILITY,获得：%s,Unlocked: %s
 ABILITY_WATER_GUN,水枪,Water gun
 ABILITY_JETPACK,喷气背包,Jetpack
 ABILITY_LEVEL,%s Lv%d,%s Lv%d
-TERMINAL_BATTERY_TITLE,核心电池,Core battery
-TERMINAL_BATTERY_CHARGING,电池充能中……使用水枪，恢复湖泊、森林、山地、工厂四个区域的生态以便提供绿色能源供应，充满后回到湖心电站取出电池。,"Battery charging... Use the water gun to restore the ecosystems of the lake, forest, mountain and factory regions to supply green energy. Once it is full, return to the lake station to take the battery."
-TERMINAL_BATTERY_FULL,电池已充满！回到湖心电站，与终端交互取出电池。,Battery fully charged! Return to the lake station and use the terminal to take it.
-TERMINAL_BATTERY_COLLECTED,已从湖心电站取出电池。,You have taken the battery from the lake station.
-BATTERY_READY_NOTICE,电池已充满，回到湖心电站取出电池,Battery full: return to the lake station to take it
-TERMINAL_BATTERY_CHARGE,电池充能,Battery charge
+TERMINAL_BATTERY_TITLE,混沌能量模块,Chaos Energy Module
+TERMINAL_BATTERY_CHARGING,混沌能量模块充能中……使用水枪，恢复湖泊、森林、山地、工厂四个区域的生态以便提供绿色能源供应，充满后回到湖心电站取出混沌能量模块。,"Chaos Energy Module charging... Use the water gun to restore the ecosystems of the lake, forest, mountain and factory regions to supply green energy. Once it is full, return to the lake station to take the Chaos Energy Module."
+TERMINAL_BATTERY_FULL,混沌能量模块已充满！回到湖心电站，与终端交互取出混沌能量模块。,Chaos Energy Module fully charged! Return to the lake station and use the terminal to take it.
+TERMINAL_BATTERY_COLLECTED,已从湖心电站取出混沌能量模块。,You have taken the Chaos Energy Module from the lake station.
+BATTERY_READY_NOTICE,混沌能量模块已充满，回到湖心电站取出混沌能量模块,Chaos Energy Module full: return to the lake station to take it
+TERMINAL_BATTERY_CHARGE,混沌能量模块充能,Chaos Energy Module charge
 TERMINAL_REGIONS_TITLE,区域清理度,Region recovery
 TERMINAL_UPGRADES_TITLE,装备升级,Equipment upgrades
 TERMINAL_UPGRADES_HINT,清理的每一堆垃圾都会转化为 1 份材料。,Every rubbish pile you clear becomes 1 material.
@@ -185,7 +184,7 @@ UPGRADE_TANK,水箱容量,Water tank capacity
 UPGRADE_TANK_DESC,水箱可装更多水，射击次数更多。,The tank holds more water for more shots.
 UPGRADE_BUY,升级（%d 材料）,Upgrade (%d material)
 UPGRADE_MAX,已满级,Max level
-ITEM_BATTERY_1,核心电池,Core battery
+ITEM_BATTERY_1,混沌能量模块,Chaos Energy Module
 ITEM_FOX_KEY_1,狐狸给的钥匙,The fox's key
 TERMINAL_ITEMS_TITLE,随身物品,Carried items
 TERMINAL_ITEMS_EMPTY,（暂无）,(none yet)
@@ -219,21 +218,19 @@ RADAR_DELIVERY_RECEIVED,湖心终端：雷达信息已接收，坐标已记录�
 RADAR_DELIVERY_REWARD,湖心终端：混沌能量模块已交付。,Lake terminal: Chaos Energy Module issued.
 ITEM_CHAOS_ENERGY_MODULE_1,混沌能量模块,Chaos Energy Module
 QUEST_FINALE_TITLE,最后的选择,The final choice
-QUEST_FINALE_DESC,携带混沌能量模块启动雷达站的同步破坏器，或在港口载入雷达坐标并插入湖心电池，为小船供能后出发。确认启动将锁定对应结局。,"Activate the radar disruptor with the Chaos Energy Module, or load the radar coordinates and insert the lake battery at the harbor core to power the ship. Confirming departure locks the boat ending."
+QUEST_FINALE_DESC,携带混沌能量模块启动雷达站的同步破坏器，或在港口载入雷达坐标并插入混沌能量模块，为小船供能后出发。确认启动将锁定对应结局。,"Activate the radar disruptor with the Chaos Energy Module, or load the radar coordinates and insert the Chaos Energy Module at the harbor core to power the ship. Confirming departure locks the boat ending."
 QUEST_FINALE_LOCATION,雷达站二层 / 港口,Radar upper platform / Harbor
 QUEST_FINALE_DEVICE,路线一：在雷达站二层启动同步破坏器,Route 1: Activate the Synchronization Disruptor on the radar upper platform
-QUEST_FINALE_BOAT,路线二：载入坐标，插入湖心电池并乘船出发,"Route 2: Load coordinates, insert the lake battery, and depart"
+QUEST_FINALE_BOAT,路线二：载入坐标，插入混沌能量模块并乘船出发,"Route 2: Load coordinates, insert the Chaos Energy Module, and depart"
 FINALE_MODULE_LOCKED,%s 需要混沌能量模块,%s Requires the Chaos Energy Module
 FINALE_START_DEVICE,按 %s 启动同步破坏器,Press %s to activate the Synchronization Disruptor
-FINALE_CONFIRM_DEVICE,确认使用唯一的混沌能量模块启动同步破坏器？这将进入结局一，小船路线将关闭。,Use the unique Chaos Energy Module to activate the Synchronization Disruptor? This locks Ending 1 and closes the boat route.
-FINALE_CONFIRM_BOAT,坐标已载入，电池已安装。确认启动小船并离开岛屿？这将锁定乘船结局。,Coordinates loaded. Battery installed. Power up the ship and leave the island? This locks the boat ending.
+FINALE_CONFIRM_DEVICE,确认使用混沌能量模块启动同步破坏器？这将进入结局一。,Use the Chaos Energy Module to activate the Synchronization Disruptor? This leads to Ending 1.
+FINALE_CONFIRM_BOAT,坐标已载入，混沌能量模块已安装。确认启动小船并离开岛屿？这将锁定乘船结局。,Coordinates loaded. Chaos Energy Module installed. Power up the ship and leave the island? This locks the boat ending.
 FINALE_CONFIRM_START,确认启动,Confirm startup
 FINALE_BRIEFING_DEVICE,湖心终端：携带混沌能量模块，[n]前往雷达站二层启动同步破坏器。（剧情占位）,Lake terminal: Take the Chaos Energy Module to the radar upper platform [n]and activate the Synchronization Disruptor. (Story placeholder.)
-FINALE_BRIEFING_BOAT,另一条路线：取得雷达坐标与湖心电池，在港口核心基座载入坐标、插入电池，再乘船出发。,"Alternative route: Bring the radar coordinates and lake battery to the harbor core, load the coordinates, insert the battery, and depart."
-ENDING_DEVICE_TITLE,结局一,Ending 1
-ENDING_DEVICE_BODY,同步破坏器已启动。\n混沌能量模块已使用，小船路线已关闭。\n\n（结局剧情与演出待补充）,The Synchronization Disruptor is active.\nThe Chaos Energy Module has been used and the boat route is closed.\n\n(Ending text and cinematic to be added.)
-ENDING_BOAT_TITLE,结局二,Ending 2
-ENDING_BOAT_BODY,模块已安装，小船已启动。\n混沌能量模块已使用，同步破坏器路线已关闭。\n\n（结局剧情与演出待补充）,The module is installed and the boat is ready.\nThe Chaos Energy Module has been used and the disruptor route is closed.\n\n(Ending text and cinematic to be added.)
+FINALE_BRIEFING_BOAT,另一条路线：取得雷达坐标与混沌能量模块，在港口核心基座载入坐标、插入混沌能量模块，再乘船出发。,"Alternative route: Bring the radar coordinates and Chaos Energy Module to the harbor core, load the coordinates, insert the Chaos Energy Module, and depart."
+ENDING_DEVICE_TITLE,结局一 · 岛上的记录,Ending 1 · Island records
+ENDING_BOAT_TITLE,结局二 · 驶向远方,Ending 2 · Beyond the island
 ENDING_SAVE_OK,结局进度已保存。,Ending progress saved.
 ENDING_SAVE_UNAVAILABLE,当前没有可保存的存档位。,No active save slot is available.
 INTERACT_ROBOT_KEY,按 %s 与小机器人交谈获取密钥,Press %s to ask the companion bot for the radar key
@@ -295,8 +292,8 @@ COORD_PAD_TITLE,输入航行坐标,Enter navigation coordinates
 COORD_PAD_WRONG,坐标错误,Wrong coordinates
 COORD_PAD_CLEAR,清除,Clear
 COORD_PAD_CONFIRM,确认,Confirm
-HARBOR_BATTERY_REQUIRED,%s 需要充满的湖心电池,%s Requires the charged lake battery
-HARBOR_INSERT_BATTERY,按 %s 插入湖心电池并供能,Press %s to insert the lake battery and power the core
+HARBOR_BATTERY_REQUIRED,%s 需要充满的混沌能量模块,%s Requires the Chaos Energy Module
+HARBOR_INSERT_BATTERY,按 %s 插入混沌能量模块并供能,Press %s to insert the Chaos Energy Module and power the core
 HARBOR_DEPART,按 %s 确认航线并出发,Press %s to confirm the route and depart
 REST_0,按 %s 阅读,Press %s to inspect
 REST_1,蛙奥的座椅,
@@ -309,20 +306,32 @@ BIKE_1,一台@Decathlong 生产的ROCKRIDER ST100型号自行车，
 BIKE_2,自行车是一种省力不省功的非化石燃料驱动移动工具。
 BIKE_3,在古老的cambridge小镇这或许是最珍贵的东西,
 BIKE_4,因为资料显示直到人类消失前该地几乎所有的犯罪报告都来自于自行车的失窃。
+FOX_0, 按 %s 阅读
+FOX_1, 狐狸的家
+FOX_2, wooooooooo！wooo！
 STARTUP_WATER_GUN_TITLE,生态修复模块校验,Ecosystem restoration check
 STARTUP_WATER_GUN_BODY,水枪已接入。向枯地发射水团，确认生态修复反馈。,Water gun connected. Fire a water blob at barren ground to check the restoration system.
 STARTUP_WATER_GUN_INPUT,按住 %s 瞄准，按 %s 发射,Hold %s to aim and press %s to fire
 STARTUP_JETPACK_TITLE,推进模块校验,Propulsion check
 STARTUP_JETPACK_BODY,喷气背包已接入。先跳跃，在空中再次按住跳跃键，测试持续升空。松开停止喷射，停用后能量逐渐恢复。,Jetpack connected. Jump then press and hold jump again in midair to test sustained flight. Release to stop thrust; energy recovers while not in use.
 STARTUP_JETPACK_INPUT,按 %s 跳跃，空中再次按住 %s 喷射,Press %s to jump then press and hold %s again in midair to thrust
-QUEST_CABIN_INVESTIGATE,调查机舱内部，读完两份平板记录（%d/2）,Inspect the cabin and read both tablet records (%d/2)
-PUMP_REQUIRES_CABIN,%s 先读完机舱内的两份记录,%s Read both cabin records first
 TERMINAL_NEXT_RADAR,前往山地雷达站，启动雷达并获取航行坐标。,Go to the mountain radar station and obtain the navigation coordinates.
-TERMINAL_NEXT_HARBOR,前往港口，在控制台输入航行坐标并安装核心电池。,Go to the harbor and enter the navigation coordinates at the control console. Then install the core battery.
-TERMINAL_NEXT_BATTERY,在港口控制台安装核心电池，为小船供能。,Install the core battery at the harbor control console to power the boat.
+TERMINAL_NEXT_HARBOR,前往港口，在控制台输入航行坐标并安装混沌能量模块。,Go to the harbor and enter the navigation coordinates at the control console. Then install the Chaos Energy Module.
+TERMINAL_NEXT_BATTERY,在港口控制台安装混沌能量模块，为小船供能。,Install the Chaos Energy Module at the harbor control console to power the boat.
 TERMINAL_NEXT_DEPART,在港口控制台确认航线并出发。,Confirm the route at the harbor control console and depart.
 RADAR_HOLD_START,按住 %s 插入钥匙启动雷达站,Hold %s to insert the key and start the radar station
 RADAR_KEY_REQUIRED,需要钥匙启动雷达站,A key is required to start the radar station
 RADAR_ONLINE,雷达站已启动。,Radar station online.
 BOUNDARY_WARNING_TITLE,作业范围警告,Operating area warning
 BOUNDARY_WARNING_BODY,已接近试验岛边界。请返回岛内，继续当前作业。,You are approaching the island boundary. Return to the island to continue your assignment.
+ENDING_DEVICE_START,同步破坏器：启动完成。\n\n混沌能量模块：已使用。,Synchronization Disruptor: Activated.\n\nChaos Energy Module: Expended.
+ENDING_DEVICE_LOCATION,航行计划：已终止。\n\n当前位置：第七自治试验岛。,Departure plan: Terminated.\n\nCurrent location: Autonomous Test Island No. 7.
+ENDING_DEVICE_QUESTIONS,运输事故留下的疑问，\n仍未得到回答。,The questions left by the transport accident\nremain unanswered.
+ENDING_DEVICE_ISLAND,LIRA 留在了岛上。\n\n这里曾是试验场，\n也是它重新启动的地方。,LIRA remains on the island.\n\nOnce a testing ground;\nthe place where it came back online.
+ENDING_DEVICE_CONTINUE,环境工程试验机 LIRA，\n继续运行。\n\n下一份记录，尚未写下。,Environmental Engineering Test Unit LIRA\nremains operational.\n\nThe next entry has yet to be written.
+ENDING_BOAT_START,导航坐标：已载入。\n混沌能量模块：已接入。\n\n小船启动。,Navigation coordinates: Loaded.\nLake station Chaos Energy Module: Connected.\n\nBoat startup complete.
+ENDING_BOAT_ISLAND,供水已恢复，植被重新生长。\n\n那座最初只有故障记录的岛，\n如今留下了新的颜色。,Water flows again. Vegetation returns.\n\nThe island first known through fault logs\nnow holds new colors.
+ENDING_BOAT_OBJECTIVE,应急目标：\n恢复通信，报告位置，等待回收。\n\n岛外的回应，仍待确认。,Emergency objective:\nRestore communications. Report location. Await recovery.\n\nA response from beyond the island remains unconfirmed.
+ENDING_BOAT_DEPARTURE,小船驶离岸边。\n\nLIRA 带走了岛上的记录，\n也带走了那些尚未得到回答的问题。,The boat leaves the shore.\n\nLIRA carries the island's records\nand the questions still unanswered.
+ENDING_BOAT_RECORD,环境工程试验机 LIRA。\n\n当前位置：返航途中。\n\n新的记录，从海的另一边开始。,Environmental Engineering Test Unit LIRA.\n\nCurrent location: On the return voyage.\n\nNew records await beyond the sea.
+OPT_SHOW_FPS,显示帧率,Show FPS
