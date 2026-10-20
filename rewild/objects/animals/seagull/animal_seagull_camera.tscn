@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://c5p7eym7jv6ui"]
+
+[ext_resource type="PackedScene" uid="uid://db2wta2nor7sj" path="res://objects/animals/seagull/animal_seagull.tscn" id="1_j42aa"]
+[ext_resource type="Script" uid="uid://c4tax2dor6do" path="res://objects/animals/seagull/animal_seagull_camera.gd" id="2_01yau"]
+[ext_resource type="PackedScene" uid="uid://cv2wykdmn5n2l" path="res://systems/cameras/rewild_phantom_camera.tscn" id="2_euv2t"]
+[ext_resource type="Script" uid="uid://cuffvge5ad4aa" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_3d.gd" id="3_01yau"]
+
+[sub_resource type="Resource" id="Resource_8i2mi"]
+script = ExtResource("3_01yau")
+amplitude = 14.444
+metadata/_custom_type_script = "uid://cuffvge5ad4aa"
+
+[node name="AnimalSeagull" unique_id=1987472582 instance=ExtResource("1_j42aa")]
+script = ExtResource("2_01yau")
+sing_delay = 1.0
+
+[node name="Skeleton3D" parent="seagull/Seagull" parent_id_path=PackedInt32Array(737309334, 126082168) index="0" unique_id=838608266]
+bones/5/rotation = Quaternion(0.06557271, 7.855624e-09, -4.1096393e-09, 0.9978478)
+bones/10/rotation = Quaternion(0.7053085, -0.09089141, -0.075180866, 0.6990182)
+bones/10/scale = Vector3(1.0053754, 1.0053753, 1.005375)
+bones/11/rotation = Quaternion(-0.0010698516, 0.25765422, 0.021094596, 0.9660063)
+bones/12/rotation = Quaternion(0.0004643655, -0.3351703, -0.015482991, 0.94203025)
+bones/13/rotation = Quaternion(0.008221388, -0.02808761, 0.024423236, 0.9992733)
+bones/14/rotation = Quaternion(0.0049368003, -0.033304285, -0.00090125663, 0.99943274)
+bones/20/rotation = Quaternion(-0.6885572, -0.04843052, 0.12330984, 0.7129785)
+bones/20/scale = Vector3(1.0039816, 0.9999997, 0.9999997)
+bones/21/rotation = Quaternion(-0.0030848966, 0.25764915, -0.0048521077, 0.96622145)
+bones/22/position = Vector3(-0.12688431, 0.0006782992, -1.1298795e-08)
+bones/22/rotation = Quaternion(0.00031248247, -0.33515787, 0.009656649, 0.94211245)
+bones/23/rotation = Quaternion(-0.0032853393, -0.028085163, 0.0053908746, 0.9995857)
+bones/24/rotation = Quaternion(0.0028952323, -0.03329881, 0.0017610441, 0.9994397)
+bones/31/position = Vector3(-0.0029849755, -0.0764062, 2.568462e-08)
+bones/31/rotation = Quaternion(0.043100834, 1.9769452e-11, 7.882831e-10, 0.9990708)
+bones/32/position = Vector3(-0.002984976, -0.07897563, -3.953147e-09)
+bones/32/rotation = Quaternion(0.035066307, 1.2332893e-11, 5.462494e-10, 0.99938506)
+bones/35/rotation = Quaternion(0.29418758, -0.047776207, 0.0055196285, 0.95453686)
+bones/40/rotation = Quaternion(0.30276528, -0.12619923, 0.04426792, 0.9436352)
+bones/41/rotation = Quaternion(0.47798288, -0.15507409, -0.017989442, 0.8643846)
+
+[node name="PCam_Seagull" parent="." index="2" unique_id=1245248570 instance=ExtResource("2_euv2t")]
+transform = Transform3D(-1, 0, 0, 0, 0.88334626, 0.46872082, 0, 0.468721, -0.8833459, 0, 1.9829154, -3.7369797)
+look_at_mode = 2
+noise = SubResource("Resource_8i2mi")
+
+[node name="CameraView" parent="PCam_Seagull" index="0" unique_id=250864998]
+view_name = &"seagull"
+
+[node name="FmodEventEmitter3D" type="FmodEventEmitter3D" parent="." index="3" unique_id=441589515]
+event_name = "event:/Seagull/Cry"
+event_guid = "{204d6548-e084-4864-af58-d40b687dfa27}"
+
+[editable path="seagull"]
+[editable path="PCam_Seagull"]

@@ -39,7 +39,6 @@ var _cut_masks: Array = [null, null, null, null]
 var _fog_quad: MeshInstance3D
 var _screen_layer: CanvasLayer
 
-@onready var water_volume : WaterVolume = $WaterVolume
 var _wave_height_cache:float = 0.06
 var _wave_speed_cache:float = 1.0
 
@@ -283,3 +282,82 @@ func holds_point(point: Vector3) -> bool:
 		if is_instance_valid(w) and w.covers(point):
 			return false
 	return true
+
+
+##########################
+
+## The water holding p (basin and cutouts respected, so the sea doesn't claim the lake).
+## Water shallower than min_depth (puddles) is skipped. If none holds p, the nearest one wins.
+static func find_closest(p: Vector3, min_depth := 3.0) -> StylizedWater:
+	var tree := Engine.get_main_loop() as SceneTree
+	var best: StylizedWater = null
+	var best_score := INF
+	for n in tree.get_nodes_in_group(&"water_surfaces"):
+		var w := n as StylizedWater
+		if w == null or not w.is_inside_tree() or w.mesh == null:
+			continue
+		var score: float
+		if w.holds_point(p):
+			var floor_y := w.get_seabed_height(Vector2(p.x, p.z))
+			if is_nan(floor_y) or w.get_plane_surface_y() - floor_y < min_depth:
+				continue
+			score = absf(p.y - w.get_plane_surface_y())
+		else:
+			var f := w._footprint()
+			score = 1e6 + Vector2(p.x - f.x, p.z - f.y).length_squared()
+		if score < best_score:
+			best_score = score
+			best = w
+	return best
+
+
+func clamp_xz(xz: Vector2, margin: float) -> Vector2:
+	var f := _footprint()
+	return Vector2(clampf(xz.x, f.x - f.z + margin, f.x + f.z - margin),
+			clampf(xz.y, f.y - f.w + margin, f.y + f.w - margin))
+
+## A random spot inside this water (basin and cutouts respected), at least `margin` from the footprint edge.
+## Returns (NAN, NAN) if none was found.
+func random_point_xz(margin: float) -> Vector2:
+	var f := _footprint()
+	var hx := maxf(f.z - margin, 0.0)
+	var hz := maxf(f.w - margin, 0.0)
+	for i in 16:
+		var p := Vector2(f.x + randf_range(-hx, hx), f.y + randf_range(-hz, hz))
+		if holds_point(Vector3(p.x, get_plane_surface_y(), p.y)):
+			return p
+	return Vector2(NAN, NAN)
+
+## NAN in holes, outside the terrain, or without a terrain.
+func get_seabed_height(xz: Vector2) -> float:
+	var t := _get_terrain()
+	return NAN if t == null else t.data.get_height(Vector3(xz.x, 0.0, xz.y))
+
+
+func get_seabed_normal(xz: Vector2, e: float) -> Vector3:
+	var hx := get_seabed_height(xz + Vector2(e, 0)) - get_seabed_height(xz - Vector2(e, 0))
+	var hz := get_seabed_height(xz + Vector2(0, e)) - get_seabed_height(xz - Vector2(0, e))
+	if is_nan(hx) or is_nan(hz):
+		return Vector3.UP
+	return Vector3(-hx / (2.0 * e), 1.0, -hz / (2.0 * e)).normalized()
+
+
+## Heights where a body with `room` (radius + clearance) fits; x > y = no room here.
+## `reach` = how far from the centre the seabed is probed (sharks pass half their length).
+func get_safe_band(xz: Vector2, room: float, reach := -1.0) -> Vector2:
+	var r := room if reach < 0.0 else reach
+	var floor_y := -INF
+	for i in 9:
+		var off := Vector2.ZERO if i == 0 else Vector2.from_angle(TAU * i / 8.0) * r
+		var h := get_seabed_height(xz + off)
+		if is_nan(h):
+			return Vector2(1.0, -1.0)
+		floor_y = maxf(floor_y, h)
+	return Vector2(floor_y + room, get_plane_surface_y() - room)
+
+
+func clamp_to_water(position: Vector3, room: float) -> Vector3:
+	var xz := clamp_xz(Vector2(position.x, position.z), room)
+	var band := get_safe_band(xz, room)
+	var y := clampf(position.y, band.x, band.y) if band.x <= band.y else get_plane_surface_y() - room
+	return Vector3(xz.x, y, xz.y)

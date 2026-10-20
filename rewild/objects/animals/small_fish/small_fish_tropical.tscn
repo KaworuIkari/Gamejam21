@@ -35,27 +35,24 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 [node name="tropical_fish_anim1" parent="." index="0" unique_id=1077991020 instance=ExtResource("2_xxt23")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Skeleton3D" parent="tropical_fish_anim1/Armature" parent_id_path=PackedInt32Array(1077991020, 87592292) index="0" unique_id=385100836]
+[node name="Skeleton3D" parent="tropical_fish_anim1/Armature" parent_id_path=PackedInt32Array(1077991020, 2132959755) index="0" unique_id=1002707011]
 bones/0/rotation = Quaternion(0.49999967, -0.50000036, 0.5000003, -0.49999973)
-bones/1/rotation = Quaternion(0.2519061, 0.7285727, -0.5920472, 0.23495804)
-bones/2/rotation = Quaternion(0.61308616, 0.24221827, -0.2449314, 0.7109601)
+bones/1/rotation = Quaternion(0.25158674, 0.7277678, -0.59303635, 0.23530011)
+bones/2/rotation = Quaternion(0.5814097, 0.23127583, -0.25528926, 0.73709005)
 bones/5/rotation = Quaternion(0.49999967, -0.50000036, 0.5000003, -0.49999973)
-bones/6/rotation = Quaternion(0.48131147, 0.5149601, -0.45657635, 0.5428568)
-bones/7/rotation = Quaternion(-0.15209632, -0.023839235, 0.08503294, 0.98441243)
-bones/8/rotation = Quaternion(0.02098119, -0.7070945, 0.004251443, 0.706795)
-bones/9/rotation = Quaternion(-0.036734466, -2.666293e-05, 0.025022637, 0.99901175)
-bones/10/rotation = Quaternion(-0.15030208, -0.6660829, -0.13960615, 0.7171143)
+bones/6/rotation = Quaternion(0.4887269, 0.5059973, -0.44862968, 0.5512206)
+bones/7/rotation = Quaternion(-0.15108795, -0.03903638, 0.13924026, 0.97788584)
+bones/8/rotation = Quaternion(0.032609455, -0.7070687, -0.007385133, 0.70635396)
+bones/9/rotation = Quaternion(-0.03671001, -4.7136575e-05, 0.04423694, 0.9983464)
+bones/10/rotation = Quaternion(-0.15585755, -0.6363555, -0.13337548, 0.7436203)
 bones/11/rotation = Quaternion(-0.26545057, -1.3659517e-09, 7.4000404e-08, 0.96412456)
-bones/12/rotation = Quaternion(0.1566952, -0.6658149, 0.14597254, 0.7147231)
-bones/14/rotation = Quaternion(-0.4217178, 0.55315316, 0.38427565, 0.6070486)
+bones/12/rotation = Quaternion(0.16227776, -0.63738745, 0.13974011, 0.74018645)
+bones/14/rotation = Quaternion(-0.43064573, 0.5387118, 0.3742433, 0.6198999)
 
-[node name="DebugLabel3D" parent="." index="2" unique_id=879025316]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33408886, 0)
-
-[node name="CollisionShape3D" parent="." index="3" unique_id=1260081375]
+[node name="CollisionShape3D" parent="." index="2" unique_id=1260081375]
 shape = SubResource("SphereShape3D_vdw7w")
 
-[node name="AnimationTree" parent="." index="4" unique_id=669078589]
+[node name="AnimationTree" parent="." index="3" unique_id=669078589]
 root_node = NodePath("../tropical_fish_anim1")
 tree_root = SubResource("AnimationNodeStateMachine_30rud")
 advance_expression_base_node = NodePath("..")

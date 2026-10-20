@@ -27,6 +27,7 @@ class_name AnimalBase
 @export var waypoint_radius := 0.5  # the agent's arrival distance
 @export var move_timeout := 15.0  # failsafe: give up on one leg after this long
 @export var model_faces_positive_z := true
+var _height_calibrated := false
 
 @export_group("Animation")
 @export var blend_time := 0.2
@@ -197,6 +198,10 @@ func _apply_motion(delta: float) -> void:
 	if _face_dir == Vector3.ZERO and h.length() > 0.1:
 		_face_dir = h
 
+	if is_on_floor() and not _height_calibrated:
+		_height_calibrated = true
+		_calibrate_height()
+
 
 func _face(delta: float) -> void:
 	var d := Vector3(_face_dir.x, 0.0, _face_dir.z)
@@ -260,6 +265,10 @@ func _flat_forward() -> Vector3:
 	f.y = 0.0
 	return f.normalized() if f.length() > 1e-3 else Vector3.FORWARD
 
+func _calibrate_height() -> void:
+	var p := _closest_nav_point(global_position)
+	if p != Vector3.ZERO:
+		agent.path_height_offset = -(global_position.y - p.y)  # subtracted from path y, so negative raises the path
 
 # === Debug ===
 
