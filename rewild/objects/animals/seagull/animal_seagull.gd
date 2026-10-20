@@ -72,15 +72,9 @@ var _flap_timer := 0.0
 var _flapping := false
 var _wings_blend := 0.0
 
-@export_group("Camera")
-@export var sing_delay := 1.0
-var _sing_timer := -1.0
-
 @onready var terrain: Terrain3D = get_tree().root.find_child("Terrain3D", true, false)
 @onready var _player: LIRA_Character = get_tree().get_first_node_in_group("player")
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var _sound_emitter: FmodEventEmitter3D = $FmodEventEmitter3D
-@onready var _camera_view: CameraView = $PCam_Seagull/CameraView
 
 var velocity := Vector3.ZERO
 var _state := State.FLOCK
@@ -112,7 +106,6 @@ func _ready() -> void:
 	animation_tree.active = true
 	animation_tree.set(wings_blend_param, 0.0)
 	_flap_timer = randf() * flap_interval_mean
-	CameraDirector.view_changed.connect(_on_camera_view_changed)
 	_think()
 
 
@@ -132,7 +125,6 @@ func _physics_process(delta: float) -> void:
 	_clamp_to_floor()
 	_update_facing(delta)
 	_update_wings(delta)
-	_update_sing(delta)
 
 func _think() -> void:
 	_dive_cooldown = maxf(_dive_cooldown - think_interval, 0.0)
@@ -376,19 +368,3 @@ func _update_wings(delta: float) -> void:
 	var target := 1.0 if _flapping else 0.0
 	_wings_blend = lerpf(_wings_blend, target, 1.0 - exp(-wings_blend_speed * delta))
 	animation_tree.set(wings_blend_param, _wings_blend)
-
-func _on_camera_view_changed(previous: StringName, current: StringName) -> void:
-	var mine := _camera_view.view_name
-	if current == mine and previous != mine:
-		_sing_timer = sing_delay
-	elif current != mine:
-		_sing_timer = -1.0  # left the view before the cry landed
-
-
-func _update_sing(delta: float) -> void:
-	if _sing_timer < 0.0:
-		return
-	_sing_timer -= delta
-	if _sing_timer <= 0.0:
-		_sing_timer = -1.0
-		_sound_emitter.play()
