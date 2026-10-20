@@ -36,7 +36,7 @@ var _fire_cd := 0.0
 ## Per fire-rate upgrade bought at the terminal (first entry = none): seconds between shots.
 @export var water_gun_cooldown := PackedFloat32Array([0.6, 0.48, 0.38, 0.3])
 ## Per tank upgrade bought at the terminal (first entry = none): water the tank holds.
-@export var water_tank_capacity := PackedFloat32Array([10, 15, 22, 30])
+@export var water_tank_capacity := PackedFloat32Array([15, 20, 25, 30])
 ## Per level: jetpack energy (fuel).
 @export var jetpack_energy := PackedFloat32Array([100.0, 200.0, 240.0])
 var water_gun_level := 0
@@ -133,8 +133,7 @@ func _ready() -> void:
 	energy_hud.configure(self)
 	get_tree().root.add_child.call_deferred(energy_hud)
 	tree_exiting.connect(energy_hud.queue_free)
-	# Water siblings may become ready after LIRA; collect them after scene setup.
-	_refresh_water_list.call_deferred()
+	_refresh_water_list()
 	_setup_swim_idle_pool()
 
 	_water_pos_y_offset = Vector3(0.0, _capsule_height() * 0.1, 0.0)
@@ -156,15 +155,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("use"):
 		try_shoot()
 
-	var filling := in_water and tank.level < 1.0
-	tank.set_filling(filling)
-	if filling:
-		tank.refill(delta)
+	# Refilling is a hold at a water source, see objects/water/water_refill.gd.
 
 	# move camera sideways when aiming
-	# var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
-	# var target := yaw_basis * _target_pivot_offset
-	# spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
+	var yaw_basis := Basis(Vector3.UP, camera_pivot.rotation.y)
+	var target := yaw_basis * _target_pivot_offset
+	spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
 
 func _apply_movement(delta : float) -> void:
 	if in_water:
@@ -246,7 +242,7 @@ func set_water_gun(enabled: bool) -> void:
 		on_aim(false)
 
 func try_shoot() -> void:                   # call this from the input code that used to set is_shooting
-	if not has_water_gun or not animation_script.is_aiming or _fire_cd > 0.0:
+	if not animation_script.is_aiming or _fire_cd > 0.0:
 		return
 	if not tank.consume_shot():
 		react(RobotFace.Mood.QUESTION, 1, 0.8)   # dry: LIRA notices
@@ -258,7 +254,7 @@ func try_shoot() -> void:                   # call this from the input code that
 	animation_script.aim_correction.kick()
 
 func on_aim(is_aiming : bool) -> void:
-	if is_aiming and (not has_water_gun or in_water):
+	if is_aiming and in_water:
 		return
 	if is_aiming:
 		_update_camera_distance(aim_camera_distance)
@@ -441,8 +437,7 @@ func _detect_surface() -> int:
 func _refresh_water_list() -> void:
 	_water_list.clear()
 	for n in get_tree().get_nodes_in_group(&"water_surfaces"):
-		# Keep dormant surfaces too: the pump can reveal them later.
-		if n is StylizedWater:
+		if n is StylizedWater and n.visible:
 			_water_list.append(n)
 
 func _update_water() -> void:
@@ -475,15 +470,15 @@ func _update_water() -> void:
 			_end_dive()
 
 func _find_water() -> StylizedWater:
-	var lira_pos := global_position + _water_pos_y_offset
+	var lira_pos := global_position+_water_pos_y_offset
+	if is_instance_valid(_current_water) and _current_water.is_point_underwater(lira_pos):
+		return _current_water
 	_current_water = null
-	for water in _water_list:
-		if not is_instance_valid(water) or not water.is_visible_in_tree() or not water.holds_point(lira_pos):
-			continue
-		# A raised pool can overlap the sea's footprint. Recheck even while cached
-		# in the sea, and use the highest local surface for depth and buoyancy.
-		if _current_water == null or water.get_plane_surface_y() > _current_water.get_plane_surface_y():
-			_current_water = water
+	for v in _water_list:
+		print
+		if is_instance_valid(v) and v.is_point_underwater(lira_pos):
+			_current_water = v
+			break
 	return _current_water
 
 func _capsule_height() -> float:

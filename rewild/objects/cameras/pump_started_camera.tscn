@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dr2wg6xqff2gw"]
+
+[ext_resource type="Script" uid="uid://csjccrhj5wnx7" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="1_7yuhd"]
+[ext_resource type="Script" uid="uid://cdpuvw7hdh7yt" path="res://objects/cameras/camera_shot.gd" id="1_fvim8"]
+[ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="2_fvim8"]
+[ext_resource type="Script" uid="uid://rmux0r4m7vby" path="res://systems/cameras/camera_view.gd" id="3_cj6sg"]
+
+[sub_resource type="Curve3D" id="Curve3D_n2xf4"]
+
+[sub_resource type="Resource" id="Resource_7xu28"]
+script = ExtResource("2_fvim8")
+duration = 1.5
+
+[node name="PumpStartedCameraPath3D" type="Path3D" unique_id=62686932]
+curve = SubResource("Curve3D_n2xf4")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="." unique_id=277011382]
+rotation_mode = 4
+script = ExtResource("1_fvim8")
+
+[node name="PhantomCamera3D" type="Node3D" parent="PathFollow3D" unique_id=561417519]
+script = ExtResource("1_7yuhd")
+tween_resource = SubResource("Resource_7xu28")
+metadata/_custom_type_script = "uid://csjccrhj5wnx7"
+
+[node name="CameraView" type="Node" parent="PathFollow3D/PhantomCamera3D" unique_id=114001530]
+script = ExtResource("3_cj6sg")
+view_name = &"pump_shot"
+metadata/_custom_type_script = "uid://rmux0r4m7vby"

@@ -26,6 +26,7 @@ var _rect := Rect2i()          # cells that hold water
 var _calm := 0                 # physics frames in a row with (almost) no flow
 var _calm_time := 0.0
 var _label_time := 0.0
+var _green_time := 0.0
 var _ground_img: Image
 var _depth_img: Image
 var _depth_tex: ImageTexture
@@ -149,6 +150,10 @@ func _physics_process(delta: float) -> void:
 		_label_time = 0.0
 		_group_bodies()
 	_evaporate(delta)
+	_green_time += delta
+	if _green_time >= settings.green_interval:
+		_green_time = 0.0
+		_moisten_ground()
 	_upload()
 
 
@@ -242,6 +247,33 @@ func _group_bodies() -> void:
 			for i in body:
 				_evap[i] = rate
 			next += 1
+
+
+## Tells the GrowthMap where the water is now. Many cells share one growth pixel;
+## the deepest one decides how wet that pixel gets.
+func _moisten_ground() -> void:
+	if not settings.green_ground:
+		return
+	var growth := get_node_or_null(^"/root/GrowthMap")
+	if growth == null:
+		return
+	var full: float = maxf(settings.green_full_depth, 0.0001)
+	var wet := {}
+	var res: int = growth.RES
+	for y in range(_rect.position.y, _rect.end.y):
+		for x in range(_rect.position.x, _rect.end.x):
+			var d := depth[y * n + x]
+			if d < WET:
+				continue
+			var p: Vector2 = growth.world_to_px(Vector3(origin.x + x * cell, 0.0, origin.y + y * cell))
+			if p.x < 0.0 or p.y < 0.0 or p.x >= res or p.y >= res:
+				continue
+			var i := int(p.y) * res + int(p.x)
+			var v := int(clampf(d / full, 0.35, 1.0) * 255.0)
+			if v > int(wet.get(i, 0)):
+				wet[i] = v
+	if not wet.is_empty():
+		growth.moisten(wet)
 
 
 func _evaporate(dt: float) -> void:

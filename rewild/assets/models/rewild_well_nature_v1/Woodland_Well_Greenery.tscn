@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://assets/models/rewild_well_nature_v1/growing_greenery.gd" id="1_wcko1"]
 [ext_resource type="PackedScene" path="res://assets/models/rewild_well_nature_v1/Woodland_Well_Greenery.glb" id="2_blfat"]
 
-[node name="Woodland_Well_Greenery" type="Node3D" unique_id=1094377690]
+[node name="Woodland_Well_Greenery" type="Node3D" unique_id=1235183196]
 script = ExtResource("1_wcko1")
 
-[node name="Visual" type="Node3D" parent="." unique_id=1982960931 instance=ExtResource("2_blfat")]
+[node name="Visual" type="Node3D" parent="." unique_id=1855315254 instance=ExtResource("2_blfat")]

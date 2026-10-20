@@ -2,7 +2,7 @@
 class_name WaterTank extends MeshInstance3D
 
 #### Water refill ####
-@export var refill_time := 5.0   ## seconds, empty to full
+@export var refill_time := 1.0   ## seconds, empty to full, while holding interact at a water source
 @export var capacity := 10.0   ## shots in a full tank; set per level by the player
 @export var smooth := 8.0        ## visual catch-up rate
 

@@ -9,6 +9,7 @@ var _restore: VBoxContainer
 var _restore_total: Label
 var _restore_regions: Label
 var _toast: Label
+var _battery_notified := false
 var _toast_queue: Array[String] = []
 var _toast_tween: Tween
 @onready var _entry: Button = %TerminalButton
@@ -96,6 +97,10 @@ func _build_restoration_hud(column: Control) -> void:
 	_refresh_restoration()
 
 func _refresh_restoration() -> void:
+	# Once, when the battery reaches 100%: it waits at the lake station.
+	if not _battery_notified and BatteryCharge.ready_to_collect():
+		_battery_notified = true
+		_notify(tr("BATTERY_READY_NOTICE"))
 	var growth := get_node_or_null(^"/root/GrowthMap")
 	var regions: Array[Dictionary] = growth.progress_regions() if growth else []
 	_restore.visible = not regions.is_empty()

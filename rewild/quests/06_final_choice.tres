@@ -13,8 +13,8 @@ event = &"ending_disruptor"
 script = ExtResource("2")
 text = "QUEST_FINALE_BOAT"
 event = &"ending_boat"
-progress_event = &"harbor_parts"
-progress_target = 6
+progress_event = &"boat_battery_installed"
+progress_target = 1
 
 [resource]
 script = ExtResource("1")

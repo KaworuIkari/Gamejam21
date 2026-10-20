@@ -73,7 +73,7 @@ var _flapping := false
 var _wings_blend := 0.0
 
 @export_group("Camera")
-@export var sing_delay := 2.0
+@export var sing_delay := 1.0
 var _sing_timer := -1.0
 
 @onready var terrain: Terrain3D = get_tree().root.find_child("Terrain3D", true, false)

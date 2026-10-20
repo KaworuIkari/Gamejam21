@@ -1,8 +1,8 @@
 extends Node3D
-const SPEAKER = preload("res://dialogue/characters/RadarSystem.dch")
 ## Quest 05: start the radar and read the coordinates, available from the start (no key,
 ## recovery or earlier quest needed). The coordinates are for the boat ending.
 const CONSOLE = preload("res://levels/meadow_hand/radar_console.gd")
+const FinaleStory = preload("res://levels/meadow_hand/finale_story.gd")
 const NOTE = preload("res://objects/interactables/readables/readable_note.tscn")
 const LITTER: Array[PackedScene] = [
 	preload("res://objects/clearable/garbage_dirty_litter_heap_1.tscn"),
@@ -107,8 +107,7 @@ func activate_radar() -> void:
 func make_readout_timeline() -> DialogicTimeline:
 	var timeline := DialogicTimeline.new()
 	var event := DialogicTextEvent.new()
-	event.character = SPEAKER
-	event.text = tr("RADAR_READOUT_COORDINATES")
+	event.text = tr("RADAR_READOUT_COORDINATES") % FinaleStory.COORDINATES
 	timeline.events.append(event)
 	timeline.events_processed = true
 	return timeline

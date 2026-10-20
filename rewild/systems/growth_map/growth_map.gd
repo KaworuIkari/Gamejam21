@@ -13,7 +13,10 @@ signal watered(world_pos: Vector3, radius: float)
 ## Emitted when the restoration percentages (progress_total, progress_regions()) change.
 signal progress_changed
 
-const MAP_ORIGIN := Vector2(-512.0, -512.0)  # world XZ of the crater's corner
+# World XZ of the map's corner. Covers x -512..512, z -640..384, i.e. all land of
+# meadow_hand (z reaches -600 at the north island). Outside the map the shaders draw
+# everything green, so no land may lie outside it.
+const MAP_ORIGIN := Vector2(-512.0, -640.0)
 const MAP_SIZE := 1024.0               # crater size in world metres (not mask pixels)
 const RES := 512                       # growth map pixels per side -> 2 m per pixel
 const SAVE_PATH := "user://growth_map.png"
@@ -102,9 +105,31 @@ var _p_lone := PackedFloat32Array()
 var _p_lut: Array[PackedFloat32Array] = []
 var _lut_cache := {}                   # Curve -> PackedFloat32Array
 
+@export_group("Final push")
+## Once the world is this green (the battery charge: the average of the GrowthRegions,
+## or all land without regions), spreading speeds up more and more and every bit of land
+## is reached, so it always ends 100% green.
+@export_range(0.0, 1.0) var push_from := 0.7
+## Seconds for the push to double the spreading speed. It keeps doubling up to push_max.
+@export var push_double_time := 20.0
+## Highest speed-up of the push.
+@export var push_max := 40.0
+## Milliseconds per frame the spreading may use during the push (spread_budget_ms before).
+@export var push_budget_ms := 4.0
+
+var _pushing := false
+var _push_clock := 0.0
+var _push_mask := PackedByteArray()  # 1 = land the push spreads over (sea is skipped)
+var _push_last_total := 0.0
+var _push_stall := 0.0
+
 @export_group("Restoration progress")
-## Ground below this terrain height (sea, lake beds) doesn't count towards the percentages.
+## Ground below this terrain height never counts towards the percentages. Ground under
+## any water surface (sea, lake, river, ponds: every StylizedWater) never counts either.
 @export var land_min_height := 20.0
+## Only the central island counts: the biggest piece of land, plus smaller pieces that lie
+## inside its outline (e.g. the islet in the lake). Off = every island counts.
+@export var count_main_island_only := true
 ## Seconds between measurements while the ground is changing.
 @export var progress_interval := 1.0
 
@@ -142,6 +167,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_clock += delta
+	if _pushing:
+		_push_clock += delta
 	if _regions_dirty:
 		_rebuild_regions()
 	if not _tile_queue.is_empty():
@@ -176,6 +203,8 @@ func _process(delta: float) -> void:
 func attach_terrain(terrain: Terrain3D) -> void:
 	terrain.material.set_shader_param("growth_map", texture)
 	terrain.material.set_shader_param("wet_map", wet_texture)
+	terrain.material.set_shader_param("growth_origin", MAP_ORIGIN)
+	terrain.material.set_shader_param("growth_size", MAP_SIZE)
 	if always_green_slot >= 0:
 		seed_from_terrain(terrain, always_green_slot)
 	_build_land(terrain)
@@ -227,6 +256,11 @@ func _add_base(i: int, v: int) -> void:
 func attach_material(mat: ShaderMaterial) -> void:
 	mat.set_shader_parameter("growth_map", texture)
 	mat.set_shader_parameter("wet_map", wet_texture)
+	# Where the map lies; the shaders name it one of two ways.
+	mat.set_shader_parameter("growth_origin", MAP_ORIGIN)
+	mat.set_shader_parameter("growth_size", MAP_SIZE)
+	mat.set_shader_parameter("map_origin", MAP_ORIGIN)
+	mat.set_shader_parameter("map_size", MAP_SIZE)
 
 
 # --- Coordinates ----------------------------------------------------------
@@ -352,6 +386,19 @@ func _apply_reveal(t: float, buckets: Array[PackedInt32Array], delay: PackedFloa
 func water(world_pos: Vector3, radius: float, amount: float = 1.0, edge_noise: float = 0.35) -> void:
 	_wet_disc(world_pos, radius, amount, edge_noise)
 	watered.emit(world_pos, radius)
+
+
+## Wets the ground under running or standing water (see Puddles). Unlike water() it
+## makes no splash shape and emits no `watered`: it only keeps each pixel at least
+## this wet, so water that flows away greens the ground it passes over.
+## wet: growth map pixel index -> wetness 0..255.
+func moisten(wet: Dictionary) -> void:
+	for i in wet:
+		var v: int = wet[i]
+		if _wet[i] < v:
+			_wet[i] = v
+			_activate(i)
+			_wet_dirty = true
 
 
 func _wet_disc(world_pos: Vector3, radius: float, amount: float, edge_noise: float) -> void:
@@ -653,6 +700,14 @@ func _refresh_spread_params() -> void:
 		_p_reach[k] = maxi(1, int(region.attract_distance / PIXEL_M))
 		_p_lone[k] = region.lone_spread
 		_p_lut[k] = _lut(region.spread_by_growth if region.spread_by_growth else spread_by_growth)
+	if _pushing:
+		# Faster and faster, everywhere: regions can't hold it back, and edges move even
+		# with no other green ahead of them.
+		var boost := minf(pow(2.0, _push_clock / push_double_time), push_max)
+		var lone := clampf(_push_clock / push_double_time, 0.0, 1.0)
+		for k in n:
+			_p_speed[k] = maxf(_p_speed[k], spread_speed) * boost
+			_p_lone[k] = lerpf(_p_lone[k], 1.0, lone)
 
 
 ## Curve sampled at every growth byte (0..255).
@@ -670,7 +725,7 @@ func _lut(curve: Curve) -> PackedFloat32Array:
 func _spread_step() -> void:
 	_refresh_spread_params()
 	var start := Time.get_ticks_usec()
-	var limit := int(spread_budget_ms * 1000.0)
+	var limit := int((push_budget_ms if _pushing else spread_budget_ms) * 1000.0)
 	var steps := _tile_queue.size()  # each tile at most once per frame
 	while steps > 0 and not _tile_queue.is_empty() and Time.get_ticks_usec() - start < limit:
 		steps -= 1
@@ -694,6 +749,7 @@ func _spread_tile(t: int) -> bool:
 	var x0 := (t % TILES) * TILE
 	var y0 := (t / TILES) * TILE
 	var has_soil := soil.size() == RES * RES
+	var push_land := _pushing and _push_mask.size() == RES * RES
 	var moving := false
 	var max_reach := 0
 	var hit_i := PackedInt32Array()
@@ -702,7 +758,7 @@ func _spread_tile(t: int) -> bool:
 		for x in range(x0, x0 + TILE):
 			var i := y * RES + x
 			var g := _data[i]
-			if g >= 255 or (has_soil and g >= soil[i]):
+			if g >= 255 or (has_soil and g >= soil[i]) or (push_land and _push_mask[i] == 0):
 				continue
 			var m := 0
 			if x > 0: m = _data[i - 1]
@@ -717,7 +773,8 @@ func _spread_tile(t: int) -> bool:
 				continue
 			var reach := _p_reach[r]
 			max_reach = maxi(max_reach, reach)
-			speed *= lerpf(_p_lone[r], 1.0, _attraction(x, y, reach))
+			if _p_lone[r] < 0.999:  # with full lone speed the pull makes no difference
+				speed *= lerpf(_p_lone[r], 1.0, _attraction(x, y, reach))
 			if speed <= 0.0:
 				continue
 			moving = true
@@ -818,6 +875,7 @@ func load_progress(path: String = SAVE_PATH) -> bool:
 ## Back to the start: barren except the permanent green.
 func clear() -> void:
 	_data = _base.duplicate()
+	_pushing = false
 	_wet.fill(0)
 	_is_active.fill(0)
 	_active.clear()
@@ -885,10 +943,13 @@ func region_progress(id: StringName) -> float:
 	return -1.0
 
 
+## Which ground counts towards the percentages (and the final push): dry land above every
+## water surface, on the central island. Measured on every second pixel.
 func _build_land(terrain: Terrain3D) -> void:
 	var data := terrain.data
 	if data == null:
 		return
+	var waters := _water_surfaces()
 	_land.resize(RES * RES)
 	_land.fill(0)
 	for y in range(0, RES, 2):
@@ -897,9 +958,99 @@ func _build_land(terrain: Terrain3D) -> void:
 			if not data.has_regionp(wp):
 				continue
 			var h := data.get_height(wp)
-			if not is_nan(h) and h >= land_min_height:
+			if not is_nan(h) and h >= land_min_height and not _underwater(waters, wp, h):
 				_land[y * RES + x] = 1
+	if count_main_island_only:
+		_keep_main_island()
 	_progress_layout_dirty = true
+	_build_push_mask()
+
+
+## Every StylizedWater in the scene as {inv, box, level, cutouts}. Rising water (lowered by a
+## WaterFlowSwitch at the start) counts at its full height.
+func _water_surfaces() -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for w in get_tree().root.find_children("*", "MeshInstance3D", true, false):
+		if not w.has_method(&"is_point_underwater") or w.mesh == null:
+			continue
+		var level: float = w.get(&"full_level") if w.get(&"full_level") != null else NAN
+		if is_nan(level):
+			level = w.global_position.y
+		out.append({"inv": w.global_transform.affine_inverse(), "box": w.mesh.get_aabb(),
+				"level": level, "cutouts": w.get(&"cutouts") if w.get(&"cutouts") else []})
+	return out
+
+
+func _underwater(waters: Array[Dictionary], wp: Vector3, h: float) -> bool:
+	for w in waters:
+		if h >= w.level:
+			continue
+		var local: Vector3 = w.inv * Vector3(wp.x, w.level, wp.z)
+		var box: AABB = w.box
+		if local.x < box.position.x or local.x > box.end.x or local.z < box.position.z or local.z > box.end.z:
+			continue
+		var cut := false
+		for c in w.cutouts:  # e.g. the sea isn't drawn over the lake
+			if is_instance_valid(c) and c.covers(wp):
+				cut = true
+				break
+		if not cut:
+			return true
+	return false
+
+
+## Keeps the biggest piece of land, and smaller pieces lying fully inside its outline
+## (its bounding box), so the islet in the lake counts but other islands don't.
+func _keep_main_island() -> void:
+	var comp := PackedInt32Array()
+	comp.resize(RES * RES)
+	comp.fill(-1)
+	var sizes := PackedInt32Array()
+	var boxes: Array[Rect2i] = []
+	var stack := PackedInt32Array()
+	for start in range(0, RES * RES):
+		if _land[start] == 0 or comp[start] >= 0:
+			continue
+		var id := sizes.size()
+		var size := 0
+		var box := Rect2i(start % RES, start / RES, 1, 1)
+		comp[start] = id
+		stack.append(start)
+		while not stack.is_empty():
+			var i := stack[stack.size() - 1]
+			stack.resize(stack.size() - 1)
+			size += 1
+			var x := i % RES
+			var y := i / RES
+			box = box.expand(Vector2i(x, y))
+			# Samples sit on every second pixel, so neighbours are 2 apart.
+			if x >= 2 and _land[i - 2] and comp[i - 2] < 0:
+				comp[i - 2] = id
+				stack.append(i - 2)
+			if x < RES - 2 and _land[i + 2] and comp[i + 2] < 0:
+				comp[i + 2] = id
+				stack.append(i + 2)
+			if y >= 2 and _land[i - 2 * RES] and comp[i - 2 * RES] < 0:
+				comp[i - 2 * RES] = id
+				stack.append(i - 2 * RES)
+			if y < RES - 2 and _land[i + 2 * RES] and comp[i + 2 * RES] < 0:
+				comp[i + 2 * RES] = id
+				stack.append(i + 2 * RES)
+		sizes.append(size)
+		boxes.append(box)
+	if sizes.is_empty():
+		return
+	var main := 0
+	for k in sizes.size():
+		if sizes[k] > sizes[main]:
+			main = k
+	var keep := PackedByteArray()
+	keep.resize(sizes.size())
+	for k in sizes.size():
+		keep[k] = 1 if k == main or boxes[main].encloses(boxes[k]) else 0
+	for i in RES * RES:
+		if _land[i] and keep[comp[i]] == 0:
+			_land[i] = 0
 
 
 func _build_progress_layout() -> void:
@@ -956,7 +1107,124 @@ func _measure_progress() -> void:
 		return
 	_progress_values = values
 	progress_total = t
+	_check_push()
 	progress_changed.emit()
+
+
+# --- 5. Final push: from push_from greenness on, everything turns green ----------
+
+## The greenness the player sees: the average of the GrowthRegions (the battery charge),
+## or the share of all land when there are no regions.
+func world_greenness() -> float:
+	if _progress_values.is_empty():
+		return progress_total
+	var sum := 0.0
+	for v in _progress_values:
+		sum += v
+	return sum / _progress_values.size()
+
+
+func is_pushing() -> bool:
+	return _pushing
+
+
+func _check_push() -> void:
+	if not _pushing:
+		if world_greenness() >= push_from and progress_total < 0.999:
+			_start_push()
+		return
+	# Stall guard: if all land isn't green yet but nothing has moved for a while
+	# (e.g. a patch of land cut off by a cliff of non-land), seed it again.
+	if progress_total >= 1.0:
+		return
+	if progress_total > _push_last_total + 0.00005:
+		_push_last_total = progress_total
+		_push_stall = 0.0
+	else:
+		_push_stall += progress_interval
+		if _push_stall >= 10.0:
+			_push_stall = 0.0
+			_seed_unreached()
+			_wake_all()
+
+
+func _start_push() -> void:
+	_pushing = true
+	_push_clock = 0.0
+	_push_last_total = progress_total
+	_push_stall = 0.0
+	if _push_mask.is_empty():
+		_build_push_mask()
+	_seed_unreached()
+	_wake_all()
+
+
+## Land at full resolution (it is measured every 2nd pixel), grown by 2 pixels so the
+## push also covers the shore and narrow necks between samples.
+func _build_push_mask() -> void:
+	if _land.size() != RES * RES:
+		_push_mask = PackedByteArray()  # no terrain: the push spreads over the whole map
+		return
+	var m := PackedByteArray()
+	m.resize(RES * RES)
+	for y in range(0, RES, 2):
+		for x in range(0, RES, 2):
+			if _land[y * RES + x]:
+				for dy in 2:
+					for dx in 2:
+						if y + dy < RES and x + dx < RES:
+							m[(y + dy) * RES + x + dx] = 1
+	for pass_i in 2:
+		var src := m.duplicate()
+		for i in RES * RES:
+			if src[i] == 0:
+				var x := i % RES
+				if (x > 0 and src[i - 1]) or (x < RES - 1 and src[i + 1]) \
+						or (i >= RES and src[i - RES]) or (i < RES * (RES - 1) and src[i + RES]):
+					m[i] = 1
+	_push_mask = m
+
+
+## Every separate piece of push land (an island, the islet in the lake) needs some green
+## to spread from: pieces without any get one seed at their greenest pixel.
+func _seed_unreached() -> void:
+	if _push_mask.size() != RES * RES:
+		return
+	var seen := PackedByteArray()
+	seen.resize(RES * RES)
+	var stack := PackedInt32Array()
+	for start in RES * RES:
+		if _push_mask[start] == 0 or seen[start]:
+			continue
+		# Flood one piece, remembering whether it has green and its greenest pixel.
+		var has_green := false
+		var best := start
+		seen[start] = 1
+		stack.append(start)
+		while not stack.is_empty():
+			var i := stack[stack.size() - 1]
+			stack.resize(stack.size() - 1)
+			var g := _data[i]
+			if g >= spread_min_source:
+				has_green = true
+			if g > _data[best]:
+				best = i
+			var x := i % RES
+			if x > 0 and _push_mask[i - 1] and not seen[i - 1]:
+				seen[i - 1] = 1
+				stack.append(i - 1)
+			if x < RES - 1 and _push_mask[i + 1] and not seen[i + 1]:
+				seen[i + 1] = 1
+				stack.append(i + 1)
+			if i >= RES and _push_mask[i - RES] and not seen[i - RES]:
+				seen[i - RES] = 1
+				stack.append(i - RES)
+			if i < RES * (RES - 1) and _push_mask[i + RES] and not seen[i + RES]:
+				seen[i + RES] = 1
+				stack.append(i + RES)
+		if not has_green:
+			_data[best] = _cap(best, 255)
+			_dirty = true
 
 
 # --- Helpers -------------------------------------------------------------------

@@ -40,6 +40,9 @@ var _brown := 0.0
 var _low := 0.0
 var _phase := 0.0
 
+signal awakening_started
+signal awakening_finished
+
 
 func _ready() -> void:
 	if giant == null:
@@ -73,6 +76,7 @@ func _on_statue_landed(in_target: bool) -> void:
 	t.tween_property(statue, "global_position", statue.global_position - Vector3(0, 3, 0), 1.5) \
 			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	t.tween_callback(statue.hide)
+	awakening_started.emit()
 	awaken()
 
 
@@ -133,6 +137,8 @@ func _finish() -> void:
 	var quests := get_node_or_null(^"/root/Quests")
 	if quests and quest_event != &"":
 		quests.report(quest_event)
+	awakening_finished.emit()
+	set_process(false)
 
 
 ## No rumble in the FMOD banks yet, so make one: filtered brown noise with a slow roll

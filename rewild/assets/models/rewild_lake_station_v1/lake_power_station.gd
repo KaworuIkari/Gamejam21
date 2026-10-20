@@ -206,6 +206,9 @@ func _open_terminal() -> void:
 	var quests := get_node_or_null(^"/root/Quests")
 	if quests and not quests.terminal_unlocked():
 		await _first_contact(quests)
+	# The core battery is taken here, in person, once the land has charged it to 100%.
+	if quests and BatteryCharge.ready_to_collect():
+		BatteryCharge.collect()
 	_show_terminal()
 	_terminal_busy = false
 
