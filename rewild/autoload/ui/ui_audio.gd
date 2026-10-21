@@ -60,8 +60,8 @@ func play_settings_tab_sound(_tab: int) -> void:
 
 ## Gameplay one-shots (garbage, gears, upgrades, tank full); slight pitch variation
 ## so repeats don't sound identical.
-func play_sfx(stream: AudioStream, pitch_jitter := 0.05) -> void:
-	_play_stream(stream, randf_range(1.0 - pitch_jitter, 1.0 + pitch_jitter))
+func play_sfx(stream: AudioStream, pitch_jitter := 0.05, volume_db := 0.0) -> void:
+	_play_stream(stream, randf_range(1.0 - pitch_jitter, 1.0 + pitch_jitter), volume_db)
 
 ## A one-shot heard from a spot in the world (wells, the pump, a thrown prop landing),
 ## quieter the further it is from LIRA. Not an AudioStreamPlayer3D: the level's 3D world

@@ -2,16 +2,25 @@ class_name LeafRustle extends Node
 ## Rustle of leaves growing out on the trees whose leaves use tree_leaves.gdshader: once when
 ## the ground under a tree greens past the material's leaf_start (first leaves) and again past
 ## leaf_full (full canopy). Add it under the level; trees already leafy on load stay quiet.
+## ProtonScatter copies (the west forest) appear after _ready, so each scatter build rescans.
 
 const LEAF_SHADER := preload("res://systems/growth_map/tree_leaves.gdshader")
 
 var _trees: Array[Dictionary] = []  # {pos, start, full, stage}
+var _seen := {}  # cell -> true, one entry per tree
 var _pending := false
 var _last_msec := 0
 
 
 func _ready() -> void:
-	var seen := {}
+	_scan()
+	for scatter: ProtonScatter in get_parent().find_children("*", "ProtonScatter", true, false):
+		scatter.build_completed.connect(_on_scatter_built, CONNECT_DEFERRED)
+	GrowthMap.changed.connect(_queue_check)
+	_check.call_deferred(true)
+
+
+func _scan() -> void:
 	for mesh: MeshInstance3D in get_parent().find_children("*", "MeshInstance3D", true, false):
 		if mesh.mesh == null:
 			continue
@@ -20,13 +29,17 @@ func _ready() -> void:
 			if mat == null or mat.shader != LEAF_SHADER:
 				continue
 			var cell := Vector3i((mesh.global_position / 3.0).round())  # a tree's leaf meshes share a spot
-			if not seen.has(cell):
-				seen[cell] = true
-				_trees.append({pos = mesh.global_position, stage = 0,
-						start = mat.get_shader_parameter(&"leaf_start"), full = mat.get_shader_parameter(&"leaf_full")})
+			if not _seen.has(cell):
+				_seen[cell] = true
+				var tree := {pos = mesh.global_position, start = mat.get_shader_parameter(&"leaf_start"),
+						full = mat.get_shader_parameter(&"leaf_full")}
+				tree.stage = _stage(tree)  # whatever is already grown stays quiet
+				_trees.append(tree)
 			break
-	GrowthMap.changed.connect(_queue_check)
-	_check.call_deferred(true)
+
+
+func _on_scatter_built() -> void:
+	_scan()
 
 
 func _queue_check() -> void:
@@ -41,9 +54,13 @@ func _queue_check() -> void:
 
 func _check(silent: bool) -> void:
 	for tree in _trees:
-		var g := GrowthMap.sample(tree.pos)
-		var stage := 2 if g >= tree.full else 1 if g >= tree.start else 0
+		var stage := _stage(tree)
 		if stage > tree.stage and not silent and Time.get_ticks_msec() - _last_msec > 150:
 			_last_msec = Time.get_ticks_msec()
 			UIAudio.play_sfx_at(UIAudio.LEAF_RUSTLE, tree.pos, 0.1, 0.0 if stage == 2 else -3.0)
 		tree.stage = stage
+
+
+func _stage(tree: Dictionary) -> int:
+	var g := GrowthMap.sample(tree.pos)
+	return 2 if g >= tree.full else 1 if g >= tree.start else 0

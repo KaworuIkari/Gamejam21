@@ -62,8 +62,8 @@ const DEFAULTS := {
 	"audio": {
 		"master_volume": 80,
 		"music_volume": 70,
-		"sfx_volume": 80,
-		"ambient_volume": 70,
+		"sfx_volume": 20,
+		"ambient_volume": 50, 
 	},
 	"video": {
 		"window_mode": WindowMode.WINDOWED,

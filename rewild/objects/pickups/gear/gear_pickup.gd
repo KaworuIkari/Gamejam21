@@ -84,7 +84,7 @@ func _part(mesh: Mesh, material: Material) -> MeshInstance3D:
 
 func _collect() -> void:
 	$SoftSparkles.emitting = false
-	UIAudio.play_sfx(UIAudio.GEAR_PICKUP)
+	UIAudio.play_sfx(UIAudio.GEAR_PICKUP, 0.05, linear_to_db(0.7))
 	Quests.report(saved_event)
 	Quests.report(event)
 	collected.emit(self)

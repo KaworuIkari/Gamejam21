@@ -90,7 +90,7 @@ script = ExtResource("5_text")
 textbox_root = NodePath("../../..")
 
 [node name="DialogicNode_TypeSounds" type="AudioStreamPlayer" parent="Box/Panel/TextColumn/DialogicNode_DialogText"]
-volume_db = -12.0
+volume_db = -10.06
 bus = &"SFX"
 script = ExtResource("6_sound")
 sounds = Array[AudioStream]([ExtResource("13_blip1"), ExtResource("13_blip2"), ExtResource("13_blip3")])

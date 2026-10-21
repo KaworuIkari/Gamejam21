@@ -173,7 +173,7 @@ QUEST_RADAR_STEP_COORDINATES,读取雷达的坐标信息,Read the radar coordina
 INTERACT_RADAR_START,按 %s 启动雷达,Press %s to bring the radar online
 INTERACT_RADAR_READ,按 %s 读取雷达坐标,Press %s to read the radar coordinates
 RADAR_READOUT_COORDINATES,已获取航行坐标：%s。前往港口，在控制台输入航行坐标。,Navigation coordinates received: %s. Go to the harbor and enter them at the control console.
-ITEM_CHAOS_ENERGY_MODULE_1,混沌能量模块,Chaos Energy Module
+ITEM_CHAOS_ENERGY_MODULE_1,航行坐标,Navigation coordinates
 QUEST_FINALE_TITLE,最后的选择,The final choice
 QUEST_FINALE_DESC,携带混沌能量模块启动雷达站的同步破坏器，或在港口载入雷达坐标并插入混沌能量模块，为小船供能后出发。确认启动将锁定对应结局。,"Activate the radar disruptor with the Chaos Energy Module, or load the radar coordinates and insert the Chaos Energy Module at the harbor core to power the ship. Confirming departure locks the boat ending."
 QUEST_FINALE_LOCATION,雷达站二层 / 港口,Radar upper platform / Harbor
@@ -265,7 +265,8 @@ BIKE_3,在古老的cambridge小镇这或许是最珍贵的东西,
 BIKE_4,因为资料显示直到人类消失前该地几乎所有的犯罪报告都来自于自行车的失窃。
 FOX_0,按 %s 阅读
 FOX_1,狐狸的家
-FOX_2,wooooooooo！wooo！
+FOX_2,狐狸的家以前是以前是一片茂密的森林，
+FOX_3,狐狸喜欢在森林里玩水。
 STARTUP_WATER_GUN_TITLE,生态修复模块校验,Ecosystem restoration check
 STARTUP_WATER_GUN_BODY,水枪已接入。向枯地发射水团，确认生态修复反馈。,Water gun connected. Fire a water blob at barren ground to check the restoration system.
 STARTUP_WATER_GUN_INPUT,按住 %s 瞄准，按 %s 发射,Hold %s to aim and press %s to fire

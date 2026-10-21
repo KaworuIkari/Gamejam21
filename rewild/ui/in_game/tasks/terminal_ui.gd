@@ -15,6 +15,8 @@ var _toast_tween: Tween
 @onready var _entry: Button = %TerminalButton
 @onready var _page: Control = $TaskPage
 @onready var _hud: Control = $HUD
+## Outside the HUD so notices (e.g. the fox key) show before the terminal is found.
+@onready var _notices: Control = $Notices
 
 func configure(pause_menu: CanvasLayer) -> void:
 	_pause_menu = pause_menu
@@ -33,7 +35,8 @@ func _notification(what: int) -> void:
 		_refresh_restoration()
 
 func _process(_delta: float) -> void:
-	_hud.visible = _terminal_unlocked() and not get_tree().paused and not _dialogue_active() and not SceneRouter.is_busy()
+	_notices.visible = not get_tree().paused and not _dialogue_active() and not SceneRouter.is_busy()
+	_hud.visible = _terminal_unlocked() and _notices.visible
 
 func _input(event: InputEvent) -> void:
 	if event.is_echo() or not event.is_action_pressed(ACTION) or not _terminal_unlocked():
