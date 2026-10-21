@@ -2,6 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bd3xu2yw87eul" path="res://objects/camera_paths/forest_fox_camera.tscn" id="1_7xv26"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_0yw1p"]
+
 [node name="RadioStationCamera" unique_id=62686932 instance=ExtResource("1_7xv26")]
 
 [node name="PathFollow3D" parent="." index="0" unique_id=277011382]
@@ -10,3 +12,6 @@ step_event_name = &"radio_station_camera"
 
 [node name="CameraView" parent="PathFollow3D/PhantomCamera3D" parent_id_path=PackedInt32Array(561417519) index="0" unique_id=114001530]
 view_name = &"radio_station_camera"
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." index="2" unique_id=1462256975]
+navigation_mesh = SubResource("NavigationMesh_0yw1p")
