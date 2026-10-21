@@ -11,6 +11,7 @@ bank_paths = ["res://assets/audio/fmod_bank/Desktop/Master.strings.bank", "res:/
 [node name="WorldBGM" type="FmodEventEmitter2D" parent="." unique_id=931620375]
 event_name = "event:/BGM/Game"
 event_guid = "{852d9e94-6107-42e3-8d62-5b6878fc6c7c}"
+volume = 0.7
 fmod_parameters/track/id = -8097890939306202993
 fmod_parameters/track = 0
 fmod_parameters/track/variant_type = 2

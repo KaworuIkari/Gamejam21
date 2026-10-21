@@ -72,7 +72,17 @@ theme_override_colors/font_outline_color = Color(0.08, 0.12, 0.1, 0.9)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 18
 
-[node name="UnlockNotice" type="Label" parent="HUD"]
+[node name="Notices" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3")
+
+[node name="UnlockNotice" type="Label" parent="Notices"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 anchor_left = 0.5
