@@ -2,7 +2,7 @@ extends AnimalBase
 class_name AnimalFox
 ## Starts lying hurt on its side (DOWN) until LIRA holds interact beside it; the rescue is
 ## saved as `rescue_event`. It then gets up, hops and howls, gives LIRA `reward_item` (a key,
-## listed on the terminal), and lives:
+## listed on the terminal), walks `exit_path` out of the house and down the stairs (EXIT), and lives:
 ## IDLE ⇄ WANDER when the player is far; WATCH (stand still, face the player) at middle
 ## distance; player close → FRIENDLY: it trots over, keeps about follow_distance away and
 ## now and then hops, spins or howls (HAPPY). It stays friendly until the player is beyond
@@ -12,7 +12,7 @@ class_name AnimalFox
 ## Waypoint advancement is owned entirely by NavigationAgent3D: one target at a
 ## time, arrival decided by agent.is_navigation_finished().
 
-enum State { DOWN, IDLE, WANDER, WATCH, FRIENDLY, HAPPY, INVESTIGATE }
+enum State { DOWN, EXIT, IDLE, WANDER, WATCH, FRIENDLY, HAPPY, INVESTIGATE }
 
 const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_prompt.tscn")
 
@@ -45,8 +45,11 @@ const HOLD_PROMPT_SCENE = preload("res://ui/in_game/interaction/clear_hold_promp
 ## Given after the rescue howl; an ability in Quests, named by ITEM_<NAME>_1 in strings.csv.
 @export var reward_item: StringName = &"fox_key"
 @export var rescue_hold := 1.5  # seconds interact must be held
-@export var rescue_radius := 2.5
+@export var rescue_radius := 2
 @export var rescue_prompt := "FOX_RESCUE_PROMPT"
+## Walked after the rescue, from the fox's spot to the ground, before it roams the nav mesh.
+## Followed point to point without physics (doorway, stairs), so the last point must sit on the ground.
+@export var exit_path: Path3D
 
 @export_group("Events")
 @export var curiosity_threshold := 0.6
@@ -99,6 +102,8 @@ func _ready() -> void:
 	_tick_timer = randf() * tick_interval  # stagger foxes so they do not all think on one frame
 	if Quests.event_count(rescue_event) > 0:
 		_give_reward()  # in case a save happened during the rescue sequence
+		if exit_path:
+			global_position = _exit_point(exit_path.curve.get_baked_length())
 		_enter_idle()
 	else:
 		_lie_down()
@@ -111,7 +116,7 @@ func _nav_ready() -> bool:
 # === State machine ===
 
 func _tick_state(delta: float) -> void:
-	if state == State.DOWN:
+	if state == State.DOWN or state == State.EXIT:
 		return
 	_tick_timer -= delta
 	if _tick_timer <= 0.0:
@@ -199,14 +204,47 @@ func _rescue() -> void:
 	await get_tree().create_timer(0.5).timeout
 	await _hop(2)
 	await _howl()
+	if not is_inside_tree():
+		return
+	_give_reward()
+	if exit_path:
+		await _walk_exit()
 	if is_inside_tree():
-		_give_reward()
 		_enter_idle()
 
 
 func _give_reward() -> void:
 	if reward_item != &"":
 		Quests.grant(reward_item)
+
+
+## Walks exit_path at walk_speed with physics off, then hands back to the nav mesh.
+func _walk_exit() -> void:
+	state = State.EXIT
+	set_physics_process(false)
+	velocity = Vector3.ZERO
+	var length := exit_path.curve.get_baked_length()
+	var step := walk_speed / exit_path.global_basis.get_scale().x  # curve units are local to the path
+	var d := 0.0
+	while d < length:
+		if animation_player.current_animation != walk_anim:
+			animation_player.play(walk_anim)  # the clip does not loop; restart it like _animate does
+		await get_tree().physics_frame
+		if not is_inside_tree():
+			return
+		var delta := get_physics_process_delta_time()
+		d = minf(d + step * delta, length)
+		var p := _exit_point(d)
+		_face_dir = p - global_position
+		_face(delta)
+		global_position = p
+	_heading = Vector3.ZERO
+	_height_calibrated = false  # first calibrated on the house floor; redo it on the ground
+	set_physics_process(true)
+
+
+func _exit_point(d: float) -> Vector3:
+	return exit_path.to_global(exit_path.curve.sample_baked(d))
 
 
 # === States ===
@@ -344,7 +382,7 @@ func _pick_clip() -> String:
 # === World events ===
 
 func _on_world_event(pos: Vector3, _kind: StringName, interest: float) -> void:
-	if interest < curiosity_threshold or state == State.DOWN or state == State.HAPPY:
+	if interest < curiosity_threshold or state == State.DOWN or state == State.EXIT or state == State.HAPPY:
 		return
 	# Events outrank watching or playing with the player.
 	_clear_target()

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cj5gwdo0icmrd"
 path.s3tc="res://.godot/imported/tropical_fish_anim1_fin_back_metallicRoughness.jpg-3b1e5ee14d6f40b9201de51cbc312e62.s3tc.ctex"
+path.etc2="res://.godot/imported/tropical_fish_anim1_fin_back_metallicRoughness.jpg-3b1e5ee14d6f40b9201de51cbc312e62.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://objects/animals/small_fish/tropical_fish/tropical_fish_anim1_fin_back_metallicRoughness.jpg"
-dest_files=["res://.godot/imported/tropical_fish_anim1_fin_back_metallicRoughness.jpg-3b1e5ee14d6f40b9201de51cbc312e62.s3tc.ctex"]
+dest_files=["res://.godot/imported/tropical_fish_anim1_fin_back_metallicRoughness.jpg-3b1e5ee14d6f40b9201de51cbc312e62.s3tc.ctex", "res://.godot/imported/tropical_fish_anim1_fin_back_metallicRoughness.jpg-3b1e5ee14d6f40b9201de51cbc312e62.etc2.ctex"]
 
 [params]
 

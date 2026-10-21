@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/in_game/ending/ending_screen.gd" id="1_screen"]
 [ext_resource type="Theme" path="res://ui/theme/light/light_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://ui/in_game/ending/ending_island.png" id="3_island"]
 
 [node name="EndingScreen" type="CanvasLayer"]
 process_mode = 3
@@ -19,6 +20,20 @@ color = Color(0, 0, 0, 1)
 
 [node name="ResultLayer" type="CanvasLayer" parent="."]
 layer = 110
+
+[node name="Island" type="TextureRect" parent="ResultLayer"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_island")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Result" type="CenterContainer" parent="ResultLayer"]
 unique_name_in_owner = true

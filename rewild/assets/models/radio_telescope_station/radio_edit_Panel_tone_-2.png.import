@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://45lpf0wnfeiq"
 path.s3tc="res://.godot/imported/radio_edit_Panel_tone_-2.png-94b2cb4a3ef159b15771ec32302b4ae3.s3tc.ctex"
+path.etc2="res://.godot/imported/radio_edit_Panel_tone_-2.png-94b2cb4a3ef159b15771ec32302b4ae3.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/radio_edit_Panel_tone_-2.png"
-dest_files=["res://.godot/imported/radio_edit_Panel_tone_-2.png-94b2cb4a3ef159b15771ec32302b4ae3.s3tc.ctex"]
+dest_files=["res://.godot/imported/radio_edit_Panel_tone_-2.png-94b2cb4a3ef159b15771ec32302b4ae3.s3tc.ctex", "res://.godot/imported/radio_edit_Panel_tone_-2.png-94b2cb4a3ef159b15771ec32302b4ae3.etc2.ctex"]
 
 [params]
 

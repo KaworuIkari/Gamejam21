@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dg7wvu8st1i57"
 path.s3tc="res://.godot/imported/Terrain_Fitted_Piles_Harbor_aged_rust.png-884d513dee8a05a15ec7d152066c7572.s3tc.ctex"
+path.etc2="res://.godot/imported/Terrain_Fitted_Piles_Harbor_aged_rust.png-884d513dee8a05a15ec7d152066c7572.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Terrain_Fitted_Piles_Harbor_aged_rust.png"
-dest_files=["res://.godot/imported/Terrain_Fitted_Piles_Harbor_aged_rust.png-884d513dee8a05a15ec7d152066c7572.s3tc.ctex"]
+dest_files=["res://.godot/imported/Terrain_Fitted_Piles_Harbor_aged_rust.png-884d513dee8a05a15ec7d152066c7572.s3tc.ctex", "res://.godot/imported/Terrain_Fitted_Piles_Harbor_aged_rust.png-884d513dee8a05a15ec7d152066c7572.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dthq3br3c2wi3"
 path.bptc="res://.godot/imported/PathRocks_alb_ht.png-5f5da3bc8a08103688c11a580c2d9a66.bptc.ctex"
+path.astc="res://.godot/imported/PathRocks_alb_ht.png-5f5da3bc8a08103688c11a580c2d9a66.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/stylized_nature/Textures/PathRocks_alb_ht.png"
-dest_files=["res://.godot/imported/PathRocks_alb_ht.png-5f5da3bc8a08103688c11a580c2d9a66.bptc.ctex"]
+dest_files=["res://.godot/imported/PathRocks_alb_ht.png-5f5da3bc8a08103688c11a580c2d9a66.bptc.ctex", "res://.godot/imported/PathRocks_alb_ht.png-5f5da3bc8a08103688c11a580c2d9a66.astc.ctex"]
 
 [params]
 

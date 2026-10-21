@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://duqcq81wwfmyd"
 path.s3tc="res://.godot/imported/Dry_oxidized_steel_paint.png-6efec143e77de5fcbaa54f4859144812.s3tc.ctex"
+path.etc2="res://.godot/imported/Dry_oxidized_steel_paint.png-6efec143e77de5fcbaa54f4859144812.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/textures/Dry_oxidized_steel_paint.png"
-dest_files=["res://.godot/imported/Dry_oxidized_steel_paint.png-6efec143e77de5fcbaa54f4859144812.s3tc.ctex"]
+dest_files=["res://.godot/imported/Dry_oxidized_steel_paint.png-6efec143e77de5fcbaa54f4859144812.s3tc.ctex", "res://.godot/imported/Dry_oxidized_steel_paint.png-6efec143e77de5fcbaa54f4859144812.etc2.ctex"]
 
 [params]
 

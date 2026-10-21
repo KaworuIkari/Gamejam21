@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxk4ty6uwcvyk"
 path.s3tc="res://.godot/imported/Conveyor_4m_Worn_machine_enamel.png-fd586ec71ce15ad88908f223879e349c.s3tc.ctex"
+path.etc2="res://.godot/imported/Conveyor_4m_Worn_machine_enamel.png-fd586ec71ce15ad88908f223879e349c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Conveyor_4m_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Conveyor_4m_Worn_machine_enamel.png-fd586ec71ce15ad88908f223879e349c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Conveyor_4m_Worn_machine_enamel.png-fd586ec71ce15ad88908f223879e349c.s3tc.ctex", "res://.godot/imported/Conveyor_4m_Worn_machine_enamel.png-fd586ec71ce15ad88908f223879e349c.etc2.ctex"]
 
 [params]
 

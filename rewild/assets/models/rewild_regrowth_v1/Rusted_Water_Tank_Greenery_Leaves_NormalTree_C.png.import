@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dka31lfbeswsf"
 path.s3tc="res://.godot/imported/Rusted_Water_Tank_Greenery_Leaves_NormalTree_C.png-ad6811a2b3b985b6d7898476f283f1ac.s3tc.ctex"
+path.etc2="res://.godot/imported/Rusted_Water_Tank_Greenery_Leaves_NormalTree_C.png-ad6811a2b3b985b6d7898476f283f1ac.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Rusted_Water_Tank_Greenery_Leaves_NormalTree_C.png"
-dest_files=["res://.godot/imported/Rusted_Water_Tank_Greenery_Leaves_NormalTree_C.png-ad6811a2b3b985b6d7898476f283f1ac.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rusted_Water_Tank_Greenery_Leaves_NormalTree_C.png-ad6811a2b3b985b6d7898476f283f1ac.s3tc.ctex", "res://.godot/imported/Rusted_Water_Tank_Greenery_Leaves_NormalTree_C.png-ad6811a2b3b985b6d7898476f283f1ac.etc2.ctex"]
 
 [params]
 

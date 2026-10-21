@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bibpfduhs51vx"
 path.s3tc="res://.godot/imported/Power_Cabinet_Greenery_Leaves.png-9e94f5c646ae1ecbe195282ba2e060dc.s3tc.ctex"
+path.etc2="res://.godot/imported/Power_Cabinet_Greenery_Leaves.png-9e94f5c646ae1ecbe195282ba2e060dc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Power_Cabinet_Greenery_Leaves.png"
-dest_files=["res://.godot/imported/Power_Cabinet_Greenery_Leaves.png-9e94f5c646ae1ecbe195282ba2e060dc.s3tc.ctex"]
+dest_files=["res://.godot/imported/Power_Cabinet_Greenery_Leaves.png-9e94f5c646ae1ecbe195282ba2e060dc.s3tc.ctex", "res://.godot/imported/Power_Cabinet_Greenery_Leaves.png-9e94f5c646ae1ecbe195282ba2e060dc.etc2.ctex"]
 
 [params]
 

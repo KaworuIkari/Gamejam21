@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://fvs5r4sieght"
 path.s3tc="res://.godot/imported/curtain_tex.png-a4b1d9b9b42b0f8e735931e95ef7d28f.s3tc.ctex"
+path.etc2="res://.godot/imported/curtain_tex.png-a4b1d9b9b42b0f8e735931e95ef7d28f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/textures/mytex/curtain_tex.png"
-dest_files=["res://.godot/imported/curtain_tex.png-a4b1d9b9b42b0f8e735931e95ef7d28f.s3tc.ctex"]
+dest_files=["res://.godot/imported/curtain_tex.png-a4b1d9b9b42b0f8e735931e95ef7d28f.s3tc.ctex", "res://.godot/imported/curtain_tex.png-a4b1d9b9b42b0f8e735931e95ef7d28f.etc2.ctex"]
 
 [params]
 

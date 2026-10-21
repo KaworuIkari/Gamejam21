@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b857mihxudsss"
 path.s3tc="res://.godot/imported/Rubble_Cluster_4_Exposed_concrete_core.png-0d6c7c394e2ece1c3801df50f948c93d.s3tc.ctex"
+path.etc2="res://.godot/imported/Rubble_Cluster_4_Exposed_concrete_core.png-0d6c7c394e2ece1c3801df50f948c93d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Rubble_Cluster_4_Exposed_concrete_core.png"
-dest_files=["res://.godot/imported/Rubble_Cluster_4_Exposed_concrete_core.png-0d6c7c394e2ece1c3801df50f948c93d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rubble_Cluster_4_Exposed_concrete_core.png-0d6c7c394e2ece1c3801df50f948c93d.s3tc.ctex", "res://.godot/imported/Rubble_Cluster_4_Exposed_concrete_core.png-0d6c7c394e2ece1c3801df50f948c93d.etc2.ctex"]
 
 [params]
 

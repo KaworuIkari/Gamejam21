@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7m3osdit6s2t"
 path.s3tc="res://.godot/imported/Sand_Drift_3_Windblown_sand_paint.png-19b8b2ad217d264af7d780aee8cf8367.s3tc.ctex"
+path.etc2="res://.godot/imported/Sand_Drift_3_Windblown_sand_paint.png-19b8b2ad217d264af7d780aee8cf8367.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Sand_Drift_3_Windblown_sand_paint.png"
-dest_files=["res://.godot/imported/Sand_Drift_3_Windblown_sand_paint.png-19b8b2ad217d264af7d780aee8cf8367.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sand_Drift_3_Windblown_sand_paint.png-19b8b2ad217d264af7d780aee8cf8367.s3tc.ctex", "res://.godot/imported/Sand_Drift_3_Windblown_sand_paint.png-19b8b2ad217d264af7d780aee8cf8367.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkqpfohnsh14m"
 path.s3tc="res://.godot/imported/fantasy_forest_edit_curtain_tex.png-5d3518d5910f9787b336a0ad0be23a15.s3tc.ctex"
+path.etc2="res://.godot/imported/fantasy_forest_edit_curtain_tex.png-5d3518d5910f9787b336a0ad0be23a15.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/fantasy_forest_edit_curtain_tex.png"
-dest_files=["res://.godot/imported/fantasy_forest_edit_curtain_tex.png-5d3518d5910f9787b336a0ad0be23a15.s3tc.ctex"]
+dest_files=["res://.godot/imported/fantasy_forest_edit_curtain_tex.png-5d3518d5910f9787b336a0ad0be23a15.s3tc.ctex", "res://.godot/imported/fantasy_forest_edit_curtain_tex.png-5d3518d5910f9787b336a0ad0be23a15.etc2.ctex"]
 
 [params]
 

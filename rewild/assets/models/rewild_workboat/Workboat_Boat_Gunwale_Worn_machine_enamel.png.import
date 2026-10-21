@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://sddpxov621ll"
 path.s3tc="res://.godot/imported/Workboat_Boat_Gunwale_Worn_machine_enamel.png-71d60b2479c8f37f9eb78d4d58b9ea8a.s3tc.ctex"
+path.etc2="res://.godot/imported/Workboat_Boat_Gunwale_Worn_machine_enamel.png-71d60b2479c8f37f9eb78d4d58b9ea8a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_workboat/Workboat_Boat_Gunwale_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Workboat_Boat_Gunwale_Worn_machine_enamel.png-71d60b2479c8f37f9eb78d4d58b9ea8a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Workboat_Boat_Gunwale_Worn_machine_enamel.png-71d60b2479c8f37f9eb78d4d58b9ea8a.s3tc.ctex", "res://.godot/imported/Workboat_Boat_Gunwale_Worn_machine_enamel.png-71d60b2479c8f37f9eb78d4d58b9ea8a.etc2.ctex"]
 
 [params]
 

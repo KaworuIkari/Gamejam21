@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ba8g841l3u1fd"
 path.bptc="res://.godot/imported/desert_normal.png-f6486f0672c9c9ccab04dc14552714f8.bptc.ctex"
+path.astc="res://.godot/imported/desert_normal.png-f6486f0672c9c9ccab04dc14552714f8.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/ground/desert/desert_normal.png"
-dest_files=["res://.godot/imported/desert_normal.png-f6486f0672c9c9ccab04dc14552714f8.bptc.ctex"]
+dest_files=["res://.godot/imported/desert_normal.png-f6486f0672c9c9ccab04dc14552714f8.bptc.ctex", "res://.godot/imported/desert_normal.png-f6486f0672c9c9ccab04dc14552714f8.astc.ctex"]
 
 [params]
 

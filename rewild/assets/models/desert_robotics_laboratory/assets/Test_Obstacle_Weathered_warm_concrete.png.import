@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3t0jj3uvd5pt"
 path.s3tc="res://.godot/imported/Test_Obstacle_Weathered_warm_concrete.png-18b486cd4871a8129f8b3be063635b4f.s3tc.ctex"
+path.etc2="res://.godot/imported/Test_Obstacle_Weathered_warm_concrete.png-18b486cd4871a8129f8b3be063635b4f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Test_Obstacle_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/Test_Obstacle_Weathered_warm_concrete.png-18b486cd4871a8129f8b3be063635b4f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Test_Obstacle_Weathered_warm_concrete.png-18b486cd4871a8129f8b3be063635b4f.s3tc.ctex", "res://.godot/imported/Test_Obstacle_Weathered_warm_concrete.png-18b486cd4871a8129f8b3be063635b4f.etc2.ctex"]
 
 [params]
 

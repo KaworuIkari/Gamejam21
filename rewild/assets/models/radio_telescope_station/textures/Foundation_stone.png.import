@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3ru4bffkhppt"
 path.s3tc="res://.godot/imported/Foundation_stone.png-b219e3c24a9a2f0b82b1e53877726c5b.s3tc.ctex"
+path.etc2="res://.godot/imported/Foundation_stone.png-b219e3c24a9a2f0b82b1e53877726c5b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/textures/Foundation_stone.png"
-dest_files=["res://.godot/imported/Foundation_stone.png-b219e3c24a9a2f0b82b1e53877726c5b.s3tc.ctex"]
+dest_files=["res://.godot/imported/Foundation_stone.png-b219e3c24a9a2f0b82b1e53877726c5b.s3tc.ctex", "res://.godot/imported/Foundation_stone.png-b219e3c24a9a2f0b82b1e53877726c5b.etc2.ctex"]
 
 [params]
 

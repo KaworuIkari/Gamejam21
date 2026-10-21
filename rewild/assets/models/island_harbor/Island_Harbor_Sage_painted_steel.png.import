@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ov3wo8w6j24t"
 path.s3tc="res://.godot/imported/Island_Harbor_Sage_painted_steel.png-0a834b5b267433865d0265a1ead9bc6c.s3tc.ctex"
+path.etc2="res://.godot/imported/Island_Harbor_Sage_painted_steel.png-0a834b5b267433865d0265a1ead9bc6c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/Island_Harbor_Sage_painted_steel.png"
-dest_files=["res://.godot/imported/Island_Harbor_Sage_painted_steel.png-0a834b5b267433865d0265a1ead9bc6c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Island_Harbor_Sage_painted_steel.png-0a834b5b267433865d0265a1ead9bc6c.s3tc.ctex", "res://.godot/imported/Island_Harbor_Sage_painted_steel.png-0a834b5b267433865d0265a1ead9bc6c.etc2.ctex"]
 
 [params]
 

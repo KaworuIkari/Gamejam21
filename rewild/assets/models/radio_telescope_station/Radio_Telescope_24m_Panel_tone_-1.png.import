@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ckn7xctm038n0"
 path.s3tc="res://.godot/imported/Radio_Telescope_24m_Panel_tone_-1.png-b951d583fe3ef4bdca39292ad020e122.s3tc.ctex"
+path.etc2="res://.godot/imported/Radio_Telescope_24m_Panel_tone_-1.png-b951d583fe3ef4bdca39292ad020e122.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/Radio_Telescope_24m_Panel_tone_-1.png"
-dest_files=["res://.godot/imported/Radio_Telescope_24m_Panel_tone_-1.png-b951d583fe3ef4bdca39292ad020e122.s3tc.ctex"]
+dest_files=["res://.godot/imported/Radio_Telescope_24m_Panel_tone_-1.png-b951d583fe3ef4bdca39292ad020e122.s3tc.ctex", "res://.godot/imported/Radio_Telescope_24m_Panel_tone_-1.png-b951d583fe3ef4bdca39292ad020e122.etc2.ctex"]
 
 [params]
 

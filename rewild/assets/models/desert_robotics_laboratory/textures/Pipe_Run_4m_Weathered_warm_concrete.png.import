@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://lndv2h6chsak"
 path.s3tc="res://.godot/imported/Pipe_Run_4m_Weathered_warm_concrete.png-c5e7652e8d2804dc8025fbad660dce7b.s3tc.ctex"
+path.etc2="res://.godot/imported/Pipe_Run_4m_Weathered_warm_concrete.png-c5e7652e8d2804dc8025fbad660dce7b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Pipe_Run_4m_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/Pipe_Run_4m_Weathered_warm_concrete.png-c5e7652e8d2804dc8025fbad660dce7b.s3tc.ctex"]
+dest_files=["res://.godot/imported/Pipe_Run_4m_Weathered_warm_concrete.png-c5e7652e8d2804dc8025fbad660dce7b.s3tc.ctex", "res://.godot/imported/Pipe_Run_4m_Weathered_warm_concrete.png-c5e7652e8d2804dc8025fbad660dce7b.etc2.ctex"]
 
 [params]
 

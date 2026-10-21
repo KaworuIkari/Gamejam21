@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c4iu0pffiwyuh"
 path.s3tc="res://.godot/imported/Broken_Cargo_Crate_Barren_Bark_NormalTree_Normal.png-f1212f943dbc5c805213ecee07bf8b22.s3tc.ctex"
+path.etc2="res://.godot/imported/Broken_Cargo_Crate_Barren_Bark_NormalTree_Normal.png-f1212f943dbc5c805213ecee07bf8b22.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Broken_Cargo_Crate_Barren_Bark_NormalTree_Normal.png"
-dest_files=["res://.godot/imported/Broken_Cargo_Crate_Barren_Bark_NormalTree_Normal.png-f1212f943dbc5c805213ecee07bf8b22.s3tc.ctex"]
+dest_files=["res://.godot/imported/Broken_Cargo_Crate_Barren_Bark_NormalTree_Normal.png-f1212f943dbc5c805213ecee07bf8b22.s3tc.ctex", "res://.godot/imported/Broken_Cargo_Crate_Barren_Bark_NormalTree_Normal.png-f1212f943dbc5c805213ecee07bf8b22.etc2.ctex"]
 
 [params]
 

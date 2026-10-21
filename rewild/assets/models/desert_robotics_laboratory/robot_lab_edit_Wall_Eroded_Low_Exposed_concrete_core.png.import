@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://be7tc0757oy5g"
 path.s3tc="res://.godot/imported/robot_lab_edit_Wall_Eroded_Low_Exposed_concrete_core.png-13c39a3626305e134bab33aac7ded344.s3tc.ctex"
+path.etc2="res://.godot/imported/robot_lab_edit_Wall_Eroded_Low_Exposed_concrete_core.png-13c39a3626305e134bab33aac7ded344.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/robot_lab_edit_Wall_Eroded_Low_Exposed_concrete_core.png"
-dest_files=["res://.godot/imported/robot_lab_edit_Wall_Eroded_Low_Exposed_concrete_core.png-13c39a3626305e134bab33aac7ded344.s3tc.ctex"]
+dest_files=["res://.godot/imported/robot_lab_edit_Wall_Eroded_Low_Exposed_concrete_core.png-13c39a3626305e134bab33aac7ded344.s3tc.ctex", "res://.godot/imported/robot_lab_edit_Wall_Eroded_Low_Exposed_concrete_core.png-13c39a3626305e134bab33aac7ded344.etc2.ctex"]
 
 [params]
 

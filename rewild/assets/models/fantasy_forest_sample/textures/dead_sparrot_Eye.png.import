@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5fjphyaj4iku"
 path.s3tc="res://.godot/imported/dead_sparrot_Eye.png-18355fe356a9678f0140a85b3b9ff641.s3tc.ctex"
+path.etc2="res://.godot/imported/dead_sparrot_Eye.png-18355fe356a9678f0140a85b3b9ff641.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/textures/dead_sparrot_Eye.png"
-dest_files=["res://.godot/imported/dead_sparrot_Eye.png-18355fe356a9678f0140a85b3b9ff641.s3tc.ctex"]
+dest_files=["res://.godot/imported/dead_sparrot_Eye.png-18355fe356a9678f0140a85b3b9ff641.s3tc.ctex", "res://.godot/imported/dead_sparrot_Eye.png-18355fe356a9678f0140a85b3b9ff641.etc2.ctex"]
 
 [params]
 

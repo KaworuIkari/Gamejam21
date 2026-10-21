@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpgatlp6jqhyt"
 path.s3tc="res://.godot/imported/Boat_Shed_Walls_Harbor_aged_steel.png-56a449be2b1f4588c570b2400b941599.s3tc.ctex"
+path.etc2="res://.godot/imported/Boat_Shed_Walls_Harbor_aged_steel.png-56a449be2b1f4588c570b2400b941599.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Boat_Shed_Walls_Harbor_aged_steel.png"
-dest_files=["res://.godot/imported/Boat_Shed_Walls_Harbor_aged_steel.png-56a449be2b1f4588c570b2400b941599.s3tc.ctex"]
+dest_files=["res://.godot/imported/Boat_Shed_Walls_Harbor_aged_steel.png-56a449be2b1f4588c570b2400b941599.s3tc.ctex", "res://.godot/imported/Boat_Shed_Walls_Harbor_aged_steel.png-56a449be2b1f4588c570b2400b941599.etc2.ctex"]
 
 [params]
 

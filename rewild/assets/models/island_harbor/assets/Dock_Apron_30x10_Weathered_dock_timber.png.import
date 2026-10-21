@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhsner8rgrqki"
 path.s3tc="res://.godot/imported/Dock_Apron_30x10_Weathered_dock_timber.png-71189d6950dd9a07a9d343a7494375d9.s3tc.ctex"
+path.etc2="res://.godot/imported/Dock_Apron_30x10_Weathered_dock_timber.png-71189d6950dd9a07a9d343a7494375d9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Dock_Apron_30x10_Weathered_dock_timber.png"
-dest_files=["res://.godot/imported/Dock_Apron_30x10_Weathered_dock_timber.png-71189d6950dd9a07a9d343a7494375d9.s3tc.ctex"]
+dest_files=["res://.godot/imported/Dock_Apron_30x10_Weathered_dock_timber.png-71189d6950dd9a07a9d343a7494375d9.s3tc.ctex", "res://.godot/imported/Dock_Apron_30x10_Weathered_dock_timber.png-71189d6950dd9a07a9d343a7494375d9.etc2.ctex"]
 
 [params]
 

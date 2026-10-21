@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxqwewy3pvkdg"
 path.s3tc="res://.godot/imported/leon_mat_Roughness.png-7e0e8ebf197fcbf914fe5bb8afee7e27.s3tc.ctex"
+path.etc2="res://.godot/imported/leon_mat_Roughness.png-7e0e8ebf197fcbf914fe5bb8afee7e27.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/leon/froggo/leon_mat_Roughness.png"
-dest_files=["res://.godot/imported/leon_mat_Roughness.png-7e0e8ebf197fcbf914fe5bb8afee7e27.s3tc.ctex"]
+dest_files=["res://.godot/imported/leon_mat_Roughness.png-7e0e8ebf197fcbf914fe5bb8afee7e27.s3tc.ctex", "res://.godot/imported/leon_mat_Roughness.png-7e0e8ebf197fcbf914fe5bb8afee7e27.etc2.ctex"]
 
 [params]
 

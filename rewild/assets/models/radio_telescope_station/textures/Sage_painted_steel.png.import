@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbrpw2ttmblbf"
 path.s3tc="res://.godot/imported/Sage_painted_steel.png-78dfd976272e77027792a34913aec35e.s3tc.ctex"
+path.etc2="res://.godot/imported/Sage_painted_steel.png-78dfd976272e77027792a34913aec35e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/textures/Sage_painted_steel.png"
-dest_files=["res://.godot/imported/Sage_painted_steel.png-78dfd976272e77027792a34913aec35e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sage_painted_steel.png-78dfd976272e77027792a34913aec35e.s3tc.ctex", "res://.godot/imported/Sage_painted_steel.png-78dfd976272e77027792a34913aec35e.etc2.ctex"]
 
 [params]
 

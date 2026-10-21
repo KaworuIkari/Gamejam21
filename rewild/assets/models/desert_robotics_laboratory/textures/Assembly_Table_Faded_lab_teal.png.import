@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://rawlaviyhkuy"
 path.s3tc="res://.godot/imported/Assembly_Table_Faded_lab_teal.png-e0ad81aaa64a187c40a875310425e38c.s3tc.ctex"
+path.etc2="res://.godot/imported/Assembly_Table_Faded_lab_teal.png-e0ad81aaa64a187c40a875310425e38c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Assembly_Table_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Assembly_Table_Faded_lab_teal.png-e0ad81aaa64a187c40a875310425e38c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Assembly_Table_Faded_lab_teal.png-e0ad81aaa64a187c40a875310425e38c.s3tc.ctex", "res://.godot/imported/Assembly_Table_Faded_lab_teal.png-e0ad81aaa64a187c40a875310425e38c.etc2.ctex"]
 
 [params]
 

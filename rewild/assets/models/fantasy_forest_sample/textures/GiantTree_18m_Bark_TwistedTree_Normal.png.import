@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://djmcalsudyhmk"
 path.s3tc="res://.godot/imported/GiantTree_18m_Bark_TwistedTree_Normal.png-e920e6a5a68f568176d3b9cb635d1e59.s3tc.ctex"
+path.etc2="res://.godot/imported/GiantTree_18m_Bark_TwistedTree_Normal.png-e920e6a5a68f568176d3b9cb635d1e59.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/textures/GiantTree_18m_Bark_TwistedTree_Normal.png"
-dest_files=["res://.godot/imported/GiantTree_18m_Bark_TwistedTree_Normal.png-e920e6a5a68f568176d3b9cb635d1e59.s3tc.ctex"]
+dest_files=["res://.godot/imported/GiantTree_18m_Bark_TwistedTree_Normal.png-e920e6a5a68f568176d3b9cb635d1e59.s3tc.ctex", "res://.godot/imported/GiantTree_18m_Bark_TwistedTree_Normal.png-e920e6a5a68f568176d3b9cb635d1e59.etc2.ctex"]
 
 [params]
 

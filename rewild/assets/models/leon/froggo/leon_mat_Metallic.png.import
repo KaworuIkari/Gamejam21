@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dd5xfuyfypi6t"
 path.s3tc="res://.godot/imported/leon_mat_Metallic.png-b290eb62de2b79edfa51c03bcee657f2.s3tc.ctex"
+path.etc2="res://.godot/imported/leon_mat_Metallic.png-b290eb62de2b79edfa51c03bcee657f2.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/leon/froggo/leon_mat_Metallic.png"
-dest_files=["res://.godot/imported/leon_mat_Metallic.png-b290eb62de2b79edfa51c03bcee657f2.s3tc.ctex"]
+dest_files=["res://.godot/imported/leon_mat_Metallic.png-b290eb62de2b79edfa51c03bcee657f2.s3tc.ctex", "res://.godot/imported/leon_mat_Metallic.png-b290eb62de2b79edfa51c03bcee657f2.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bs8dn8uxx5nxm"
 path.s3tc="res://.godot/imported/Abandoned_Well_Barren_Rocks_Diffuse.png-72f46aa57f092517bca82b6327e5845e.s3tc.ctex"
+path.etc2="res://.godot/imported/Abandoned_Well_Barren_Rocks_Diffuse.png-72f46aa57f092517bca82b6327e5845e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Abandoned_Well_Barren_Rocks_Diffuse.png"
-dest_files=["res://.godot/imported/Abandoned_Well_Barren_Rocks_Diffuse.png-72f46aa57f092517bca82b6327e5845e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Abandoned_Well_Barren_Rocks_Diffuse.png-72f46aa57f092517bca82b6327e5845e.s3tc.ctex", "res://.godot/imported/Abandoned_Well_Barren_Rocks_Diffuse.png-72f46aa57f092517bca82b6327e5845e.etc2.ctex"]
 
 [params]
 

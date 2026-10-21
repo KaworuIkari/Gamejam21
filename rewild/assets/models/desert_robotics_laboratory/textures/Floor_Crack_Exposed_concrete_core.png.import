@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bua38ktfvm404"
 path.s3tc="res://.godot/imported/Floor_Crack_Exposed_concrete_core.png-d2fb6aac6d805ca9f9767ebb804a2ad5.s3tc.ctex"
+path.etc2="res://.godot/imported/Floor_Crack_Exposed_concrete_core.png-d2fb6aac6d805ca9f9767ebb804a2ad5.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Floor_Crack_Exposed_concrete_core.png"
-dest_files=["res://.godot/imported/Floor_Crack_Exposed_concrete_core.png-d2fb6aac6d805ca9f9767ebb804a2ad5.s3tc.ctex"]
+dest_files=["res://.godot/imported/Floor_Crack_Exposed_concrete_core.png-d2fb6aac6d805ca9f9767ebb804a2ad5.s3tc.ctex", "res://.godot/imported/Floor_Crack_Exposed_concrete_core.png-d2fb6aac6d805ca9f9767ebb804a2ad5.etc2.ctex"]
 
 [params]
 

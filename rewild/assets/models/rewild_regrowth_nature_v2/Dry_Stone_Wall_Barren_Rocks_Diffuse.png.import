@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bi35x3k3pcnbt"
 path.s3tc="res://.godot/imported/Dry_Stone_Wall_Barren_Rocks_Diffuse.png-3eb64b7e7d2050a86b1cbf5ea619907e.s3tc.ctex"
+path.etc2="res://.godot/imported/Dry_Stone_Wall_Barren_Rocks_Diffuse.png-3eb64b7e7d2050a86b1cbf5ea619907e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Dry_Stone_Wall_Barren_Rocks_Diffuse.png"
-dest_files=["res://.godot/imported/Dry_Stone_Wall_Barren_Rocks_Diffuse.png-3eb64b7e7d2050a86b1cbf5ea619907e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Dry_Stone_Wall_Barren_Rocks_Diffuse.png-3eb64b7e7d2050a86b1cbf5ea619907e.s3tc.ctex", "res://.godot/imported/Dry_Stone_Wall_Barren_Rocks_Diffuse.png-3eb64b7e7d2050a86b1cbf5ea619907e.etc2.ctex"]
 
 [params]
 

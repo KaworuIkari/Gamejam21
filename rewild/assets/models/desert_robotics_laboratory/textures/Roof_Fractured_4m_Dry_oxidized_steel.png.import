@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bna1ih2l7nedj"
 path.s3tc="res://.godot/imported/Roof_Fractured_4m_Dry_oxidized_steel.png-e8bb14847661d208cdb462e35209e407.s3tc.ctex"
+path.etc2="res://.godot/imported/Roof_Fractured_4m_Dry_oxidized_steel.png-e8bb14847661d208cdb462e35209e407.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Roof_Fractured_4m_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Roof_Fractured_4m_Dry_oxidized_steel.png-e8bb14847661d208cdb462e35209e407.s3tc.ctex"]
+dest_files=["res://.godot/imported/Roof_Fractured_4m_Dry_oxidized_steel.png-e8bb14847661d208cdb462e35209e407.s3tc.ctex", "res://.godot/imported/Roof_Fractured_4m_Dry_oxidized_steel.png-e8bb14847661d208cdb462e35209e407.etc2.ctex"]
 
 [params]
 

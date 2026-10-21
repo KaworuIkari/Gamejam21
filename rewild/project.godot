@@ -212,3 +212,4 @@ locale/translations=PackedStringArray("res://i18n/dialogue_xbot.en.translation",
 
 rendering_device/vsync/swapchain_image_count=2
 rendering_device/driver.windows="d3d12"
+textures/vram_compression/import_etc2_astc=true

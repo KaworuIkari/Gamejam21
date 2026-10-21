@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwmwchctxsp8i"
 path.s3tc="res://.godot/imported/Abandoned_Handcart_Barren_Bark_DeadTree.png-cf3a4fe7d3f2abee791b91a308019963.s3tc.ctex"
+path.etc2="res://.godot/imported/Abandoned_Handcart_Barren_Bark_DeadTree.png-cf3a4fe7d3f2abee791b91a308019963.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Abandoned_Handcart_Barren_Bark_DeadTree.png"
-dest_files=["res://.godot/imported/Abandoned_Handcart_Barren_Bark_DeadTree.png-cf3a4fe7d3f2abee791b91a308019963.s3tc.ctex"]
+dest_files=["res://.godot/imported/Abandoned_Handcart_Barren_Bark_DeadTree.png-cf3a4fe7d3f2abee791b91a308019963.s3tc.ctex", "res://.godot/imported/Abandoned_Handcart_Barren_Bark_DeadTree.png-cf3a4fe7d3f2abee791b91a308019963.etc2.ctex"]
 
 [params]
 

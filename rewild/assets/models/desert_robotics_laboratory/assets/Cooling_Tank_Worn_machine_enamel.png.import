@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhhi7sl7t63ge"
 path.s3tc="res://.godot/imported/Cooling_Tank_Worn_machine_enamel.png-c56f81e402c7d849615e60f350184201.s3tc.ctex"
+path.etc2="res://.godot/imported/Cooling_Tank_Worn_machine_enamel.png-c56f81e402c7d849615e60f350184201.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Cooling_Tank_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Cooling_Tank_Worn_machine_enamel.png-c56f81e402c7d849615e60f350184201.s3tc.ctex"]
+dest_files=["res://.godot/imported/Cooling_Tank_Worn_machine_enamel.png-c56f81e402c7d849615e60f350184201.s3tc.ctex", "res://.godot/imported/Cooling_Tank_Worn_machine_enamel.png-c56f81e402c7d849615e60f350184201.etc2.ctex"]
 
 [params]
 

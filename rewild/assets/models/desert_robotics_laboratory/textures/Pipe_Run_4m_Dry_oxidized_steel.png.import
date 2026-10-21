@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://4ki7askh13jf"
 path.s3tc="res://.godot/imported/Pipe_Run_4m_Dry_oxidized_steel.png-472f542d35485c668b8b86405ae5eae1.s3tc.ctex"
+path.etc2="res://.godot/imported/Pipe_Run_4m_Dry_oxidized_steel.png-472f542d35485c668b8b86405ae5eae1.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Pipe_Run_4m_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Pipe_Run_4m_Dry_oxidized_steel.png-472f542d35485c668b8b86405ae5eae1.s3tc.ctex"]
+dest_files=["res://.godot/imported/Pipe_Run_4m_Dry_oxidized_steel.png-472f542d35485c668b8b86405ae5eae1.s3tc.ctex", "res://.godot/imported/Pipe_Run_4m_Dry_oxidized_steel.png-472f542d35485c668b8b86405ae5eae1.etc2.ctex"]
 
 [params]
 

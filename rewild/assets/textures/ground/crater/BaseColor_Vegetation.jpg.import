@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b56l82fo6np2o"
 path.bptc="res://.godot/imported/BaseColor_Vegetation.jpg-de0788414f56d2129d5ce6eee0a6d970.bptc.ctex"
+path.astc="res://.godot/imported/BaseColor_Vegetation.jpg-de0788414f56d2129d5ce6eee0a6d970.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/ground/crater/BaseColor_Vegetation.jpg"
-dest_files=["res://.godot/imported/BaseColor_Vegetation.jpg-de0788414f56d2129d5ce6eee0a6d970.bptc.ctex"]
+dest_files=["res://.godot/imported/BaseColor_Vegetation.jpg-de0788414f56d2129d5ce6eee0a6d970.bptc.ctex", "res://.godot/imported/BaseColor_Vegetation.jpg-de0788414f56d2129d5ce6eee0a6d970.astc.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dw8np57ewtmy1"
 path.s3tc="res://.godot/imported/Wall_Eroded_Tall_Weathered_warm_concrete.png-39eac6812e09a03dfdd9510dfb6dcc01.s3tc.ctex"
+path.etc2="res://.godot/imported/Wall_Eroded_Tall_Weathered_warm_concrete.png-39eac6812e09a03dfdd9510dfb6dcc01.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Wall_Eroded_Tall_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/Wall_Eroded_Tall_Weathered_warm_concrete.png-39eac6812e09a03dfdd9510dfb6dcc01.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wall_Eroded_Tall_Weathered_warm_concrete.png-39eac6812e09a03dfdd9510dfb6dcc01.s3tc.ctex", "res://.godot/imported/Wall_Eroded_Tall_Weathered_warm_concrete.png-39eac6812e09a03dfdd9510dfb6dcc01.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bic71bhep2sux"
 path.s3tc="res://.godot/imported/Wall_Eroded_Tall_Faded_lab_teal.png-7ca8f9e22c5a33e7e2bade0169c71c5d.s3tc.ctex"
+path.etc2="res://.godot/imported/Wall_Eroded_Tall_Faded_lab_teal.png-7ca8f9e22c5a33e7e2bade0169c71c5d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Wall_Eroded_Tall_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Wall_Eroded_Tall_Faded_lab_teal.png-7ca8f9e22c5a33e7e2bade0169c71c5d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wall_Eroded_Tall_Faded_lab_teal.png-7ca8f9e22c5a33e7e2bade0169c71c5d.s3tc.ctex", "res://.godot/imported/Wall_Eroded_Tall_Faded_lab_teal.png-7ca8f9e22c5a33e7e2bade0169c71c5d.etc2.ctex"]
 
 [params]
 

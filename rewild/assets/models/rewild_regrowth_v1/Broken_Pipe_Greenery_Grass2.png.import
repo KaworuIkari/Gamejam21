@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d4aainf37y6g7"
 path.s3tc="res://.godot/imported/Broken_Pipe_Greenery_Grass2.png-9e692f9a5dbba32a11a600b4dd1ffd34.s3tc.ctex"
+path.etc2="res://.godot/imported/Broken_Pipe_Greenery_Grass2.png-9e692f9a5dbba32a11a600b4dd1ffd34.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Broken_Pipe_Greenery_Grass2.png"
-dest_files=["res://.godot/imported/Broken_Pipe_Greenery_Grass2.png-9e692f9a5dbba32a11a600b4dd1ffd34.s3tc.ctex"]
+dest_files=["res://.godot/imported/Broken_Pipe_Greenery_Grass2.png-9e692f9a5dbba32a11a600b4dd1ffd34.s3tc.ctex", "res://.godot/imported/Broken_Pipe_Greenery_Grass2.png-9e692f9a5dbba32a11a600b4dd1ffd34.etc2.ctex"]
 
 [params]
 

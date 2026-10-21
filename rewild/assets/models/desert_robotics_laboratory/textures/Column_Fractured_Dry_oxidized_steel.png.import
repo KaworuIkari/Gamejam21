@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpbpo8qf42avg"
 path.s3tc="res://.godot/imported/Column_Fractured_Dry_oxidized_steel.png-1cb3782b33129a36c726ac0a9d2f9280.s3tc.ctex"
+path.etc2="res://.godot/imported/Column_Fractured_Dry_oxidized_steel.png-1cb3782b33129a36c726ac0a9d2f9280.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Column_Fractured_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Column_Fractured_Dry_oxidized_steel.png-1cb3782b33129a36c726ac0a9d2f9280.s3tc.ctex"]
+dest_files=["res://.godot/imported/Column_Fractured_Dry_oxidized_steel.png-1cb3782b33129a36c726ac0a9d2f9280.s3tc.ctex", "res://.godot/imported/Column_Fractured_Dry_oxidized_steel.png-1cb3782b33129a36c726ac0a9d2f9280.etc2.ctex"]
 
 [params]
 

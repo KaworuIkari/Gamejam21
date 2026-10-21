@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfkrb177c3qyu"
 path.s3tc="res://.godot/imported/robot_lab_edit_Roof_Panel_4m_Worn_machine_enamel.png-bf3e88d1d1c9033efbf23f02d178283b.s3tc.ctex"
+path.etc2="res://.godot/imported/robot_lab_edit_Roof_Panel_4m_Worn_machine_enamel.png-bf3e88d1d1c9033efbf23f02d178283b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/robot_lab_edit_Roof_Panel_4m_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/robot_lab_edit_Roof_Panel_4m_Worn_machine_enamel.png-bf3e88d1d1c9033efbf23f02d178283b.s3tc.ctex"]
+dest_files=["res://.godot/imported/robot_lab_edit_Roof_Panel_4m_Worn_machine_enamel.png-bf3e88d1d1c9033efbf23f02d178283b.s3tc.ctex", "res://.godot/imported/robot_lab_edit_Roof_Panel_4m_Worn_machine_enamel.png-bf3e88d1d1c9033efbf23f02d178283b.etc2.ctex"]
 
 [params]
 

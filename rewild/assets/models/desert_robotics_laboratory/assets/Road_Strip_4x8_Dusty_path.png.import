@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cii2fk8dff8ow"
 path.s3tc="res://.godot/imported/Road_Strip_4x8_Dusty_path.png-164cde1be60695149aa72640fa1e9df4.s3tc.ctex"
+path.etc2="res://.godot/imported/Road_Strip_4x8_Dusty_path.png-164cde1be60695149aa72640fa1e9df4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Road_Strip_4x8_Dusty_path.png"
-dest_files=["res://.godot/imported/Road_Strip_4x8_Dusty_path.png-164cde1be60695149aa72640fa1e9df4.s3tc.ctex"]
+dest_files=["res://.godot/imported/Road_Strip_4x8_Dusty_path.png-164cde1be60695149aa72640fa1e9df4.s3tc.ctex", "res://.godot/imported/Road_Strip_4x8_Dusty_path.png-164cde1be60695149aa72640fa1e9df4.etc2.ctex"]
 
 [params]
 

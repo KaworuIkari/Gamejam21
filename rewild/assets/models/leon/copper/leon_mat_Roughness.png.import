@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkwxwbba4mjcb"
 path.s3tc="res://.godot/imported/leon_mat_Roughness.png-4f0fb6cc698fd22ec3ff451f97528a38.s3tc.ctex"
+path.etc2="res://.godot/imported/leon_mat_Roughness.png-4f0fb6cc698fd22ec3ff451f97528a38.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/leon/copper/leon_mat_Roughness.png"
-dest_files=["res://.godot/imported/leon_mat_Roughness.png-4f0fb6cc698fd22ec3ff451f97528a38.s3tc.ctex"]
+dest_files=["res://.godot/imported/leon_mat_Roughness.png-4f0fb6cc698fd22ec3ff451f97528a38.s3tc.ctex", "res://.godot/imported/leon_mat_Roughness.png-4f0fb6cc698fd22ec3ff451f97528a38.etc2.ctex"]
 
 [params]
 

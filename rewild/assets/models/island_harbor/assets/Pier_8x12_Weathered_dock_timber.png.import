@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvn4w8fy2m6e2"
 path.s3tc="res://.godot/imported/Pier_8x12_Weathered_dock_timber.png-ad14508e4316406a7296e56d2dd36e23.s3tc.ctex"
+path.etc2="res://.godot/imported/Pier_8x12_Weathered_dock_timber.png-ad14508e4316406a7296e56d2dd36e23.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Pier_8x12_Weathered_dock_timber.png"
-dest_files=["res://.godot/imported/Pier_8x12_Weathered_dock_timber.png-ad14508e4316406a7296e56d2dd36e23.s3tc.ctex"]
+dest_files=["res://.godot/imported/Pier_8x12_Weathered_dock_timber.png-ad14508e4316406a7296e56d2dd36e23.s3tc.ctex", "res://.godot/imported/Pier_8x12_Weathered_dock_timber.png-ad14508e4316406a7296e56d2dd36e23.etc2.ctex"]
 
 [params]
 

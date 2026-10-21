@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://btvo6ufbnhx28"
 path.s3tc="res://.godot/imported/Dock_Rail_4m_Faded_lab_teal.png-bd1a9e62ce5ea6df86468d6a53d98d77.s3tc.ctex"
+path.etc2="res://.godot/imported/Dock_Rail_4m_Faded_lab_teal.png-bd1a9e62ce5ea6df86468d6a53d98d77.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Dock_Rail_4m_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Dock_Rail_4m_Faded_lab_teal.png-bd1a9e62ce5ea6df86468d6a53d98d77.s3tc.ctex"]
+dest_files=["res://.godot/imported/Dock_Rail_4m_Faded_lab_teal.png-bd1a9e62ce5ea6df86468d6a53d98d77.s3tc.ctex", "res://.godot/imported/Dock_Rail_4m_Faded_lab_teal.png-bd1a9e62ce5ea6df86468d6a53d98d77.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://x0okhm1sp770"
 path.s3tc="res://.godot/imported/Service_Cradle_Faded_lab_teal.png-05d50b6a4d12d79b16655b08ab86c658.s3tc.ctex"
+path.etc2="res://.godot/imported/Service_Cradle_Faded_lab_teal.png-05d50b6a4d12d79b16655b08ab86c658.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Service_Cradle_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Service_Cradle_Faded_lab_teal.png-05d50b6a4d12d79b16655b08ab86c658.s3tc.ctex"]
+dest_files=["res://.godot/imported/Service_Cradle_Faded_lab_teal.png-05d50b6a4d12d79b16655b08ab86c658.s3tc.ctex", "res://.godot/imported/Service_Cradle_Faded_lab_teal.png-05d50b6a4d12d79b16655b08ab86c658.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6f8ekt663o5l"
 path.s3tc="res://.godot/imported/Robot_Bdoy_Normal.png-a92923f8aeb0758f1f7f4c1cbec626c7.s3tc.ctex"
+path.etc2="res://.godot/imported/Robot_Bdoy_Normal.png-a92923f8aeb0758f1f7f4c1cbec626c7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://objects/player/LIRA/textures/black/Robot_Bdoy_Normal.png"
-dest_files=["res://.godot/imported/Robot_Bdoy_Normal.png-a92923f8aeb0758f1f7f4c1cbec626c7.s3tc.ctex"]
+dest_files=["res://.godot/imported/Robot_Bdoy_Normal.png-a92923f8aeb0758f1f7f4c1cbec626c7.s3tc.ctex", "res://.godot/imported/Robot_Bdoy_Normal.png-a92923f8aeb0758f1f7f4c1cbec626c7.etc2.ctex"]
 
 [params]
 

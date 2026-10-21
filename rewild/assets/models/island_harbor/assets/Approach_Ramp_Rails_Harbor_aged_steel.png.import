@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://vjx0udrwvsf"
 path.s3tc="res://.godot/imported/Approach_Ramp_Rails_Harbor_aged_steel.png-d4411692f23d41ef5400664239771e24.s3tc.ctex"
+path.etc2="res://.godot/imported/Approach_Ramp_Rails_Harbor_aged_steel.png-d4411692f23d41ef5400664239771e24.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Approach_Ramp_Rails_Harbor_aged_steel.png"
-dest_files=["res://.godot/imported/Approach_Ramp_Rails_Harbor_aged_steel.png-d4411692f23d41ef5400664239771e24.s3tc.ctex"]
+dest_files=["res://.godot/imported/Approach_Ramp_Rails_Harbor_aged_steel.png-d4411692f23d41ef5400664239771e24.s3tc.ctex", "res://.godot/imported/Approach_Ramp_Rails_Harbor_aged_steel.png-d4411692f23d41ef5400664239771e24.etc2.ctex"]
 
 [params]
 

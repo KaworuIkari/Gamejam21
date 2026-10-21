@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/blue_cap_penguin/Blue_Cap.tscn" id="1_visual"]
+
+[sub_resource type="BoxShape3D" id="Shape_prop"]
+size = Vector3(0.34, 0.20, 0.50)
+
+[node name="Blue_Cap_Static" type="StaticBody3D"]
+metadata/description = "Optional solid prop with simple approximate collision. Use Blue_Cap.tscn for visuals or attachment."
+metadata/source = "Blue_Cap.tscn"
+metadata/units = "metres"
+metadata/up_axis = "+Y"
+metadata/front_axis = "+Z"
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" parent="." instance=ExtResource("1_visual")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.09, 0.08)
+shape = SubResource("Shape_prop")

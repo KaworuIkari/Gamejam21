@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://btd6hl34xuv8q"
 path.s3tc="res://.godot/imported/Auxiliary_Cabinet_Sage_painted_steel.png-ec42805262c184b2418cfbfb4499900d.s3tc.ctex"
+path.etc2="res://.godot/imported/Auxiliary_Cabinet_Sage_painted_steel.png-ec42805262c184b2418cfbfb4499900d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Auxiliary_Cabinet_Sage_painted_steel.png"
-dest_files=["res://.godot/imported/Auxiliary_Cabinet_Sage_painted_steel.png-ec42805262c184b2418cfbfb4499900d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Auxiliary_Cabinet_Sage_painted_steel.png-ec42805262c184b2418cfbfb4499900d.s3tc.ctex", "res://.godot/imported/Auxiliary_Cabinet_Sage_painted_steel.png-ec42805262c184b2418cfbfb4499900d.etc2.ctex"]
 
 [params]
 

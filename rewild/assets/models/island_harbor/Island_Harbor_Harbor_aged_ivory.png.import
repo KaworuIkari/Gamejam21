@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbbiwuf1vravn"
 path.s3tc="res://.godot/imported/Island_Harbor_Harbor_aged_ivory.png-13693abd47408cd3b8b11bf50e7644bc.s3tc.ctex"
+path.etc2="res://.godot/imported/Island_Harbor_Harbor_aged_ivory.png-13693abd47408cd3b8b11bf50e7644bc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/Island_Harbor_Harbor_aged_ivory.png"
-dest_files=["res://.godot/imported/Island_Harbor_Harbor_aged_ivory.png-13693abd47408cd3b8b11bf50e7644bc.s3tc.ctex"]
+dest_files=["res://.godot/imported/Island_Harbor_Harbor_aged_ivory.png-13693abd47408cd3b8b11bf50e7644bc.s3tc.ctex", "res://.godot/imported/Island_Harbor_Harbor_aged_ivory.png-13693abd47408cd3b8b11bf50e7644bc.etc2.ctex"]
 
 [params]
 

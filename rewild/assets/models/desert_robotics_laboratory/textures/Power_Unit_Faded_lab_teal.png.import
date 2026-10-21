@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b7wkesu7vb5eo"
 path.s3tc="res://.godot/imported/Power_Unit_Faded_lab_teal.png-0d5a7e1c4d15d2a8ae9150841d424297.s3tc.ctex"
+path.etc2="res://.godot/imported/Power_Unit_Faded_lab_teal.png-0d5a7e1c4d15d2a8ae9150841d424297.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Power_Unit_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Power_Unit_Faded_lab_teal.png-0d5a7e1c4d15d2a8ae9150841d424297.s3tc.ctex"]
+dest_files=["res://.godot/imported/Power_Unit_Faded_lab_teal.png-0d5a7e1c4d15d2a8ae9150841d424297.s3tc.ctex", "res://.godot/imported/Power_Unit_Faded_lab_teal.png-0d5a7e1c4d15d2a8ae9150841d424297.etc2.ctex"]
 
 [params]
 

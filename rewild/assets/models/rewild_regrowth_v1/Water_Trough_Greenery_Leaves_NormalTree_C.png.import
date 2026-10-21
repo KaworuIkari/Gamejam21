@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://t7lossgwwnyf"
 path.s3tc="res://.godot/imported/Water_Trough_Greenery_Leaves_NormalTree_C.png-d3dad313a496e8f7b57c1653680c6fcd.s3tc.ctex"
+path.etc2="res://.godot/imported/Water_Trough_Greenery_Leaves_NormalTree_C.png-d3dad313a496e8f7b57c1653680c6fcd.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Water_Trough_Greenery_Leaves_NormalTree_C.png"
-dest_files=["res://.godot/imported/Water_Trough_Greenery_Leaves_NormalTree_C.png-d3dad313a496e8f7b57c1653680c6fcd.s3tc.ctex"]
+dest_files=["res://.godot/imported/Water_Trough_Greenery_Leaves_NormalTree_C.png-d3dad313a496e8f7b57c1653680c6fcd.s3tc.ctex", "res://.godot/imported/Water_Trough_Greenery_Leaves_NormalTree_C.png-d3dad313a496e8f7b57c1653680c6fcd.etc2.ctex"]
 
 [params]
 

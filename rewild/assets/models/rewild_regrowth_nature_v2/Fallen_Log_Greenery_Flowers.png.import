@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b2ddqs0mmei0d"
 path.s3tc="res://.godot/imported/Fallen_Log_Greenery_Flowers.png-747591715a291ebf7a0a6b222fbd8218.s3tc.ctex"
+path.etc2="res://.godot/imported/Fallen_Log_Greenery_Flowers.png-747591715a291ebf7a0a6b222fbd8218.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Fallen_Log_Greenery_Flowers.png"
-dest_files=["res://.godot/imported/Fallen_Log_Greenery_Flowers.png-747591715a291ebf7a0a6b222fbd8218.s3tc.ctex"]
+dest_files=["res://.godot/imported/Fallen_Log_Greenery_Flowers.png-747591715a291ebf7a0a6b222fbd8218.s3tc.ctex", "res://.godot/imported/Fallen_Log_Greenery_Flowers.png-747591715a291ebf7a0a6b222fbd8218.etc2.ctex"]
 
 [params]
 

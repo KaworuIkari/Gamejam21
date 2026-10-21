@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cevxdd0auw2kh"
 path.s3tc="res://.godot/imported/Stair_Rails_Bark_NormalTree.png-dcfd9aea0282ece4f900073a154ca48a.s3tc.ctex"
+path.etc2="res://.godot/imported/Stair_Rails_Bark_NormalTree.png-dcfd9aea0282ece4f900073a154ca48a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/assets/Stair_Rails_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/Stair_Rails_Bark_NormalTree.png-dcfd9aea0282ece4f900073a154ca48a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Stair_Rails_Bark_NormalTree.png-dcfd9aea0282ece4f900073a154ca48a.s3tc.ctex", "res://.godot/imported/Stair_Rails_Bark_NormalTree.png-dcfd9aea0282ece4f900073a154ca48a.etc2.ctex"]
 
 [params]
 

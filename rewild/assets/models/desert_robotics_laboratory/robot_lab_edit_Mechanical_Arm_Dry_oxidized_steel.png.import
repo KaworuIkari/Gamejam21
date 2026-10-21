@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dk55waqs2btkt"
 path.s3tc="res://.godot/imported/robot_lab_edit_Mechanical_Arm_Dry_oxidized_steel.png-08a0cc66842ecd86cba0a178b937079f.s3tc.ctex"
+path.etc2="res://.godot/imported/robot_lab_edit_Mechanical_Arm_Dry_oxidized_steel.png-08a0cc66842ecd86cba0a178b937079f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/robot_lab_edit_Mechanical_Arm_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/robot_lab_edit_Mechanical_Arm_Dry_oxidized_steel.png-08a0cc66842ecd86cba0a178b937079f.s3tc.ctex"]
+dest_files=["res://.godot/imported/robot_lab_edit_Mechanical_Arm_Dry_oxidized_steel.png-08a0cc66842ecd86cba0a178b937079f.s3tc.ctex", "res://.godot/imported/robot_lab_edit_Mechanical_Arm_Dry_oxidized_steel.png-08a0cc66842ecd86cba0a178b937079f.etc2.ctex"]
 
 [params]
 

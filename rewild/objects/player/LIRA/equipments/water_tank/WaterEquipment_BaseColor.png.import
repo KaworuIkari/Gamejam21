@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://8aynvloslqp"
 path.s3tc="res://.godot/imported/WaterEquipment_BaseColor.png-fdb0a1be30c0afabef0102c2cde8e533.s3tc.ctex"
+path.etc2="res://.godot/imported/WaterEquipment_BaseColor.png-fdb0a1be30c0afabef0102c2cde8e533.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://objects/player/LIRA/equipments/water_tank/WaterEquipment_BaseColor.png"
-dest_files=["res://.godot/imported/WaterEquipment_BaseColor.png-fdb0a1be30c0afabef0102c2cde8e533.s3tc.ctex"]
+dest_files=["res://.godot/imported/WaterEquipment_BaseColor.png-fdb0a1be30c0afabef0102c2cde8e533.s3tc.ctex", "res://.godot/imported/WaterEquipment_BaseColor.png-fdb0a1be30c0afabef0102c2cde8e533.etc2.ctex"]
 
 [params]
 

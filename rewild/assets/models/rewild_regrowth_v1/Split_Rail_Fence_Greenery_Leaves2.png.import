@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dn68ogl8s4gb2"
 path.s3tc="res://.godot/imported/Split_Rail_Fence_Greenery_Leaves2.png-ed102f2967fecb4cd2a7b0f8ce831609.s3tc.ctex"
+path.etc2="res://.godot/imported/Split_Rail_Fence_Greenery_Leaves2.png-ed102f2967fecb4cd2a7b0f8ce831609.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Split_Rail_Fence_Greenery_Leaves2.png"
-dest_files=["res://.godot/imported/Split_Rail_Fence_Greenery_Leaves2.png-ed102f2967fecb4cd2a7b0f8ce831609.s3tc.ctex"]
+dest_files=["res://.godot/imported/Split_Rail_Fence_Greenery_Leaves2.png-ed102f2967fecb4cd2a7b0f8ce831609.s3tc.ctex", "res://.godot/imported/Split_Rail_Fence_Greenery_Leaves2.png-ed102f2967fecb4cd2a7b0f8ce831609.etc2.ctex"]
 
 [params]
 

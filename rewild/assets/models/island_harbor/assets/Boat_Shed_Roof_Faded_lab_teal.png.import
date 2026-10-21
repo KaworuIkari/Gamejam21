@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d06nrhhjj8sb8"
 path.s3tc="res://.godot/imported/Boat_Shed_Roof_Faded_lab_teal.png-b71136f59e4aa6005e89c52ea9cff1be.s3tc.ctex"
+path.etc2="res://.godot/imported/Boat_Shed_Roof_Faded_lab_teal.png-b71136f59e4aa6005e89c52ea9cff1be.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Boat_Shed_Roof_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Boat_Shed_Roof_Faded_lab_teal.png-b71136f59e4aa6005e89c52ea9cff1be.s3tc.ctex"]
+dest_files=["res://.godot/imported/Boat_Shed_Roof_Faded_lab_teal.png-b71136f59e4aa6005e89c52ea9cff1be.s3tc.ctex", "res://.godot/imported/Boat_Shed_Roof_Faded_lab_teal.png-b71136f59e4aa6005e89c52ea9cff1be.etc2.ctex"]
 
 [params]
 

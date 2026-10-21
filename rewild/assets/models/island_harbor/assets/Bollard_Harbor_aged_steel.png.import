@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cocgq8r7n4f0m"
 path.s3tc="res://.godot/imported/Bollard_Harbor_aged_steel.png-2cd6c4af93d85c65838921f1a3ac03dd.s3tc.ctex"
+path.etc2="res://.godot/imported/Bollard_Harbor_aged_steel.png-2cd6c4af93d85c65838921f1a3ac03dd.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Bollard_Harbor_aged_steel.png"
-dest_files=["res://.godot/imported/Bollard_Harbor_aged_steel.png-2cd6c4af93d85c65838921f1a3ac03dd.s3tc.ctex"]
+dest_files=["res://.godot/imported/Bollard_Harbor_aged_steel.png-2cd6c4af93d85c65838921f1a3ac03dd.s3tc.ctex", "res://.godot/imported/Bollard_Harbor_aged_steel.png-2cd6c4af93d85c65838921f1a3ac03dd.etc2.ctex"]
 
 [params]
 

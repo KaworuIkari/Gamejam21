@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bqa4sso6t3xv7"
 path.s3tc="res://.godot/imported/GiantTree_18m_Bark_NormalTree.png-fd99a8316074d37c2d222fe8ab40e870.s3tc.ctex"
+path.etc2="res://.godot/imported/GiantTree_18m_Bark_NormalTree.png-fd99a8316074d37c2d222fe8ab40e870.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/assets/GiantTree_18m_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/GiantTree_18m_Bark_NormalTree.png-fd99a8316074d37c2d222fe8ab40e870.s3tc.ctex"]
+dest_files=["res://.godot/imported/GiantTree_18m_Bark_NormalTree.png-fd99a8316074d37c2d222fe8ab40e870.s3tc.ctex", "res://.godot/imported/GiantTree_18m_Bark_NormalTree.png-fd99a8316074d37c2d222fe8ab40e870.etc2.ctex"]
 
 [params]
 

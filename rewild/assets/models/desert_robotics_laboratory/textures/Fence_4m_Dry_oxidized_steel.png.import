@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://isqfcxnoq2ln"
 path.s3tc="res://.godot/imported/Fence_4m_Dry_oxidized_steel.png-c723a026e7487e819c1fa615fc58de5f.s3tc.ctex"
+path.etc2="res://.godot/imported/Fence_4m_Dry_oxidized_steel.png-c723a026e7487e819c1fa615fc58de5f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Fence_4m_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Fence_4m_Dry_oxidized_steel.png-c723a026e7487e819c1fa615fc58de5f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Fence_4m_Dry_oxidized_steel.png-c723a026e7487e819c1fa615fc58de5f.s3tc.ctex", "res://.godot/imported/Fence_4m_Dry_oxidized_steel.png-c723a026e7487e819c1fa615fc58de5f.etc2.ctex"]
 
 [params]
 

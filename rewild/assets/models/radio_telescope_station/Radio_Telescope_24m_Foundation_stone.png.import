@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0id2jahix7to"
 path.s3tc="res://.godot/imported/Radio_Telescope_24m_Foundation_stone.png-078bdb48093812a3311e301a59abb247.s3tc.ctex"
+path.etc2="res://.godot/imported/Radio_Telescope_24m_Foundation_stone.png-078bdb48093812a3311e301a59abb247.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/Radio_Telescope_24m_Foundation_stone.png"
-dest_files=["res://.godot/imported/Radio_Telescope_24m_Foundation_stone.png-078bdb48093812a3311e301a59abb247.s3tc.ctex"]
+dest_files=["res://.godot/imported/Radio_Telescope_24m_Foundation_stone.png-078bdb48093812a3311e301a59abb247.s3tc.ctex", "res://.godot/imported/Radio_Telescope_24m_Foundation_stone.png-078bdb48093812a3311e301a59abb247.etc2.ctex"]
 
 [params]
 

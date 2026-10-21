@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dujbnr118avw7"
 path.s3tc="res://.godot/imported/island_harbour_edit_Harbor_aged_ivory.png-61711d7d67f03d7d673274ec7fd241f8.s3tc.ctex"
+path.etc2="res://.godot/imported/island_harbour_edit_Harbor_aged_ivory.png-61711d7d67f03d7d673274ec7fd241f8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/island_harbour_edit_Harbor_aged_ivory.png"
-dest_files=["res://.godot/imported/island_harbour_edit_Harbor_aged_ivory.png-61711d7d67f03d7d673274ec7fd241f8.s3tc.ctex"]
+dest_files=["res://.godot/imported/island_harbour_edit_Harbor_aged_ivory.png-61711d7d67f03d7d673274ec7fd241f8.s3tc.ctex", "res://.godot/imported/island_harbour_edit_Harbor_aged_ivory.png-61711d7d67f03d7d673274ec7fd241f8.etc2.ctex"]
 
 [params]
 

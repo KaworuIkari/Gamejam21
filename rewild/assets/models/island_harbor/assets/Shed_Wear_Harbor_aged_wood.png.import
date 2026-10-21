@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://xt743ko1yusq"
 path.s3tc="res://.godot/imported/Shed_Wear_Harbor_aged_wood.png-abe01f672b40964dbf779b44873adcb6.s3tc.ctex"
+path.etc2="res://.godot/imported/Shed_Wear_Harbor_aged_wood.png-abe01f672b40964dbf779b44873adcb6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Shed_Wear_Harbor_aged_wood.png"
-dest_files=["res://.godot/imported/Shed_Wear_Harbor_aged_wood.png-abe01f672b40964dbf779b44873adcb6.s3tc.ctex"]
+dest_files=["res://.godot/imported/Shed_Wear_Harbor_aged_wood.png-abe01f672b40964dbf779b44873adcb6.s3tc.ctex", "res://.godot/imported/Shed_Wear_Harbor_aged_wood.png-abe01f672b40964dbf779b44873adcb6.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://8m00nyw2aav6"
 path.s3tc="res://.godot/imported/Sign_Service_Faded_lab_teal.png-e38bef0763d3c217d714d4fe3a02134c.s3tc.ctex"
+path.etc2="res://.godot/imported/Sign_Service_Faded_lab_teal.png-e38bef0763d3c217d714d4fe3a02134c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Sign_Service_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Sign_Service_Faded_lab_teal.png-e38bef0763d3c217d714d4fe3a02134c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sign_Service_Faded_lab_teal.png-e38bef0763d3c217d714d4fe3a02134c.s3tc.ctex", "res://.godot/imported/Sign_Service_Faded_lab_teal.png-e38bef0763d3c217d714d4fe3a02134c.etc2.ctex"]
 
 [params]
 

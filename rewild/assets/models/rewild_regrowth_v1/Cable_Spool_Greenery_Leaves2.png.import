@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7gukq104wuu4"
 path.s3tc="res://.godot/imported/Cable_Spool_Greenery_Leaves2.png-a6de42e218ceec11a012b13a4b12d12e.s3tc.ctex"
+path.etc2="res://.godot/imported/Cable_Spool_Greenery_Leaves2.png-a6de42e218ceec11a012b13a4b12d12e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Cable_Spool_Greenery_Leaves2.png"
-dest_files=["res://.godot/imported/Cable_Spool_Greenery_Leaves2.png-a6de42e218ceec11a012b13a4b12d12e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Cable_Spool_Greenery_Leaves2.png-a6de42e218ceec11a012b13a4b12d12e.s3tc.ctex", "res://.godot/imported/Cable_Spool_Greenery_Leaves2.png-a6de42e218ceec11a012b13a4b12d12e.etc2.ctex"]
 
 [params]
 

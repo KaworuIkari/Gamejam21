@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhriilb6ah2mr"
 path.s3tc="res://.godot/imported/leon_mat_BaseColor.png-ce1e7813b12e9beb5dd938b30de28f74.s3tc.ctex"
+path.etc2="res://.godot/imported/leon_mat_BaseColor.png-ce1e7813b12e9beb5dd938b30de28f74.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/leon/copper/leon_mat_BaseColor.png"
-dest_files=["res://.godot/imported/leon_mat_BaseColor.png-ce1e7813b12e9beb5dd938b30de28f74.s3tc.ctex"]
+dest_files=["res://.godot/imported/leon_mat_BaseColor.png-ce1e7813b12e9beb5dd938b30de28f74.s3tc.ctex", "res://.godot/imported/leon_mat_BaseColor.png-ce1e7813b12e9beb5dd938b30de28f74.etc2.ctex"]
 
 [params]
 

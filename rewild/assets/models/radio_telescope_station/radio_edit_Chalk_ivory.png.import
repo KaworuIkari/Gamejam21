@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://581jt58g27ud"
 path.s3tc="res://.godot/imported/radio_edit_Chalk_ivory.png-9d646ab28ccef06e785b933a96c910c5.s3tc.ctex"
+path.etc2="res://.godot/imported/radio_edit_Chalk_ivory.png-9d646ab28ccef06e785b933a96c910c5.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/radio_edit_Chalk_ivory.png"
-dest_files=["res://.godot/imported/radio_edit_Chalk_ivory.png-9d646ab28ccef06e785b933a96c910c5.s3tc.ctex"]
+dest_files=["res://.godot/imported/radio_edit_Chalk_ivory.png-9d646ab28ccef06e785b933a96c910c5.s3tc.ctex", "res://.godot/imported/radio_edit_Chalk_ivory.png-9d646ab28ccef06e785b933a96c910c5.etc2.ctex"]
 
 [params]
 

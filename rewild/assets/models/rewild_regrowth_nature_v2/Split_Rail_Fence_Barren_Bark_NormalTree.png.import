@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxv0vs7oae3dv"
 path.s3tc="res://.godot/imported/Split_Rail_Fence_Barren_Bark_NormalTree.png-5a17b4fb21311d211cfe72e3238856d6.s3tc.ctex"
+path.etc2="res://.godot/imported/Split_Rail_Fence_Barren_Bark_NormalTree.png-5a17b4fb21311d211cfe72e3238856d6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Split_Rail_Fence_Barren_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/Split_Rail_Fence_Barren_Bark_NormalTree.png-5a17b4fb21311d211cfe72e3238856d6.s3tc.ctex"]
+dest_files=["res://.godot/imported/Split_Rail_Fence_Barren_Bark_NormalTree.png-5a17b4fb21311d211cfe72e3238856d6.s3tc.ctex", "res://.godot/imported/Split_Rail_Fence_Barren_Bark_NormalTree.png-5a17b4fb21311d211cfe72e3238856d6.etc2.ctex"]
 
 [params]
 

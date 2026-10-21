@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bsj2hbqrlmtlq"
 path.bptc="res://.godot/imported/rock_normal.png-43f7ab4a699c7ed7714f853f6ae964eb.bptc.ctex"
+path.astc="res://.godot/imported/rock_normal.png-43f7ab4a699c7ed7714f853f6ae964eb.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/ground/stylized_rock/rock_normal.png"
-dest_files=["res://.godot/imported/rock_normal.png-43f7ab4a699c7ed7714f853f6ae964eb.bptc.ctex"]
+dest_files=["res://.godot/imported/rock_normal.png-43f7ab4a699c7ed7714f853f6ae964eb.bptc.ctex", "res://.godot/imported/rock_normal.png-43f7ab4a699c7ed7714f853f6ae964eb.astc.ctex"]
 
 [params]
 

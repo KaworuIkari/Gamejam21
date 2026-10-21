@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwarntm1y2spe"
 path.s3tc="res://.godot/imported/Pile_Cross_Braces_Sage_painted_steel.png-0b565d99f0a22c8bf455ff2c15a021c7.s3tc.ctex"
+path.etc2="res://.godot/imported/Pile_Cross_Braces_Sage_painted_steel.png-0b565d99f0a22c8bf455ff2c15a021c7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Pile_Cross_Braces_Sage_painted_steel.png"
-dest_files=["res://.godot/imported/Pile_Cross_Braces_Sage_painted_steel.png-0b565d99f0a22c8bf455ff2c15a021c7.s3tc.ctex"]
+dest_files=["res://.godot/imported/Pile_Cross_Braces_Sage_painted_steel.png-0b565d99f0a22c8bf455ff2c15a021c7.s3tc.ctex", "res://.godot/imported/Pile_Cross_Braces_Sage_painted_steel.png-0b565d99f0a22c8bf455ff2c15a021c7.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c542vatg0tbyy"
 path.s3tc="res://.godot/imported/Plane_Greenery_Leaves2.png-280e72e2762f3d370429c5f93500d72e.s3tc.ctex"
+path.etc2="res://.godot/imported/Plane_Greenery_Leaves2.png-280e72e2762f3d370429c5f93500d72e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Plane_Greenery_Leaves2.png"
-dest_files=["res://.godot/imported/Plane_Greenery_Leaves2.png-280e72e2762f3d370429c5f93500d72e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Plane_Greenery_Leaves2.png-280e72e2762f3d370429c5f93500d72e.s3tc.ctex", "res://.godot/imported/Plane_Greenery_Leaves2.png-280e72e2762f3d370429c5f93500d72e.etc2.ctex"]
 
 [params]
 

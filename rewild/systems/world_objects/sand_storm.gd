@@ -4,6 +4,7 @@ class_name SandStorm extends Node3D
 ## RegionHaze is still there (barren), none once that region is cleaned; outside every region
 ## it calms as the whole island's progress reaches `clear_at`. Green ground underfoot calms it
 ## too, and so does a roof overhead (indoors). Changes blend in over a few seconds, so a region being cleaned settles the storm.
+## Underwater there is no storm at all: it cuts out the moment the camera dives and returns when it surfaces.
 ## It also turns the environment's fog thick and sandy while it blows (nothing else in the
 ## level drives the fog; the scene's own values are what it returns to).
 ## Ambience follows it too: wind howls as loud as the storm blows, and once the air is clear
@@ -56,6 +57,7 @@ var _wind: AudioStreamPlayer
 var _birds: AudioStreamPlayer
 var _bird_timer := 0.0
 var _indoors := false
+var _underwater_now := false
 
 
 func _ready() -> void:
@@ -146,6 +148,10 @@ func _process(delta: float) -> void:
 		return
 	# Spawn upwind so the sand has blown in by the time it reaches the camera.
 	global_position = cam.global_position - wind * 1.0
+	var under := _underwater(cam.global_position)
+	if under != _underwater_now:
+		_underwater_now = under
+		_apply()
 	_timer += delta
 	if _timer >= CHECK_INTERVAL:
 		_timer = 0.0
@@ -173,6 +179,13 @@ func _under_roof(p: Vector3) -> bool:
 	return not get_world_3d().direct_space_state.intersect_ray(query).is_empty()
 
 
+func _underwater(p: Vector3) -> bool:
+	for water in get_tree().get_nodes_in_group(&"water_surfaces"):
+		if water is StylizedWater and water.is_visible_in_tree() and water.is_point_underwater(p):
+			return true
+	return false
+
+
 ## 0..1: how stormy it is at p.
 func _barren(p: Vector3) -> float:
 	var out := 1.0 - smoothstep(clear_at * 0.6, clear_at, GrowthMap.progress_total)
@@ -189,19 +202,20 @@ func _barren(p: Vector3) -> float:
 
 
 func _apply() -> void:
-	_sand.emitting = strength > 0.01
-	_dust.emitting = strength > 0.01
-	_sand.amount_ratio = strength
-	_wind.volume_db = wind_volume_db + linear_to_db(maxf(strength, 0.001))
-	if _wind.playing != (strength > 0.01):
-		_wind.playing = strength > 0.01
-	_dust.amount_ratio = strength
-	_sand_mat.set_shader_parameter(&"strength", strength)
+	var s := 0.0 if _underwater_now else strength  # strength (LIRA's face) keeps tracking the surface
+	_sand.emitting = s > 0.01
+	_dust.emitting = s > 0.01
+	_sand.amount_ratio = s
+	_wind.volume_db = wind_volume_db + linear_to_db(maxf(s, 0.001))
+	if _wind.playing != (s > 0.01):
+		_wind.playing = s > 0.01
+	_dust.amount_ratio = s
+	_sand_mat.set_shader_parameter(&"strength", s)
 	var c := dust_color
-	c.a *= strength
+	c.a *= s
 	_dust_mat.set_shader_parameter(&"haze_color", c)
 	if not _fog_base.is_empty():
 		var env := environment.environment
-		env.fog_light_color = (_fog_base.color as Color).lerp(fog_color, strength)
-		env.fog_density = _fog_base.density + fog_density * strength
-		env.fog_sky_affect = lerpf(_fog_base.sky, fog_sky_affect, strength)
+		env.fog_light_color = (_fog_base.color as Color).lerp(fog_color, s)
+		env.fog_density = _fog_base.density + fog_density * s
+		env.fog_sky_affect = lerpf(_fog_base.sky, fog_sky_affect, s)

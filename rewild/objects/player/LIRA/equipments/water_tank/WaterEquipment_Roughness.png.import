@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://nt8gfm118mpy"
 path.s3tc="res://.godot/imported/WaterEquipment_Roughness.png-179fd7c300859b3f29384a8fe4d66bff.s3tc.ctex"
+path.etc2="res://.godot/imported/WaterEquipment_Roughness.png-179fd7c300859b3f29384a8fe4d66bff.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://objects/player/LIRA/equipments/water_tank/WaterEquipment_Roughness.png"
-dest_files=["res://.godot/imported/WaterEquipment_Roughness.png-179fd7c300859b3f29384a8fe4d66bff.s3tc.ctex"]
+dest_files=["res://.godot/imported/WaterEquipment_Roughness.png-179fd7c300859b3f29384a8fe4d66bff.s3tc.ctex", "res://.godot/imported/WaterEquipment_Roughness.png-179fd7c300859b3f29384a8fe4d66bff.etc2.ctex"]
 
 [params]
 

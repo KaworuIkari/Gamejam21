@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyxdyikacs84c"
 path.s3tc="res://.godot/imported/Bollard_Faded_lab_teal.png-46475b800ca3486529c498419cab6c00.s3tc.ctex"
+path.etc2="res://.godot/imported/Bollard_Faded_lab_teal.png-46475b800ca3486529c498419cab6c00.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Bollard_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Bollard_Faded_lab_teal.png-46475b800ca3486529c498419cab6c00.s3tc.ctex"]
+dest_files=["res://.godot/imported/Bollard_Faded_lab_teal.png-46475b800ca3486529c498419cab6c00.s3tc.ctex", "res://.godot/imported/Bollard_Faded_lab_teal.png-46475b800ca3486529c498419cab6c00.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqn1xnbaud45m"
 path.s3tc="res://.godot/imported/Wall_Window_4m_Weathered_warm_concrete.png-361c52b82de7dc6a18c37368d0a5c0be.s3tc.ctex"
+path.etc2="res://.godot/imported/Wall_Window_4m_Weathered_warm_concrete.png-361c52b82de7dc6a18c37368d0a5c0be.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Wall_Window_4m_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/Wall_Window_4m_Weathered_warm_concrete.png-361c52b82de7dc6a18c37368d0a5c0be.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wall_Window_4m_Weathered_warm_concrete.png-361c52b82de7dc6a18c37368d0a5c0be.s3tc.ctex", "res://.godot/imported/Wall_Window_4m_Weathered_warm_concrete.png-361c52b82de7dc6a18c37368d0a5c0be.etc2.ctex"]
 
 [params]
 

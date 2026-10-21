@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://3iigehjn5e63"
 path.s3tc="res://.godot/imported/Service_Platform_Sage_painted_steel.png-4b08c69550d5163a8b4f2f18c91422cf.s3tc.ctex"
+path.etc2="res://.godot/imported/Service_Platform_Sage_painted_steel.png-4b08c69550d5163a8b4f2f18c91422cf.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Service_Platform_Sage_painted_steel.png"
-dest_files=["res://.godot/imported/Service_Platform_Sage_painted_steel.png-4b08c69550d5163a8b4f2f18c91422cf.s3tc.ctex"]
+dest_files=["res://.godot/imported/Service_Platform_Sage_painted_steel.png-4b08c69550d5163a8b4f2f18c91422cf.s3tc.ctex", "res://.godot/imported/Service_Platform_Sage_painted_steel.png-4b08c69550d5163a8b4f2f18c91422cf.etc2.ctex"]
 
 [params]
 

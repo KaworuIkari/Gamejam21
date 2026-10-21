@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://djtydq3wahy7v"
 path.s3tc="res://.godot/imported/Faded_lab_teal_paint.png-1c7d138ea2dc886629c1db8c4a5e0134.s3tc.ctex"
+path.etc2="res://.godot/imported/Faded_lab_teal_paint.png-1c7d138ea2dc886629c1db8c4a5e0134.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/textures/Faded_lab_teal_paint.png"
-dest_files=["res://.godot/imported/Faded_lab_teal_paint.png-1c7d138ea2dc886629c1db8c4a5e0134.s3tc.ctex"]
+dest_files=["res://.godot/imported/Faded_lab_teal_paint.png-1c7d138ea2dc886629c1db8c4a5e0134.s3tc.ctex", "res://.godot/imported/Faded_lab_teal_paint.png-1c7d138ea2dc886629c1db8c4a5e0134.etc2.ctex"]
 
 [params]
 

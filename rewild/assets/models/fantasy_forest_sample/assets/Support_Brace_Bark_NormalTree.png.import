@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0d04cmf84865"
 path.s3tc="res://.godot/imported/Support_Brace_Bark_NormalTree.png-7ac0bc690a0256ad8923438625b30399.s3tc.ctex"
+path.etc2="res://.godot/imported/Support_Brace_Bark_NormalTree.png-7ac0bc690a0256ad8923438625b30399.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/assets/Support_Brace_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/Support_Brace_Bark_NormalTree.png-7ac0bc690a0256ad8923438625b30399.s3tc.ctex"]
+dest_files=["res://.godot/imported/Support_Brace_Bark_NormalTree.png-7ac0bc690a0256ad8923438625b30399.s3tc.ctex", "res://.godot/imported/Support_Brace_Bark_NormalTree.png-7ac0bc690a0256ad8923438625b30399.etc2.ctex"]
 
 [params]
 

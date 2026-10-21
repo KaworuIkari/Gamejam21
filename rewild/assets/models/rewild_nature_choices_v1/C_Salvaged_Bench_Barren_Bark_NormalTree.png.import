@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bn1q2bm0v252h"
 path.s3tc="res://.godot/imported/C_Salvaged_Bench_Barren_Bark_NormalTree.png-5fb95d9456e724d068ccb72234071677.s3tc.ctex"
+path.etc2="res://.godot/imported/C_Salvaged_Bench_Barren_Bark_NormalTree.png-5fb95d9456e724d068ccb72234071677.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_nature_choices_v1/C_Salvaged_Bench_Barren_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/C_Salvaged_Bench_Barren_Bark_NormalTree.png-5fb95d9456e724d068ccb72234071677.s3tc.ctex"]
+dest_files=["res://.godot/imported/C_Salvaged_Bench_Barren_Bark_NormalTree.png-5fb95d9456e724d068ccb72234071677.s3tc.ctex", "res://.godot/imported/C_Salvaged_Bench_Barren_Bark_NormalTree.png-5fb95d9456e724d068ccb72234071677.etc2.ctex"]
 
 [params]
 

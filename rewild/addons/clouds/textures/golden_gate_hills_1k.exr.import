@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvcf455kww2li"
 path.bptc="res://.godot/imported/golden_gate_hills_1k.exr-bc46f3b11506941739c8d5fa4782620b.bptc.ctex"
+path.astc="res://.godot/imported/golden_gate_hills_1k.exr-bc46f3b11506941739c8d5fa4782620b.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/clouds/textures/golden_gate_hills_1k.exr"
-dest_files=["res://.godot/imported/golden_gate_hills_1k.exr-bc46f3b11506941739c8d5fa4782620b.bptc.ctex"]
+dest_files=["res://.godot/imported/golden_gate_hills_1k.exr-bc46f3b11506941739c8d5fa4782620b.bptc.ctex", "res://.godot/imported/golden_gate_hills_1k.exr-bc46f3b11506941739c8d5fa4782620b.astc.ctex"]
 
 [params]
 

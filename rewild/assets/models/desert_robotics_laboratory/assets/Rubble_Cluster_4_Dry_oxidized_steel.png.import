@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dl5jjxk2o5wsx"
 path.s3tc="res://.godot/imported/Rubble_Cluster_4_Dry_oxidized_steel.png-7301b848c0b97212ca019df3c2a5f6a3.s3tc.ctex"
+path.etc2="res://.godot/imported/Rubble_Cluster_4_Dry_oxidized_steel.png-7301b848c0b97212ca019df3c2a5f6a3.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Rubble_Cluster_4_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Rubble_Cluster_4_Dry_oxidized_steel.png-7301b848c0b97212ca019df3c2a5f6a3.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rubble_Cluster_4_Dry_oxidized_steel.png-7301b848c0b97212ca019df3c2a5f6a3.s3tc.ctex", "res://.godot/imported/Rubble_Cluster_4_Dry_oxidized_steel.png-7301b848c0b97212ca019df3c2a5f6a3.etc2.ctex"]
 
 [params]
 

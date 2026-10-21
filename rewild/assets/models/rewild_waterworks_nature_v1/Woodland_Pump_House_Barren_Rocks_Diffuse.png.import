@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bq53dqmarc3lb"
 path.s3tc="res://.godot/imported/Woodland_Pump_House_Barren_Rocks_Diffuse.png-29f9b95d196b22c908fb7b5df5af7d0e.s3tc.ctex"
+path.etc2="res://.godot/imported/Woodland_Pump_House_Barren_Rocks_Diffuse.png-29f9b95d196b22c908fb7b5df5af7d0e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_waterworks_nature_v1/Woodland_Pump_House_Barren_Rocks_Diffuse.png"
-dest_files=["res://.godot/imported/Woodland_Pump_House_Barren_Rocks_Diffuse.png-29f9b95d196b22c908fb7b5df5af7d0e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Woodland_Pump_House_Barren_Rocks_Diffuse.png-29f9b95d196b22c908fb7b5df5af7d0e.s3tc.ctex", "res://.godot/imported/Woodland_Pump_House_Barren_Rocks_Diffuse.png-29f9b95d196b22c908fb7b5df5af7d0e.etc2.ctex"]
 
 [params]
 

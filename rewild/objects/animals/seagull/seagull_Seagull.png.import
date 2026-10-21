@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://h4c7eg5a4dgp"
 path.s3tc="res://.godot/imported/seagull_Seagull.png-2d7d654a3bdaa6a0985dcf82fdb9b6db.s3tc.ctex"
+path.etc2="res://.godot/imported/seagull_Seagull.png-2d7d654a3bdaa6a0985dcf82fdb9b6db.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://objects/animals/seagull/seagull_Seagull.png"
-dest_files=["res://.godot/imported/seagull_Seagull.png-2d7d654a3bdaa6a0985dcf82fdb9b6db.s3tc.ctex"]
+dest_files=["res://.godot/imported/seagull_Seagull.png-2d7d654a3bdaa6a0985dcf82fdb9b6db.s3tc.ctex", "res://.godot/imported/seagull_Seagull.png-2d7d654a3bdaa6a0985dcf82fdb9b6db.etc2.ctex"]
 
 [params]
 

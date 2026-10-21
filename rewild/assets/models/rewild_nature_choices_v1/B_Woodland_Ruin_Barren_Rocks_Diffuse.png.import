@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgugjj4ciw4k1"
 path.s3tc="res://.godot/imported/B_Woodland_Ruin_Barren_Rocks_Diffuse.png-cadc2e07a7e0190f10b44545ccdc8427.s3tc.ctex"
+path.etc2="res://.godot/imported/B_Woodland_Ruin_Barren_Rocks_Diffuse.png-cadc2e07a7e0190f10b44545ccdc8427.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_nature_choices_v1/B_Woodland_Ruin_Barren_Rocks_Diffuse.png"
-dest_files=["res://.godot/imported/B_Woodland_Ruin_Barren_Rocks_Diffuse.png-cadc2e07a7e0190f10b44545ccdc8427.s3tc.ctex"]
+dest_files=["res://.godot/imported/B_Woodland_Ruin_Barren_Rocks_Diffuse.png-cadc2e07a7e0190f10b44545ccdc8427.s3tc.ctex", "res://.godot/imported/B_Woodland_Ruin_Barren_Rocks_Diffuse.png-cadc2e07a7e0190f10b44545ccdc8427.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b3jbb6e38tc7w"
 path.s3tc="res://.godot/imported/Woodland_Pump_House_Barren_Bark_NormalTree.png-4969e50fdfebdc2af064d9520078599c.s3tc.ctex"
+path.etc2="res://.godot/imported/Woodland_Pump_House_Barren_Bark_NormalTree.png-4969e50fdfebdc2af064d9520078599c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_waterworks_nature_v1/Woodland_Pump_House_Barren_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/Woodland_Pump_House_Barren_Bark_NormalTree.png-4969e50fdfebdc2af064d9520078599c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Woodland_Pump_House_Barren_Bark_NormalTree.png-4969e50fdfebdc2af064d9520078599c.s3tc.ctex", "res://.godot/imported/Woodland_Pump_House_Barren_Bark_NormalTree.png-4969e50fdfebdc2af064d9520078599c.etc2.ctex"]
 
 [params]
 

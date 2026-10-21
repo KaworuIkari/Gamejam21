@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6k4xt3na4qbu"
 path.s3tc="res://.godot/imported/Rock_Original_Rocks_Diffuse.png-08f636bd232bf9ebdb4ce4d5d915c887.s3tc.ctex"
+path.etc2="res://.godot/imported/Rock_Original_Rocks_Diffuse.png-08f636bd232bf9ebdb4ce4d5d915c887.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/crashsite_outpost_v2/assets/Rock_Original_Rocks_Diffuse.png"
-dest_files=["res://.godot/imported/Rock_Original_Rocks_Diffuse.png-08f636bd232bf9ebdb4ce4d5d915c887.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rock_Original_Rocks_Diffuse.png-08f636bd232bf9ebdb4ce4d5d915c887.s3tc.ctex", "res://.godot/imported/Rock_Original_Rocks_Diffuse.png-08f636bd232bf9ebdb4ce4d5d915c887.etc2.ctex"]
 
 [params]
 

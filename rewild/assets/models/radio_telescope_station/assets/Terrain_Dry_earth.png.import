@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bkfrotch48y1o"
 path.s3tc="res://.godot/imported/Terrain_Dry_earth.png-bb88084526b5fee4e17a04c7e1d464a1.s3tc.ctex"
+path.etc2="res://.godot/imported/Terrain_Dry_earth.png-bb88084526b5fee4e17a04c7e1d464a1.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Terrain_Dry_earth.png"
-dest_files=["res://.godot/imported/Terrain_Dry_earth.png-bb88084526b5fee4e17a04c7e1d464a1.s3tc.ctex"]
+dest_files=["res://.godot/imported/Terrain_Dry_earth.png-bb88084526b5fee4e17a04c7e1d464a1.s3tc.ctex", "res://.godot/imported/Terrain_Dry_earth.png-bb88084526b5fee4e17a04c7e1d464a1.etc2.ctex"]
 
 [params]
 

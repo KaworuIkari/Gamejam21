@@ -272,7 +272,24 @@ func _fetch_jetpack() -> void:
 	_carry()
 	for i in range(way.size() - 1, -1, -1):
 		await _hop_to(way[i])
+	await _return_to_lira()
 	_bot().play(&"Idle")
+
+
+## Back beside LIRA on the ground path: the navmesh does not know the factory walls.
+func _return_to_lira() -> void:
+	var lira := get_tree().get_first_node_in_group(&"player") as Node3D
+	if lira == null:
+		return
+	var away := companion.global_position - lira.global_position
+	away.y = 0.0
+	away = away.normalized() if away.length() > 0.01 else Vector3.BACK
+	var goal := lira.global_position + away * companion.follow_distance
+	var ground := _ground_at(companion.get_world_3d().direct_space_state, goal, goal.y + 1.5)
+	if not is_nan(ground.y):
+		goal = ground
+	for point in _ground_path(companion.global_position, goal):
+		await _run_to(point)
 
 
 ## [ground outside, sill, ...] from `route`, else the window found by rays (may be empty).
@@ -354,6 +371,15 @@ func _blocked(space: PhysicsDirectSpaceState3D, ground: Vector3) -> bool:
 	return not space.intersect_shape(query, 1).is_empty()
 
 
+## Horizontal distance from `a` to the first wall on the way to `b`, or -1 when clear.
+func _wall_distance(space: PhysicsDirectSpaceState3D, a: Vector3, b: Vector3) -> float:
+	for h in [0.4, 0.9]:
+		var hit := _ray(space, a + Vector3.UP * h, b + Vector3.UP * h)
+		if not hit.is_empty():
+			return Vector2(hit.position.x - a.x, hit.position.z - a.z).length()
+	return -1.0
+
+
 ## A collider-free path over the ground from `from` to `to`: A* on a grid of cells whose
 ## ground was probed with rays, then shortened where the straight line is clear.
 func _ground_path(from: Vector3, to: Vector3) -> Array[Vector3]:
@@ -374,6 +400,18 @@ func _ground_path(from: Vector3, to: Vector3) -> Array[Vector3]:
 			ground[cell] = g
 			if is_nan(g.y) or absf(g.y - from.y) > 6.0 or _blocked(space, g):
 				grid.set_point_solid(cell)
+	# A wall between neighbours cuts the link: the cell nearer it becomes solid. This also
+	# catches cells inside thin walls, where the sphere above finds nothing (from inside a
+	# collider no query hits its faces), as the ray from the neighbour does.
+	for cell: Vector2i in ground:
+		for step: Vector2i in [Vector2i.RIGHT, Vector2i.DOWN]:
+			var next: Vector2i = cell + step
+			if not ground.has(next) or is_nan(ground[cell].y) or is_nan(ground[next].y):
+				continue
+			for pair in [[cell, next], [next, cell]]:
+				var d := _wall_distance(space, ground[pair[0]], ground[pair[1]])
+				if d >= 0.0:
+					grid.set_point_solid(pair[1] if d > PLAN_CELL * 0.5 else pair[0])
 	grid.set_point_solid(start, false)
 	grid.set_point_solid(goal, false)
 	var cells := grid.get_id_path(start, goal)
@@ -423,7 +461,9 @@ func _hop_to(point: Vector3) -> void:
 	var flat := Vector3(point.x - from.x, 0, point.z - from.z)
 	if flat.length() > 0.01:
 		companion.rotation.y = atan2(flat.x, flat.z)
-	var height := HOP_HEIGHT + maxf(point.y - from.y, 0.0)
+	# The arc rides on the straight line from -> point, so half the rise clears the sill
+	# without the bot's head hitting the top of the window.
+	var height := HOP_HEIGHT + absf(point.y - from.y) * 0.5
 	bot.play(&"Jump_Start")
 	var hop := create_tween()
 	hop.tween_method(func(t: float) -> void:

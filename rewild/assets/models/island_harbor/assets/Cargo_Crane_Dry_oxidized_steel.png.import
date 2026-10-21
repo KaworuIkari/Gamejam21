@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://8i3ya4884tqh"
 path.s3tc="res://.godot/imported/Cargo_Crane_Dry_oxidized_steel.png-ede41e9d7e888424a6b83ae13f4e96c2.s3tc.ctex"
+path.etc2="res://.godot/imported/Cargo_Crane_Dry_oxidized_steel.png-ede41e9d7e888424a6b83ae13f4e96c2.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Cargo_Crane_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Cargo_Crane_Dry_oxidized_steel.png-ede41e9d7e888424a6b83ae13f4e96c2.s3tc.ctex"]
+dest_files=["res://.godot/imported/Cargo_Crane_Dry_oxidized_steel.png-ede41e9d7e888424a6b83ae13f4e96c2.s3tc.ctex", "res://.godot/imported/Cargo_Crane_Dry_oxidized_steel.png-ede41e9d7e888424a6b83ae13f4e96c2.etc2.ctex"]
 
 [params]
 

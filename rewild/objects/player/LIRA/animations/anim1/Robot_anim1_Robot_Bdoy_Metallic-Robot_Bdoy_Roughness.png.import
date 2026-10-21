@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://s8oo83dn78iu"
 path.s3tc="res://.godot/imported/Robot_anim1_Robot_Bdoy_Metallic-Robot_Bdoy_Roughness.png-34efb8ba81e79d8a14aace43f759d4be.s3tc.ctex"
+path.etc2="res://.godot/imported/Robot_anim1_Robot_Bdoy_Metallic-Robot_Bdoy_Roughness.png-34efb8ba81e79d8a14aace43f759d4be.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://objects/player/LIRA/animations/anim1/Robot_anim1_Robot_Bdoy_Metallic-Robot_Bdoy_Roughness.png"
-dest_files=["res://.godot/imported/Robot_anim1_Robot_Bdoy_Metallic-Robot_Bdoy_Roughness.png-34efb8ba81e79d8a14aace43f759d4be.s3tc.ctex"]
+dest_files=["res://.godot/imported/Robot_anim1_Robot_Bdoy_Metallic-Robot_Bdoy_Roughness.png-34efb8ba81e79d8a14aace43f759d4be.s3tc.ctex", "res://.godot/imported/Robot_anim1_Robot_Bdoy_Metallic-Robot_Bdoy_Roughness.png-34efb8ba81e79d8a14aace43f759d4be.etc2.ctex"]
 
 [params]
 

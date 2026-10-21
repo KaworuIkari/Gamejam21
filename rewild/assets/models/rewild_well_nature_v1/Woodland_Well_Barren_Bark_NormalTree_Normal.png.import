@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://byfqwcfti746o"
 path.s3tc="res://.godot/imported/Woodland_Well_Barren_Bark_NormalTree_Normal.png-6327160cfa6a6cf95ba61c965447cc9a.s3tc.ctex"
+path.etc2="res://.godot/imported/Woodland_Well_Barren_Bark_NormalTree_Normal.png-6327160cfa6a6cf95ba61c965447cc9a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_well_nature_v1/Woodland_Well_Barren_Bark_NormalTree_Normal.png"
-dest_files=["res://.godot/imported/Woodland_Well_Barren_Bark_NormalTree_Normal.png-6327160cfa6a6cf95ba61c965447cc9a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Woodland_Well_Barren_Bark_NormalTree_Normal.png-6327160cfa6a6cf95ba61c965447cc9a.s3tc.ctex", "res://.godot/imported/Woodland_Well_Barren_Bark_NormalTree_Normal.png-6327160cfa6a6cf95ba61c965447cc9a.etc2.ctex"]
 
 [params]
 

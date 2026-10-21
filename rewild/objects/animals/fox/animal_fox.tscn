@@ -9,48 +9,41 @@ radius = 0.7
 
 [node name="AnimalFox" unique_id=1591991278 node_paths=PackedStringArray("animation_player") instance=ExtResource("1_auv3j")]
 script = ExtResource("2_u6hmh")
-friendly_radius = null
-calm_radius = null
-run_speed = null
-tick_interval = null
-idle_time = null
+friendly_radius = 10.0
+calm_radius = 30.0
+run_speed = 7.0
+tick_interval = 2.0
+idle_time = Vector2(3, 9)
 wander_radius = 60.0
-follow_distance = null
-follow_slack = null
-happy_chance = null
-hop_height = null
-howl_speed = null
-howl_tilt_deg = null
-rescue_event = null
-reward_item = null
-rescue_hold = null
-rescue_radius = null
-rescue_prompt = null
-down_roll_deg = null
-down_height = null
-curiosity_threshold = null
-investigate_time = null
-run_anim = null
-bark_anim = null
+wander_run_chance = 0.25
+follow_distance = 3.0
+follow_slack = 1.5
+happy_chance = 0.35
+hop_height = 0.35
+howl_speed = 0.85
+howl_tilt_deg = 25.0
+rescue_event = &"fox_rescued"
+reward_item = &"fox_key"
+rescue_hold = 1.5
+rescue_radius = 2
+rescue_prompt = "FOX_RESCUE_PROMPT"
+curiosity_threshold = 0.6
+investigate_time = 3.0
+run_anim = "running_rig"
+bark_anim = "bark_rig"
+hurt_anim = "hurt_rig"
 animation_player = NodePath("fox_rigged/AnimationPlayer")
-walk_speed = null
-acceleration = null
-turn_speed = null
-max_turn_rate = null
 path_advance_distance = 2.0
 waypoint_radius = 2.0
-move_timeout = null
-model_faces_positive_z = null
-blend_time = null
 idle_anim = "idle_rig"
 walk_anim = "walking_rig"
-fall_recover_depth = null
-slow_tick_interval = null
-debug = null
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=256457580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("SphereShape3D_82kr3")
+
+[node name="NavigationAgent3D" parent="." index="1" unique_id=1135822814]
+debug_enabled = false
 
 [node name="DebugLabel3D" parent="." index="2" unique_id=1114967018]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.753709, 0)
@@ -58,7 +51,7 @@ text = "Animal Fox"
 
 [node name="fox_rigged" parent="." index="3" unique_id=1016746439 instance=ExtResource("2_y0crv")]
 
-[node name="Skeleton3D" parent="fox_rigged/root" parent_id_path=PackedInt32Array(1016746439, 1210317772) index="0" unique_id=678085041]
+[node name="Skeleton3D" parent="fox_rigged/root" parent_id_path=PackedInt32Array(1016746439, 1690743424) index="0" unique_id=869575140]
 bones/0/position = Vector3(-6.160443e-10, 1.0123951, -0.33078575)
 bones/0/rotation = Quaternion(0.68181336, -3.0167648e-06, -2.8183701e-06, 0.7315262)
 bones/1/position = Vector3(-3.242063e-10, 0.28557965, 6.972153e-08)
@@ -101,11 +94,11 @@ bones/34/rotation = Quaternion(-0.09489991, 1.7125521e-11, 2.2628974e-08, 0.9954
 bones/35/rotation = Quaternion(0.04691576, -1.7641447e-13, -1.1183602e-08, 0.9988989)
 bones/36/rotation = Quaternion(0.18316063, -4.0834003e-13, -4.3666418e-08, 0.98308307)
 
-[node name="FmodEventEmitter3DBark" type="FmodEventEmitter3D" parent="fox_rigged/root/Skeleton3D/Retopo_fox_002" parent_id_path=PackedInt32Array(1016746439, 493109532) index="0" unique_id=680458011]
+[node name="FmodEventEmitter3DBark" type="FmodEventEmitter3D" parent="fox_rigged/root/Skeleton3D/Retopo_fox_002" parent_id_path=PackedInt32Array(1016746439, 679428207) index="0" unique_id=680458011]
 event_name = "event:/Fox/Say"
 event_guid = "{9306dfc8-9df7-4184-ad7a-1239cf49d379}"
 
-[node name="HurtSound" type="FmodEventEmitter3D" parent="fox_rigged/root/Skeleton3D/Retopo_fox_002" parent_id_path=PackedInt32Array(1016746439, 493109532) index="1" unique_id=731377103]
+[node name="HurtSound" type="FmodEventEmitter3D" parent="fox_rigged/root/Skeleton3D/Retopo_fox_002" parent_id_path=PackedInt32Array(1016746439, 679428207) index="1" unique_id=731377103]
 event_guid = "{0000000f-0003-0000-0f00-000014000000}"
 
 [editable path="fox_rigged"]

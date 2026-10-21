@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cfaojwhxohtyp"
 path.s3tc="res://.godot/imported/Old_Stone_Steps_Greenery_Grass2.png-e163c9506ae49d616932c51cdb4ef605.s3tc.ctex"
+path.etc2="res://.godot/imported/Old_Stone_Steps_Greenery_Grass2.png-e163c9506ae49d616932c51cdb4ef605.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Old_Stone_Steps_Greenery_Grass2.png"
-dest_files=["res://.godot/imported/Old_Stone_Steps_Greenery_Grass2.png-e163c9506ae49d616932c51cdb4ef605.s3tc.ctex"]
+dest_files=["res://.godot/imported/Old_Stone_Steps_Greenery_Grass2.png-e163c9506ae49d616932c51cdb4ef605.s3tc.ctex", "res://.godot/imported/Old_Stone_Steps_Greenery_Grass2.png-e163c9506ae49d616932c51cdb4ef605.etc2.ctex"]
 
 [params]
 

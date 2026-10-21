@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d171n1wyee7y8"
 path.s3tc="res://.godot/imported/Arch_Voussoir_05_Rocks_Diffuse.png-bb9ba712048cc770d6daea7b9fb61583.s3tc.ctex"
+path.etc2="res://.godot/imported/Arch_Voussoir_05_Rocks_Diffuse.png-bb9ba712048cc770d6daea7b9fb61583.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/assets/Arch_Voussoir_05_Rocks_Diffuse.png"
-dest_files=["res://.godot/imported/Arch_Voussoir_05_Rocks_Diffuse.png-bb9ba712048cc770d6daea7b9fb61583.s3tc.ctex"]
+dest_files=["res://.godot/imported/Arch_Voussoir_05_Rocks_Diffuse.png-bb9ba712048cc770d6daea7b9fb61583.s3tc.ctex", "res://.godot/imported/Arch_Voussoir_05_Rocks_Diffuse.png-bb9ba712048cc770d6daea7b9fb61583.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://7vbymoj4bhi"
 path.s3tc="res://.godot/imported/Sign_Power_Faded_lab_teal.png-83ddb16a6766d978d43f383c5225b434.s3tc.ctex"
+path.etc2="res://.godot/imported/Sign_Power_Faded_lab_teal.png-83ddb16a6766d978d43f383c5225b434.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Sign_Power_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Sign_Power_Faded_lab_teal.png-83ddb16a6766d978d43f383c5225b434.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sign_Power_Faded_lab_teal.png-83ddb16a6766d978d43f383c5225b434.s3tc.ctex", "res://.godot/imported/Sign_Power_Faded_lab_teal.png-83ddb16a6766d978d43f383c5225b434.etc2.ctex"]
 
 [params]
 

@@ -392,11 +392,10 @@ func _check_stuck(delta: float) -> bool:
 	return true
 
 
-## A big hop that lands beside LIRA, over whatever was in the way.
+## A big hop that lands beside LIRA, over whatever was in the way. Walls and roofs the
+## arc would pass through (the navmesh does not know buildings) cancel it: the bot waits.
 func _catch_up() -> void:
-	_catching = true
 	_stuck_t = 0.0
-	velocity = Vector3.ZERO
 	var from := global_position
 	var side := Vector3(from.x - lira.global_position.x, 0.0, from.z - lira.global_position.z)
 	side = side.normalized() if side.length() > 0.01 else Vector3.BACK
@@ -406,11 +405,17 @@ func _catch_up() -> void:
 		var on_mesh := NavigationServer3D.map_get_closest_point(map, to)
 		if on_mesh.distance_to(to) < follow_distance:
 			to = on_mesh
+	var height := catch_up_height + maxf(to.y - from.y, 0.0)
+	if not _arc_clear(from, to, height):
+		_enter(Mode.IDLE)
+		_yaw_goal = _yaw_to(lira.global_position)
+		return
+	_catching = true
+	velocity = Vector3.ZERO
 	_yaw_goal = _yaw_to(to)
 	rotation.y = _yaw_goal
 	_anim_lock = true
 	_play(&"Jump_Start", 0.05)
-	var height := catch_up_height + maxf(to.y - from.y, 0.0)
 	var hop := create_tween()
 	hop.tween_method(func(t: float) -> void:
 		global_position = from.lerp(to, t) + Vector3.UP * sin(t * PI) * height,
@@ -421,6 +426,19 @@ func _catch_up() -> void:
 	_progress_from = global_position
 	_anim_lock = true
 	_play(&"Land", 0.05)
+
+
+## The hop's arc, as two straight legs through its top, meets no collider.
+func _arc_clear(from: Vector3, to: Vector3, height: float) -> bool:
+	var space := get_world_3d().direct_space_state
+	var up := Vector3.UP * 0.5
+	var top := from.lerp(to, 0.5) + Vector3.UP * height + up
+	for leg in [[from + up, top], [top, to + up]]:
+		var query := PhysicsRayQueryParameters3D.create(leg[0], leg[1])
+		query.exclude = [get_rid(), lira.get_rid()]
+		if not space.intersect_ray(query).is_empty():
+			return false
+	return true
 
 
 func _set_active(on: bool) -> void:

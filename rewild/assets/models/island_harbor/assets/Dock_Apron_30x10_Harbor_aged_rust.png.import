@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cm5bnvmlajnh2"
 path.s3tc="res://.godot/imported/Dock_Apron_30x10_Harbor_aged_rust.png-724d1a77818060a1fb1293fe10336068.s3tc.ctex"
+path.etc2="res://.godot/imported/Dock_Apron_30x10_Harbor_aged_rust.png-724d1a77818060a1fb1293fe10336068.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Dock_Apron_30x10_Harbor_aged_rust.png"
-dest_files=["res://.godot/imported/Dock_Apron_30x10_Harbor_aged_rust.png-724d1a77818060a1fb1293fe10336068.s3tc.ctex"]
+dest_files=["res://.godot/imported/Dock_Apron_30x10_Harbor_aged_rust.png-724d1a77818060a1fb1293fe10336068.s3tc.ctex", "res://.godot/imported/Dock_Apron_30x10_Harbor_aged_rust.png-724d1a77818060a1fb1293fe10336068.etc2.ctex"]
 
 [params]
 

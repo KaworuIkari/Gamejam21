@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cd7l0tvw4ubi7"
 path.s3tc="res://.godot/imported/Wall_Door_2m_Bark_NormalTree.png-8477ca475f5e21b3ebe167f1e6fab967.s3tc.ctex"
+path.etc2="res://.godot/imported/Wall_Door_2m_Bark_NormalTree.png-8477ca475f5e21b3ebe167f1e6fab967.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/textures/Wall_Door_2m_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/Wall_Door_2m_Bark_NormalTree.png-8477ca475f5e21b3ebe167f1e6fab967.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wall_Door_2m_Bark_NormalTree.png-8477ca475f5e21b3ebe167f1e6fab967.s3tc.ctex", "res://.godot/imported/Wall_Door_2m_Bark_NormalTree.png-8477ca475f5e21b3ebe167f1e6fab967.etc2.ctex"]
 
 [params]
 

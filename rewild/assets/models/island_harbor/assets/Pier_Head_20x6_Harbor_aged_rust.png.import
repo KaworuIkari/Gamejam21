@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bef3tlqpbmaqg"
 path.s3tc="res://.godot/imported/Pier_Head_20x6_Harbor_aged_rust.png-8aa1ec91ac959acb150bdaf3e179bdc0.s3tc.ctex"
+path.etc2="res://.godot/imported/Pier_Head_20x6_Harbor_aged_rust.png-8aa1ec91ac959acb150bdaf3e179bdc0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Pier_Head_20x6_Harbor_aged_rust.png"
-dest_files=["res://.godot/imported/Pier_Head_20x6_Harbor_aged_rust.png-8aa1ec91ac959acb150bdaf3e179bdc0.s3tc.ctex"]
+dest_files=["res://.godot/imported/Pier_Head_20x6_Harbor_aged_rust.png-8aa1ec91ac959acb150bdaf3e179bdc0.s3tc.ctex", "res://.godot/imported/Pier_Head_20x6_Harbor_aged_rust.png-8aa1ec91ac959acb150bdaf3e179bdc0.etc2.ctex"]
 
 [params]
 

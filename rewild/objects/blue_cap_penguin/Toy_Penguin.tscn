@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/blue_cap_penguin/Toy_Penguin.glb" id="1_model"]
+
+[node name="Toy_Penguin" type="Node3D"]
+metadata/description = "Small rounded toy penguin with a warm white face and belly, orange beak and feet, little flippers and visible toy details. Ground pivot, +Z front."
+metadata/source = "Toy_Penguin.glb; editable source in source/"
+metadata/units = "metres"
+metadata/up_axis = "+Y"
+metadata/front_axis = "+Z"
+metadata/static_prop = true
+metadata/rigged = false
+metadata/ground_pivot = true
+
+[node name="Visual" parent="." instance=ExtResource("1_model")]

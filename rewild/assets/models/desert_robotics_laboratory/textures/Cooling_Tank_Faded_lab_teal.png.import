@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bh407njkjhyl5"
 path.s3tc="res://.godot/imported/Cooling_Tank_Faded_lab_teal.png-6c4d6cc47ffac140f1f866d7d8bd15fc.s3tc.ctex"
+path.etc2="res://.godot/imported/Cooling_Tank_Faded_lab_teal.png-6c4d6cc47ffac140f1f866d7d8bd15fc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Cooling_Tank_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Cooling_Tank_Faded_lab_teal.png-6c4d6cc47ffac140f1f866d7d8bd15fc.s3tc.ctex"]
+dest_files=["res://.godot/imported/Cooling_Tank_Faded_lab_teal.png-6c4d6cc47ffac140f1f866d7d8bd15fc.s3tc.ctex", "res://.godot/imported/Cooling_Tank_Faded_lab_teal.png-6c4d6cc47ffac140f1f866d7d8bd15fc.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cnjrkrcyix43x"
 path.s3tc="res://.godot/imported/Relay_Mast_Greenery_Leaves.png-5fab3c5559a91123ce7483a3376cd62d.s3tc.ctex"
+path.etc2="res://.godot/imported/Relay_Mast_Greenery_Leaves.png-5fab3c5559a91123ce7483a3376cd62d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Relay_Mast_Greenery_Leaves.png"
-dest_files=["res://.godot/imported/Relay_Mast_Greenery_Leaves.png-5fab3c5559a91123ce7483a3376cd62d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Relay_Mast_Greenery_Leaves.png-5fab3c5559a91123ce7483a3376cd62d.s3tc.ctex", "res://.godot/imported/Relay_Mast_Greenery_Leaves.png-5fab3c5559a91123ce7483a3376cd62d.etc2.ctex"]
 
 [params]
 

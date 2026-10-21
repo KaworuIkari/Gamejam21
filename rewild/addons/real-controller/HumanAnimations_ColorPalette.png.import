@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://clvrjivp043tr"
 path.s3tc="res://.godot/imported/HumanAnimations_ColorPalette.png-680db3df0b3445ef88d3de52fae40dfc.s3tc.ctex"
+path.etc2="res://.godot/imported/HumanAnimations_ColorPalette.png-680db3df0b3445ef88d3de52fae40dfc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/real-controller/HumanAnimations_ColorPalette.png"
-dest_files=["res://.godot/imported/HumanAnimations_ColorPalette.png-680db3df0b3445ef88d3de52fae40dfc.s3tc.ctex"]
+dest_files=["res://.godot/imported/HumanAnimations_ColorPalette.png-680db3df0b3445ef88d3de52fae40dfc.s3tc.ctex", "res://.godot/imported/HumanAnimations_ColorPalette.png-680db3df0b3445ef88d3de52fae40dfc.etc2.ctex"]
 
 [params]
 

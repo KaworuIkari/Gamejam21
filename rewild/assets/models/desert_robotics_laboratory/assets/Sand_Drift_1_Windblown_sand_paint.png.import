@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://clrqtlx251gyi"
 path.s3tc="res://.godot/imported/Sand_Drift_1_Windblown_sand_paint.png-860d1b50f9d4db765a1c1f2869a9e47f.s3tc.ctex"
+path.etc2="res://.godot/imported/Sand_Drift_1_Windblown_sand_paint.png-860d1b50f9d4db765a1c1f2869a9e47f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Sand_Drift_1_Windblown_sand_paint.png"
-dest_files=["res://.godot/imported/Sand_Drift_1_Windblown_sand_paint.png-860d1b50f9d4db765a1c1f2869a9e47f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sand_Drift_1_Windblown_sand_paint.png-860d1b50f9d4db765a1c1f2869a9e47f.s3tc.ctex", "res://.godot/imported/Sand_Drift_1_Windblown_sand_paint.png-860d1b50f9d4db765a1c1f2869a9e47f.etc2.ctex"]
 
 [params]
 

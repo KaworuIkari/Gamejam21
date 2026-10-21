@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmq4tm542dkiv"
 path.bptc="res://.godot/imported/BaseColor_Desert.jpg-1eb1032c6693eb2b08f427e40c6a81b2.bptc.ctex"
+path.astc="res://.godot/imported/BaseColor_Desert.jpg-1eb1032c6693eb2b08f427e40c6a81b2.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/ground/crater/BaseColor_Desert.jpg"
-dest_files=["res://.godot/imported/BaseColor_Desert.jpg-1eb1032c6693eb2b08f427e40c6a81b2.bptc.ctex"]
+dest_files=["res://.godot/imported/BaseColor_Desert.jpg-1eb1032c6693eb2b08f427e40c6a81b2.bptc.ctex", "res://.godot/imported/BaseColor_Desert.jpg-1eb1032c6693eb2b08f427e40c6a81b2.astc.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ra5t82iouvx8"
 path.s3tc="res://.godot/imported/Control_Console_Faded_lab_teal.png-a3729754b1d7b28690e500efd983f1f2.s3tc.ctex"
+path.etc2="res://.godot/imported/Control_Console_Faded_lab_teal.png-a3729754b1d7b28690e500efd983f1f2.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Control_Console_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Control_Console_Faded_lab_teal.png-a3729754b1d7b28690e500efd983f1f2.s3tc.ctex"]
+dest_files=["res://.godot/imported/Control_Console_Faded_lab_teal.png-a3729754b1d7b28690e500efd983f1f2.s3tc.ctex", "res://.godot/imported/Control_Console_Faded_lab_teal.png-a3729754b1d7b28690e500efd983f1f2.etc2.ctex"]
 
 [params]
 

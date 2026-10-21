@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://boc7wfartkvbs"
 path.s3tc="res://.godot/imported/Access_Ladder_Sage_painted_steel.png-a7aa3394922f5ce394d81fc822a41c5e.s3tc.ctex"
+path.etc2="res://.godot/imported/Access_Ladder_Sage_painted_steel.png-a7aa3394922f5ce394d81fc822a41c5e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Access_Ladder_Sage_painted_steel.png"
-dest_files=["res://.godot/imported/Access_Ladder_Sage_painted_steel.png-a7aa3394922f5ce394d81fc822a41c5e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Access_Ladder_Sage_painted_steel.png-a7aa3394922f5ce394d81fc822a41c5e.s3tc.ctex", "res://.godot/imported/Access_Ladder_Sage_painted_steel.png-a7aa3394922f5ce394d81fc822a41c5e.etc2.ctex"]
 
 [params]
 

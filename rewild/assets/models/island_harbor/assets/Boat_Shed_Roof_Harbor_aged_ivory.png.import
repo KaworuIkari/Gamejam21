@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cmkjkmtuadaoj"
 path.s3tc="res://.godot/imported/Boat_Shed_Roof_Harbor_aged_ivory.png-9eb6521566dfa7f7cf91551fc3c76e23.s3tc.ctex"
+path.etc2="res://.godot/imported/Boat_Shed_Roof_Harbor_aged_ivory.png-9eb6521566dfa7f7cf91551fc3c76e23.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Boat_Shed_Roof_Harbor_aged_ivory.png"
-dest_files=["res://.godot/imported/Boat_Shed_Roof_Harbor_aged_ivory.png-9eb6521566dfa7f7cf91551fc3c76e23.s3tc.ctex"]
+dest_files=["res://.godot/imported/Boat_Shed_Roof_Harbor_aged_ivory.png-9eb6521566dfa7f7cf91551fc3c76e23.s3tc.ctex", "res://.godot/imported/Boat_Shed_Roof_Harbor_aged_ivory.png-9eb6521566dfa7f7cf91551fc3c76e23.etc2.ctex"]
 
 [params]
 

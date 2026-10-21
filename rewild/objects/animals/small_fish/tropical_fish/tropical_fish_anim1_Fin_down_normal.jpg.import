@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://vsp52nb4jgmh"
 path.s3tc="res://.godot/imported/tropical_fish_anim1_Fin_down_normal.jpg-c3456a072327f681e21c77783bedd545.s3tc.ctex"
+path.etc2="res://.godot/imported/tropical_fish_anim1_Fin_down_normal.jpg-c3456a072327f681e21c77783bedd545.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://objects/animals/small_fish/tropical_fish/tropical_fish_anim1_Fin_down_normal.jpg"
-dest_files=["res://.godot/imported/tropical_fish_anim1_Fin_down_normal.jpg-c3456a072327f681e21c77783bedd545.s3tc.ctex"]
+dest_files=["res://.godot/imported/tropical_fish_anim1_Fin_down_normal.jpg-c3456a072327f681e21c77783bedd545.s3tc.ctex", "res://.godot/imported/tropical_fish_anim1_Fin_down_normal.jpg-c3456a072327f681e21c77783bedd545.etc2.ctex"]
 
 [params]
 

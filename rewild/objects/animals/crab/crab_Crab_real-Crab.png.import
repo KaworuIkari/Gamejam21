@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cqudf6giw06mw"
 path.s3tc="res://.godot/imported/crab_Crab_real-Crab.png-24257b975fe21773eb4e525096c4de18.s3tc.ctex"
+path.etc2="res://.godot/imported/crab_Crab_real-Crab.png-24257b975fe21773eb4e525096c4de18.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://objects/animals/crab/crab_Crab_real-Crab.png"
-dest_files=["res://.godot/imported/crab_Crab_real-Crab.png-24257b975fe21773eb4e525096c4de18.s3tc.ctex"]
+dest_files=["res://.godot/imported/crab_Crab_real-Crab.png-24257b975fe21773eb4e525096c4de18.s3tc.ctex", "res://.godot/imported/crab_Crab_real-Crab.png-24257b975fe21773eb4e525096c4de18.etc2.ctex"]
 
 [params]
 

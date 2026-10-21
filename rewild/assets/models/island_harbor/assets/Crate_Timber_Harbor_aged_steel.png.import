@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cq0k45alvfwxs"
 path.s3tc="res://.godot/imported/Crate_Timber_Harbor_aged_steel.png-2b38ffff9461e8aeeeec89386592b399.s3tc.ctex"
+path.etc2="res://.godot/imported/Crate_Timber_Harbor_aged_steel.png-2b38ffff9461e8aeeeec89386592b399.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Crate_Timber_Harbor_aged_steel.png"
-dest_files=["res://.godot/imported/Crate_Timber_Harbor_aged_steel.png-2b38ffff9461e8aeeeec89386592b399.s3tc.ctex"]
+dest_files=["res://.godot/imported/Crate_Timber_Harbor_aged_steel.png-2b38ffff9461e8aeeeec89386592b399.s3tc.ctex", "res://.godot/imported/Crate_Timber_Harbor_aged_steel.png-2b38ffff9461e8aeeeec89386592b399.etc2.ctex"]
 
 [params]
 

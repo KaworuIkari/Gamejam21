@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://clse3b0cpqupb"
 path.s3tc="res://.godot/imported/Radio_Observatory_Scene_Foundation_stone.png-9ac5fcad6055b70e76d978bd1c2673fe.s3tc.ctex"
+path.etc2="res://.godot/imported/Radio_Observatory_Scene_Foundation_stone.png-9ac5fcad6055b70e76d978bd1c2673fe.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/Radio_Observatory_Scene_Foundation_stone.png"
-dest_files=["res://.godot/imported/Radio_Observatory_Scene_Foundation_stone.png-9ac5fcad6055b70e76d978bd1c2673fe.s3tc.ctex"]
+dest_files=["res://.godot/imported/Radio_Observatory_Scene_Foundation_stone.png-9ac5fcad6055b70e76d978bd1c2673fe.s3tc.ctex", "res://.godot/imported/Radio_Observatory_Scene_Foundation_stone.png-9ac5fcad6055b70e76d978bd1c2673fe.etc2.ctex"]
 
 [params]
 

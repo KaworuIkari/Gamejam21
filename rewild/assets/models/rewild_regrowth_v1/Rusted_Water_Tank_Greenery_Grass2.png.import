@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8ht45422544t"
 path.s3tc="res://.godot/imported/Rusted_Water_Tank_Greenery_Grass2.png-d91dee76877b6f3f852b6a0d23fed910.s3tc.ctex"
+path.etc2="res://.godot/imported/Rusted_Water_Tank_Greenery_Grass2.png-d91dee76877b6f3f852b6a0d23fed910.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Rusted_Water_Tank_Greenery_Grass2.png"
-dest_files=["res://.godot/imported/Rusted_Water_Tank_Greenery_Grass2.png-d91dee76877b6f3f852b6a0d23fed910.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rusted_Water_Tank_Greenery_Grass2.png-d91dee76877b6f3f852b6a0d23fed910.s3tc.ctex", "res://.godot/imported/Rusted_Water_Tank_Greenery_Grass2.png-d91dee76877b6f3f852b6a0d23fed910.etc2.ctex"]
 
 [params]
 

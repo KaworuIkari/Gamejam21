@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bm210gqqwug0t"
 path.s3tc="res://.godot/imported/Wall_Solid_4m_Faded_lab_teal.png-8a20cccc5bc4a751ffafaaf0320031be.s3tc.ctex"
+path.etc2="res://.godot/imported/Wall_Solid_4m_Faded_lab_teal.png-8a20cccc5bc4a751ffafaaf0320031be.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Wall_Solid_4m_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Wall_Solid_4m_Faded_lab_teal.png-8a20cccc5bc4a751ffafaaf0320031be.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wall_Solid_4m_Faded_lab_teal.png-8a20cccc5bc4a751ffafaaf0320031be.s3tc.ctex", "res://.godot/imported/Wall_Solid_4m_Faded_lab_teal.png-8a20cccc5bc4a751ffafaaf0320031be.etc2.ctex"]
 
 [params]
 

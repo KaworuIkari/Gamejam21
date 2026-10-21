@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbv7smnvqgd3d"
 path.s3tc="res://.godot/imported/Reflector_Continuous_Panel_tone_2.png-c929847482f11081a03bf9d3055e63b1.s3tc.ctex"
+path.etc2="res://.godot/imported/Reflector_Continuous_Panel_tone_2.png-c929847482f11081a03bf9d3055e63b1.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Reflector_Continuous_Panel_tone_2.png"
-dest_files=["res://.godot/imported/Reflector_Continuous_Panel_tone_2.png-c929847482f11081a03bf9d3055e63b1.s3tc.ctex"]
+dest_files=["res://.godot/imported/Reflector_Continuous_Panel_tone_2.png-c929847482f11081a03bf9d3055e63b1.s3tc.ctex", "res://.godot/imported/Reflector_Continuous_Panel_tone_2.png-c929847482f11081a03bf9d3055e63b1.etc2.ctex"]
 
 [params]
 

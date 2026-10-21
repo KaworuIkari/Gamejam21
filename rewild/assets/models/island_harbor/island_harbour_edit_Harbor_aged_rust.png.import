@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://p1vnwbuh10gw"
 path.s3tc="res://.godot/imported/island_harbour_edit_Harbor_aged_rust.png-54c797d041835d2c4e1a3d6927a86a45.s3tc.ctex"
+path.etc2="res://.godot/imported/island_harbour_edit_Harbor_aged_rust.png-54c797d041835d2c4e1a3d6927a86a45.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/island_harbour_edit_Harbor_aged_rust.png"
-dest_files=["res://.godot/imported/island_harbour_edit_Harbor_aged_rust.png-54c797d041835d2c4e1a3d6927a86a45.s3tc.ctex"]
+dest_files=["res://.godot/imported/island_harbour_edit_Harbor_aged_rust.png-54c797d041835d2c4e1a3d6927a86a45.s3tc.ctex", "res://.godot/imported/island_harbour_edit_Harbor_aged_rust.png-54c797d041835d2c4e1a3d6927a86a45.etc2.ctex"]
 
 [params]
 

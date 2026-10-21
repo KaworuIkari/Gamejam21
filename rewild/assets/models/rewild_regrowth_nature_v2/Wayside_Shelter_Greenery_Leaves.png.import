@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dsrt0qwm3mc3j"
 path.s3tc="res://.godot/imported/Wayside_Shelter_Greenery_Leaves.png-ac81520c8e0ef7d13a6250236ee72d2a.s3tc.ctex"
+path.etc2="res://.godot/imported/Wayside_Shelter_Greenery_Leaves.png-ac81520c8e0ef7d13a6250236ee72d2a.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Wayside_Shelter_Greenery_Leaves.png"
-dest_files=["res://.godot/imported/Wayside_Shelter_Greenery_Leaves.png-ac81520c8e0ef7d13a6250236ee72d2a.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wayside_Shelter_Greenery_Leaves.png-ac81520c8e0ef7d13a6250236ee72d2a.s3tc.ctex", "res://.godot/imported/Wayside_Shelter_Greenery_Leaves.png-ac81520c8e0ef7d13a6250236ee72d2a.etc2.ctex"]
 
 [params]
 

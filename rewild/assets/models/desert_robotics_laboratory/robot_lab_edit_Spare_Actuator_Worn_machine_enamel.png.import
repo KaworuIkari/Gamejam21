@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://crsofp01ahim3"
 path.s3tc="res://.godot/imported/robot_lab_edit_Spare_Actuator_Worn_machine_enamel.png-896e33eaf239b1e4b1db8bdd1bae6d9e.s3tc.ctex"
+path.etc2="res://.godot/imported/robot_lab_edit_Spare_Actuator_Worn_machine_enamel.png-896e33eaf239b1e4b1db8bdd1bae6d9e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/robot_lab_edit_Spare_Actuator_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/robot_lab_edit_Spare_Actuator_Worn_machine_enamel.png-896e33eaf239b1e4b1db8bdd1bae6d9e.s3tc.ctex"]
+dest_files=["res://.godot/imported/robot_lab_edit_Spare_Actuator_Worn_machine_enamel.png-896e33eaf239b1e4b1db8bdd1bae6d9e.s3tc.ctex", "res://.godot/imported/robot_lab_edit_Spare_Actuator_Worn_machine_enamel.png-896e33eaf239b1e4b1db8bdd1bae6d9e.etc2.ctex"]
 
 [params]
 

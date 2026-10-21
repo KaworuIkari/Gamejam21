@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dt40wvlkqsx0a"
 path.s3tc="res://.godot/imported/Railing_Wedge30_Bark_NormalTree.png-d708bca1908405aabc4b61efc2658ee8.s3tc.ctex"
+path.etc2="res://.godot/imported/Railing_Wedge30_Bark_NormalTree.png-d708bca1908405aabc4b61efc2658ee8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/textures/Railing_Wedge30_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/Railing_Wedge30_Bark_NormalTree.png-d708bca1908405aabc4b61efc2658ee8.s3tc.ctex"]
+dest_files=["res://.godot/imported/Railing_Wedge30_Bark_NormalTree.png-d708bca1908405aabc4b61efc2658ee8.s3tc.ctex", "res://.godot/imported/Railing_Wedge30_Bark_NormalTree.png-d708bca1908405aabc4b61efc2658ee8.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://2oda2wk40m8k"
 path.s3tc="res://.godot/imported/Harbor_Office_Harbor_aged_rust.png-2581c306db36bd3148a8b42303a0b0d8.s3tc.ctex"
+path.etc2="res://.godot/imported/Harbor_Office_Harbor_aged_rust.png-2581c306db36bd3148a8b42303a0b0d8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Harbor_Office_Harbor_aged_rust.png"
-dest_files=["res://.godot/imported/Harbor_Office_Harbor_aged_rust.png-2581c306db36bd3148a8b42303a0b0d8.s3tc.ctex"]
+dest_files=["res://.godot/imported/Harbor_Office_Harbor_aged_rust.png-2581c306db36bd3148a8b42303a0b0d8.s3tc.ctex", "res://.godot/imported/Harbor_Office_Harbor_aged_rust.png-2581c306db36bd3148a8b42303a0b0d8.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0mm26t4kh6xi"
 path.s3tc="res://.godot/imported/Hollow_Stump_Greenery_Leaves2.png-961b79ef69b6b0900b7460163ed32ecd.s3tc.ctex"
+path.etc2="res://.godot/imported/Hollow_Stump_Greenery_Leaves2.png-961b79ef69b6b0900b7460163ed32ecd.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Hollow_Stump_Greenery_Leaves2.png"
-dest_files=["res://.godot/imported/Hollow_Stump_Greenery_Leaves2.png-961b79ef69b6b0900b7460163ed32ecd.s3tc.ctex"]
+dest_files=["res://.godot/imported/Hollow_Stump_Greenery_Leaves2.png-961b79ef69b6b0900b7460163ed32ecd.s3tc.ctex", "res://.godot/imported/Hollow_Stump_Greenery_Leaves2.png-961b79ef69b6b0900b7460163ed32ecd.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhnt170v2bxik"
 path.s3tc="res://.godot/imported/Panel_tone_-2.png-179415cb54e32539b01a15f448cd18ff.s3tc.ctex"
+path.etc2="res://.godot/imported/Panel_tone_-2.png-179415cb54e32539b01a15f448cd18ff.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/textures/Panel_tone_-2.png"
-dest_files=["res://.godot/imported/Panel_tone_-2.png-179415cb54e32539b01a15f448cd18ff.s3tc.ctex"]
+dest_files=["res://.godot/imported/Panel_tone_-2.png-179415cb54e32539b01a15f448cd18ff.s3tc.ctex", "res://.godot/imported/Panel_tone_-2.png-179415cb54e32539b01a15f448cd18ff.etc2.ctex"]
 
 [params]
 

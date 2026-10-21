@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cj88ahsi2sk4b"
 path.s3tc="res://.godot/imported/Doorway_Wide_8m_Weathered_warm_concrete.png-f38acc4f14cbaff7d52b90d1497efc8b.s3tc.ctex"
+path.etc2="res://.godot/imported/Doorway_Wide_8m_Weathered_warm_concrete.png-f38acc4f14cbaff7d52b90d1497efc8b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Doorway_Wide_8m_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/Doorway_Wide_8m_Weathered_warm_concrete.png-f38acc4f14cbaff7d52b90d1497efc8b.s3tc.ctex"]
+dest_files=["res://.godot/imported/Doorway_Wide_8m_Weathered_warm_concrete.png-f38acc4f14cbaff7d52b90d1497efc8b.s3tc.ctex", "res://.godot/imported/Doorway_Wide_8m_Weathered_warm_concrete.png-f38acc4f14cbaff7d52b90d1497efc8b.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwoy4x1hglt"
 path.s3tc="res://.godot/imported/Collapsed_Solar_Panel_Greenery_Grass2.png-7b9f8629b421fed957c5e7ca23d479de.s3tc.ctex"
+path.etc2="res://.godot/imported/Collapsed_Solar_Panel_Greenery_Grass2.png-7b9f8629b421fed957c5e7ca23d479de.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Collapsed_Solar_Panel_Greenery_Grass2.png"
-dest_files=["res://.godot/imported/Collapsed_Solar_Panel_Greenery_Grass2.png-7b9f8629b421fed957c5e7ca23d479de.s3tc.ctex"]
+dest_files=["res://.godot/imported/Collapsed_Solar_Panel_Greenery_Grass2.png-7b9f8629b421fed957c5e7ca23d479de.s3tc.ctex", "res://.godot/imported/Collapsed_Solar_Panel_Greenery_Grass2.png-7b9f8629b421fed957c5e7ca23d479de.etc2.ctex"]
 
 [params]
 

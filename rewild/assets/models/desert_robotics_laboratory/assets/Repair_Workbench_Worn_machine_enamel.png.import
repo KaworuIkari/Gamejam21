@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://de62mcvnld4t"
 path.s3tc="res://.godot/imported/Repair_Workbench_Worn_machine_enamel.png-7c0eb7e2986e018dc4739c6f297a963b.s3tc.ctex"
+path.etc2="res://.godot/imported/Repair_Workbench_Worn_machine_enamel.png-7c0eb7e2986e018dc4739c6f297a963b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Repair_Workbench_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Repair_Workbench_Worn_machine_enamel.png-7c0eb7e2986e018dc4739c6f297a963b.s3tc.ctex"]
+dest_files=["res://.godot/imported/Repair_Workbench_Worn_machine_enamel.png-7c0eb7e2986e018dc4739c6f297a963b.s3tc.ctex", "res://.godot/imported/Repair_Workbench_Worn_machine_enamel.png-7c0eb7e2986e018dc4739c6f297a963b.etc2.ctex"]
 
 [params]
 

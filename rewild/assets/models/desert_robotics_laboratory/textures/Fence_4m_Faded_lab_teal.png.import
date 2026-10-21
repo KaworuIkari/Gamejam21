@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dydnllf7gc312"
 path.s3tc="res://.godot/imported/Fence_4m_Faded_lab_teal.png-95cf81de6849750094eed5436187de54.s3tc.ctex"
+path.etc2="res://.godot/imported/Fence_4m_Faded_lab_teal.png-95cf81de6849750094eed5436187de54.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Fence_4m_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Fence_4m_Faded_lab_teal.png-95cf81de6849750094eed5436187de54.s3tc.ctex"]
+dest_files=["res://.godot/imported/Fence_4m_Faded_lab_teal.png-95cf81de6849750094eed5436187de54.s3tc.ctex", "res://.godot/imported/Fence_4m_Faded_lab_teal.png-95cf81de6849750094eed5436187de54.etc2.ctex"]
 
 [params]
 

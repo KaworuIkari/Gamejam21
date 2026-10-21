@@ -12,10 +12,13 @@ animation_player = NodePath("crab/AnimationPlayer")
 walk_speed = 1.0
 waypoint_radius = 1.0
 
+[node name="NavigationAgent3D" parent="." index="1" unique_id=1135822814]
+debug_enabled = false
+
 [node name="crab" parent="." index="3" unique_id=2127516367 instance=ExtResource("1_3xoq4")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Skeleton3D" parent="crab/Crab" parent_id_path=PackedInt32Array(2127516367, 1862222575) index="0" unique_id=2098809835]
+[node name="Skeleton3D" parent="crab/Crab" parent_id_path=PackedInt32Array(2127516367, 1314518047) index="0" unique_id=1709925246]
 bones/1/position = Vector3(2.4829376e-09, -0.009119425, -0.056803)
 bones/4/rotation = Quaternion(-0.116772056, -0.03328601, 0.32885602, 0.9365416)
 bones/6/rotation = Quaternion(-0.12302907, -0.0025575391, 0.31637406, 0.9406194)

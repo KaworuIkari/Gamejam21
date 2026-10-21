@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c84c1ql7mimrs"
 path.s3tc="res://.godot/imported/Woodland_Pump_House_Greenery_Flowers.png-5d4c2d9a458e3b5ef0036f4ac356b083.s3tc.ctex"
+path.etc2="res://.godot/imported/Woodland_Pump_House_Greenery_Flowers.png-5d4c2d9a458e3b5ef0036f4ac356b083.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_waterworks_nature_v1/Woodland_Pump_House_Greenery_Flowers.png"
-dest_files=["res://.godot/imported/Woodland_Pump_House_Greenery_Flowers.png-5d4c2d9a458e3b5ef0036f4ac356b083.s3tc.ctex"]
+dest_files=["res://.godot/imported/Woodland_Pump_House_Greenery_Flowers.png-5d4c2d9a458e3b5ef0036f4ac356b083.s3tc.ctex", "res://.godot/imported/Woodland_Pump_House_Greenery_Flowers.png-5d4c2d9a458e3b5ef0036f4ac356b083.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dsp5v22gbo633"
 path.s3tc="res://.godot/imported/Woodland_Well_Greenery_Leaves.png-092096bad177eb8d764da86ffdfbd13e.s3tc.ctex"
+path.etc2="res://.godot/imported/Woodland_Well_Greenery_Leaves.png-092096bad177eb8d764da86ffdfbd13e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_well_nature_v1/Woodland_Well_Greenery_Leaves.png"
-dest_files=["res://.godot/imported/Woodland_Well_Greenery_Leaves.png-092096bad177eb8d764da86ffdfbd13e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Woodland_Well_Greenery_Leaves.png-092096bad177eb8d764da86ffdfbd13e.s3tc.ctex", "res://.godot/imported/Woodland_Well_Greenery_Leaves.png-092096bad177eb8d764da86ffdfbd13e.etc2.ctex"]
 
 [params]
 

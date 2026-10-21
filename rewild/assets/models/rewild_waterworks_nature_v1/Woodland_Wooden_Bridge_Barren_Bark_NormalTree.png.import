@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhn3i1sxhh5d3"
 path.s3tc="res://.godot/imported/Woodland_Wooden_Bridge_Barren_Bark_NormalTree.png-74a87d9b4425a7d19c6ad767db60b965.s3tc.ctex"
+path.etc2="res://.godot/imported/Woodland_Wooden_Bridge_Barren_Bark_NormalTree.png-74a87d9b4425a7d19c6ad767db60b965.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_waterworks_nature_v1/Woodland_Wooden_Bridge_Barren_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/Woodland_Wooden_Bridge_Barren_Bark_NormalTree.png-74a87d9b4425a7d19c6ad767db60b965.s3tc.ctex"]
+dest_files=["res://.godot/imported/Woodland_Wooden_Bridge_Barren_Bark_NormalTree.png-74a87d9b4425a7d19c6ad767db60b965.s3tc.ctex", "res://.godot/imported/Woodland_Wooden_Bridge_Barren_Bark_NormalTree.png-74a87d9b4425a7d19c6ad767db60b965.etc2.ctex"]
 
 [params]
 

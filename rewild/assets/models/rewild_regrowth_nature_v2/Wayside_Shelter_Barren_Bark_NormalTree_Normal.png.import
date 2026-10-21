@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dp0fp7o14ndj"
 path.s3tc="res://.godot/imported/Wayside_Shelter_Barren_Bark_NormalTree_Normal.png-4f7d6689bf812ffd4af1a9a5e1195b10.s3tc.ctex"
+path.etc2="res://.godot/imported/Wayside_Shelter_Barren_Bark_NormalTree_Normal.png-4f7d6689bf812ffd4af1a9a5e1195b10.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Wayside_Shelter_Barren_Bark_NormalTree_Normal.png"
-dest_files=["res://.godot/imported/Wayside_Shelter_Barren_Bark_NormalTree_Normal.png-4f7d6689bf812ffd4af1a9a5e1195b10.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wayside_Shelter_Barren_Bark_NormalTree_Normal.png-4f7d6689bf812ffd4af1a9a5e1195b10.s3tc.ctex", "res://.godot/imported/Wayside_Shelter_Barren_Bark_NormalTree_Normal.png-4f7d6689bf812ffd4af1a9a5e1195b10.etc2.ctex"]
 
 [params]
 

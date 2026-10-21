@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://gxvk3ul2i5dx"
 path.s3tc="res://.godot/imported/Rubble_Cluster_3_Rocks_Diffuse.png-e8cdf1425df94840ea217a552ff0c534.s3tc.ctex"
+path.etc2="res://.godot/imported/Rubble_Cluster_3_Rocks_Diffuse.png-e8cdf1425df94840ea217a552ff0c534.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/industrial_relay/Rubble_Cluster_3_Rocks_Diffuse.png"
-dest_files=["res://.godot/imported/Rubble_Cluster_3_Rocks_Diffuse.png-e8cdf1425df94840ea217a552ff0c534.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rubble_Cluster_3_Rocks_Diffuse.png-e8cdf1425df94840ea217a552ff0c534.s3tc.ctex", "res://.godot/imported/Rubble_Cluster_3_Rocks_Diffuse.png-e8cdf1425df94840ea217a552ff0c534.etc2.ctex"]
 
 [params]
 

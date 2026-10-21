@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://djti5rag883vd"
 path.s3tc="res://.godot/imported/robot_lab_edit_Doorway_Wide_8m_Weathered_warm_concrete.png-6e029cc67f9efc6e00a53c68fbc826e8.s3tc.ctex"
+path.etc2="res://.godot/imported/robot_lab_edit_Doorway_Wide_8m_Weathered_warm_concrete.png-6e029cc67f9efc6e00a53c68fbc826e8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/robot_lab_edit_Doorway_Wide_8m_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/robot_lab_edit_Doorway_Wide_8m_Weathered_warm_concrete.png-6e029cc67f9efc6e00a53c68fbc826e8.s3tc.ctex"]
+dest_files=["res://.godot/imported/robot_lab_edit_Doorway_Wide_8m_Weathered_warm_concrete.png-6e029cc67f9efc6e00a53c68fbc826e8.s3tc.ctex", "res://.godot/imported/robot_lab_edit_Doorway_Wide_8m_Weathered_warm_concrete.png-6e029cc67f9efc6e00a53c68fbc826e8.etc2.ctex"]
 
 [params]
 

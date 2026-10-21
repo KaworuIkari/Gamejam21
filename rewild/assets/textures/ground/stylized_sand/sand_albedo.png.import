@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhhf02dj4bluw"
 path.bptc="res://.godot/imported/sand_albedo.png-0d2e222be678894f243603e58b955305.bptc.ctex"
+path.astc="res://.godot/imported/sand_albedo.png-0d2e222be678894f243603e58b955305.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/ground/stylized_sand/sand_albedo.png"
-dest_files=["res://.godot/imported/sand_albedo.png-0d2e222be678894f243603e58b955305.bptc.ctex"]
+dest_files=["res://.godot/imported/sand_albedo.png-0d2e222be678894f243603e58b955305.bptc.ctex", "res://.godot/imported/sand_albedo.png-0d2e222be678894f243603e58b955305.astc.ctex"]
 
 [params]
 

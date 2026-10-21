@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/blue_cap_penguin/Blue_Cap.glb" id="1_model"]
+
+[node name="Blue_Cap" type="Node3D"]
+metadata/description = "Stylised royal-blue baseball cap with a curved bill, six panels, stitching and a small front badge. Opening centred at the origin; bill faces +Z."
+metadata/source = "Blue_Cap.glb; editable source in source/"
+metadata/units = "metres"
+metadata/up_axis = "+Y"
+metadata/front_axis = "+Z"
+metadata/static_prop = true
+metadata/rigged = false
+metadata/ground_pivot = false
+
+[node name="Visual" parent="." instance=ExtResource("1_model")]

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ceryotctaj45r"
 path.s3tc="res://.godot/imported/fantasy_forest_edit_House_Curtain_BaseColor.png-32003c3e3e79ce619b76204cf2afe174.s3tc.ctex"
+path.etc2="res://.godot/imported/fantasy_forest_edit_House_Curtain_BaseColor.png-32003c3e3e79ce619b76204cf2afe174.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/fantasy_forest_edit_House_Curtain_BaseColor.png"
-dest_files=["res://.godot/imported/fantasy_forest_edit_House_Curtain_BaseColor.png-32003c3e3e79ce619b76204cf2afe174.s3tc.ctex"]
+dest_files=["res://.godot/imported/fantasy_forest_edit_House_Curtain_BaseColor.png-32003c3e3e79ce619b76204cf2afe174.s3tc.ctex", "res://.godot/imported/fantasy_forest_edit_House_Curtain_BaseColor.png-32003c3e3e79ce619b76204cf2afe174.etc2.ctex"]
 
 [params]
 

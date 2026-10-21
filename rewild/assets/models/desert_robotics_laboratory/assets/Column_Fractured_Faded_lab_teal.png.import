@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://by0rkdmra8i1k"
 path.s3tc="res://.godot/imported/Column_Fractured_Faded_lab_teal.png-bac0671cc696d85bc20241656039170f.s3tc.ctex"
+path.etc2="res://.godot/imported/Column_Fractured_Faded_lab_teal.png-bac0671cc696d85bc20241656039170f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Column_Fractured_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Column_Fractured_Faded_lab_teal.png-bac0671cc696d85bc20241656039170f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Column_Fractured_Faded_lab_teal.png-bac0671cc696d85bc20241656039170f.s3tc.ctex", "res://.godot/imported/Column_Fractured_Faded_lab_teal.png-bac0671cc696d85bc20241656039170f.etc2.ctex"]
 
 [params]
 

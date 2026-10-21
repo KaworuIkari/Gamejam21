@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddprscrpsofah"
 path.s3tc="res://.godot/imported/ground037_alb_ht.png-9026ccc84e7e33d6bbb1c04563cb628b.s3tc.ctex"
+path.etc2="res://.godot/imported/ground037_alb_ht.png-9026ccc84e7e33d6bbb1c04563cb628b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://sandbox/terrain3d_demo/assets/textures/ground037_alb_ht.png"
-dest_files=["res://.godot/imported/ground037_alb_ht.png-9026ccc84e7e33d6bbb1c04563cb628b.s3tc.ctex"]
+dest_files=["res://.godot/imported/ground037_alb_ht.png-9026ccc84e7e33d6bbb1c04563cb628b.s3tc.ctex", "res://.godot/imported/ground037_alb_ht.png-9026ccc84e7e33d6bbb1c04563cb628b.etc2.ctex"]
 
 [params]
 

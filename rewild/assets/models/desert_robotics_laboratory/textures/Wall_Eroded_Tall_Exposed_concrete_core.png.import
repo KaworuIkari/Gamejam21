@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c06q710o625mq"
 path.s3tc="res://.godot/imported/Wall_Eroded_Tall_Exposed_concrete_core.png-900aba429b8ac3c9ca802d0875bda8cf.s3tc.ctex"
+path.etc2="res://.godot/imported/Wall_Eroded_Tall_Exposed_concrete_core.png-900aba429b8ac3c9ca802d0875bda8cf.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Wall_Eroded_Tall_Exposed_concrete_core.png"
-dest_files=["res://.godot/imported/Wall_Eroded_Tall_Exposed_concrete_core.png-900aba429b8ac3c9ca802d0875bda8cf.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wall_Eroded_Tall_Exposed_concrete_core.png-900aba429b8ac3c9ca802d0875bda8cf.s3tc.ctex", "res://.godot/imported/Wall_Eroded_Tall_Exposed_concrete_core.png-900aba429b8ac3c9ca802d0875bda8cf.etc2.ctex"]
 
 [params]
 

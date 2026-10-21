@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://0gk5mld2far1"
 path.s3tc="res://.godot/imported/Island_Harbor_Worn_machine_enamel_paint.png-fc13cc250b3366cb911c492547716496.s3tc.ctex"
+path.etc2="res://.godot/imported/Island_Harbor_Worn_machine_enamel_paint.png-fc13cc250b3366cb911c492547716496.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/Island_Harbor_Worn_machine_enamel_paint.png"
-dest_files=["res://.godot/imported/Island_Harbor_Worn_machine_enamel_paint.png-fc13cc250b3366cb911c492547716496.s3tc.ctex"]
+dest_files=["res://.godot/imported/Island_Harbor_Worn_machine_enamel_paint.png-fc13cc250b3366cb911c492547716496.s3tc.ctex", "res://.godot/imported/Island_Harbor_Worn_machine_enamel_paint.png-fc13cc250b3366cb911c492547716496.etc2.ctex"]
 
 [params]
 

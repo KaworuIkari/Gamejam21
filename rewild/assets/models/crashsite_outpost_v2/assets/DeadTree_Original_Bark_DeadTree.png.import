@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://s58wlqi0e8nn"
 path.s3tc="res://.godot/imported/DeadTree_Original_Bark_DeadTree.png-3d6c1307a336ace2bba81d50666b5c16.s3tc.ctex"
+path.etc2="res://.godot/imported/DeadTree_Original_Bark_DeadTree.png-3d6c1307a336ace2bba81d50666b5c16.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/crashsite_outpost_v2/assets/DeadTree_Original_Bark_DeadTree.png"
-dest_files=["res://.godot/imported/DeadTree_Original_Bark_DeadTree.png-3d6c1307a336ace2bba81d50666b5c16.s3tc.ctex"]
+dest_files=["res://.godot/imported/DeadTree_Original_Bark_DeadTree.png-3d6c1307a336ace2bba81d50666b5c16.s3tc.ctex", "res://.godot/imported/DeadTree_Original_Bark_DeadTree.png-3d6c1307a336ace2bba81d50666b5c16.etc2.ctex"]
 
 [params]
 

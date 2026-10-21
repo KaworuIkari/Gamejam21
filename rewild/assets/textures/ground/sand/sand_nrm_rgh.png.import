@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cbmub7lakcv81"
 path.bptc="res://.godot/imported/sand_nrm_rgh.png-024e46ed92a1bdb8508c995bce4a8756.bptc.ctex"
+path.astc="res://.godot/imported/sand_nrm_rgh.png-024e46ed92a1bdb8508c995bce4a8756.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/ground/sand/sand_nrm_rgh.png"
-dest_files=["res://.godot/imported/sand_nrm_rgh.png-024e46ed92a1bdb8508c995bce4a8756.bptc.ctex"]
+dest_files=["res://.godot/imported/sand_nrm_rgh.png-024e46ed92a1bdb8508c995bce4a8756.bptc.ctex", "res://.godot/imported/sand_nrm_rgh.png-024e46ed92a1bdb8508c995bce4a8756.astc.ctex"]
 
 [params]
 

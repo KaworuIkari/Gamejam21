@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ctjspj0r3s7wu"
 path.s3tc="res://.godot/imported/Rubble_Cluster_1_Weathered_warm_concrete.png-dac8e688ee2c64b1670cdbef7e14844f.s3tc.ctex"
+path.etc2="res://.godot/imported/Rubble_Cluster_1_Weathered_warm_concrete.png-dac8e688ee2c64b1670cdbef7e14844f.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Rubble_Cluster_1_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/Rubble_Cluster_1_Weathered_warm_concrete.png-dac8e688ee2c64b1670cdbef7e14844f.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rubble_Cluster_1_Weathered_warm_concrete.png-dac8e688ee2c64b1670cdbef7e14844f.s3tc.ctex", "res://.godot/imported/Rubble_Cluster_1_Weathered_warm_concrete.png-dac8e688ee2c64b1670cdbef7e14844f.etc2.ctex"]
 
 [params]
 

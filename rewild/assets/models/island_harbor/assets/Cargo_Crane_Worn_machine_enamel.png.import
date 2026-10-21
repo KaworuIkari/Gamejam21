@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dir141p3kxpj2"
 path.s3tc="res://.godot/imported/Cargo_Crane_Worn_machine_enamel.png-b3f1621dfd6e5a5d6ed071bfbcc15090.s3tc.ctex"
+path.etc2="res://.godot/imported/Cargo_Crane_Worn_machine_enamel.png-b3f1621dfd6e5a5d6ed071bfbcc15090.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Cargo_Crane_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Cargo_Crane_Worn_machine_enamel.png-b3f1621dfd6e5a5d6ed071bfbcc15090.s3tc.ctex"]
+dest_files=["res://.godot/imported/Cargo_Crane_Worn_machine_enamel.png-b3f1621dfd6e5a5d6ed071bfbcc15090.s3tc.ctex", "res://.godot/imported/Cargo_Crane_Worn_machine_enamel.png-b3f1621dfd6e5a5d6ed071bfbcc15090.etc2.ctex"]
 
 [params]
 

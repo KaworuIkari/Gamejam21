@@ -37,6 +37,7 @@ var _timer : Timer
 var _history: Array[int] = []
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS  # terminals/coordinate pad pause the tree; music keeps playing
 	_timer = Timer.new()
 	_timer.one_shot = true
 	_timer.timeout.connect(_on_timer)

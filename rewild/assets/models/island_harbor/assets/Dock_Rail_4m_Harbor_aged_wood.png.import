@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbykhhuor7fo3"
 path.s3tc="res://.godot/imported/Dock_Rail_4m_Harbor_aged_wood.png-e6ed0c538e255e2ad5dc560cdbcbd43d.s3tc.ctex"
+path.etc2="res://.godot/imported/Dock_Rail_4m_Harbor_aged_wood.png-e6ed0c538e255e2ad5dc560cdbcbd43d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Dock_Rail_4m_Harbor_aged_wood.png"
-dest_files=["res://.godot/imported/Dock_Rail_4m_Harbor_aged_wood.png-e6ed0c538e255e2ad5dc560cdbcbd43d.s3tc.ctex"]
+dest_files=["res://.godot/imported/Dock_Rail_4m_Harbor_aged_wood.png-e6ed0c538e255e2ad5dc560cdbcbd43d.s3tc.ctex", "res://.godot/imported/Dock_Rail_4m_Harbor_aged_wood.png-e6ed0c538e255e2ad5dc560cdbcbd43d.etc2.ctex"]
 
 [params]
 

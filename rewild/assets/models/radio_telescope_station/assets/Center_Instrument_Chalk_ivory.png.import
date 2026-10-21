@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://ddqcyw0sktxwa"
 path.s3tc="res://.godot/imported/Center_Instrument_Chalk_ivory.png-d9b9a0cfa78726b9159ddd5812103ce7.s3tc.ctex"
+path.etc2="res://.godot/imported/Center_Instrument_Chalk_ivory.png-d9b9a0cfa78726b9159ddd5812103ce7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Center_Instrument_Chalk_ivory.png"
-dest_files=["res://.godot/imported/Center_Instrument_Chalk_ivory.png-d9b9a0cfa78726b9159ddd5812103ce7.s3tc.ctex"]
+dest_files=["res://.godot/imported/Center_Instrument_Chalk_ivory.png-d9b9a0cfa78726b9159ddd5812103ce7.s3tc.ctex", "res://.godot/imported/Center_Instrument_Chalk_ivory.png-d9b9a0cfa78726b9159ddd5812103ce7.etc2.ctex"]
 
 [params]
 

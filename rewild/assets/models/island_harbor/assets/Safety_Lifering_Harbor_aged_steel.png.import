@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dhh8y0hno0w8v"
 path.s3tc="res://.godot/imported/Safety_Lifering_Harbor_aged_steel.png-1692b7348126e0b485864769a3567bb9.s3tc.ctex"
+path.etc2="res://.godot/imported/Safety_Lifering_Harbor_aged_steel.png-1692b7348126e0b485864769a3567bb9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Safety_Lifering_Harbor_aged_steel.png"
-dest_files=["res://.godot/imported/Safety_Lifering_Harbor_aged_steel.png-1692b7348126e0b485864769a3567bb9.s3tc.ctex"]
+dest_files=["res://.godot/imported/Safety_Lifering_Harbor_aged_steel.png-1692b7348126e0b485864769a3567bb9.s3tc.ctex", "res://.godot/imported/Safety_Lifering_Harbor_aged_steel.png-1692b7348126e0b485864769a3567bb9.etc2.ctex"]
 
 [params]
 

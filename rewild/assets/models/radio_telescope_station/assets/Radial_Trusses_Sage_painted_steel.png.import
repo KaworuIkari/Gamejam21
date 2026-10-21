@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dp3aux5vjbghr"
 path.s3tc="res://.godot/imported/Radial_Trusses_Sage_painted_steel.png-28e493117775d23b04009f30d4f26512.s3tc.ctex"
+path.etc2="res://.godot/imported/Radial_Trusses_Sage_painted_steel.png-28e493117775d23b04009f30d4f26512.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Radial_Trusses_Sage_painted_steel.png"
-dest_files=["res://.godot/imported/Radial_Trusses_Sage_painted_steel.png-28e493117775d23b04009f30d4f26512.s3tc.ctex"]
+dest_files=["res://.godot/imported/Radial_Trusses_Sage_painted_steel.png-28e493117775d23b04009f30d4f26512.s3tc.ctex", "res://.godot/imported/Radial_Trusses_Sage_painted_steel.png-28e493117775d23b04009f30d4f26512.etc2.ctex"]
 
 [params]
 

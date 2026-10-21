@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bx23cwflsfle6"
 path.s3tc="res://.godot/imported/Slab_Collapsed_Dry_oxidized_steel.png-66337f356bcb4369ee6241cf729f0f74.s3tc.ctex"
+path.etc2="res://.godot/imported/Slab_Collapsed_Dry_oxidized_steel.png-66337f356bcb4369ee6241cf729f0f74.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Slab_Collapsed_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Slab_Collapsed_Dry_oxidized_steel.png-66337f356bcb4369ee6241cf729f0f74.s3tc.ctex"]
+dest_files=["res://.godot/imported/Slab_Collapsed_Dry_oxidized_steel.png-66337f356bcb4369ee6241cf729f0f74.s3tc.ctex", "res://.godot/imported/Slab_Collapsed_Dry_oxidized_steel.png-66337f356bcb4369ee6241cf729f0f74.etc2.ctex"]
 
 [params]
 

@@ -26,6 +26,8 @@ curve = SubResource("Curve3D_fox")
 transform = Transform3D(0.10323157, -0.45141584, 0.8863222, 0, 0.89108294, 0.45384055, -0.99465734, -0.046850674, 0.09198789, 14.442, 6, 1.84)
 rotation_mode = 4
 script = ExtResource("1_rp36w")
+bgm_idx = -1
+step_event_name = &"fox_house"
 
 [node name="PhantomCamera3D" type="Node3D" parent="PathFollow3D" unique_id=907645702]
 script = ExtResource("2_pcam")
@@ -37,10 +39,10 @@ script = ExtResource("4_view")
 view_name = &"fox_house"
 metadata/_custom_type_script = "uid://rmux0r4m7vby"
 
-[node name="Trigger" type="Area3D" parent="." unique_id=508011892]
+[node name="Area3D" type="Area3D" parent="." unique_id=508011892]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.757, -0.5, 1.182)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Trigger" unique_id=1551547536]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1551547536]
 shape = SubResource("SphereShape3D_trigger")
 
-[connection signal="body_entered" from="Trigger" to="PathFollow3D" method="_on_trigger_body_entered"]
+[connection signal="body_entered" from="Area3D" to="PathFollow3D" method="_on_area_3d_body_entered"]

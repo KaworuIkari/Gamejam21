@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/models/blue_cap_penguin/Toy_Penguin.tscn" id="1_visual"]
+
+[sub_resource type="CapsuleShape3D" id="Shape_prop"]
+radius = 0.18
+height = 0.60
+
+[node name="Toy_Penguin_Static" type="StaticBody3D"]
+metadata/description = "Optional solid prop with simple approximate collision. Use Toy_Penguin.tscn for visuals or attachment."
+metadata/source = "Toy_Penguin.tscn"
+metadata/units = "metres"
+metadata/up_axis = "+Y"
+metadata/front_axis = "+Z"
+collision_layer = 1
+collision_mask = 1
+
+[node name="Visual" parent="." instance=ExtResource("1_visual")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.30, 0)
+shape = SubResource("Shape_prop")

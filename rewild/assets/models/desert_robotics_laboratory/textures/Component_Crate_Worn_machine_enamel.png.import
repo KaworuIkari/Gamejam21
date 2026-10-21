@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmlohffkvd25s"
 path.s3tc="res://.godot/imported/Component_Crate_Worn_machine_enamel.png-7a8bc5225c11f35cd34277be98a704d0.s3tc.ctex"
+path.etc2="res://.godot/imported/Component_Crate_Worn_machine_enamel.png-7a8bc5225c11f35cd34277be98a704d0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Component_Crate_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Component_Crate_Worn_machine_enamel.png-7a8bc5225c11f35cd34277be98a704d0.s3tc.ctex"]
+dest_files=["res://.godot/imported/Component_Crate_Worn_machine_enamel.png-7a8bc5225c11f35cd34277be98a704d0.s3tc.ctex", "res://.godot/imported/Component_Crate_Worn_machine_enamel.png-7a8bc5225c11f35cd34277be98a704d0.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxtgl4w61ex86"
 path.s3tc="res://.godot/imported/Collapsed_Solar_Panel_Greenery_Leaves.png-950a41c00e3b6ba03438aa6094ee04ad.s3tc.ctex"
+path.etc2="res://.godot/imported/Collapsed_Solar_Panel_Greenery_Leaves.png-950a41c00e3b6ba03438aa6094ee04ad.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Collapsed_Solar_Panel_Greenery_Leaves.png"
-dest_files=["res://.godot/imported/Collapsed_Solar_Panel_Greenery_Leaves.png-950a41c00e3b6ba03438aa6094ee04ad.s3tc.ctex"]
+dest_files=["res://.godot/imported/Collapsed_Solar_Panel_Greenery_Leaves.png-950a41c00e3b6ba03438aa6094ee04ad.s3tc.ctex", "res://.godot/imported/Collapsed_Solar_Panel_Greenery_Leaves.png-950a41c00e3b6ba03438aa6094ee04ad.etc2.ctex"]
 
 [params]
 

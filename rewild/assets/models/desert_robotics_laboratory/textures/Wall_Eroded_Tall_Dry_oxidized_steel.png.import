@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cib8nm2kc7q3y"
 path.s3tc="res://.godot/imported/Wall_Eroded_Tall_Dry_oxidized_steel.png-f7f50ddd83fd78ee51cb5407c7867e12.s3tc.ctex"
+path.etc2="res://.godot/imported/Wall_Eroded_Tall_Dry_oxidized_steel.png-f7f50ddd83fd78ee51cb5407c7867e12.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Wall_Eroded_Tall_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Wall_Eroded_Tall_Dry_oxidized_steel.png-f7f50ddd83fd78ee51cb5407c7867e12.s3tc.ctex"]
+dest_files=["res://.godot/imported/Wall_Eroded_Tall_Dry_oxidized_steel.png-f7f50ddd83fd78ee51cb5407c7867e12.s3tc.ctex", "res://.godot/imported/Wall_Eroded_Tall_Dry_oxidized_steel.png-f7f50ddd83fd78ee51cb5407c7867e12.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhi2xatc0fa6b"
 path.s3tc="res://.godot/imported/Harbor_Sign_Worn_machine_enamel.png-32aabe860550c4755a19c2306fc18b28.s3tc.ctex"
+path.etc2="res://.godot/imported/Harbor_Sign_Worn_machine_enamel.png-32aabe860550c4755a19c2306fc18b28.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Harbor_Sign_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Harbor_Sign_Worn_machine_enamel.png-32aabe860550c4755a19c2306fc18b28.s3tc.ctex"]
+dest_files=["res://.godot/imported/Harbor_Sign_Worn_machine_enamel.png-32aabe860550c4755a19c2306fc18b28.s3tc.ctex", "res://.godot/imported/Harbor_Sign_Worn_machine_enamel.png-32aabe860550c4755a19c2306fc18b28.etc2.ctex"]
 
 [params]
 

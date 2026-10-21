@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7c3vqktc7wnd"
 path.s3tc="res://.godot/imported/Test_Gantry_Weathered_warm_concrete.png-9cccc3fd11998cc2a29aad17589cbb96.s3tc.ctex"
+path.etc2="res://.godot/imported/Test_Gantry_Weathered_warm_concrete.png-9cccc3fd11998cc2a29aad17589cbb96.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Test_Gantry_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/Test_Gantry_Weathered_warm_concrete.png-9cccc3fd11998cc2a29aad17589cbb96.s3tc.ctex"]
+dest_files=["res://.godot/imported/Test_Gantry_Weathered_warm_concrete.png-9cccc3fd11998cc2a29aad17589cbb96.s3tc.ctex", "res://.godot/imported/Test_Gantry_Weathered_warm_concrete.png-9cccc3fd11998cc2a29aad17589cbb96.etc2.ctex"]
 
 [params]
 

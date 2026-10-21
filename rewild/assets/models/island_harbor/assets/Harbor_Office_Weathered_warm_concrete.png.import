@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cm1g314f2xse6"
 path.s3tc="res://.godot/imported/Harbor_Office_Weathered_warm_concrete.png-d9c6c83fd46dfbe02ea1a6e80766a543.s3tc.ctex"
+path.etc2="res://.godot/imported/Harbor_Office_Weathered_warm_concrete.png-d9c6c83fd46dfbe02ea1a6e80766a543.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Harbor_Office_Weathered_warm_concrete.png"
-dest_files=["res://.godot/imported/Harbor_Office_Weathered_warm_concrete.png-d9c6c83fd46dfbe02ea1a6e80766a543.s3tc.ctex"]
+dest_files=["res://.godot/imported/Harbor_Office_Weathered_warm_concrete.png-d9c6c83fd46dfbe02ea1a6e80766a543.s3tc.ctex", "res://.godot/imported/Harbor_Office_Weathered_warm_concrete.png-d9c6c83fd46dfbe02ea1a6e80766a543.etc2.ctex"]
 
 [params]
 

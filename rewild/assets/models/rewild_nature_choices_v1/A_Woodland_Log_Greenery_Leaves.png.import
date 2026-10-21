@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b43g8wvq2csl2"
 path.s3tc="res://.godot/imported/A_Woodland_Log_Greenery_Leaves.png-1159f5b83321ffdf95d0813a360b9fb9.s3tc.ctex"
+path.etc2="res://.godot/imported/A_Woodland_Log_Greenery_Leaves.png-1159f5b83321ffdf95d0813a360b9fb9.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_nature_choices_v1/A_Woodland_Log_Greenery_Leaves.png"
-dest_files=["res://.godot/imported/A_Woodland_Log_Greenery_Leaves.png-1159f5b83321ffdf95d0813a360b9fb9.s3tc.ctex"]
+dest_files=["res://.godot/imported/A_Woodland_Log_Greenery_Leaves.png-1159f5b83321ffdf95d0813a360b9fb9.s3tc.ctex", "res://.godot/imported/A_Woodland_Log_Greenery_Leaves.png-1159f5b83321ffdf95d0813a360b9fb9.etc2.ctex"]
 
 [params]
 

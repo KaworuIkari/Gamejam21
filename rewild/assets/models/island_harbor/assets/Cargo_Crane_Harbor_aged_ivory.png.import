@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://csbubp531cf8e"
 path.s3tc="res://.godot/imported/Cargo_Crane_Harbor_aged_ivory.png-b35ccab7314cc0ca8a57eb535de57578.s3tc.ctex"
+path.etc2="res://.godot/imported/Cargo_Crane_Harbor_aged_ivory.png-b35ccab7314cc0ca8a57eb535de57578.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Cargo_Crane_Harbor_aged_ivory.png"
-dest_files=["res://.godot/imported/Cargo_Crane_Harbor_aged_ivory.png-b35ccab7314cc0ca8a57eb535de57578.s3tc.ctex"]
+dest_files=["res://.godot/imported/Cargo_Crane_Harbor_aged_ivory.png-b35ccab7314cc0ca8a57eb535de57578.s3tc.ctex", "res://.godot/imported/Cargo_Crane_Harbor_aged_ivory.png-b35ccab7314cc0ca8a57eb535de57578.etc2.ctex"]
 
 [params]
 

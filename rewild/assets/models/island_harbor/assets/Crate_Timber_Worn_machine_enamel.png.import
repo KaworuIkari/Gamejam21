@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8qrotuy40v8b"
 path.s3tc="res://.godot/imported/Crate_Timber_Worn_machine_enamel.png-bde218bd9c85c9a89b1bf87e1d55b90e.s3tc.ctex"
+path.etc2="res://.godot/imported/Crate_Timber_Worn_machine_enamel.png-bde218bd9c85c9a89b1bf87e1d55b90e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/island_harbor/assets/Crate_Timber_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Crate_Timber_Worn_machine_enamel.png-bde218bd9c85c9a89b1bf87e1d55b90e.s3tc.ctex"]
+dest_files=["res://.godot/imported/Crate_Timber_Worn_machine_enamel.png-bde218bd9c85c9a89b1bf87e1d55b90e.s3tc.ctex", "res://.godot/imported/Crate_Timber_Worn_machine_enamel.png-bde218bd9c85c9a89b1bf87e1d55b90e.etc2.ctex"]
 
 [params]
 

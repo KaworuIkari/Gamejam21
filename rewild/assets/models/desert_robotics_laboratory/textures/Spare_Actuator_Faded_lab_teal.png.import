@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://7p6b2grwm67b"
 path.s3tc="res://.godot/imported/Spare_Actuator_Faded_lab_teal.png-17318f038731a11620d80f96612f6337.s3tc.ctex"
+path.etc2="res://.godot/imported/Spare_Actuator_Faded_lab_teal.png-17318f038731a11620d80f96612f6337.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Spare_Actuator_Faded_lab_teal.png"
-dest_files=["res://.godot/imported/Spare_Actuator_Faded_lab_teal.png-17318f038731a11620d80f96612f6337.s3tc.ctex"]
+dest_files=["res://.godot/imported/Spare_Actuator_Faded_lab_teal.png-17318f038731a11620d80f96612f6337.s3tc.ctex", "res://.godot/imported/Spare_Actuator_Faded_lab_teal.png-17318f038731a11620d80f96612f6337.etc2.ctex"]
 
 [params]
 

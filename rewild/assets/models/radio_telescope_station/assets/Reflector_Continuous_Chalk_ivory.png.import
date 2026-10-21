@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5ppwdovk1h2n"
 path.s3tc="res://.godot/imported/Reflector_Continuous_Chalk_ivory.png-1b7341a2c872c11caa1e018bbe968345.s3tc.ctex"
+path.etc2="res://.godot/imported/Reflector_Continuous_Chalk_ivory.png-1b7341a2c872c11caa1e018bbe968345.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Reflector_Continuous_Chalk_ivory.png"
-dest_files=["res://.godot/imported/Reflector_Continuous_Chalk_ivory.png-1b7341a2c872c11caa1e018bbe968345.s3tc.ctex"]
+dest_files=["res://.godot/imported/Reflector_Continuous_Chalk_ivory.png-1b7341a2c872c11caa1e018bbe968345.s3tc.ctex", "res://.godot/imported/Reflector_Continuous_Chalk_ivory.png-1b7341a2c872c11caa1e018bbe968345.etc2.ctex"]
 
 [params]
 

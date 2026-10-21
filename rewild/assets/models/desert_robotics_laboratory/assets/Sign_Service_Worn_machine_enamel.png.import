@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bku6l780g2o8l"
 path.s3tc="res://.godot/imported/Sign_Service_Worn_machine_enamel.png-cc6f5ebc772b204ab30ad2cce602f90c.s3tc.ctex"
+path.etc2="res://.godot/imported/Sign_Service_Worn_machine_enamel.png-cc6f5ebc772b204ab30ad2cce602f90c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Sign_Service_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Sign_Service_Worn_machine_enamel.png-cc6f5ebc772b204ab30ad2cce602f90c.s3tc.ctex"]
+dest_files=["res://.godot/imported/Sign_Service_Worn_machine_enamel.png-cc6f5ebc772b204ab30ad2cce602f90c.s3tc.ctex", "res://.godot/imported/Sign_Service_Worn_machine_enamel.png-cc6f5ebc772b204ab30ad2cce602f90c.etc2.ctex"]
 
 [params]
 

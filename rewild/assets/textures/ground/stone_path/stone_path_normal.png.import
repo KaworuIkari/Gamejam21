@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://duowwvsj0n56f"
 path.bptc="res://.godot/imported/stone_path_normal.png-3644537328e87bf0f363d42ae8011684.bptc.ctex"
+path.astc="res://.godot/imported/stone_path_normal.png-3644537328e87bf0f363d42ae8011684.astc.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/textures/ground/stone_path/stone_path_normal.png"
-dest_files=["res://.godot/imported/stone_path_normal.png-3644537328e87bf0f363d42ae8011684.bptc.ctex"]
+dest_files=["res://.godot/imported/stone_path_normal.png-3644537328e87bf0f363d42ae8011684.bptc.ctex", "res://.godot/imported/stone_path_normal.png-3644537328e87bf0f363d42ae8011684.astc.ctex"]
 
 [params]
 

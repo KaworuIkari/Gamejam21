@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cn2al8f14l88t"
 path.s3tc="res://.godot/imported/Power_Floor_Dusty_lab_floor.png-b770d4f9121fa90d5981ad11e55c53a6.s3tc.ctex"
+path.etc2="res://.godot/imported/Power_Floor_Dusty_lab_floor.png-b770d4f9121fa90d5981ad11e55c53a6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/assets/Power_Floor_Dusty_lab_floor.png"
-dest_files=["res://.godot/imported/Power_Floor_Dusty_lab_floor.png-b770d4f9121fa90d5981ad11e55c53a6.s3tc.ctex"]
+dest_files=["res://.godot/imported/Power_Floor_Dusty_lab_floor.png-b770d4f9121fa90d5981ad11e55c53a6.s3tc.ctex", "res://.godot/imported/Power_Floor_Dusty_lab_floor.png-b770d4f9121fa90d5981ad11e55c53a6.etc2.ctex"]
 
 [params]
 

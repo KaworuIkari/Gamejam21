@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://deans7matb4pd"
 path.s3tc="res://.godot/imported/Workboat_Workboat_Hull_Boat_faded_blue_green.png-623580a52091813480dc791752e71a94.s3tc.ctex"
+path.etc2="res://.godot/imported/Workboat_Workboat_Hull_Boat_faded_blue_green.png-623580a52091813480dc791752e71a94.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_workboat/Workboat_Workboat_Hull_Boat_faded_blue_green.png"
-dest_files=["res://.godot/imported/Workboat_Workboat_Hull_Boat_faded_blue_green.png-623580a52091813480dc791752e71a94.s3tc.ctex"]
+dest_files=["res://.godot/imported/Workboat_Workboat_Hull_Boat_faded_blue_green.png-623580a52091813480dc791752e71a94.s3tc.ctex", "res://.godot/imported/Workboat_Workboat_Hull_Boat_faded_blue_green.png-623580a52091813480dc791752e71a94.etc2.ctex"]
 
 [params]
 

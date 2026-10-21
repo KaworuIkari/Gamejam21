@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bywe7kyuv334b"
 path.s3tc="res://.godot/imported/robot_lab_edit_Robot_2m_Reference_Worn_machine_enamel.png-7c78bab7ead90ed5ac2e1eb84a360122.s3tc.ctex"
+path.etc2="res://.godot/imported/robot_lab_edit_Robot_2m_Reference_Worn_machine_enamel.png-7c78bab7ead90ed5ac2e1eb84a360122.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/robot_lab_edit_Robot_2m_Reference_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/robot_lab_edit_Robot_2m_Reference_Worn_machine_enamel.png-7c78bab7ead90ed5ac2e1eb84a360122.s3tc.ctex"]
+dest_files=["res://.godot/imported/robot_lab_edit_Robot_2m_Reference_Worn_machine_enamel.png-7c78bab7ead90ed5ac2e1eb84a360122.s3tc.ctex", "res://.godot/imported/robot_lab_edit_Robot_2m_Reference_Worn_machine_enamel.png-7c78bab7ead90ed5ac2e1eb84a360122.etc2.ctex"]
 
 [params]
 

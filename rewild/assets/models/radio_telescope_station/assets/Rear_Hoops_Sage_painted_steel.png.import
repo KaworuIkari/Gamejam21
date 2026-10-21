@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://wb7m330cygbm"
 path.s3tc="res://.godot/imported/Rear_Hoops_Sage_painted_steel.png-cfec9d128b04f8e0fa3714c7a82469ba.s3tc.ctex"
+path.etc2="res://.godot/imported/Rear_Hoops_Sage_painted_steel.png-cfec9d128b04f8e0fa3714c7a82469ba.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/radio_telescope_station/assets/Rear_Hoops_Sage_painted_steel.png"
-dest_files=["res://.godot/imported/Rear_Hoops_Sage_painted_steel.png-cfec9d128b04f8e0fa3714c7a82469ba.s3tc.ctex"]
+dest_files=["res://.godot/imported/Rear_Hoops_Sage_painted_steel.png-cfec9d128b04f8e0fa3714c7a82469ba.s3tc.ctex", "res://.godot/imported/Rear_Hoops_Sage_painted_steel.png-cfec9d128b04f8e0fa3714c7a82469ba.etc2.ctex"]
 
 [params]
 

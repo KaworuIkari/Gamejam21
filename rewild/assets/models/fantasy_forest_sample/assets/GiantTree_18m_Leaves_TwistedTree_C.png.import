@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpsii4mqdniie"
 path.s3tc="res://.godot/imported/GiantTree_18m_Leaves_TwistedTree_C.png-75ecbfb3a2573adbfd614f9c3cfd9f3d.s3tc.ctex"
+path.etc2="res://.godot/imported/GiantTree_18m_Leaves_TwistedTree_C.png-75ecbfb3a2573adbfd614f9c3cfd9f3d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/assets/GiantTree_18m_Leaves_TwistedTree_C.png"
-dest_files=["res://.godot/imported/GiantTree_18m_Leaves_TwistedTree_C.png-75ecbfb3a2573adbfd614f9c3cfd9f3d.s3tc.ctex"]
+dest_files=["res://.godot/imported/GiantTree_18m_Leaves_TwistedTree_C.png-75ecbfb3a2573adbfd614f9c3cfd9f3d.s3tc.ctex", "res://.godot/imported/GiantTree_18m_Leaves_TwistedTree_C.png-75ecbfb3a2573adbfd614f9c3cfd9f3d.etc2.ctex"]
 
 [params]
 

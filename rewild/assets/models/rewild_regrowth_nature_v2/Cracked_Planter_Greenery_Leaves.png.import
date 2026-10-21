@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjnbg5yne5pjg"
 path.s3tc="res://.godot/imported/Cracked_Planter_Greenery_Leaves.png-f0bdd72f97526f3df70734f969b44bcb.s3tc.ctex"
+path.etc2="res://.godot/imported/Cracked_Planter_Greenery_Leaves.png-f0bdd72f97526f3df70734f969b44bcb.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Cracked_Planter_Greenery_Leaves.png"
-dest_files=["res://.godot/imported/Cracked_Planter_Greenery_Leaves.png-f0bdd72f97526f3df70734f969b44bcb.s3tc.ctex"]
+dest_files=["res://.godot/imported/Cracked_Planter_Greenery_Leaves.png-f0bdd72f97526f3df70734f969b44bcb.s3tc.ctex", "res://.godot/imported/Cracked_Planter_Greenery_Leaves.png-f0bdd72f97526f3df70734f969b44bcb.etc2.ctex"]
 
 [params]
 

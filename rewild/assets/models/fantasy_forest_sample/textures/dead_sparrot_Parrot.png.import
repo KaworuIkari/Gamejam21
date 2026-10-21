@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0q17bivhkkld"
 path.s3tc="res://.godot/imported/dead_sparrot_Parrot.png-17554f2d8f296ec49d8463f57278edcc.s3tc.ctex"
+path.etc2="res://.godot/imported/dead_sparrot_Parrot.png-17554f2d8f296ec49d8463f57278edcc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/textures/dead_sparrot_Parrot.png"
-dest_files=["res://.godot/imported/dead_sparrot_Parrot.png-17554f2d8f296ec49d8463f57278edcc.s3tc.ctex"]
+dest_files=["res://.godot/imported/dead_sparrot_Parrot.png-17554f2d8f296ec49d8463f57278edcc.s3tc.ctex", "res://.godot/imported/dead_sparrot_Parrot.png-17554f2d8f296ec49d8463f57278edcc.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://csxj7mmatv3t6"
 path.s3tc="res://.godot/imported/leon_mat_BaseColor.png-0a6d18cebf9fd17cccd0978b14d11f19.s3tc.ctex"
+path.etc2="res://.godot/imported/leon_mat_BaseColor.png-0a6d18cebf9fd17cccd0978b14d11f19.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/leon/froggo/leon_mat_BaseColor.png"
-dest_files=["res://.godot/imported/leon_mat_BaseColor.png-0a6d18cebf9fd17cccd0978b14d11f19.s3tc.ctex"]
+dest_files=["res://.godot/imported/leon_mat_BaseColor.png-0a6d18cebf9fd17cccd0978b14d11f19.s3tc.ctex", "res://.godot/imported/leon_mat_BaseColor.png-0a6d18cebf9fd17cccd0978b14d11f19.etc2.ctex"]
 
 [params]
 

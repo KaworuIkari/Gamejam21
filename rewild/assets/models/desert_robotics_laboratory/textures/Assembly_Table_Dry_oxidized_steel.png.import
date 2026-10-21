@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://4b5oyn2em6o2"
 path.s3tc="res://.godot/imported/Assembly_Table_Dry_oxidized_steel.png-92a60d5eeddddc4e29fb8fdb043de766.s3tc.ctex"
+path.etc2="res://.godot/imported/Assembly_Table_Dry_oxidized_steel.png-92a60d5eeddddc4e29fb8fdb043de766.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Assembly_Table_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Assembly_Table_Dry_oxidized_steel.png-92a60d5eeddddc4e29fb8fdb043de766.s3tc.ctex"]
+dest_files=["res://.godot/imported/Assembly_Table_Dry_oxidized_steel.png-92a60d5eeddddc4e29fb8fdb043de766.s3tc.ctex", "res://.godot/imported/Assembly_Table_Dry_oxidized_steel.png-92a60d5eeddddc4e29fb8fdb043de766.etc2.ctex"]
 
 [params]
 

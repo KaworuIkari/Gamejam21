@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://6u2w5axxqv0e"
 path.s3tc="res://.godot/imported/Test_Markings_Worn_machine_enamel.png-705e61128871f942ec22e6711993cc16.s3tc.ctex"
+path.etc2="res://.godot/imported/Test_Markings_Worn_machine_enamel.png-705e61128871f942ec22e6711993cc16.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Test_Markings_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Test_Markings_Worn_machine_enamel.png-705e61128871f942ec22e6711993cc16.s3tc.ctex"]
+dest_files=["res://.godot/imported/Test_Markings_Worn_machine_enamel.png-705e61128871f942ec22e6711993cc16.s3tc.ctex", "res://.godot/imported/Test_Markings_Worn_machine_enamel.png-705e61128871f942ec22e6711993cc16.etc2.ctex"]
 
 [params]
 

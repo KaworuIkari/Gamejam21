@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cc3iqjprlx0a7"
 path.s3tc="res://.godot/imported/Water_Trough_Greenery_Leaves.png-7d130b51ca16498a84c4e5db2a4d1bf6.s3tc.ctex"
+path.etc2="res://.godot/imported/Water_Trough_Greenery_Leaves.png-7d130b51ca16498a84c4e5db2a4d1bf6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Water_Trough_Greenery_Leaves.png"
-dest_files=["res://.godot/imported/Water_Trough_Greenery_Leaves.png-7d130b51ca16498a84c4e5db2a4d1bf6.s3tc.ctex"]
+dest_files=["res://.godot/imported/Water_Trough_Greenery_Leaves.png-7d130b51ca16498a84c4e5db2a4d1bf6.s3tc.ctex", "res://.godot/imported/Water_Trough_Greenery_Leaves.png-7d130b51ca16498a84c4e5db2a4d1bf6.etc2.ctex"]
 
 [params]
 

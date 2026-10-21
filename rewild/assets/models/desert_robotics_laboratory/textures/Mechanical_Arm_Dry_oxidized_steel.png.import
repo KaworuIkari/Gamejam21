@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://87o2lumtopee"
 path.s3tc="res://.godot/imported/Mechanical_Arm_Dry_oxidized_steel.png-97a53261219352984960f07846e0add1.s3tc.ctex"
+path.etc2="res://.godot/imported/Mechanical_Arm_Dry_oxidized_steel.png-97a53261219352984960f07846e0add1.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Mechanical_Arm_Dry_oxidized_steel.png"
-dest_files=["res://.godot/imported/Mechanical_Arm_Dry_oxidized_steel.png-97a53261219352984960f07846e0add1.s3tc.ctex"]
+dest_files=["res://.godot/imported/Mechanical_Arm_Dry_oxidized_steel.png-97a53261219352984960f07846e0add1.s3tc.ctex", "res://.godot/imported/Mechanical_Arm_Dry_oxidized_steel.png-97a53261219352984960f07846e0add1.etc2.ctex"]
 
 [params]
 

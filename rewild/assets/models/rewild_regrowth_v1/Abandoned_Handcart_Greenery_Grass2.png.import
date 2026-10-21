@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://n1qhl8xjx0ws"
 path.s3tc="res://.godot/imported/Abandoned_Handcart_Greenery_Grass2.png-2bfd1741853e9c3e4d47e9613dd236be.s3tc.ctex"
+path.etc2="res://.godot/imported/Abandoned_Handcart_Greenery_Grass2.png-2bfd1741853e9c3e4d47e9613dd236be.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_v1/Abandoned_Handcart_Greenery_Grass2.png"
-dest_files=["res://.godot/imported/Abandoned_Handcart_Greenery_Grass2.png-2bfd1741853e9c3e4d47e9613dd236be.s3tc.ctex"]
+dest_files=["res://.godot/imported/Abandoned_Handcart_Greenery_Grass2.png-2bfd1741853e9c3e4d47e9613dd236be.s3tc.ctex", "res://.godot/imported/Abandoned_Handcart_Greenery_Grass2.png-2bfd1741853e9c3e4d47e9613dd236be.etc2.ctex"]
 
 [params]
 

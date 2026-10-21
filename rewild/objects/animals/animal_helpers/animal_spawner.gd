@@ -183,10 +183,10 @@ func _lod_tick() -> void:
 
 var _debug_bonus := 0.0
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not OS.is_debug_build() or not (event is InputEventKey and event.pressed and not event.echo):
-		return
-	if event.keycode == KEY_F10:
-		_debug_bonus = clampf(_debug_bonus + (-0.1 if event.shift_pressed else 0.1), 0.0, 1.0)
-		print("[AnimalSpawner] debug progress bonus: +%.1f" % _debug_bonus)
-		_wake_spawner()
+#func _unhandled_input(event: InputEvent) -> void:
+	#if not OS.is_debug_build() or not (event is InputEventKey and event.pressed and not event.echo):
+		#return
+	#if event.keycode == KEY_F10:
+		#_debug_bonus = clampf(_debug_bonus + (-0.1 if event.shift_pressed else 0.1), 0.0, 1.0)
+		#print("[AnimalSpawner] debug progress bonus: +%.1f" % _debug_bonus)
+		#_wake_spawner()

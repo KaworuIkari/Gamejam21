@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpb013dxe2j0"
 path.s3tc="res://.godot/imported/Woodland_Wooden_Bridge_Barren_Rocks_Diffuse.png-ef1a772a51c0692490d5f0561c701b36.s3tc.ctex"
+path.etc2="res://.godot/imported/Woodland_Wooden_Bridge_Barren_Rocks_Diffuse.png-ef1a772a51c0692490d5f0561c701b36.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_waterworks_nature_v1/Woodland_Wooden_Bridge_Barren_Rocks_Diffuse.png"
-dest_files=["res://.godot/imported/Woodland_Wooden_Bridge_Barren_Rocks_Diffuse.png-ef1a772a51c0692490d5f0561c701b36.s3tc.ctex"]
+dest_files=["res://.godot/imported/Woodland_Wooden_Bridge_Barren_Rocks_Diffuse.png-ef1a772a51c0692490d5f0561c701b36.s3tc.ctex", "res://.godot/imported/Woodland_Wooden_Bridge_Barren_Rocks_Diffuse.png-ef1a772a51c0692490d5f0561c701b36.etc2.ctex"]
 
 [params]
 

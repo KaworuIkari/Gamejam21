@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://by0c2xtkq7oav"
 path.s3tc="res://.godot/imported/Timber_Bench_Greenery_Flowers.png-6b5e126375a474dee0851da64d8ef3e6.s3tc.ctex"
+path.etc2="res://.godot/imported/Timber_Bench_Greenery_Flowers.png-6b5e126375a474dee0851da64d8ef3e6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Timber_Bench_Greenery_Flowers.png"
-dest_files=["res://.godot/imported/Timber_Bench_Greenery_Flowers.png-6b5e126375a474dee0851da64d8ef3e6.s3tc.ctex"]
+dest_files=["res://.godot/imported/Timber_Bench_Greenery_Flowers.png-6b5e126375a474dee0851da64d8ef3e6.s3tc.ctex", "res://.godot/imported/Timber_Bench_Greenery_Flowers.png-6b5e126375a474dee0851da64d8ef3e6.etc2.ctex"]
 
 [params]
 

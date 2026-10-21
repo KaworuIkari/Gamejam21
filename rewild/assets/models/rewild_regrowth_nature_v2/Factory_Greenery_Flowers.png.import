@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://npv68jqu32ar"
 path.s3tc="res://.godot/imported/Factory_Greenery_Flowers.png-63ecdbcf4af4bd355fceaa38a28897f7.s3tc.ctex"
+path.etc2="res://.godot/imported/Factory_Greenery_Flowers.png-63ecdbcf4af4bd355fceaa38a28897f7.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/rewild_regrowth_nature_v2/Factory_Greenery_Flowers.png"
-dest_files=["res://.godot/imported/Factory_Greenery_Flowers.png-63ecdbcf4af4bd355fceaa38a28897f7.s3tc.ctex"]
+dest_files=["res://.godot/imported/Factory_Greenery_Flowers.png-63ecdbcf4af4bd355fceaa38a28897f7.s3tc.ctex", "res://.godot/imported/Factory_Greenery_Flowers.png-63ecdbcf4af4bd355fceaa38a28897f7.etc2.ctex"]
 
 [params]
 

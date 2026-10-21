@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmmpyhd11fpee"
 path.s3tc="res://.godot/imported/Harbor_aged_wood.png-febaa45d8de59413f99ffa2ee045d0d0.s3tc.ctex"
+path.etc2="res://.godot/imported/Harbor_aged_wood.png-febaa45d8de59413f99ffa2ee045d0d0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/island_harbor/textures/Harbor_aged_wood.png"
-dest_files=["res://.godot/imported/Harbor_aged_wood.png-febaa45d8de59413f99ffa2ee045d0d0.s3tc.ctex"]
+dest_files=["res://.godot/imported/Harbor_aged_wood.png-febaa45d8de59413f99ffa2ee045d0d0.s3tc.ctex", "res://.godot/imported/Harbor_aged_wood.png-febaa45d8de59413f99ffa2ee045d0d0.etc2.ctex"]
 
 [params]
 

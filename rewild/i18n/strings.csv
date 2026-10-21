@@ -130,7 +130,7 @@ ABILITY_WATER_GUN,水枪,Water gun
 ABILITY_JETPACK,喷气背包,Jetpack
 ABILITY_LEVEL,%s Lv%d,%s Lv%d
 TERMINAL_BATTERY_TITLE,混沌能量模块,Chaos Energy Module
-TERMINAL_BATTERY_CHARGING,混沌能量模块充能中……使用水枪，恢复湖泊、森林、山地、工厂四个区域的生态以便提供绿色能源供应，充满后回到湖心电站取出混沌能量模块。\n工厂内部有意识等待被唤醒，它或许可以帮助你获取工厂内制造的装备。\n去雷达站获取坐标，系统显示开启钥匙在森林某处\n一切准备就绪后，前往码头启动小船，带上这座岛的记忆起航吧。,"Chaos Energy Module charging... Use the water gun to restore the ecosystems of the lake, forest, mountain and factory regions to supply green energy. Once it is full, return to the lake station to take the Chaos Energy Module."
+TERMINAL_BATTERY_CHARGING,混沌能量模块充能中……使用水枪，恢复湖泊、森林、山地、工厂四个区域的生态以便提供绿色能源供应，充满后回到湖心电站取出混沌能量模块。\n 靠近水源或者岛上遍布的井可以从中取水 \n工厂内部有意识等待被唤醒，它或许可以帮助你获取工厂内制造的装备。\n去雷达站获取坐标，系统显示开启钥匙在森林某处\n一切准备就绪后，前往码头启动小船，带上这座岛的记忆起航吧。,"Chaos Energy Module charging... Use the water gun to restore the ecosystems of the lake, forest, mountain and factory regions to supply green energy. Once it is full, return to the lake station to take the Chaos Energy Module."
 TERMINAL_BATTERY_FULL,混沌能量模块已充满！回到湖心电站，与终端交互取出混沌能量模块。,Chaos Energy Module fully charged! Return to the lake station and use the terminal to take it.
 TERMINAL_BATTERY_COLLECTED,已从湖心电站取出混沌能量模块。,You have taken the Chaos Energy Module from the lake station.
 BATTERY_READY_NOTICE,混沌能量模块已充满，回到湖心电站取出混沌能量模块,Chaos Energy Module full: return to the lake station to take it
@@ -185,7 +185,7 @@ FINALE_CONFIRM_DEVICE,确认使用混沌能量模块启动同步破坏器？这�
 FINALE_CONFIRM_BOAT,坐标已载入，能量模块已安装。现在就启动小船并离开岛屿吗？,Coordinates loaded. Chaos Energy Module installed. Power up the ship and leave the island? This locks the boat ending.
 FINALE_CONFIRM_START,确认启动,Confirm startup
 ENDING_DEVICE_TITLE,结局 · 岛上的记录,Ending 1 · Island records
-ENDING_BOAT_TITLE,The　End,The End
+ENDING_BOAT_TITLE,帽子企鹅:\nLvgner\nKaworuIkari\nAntidusPig,Thanks for playing from:\nLvgner\nKaworuIkari\nAntidusPig
 ENDING_SAVE_OK,结局进度已保存。,Ending progress saved.
 ENDING_SAVE_UNAVAILABLE,当前没有可保存的存档位。,No active save slot is available.
 FINALE_BRIEFING_DEVICE,湖心终端：携带混沌能量模块，[n]前往雷达站二层启动同步破坏器。（剧情占位）,Lake terminal: Take the Chaos Energy Module to the radar upper platform [n]and activate the Synchronization Disruptor. (Story placeholder.)
@@ -299,3 +299,12 @@ SPEAKER_CREW_LOG,机组离线记录,Crew offline log
 SPEAKER_COMPANION_BOT,维修机器人,Maintenance robot
 SPEAKER_RADAR_SYSTEM,雷达站系统,Radar system
 SPEAKER_XBOT,X 型机器人,X-series robot
+PENGUIN_0, 按 %s 检查
+PENGUIN_1,PART_II_NMR_LAB_LAOTAO_LUCY
+PENGUIN_2,LUCY:行～来吃点小零食来(叉腰)...所罗门大帝扛大旗！
+PENGUIN_3,SUO:这里面没水啊！(挠头/不摘帽子)
+PENGUIN_4,LAOTAO:能不能关五秒我们干扰太大了(双手交叉(反复)
+PENGUIN_5,LEON：这里面肯定有水！！
+CAP_0, 按 %s 检查
+CAP_1, 完了。(指被发现了)
+CAP_1, 按V解锁小动物

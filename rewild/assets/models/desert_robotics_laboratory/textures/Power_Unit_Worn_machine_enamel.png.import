@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cdp7ocdcw3kh5"
 path.s3tc="res://.godot/imported/Power_Unit_Worn_machine_enamel.png-723a036318abce57c710b9a239555794.s3tc.ctex"
+path.etc2="res://.godot/imported/Power_Unit_Worn_machine_enamel.png-723a036318abce57c710b9a239555794.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/desert_robotics_laboratory/textures/Power_Unit_Worn_machine_enamel.png"
-dest_files=["res://.godot/imported/Power_Unit_Worn_machine_enamel.png-723a036318abce57c710b9a239555794.s3tc.ctex"]
+dest_files=["res://.godot/imported/Power_Unit_Worn_machine_enamel.png-723a036318abce57c710b9a239555794.s3tc.ctex", "res://.godot/imported/Power_Unit_Worn_machine_enamel.png-723a036318abce57c710b9a239555794.etc2.ctex"]
 
 [params]
 

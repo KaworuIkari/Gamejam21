@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbhjebdcs8o1s"
 path.s3tc="res://.godot/imported/Floor_2x2_Bark_NormalTree.png-0ce5929bd9849e9e56ce8c6089e2b7ed.s3tc.ctex"
+path.etc2="res://.godot/imported/Floor_2x2_Bark_NormalTree.png-0ce5929bd9849e9e56ce8c6089e2b7ed.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/models/fantasy_forest_sample/textures/Floor_2x2_Bark_NormalTree.png"
-dest_files=["res://.godot/imported/Floor_2x2_Bark_NormalTree.png-0ce5929bd9849e9e56ce8c6089e2b7ed.s3tc.ctex"]
+dest_files=["res://.godot/imported/Floor_2x2_Bark_NormalTree.png-0ce5929bd9849e9e56ce8c6089e2b7ed.s3tc.ctex", "res://.godot/imported/Floor_2x2_Bark_NormalTree.png-0ce5929bd9849e9e56ce8c6089e2b7ed.etc2.ctex"]
 
 [params]
 
