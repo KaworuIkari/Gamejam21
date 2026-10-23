@@ -4,7 +4,7 @@
 
 ![The island of Rewild](website/img/island.jpg)
 
-Rewild is a cosy, hand-drawn 3D exploration game, made as a game jam project.
+Rewild is a cosy 3D exploration game, made as a game jam project.
 
 You wake up as a small water robot on an island the world forgot. A plane lies broken on the beach, the pier is rusting, the radar is silent and the lake station has gone dark. With a hose, a water tank and plenty of time, you:
 
