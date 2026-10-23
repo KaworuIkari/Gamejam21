@@ -139,6 +139,39 @@
   .card .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: 2px; }
   @media (max-width: 860px) { .cards { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; } }
 
+  /* In-game */
+  .ingame header { text-align: center; max-width: 640px; margin: 0 auto 44px; }
+  .ingame header p { color: var(--muted); margin: 14px 0 0; }
+  .shot { margin: 0; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px; }
+  .shot button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 12px; overflow: hidden; }
+  .shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform .4s; }
+  .shot button:hover img { transform: scale(1.03); }
+  .shot figcaption { padding: 10px 6px 4px; font-weight: 700; font-size: 15px; }
+  .ingame-top { display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; margin-bottom: 22px; }
+  .ingame-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 860px) { .ingame-top { grid-template-columns: 1fr; } .ingame-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .ingame-grid { grid-template-columns: 1fr; } }
+
+  .compare { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 10; user-select: none; touch-action: pan-y; }
+  .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .compare .after { clip-path: inset(0 0 0 var(--pos, 50%)); }
+  .compare .handle {
+    position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 4px; margin-left: -2px; background: var(--paper);
+    box-shadow: 0 0 12px rgba(0,0,0,.3); pointer-events: none;
+  }
+  .compare .handle::after {
+    content: "⟷"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+    background: var(--paper); color: var(--ink); font-weight: 700; box-shadow: var(--shadow);
+  }
+  .compare .label {
+    position: absolute; bottom: 12px; padding: 4px 12px; border-radius: 999px; pointer-events: none;
+    font: 600 13px "Fredoka", var(--cjk); background: rgba(255,250,240,.9); color: var(--ink);
+  }
+  .compare .label.before { left: 12px; }
+  .compare .label.after-label { right: 12px; background: var(--leaf); color: #fff; }
+  .compare input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; }
+
   /* Journey */
   .journey header { margin-bottom: 44px; }
   .steps { display: grid; gap: 20px; counter-reset: step; }
@@ -155,7 +188,8 @@
   @media (max-width: 640px) { .step { grid-template-columns: 1fr; padding-right: 14px; } .step div { padding: 0 8px 8px; } }
 
   /* Gallery */
-  .gallery { background: var(--paper); border-block: 1px solid var(--line); }
+  .journey { background: var(--paper); border-block: 1px solid var(--line); }
+  .journey .step { background: var(--cream); }
   .gallery header { text-align: center; margin-bottom: 40px; }
   .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
   .grid button { padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 14px; overflow: hidden; grid-column: span 2; }
@@ -216,6 +250,7 @@
     <a class="brand" href="#top"><img src="img/icon.png" alt=""><span data-i18n="brand">Rewild</span></a>
     <ul>
       <li><a href="#about" data-i18n="navAbout">About</a></li>
+      <li><a href="#ingame" data-i18n="navIngame">In-game</a></li>
       <li><a href="#journey" data-i18n="navJourney">Journey</a></li>
       <li><a href="#gallery" data-i18n="navGallery">Gallery</a></li>
       <li><a class="btn btn-primary btn-small" href="#download" data-i18n="navDownload">Download</a></li>
@@ -282,6 +317,41 @@
     </div>
   </section>
 
+  <section id="ingame" class="ingame">
+    <div class="wrap">
+      <header>
+        <div class="eyebrow" data-i18n="ingameEyebrow">In the game</div>
+        <h2 data-i18n="ingameTitle">Watch it turn green</h2>
+        <p data-i18n="ingameIntro">Every region starts as dust and dead trees. Clean it, water it and it comes back to life. These are real in-game screenshots.</p>
+      </header>
+      <div class="ingame-top">
+        <figure class="shot">
+          <div class="compare" id="compare">
+            <img src="img/game/dust.jpg" alt="The robot running through a dust storm in the wasteland">
+            <img class="after" src="img/game/meadow.jpg" alt="The robot running across the same island after it turns green">
+            <div class="handle"></div>
+            <span class="label before" data-i18n="before">Before</span>
+            <span class="label after-label" data-i18n="after">After</span>
+            <input type="range" min="0" max="100" value="50" aria-label="Before and after">
+          </div>
+          <figcaption data-i18n="compareCaption">Drag to compare: the wasteland and the meadow it becomes</figcaption>
+        </figure>
+        <figure class="shot">
+          <button><img src="img/game/jetpack.jpg" alt="The robot flying with a jetpack over a river at sunset" loading="lazy"></button>
+          <figcaption data-i18n="shotJetpack">Earn the jetpack and fly over the river</figcaption>
+        </figure>
+      </div>
+      <div class="ingame-grid">
+        <figure class="shot"><button><img src="img/game/wasteland.jpg" alt="A treehouse in the dusty wasteland" loading="lazy"></button><figcaption data-i18n="shotWasteland">The wasteland before it wakes</figcaption></figure>
+        <figure class="shot"><button><img src="img/game/spring.jpg" alt="The robot spraying water on a spring" loading="lazy"></button><figcaption data-i18n="shotSpring">Bring the spring back</figcaption></figure>
+        <figure class="shot"><button><img src="img/game/factory.jpg" alt="The robot inside the abandoned factory" loading="lazy"></button><figcaption data-i18n="shotFactory">Inside the abandoned factory</figcaption></figure>
+        <figure class="shot"><button><img src="img/game/radar.jpg" alt="The robot running toward the radar hill" loading="lazy"></button><figcaption data-i18n="shotRadar">Head for the radar hill</figcaption></figure>
+        <figure class="shot"><button><img src="img/game/bot.jpg" alt="The robot and a small bot among yellow flowers" loading="lazy"></button><figcaption data-i18n="shotBot">A small friend in the flowers</figcaption></figure>
+        <figure class="shot"><button><img src="img/game/fox.jpg" alt="The robot and a fox at sunset" loading="lazy"></button><figcaption data-i18n="shotFox">Sunset with the locals</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
   <section id="journey" class="journey">
     <div class="wrap">
       <header>
@@ -301,7 +371,7 @@
   <section id="gallery" class="gallery">
     <div class="wrap">
       <header>
-        <div class="eyebrow" data-i18n="galleryEyebrow">Gallery</div>
+        <div class="eyebrow" data-i18n="galleryEyebrow">Concept art</div>
         <h2 data-i18n="galleryTitle">Postcards from the island</h2>
       </header>
       <div class="grid" id="grid">
@@ -414,6 +484,20 @@
     feat2: "重新打开泉眼，重启湖心电站，唤醒那些曾经让小岛运转的沉睡机器。",
     feat3Title: "升级装备",
     feat3: "升级你的水箱，获得喷气背包，去往小岛上从前到不了的角落。",
+    navIngame: "实机画面",
+    ingameEyebrow: "实机画面",
+    ingameTitle: "看着它慢慢变绿",
+    ingameIntro: "每个区域起初都只有沙尘与枯树。清理它、浇灌它，它就会重新焕发生机。以下均为游戏实机截图。",
+    before: "之前",
+    after: "之后",
+    compareCaption: "拖动对比：荒原，以及它将变成的草地",
+    shotJetpack: "获得喷气背包，飞越蜿蜒的河流",
+    shotWasteland: "苏醒之前的荒原",
+    shotSpring: "让泉眼重新涌流",
+    shotFactory: "废弃工厂内部",
+    shotRadar: "奔向雷达山",
+    shotBot: "花丛中的小伙伴",
+    shotFox: "与岛上的居民共赏日落",
     journeyEyebrow: "旅程",
     journeyTitle: "从残骸，到归途",
     step1Title: "坠机现场",
@@ -426,7 +510,7 @@
     step4: "让山地重焕生机，用密钥启动雷达站，读取它保存已久的坐标。",
     step5Title: "最后的旅程",
     step5: "为混沌能量模块充能，把你修复的一切汇聚起来，迎接小岛的最终篇章。",
-    galleryEyebrow: "画廊",
+    galleryEyebrow: "概念美术",
     galleryTitle: "来自小岛的明信片",
     dlEyebrow: "免费下载",
     dlTitle: "让小岛重获新生",
@@ -486,8 +570,11 @@
   onScroll();
 
   const box = document.getElementById("lightbox");
-  document.getElementById("grid").addEventListener("click", (e) => {
-    const img = e.target.closest("button")?.querySelector("img");
+  const compare = document.getElementById("compare");
+  compare.querySelector("input").addEventListener("input", (e) => compare.style.setProperty("--pos", e.target.value + "%"));
+
+  document.addEventListener("click", (e) => {
+    const img = e.target.closest("#grid button, .shot button")?.querySelector("img");
     if (!img) return;
     box.firstElementChild.src = img.src;
     box.firstElementChild.alt = img.alt;
