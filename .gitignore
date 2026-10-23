@@ -57,3 +57,4 @@ mono_crash.*.json
 *.blend1
 # Blender auto-backups
 *.blend[0-9]*
+*.dmg
