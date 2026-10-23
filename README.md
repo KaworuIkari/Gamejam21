@@ -12,7 +12,7 @@ You wake up as a small water robot on an island the world forgot. A plane lies b
 - **Restore the island:** reopen the spring, restart the lake power station and wake the sleeping machines that once kept the island running.
 - **Gear up:** upgrade your water tank, earn a jetpack and reach corners of the island you couldn't get to before.
 
-The game is available in English and Chinese.
+A full playthrough takes about 20 minutes. The game is available in English and Chinese.
 
 ## Download
 
