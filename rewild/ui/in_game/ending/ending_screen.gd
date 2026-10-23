@@ -7,6 +7,8 @@ const CREDITS_FADE := 2.0
 const BUTTON_FADE := 0.8
 ## Pixel lettering for the credits, matching the terminal UI; 48 px keeps the 12 px grid crisp.
 const CREDITS_FONT = preload("res://ui/fonts/fusion-pixel-12px.ttf")
+## Shown instead of the scene's default island once the giant Leon has been woken.
+const ISLAND_WITH_FROG = preload("res://ui/in_game/ending/ending_island_with_frog.png")
 
 var route: StringName
 var _returning := false
@@ -29,6 +31,8 @@ func _reveal_island() -> void:
 	%Title.add_theme_color_override("font_outline_color", Color(0.1, 0.16, 0.2, 0.85))
 	%MenuButton.hide()
 	%MenuButton.modulate.a = 0.0
+	if Quests.event_count(&"leon_awakened") > 0:
+		%Island.texture = ISLAND_WITH_FROG
 	%Island.show()
 	var tween := create_tween().set_parallel()
 	tween.tween_property(%Island, "modulate:a", 1.0, ISLAND_FADE).set_delay(ISLAND_DELAY)

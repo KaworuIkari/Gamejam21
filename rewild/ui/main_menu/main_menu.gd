@@ -22,19 +22,16 @@ func _ready() -> void:
 	resized.connect(_update_responsive_layout)
 	_update_responsive_layout()
 	_new_game.grab_focus.call_deferred()
+	BgmPlayer.play_menu_music()
 
 
 func _start_game() -> void:
 	if _starting or SceneRouter.is_busy():
 		return
 	_starting = true
-	var accepted: bool = await ConfirmPopup.ask(self, tr("MENU_START_CONFIRM"), "MENU_NEW_GAME")
-	if not is_inside_tree():
-		return
-	_starting = false
-	if accepted:
-		SaveManager.start_new_game()
-		SceneRouter.goto_game()
+	SaveManager.start_new_game()
+	BgmPlayer.enter_game()
+	SceneRouter.goto_game()
 
 
 func _on_settings() -> void:

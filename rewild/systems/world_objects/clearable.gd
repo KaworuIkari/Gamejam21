@@ -79,6 +79,7 @@ func _process(delta: float) -> void:
 	var focused := _focus == self
 	if focused and _prompt == null:
 		_prompt = PROMPT_SCENE.instantiate()
+		_prompt.complete_chime = false
 		add_child(_prompt)
 		_prompt_locked = not is_locked()  # forces configure below
 	if _prompt:

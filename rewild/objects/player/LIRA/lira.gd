@@ -174,6 +174,8 @@ func _physics_process(delta: float) -> void:
 	spring_arm_3d.update_pivot_offset(target, delta, aim_offset_lerp_speed)
 
 func _apply_movement(delta : float) -> void:
+	if input_dir != Vector2.ZERO:
+		BgmPlayer.notify_player_moved()   # world music starts a few seconds after the first move
 	if in_water:
 		_water_horizontal(delta)
 		return
@@ -253,10 +255,13 @@ func set_water_gun(enabled: bool) -> void:
 		on_aim(false)
 
 func try_shoot() -> void:                   # call this from the input code that used to set is_shooting
-	if not animation_script.is_aiming or _fire_cd > 0.0:
+	if not animation_script.is_aiming:
 		return
-	if not tank.consume_shot():
-		_fire_cd = 0.4                           # stop re-checking every frame while held
+	if not tank.can_shoot():
+		if Input.is_action_just_pressed("use"):  # dry click once per press, not on repeat while held
+			UIAudio.play_sfx(UIAudio.TANK_EMPTY)
+		return
+	if _fire_cd > 0.0 or not tank.consume_shot():
 		return
 	_fire_cd = fire_cooldown
 	aim_trajectory.fire()
@@ -392,8 +397,8 @@ const GREEN_SEEN_RANGE := 40.0     # watering (so greening) farther away than th
 const FACE_VIEW := &"lira_face"
 @export_group("Face close-up")
 ## Seconds the camera takes to push in on the face, then to hold on it before and after the smile.
-@export var face_zoom_time := 2.5
-@export var face_hold_blank := 1.0
+@export var face_zoom_time := 3.5
+@export var face_hold_blank := 2.5
 @export var face_hold_smile := 1.5
 ## Camera distance from the face at the start and end of the push-in, in metres.
 @export var face_zoom_from := 2.2

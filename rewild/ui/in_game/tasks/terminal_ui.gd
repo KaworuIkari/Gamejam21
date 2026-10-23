@@ -37,6 +37,9 @@ func _notification(what: int) -> void:
 func _process(_delta: float) -> void:
 	_notices.visible = not get_tree().paused and not _dialogue_active() and not SceneRouter.is_busy()
 	_hud.visible = _terminal_unlocked() and _notices.visible
+	# Toasts raised behind a menu (e.g. the battery, taken as the terminal opens) wait for it to close.
+	if _notices.visible and not _toast_queue.is_empty() and (_toast_tween == null or not _toast_tween.is_running()):
+		_next_toast()
 
 func _input(event: InputEvent) -> void:
 	if event.is_echo() or not event.is_action_pressed(ACTION) or not _terminal_unlocked():
@@ -61,6 +64,8 @@ func _connect_hud() -> void:
 			return
 		if a == &"jetpack" and level == 1:
 			_notify(tr("QUEST_TOAST_JETPACK_ENABLED"))
+		elif a == BatteryCharge.BATTERY:
+			_notify(tr("QUEST_TOAST_BATTERY"))
 		else:
 			_notify(tr("QUEST_TOAST_ABILITY") % TaskPage.ability_name(a, level)))
 
@@ -89,7 +94,7 @@ func _notify(text: String) -> void:
 		_next_toast()
 
 func _next_toast() -> void:
-	if _toast_queue.is_empty():
+	if _toast_queue.is_empty() or not _notices.visible:
 		return
 	_toast.text = _toast_queue.pop_front()
 	_toast_tween = create_tween()

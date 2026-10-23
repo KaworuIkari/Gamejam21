@@ -2,8 +2,8 @@ extends Node
 class_name DebugNode
 
 const DEBUG_MENU = preload("res://ui/debug/debug_menu.gd")
-## Off for launch; set true to get the F1 cheat menu back in debug builds.
-const DEBUG_MENU_ENABLED := false
+## Set false to hide the F1 cheat menu (e.g. for launch builds).
+const DEBUG_MENU_ENABLED := true
 
 func _init() -> void:
 	RenderingServer.set_debug_generate_wireframes(true)

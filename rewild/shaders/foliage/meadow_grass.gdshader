@@ -13,6 +13,10 @@ uniform vec2 wind_direction = vec2(1.0, 1.0);
 uniform float dry_coverage : hint_range(0.0, 1.0) = 0.36;
 uniform float dry_density : hint_range(0.0, 1.0) = 0.6;
 uniform float dry_height : hint_range(0.0, 1.0) = 0.75;
+// TRAMPLE: recent footprints (xyz, w = strength 0..1), fed by objects/foliage/grass_trample.gd.
+#define TRAMPLE_POINTS 8
+uniform vec4 trample_points[TRAMPLE_POINTS];
+uniform float trample_radius = 0.9;
 
 varying vec4 data;
 
@@ -60,6 +64,23 @@ void vertex() {
 
 	// World space vertex
 	vec3 w_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+
+	// TRAMPLE: blades near the footprints lean away from them and lie down.
+	vec3 root = (MODEL_MATRIX * vec4(0.0, -0.55, 0.0, 1.0)).xyz;
+	vec2 push = vec2(0.0);
+	float press = 0.0;
+	for (int i = 0; i < TRAMPLE_POINTS; i++) {
+		vec4 t = trample_points[i];
+		vec2 d = root.xz - t.xz;
+		float dist = length(d);
+		float f = t.w * (1.0 - smoothstep(trample_radius * 0.35, trample_radius, dist))
+				* step(abs(root.y - t.y), 2.0);
+		push += d / max(dist, 0.001) * f;
+		press = max(press, f);
+	}
+	float blade_h = w_vertex.y - root.y;
+	w_vertex.xz += push / max(length(push), 0.001) * blade_h * press * 0.9;
+	w_vertex.y = root.y + blade_h * (1.0 - 0.7 * press);
 	// Get wind force and scale from process()
 	float scale = pow(INSTANCE_CUSTOM[3] * INSTANCE_CUSTOM[3], 0.707);
 	float force = INSTANCE_CUSTOM[2] * data[2] * scale;
@@ -67,6 +88,7 @@ void vertex() {
 	force -= fract(force * 256.0) * force * 0.05;
 	// Curve the result
 	force = pow(force, 0.707);
+	force *= 1.0 - 0.8 * press; // trampled blades barely sway
 
 	// These 2 combined result in a decent bend without resorting to matrices or pivot data.
 	// Lateral move and wobble

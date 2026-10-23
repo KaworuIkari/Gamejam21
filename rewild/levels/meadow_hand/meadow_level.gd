@@ -72,6 +72,10 @@ func _ready() -> void:
 	for mat in TREE_LEAVES:
 		GrowthMap.attach_material(mat)
 	add_child(LeafRustle.new())
+	var trample := GrassTrample.new()
+	trample.material = $Plants/Grass.mesh_material_override
+	trample.player = player
+	add_child(trample)
 	GrowthMap.attach_material(GROW_IN_FLOWERS)
 
 	var restoration_regions := RESTORATION_REGIONS.instantiate()
@@ -123,6 +127,11 @@ func _ready() -> void:
 	var regrowth := TreeRegrowth.new()
 	regrowth.name = "TreeRegrowth"
 	add_child(regrowth)
+	var sky := SkyProgression.new()
+	sky.name = "SkyProgression"
+	sky.environment = $WorldEnvironment
+	sky.pump = get_node(PUMP_PATH)
+	add_child(sky)
 	add_child(PAUSE_MENU.instantiate())
 	SettingsManager.refresh_fmod_audio()
 

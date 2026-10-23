@@ -110,6 +110,19 @@ func _ready() -> void:
 	animation_tree.set(wings_blend_param, 0.0)
 	_flap_timer = randf() * flap_interval_mean
 	_think()
+	# The sky stays empty until the action terminal is activated (lake_power_station.gd).
+	if not Quests.terminal_unlocked():
+		hide()
+		process_mode = Node.PROCESS_MODE_DISABLED
+		Quests.ability_changed.connect(_on_ability_changed)
+
+
+func _on_ability_changed(_ability: StringName, _level: int) -> void:
+	if not Quests.terminal_unlocked():
+		return
+	Quests.ability_changed.disconnect(_on_ability_changed)
+	show()
+	process_mode = Node.PROCESS_MODE_INHERIT
 
 
 func _physics_process(delta: float) -> void:

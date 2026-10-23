@@ -102,12 +102,15 @@ func update_tube():
 # tank water
 func is_empty() -> bool:
 	return level <= 0.0
+func _shot_cost() -> float:
+	return 1.0 / maxf(capacity, 1.0)
+func can_shoot() -> bool:
+	return level >= _shot_cost()
 ## Spends one shot's worth. Returns false and spends nothing if the tank can't cover it.
 func consume_shot() -> bool:
-	var cost := 1.0 / maxf(capacity, 1.0)
-	if level < cost:
+	if not can_shoot():
 		return false
-	level -= cost
+	level -= _shot_cost()
 	return true
 func shots_left() -> int:            # wire this to UI if any
 	return floori(level * capacity)

@@ -5,6 +5,15 @@ extends CanvasLayer
 
 const TOGGLE_KEY := KEY_F1
 const PauseMenu = preload("res://ui/in_game/pause_menu.gd")
+## [label, landmark node path from the level root, world offset, snap to terrain].
+const TELEPORTS := [
+	["森林", "Enviroment/West_forest/Trail_Sign_Barren2", Vector3(0, 0, 4), true],
+	["水泵", "Enviroment/North_water_source/Ruined_Pump_House_Golden", Vector3(0, 0, 8), true],
+	["终端", "Enviroment/Central_lake/LakePowerStation", Vector3(0, 0, 8), true],
+	["机器人工厂", "Enviroment/East_Robot_factory/Jetpack_root", Vector3(-4, 0, 0), true],
+	["船", "NavigationRegion3D/Workboat", Vector3(0, 3, 0), false],
+	["雷达站", "Enviroment/East_Mountain/RadioObservatory", Vector3(0, 0, 10), true],
+]
 
 var _panel: PanelContainer
 var _status: Label
@@ -55,6 +64,13 @@ func _build() -> void:
 		["狐狸钥匙", func(): Quests.grant(&"fox_key")],
 	]:
 		column.add_child(_button(entry[0], entry[1]))
+	var teleports := GridContainer.new()
+	teleports.columns = 2
+	column.add_child(teleports)
+	for spot in TELEPORTS:
+		var button := _button("传送：" + spot[0], _teleport.bind(spot[1], spot[2], spot[3]))
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		teleports.add_child(button)
 	_refresh()
 
 
@@ -98,6 +114,27 @@ func _refresh() -> void:
 ## Free upgrade, without spending material.
 func _upgrade(track: StringName) -> void:
 	Quests.grant(track, mini(WaterGunUpgrades.level(track) + 1, WaterGunUpgrades.MAX_LEVEL))
+
+
+## Moves the player next to a landmark of the current level, standing on the terrain.
+func _teleport(path: String, offset: Vector3, snap: bool) -> void:
+	var scene := get_tree().current_scene
+	var player := get_tree().get_first_node_in_group(&"player") as Node3D
+	var landmark := scene.get_node_or_null(path) as Node3D if scene else null
+	if player == null or landmark == null:
+		push_warning("debug teleport: no player or landmark %s" % path)
+		return
+	var target := landmark.global_position + offset
+	if snap:
+		var terrains := scene.find_children("*", "Terrain3D", true, false)
+		if not terrains.is_empty() and terrains[0].data:
+			var height: float = terrains[0].data.get_height(target)
+			if not is_nan(height):
+				target.y = maxf(height, target.y)
+		target.y += 1.0
+	player.global_position = target
+	if player is CharacterBody3D:
+		player.velocity = Vector3.ZERO
 
 
 ## Starts the level's pump (the WaterFlowSwitch reporting pump_started) as if it were used.

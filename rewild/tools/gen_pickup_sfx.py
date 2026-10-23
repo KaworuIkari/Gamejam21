@@ -18,6 +18,7 @@ leaf_rustle.wav     swelling rustle of leaves (a tree's leaves grow out)
 robot_wake.wav      rattle, power-up whine, boot chime (the factory bot is repaired and wakes)
 wind_loop.wav       seamless gusty wind (looped while the sand storm / fog blows)
 bird_chirp_1..3.wav distant bird calls (the occasional ambient chirp once the air is clear)
+tank_empty.wav      dry trigger click + low descending buzz (shooting with an empty tank)
 """
 import math
 import os
@@ -290,6 +291,18 @@ def bird_chirp(kind):
     return out
 
 
+
+def tank_empty():
+    out = silence(0.32)
+    # Dry trigger click: the pump catches nothing.
+    mix(out, noise(0.03, 0.0005, 0.006, lowpass=0.9, highpass=0.95), 0.0, 0.7)
+    # Two short buzzy "nope" tones stepping down.
+    buzz = ((1, 1.0), (3, 0.33), (5, 0.2), (7, 0.14))
+    mix(out, tone(220, 0.1, 0.003, 0.04, partials=buzz, sweep=-0.1), 0.02, 0.6)
+    mix(out, tone(165, 0.16, 0.003, 0.06, partials=buzz, sweep=-0.15), 0.11, 0.6)
+    return out
+
+
 if __name__ == "__main__":
     random.seed(21)
     write("garbage_pickup.wav", garbage_pickup())
@@ -310,3 +323,4 @@ if __name__ == "__main__":
     write("wind_loop.wav", wind_loop(), peak=0.6, loop=True)
     for k in (1, 2, 3):
         write("bird_chirp_%d.wav" % k, bird_chirp(k), peak=0.5)
+    write("tank_empty.wav", tank_empty(), peak=0.55)

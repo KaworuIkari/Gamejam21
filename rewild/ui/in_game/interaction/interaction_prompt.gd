@@ -7,6 +7,8 @@ const COMPLETE_DURATION := 0.15
 ## Long presses (set_hold_progress) hum while filling, chime on play_activation() and wind
 ## down when let go early. Off for holds with their own sound (the tank refill).
 var charge_sound := true
+## Off to skip the chime on play_activation() but keep the hum (garbage clearing).
+var complete_chime := true
 
 @onready var _root: Control = $Root
 @onready var _panel: PanelContainer = $Root/Anchor/Panel
@@ -84,7 +86,8 @@ func play_activation() -> void:
 	if _charge.playing:
 		_charge.stop()
 		_charge_done = true
-		UIAudio.play_sfx(UIAudio.CHARGE_COMPLETE, 0.0)
+		if complete_chime:
+			UIAudio.play_sfx(UIAudio.CHARGE_COMPLETE, 0.0)
 
 func _blocked() -> bool:
 	return get_tree().paused or SceneRouter.is_busy()

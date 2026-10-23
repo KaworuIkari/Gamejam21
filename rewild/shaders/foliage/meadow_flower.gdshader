@@ -7,6 +7,10 @@ render_mode cull_disabled, depth_draw_always, specular_disabled;
 
 uniform float cluster_density : hint_range(0.0, 1.0) = 0.8; // inside clusters
 uniform float lone_density : hint_range(0.0, 1.0) = 0.04;    // scattered everywhere else
+// Stay closed while the watered ground is still wet. Off by default: wetness has no
+// memory, so re-watering green ground would hide flowers that had already opened
+// until it dried again. Growth never goes down, so with this off they stay open.
+uniform bool wait_for_dry = false;
 
 varying vec3 petal_color;
 
@@ -23,7 +27,9 @@ void vertex() {
 	// (This is the same thing Godot's built-in "Billboard" material mode does.)
 	float size = keep ? length(MODEL_MATRIX[0].xyz) : 0.0; // size 0 = invisible
 	size *= smoothstep(0.6, 0.9, growth_at(pos)); // GROWTH: flowers come after the grass
-	size *= 1.0 - wet_at(pos);                    // ...and open once the watered ground has dried
+	if (wait_for_dry) {
+		size *= 1.0 - wet_at(pos);                // ...and open once the watered ground has dried
+	}
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 			INV_VIEW_MATRIX[0] * size,
 			INV_VIEW_MATRIX[1] * size,

@@ -9,6 +9,7 @@ const GARBAGE_PICKUP: AudioStream = preload("res://assets/audio/sfx/garbage_pick
 const GEAR_PICKUP: AudioStream = preload("res://assets/audio/sfx/gear_pickup.wav")
 const UPGRADE: AudioStream = preload("res://assets/audio/sfx/upgrade.wav")
 const TANK_FULL: AudioStream = preload("res://assets/audio/sfx/tank_full.wav")
+const TANK_EMPTY: AudioStream = preload("res://assets/audio/sfx/tank_empty.wav")
 const WELL_START: AudioStream = preload("res://assets/audio/sfx/well_start.wav")
 const WATER_RUSH: AudioStream = preload("res://assets/audio/sfx/water_rush.wav")
 const PROP_GRAB: AudioStream = preload("res://assets/audio/sfx/prop_grab.wav")

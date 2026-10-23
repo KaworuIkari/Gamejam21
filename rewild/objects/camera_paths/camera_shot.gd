@@ -2,6 +2,8 @@ extends PathFollow3D
 class_name CameraPathShot
 
 @export var travel_time := 8.0
+## Seconds the camera holds on the end of the path before handing control back.
+@export var hold_time := 0.0
 @export var step_event_name: StringName = &""  # this should also be the name of CameraView, set it even if step is not used
 @export_group("if use quest step")
 @export var quest: Quest
@@ -41,6 +43,8 @@ func play(bgm_index: int = 0) -> void:
 	t.tween_property(self, "progress_ratio", 1.0, travel_time) \
 			.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	await t.finished
+	if hold_time > 0.0:
+		await get_tree().create_timer(hold_time).timeout
 	CameraDirector.pop(true)
 	_playing = false
 	finished.emit()
