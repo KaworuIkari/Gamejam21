@@ -107,6 +107,11 @@
   }
   .hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
   .hero .meta { margin-top: 22px; font-size: 14px; font-weight: 700; color: var(--ink); opacity: .75; }
+  .hero .studio {
+    display: inline-block; margin-top: 14px; padding: 5px 14px; border-radius: 999px;
+    background: rgba(255,250,240,.7); font: 500 14px "Fredoka", var(--cjk); letter-spacing: .04em;
+  }
+  .hero .studio b { font-weight: 600; letter-spacing: .1em; }
   @keyframes float { 50% { transform: translateY(-8px); } }
 
   section { padding: clamp(70px, 10vw, 120px) 0; }
@@ -274,6 +279,7 @@
       <a class="btn btn-ghost" href="#about" data-i18n="learnMore">Learn more</a>
     </div>
     <div class="meta" data-i18n="heroMeta">macOS &nbsp;·&nbsp; Windows &nbsp;·&nbsp; English / 中文</div>
+    <div class="studio" data-i18n="heroStudio">A game by <b>CAPGUIN</b> · 帽子企鹅</div>
   </div>
 </header>
 
@@ -437,14 +443,14 @@
       <p data-i18n="footMade">A game jam project made with Godot, 2026.</p>
     </div>
     <div>
-      <h3 data-i18n="footTeam">Made by</h3>
+      <h3 data-i18n="footTeam">Made by CAPGUIN · 帽子企鹅</h3>
       <p>Lvgner · KaworuIkari · AntidusPig</p>
     </div>
     <div>
       <h3 data-i18n="footThanks">Special thanks</h3>
       <p data-i18n="footThanksList">T.K. · Arctic Fox · NMR_F4 · bill · linhan</p>
     </div>
-    <p class="small" data-i18n="footCopy">© 2026 the Rewild team. Thanks for playing.</p>
+    <p class="small" data-i18n="footCopy">© 2026 CAPGUIN (帽子企鹅). Thanks for playing.</p>
   </div>
 </footer>
 
@@ -524,10 +530,11 @@
     dlWin: "下载 Windows 版",
     winHelp: "解压整个文件夹后运行 <b>rewild.exe</b>，请让 .dll 文件和 exe 保持在同一个文件夹里。如果出现 SmartScreen 提示，点击<b>更多信息</b> → <b>仍要运行</b>。",
     footMade: "使用 Godot 制作的 Game Jam 作品，2026 年。",
-    footTeam: "制作 · 帽子企鹅",
+    heroStudio: "<b>帽子企鹅</b> · CAPGUIN 出品",
+    footTeam: "制作 · 帽子企鹅 CAPGUIN",
     footThanks: "特别鸣谢",
     footThanksList: "T.K. · 戈顿乐队 · 核磁四仙 · 比尔 · 皮医生",
-    footCopy: "© 2026 归野制作组。感谢游玩。",
+    footCopy: "© 2026 帽子企鹅（CAPGUIN）。感谢游玩。",
   };
   const EN = { title: document.title };
   document.querySelectorAll("[data-i18n]").forEach((el) => { EN[el.dataset.i18n] = el.innerHTML; });

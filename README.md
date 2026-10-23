@@ -37,6 +37,6 @@ The game is a Godot 4.7 project in [`rewild/`](rewild/): open `rewild/project.go
 
 ## Credits
 
-Made by Lvgner, KaworuIkari and AntidusPig.
+Made by **CAPGUIN (帽子企鹅)**: Lvgner, KaworuIkari and AntidusPig.
 
 Special thanks to T.K., Arctic Fox, NMR_F4, bill and linhan.
