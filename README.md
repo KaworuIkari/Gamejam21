@@ -1,32 +1,42 @@
-# Gamejam21
+# Rewild · 归野
 
-A game jam lasting 21 days, from 1 October to 21 October 2026.
+**One robot, one island, slowly turning green.**
 
-**Pitch:** _one sentence, filled in on day 1_
+![The island of Rewild](website/img/island.jpg)
 
-## Key dates
+Rewild is a cosy, hand-drawn 3D exploration game, made as a game jam project.
 
-| Gate | Jam day | Date |
+You wake up as a small water robot on an island the world forgot. A plane lies broken on the beach, the pier is rusting, the radar is silent and the lake station has gone dark. With a hose, a water tank and plenty of time, you:
+
+- **Rewild the land:** spray away the grime and watch grass, flowers and trees grow back across every region.
+- **Restore the island:** reopen the spring, restart the lake power station and wake the sleeping machines that once kept the island running.
+- **Gear up:** upgrade your water tank, earn a jetpack and reach corners of the island you couldn't get to before.
+
+The game is available in English and Chinese.
+
+## Download
+
+Website: **https://kaworuikari.github.io/Gamejam21/**
+
+| Platform | Download | Notes |
 | --- | --- | --- |
-| Kickoff call | Day 1 | Thu 1 Oct |
-| Playable build | End of day 7 | Wed 7 Oct |
-| Feature freeze | End of day 16 | Fri 16 Oct |
-| Submitted | End of day 20 | Tue 20 Oct |
-| Jam deadline (buffer) | Day 21 | Wed 21 Oct |
+| macOS | [Rewild.dmg](https://github.com/KaworuIkari/Gamejam21/releases/latest/download/Rewild.dmg) | Apple Silicon and Intel, about 880 MB |
+| Windows | [Rewild-Windows.zip](https://github.com/KaworuIkari/Gamejam21/releases/latest/download/Rewild-Windows.zip) | Windows 10/11, 64-bit, about 1.4 GB unpacked |
 
-## Links
+All versions are on the [releases page](https://github.com/KaworuIkari/Gamejam21/releases).
 
-- Task board: _add link_
-- Shared Drive (source art and audio): https://drive.google.com/drive/folders/1dAuMr1tX9pbZ8WwjA47rwEANIASIRtaQ?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto
-- itch.io build page: _add link_
-- Jam page and rules: https://www.taptap.cn/moment/843496646862966742
+### First launch
 
+**macOS:** open the .dmg and drag Rewild into Applications. The build is not notarized, so macOS blocks it the first time. Click **Done**, then go to System Settings → Privacy & Security, scroll down and click **Open Anyway** next to Rewild.
 
-## Docs
+**Windows:** unzip the whole folder and run `rewild.exe`. Keep the `.dll` files next to the exe. If SmartScreen appears, click **More info** → **Run anyway**.
 
-- [Team playbook](docs/playbook.md): roles, 21-day plan, scope rules, checklists
-- [Git workflow](docs/git-workflow.md): how we branch, push, pull and merge (read before your first commit)
+## For developers
 
-## How to run
+The game is a Godot 4.7 project in [`rewild/`](rewild/): open `rewild/project.godot` in the Godot editor. The website lives in [`website/`](website/) and deploys to GitHub Pages automatically when it changes. Read the [Git workflow](docs/git-workflow.md) before your first commit.
 
-_Add once the engine is chosen: engine and version, how to open the project, how to export a build._
+## Credits
+
+Made by Lvgner, KaworuIkari and AntidusPig.
+
+Special thanks to T.K., Arctic Fox, NMR_F4, bill and linhan.
